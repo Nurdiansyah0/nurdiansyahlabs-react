@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Home -->
+  <url>
+    <loc>https://nurdiansyahlabs.com/</loc>
+    <lastmod>2025-02-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Showcase: Landing Page -->
+  <url>
+    <loc>https://nurdiansyahlabs.com/showcase/A/landing-page-1</loc>
+    <lastmod>2025-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nurdiansyahlabs.com/showcase/A/landing-page-2</loc>
+    <lastmod>2025-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nurdiansyahlabs.com/showcase/A/landing-page-3</loc>
+    <lastmod>2025-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nurdiansyahlabs.com/showcase/A/landing-page-4</loc>
+    <lastmod>2025-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Showcase: Fullstack -->
+  <url>
+    <loc>https://nurdiansyahlabs.com/showcase/B/fullstack-1</loc>
+    <lastmod>2025-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nurdiansyahlabs.com/showcase/B/fullstack-2</loc>
+    <lastmod>2025-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nurdiansyahlabs.com/showcase/B/fullstack-3</loc>
+    <lastmod>2025-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nurdiansyahlabs.com/showcase/B/fullstack-4</loc>
+    <lastmod>2025-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Showcase: Data Analyst -->
+  <url>
+    <loc>https://nurdiansyahlabs.com/showcase/C/data-analyst-1</loc>
+    <lastmod>2025-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nurdiansyahlabs.com/showcase/C/data-analyst-2</loc>
+    <lastmod>2025-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nurdiansyahlabs.com/showcase/C/data-analyst-3</loc>
+    <lastmod>2025-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nurdiansyahlabs.com/showcase/C/data-analyst-4</loc>
+    <lastmod>2025-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Showcase: Data Science -->
+  <url>
+    <loc>https://nurdiansyahlabs.com/showcase/D/data-science-1</loc>
+    <lastmod>2025-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nurdiansyahlabs.com/showcase/D/data-science-2</loc>
+    <lastmod>2025-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nurdiansyahlabs.com/showcase/D/data-science-3</loc>
+    <lastmod>2025-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nurdiansyahlabs.com/showcase/D/data-science-4</loc>
+    <lastmod>2025-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- SEO Blog / Trending Pages -->
+  <url>
+    <loc>https://nurdiansyahlabs.com/blog/jasa-landing-page-murah-indonesia</loc>
+    <lastmod>2025-02-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nurdiansyahlabs.com/blog/jasa-fullstack-developer-indonesia</loc>
+    <lastmod>2025-02-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nurdiansyahlabs.com/blog/jasa-analisis-data-bisnis-indonesia</loc>
+    <lastmod>2025-02-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nurdiansyahlabs.com/blog/jasa-machine-learning-data-science</loc>
+    <lastmod>2025-02-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nurdiansyahlabs.com/blog/buat-dashboard-bisnis-power-bi-tableau</loc>
+    <lastmod>2025-02-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+</urlset>

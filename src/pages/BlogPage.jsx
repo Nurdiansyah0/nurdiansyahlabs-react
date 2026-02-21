@@ -1,0 +1,326 @@
+import { useParams, Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { motion } from 'framer-motion'
+
+/**
+ * Auto-generated SEO blog page template.
+ * URL: /blog/:slug  (e.g. /blog/jasa-landing-page-murah-indonesia)
+ *
+ * Each slug maps to specific SEO content, keywords, and a CTA
+ * targeting one of the 4 service pillars. Google indexes these and
+ * surfaces them for relevant searches.
+ */
+
+const BLOG_DATA = {
+    'jasa-landing-page-murah-indonesia': {
+        title: 'Jasa Landing Page Murah & Profesional di Indonesia',
+        description: 'Temukan jasa pembuatan landing page berkualitas tinggi dengan harga terjangkau di Indonesia. SEO-ready, mobile-friendly, dan gratis hosting tahun pertama.',
+        service: 'A',
+        serviceLabel: 'Landing Page Development',
+        accent: '#1d4ed8',
+        accentLight: '#dbeafe',
+        faqs: [
+            { q: 'Berapa biaya jasa landing page?', a: 'Mulai dari Rp 1.750.000 sudah termasuk desain profesional, hosting gratis (tahun pertama), integrasi WhatsApp, dan SEO dasar.' },
+            { q: 'Berapa lama proses pembuatan?', a: 'Landing page standar selesai dalam 3–7 hari kerja tergantung kompleksitas desain dan jumlah revisi.' },
+            { q: 'Apakah landing page bisa diupdate sendiri?', a: 'Ya, kami menyediakan akses CMS sederhana sehingga Anda bisa memperbarui konten tanpa harus mengerti coding.' },
+        ],
+        content: `
+Memiliki **landing page profesional** adalah langkah pertama yang krusial untuk mengembangkan bisnis online Anda di era digital ini.
+Di NurdiansyahLabs, kami menyediakan jasa pembuatan landing page yang tidak hanya cantik secara visual, tetapi juga dioptimalkan untuk konversi dan pencarian Google.
+
+## Mengapa Landing Page Penting?
+
+Landing page yang baik dapat meningkatkan konversi hingga **300%** dibandingkan mengarahkan pengunjung ke halaman utama website biasa.
+Dengan desain yang fokus dan call-to-action yang jelas, landing page membantu mengubah pengunjung menjadi pelanggan potensial.
+
+## Layanan Kami
+
+- ✅ Desain responsif (mobile, tablet, desktop)
+- ✅ Optimasi SEO on-page
+- ✅ Integrasi WhatsApp & formulir kontak
+- ✅ Gratis hosting & domain tahun pertama
+- ✅ Akses ke 50+ katalog desain premium
+- ✅ Loading speed < 3 detik
+    `,
+    },
+    'jasa-fullstack-developer-indonesia': {
+        title: 'Jasa Fullstack Developer Indonesia – Sistem Web Custom',
+        description: 'Butuh sistem web custom? NurdiansyahLabs menyediakan jasa fullstack developer berpengalaman untuk membangun aplikasi web bisnis Anda dari nol.',
+        service: 'B',
+        serviceLabel: 'Fullstack Developer',
+        accent: '#4338ca',
+        accentLight: '#e0e7ff',
+        faqs: [
+            { q: 'Teknologi apa yang digunakan?', a: 'React.js, Node.js, Express, Laravel, MySQL/PostgreSQL, REST API, dan berbagai framework modern lainnya.' },
+            { q: 'Berapa estimasi biaya sistem web custom?', a: 'Mulai dari Rp 5.000.000 untuk sistem dasar. Harga dapat bervariasi tergantung fitur dan kompleksitas.' },
+            { q: 'Apakah ada garansi setelah selesai?', a: 'Ya, kami memberikan garansi maintenance 30 hari dan dukungan teknis setelah delivery.' },
+        ],
+        content: `
+Setiap bisnis memiliki kebutuhan unik yang tidak bisa dipenuhi oleh solusi off-the-shelf.
+**Jasa Fullstack Developer** NurdiansyahLabs membantu Anda membangun sistem web yang benar-benar sesuai dengan alur kerja bisnis Anda.
+
+## Apa yang Kami Bangun?
+
+Dari sistem kasir dan inventori, hingga platform e-commerce dan aplikasi HR—kami menangani seluruh stack teknologi dari database hingga tampilan antarmuka.
+
+## Stack Teknologi
+
+- **Frontend**: React.js, Vue.js, Next.js
+- **Backend**: Node.js/Express, Laravel, Django
+- **Database**: MySQL, PostgreSQL, MongoDB
+- **Deployment**: cPanel, VPS, Vercel, Railway
+    `,
+    },
+    'jasa-analisis-data-bisnis-indonesia': {
+        title: 'Jasa Analisis Data Bisnis & Dashboard Interaktif Indonesia',
+        description: 'Ubah data bisnis Anda menjadi wawasan berharga. Jasa data analyst NurdiansyahLabs: dashboard interaktif, laporan insight, dan visualisasi data profesional.',
+        service: 'C',
+        serviceLabel: 'Data Analyst',
+        accent: '#059669',
+        accentLight: '#d1fae5',
+        faqs: [
+            { q: 'Tools apa yang digunakan untuk visualisasi?', a: 'Kami menggunakan Tableau, Power BI, Looker Studio, dan custom dashboard berbasis Recharts/D3.js sesuai kebutuhan.' },
+            { q: 'Data apa yang bisa dianalisis?', a: 'Data penjualan, stok inventori, data pelanggan, traffic website, media sosial, dan sumber data bisnis lainnya.' },
+            { q: 'Apakah bisa integrasi dengan sistem yang sudah ada?', a: 'Ya, kami dapat terkoneksi ke database existing, spreadsheet, atau API pihak ketiga.' },
+        ],
+        content: `
+Data adalah aset terbesar bisnis modern—tetapi hanya bernilai jika Anda bisa membacanya.
+**Jasa Data Analyst** NurdiansyahLabs mengubah tumpukan data mentah menjadi dashboard yang mudah dibaca dan laporan yang actionable.
+
+## Layanan Analisis Data
+
+Kami membantu bisnis dari berbagai industri—retail, F&B, kesehatan, hingga agrikultur—untuk memahami pola, tren, dan peluang yang tersembunyi dalam data mereka.
+
+## Deliverables
+
+- 📊 Dashboard interaktif real-time
+- 📈 Laporan insight mingguan/bulanan
+- 🎯 Analisis segmentasi pelanggan
+- 📉 Monitoring KPI bisnis
+    `,
+    },
+    'jasa-machine-learning-data-science': {
+        title: 'Jasa Machine Learning & Data Science Indonesia',
+        description: 'Prediksi penjualan, segmentasi pelanggan, sistem rekomendasi. NurdiansyahLabs menghadirkan solusi machine learning untuk bisnis Anda.',
+        service: 'D',
+        serviceLabel: 'Data Scientist',
+        accent: '#7c3aed',
+        accentLight: '#ede9fe',
+        faqs: [
+            { q: 'Apa saja model machine learning yang tersedia?', a: 'Forecasting (ARIMA, Prophet, LSTM), clustering (K-Means, DBSCAN), klasifikasi, dan recommendation engine.' },
+            { q: 'Dibutuhkan data seperti apa?', a: 'Minimal 3–6 bulan data historis. Semakin banyak data, semakin akurat prediksi yang dihasilkan.' },
+            { q: 'Apakah hasilnya bisa diintegrasikan ke sistem?', a: 'Ya, model dapat di-deploy sebagai API yang terkoneksi ke sistem bisnis atau dashboard Anda.' },
+        ],
+        content: `
+Dengan **Machine Learning**, bisnis Anda tidak hanya reaktif terhadap tren—Anda memprediksinya sebelum terjadi.
+NurdiansyahLabs membangun model AI yang dipersonalisasi untuk kebutuhan spesifik bisnis Anda.
+
+## Solusi Data Science
+
+Dari prediksi churn pelanggan hingga sistem rekomendasi produk, kami menerapkan teknik ML terkini dengan pendekatan yang pragmatis dan berorientasi hasil bisnis.
+
+## Use Cases
+
+- 🔮 Forecasting penjualan & demand
+- 🎯 Segmentasi & personalisasi pelanggan
+- ⚠️ Deteksi anomali & prediksi churn
+- 🛒 Sistem rekomendasi produk
+    `,
+    },
+    'buat-dashboard-bisnis-power-bi-tableau': {
+        title: 'Buat Dashboard Bisnis dengan Power BI & Tableau – Indonesia',
+        description: 'Jasa pembuatan dashboard bisnis interaktif menggunakan Power BI, Tableau, dan Looker Studio. Visualisasi data profesional untuk pengambilan keputusan yang lebih baik.',
+        service: 'C',
+        serviceLabel: 'Data Analyst',
+        accent: '#059669',
+        accentLight: '#d1fae5',
+        faqs: [
+            { q: 'Power BI atau Tableau, mana yang lebih baik?', a: 'Keduanya excellent. Power BI lebih terjangkau untuk bisnis kecil, Tableau lebih powerful untuk enterprise. Kami merekomendasikan sesuai budget dan skala bisnis Anda.' },
+            { q: 'Bisakah dashboard diakses di mobile?', a: 'Ya, Power BI dan Tableau memiliki aplikasi mobile yang memungkinkan akses dari smartphone.' },
+        ],
+        content: `
+**Dashboard bisnis** yang baik memberikan visibilitas penuh terhadap performa perusahaan Anda dalam satu tampilan yang intuitif.
+Kami membantu memilih tools yang tepat dan membangun dashboard yang benar-benar sesuai kebutuhan tim Anda.
+
+## Tools yang Kami Kuasai
+
+- **Power BI** — Integrasi Microsoft 365, terjangkau
+- **Tableau** — Visualisasi advanced, enterprise-grade
+- **Looker Studio** — Free, integrasi Google ecosystem
+- **Custom Dashboard** — React + Recharts/D3.js
+
+## Manfaat Dashboard Bisnis
+
+Pengambilan keputusan berbasis data terbukti meningkatkan efisiensi operasional hingga **40%** dan mengurangi biaya operasional yang tidak perlu.
+    `,
+    },
+}
+
+// Generate structured data for any other slugs not in predefined list
+function generateGenericData(slug) {
+    const keyword = slug.replace(/-/g, ' ')
+    return {
+        title: `${keyword.charAt(0).toUpperCase() + keyword.slice(1)} – NurdiansyahLabs`,
+        description: `Layanan ${keyword} profesional di Indonesia. Hubungi NurdiansyahLabs untuk konsultasi gratis.`,
+        service: 'A', serviceLabel: 'NurdiansyahLabs', accent: '#4f46e5', accentLight: '#eef2ff',
+        faqs: [], content: `Kami menyediakan layanan **${keyword}** profesional untuk bisnis Anda di Indonesia.`,
+    }
+}
+
+export default function BlogPage() {
+    const { slug } = useParams()
+    const post = BLOG_DATA[slug] || generateGenericData(slug)
+
+    // Update SEO meta tags dynamically
+    useEffect(() => {
+        document.title = `${post.title} | NurdiansyahLabs`
+        const metaDesc = document.querySelector('meta[name="description"]')
+        if (metaDesc) metaDesc.setAttribute('content', post.description)
+
+        // JSON-LD for this article
+        const script = document.createElement('script')
+        script.type = 'application/ld+json'
+        script.id = 'blog-ld'
+        script.textContent = JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: post.title,
+            description: post.description,
+            author: { '@type': 'Person', name: 'Nurdiansyah', url: 'https://nurdiansyahlabs.com' },
+            publisher: { '@type': 'Organization', name: 'NurdiansyahLabs', url: 'https://nurdiansyahlabs.com' },
+            datePublished: '2025-02-21',
+            dateModified: new Date().toISOString().split('T')[0],
+        })
+        document.head.appendChild(script)
+        return () => { document.getElementById('blog-ld')?.remove() }
+    }, [slug, post.title, post.description])
+
+    // Convert basic markdown to JSX-friendly HTML
+    const renderContent = (text) => {
+        const lines = text.trim().split('\n').map(l => l.trim()).filter(Boolean)
+        return lines.map((line, i) => {
+            if (line.startsWith('## ')) return <h2 key={i} style={{ fontSize: '1.2rem', fontWeight: 800, color: '#0f172a', margin: '1.5rem 0 0.5rem' }}>{line.slice(3)}</h2>
+            if (line.startsWith('- ')) return <li key={i} style={{ marginBottom: '4px', color: '#374151' }}>{line.slice(2).replace(/\*\*(.*?)\*\*/g, (_, t) => t)}</li>
+            const bold = line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            return <p key={i} style={{ color: '#374151', lineHeight: 1.7, marginBottom: '0.5rem' }} dangerouslySetInnerHTML={{ __html: bold }} />
+        })
+    }
+
+    return (
+        <div style={{ minHeight: '100vh', background: '#f8fafc', fontFamily: "'Inter', sans-serif" }}>
+            {/* Top bar */}
+            <div style={{ background: '#fff', borderBottom: '1px solid #e2e8f0', padding: '0.75rem 1.5rem', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <Link to="/" style={{ color: '#4f46e5', fontWeight: 700, fontSize: '0.85rem', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <img src="/assets/logo.svg" alt="NurdiansyahLabs" style={{ width: '20px', height: '20px' }} />
+                    NurdiansyahLabs
+                </Link>
+                <span style={{ color: '#94a3b8', fontSize: '0.8rem' }}>›</span>
+                <span style={{ color: '#64748b', fontSize: '0.8rem' }}>Blog</span>
+                <span style={{ color: '#94a3b8', fontSize: '0.8rem' }}>›</span>
+                <span style={{ color: '#0f172a', fontSize: '0.8rem', fontWeight: 600, maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{slug}</span>
+            </div>
+
+            {/* Hero */}
+            <div style={{ background: `linear-gradient(135deg, ${post.accentLight} 0%, #fff 100%)`, padding: '3rem 1.5rem 2rem', borderBottom: '1px solid #e2e8f0' }}>
+                <div style={{ maxWidth: '760px', margin: '0 auto' }}>
+                    <span style={{ fontSize: '0.72rem', fontWeight: 700, padding: '4px 12px', borderRadius: '9999px', background: post.accent, color: '#fff', marginBottom: '1rem', display: 'inline-block' }}>
+                        {post.serviceLabel}
+                    </span>
+                    <motion.h1
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        style={{ fontSize: 'clamp(1.4rem, 4vw, 2rem)', fontWeight: 900, color: '#0f172a', lineHeight: 1.3, margin: '0.5rem 0 1rem' }}
+                    >
+                        {post.title}
+                    </motion.h1>
+                    <p style={{ color: '#475569', fontSize: '1rem', lineHeight: 1.6, marginBottom: '1.25rem' }}>{post.description}</p>
+                    <a
+                        href="https://wa.me/6282176012461?text=Halo, saya tertarik dengan layanan NurdiansyahLabs"
+                        target="_blank" rel="noreferrer"
+                        style={{
+                            display: 'inline-flex', alignItems: 'center', gap: '8px',
+                            background: '#22c55e', color: '#fff', padding: '0.7rem 1.5rem',
+                            borderRadius: '10px', fontWeight: 700, fontSize: '0.9rem', textDecoration: 'none'
+                        }}
+                    >
+                        <i className="fab fa-whatsapp" /> Konsultasi Gratis via WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            {/* Article body */}
+            <div style={{ maxWidth: '760px', margin: '0 auto', padding: '2.5rem 1.5rem' }}>
+                <div style={{ background: '#fff', borderRadius: '16px', padding: '2rem', border: '1px solid #e2e8f0' }}>
+                    <ul style={{ paddingLeft: '1.25rem', margin: 0 }}>
+                        {renderContent(post.content)}
+                    </ul>
+                </div>
+
+                {/* FAQ Section */}
+                {post.faqs.length > 0 && (
+                    <div style={{ marginTop: '2rem' }}>
+                        <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#0f172a', marginBottom: '1rem' }}>
+                            Pertanyaan Umum (FAQ)
+                        </h2>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                            {post.faqs.map((faq, i) => (
+                                <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: i * 0.1 }}
+                                    style={{ background: '#fff', borderRadius: '12px', padding: '1rem 1.25rem', border: '1px solid #e2e8f0' }}
+                                >
+                                    <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '6px' }}>❓ {faq.q}</div>
+                                    <div style={{ color: '#475569', fontSize: '0.9rem', lineHeight: 1.6 }}>{faq.a}</div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+                {/* CTA Card */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                    style={{
+                        marginTop: '2rem', background: `linear-gradient(135deg, ${post.accent}, #0f172a)`,
+                        borderRadius: '16px', padding: '2rem', color: '#fff', textAlign: 'center'
+                    }}
+                >
+                    <div style={{ fontWeight: 800, fontSize: '1.2rem', marginBottom: '0.5rem' }}>
+                        Siap Mulai Proyek Anda?
+                    </div>
+                    <div style={{ fontSize: '0.9rem', opacity: 0.85, marginBottom: '1.25rem' }}>
+                        Konsultasi gratis, tanpa komitmen. Respon cepat Senin–Sabtu 09:00–18:00 WIB.
+                    </div>
+                    <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
+                        <a href="https://wa.me/6282176012461" target="_blank" rel="noreferrer"
+                            style={{ background: '#22c55e', color: '#fff', padding: '0.65rem 1.4rem', borderRadius: '10px', fontWeight: 700, textDecoration: 'none' }}>
+                            <i className="fab fa-whatsapp" /> WhatsApp
+                        </a>
+                        <Link to="/" style={{ background: 'rgba(255,255,255,0.15)', color: '#fff', padding: '0.65rem 1.4rem', borderRadius: '10px', fontWeight: 700, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.3)' }}>
+                            Lihat Portofolio
+                        </Link>
+                    </div>
+                </motion.div>
+
+                {/* Schema.org FAQ hidden markup for SEO */}
+                {post.faqs.length > 0 && (
+                    <script type="application/ld+json" dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            '@context': 'https://schema.org',
+                            '@type': 'FAQPage',
+                            mainEntity: post.faqs.map(f => ({
+                                '@type': 'Question',
+                                name: f.q,
+                                acceptedAnswer: { '@type': 'Answer', text: f.a },
+                            }))
+                        })
+                    }} />
+                )}
+            </div>
+        </div>
+    )
+}

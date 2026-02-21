@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Point crawlers to the sitemap
+Sitemap: https://nurdiansyahlabs.com/sitemap.xml
+
+# Don't crawl dev/API paths if any
+Disallow: /api/
