@@ -83,7 +83,7 @@ export default function ShowcaseLayout({ children, title, subtitle, githubUrl, s
                         }}
                             onMouseEnter={e => e.currentTarget.style.background = '#f8fafc'}
                             onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
-                            <i className="fab fa-github"></i>
+                            <Github size={18}  />
                             {!isMobile && t('show.source')}
                         </a>
                     )}
@@ -97,7 +97,7 @@ export default function ShowcaseLayout({ children, title, subtitle, githubUrl, s
                         borderRadius: '8px', textDecoration: 'none',
                         whiteSpace: 'nowrap', minHeight: '32px',
                     }}>
-                        <i className="fab fa-whatsapp"></i>
+                        <MessageCircle size={18}  />
                         {isSm ? 'Hire' : t('show.hireMe')}
                     </a>
                 </div>

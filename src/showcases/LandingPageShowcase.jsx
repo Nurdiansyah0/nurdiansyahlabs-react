@@ -54,7 +54,7 @@ function TokoBatik() {
                 {/* Main Navbar */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.5rem 3rem', background: '#fff' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', flex: 1 }}>
-                        <i className="fas fa-bars" style={{ fontSize: '1.2rem', color: '#333' }}></i>
+                        <Menu size={18}  style={{ fontSize: '1.2rem', color: '#333' }} />
                         <span style={{ fontSize: '0.9rem', fontWeight: 500 }}>Menu</span>
                     </div>
 
@@ -221,7 +221,7 @@ function ConsultantPortfolio() {
                     <h2 style={{ fontSize: '1rem', letterSpacing: '0.1em', fontWeight: 400, marginBottom: '3rem' }}>CONTACT</h2>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', fontSize: '0.8rem', color: '#e4e4e7' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}><i className="fas fa-phone" style={{ color: '#71717a' }}></i> 012 453 6789</div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}><i className="fas fa-envelope" style={{ color: '#71717a' }}></i> Email</div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}><Mail size={18}  style={{ color: '#71717a' }} /> Email</div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}><i className="fas fa-map-marker-alt" style={{ color: '#71717a' }}></i> info@example.com</div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}><i className="fas fa-globe" style={{ color: '#71717a' }}></i> www.nurdiansyah.com</div>
                     </div>

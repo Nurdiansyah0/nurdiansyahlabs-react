@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { X, Lightbulb, MessageCircle, PlayCircle, ArrowRight } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useResponsive } from '../hooks/useResponsive'
 
@@ -96,8 +96,8 @@ function ProjectCard({ project, onNavigate, t }) {
                 <div style={{ fontWeight: 800, fontSize: '0.9rem', color: '#111827', marginBottom: '5px', lineHeight: 1.3 }}>{project.title}</div>
                 <div style={{ fontSize: '0.78rem', color: '#6b7280', lineHeight: 1.5, marginBottom: '10px', flexGrow: 1 }}>{project.desc}</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#4f46e5', fontSize: '0.78rem', fontWeight: 700 }}>
-                    <i className="fas fa-play-circle" style={{ fontSize: '0.9rem' }}></i> {t('modal.viewDemo')}
-                    <i className="fas fa-arrow-right" style={{ fontSize: '0.65rem', marginLeft: '4px', transform: hovered ? 'translateX(3px)' : 'none', transition: 'transform 0.2s' }}></i>
+                    <PlayCircle size={15} style={{ fontSize: '0.9rem' }} /> {t('modal.viewDemo')}
+                    <ArrowRight size={12} style={{ fontSize: '0.65rem', marginLeft: '4px', transform: hovered ? 'translateX(3px)' : 'none', transition: 'transform 0.2s' }} />
                 </div>
             </div>
         </div>
@@ -163,7 +163,7 @@ export default function PortfolioModal({ serviceKey, onClose }) {
                         }}
                         onMouseEnter={e => { e.currentTarget.style.background = '#e2e8f0'; e.currentTarget.style.color = '#334155' }}
                         onMouseLeave={e => { e.currentTarget.style.background = '#f1f5f9'; e.currentTarget.style.color = '#64748b' }}>
-                        <i className="fas fa-times"></i>
+                        <X size={18} />
                     </button>
                 </div>
 
@@ -174,7 +174,7 @@ export default function PortfolioModal({ serviceKey, onClose }) {
                     display: 'flex', alignItems: 'center', gap: '8px',
                     fontSize: isSm ? '0.78rem' : '0.85rem', color: '#64748b',
                 }}>
-                    <i className="fas fa-lightbulb" style={{ color: '#eab308', flexShrink: 0 }}></i>
+                    <Lightbulb size={16} style={{ color: '#eab308', flexShrink: 0 }} />
                     {t('modal.hint')}
                 </div>
 
@@ -205,7 +205,7 @@ export default function PortfolioModal({ serviceKey, onClose }) {
                         }}
                         onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
                         onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}>
-                        <i className="fab fa-whatsapp" style={{ fontSize: '1.1rem' }}></i> {t('modal.discuss')}
+                        <MessageCircle size={18} style={{ fontSize: '1.1rem' }} /> {t('modal.discuss')}
                     </a>
                 </div>
             </div>

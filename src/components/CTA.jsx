@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
+import { MessageCircle } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useResponsive } from '../hooks/useResponsive'
 
@@ -10,7 +11,7 @@ export default function CTA() {
             background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 60%, #1e3a8a 100%)',
             color: '#fff', padding: 'var(--section-py) 0',
         }}>
-            <motion.div
+            <m.div
                 initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }} transition={{ duration: 0.5 }}
                 className="container"
@@ -35,13 +36,13 @@ export default function CTA() {
                     }}
                     onMouseEnter={e => { e.currentTarget.style.background = '#16a34a'; e.currentTarget.style.transform = 'scale(1.04)' }}
                     onMouseLeave={e => { e.currentTarget.style.background = '#22c55e'; e.currentTarget.style.transform = 'scale(1)' }}>
-                    <i className="fab fa-whatsapp" style={{ fontSize: '1.3rem' }}></i>
+                    <MessageCircle size={18} style={{ fontSize: '1.3rem' }} />
                     {t('cta.btn')}
                 </a>
                 <div style={{ marginTop: '1.25rem', color: '#818cf8', fontSize: isSm ? '0.78rem' : '0.85rem' }}>
                     {t('cta.info')}
                 </div>
-            </motion.div>
+            </m.div>
         </section>
     )
 }

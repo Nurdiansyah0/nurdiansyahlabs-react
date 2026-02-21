@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom'
 import { useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
+import { MessageCircle } from 'lucide-react'
 
 /**
  * Auto-generated SEO blog page template.
@@ -430,13 +431,13 @@ export default function BlogPage() {
                     <span style={{ fontSize: '0.72rem', fontWeight: 700, padding: '4px 12px', borderRadius: '9999px', background: post.accent, color: '#fff', marginBottom: '1rem', display: 'inline-block' }}>
                         {post.serviceLabel}
                     </span>
-                    <motion.h1
+                    <m.h1
                         initial={{ opacity: 0, y: 16 }}
                         animate={{ opacity: 1, y: 0 }}
                         style={{ fontSize: 'clamp(1.4rem, 4vw, 2rem)', fontWeight: 900, color: '#0f172a', lineHeight: 1.3, margin: '0.5rem 0 1rem' }}
                     >
                         {post.title}
-                    </motion.h1>
+                    </m.h1>
                     <p style={{ color: '#475569', fontSize: '1rem', lineHeight: 1.6, marginBottom: '1.25rem' }}>{post.description}</p>
                     <a
                         href="https://wa.me/6282176012461?text=Halo, saya tertarik dengan layanan NurdiansyahLabs"
@@ -447,7 +448,7 @@ export default function BlogPage() {
                             borderRadius: '10px', fontWeight: 700, fontSize: '0.9rem', textDecoration: 'none'
                         }}
                     >
-                        <i className="fab fa-whatsapp" /> Konsultasi Gratis via WhatsApp
+                        <MessageCircle size={18} /> Konsultasi Gratis via WhatsApp
                     </a>
                 </div>
             </div>
@@ -468,7 +469,7 @@ export default function BlogPage() {
                         </h2>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                             {post.faqs.map((faq, i) => (
-                                <motion.div
+                                <m.div
                                     key={i}
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
@@ -477,14 +478,14 @@ export default function BlogPage() {
                                 >
                                     <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '6px' }}>❓ {faq.q}</div>
                                     <div style={{ color: '#475569', fontSize: '0.9rem', lineHeight: 1.6 }}>{faq.a}</div>
-                                </motion.div>
+                                </m.div>
                             ))}
                         </div>
                     </div>
                 )}
 
                 {/* CTA Card */}
-                <motion.div
+                <m.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4 }}
@@ -502,13 +503,13 @@ export default function BlogPage() {
                     <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
                         <a href="https://wa.me/6282176012461" target="_blank" rel="noreferrer"
                             style={{ background: '#22c55e', color: '#fff', padding: '0.65rem 1.4rem', borderRadius: '10px', fontWeight: 700, textDecoration: 'none' }}>
-                            <i className="fab fa-whatsapp" /> WhatsApp
+                            <MessageCircle size={18} /> WhatsApp
                         </a>
                         <Link to="/" style={{ background: 'rgba(255,255,255,0.15)', color: '#fff', padding: '0.65rem 1.4rem', borderRadius: '10px', fontWeight: 700, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.3)' }}>
                             Lihat Portofolio
                         </Link>
                     </div>
-                </motion.div>
+                </m.div>
 
                 {/* Schema.org FAQ hidden markup for SEO */}
                 {post.faqs.length > 0 && (

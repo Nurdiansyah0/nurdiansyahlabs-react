@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
+import { MessageCircle } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useResponsive } from '../hooks/useResponsive'
 
@@ -14,7 +15,7 @@ export default function Hero() {
             position: 'relative', overflow: 'hidden',
         }}>
             {/* Decorative blobs */}
-            <motion.div
+            <m.div
                 animate={{ scale: [1, 1.05, 1], opacity: [0.5, 0.8, 0.5] }}
                 transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
                 style={{
@@ -24,7 +25,7 @@ export default function Hero() {
                     filter: 'blur(40px)', pointerEvents: 'none',
                 }}
             />
-            <motion.div
+            <m.div
                 animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.7, 0.4] }}
                 transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
                 style={{
@@ -37,7 +38,7 @@ export default function Hero() {
 
             <div className="container" style={{ textAlign: 'center', position: 'relative' }}>
                 {/* Badge */}
-                <motion.div
+                <m.div
                     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                     style={{
@@ -48,10 +49,10 @@ export default function Hero() {
                     }}>
                     <span style={{ width: '6px', height: '6px', background: '#818cf8', borderRadius: '50%', display: 'inline-block' }}></span>
                     {t('hero.badge')}
-                </motion.div>
+                </m.div>
 
                 {/* H1 */}
-                <motion.h1
+                <m.h1
                     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.1 }}
                     style={{
@@ -62,10 +63,10 @@ export default function Hero() {
                     {t('hero.h1.1')}<br />
                     <span style={{ color: '#a5b4fc' }}>{t('hero.h1.2')}</span><br />
                     {t('hero.h1.3')}
-                </motion.h1>
+                </m.h1>
 
                 {/* Description */}
-                <motion.p
+                <m.p
                     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
                     style={{
@@ -74,10 +75,10 @@ export default function Hero() {
                         margin: '0 auto 2rem', lineHeight: 1.7,
                     }}>
                     {t('hero.desc')}
-                </motion.p>
+                </m.p>
 
                 {/* CTA Buttons */}
-                <motion.div
+                <m.div
                     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.3 }}
                     className="hero-btns">
@@ -110,12 +111,12 @@ export default function Hero() {
                         }}
                         onMouseEnter={e => { e.currentTarget.style.background = '#16a34a'; e.currentTarget.style.transform = 'translateY(-2px)' }}
                         onMouseLeave={e => { e.currentTarget.style.background = '#22c55e'; e.currentTarget.style.transform = 'translateY(0)' }}>
-                        <i className="fab fa-whatsapp" style={{ fontSize: '1.1rem' }}></i> {t('hero.cta2')}
+                        <MessageCircle size={18} style={{ fontSize: '1.1rem' }} /> {t('hero.cta2')}
                     </a>
-                </motion.div>
+                </m.div>
 
                 {/* Stats */}
-                <motion.div
+                <m.div
                     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.5 }}
                     className="hero-stats">
@@ -125,7 +126,7 @@ export default function Hero() {
                             <div style={{ fontSize: isSm ? '0.75rem' : '0.85rem', color: '#a5b4fc', marginTop: '2px' }}>{label}</div>
                         </div>
                     ))}
-                </motion.div>
+                </m.div>
             </div>
         </section>
     )

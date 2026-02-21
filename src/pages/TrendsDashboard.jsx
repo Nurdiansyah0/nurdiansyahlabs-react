@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 import { useLanguage } from '../i18n/LanguageContext'
 
 const BACKEND = 'http://localhost:3001'
@@ -15,7 +15,7 @@ function ScoreBar({ score }) {
     const color = score >= 70 ? '#22c55e' : score >= 40 ? '#f59e0b' : '#64748b'
     return (
         <div style={{ background: '#f1f5f9', borderRadius: '9999px', height: '8px', width: '100%', overflow: 'hidden' }}>
-            <motion.div
+            <m.div
                 initial={{ width: 0 }}
                 animate={{ width: `${score}%` }}
                 transition={{ duration: 0.8, ease: 'easeOut' }}
@@ -32,7 +32,7 @@ function KeywordCard({ item, index }) {
     const trendColor = item.trend > 5 ? '#22c55e' : item.trend < -5 ? '#ef4444' : '#94a3b8'
 
     return (
-        <motion.div
+        <m.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.06 }}
@@ -83,7 +83,7 @@ function KeywordCard({ item, index }) {
                     🔥 High opportunity — consider creating content for this keyword
                 </div>
             )}
-        </motion.div>
+        </m.div>
     )
 }
 
@@ -239,7 +239,7 @@ export default function TrendsDashboard() {
 
                 {/* SEO Action Panel */}
                 {!loading && !error && data?.opportunities?.length > 0 && (
-                    <motion.div
+                    <m.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5 }}
@@ -274,7 +274,7 @@ export default function TrendsDashboard() {
                                 )
                             })}
                         </div>
-                    </motion.div>
+                    </m.div>
                 )}
             </div>
         </div>

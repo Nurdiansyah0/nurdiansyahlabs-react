@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { LanguageProvider } from './i18n/LanguageContext'
+import { LazyMotion } from 'framer-motion'
 
 // Eagerly load the Home page because it's required for the initial render
 import Home from './pages/Home'
@@ -13,23 +14,27 @@ const DataScienceShowcase = lazy(() => import('./showcases/DataScienceShowcase')
 const TrendsDashboard = lazy(() => import('./pages/TrendsDashboard'))
 const BlogPage = lazy(() => import('./pages/BlogPage'))
 
+const loadFeatures = () => import('framer-motion').then(res => res.domAnimation)
+
 export default function App() {
     return (
         <LanguageProvider>
-            <BrowserRouter>
-                <Suspense fallback={<div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><img src="/assets/logo.svg" width="50" alt="Loading..." style={{ animation: 'pulse 1.5s infinite' }} /></div>}>
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/showcase/landing-page/:projectId" element={<LandingPageShowcase />} />
-                        <Route path="/showcase/fullstack/:projectId" element={<FullstackShowcase />} />
-                        <Route path="/showcase/data-analyst/:projectId" element={<DataAnalystShowcase />} />
-                        <Route path="/showcase/data-science/:projectId" element={<DataScienceShowcase />} />
-                        {/* SEO & Trends routes */}
-                        <Route path="/trends" element={<TrendsDashboard />} />
-                        <Route path="/blog/:slug" element={<BlogPage />} />
-                    </Routes>
-                </Suspense>
-            </BrowserRouter>
+            <LazyMotion features={loadFeatures}>
+                <BrowserRouter>
+                    <Suspense fallback={<div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><img src="/assets/logo.svg" width="50" alt="Loading..." style={{ animation: 'pulse 1.5s infinite' }} /></div>}>
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/showcase/landing-page/:projectId" element={<LandingPageShowcase />} />
+                            <Route path="/showcase/fullstack/:projectId" element={<FullstackShowcase />} />
+                            <Route path="/showcase/data-analyst/:projectId" element={<DataAnalystShowcase />} />
+                            <Route path="/showcase/data-science/:projectId" element={<DataScienceShowcase />} />
+                            {/* SEO & Trends routes */}
+                            <Route path="/trends" element={<TrendsDashboard />} />
+                            <Route path="/blog/:slug" element={<BlogPage />} />
+                        </Routes>
+                    </Suspense>
+                </BrowserRouter>
+            </LazyMotion>
         </LanguageProvider>
     )
 }

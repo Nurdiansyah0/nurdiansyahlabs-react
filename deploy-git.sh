@@ -15,10 +15,11 @@ if (cssFiles.length > 0) {
     let html = fs.readFileSync(htmlPath, 'utf8');
     const cssContent = fs.readFileSync(cssFiles[0], 'utf8');
     // Replace the <link rel=\"stylesheet\" href=\"/assets/index-*.css\"> with an inline <style> tag
-    html = html.replace(/<link rel=\"stylesheet\" crossorigin href=\"\/assets\/[^\"]+\.css\">/, '<style>' + cssContent + '</style>');
-    fs.writeFileSync(htmlPath, html);
+    html = html.replace(/<link rel=\"stylesheet\" (crossorigin )?href=\"\/assets\/[^\"]+\.css\">/, '<style>' + cssContent + '</style>');
     // Remove the unused CSS file so it doesn't get deployed or requested
     fs.unlinkSync(cssFiles[0]);
+    // Save HTML
+    fs.writeFileSync(htmlPath, html);
     console.log('✅ Inlined CSS and removed original file:', cssFiles[0]);
 }
 "

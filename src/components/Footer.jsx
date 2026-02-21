@@ -1,11 +1,12 @@
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
+import { MessageCircle, Mail, Github, Linkedin } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
 
 export default function Footer() {
     const { t } = useLanguage()
     return (
         <footer style={{ background: '#111827', color: '#9ca3af', padding: '2rem 0' }}>
-            <motion.div
+            <m.div
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ duration: 0.5 }}
                 className="container footer-inner">
@@ -25,31 +26,31 @@ export default function Footer() {
                         style={{ color: '#9ca3af', fontSize: '1.15rem', transition: 'color 0.2s', display: 'inline-flex', alignItems: 'center', minHeight: '44px' }}
                         onMouseEnter={e => e.target.style.color = '#4ade80'}
                         onMouseLeave={e => e.target.style.color = '#9ca3af'}>
-                        <i className="fab fa-whatsapp"></i>
+                        <MessageCircle size={18} />
                     </a>
                     <a href="mailto:nudiansyahdian28.adv@gmail.com"
                         aria-label="Email Us"
                         style={{ color: '#9ca3af', fontSize: '1.15rem', transition: 'color 0.2s', display: 'inline-flex', alignItems: 'center', minHeight: '44px' }}
                         onMouseEnter={e => e.target.style.color = '#f87171'}
                         onMouseLeave={e => e.target.style.color = '#9ca3af'}>
-                        <i className="fas fa-envelope"></i>
+                        <Mail size={18} />
                     </a>
                     <a href="https://github.com/Nurdiansyah0" target="_blank" rel="noreferrer"
                         aria-label="GitHub Profile"
                         style={{ color: '#9ca3af', fontSize: '1.15rem', transition: 'color 0.2s', display: 'inline-flex', alignItems: 'center', minHeight: '44px' }}
                         onMouseEnter={e => e.target.style.color = '#818cf8'}
                         onMouseLeave={e => e.target.style.color = '#9ca3af'}>
-                        <i className="fab fa-github"></i>
+                        <Github size={18} />
                     </a>
                     <a href="https://www.linkedin.com/in/nurdiansyah-ds" target="_blank" rel="noreferrer"
                         aria-label="LinkedIn Profile"
                         style={{ color: '#9ca3af', fontSize: '1.15rem', transition: 'color 0.2s', display: 'inline-flex', alignItems: 'center', minHeight: '44px' }}
                         onMouseEnter={e => e.target.style.color = '#60a5fa'}
                         onMouseLeave={e => e.target.style.color = '#9ca3af'}>
-                        <i className="fab fa-linkedin"></i>
+                        <Linkedin size={18} />
                     </a>
                 </div>
-            </motion.div>
+            </m.div>
         </footer>
     )
 }

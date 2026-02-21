@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { Menu, X, MessageCircle, Globe, ChevronDown } from 'lucide-react'
 import { useLanguage, langNames } from '../i18n/LanguageContext'
 import { useResponsive } from '../hooks/useResponsive'
 
@@ -81,9 +82,9 @@ export default function Navbar() {
                                 color: '#374151', fontSize: '0.82rem', fontWeight: 600, cursor: 'pointer',
                                 minHeight: '36px',
                             }}>
-                                <i className="fas fa-globe" style={{ fontSize: '0.85rem', color: '#4f46e5' }}></i>
+                                <Globe size={14} color="#4f46e5" />
                                 {lang.toUpperCase()}
-                                <i className="fas fa-chevron-down" style={{ fontSize: '0.6rem' }}></i>
+                                <ChevronDown size={12} />
                             </button>
                             {langOpen && (
                                 <div style={{
@@ -117,7 +118,7 @@ export default function Navbar() {
                         }}
                             onMouseEnter={e => e.currentTarget.style.background = '#16a34a'}
                             onMouseLeave={e => e.currentTarget.style.background = '#22c55e'}>
-                            <i className="fab fa-whatsapp"></i> WhatsApp
+                            <MessageCircle size={18} /> WhatsApp
                         </a>
                     </div>
 
@@ -131,7 +132,7 @@ export default function Navbar() {
                             background: mobileOpen ? '#f3f4f6' : 'transparent',
                             minHeight: '44px', minWidth: '44px',
                         }}>
-                        <i className={`fas ${mobileOpen ? 'fa-times' : 'fa-bars'}`} style={{ fontSize: '1.2rem' }}></i>
+                        {mobileOpen ? <X size={20} /> : <Menu size={20} />}
                     </button>
                 </div>
             </div>
@@ -187,7 +188,7 @@ export default function Navbar() {
                             padding: '12px 20px', borderRadius: '9999px', fontWeight: 600,
                             fontSize: '1rem', textAlign: 'center', minHeight: '44px',
                         }}>
-                        <i className="fab fa-whatsapp"></i> WhatsApp
+                        <MessageCircle size={18} /> WhatsApp
                     </a>
                 </div>
             )}

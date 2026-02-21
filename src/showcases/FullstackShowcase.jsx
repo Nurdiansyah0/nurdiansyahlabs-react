@@ -368,7 +368,7 @@ function VehicleInspection() {
                                         <div style={{ fontSize: '0.9rem', color: '#334155' }}>{item}</div>
                                         <div style={{ display: 'flex', gap: '4px' }}>
                                             <div style={{ width: '30px', height: '30px', borderRadius: '6px', background: '#dcfce7', color: '#16a34a', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}><i className="fas fa-check"></i></div>
-                                            <div style={{ width: '30px', height: '30px', borderRadius: '6px', background: '#f1f5f9', color: '#cbd5e1', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}><i className="fas fa-times"></i></div>
+                                            <div style={{ width: '30px', height: '30px', borderRadius: '6px', background: '#f1f5f9', color: '#cbd5e1', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}><X size={18}  /></div>
                                             <div style={{ width: '30px', height: '30px', borderRadius: '6px', background: '#f1f5f9', color: '#cbd5e1', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>NA</div>
                                         </div>
                                     </div>
