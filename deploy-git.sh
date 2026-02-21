@@ -12,8 +12,13 @@ cp backend-php/api/trends.php dist/api/trends.php
 mkdir -p dist/cache
 echo "# Cache dir" > dist/cache/.gitkeep
 
+echo "🖥️  Copying Node.js server files for cPanel..."
+cp server.js dist/server.js
+cp server-package.json dist/package.json
+
 echo "🚀 Pushing to 'deploy' branch on GitHub..."
 cd dist
+rm -rf .git
 git init
 git checkout -b deploy
 git add .

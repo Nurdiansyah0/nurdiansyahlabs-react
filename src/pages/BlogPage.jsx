@@ -154,6 +154,210 @@ Kami membantu memilih tools yang tepat dan membangun dashboard yang benar-benar 
 Pengambilan keputusan berbasis data terbukti meningkatkan efisiensi operasional hingga **40%** dan mengurangi biaya operasional yang tidak perlu.
     `,
     },
+
+    // ── NEW QUESTION-BASED ARTICLES ─────────────────────────────────────────
+
+    'berapa-harga-jasa-landing-page-profesional': {
+        title: 'Berapa Harga Jasa Landing Page Profesional di Indonesia 2026?',
+        description: 'Panduan lengkap harga jasa landing page profesional di Indonesia 2026. Breakdown biaya, faktor penentu harga, dan mana yang worth it untuk bisnis Anda.',
+        service: 'A',
+        serviceLabel: 'Landing Page',
+        accent: '#1d4ed8',
+        accentLight: '#dbeafe',
+        faqs: [
+            { q: 'Berapa harga landing page untuk UMKM?', a: 'Untuk UMKM, harga landing page berkisar Rp 1.500.000 – Rp 3.000.000 sudah termasuk desain, hosting, dan integrasi WhatsApp.' },
+            { q: 'Apakah harga murah berarti kualitas rendah?', a: 'Tidak selalu. Yang penting adalah portofolio dan proses kerja developer-nya. NurdiansyahLabs memberikan kualitas premium mulai Rp 1.750.000.' },
+            { q: 'Apa yang membuat harga landing page mahal?', a: 'Faktor: custom desain, integrasi API kompleks, animasi premium, A/B testing, dan fitur tambahan seperti chatbot atau payment gateway.' },
+            { q: 'Apakah ada biaya tahunan setelah jadi?', a: 'Biasanya ada biaya hosting & domain sekitar Rp 300.000–600.000/tahun setelah tahun pertama (gratis di NurdiansyahLabs).' },
+        ],
+        content: `
+Pertanyaan paling sering dari klien kami: **"Berapa harga jasa landing page yang wajar?"**
+Artikel ini memberikan gambaran transparan tentang kisaran harga di pasar Indonesia dan apa yang seharusnya Anda dapatkan.
+
+## Kisaran Harga Landing Page di Indonesia 2026
+
+Berdasarkan riset pasar, berikut kisaran harga yang umum:
+
+- **Rp 300.000 – 800.000** — Template jadi, tanpa kustomisasi, kualitas rendah
+- **Rp 1.000.000 – 2.500.000** — Semi-custom, desain profesional, cocok untuk UMKM ✅
+- **Rp 3.000.000 – 8.000.000** — Full custom, animasi premium, integrasi API
+- **Rp 10.000.000+** — Agency besar, campaign besar, fitur enterprise
+
+## Apa yang Harus Masuk dalam Paket?
+
+Jangan bayar jika tidak mendapat ini:
+
+- ✅ Desain mobile-first (responsif semua perangkat)
+- ✅ Koneksi WhatsApp atau formulir lead generation
+- ✅ Loading speed < 3 detik (Google PageSpeed > 80)
+- ✅ SEO on-page dasar (meta title, description, heading structure)
+- ✅ Minimal 2x revisi desain
+
+## Tips Pilih Jasa Landing Page
+
+Selalu minta **portofolio** dan **link live demo** sebelum bayar. Developer yang baik pasti punya showcase yang bisa Anda lihat dan coba langsung.
+    `,
+    },
+
+    'cara-memilih-jasa-web-developer-terpercaya': {
+        title: '5 Tips Memilih Jasa Web Developer Terpercaya di Indonesia',
+        description: 'Jangan salah pilih! Ikuti 5 tips memilih jasa web developer freelance terpercaya dan berkualitas di Indonesia agar proyek Anda sukses dan tidak rugi.',
+        service: 'B',
+        serviceLabel: 'Fullstack Developer',
+        accent: '#4338ca',
+        accentLight: '#e0e7ff',
+        faqs: [
+            { q: 'Bagaimana cara tahu developer itu terpercaya?', a: 'Cek portofolio nyata, testimoni klien, keaktifan di LinkedIn/GitHub, dan pastikan ada kontrak kerja yang jelas sebelum pembayaran.' },
+            { q: 'Lebih baik freelance atau agency?', a: 'Freelance lebih hemat dan fleksibel. Agency lebih terstruktur untuk proyek besar. Untuk UMKM, freelance berpengalaman sudah sangat cukup.' },
+            { q: 'Apakah boleh bayar setelah selesai?', a: 'Standar industri adalah DP 30-50% di awal, sisanya setelah delivery. Hindari developer yang minta 100% di muka tanpa kontrak.' },
+        ],
+        content: `
+Memilih **jasa web developer** yang tepat bisa jadi perbedaan antara proyek sukses dan buang uang percuma.
+Berikut 5 tips yang wajib Anda ikuti sebelum menyewa developer:
+
+## 1. Lihat Portofolio Nyata (Bukan Hanya Gambar)
+
+Minta link website yang sudah pernah dibuat. Buka di browser, coba klik-klik, dan rasakan kualitasnya langsung. Banyak developer yang memajang mockup Figma saja — itu bukan portofolio nyata.
+
+## 2. Cek Ulasan dan Testimoni
+
+LinkedIn recommendations, Google Reviews, atau testimoni dari klien nyata sangat penting. Tanya langsung ke klien sebelumnya jika perlu.
+
+## 3. Pastikan Ada Kontrak Tertulis
+
+Kontrak harus mencantumkan: scope pekerjaan, deadline, jumlah revisi, skema pembayaran, dan hak kepemilikan kode/domain.
+
+## 4. Tanya Proses Komunikasi
+
+Developer yang baik akan update progress secara rutin. Tanya: "Bagaimana cara Anda melaporkan progress proyek?" — ini sangat penting.
+
+## 5. Jangan Hanya Kejar yang Murah
+
+Harga paling murah sering berakhir dengan hasil buruk dan revisi tanpa batas. Cari **value for money**, bukan sekedar harga terendah.
+    `,
+    },
+
+    'kapan-bisnis-butuh-data-analyst': {
+        title: 'Kapan Bisnis Anda Butuh Jasa Data Analyst? Ini 7 Tandanya',
+        description: '7 tanda bisnis Anda sudah butuh jasa data analyst profesional. Jangan tunggu terlalu lama — data yang tidak dianalisis adalah peluang yang terbuang.',
+        service: 'C',
+        serviceLabel: 'Data Analyst',
+        accent: '#059669',
+        accentLight: '#d1fae5',
+        faqs: [
+            { q: 'Apakah bisnis kecil butuh data analyst?', a: 'Ya! Bahkan UMKM dengan 1 toko bisa mendapat manfaat besar dari analisis data penjualan, stok, dan perilaku pelanggan.' },
+            { q: 'Berapa anggaran minimal untuk jasa data analyst?', a: 'Mulai dari Rp 3.000.000/bulan untuk analisis dasar + dashboard. Sangat sepadan dibanding keputusan bisnis yang salah arah.' },
+            { q: 'Apakah kami perlu tim IT dulu?', a: 'Tidak. NurdiansyahLabs menangani semua hal teknis. Anda hanya perlu menyediakan data (bisa dari spreadsheet Excel sekalipun).' },
+        ],
+        content: `
+Banyak pemilik bisnis menunda menyewa **data analyst** karena merasa "data mereka terlalu sedikit" atau "belum waktunya."
+Padahal, semakin cepat Anda mulai menganalisis data, semakin cepat bisnis tumbuh. Berikut 7 tanda sudah waktunya:
+
+## Tanda 1: Anda Tidak Tahu Produk Mana yang Paling Menguntungkan
+
+Omzet tinggi tapi tidak tahu dari mana? Analisis data profitabilitas produk bisa menjawab ini dalam hitungan jam.
+
+## Tanda 2: Keputusan Bisnis Masih Berdasarkan "Perasaan"
+
+"Kayaknya bulan ini bagus deh…" — ini bukan cara berbisnis yang scalable. Data analyst mengubah feeling menjadi fakta.
+
+## Tanda 3: Stok Sering Habis atau Menumpuk
+
+Analisis pola permintaan bisa membantu Anda memprediksi kebutuhan stok dengan akurasi > 90%.
+
+## Tanda 4: Tingkat Churn Pelanggan Tinggi
+
+Jika pelanggan lama jarang balik, data analyst bisa mengidentifikasi kapan dan mengapa mereka pergi — lalu menyusun strategi retensi.
+
+## Tanda 5: Tim Marketing Tidak Tahu Campaign Mana yang Efektif
+
+Tanpa analisis data, budget marketing dibuang ke semua channel secara merata. Dengan data, fokus ke channel yang benar-benar menghasilkan.
+
+## Tanda 6: Laporan Bulanan Dibuat Manual di Excel Selama Berjam-jam
+
+Ini bisa diotomatisasi. Dashboard real-time menggantikan laporan manual — hemat waktu tim Anda.
+
+## Tanda 7: Kompetitor Anda Sudah Lebih Data-Driven
+
+Jika pesaing tumbuh lebih cepat, kemungkinan besar mereka sudah menggunakan data dengan lebih baik. Ini saatnya catch up.
+    `,
+    },
+
+    'jasa-website-umkm-integrasi-whatsapp': {
+        title: 'Jasa Website UMKM dengan Integrasi WhatsApp – Solusi Terbaik 2026',
+        description: 'Website UMKM dengan tombol WhatsApp langsung bisa tingkatkan leads hingga 5x. Pelajari cara kerja dan berapa biayanya di sini.',
+        service: 'A',
+        serviceLabel: 'Landing Page',
+        accent: '#1d4ed8',
+        accentLight: '#dbeafe',
+        faqs: [
+            { q: 'Apa keuntungan integrasikan WhatsApp di website?', a: 'Calon pelanggan bisa langsung chat tanpa perlu cari nomor. Ini meningkatkan konversi lead hingga 3-5x dibanding form biasa.' },
+            { q: 'Apakah pesan WhatsApp bisa dipersonalisasi?', a: 'Ya! Tombol bisa dikonfigurasi dengan pesan awal otomatis seperti "Halo, saya tertarik dengan produk X dari website Anda."' },
+            { q: 'Bisakah satu website terhubung ke beberapa nomor?', a: 'Bisa, menggunakan WhatsApp Business API atau rotasi nomor. Ideal untuk tim sales dengan banyak agen.' },
+        ],
+        content: `
+Di Indonesia, **WhatsApp adalah raja komunikasi bisnis**. Lebih dari 90% transaksi B2C di Indonesia diawali atau ditutup via WhatsApp.
+Website tanpa tombol WhatsApp sama saja kehilangan setengah potensi penjualan Anda.
+
+## Bagaimana Integrasi WhatsApp Bekerja?
+
+Tombol WhatsApp di website secara teknis menggunakan link wa.me yang langsung membuka chat ke nomor bisnis Anda.
+Ini bisa dikombinasikan dengan:
+
+- 💬 **Pesan otomatis** tersedia di link (misalnya: "Halo, saya dari website Anda, ingin tanya produk X")
+- ⚡ **Floating button** yang selalu tampil saat scroll
+- 📋 **Form + WhatsApp hybrid**: isi form → langsung redirect ke WhatsApp dengan data terisi otomatis
+
+## Kenapa UMKM Harus Punya Website + WhatsApp?
+
+- **Kredibilitas**: Bisnis dengan website terlihat lebih profesional dan terpercaya
+- **24/7 Marketing**: Website bekerja bahkan saat Anda tidur
+- **SEO**: Google akan menampilkan bisnis Anda saat orang cari produk/jasa Anda
+
+## Berapa Biayanya?
+
+Paket website UMKM + WhatsApp integration di NurdiansyahLabs mulai **Rp 1.750.000**, sudah termasuk hosting gratis tahun pertama.
+    `,
+    },
+
+    'manfaat-machine-learning-untuk-bisnis-kecil': {
+        title: 'Manfaat Machine Learning untuk Bisnis Kecil & UMKM di Indonesia',
+        description: 'Machine learning bukan hanya untuk perusahaan besar! Pelajari bagaimana UMKM dan bisnis kecil di Indonesia bisa memanfaatkan AI untuk tumbuh lebih cepat.',
+        service: 'D',
+        serviceLabel: 'Data Science',
+        accent: '#7c3aed',
+        accentLight: '#ede9fe',
+        faqs: [
+            { q: 'Apakah machine learning butuh data yang sangat banyak?', a: 'Tidak harus jutaan data. Dengan 6-12 bulan data transaksi, model prediksi sederhana sudah bisa memberikan insight berharga.' },
+            { q: 'Berapa biaya implementasi machine learning untuk UMKM?', a: 'Mulai Rp 4.500.000 untuk model pertama (prediksi penjualan atau segmentasi pelanggan). Investasi yang sangat sepadan.' },
+            { q: 'Apakah saya perlu mengerti programming?', a: 'Sama sekali tidak. Tim NurdiansyahLabs menangani seluruh proses teknis. Anda hanya perlu memahami hasil laporannya.' },
+        ],
+        content: `
+Dulu, **Machine Learning** hanya bisa diakses perusahaan dengan budget ratusan juta. Kini, UMKM pun bisa merasakan manfaatnya dengan biaya yang sangat terjangkau.
+
+## 5 Cara Machine Learning Membantu Bisnis Kecil
+
+## 1. Prediksi Kebutuhan Stok
+
+Model forecasting dapat memprediksi berapa banyak stok yang dibutuhkan minggu depan berdasarkan histori penjualan, hari dalam seminggu, cuaca, dan event lokal. Hasilnya: **stok tidak berlebihan, tidak kekurangan**.
+
+## 2. Segmentasi Pelanggan Otomatis
+
+ML dapat mengelompokkan pelanggan berdasarkan perilaku belanja — mana yang loyal, mana yang price-sensitive, mana yang butuh didekati kembali. Ini membantu personalisasi promo.
+
+## 3. Deteksi Pengeluaran Anomali
+
+Sistem ML dapat mendeteksi jika ada pengeluaran atau transaksi yang tidak wajar — berguna untuk mencegah kecurangan internal atau kesalahan input.
+
+## 4. Prediksi Churn Pelanggan
+
+Tahu siapa pelanggan yang dalam 30 hari ke depan kemungkinan tidak akan balik lagi — sebelum mereka pergi. Aktif follow-up sebelum terlambat.
+
+## 5. Rekomendasi Produk
+
+Seperti "Orang yang beli ini juga baca ini" di Tokopedia — model rekomendasi bisa diterapkan di toko online Anda sendiri untuk meningkatkan average order value.
+    `,
+    },
 }
 
 // Generate structured data for any other slugs not in predefined list

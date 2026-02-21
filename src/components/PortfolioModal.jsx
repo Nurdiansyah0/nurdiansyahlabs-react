@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useLanguage } from '../i18n/LanguageContext'
+import { useResponsive } from '../hooks/useResponsive'
 
 const portfolioData = {
     A: {
@@ -75,6 +76,7 @@ function ProjectCard({ project, onNavigate, t }) {
                 <img
                     src={project.image}
                     alt={project.title}
+                    loading="lazy"
                     style={{
                         position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
                         objectFit: 'cover', objectPosition: 'top',
@@ -82,13 +84,18 @@ function ProjectCard({ project, onNavigate, t }) {
                     }}
                 />
             </div>
-            <div style={{ padding: '1rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                <span style={{ display: 'inline-block', alignSelf: 'flex-start', fontSize: '0.62rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', padding: '3px 8px', borderRadius: '9999px', background: project.tagBg, color: project.tagColor, marginBottom: '8px' }}>
+            <div style={{ padding: '0.85rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+                <span style={{
+                    display: 'inline-block', alignSelf: 'flex-start',
+                    fontSize: '0.62rem', fontWeight: 700, textTransform: 'uppercase',
+                    letterSpacing: '0.06em', padding: '3px 8px', borderRadius: '9999px',
+                    background: project.tagBg, color: project.tagColor, marginBottom: '6px'
+                }}>
                     {project.tag}
                 </span>
-                <div style={{ fontWeight: 800, fontSize: '0.95rem', color: '#111827', marginBottom: '6px', lineHeight: 1.3 }}>{project.title}</div>
-                <div style={{ fontSize: '0.8rem', color: '#6b7280', lineHeight: 1.5, marginBottom: '12px', flexGrow: 1 }}>{project.desc}</div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#4f46e5', fontSize: '0.8rem', fontWeight: 700 }}>
+                <div style={{ fontWeight: 800, fontSize: '0.9rem', color: '#111827', marginBottom: '5px', lineHeight: 1.3 }}>{project.title}</div>
+                <div style={{ fontSize: '0.78rem', color: '#6b7280', lineHeight: 1.5, marginBottom: '10px', flexGrow: 1 }}>{project.desc}</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#4f46e5', fontSize: '0.78rem', fontWeight: 700 }}>
                     <i className="fas fa-play-circle" style={{ fontSize: '0.9rem' }}></i> {t('modal.viewDemo')}
                     <i className="fas fa-arrow-right" style={{ fontSize: '0.65rem', marginLeft: '4px', transform: hovered ? 'translateX(3px)' : 'none', transition: 'transform 0.2s' }}></i>
                 </div>
@@ -100,8 +107,10 @@ function ProjectCard({ project, onNavigate, t }) {
 export default function PortfolioModal({ serviceKey, onClose }) {
     const navigate = useNavigate()
     const { t } = useLanguage()
+    const { isMobile, isSm } = useResponsive()
     const data = portfolioData[serviceKey]
 
+    // Lock body scroll & ESC key
     useEffect(() => {
         document.body.style.overflow = 'hidden'
         const esc = (e) => e.key === 'Escape' && onClose()
@@ -117,58 +126,83 @@ export default function PortfolioModal({ serviceKey, onClose }) {
     return (
         <div
             onClick={e => e.target === e.currentTarget && onClose()}
-            style={{
-                position: 'fixed', inset: 0, zIndex: 9999,
-                background: 'rgba(15,23,42,0.65)', backdropFilter: 'blur(4px)',
-                display: 'flex', alignItems: 'flex-start', justifyContent: 'center',
-                padding: '2rem 1rem', overflowY: 'auto', animation: 'fadeIn 0.2s ease'
-            }}>
-            <div className="animate-slideUp" style={{
-                background: '#fff', borderRadius: '24px', width: '100%', maxWidth: '1000px',
-                overflow: 'hidden', marginTop: '1rem', marginBottom: '2rem', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
-            }}>
+            className="modal-overlay">
+            <div className="modal-inner animate-slideUp">
                 {/* Header */}
-                <div style={{ background: data.headerBg, padding: '2rem 2.5rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem' }}>
-                    <div>
-                        <span style={{ display: 'inline-block', fontSize: '0.65rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', padding: '4px 14px', borderRadius: '9999px', background: data.badgeBg, color: data.badgeColor, marginBottom: '10px' }}>
+                <div className="modal-header" style={{ background: data.headerBg }}>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                        <span style={{
+                            display: 'inline-block', fontSize: '0.65rem', fontWeight: 800,
+                            textTransform: 'uppercase', letterSpacing: '0.08em',
+                            padding: '4px 12px', borderRadius: '9999px',
+                            background: data.badgeBg, color: data.badgeColor, marginBottom: '8px'
+                        }}>
                             {data.badgeLabel}
                         </span>
-                        <h2 style={{ fontSize: '1.6rem', fontWeight: 800, color: '#111827', margin: '0 0 6px', letterSpacing: '-0.02em' }}>{data.title}</h2>
-                        <p style={{ color: '#6b7280', fontSize: '0.95rem', margin: 0 }}>{data.subtitle} — <strong style={{ color: data.badgeColor }}>{data.projects.length} {t('modal.exampleProjects')}</strong></p>
+                        <h2 style={{
+                            fontSize: isSm ? '1.15rem' : '1.6rem',
+                            fontWeight: 800, color: '#111827', margin: '0 0 5px', letterSpacing: '-0.02em',
+                            wordBreak: 'break-word',
+                        }}>
+                            {data.title}
+                        </h2>
+                        <p style={{ color: '#6b7280', fontSize: isSm ? '0.8rem' : '0.95rem', margin: 0 }}>
+                            {data.subtitle} —&nbsp;
+                            <strong style={{ color: data.badgeColor }}>{data.projects.length} {t('modal.exampleProjects')}</strong>
+                        </p>
                     </div>
-                    <button onClick={onClose} style={{
-                        background: '#f1f5f9', border: 'none', borderRadius: '50%', width: '40px', height: '40px',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontSize: '1.1rem', color: '#64748b', flexShrink: 0,
-                        transition: 'background 0.2s, color 0.2s'
-                    }}
+                    <button
+                        onClick={onClose}
+                        aria-label="Close modal"
+                        style={{
+                            background: '#f1f5f9', border: 'none', borderRadius: '50%',
+                            width: '44px', height: '44px', minWidth: '44px', minHeight: '44px',
+                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            cursor: 'pointer', fontSize: '1rem', color: '#64748b', flexShrink: 0,
+                            transition: 'background 0.2s, color 0.2s',
+                        }}
                         onMouseEnter={e => { e.currentTarget.style.background = '#e2e8f0'; e.currentTarget.style.color = '#334155' }}
                         onMouseLeave={e => { e.currentTarget.style.background = '#f1f5f9'; e.currentTarget.style.color = '#64748b' }}>
                         <i className="fas fa-times"></i>
                     </button>
                 </div>
 
-                {/* Hint */}
-                <div style={{ padding: '0.85rem 2.5rem', background: '#fafafa', borderBottom: '1px solid #f0f0f0', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.85rem', color: '#64748b' }}>
-                    <i className="fas fa-lightbulb" style={{ color: '#eab308' }}></i>
+                {/* Hint bar */}
+                <div style={{
+                    padding: isSm ? '0.65rem 1.25rem' : '0.85rem 2.5rem',
+                    background: '#fafafa', borderBottom: '1px solid #f0f0f0',
+                    display: 'flex', alignItems: 'center', gap: '8px',
+                    fontSize: isSm ? '0.78rem' : '0.85rem', color: '#64748b',
+                }}>
+                    <i className="fas fa-lightbulb" style={{ color: '#eab308', flexShrink: 0 }}></i>
                     {t('modal.hint')}
                 </div>
 
-                {/* Projects grid — ALL 4 shown */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '1.5rem', padding: '2rem 2.5rem' }}>
+                {/* Projects grid */}
+                <div className="modal-grid">
                     {data.projects.map(p => (
                         <ProjectCard key={p.title} project={p} onNavigate={(route) => navigate(route)} t={t} />
                     ))}
                 </div>
 
                 {/* Footer CTA */}
-                <div style={{ padding: '1.5rem 2.5rem 2rem', textAlign: 'center', borderTop: '1px solid #f3f4f6', background: '#fafafa' }}>
-                    <p style={{ color: '#6b7280', fontSize: '0.9rem', marginBottom: '1rem', fontWeight: 500 }}>{t('modal.wantSimilar')}</p>
-                    <a href="https://wa.me/6282176012461" target="_blank" rel="noreferrer" style={{
-                        display: 'inline-flex', alignItems: 'center', gap: '8px',
-                        background: '#22c55e', color: '#fff', padding: '12px 28px', borderRadius: '9999px',
-                        fontWeight: 700, fontSize: '0.95rem', textDecoration: 'none', boxShadow: '0 4px 14px rgba(34,197,94,0.3)',
-                        transition: 'transform 0.2s'
-                    }}
+                <div className="modal-footer" style={{ textAlign: 'center', borderTop: '1px solid #f3f4f6', background: '#fafafa' }}>
+                    <p style={{ color: '#6b7280', fontSize: isSm ? '0.82rem' : '0.9rem', marginBottom: '0.85rem', fontWeight: 500 }}>
+                        {t('modal.wantSimilar')}
+                    </p>
+                    <a
+                        href="https://wa.me/6282176012461"
+                        target="_blank" rel="noreferrer"
+                        style={{
+                            display: 'inline-flex', alignItems: 'center', gap: '8px',
+                            background: '#22c55e', color: '#fff',
+                            padding: isSm ? '10px 22px' : '12px 28px',
+                            borderRadius: '9999px', fontWeight: 700,
+                            fontSize: isSm ? '0.85rem' : '0.95rem',
+                            textDecoration: 'none',
+                            boxShadow: '0 4px 14px rgba(34,197,94,0.3)',
+                            transition: 'transform 0.2s', minHeight: '44px',
+                        }}
                         onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
                         onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}>
                         <i className="fab fa-whatsapp" style={{ fontSize: '1.1rem' }}></i> {t('modal.discuss')}
