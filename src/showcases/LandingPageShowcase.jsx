@@ -237,7 +237,7 @@ function ConsultantPortfolio() {
 function WarungMakan() {
     return (
         <div style={{ background: '#f5cd4f', fontFamily: '"Inter", sans-serif', minHeight: '100vh', overflow: 'hidden' }}>
-            <div style={{ maxWidth: '1200px', margin: '0 auto', background: '#e3512a', borderRadius: '24px', margin: '2rem', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}>
+            <div style={{ maxWidth: '1200px', background: '#e3512a', borderRadius: '24px', margin: '2rem auto', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}>
 
                 {/* Header Navbar */}
                 <div style={{ background: '#84954a', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 3rem', color: '#fff' }}>

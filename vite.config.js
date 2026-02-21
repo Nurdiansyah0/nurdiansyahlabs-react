@@ -20,14 +20,6 @@ export default defineConfig({
         // Output to dist/ for cPanel upload
         outDir: 'dist',
         // Ensure assets are hashed for cache busting
-        assetsDir: 'assets',
-        rollupOptions: {
-            output: {
-                manualChunks: {
-                    vendor: ['react', 'react-dom', 'react-router-dom'],
-                    motion: ['framer-motion'],
-                }
-            }
-        }
+        assetsDir: 'assets'
     }
 })
