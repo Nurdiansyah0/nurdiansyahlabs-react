@@ -19,6 +19,7 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
     "express": "^5.2.1",
+    "glob": "^13.0.6",
     "vite": "^6.3.5"
   }
 }
