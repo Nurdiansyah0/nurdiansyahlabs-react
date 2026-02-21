@@ -123,11 +123,25 @@
     }
     </script>
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <script type="module" crossorigin src="/assets/index-BNN7pJne.js"></script>
+  <!-- Font Optimizations: Preconnect to Origins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Font Awesome (Async Loading to avoid render-blocking) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print"
+    onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  </noscript>
+
+  <!-- Google Fonts (Async Loading to avoid render-blocking) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"
+    media="print" onload="this.media='all'" />
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet" />
+  </noscript>
+  <script type="module" crossorigin src="/assets/index-CZLhG-PD.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/vendor-Cy9-aXFm.js">
   <link rel="modulepreload" crossorigin href="/assets/motion-BdX9lzqX.js">
   <link rel="stylesheet" crossorigin href="/assets/index-CyrPvsNL.css">

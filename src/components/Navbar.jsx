@@ -125,7 +125,7 @@ export default function Navbar() {
                     <button
                         onClick={() => setMobileOpen(!mobileOpen)}
                         className="hamburger-btn"
-                        aria-label="Toggle menu"
+                        aria-label={mobileOpen ? "Close menu" : "Open menu"}
                         style={{
                             padding: '10px', borderRadius: '8px', color: '#374151',
                             background: mobileOpen ? '#f3f4f6' : 'transparent',
