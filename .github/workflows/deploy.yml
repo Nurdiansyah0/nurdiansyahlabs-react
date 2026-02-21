@@ -1,0 +1,42 @@
+name: Deploy to cPanel
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v4
+
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: 📦 Install Dependencies
+      run: npm install
+
+    - name: 🔨 Build Project
+      run: npm run build
+
+    - name: 📄 Copy Backend Files
+      run: |
+        cp backend-php/.htaccess dist/.htaccess
+        mkdir -p dist/api
+        cp backend-php/api/trends.php dist/api/trends.php
+        mkdir -p dist/cache
+        echo "# Cache dir" > dist/cache/.gitkeep
+
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./dist/
+        server-dir: ./public_html/
