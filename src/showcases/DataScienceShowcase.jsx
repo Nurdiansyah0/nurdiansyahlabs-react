@@ -8,11 +8,13 @@ import showcaseData from '../data/showcase.json'
 import SalesForecastingApp from './apps/SalesForecastingApp'
 import CustomerClusteringApp from './apps/CustomerClusteringApp'
 import ChurnPredictionApp from './apps/ChurnPredictionApp'
+import RecommendationApp from './apps/RecommendationApp'
 
 const appMapping = {
     'sales-forecasting': <SalesForecastingApp />,
     'customer-clustering': <CustomerClusteringApp />,
-    'churn-prediction': <ChurnPredictionApp />
+    'churn-prediction': <ChurnPredictionApp />,
+    'recommendation': <RecommendationApp />
 }
 
 export default function DataScienceShowcase() {

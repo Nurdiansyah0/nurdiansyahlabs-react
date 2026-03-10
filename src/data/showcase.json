@@ -119,6 +119,14 @@
             "description": "Sistem deteksi dini retensi pelanggan untuk mencegah kehilangan pengguna layanan aktif.",
             "category": "Data Science",
             "accentColor": "#ef4444"
+        },
+        {
+            "slug": "recommendation",
+            "categorySlug": "data-science",
+            "title": "RecoEngine – AI Recommendation System",
+            "description": "Hybrid recommendation engine powered by Python/FastAPI with SVD collaborative filtering and TF-IDF content similarity — the same architecture behind Netflix, Tokopedia, and Amazon.",
+            "category": "Data Science",
+            "accentColor": "#7c3aed"
         }
     ]
 }
