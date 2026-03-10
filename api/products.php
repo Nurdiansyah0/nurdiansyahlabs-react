@@ -4,7 +4,7 @@
 require_once __DIR__ . '/../database/db.php';
 
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *'); 
+header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Admin-Token');
 
@@ -24,11 +24,21 @@ if (!$pdo) {
 }
 
 // Security: Require Admin Token for Modification
-function verifyAdmin() {
+function verifyAdmin()
+{
     global $pdo;
-    $headers = getallheaders();
-    $token = $headers['X-Admin-Token'] ?? '';
-    
+
+    $token = $_SERVER['HTTP_X_ADMIN_TOKEN'] ?? '';
+
+    if (empty($token) && function_exists('apache_request_headers')) {
+        $requestHeaders = apache_request_headers();
+        if (isset($requestHeaders['X-Admin-Token'])) {
+            $token = $requestHeaders['X-Admin-Token'];
+        } elseif (isset($requestHeaders['x-admin-token'])) {
+            $token = $requestHeaders['x-admin-token'];
+        }
+    }
+
     if (empty($token)) {
         http_response_code(401);
         echo json_encode(['error' => 'Unauthorized']);
@@ -49,7 +59,7 @@ function verifyAdmin() {
 // ----------------------------------------------------
 if ($method === 'GET') {
     $app_id = $_GET['app'] ?? '';
-    
+
     if (empty($app_id)) {
         // Return all products if no app_id is specified
         $stmt = $pdo->query("SELECT * FROM products ORDER BY id DESC");
@@ -68,7 +78,7 @@ if ($method === 'GET') {
             $post['extras'] = new stdClass(); // Empty object
         }
     }
-    
+
     echo json_encode(['status' => 'success', 'data' => $products]);
     exit;
 }
@@ -90,7 +100,7 @@ if ($method === 'POST') {
         INSERT INTO products (app_id, name, price, description, image_url, category, extras)
         VALUES (?, ?, ?, ?, ?, ?, ?)
     ");
-    
+
     $extras = !empty($data['extras']) ? json_encode($data['extras']) : null;
 
     try {
@@ -103,7 +113,7 @@ if ($method === 'POST') {
             $data['category'] ?? '',
             $extras
         ]);
-        
+
         $newId = $pdo->lastInsertId();
         echo json_encode(['status' => 'success', 'id' => $newId]);
     } catch (Exception $e) {
@@ -131,7 +141,7 @@ if ($method === 'PUT') {
         SET app_id = ?, name = ?, price = ?, description = ?, image_url = ?, category = ?, extras = ?
         WHERE id = ?
     ");
-    
+
     $extras = !empty($data['extras']) ? json_encode($data['extras']) : null;
 
     try {
@@ -167,7 +177,7 @@ if ($method === 'DELETE') {
     }
 
     $stmt = $pdo->prepare("DELETE FROM products WHERE id = ?");
-    
+
     try {
         $stmt->execute([$id]);
         echo json_encode(['status' => 'success']);
