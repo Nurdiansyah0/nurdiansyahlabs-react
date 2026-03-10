@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react'
 import { m, AnimatePresence } from 'framer-motion'
 import { useLanguage } from '../i18n/LanguageContext'
 
-const BACKEND = 'http://localhost:3001'
-
 const SERVICE_LABELS = {
     landing_page: { label: 'Landing Page', color: '#1d4ed8', bg: '#dbeafe', icon: 'fa-layer-group' },
     fullstack: { label: 'Fullstack Dev', color: '#4338ca', bg: '#e0e7ff', icon: 'fa-code' },
@@ -110,7 +108,7 @@ export default function TrendsDashboard() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await fetch(`${BACKEND}/api/trends`)
+                const res = await fetch('/api/trends.php')
                 if (res.status === 202) {
                     setError('loading')
                     setLoading(false)
@@ -204,7 +202,7 @@ export default function TrendsDashboard() {
                         <i className="fas fa-server" style={{ fontSize: '2rem', marginBottom: '1rem', opacity: 0.4 }} />
                         <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '0.5rem' }}>Backend not running</div>
                         <div style={{ fontSize: '0.85rem' }}>
-                            Start it with: <code style={{ background: '#f1f5f9', padding: '2px 8px', borderRadius: '4px' }}>cd backend && npm start</code>
+                            Start it with: <code style={{ background: '#f1f5f9', padding: '2px 8px', borderRadius: '4px' }}>php -S localhost:8000 -t backend-php</code>
                         </div>
                     </div>
                 )}

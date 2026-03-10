@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS leads (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    contact VARCHAR(255) NOT NULL,
+    service VARCHAR(255) NULL,
+    message TEXT NOT NULL,
+    timestamp DATETIME NOT NULL
+);

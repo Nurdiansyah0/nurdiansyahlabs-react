@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: react-app-frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      # Mount the current directory to /app in the container
+      - .:/app
+      # Ensure the container uses its own node_modules, not the host's
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - BACKEND_URL=http://backend:80
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.php
+    container_name: react-app-backend
+    ports:
+      - "8000:80"
+    volumes:
+      # Mount api and database folders to serve them
+      - ./api:/var/www/html/api
+      - ./database:/var/www/html/database
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_USER=root
+      - DB_PASS=rootpassword
+      - DB_NAME=nurdiansyahlabs_db
+
+  db:
+    image: mysql:8.0
+    container_name: react-app-db
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=nurdiansyahlabs_db
+    volumes:
+      # Persist DB data
+      - db_data:/var/lib/mysql
+      # Inject init schema automatically
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  db_data:
+  backend_vendor:

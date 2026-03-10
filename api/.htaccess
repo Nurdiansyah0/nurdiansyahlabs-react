@@ -1,0 +1,62 @@
+# .htaccess for NurdiansyahLabs React SPA on cPanel Shared Hosting
+# Place this file in public_html/
+
+Options -MultiViews
+
+# ── Enable mod_rewrite for React Router ───────────────────────────────────────
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Don't rewrite requests for real files or directories
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Don't rewrite API calls (PHP backend)
+    RewriteCond %{REQUEST_URI} !^/api/
+
+    # Route everything else to index.html (React Router handles it)
+    RewriteRule ^ index.html [QSA,L]
+
+    # Force Apache to pass Authorization and Custom Security Tokens to PHP
+    SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+    SetEnvIf X-Admin-Token "(.*)" HTTP_X_ADMIN_TOKEN=$1
+</IfModule>
+
+# ── Performance: Browser caching ────────────────────────────────────────────
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 month"
+    ExpiresByType text/html "access plus 0 seconds"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/jpg "access plus 1 year"
+</IfModule>
+
+# ── Gzip compression ─────────────────────────────────────────────────────────
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json
+</IfModule>
+
+# ── Security headers ─────────────────────────────────────────────────────────
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options nosniff
+    Header always set X-Frame-Options DENY
+    Header always set Referrer-Policy strict-origin-when-cross-origin
+    # HSTS (uncomment after SSL confirmed)
+    # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+
+# ── Force HTTPS (uncomment when SSL cert is active on nurdiansyahlabs.com) ──
+# <IfModule mod_rewrite.c>
+#     RewriteCond %{HTTPS} !=on
+#     RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# </IfModule>
+
+# ── PHP: allow file_get_contents for Trends RSS ───────────────────────────────
+<IfModule mod_php.c>
+    php_value allow_url_fopen On
+</IfModule>
