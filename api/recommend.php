@@ -261,10 +261,10 @@ function route_to_python_subprocess(array $payload): string
 function route_to_sql_fallback(string $action, array $payload): string
 {
     $products = [
-        ["id" => 1, "name" => "MacBook Pro M3", "category" => "Laptop", "brand" => "Apple", "price" => 28000000, "rating" => 4.9, "sold" => 1200, "tags" => "laptop"],
-        ["id" => 4, "name" => "iPhone 15 Pro", "category" => "Smartphone", "brand" => "Apple", "price" => 23000000, "rating" => 4.8, "sold" => 3200, "tags" => "smartphone"],
-        ["id" => 7, "name" => "Sony WH-1000XM5", "category" => "Audio", "brand" => "Sony", "price" => 5500000, "rating" => 4.9, "sold" => 2100, "tags" => "audio"],
-        ["id" => 40, "name" => "Atomic Habits", "category" => "Buku", "brand" => "Avery", "price" => 109000, "rating" => 4.9, "sold" => 9800, "tags" => "productivity"],
+        ["id" => 1, "name" => "MacBook Pro M3", "category" => "Laptop", "brand" => "Apple", "price" => 28000000, "rating" => 4.9, "sold" => 1200, "tags" => "laptop", "imageUrl" => "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80"],
+        ["id" => 4, "name" => "iPhone 15 Pro", "category" => "Smartphone", "brand" => "Apple", "price" => 23000000, "rating" => 4.8, "sold" => 3200, "tags" => "smartphone", "imageUrl" => "https://images.unsplash.com/photo-1695048133142-1a20a5bf616f?w=500&q=80"],
+        ["id" => 7, "name" => "Sony WH-1000XM5", "category" => "Audio", "brand" => "Sony", "price" => 5500000, "rating" => 4.9, "sold" => 2100, "tags" => "audio", "imageUrl" => "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=500&q=80"],
+        ["id" => 40, "name" => "Atomic Habits", "category" => "Buku", "brand" => "Avery", "price" => 109000, "rating" => 4.9, "sold" => 9800, "tags" => "productivity", "imageUrl" => "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=500&q=80"],
     ];
 
     switch ($action) {
@@ -288,7 +288,8 @@ function route_to_sql_fallback(string $action, array $payload): string
                 ]);
             }, $products);
             usort($data, function ($a, $b) {
-                return $b['score'] <=> $a['score']; });
+                return $b['score'] <=> $a['score'];
+            });
             return json_encode([
                 "status" => "success",
                 "user_id" => $uid,
