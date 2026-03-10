@@ -47,7 +47,7 @@ $path = htmlspecialchars($input['path'] ?? '/');
 $route = htmlspecialchars($input['slug'] ?? '');
 $duration = (int) ($input['duration'] ?? 0);
 $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown';
-$title = htmlspecialchars($input['title'] ?? '');
+$title = trim(htmlspecialchars($input['title'] ?? ''));
 $service = htmlspecialchars($input['service'] ?? '');
 $timestamp = date('Y-m-d H:i:s'); // DB format DATETIME
 

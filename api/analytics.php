@@ -87,13 +87,17 @@ try {
     $topPathsChart = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     // 6. Project Interactions Data
-    // Ensure we handle naming inconsistencies using 'title'
-    $stmt = $pdo->query("SELECT title as name, COUNT(*) as clicks 
+    // Ensure we handle naming inconsistencies using 'title' with TRIM()
+    $stmt = $pdo->query("SELECT TRIM(title) as name, COUNT(*) as clicks 
                          FROM analytics 
                          WHERE type = 'click_project' AND title IS NOT NULL
-                         GROUP BY title 
+                         GROUP BY TRIM(title) 
                          ORDER BY clicks DESC");
     $projectsChart = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Get active DB name for diagnostic clarity
+    $stmt = $pdo->query("SELECT DATABASE()");
+    $activeDB = $stmt->fetchColumn();
 
     // Output combined analytics bundle for the React Dashboard
     http_response_code(200);
@@ -105,7 +109,11 @@ try {
         ],
         'timelineChart' => $timelineChart,
         'topPathsChart' => $topPathsChart,
-        'projectsChart' => $projectsChart
+        'projectsChart' => $projectsChart,
+        'debug' => [
+            'database' => $activeDB,
+            'timestamp' => date('Y-m-d H:i:s')
+        ]
     ]);
 
 } catch (PDOException $e) {

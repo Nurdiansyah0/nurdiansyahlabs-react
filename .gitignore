@@ -1,1 +1,31 @@
-node_modules
+# Dependencies
+node_modules/
+/venv/
+.target/
+
+# Build outputs
+/dist/
+*.zip
+*.log
+
+# Databases & Sensitive Data
+/database/*.json
+/database/*.sql
+!/database/schema.sql
+.env
+.env.*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+
+# Backend temporary diagnostics
+api/diagnose_env.php
+api/truncate_db.php
+diagnose_env.php
+truncate_db.php
+diagnose_db.php

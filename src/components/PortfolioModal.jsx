@@ -15,7 +15,7 @@ const portfolioData = {
         projects: [
             { image: 'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=600&fit=crop', tag: 'E-Commerce', tagBg: '#eff6ff', tagColor: '#1d4ed8', title: 'Batam Laptop Center', desc: 'Tech product catalog, variants, dynamic cart & checkout flow.', route: '/showcase/landing-page/toko-laptop-batam' },
             { image: '/assets/Ayam_Kampung_Super_1,2Kg.jpeg', tag: 'Agrobisnis', tagBg: '#f0fdf4', tagColor: '#16a34a', title: 'Batam Chicken Farm', desc: 'B2B Supplier Ayam Kampung dengan WhatsApp Order Management.', route: '/showcase/landing-page/batam-chicken-supplier' },
-            { image: '/assets/projects/img_fnb_order.png', tag: 'F&B', tagBg: '#fefce8', tagColor: '#a16207', title: 'Warung Makan Bu Sari', desc: 'Digital menu, online ordering funnel, promo section.', route: '/showcase/landing-page/warung-makan' },
+            { image: '/assets/projects/img_fnb_order.png', tag: 'F&B', tagBg: '#fefce8', tagColor: '#a16207', title: 'Alyuna Siomay', desc: 'Digital menu, online ordering funnel, promo section.', route: '/showcase/landing-page/warung-makan' },
             { image: '/assets/projects/img_batam_rental.png', tag: 'Automotive', tagBg: '#fef2f2', tagColor: '#b91c1c', title: 'Batam Rental Mobil', desc: 'Car rental with Python-based real-time market price scraping.', route: '/showcase/landing-page/batam-rental-mobil' },
         ]
     },
