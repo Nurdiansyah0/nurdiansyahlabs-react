@@ -10,10 +10,13 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-header('Content-Type: application/json');
+header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
+header('X-Content-Type-Options: nosniff');
+header('X-Frame-Options: DENY');
+header('Referrer-Policy: strict-origin-when-cross-origin');
 
 // Handle preflight OPTIONS request
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -42,15 +45,22 @@ if (!$input) {
     exit;
 }
 
-// ── Validate inputs ──────────────────────────────────────────────────────────
-$name = trim($input['name'] ?? '');
-$contact = trim($input['contact'] ?? '');
-$service = trim($input['service'] ?? '');
-$message = trim($input['message'] ?? '');
+// ── Validate & sanitise inputs ───────────────────────────────────────────────
+$name = substr(strip_tags(trim($input['name'] ?? '')), 0, 120);
+$contact = substr(strip_tags(trim($input['contact'] ?? '')), 0, 120);
+$service = substr(strip_tags(trim($input['service'] ?? '')), 0, 100);
+$message = substr(strip_tags(trim($input['message'] ?? '')), 0, 2000);
 
 if (empty($name) || empty($contact) || empty($message)) {
     http_response_code(400);
     echo json_encode(['error' => 'Name, Contact (Email/Phone), and Message are required']);
+    exit;
+}
+
+// Validate contact is a valid email or phone-like string
+if (!filter_var($contact, FILTER_VALIDATE_EMAIL) && !preg_match('/^[0-9\+\-\s]{6,20}$/', $contact)) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Please provide a valid email address or phone number.']);
     exit;
 }
 
@@ -91,15 +101,15 @@ $mail = new PHPMailer(true);
 try {
     // Server settings
     $mail->isSMTP();
-    $mail->Host       = 'smtp.gmail.com';             // Gmail SMTP server
-    $mail->SMTPAuth   = true;                         // Enable SMTP authentication
-    
-    // YOUR GMAIL CREDENTIALS HERE:
-    $mail->Username   = 'Nudiansyahdian28.adv@gmail.com';
-    $mail->Password   = 'qevs ydnh vxkg ixof'; 
-    
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; 
-    $mail->Port       = 587;                            // TCP port to connect to
+    $mail->Host = 'smtp.gmail.com';             // Gmail SMTP server
+    $mail->SMTPAuth = true;                         // Enable SMTP authentication
+
+    // SMTP credentials from environment variables (set in cPanel .user.ini or Docker)
+    $mail->Username = getenv('SMTP_USER') ?: 'Nudiansyahdian28.adv@gmail.com';
+    $mail->Password = getenv('SMTP_PASS') ?: '';
+
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port = 587;                            // TCP port to connect to
 
     // Recipients
     $mail->setFrom('Nudiansyahdian28.adv@gmail.com', 'NurdiansyahLabs Website');
@@ -109,18 +119,18 @@ try {
     // Content
     $mail->isHTML(false);                             // Set email format to plain text
     $mail->Subject = "⭐ New Lead from $name (" . ($service ?: 'General Inquiry') . ")";
-    
+
     $body = "New contact form submission:\n\n";
     $body .= "Name: $name\n";
     $body .= "Contact: $contact\n";
     $body .= "Service Interest: " . ($service ?: 'None specified') . "\n";
     $body .= "IP: $ip\n\n";
     $body .= "Message:\n$message\n";
-    
+
     $mail->Body = $body;
 
     $mail->send();
-    
+
     // ── Success Response ─────────────────────────────────────────────────────────
     http_response_code(201);
     echo json_encode([
@@ -128,7 +138,7 @@ try {
         'message' => 'Your message has been sent successfully.',
         'lead_id' => $leadId
     ]);
-    
+
 } catch (Exception $e) {
     // If saving to DB worked, but email failed
     http_response_code(201);

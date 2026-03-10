@@ -1,27 +1,25 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState, useMemo } from 'react'
 const CLUSTERS = [
     { id: 0, name: 'Champions', color: '#6366f1', bg: '#ede9fe', count: 312, rfm: 'R:5 F:5 M:5', revenue: 'Rp 4.8Jt avg', desc: 'Top customers dengan frekuensi dan nilai transaksi tertinggi. Fidelitas sangat tinggi.', action: 'Reward dengan loyalty program eksklusif' },
     { id: 1, name: 'Loyal', color: '#10b981', bg: '#d1fae5', count: 489, rfm: 'R:4 F:4 M:3', revenue: 'Rp 2.1Jt avg', desc: 'Pelanggan setia dengan pembelian rutin. Nilai transaksi sedang namun konsisten.', action: 'Upsell produk premium dan cross-sell' },
     { id: 2, name: 'At Risk', color: '#f59e0b', bg: '#fef3c7', count: 234, rfm: 'R:2 F:3 M:3', revenue: 'Rp 1.4Jt avg', desc: 'Pelanggan yang pernah aktif namun jarang bertransaksi belakangan ini.', action: 'Kirim personalized re-engagement email' },
     { id: 3, name: 'Lost', color: '#ef4444', bg: '#fee2e2', count: 178, rfm: 'R:1 F:1 M:2', revenue: 'Rp 0.8Jt avg', desc: 'Pelanggan yang sudah lama tidak melakukan transaksi. Perlu win-back campaign.', action: 'Tawarkan diskon besar sekali pakai' },
 ]
-// Scatter plot data (x=frequency, y=recency, color=cluster)
-const SCATTER_POINTS = CLUSTERS.flatMap(c => Array.from({ length: 20 }).map((_, i) => ({
-    x: Math.random() * (c.id === 0 ? 5 : c.id === 1 ? 4 : c.id === 2 ? 3 : 2) + c.id * 0,
+// Scatter plot data — generated once per mount via useMemo in the component
+const generateScatterPoints = () => CLUSTERS.flatMap(c => Array.from({ length: 20 }).map(() => ({
+    x: Math.random() * (c.id === 0 ? 5 : c.id === 1 ? 4 : c.id === 2 ? 3 : 2),
     y: Math.random() * (c.id === 0 ? 5 : c.id === 1 ? 4 : c.id === 2 ? 3 : 2),
     cluster: c.id,
     color: c.color,
 })))
 export default function CustomerClusteringApp() {
-    const navigate = useNavigate()
     const [selected, setSelected] = useState(null)
+    // useMemo ensures scatter points are generated once, not on every render
+    const SCATTER_POINTS = useMemo(() => generateScatterPoints(), [])
     const total = CLUSTERS.reduce((s, c) => s + c.count, 0)
     return (
         <div style={{ minHeight: '100vh', background: '#f8f9ff', fontFamily: '"Inter",sans-serif' }}>
-            <div style={{ background: '#312e81', padding: '8px 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            </div>
-            <div style={{ background: 'linear-gradient(135deg,#312e81,#4f46e5)', padding: '1.5rem 2rem', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ background: 'linear-gradient(135deg,#312e81,#4f46e5)', padding: '1.5rem 2rem', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
                 <div>
                     <div style={{ fontSize: '0.7rem', color: '#c7d2fe', letterSpacing: '0.15em', marginBottom: '4px' }}>DATA SCIENCE / CLUSTERING</div>
                     <h1 style={{ fontSize: '1.5rem', fontWeight: 800, margin: 0 }}>Customer Clustering – RFM Analysis</h1>
@@ -33,7 +31,7 @@ export default function CustomerClusteringApp() {
             </div>
             <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
                 {/* Cluster cards */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '1rem', marginBottom: '2rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
                     {CLUSTERS.map(c => (
                         <div key={c.id} onClick={() => setSelected(selected?.id === c.id ? null : c)} style={{ background: selected?.id === c.id ? c.bg : '#fff', borderRadius: '14px', padding: '1.25rem', border: `2px solid ${selected?.id === c.id ? c.color : '#e5e7eb'}`, cursor: 'pointer', transition: 'all 0.2s' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
@@ -46,7 +44,7 @@ export default function CustomerClusteringApp() {
                         </div>
                     ))}
                 </div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
                     {/* Scatter plot simulation */}
                     <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #e5e7eb' }}>
                         <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#312e81', marginBottom: '1rem' }}>RFM Scatter Plot</h3>

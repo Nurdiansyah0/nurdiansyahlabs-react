@@ -6,10 +6,12 @@
 
 function getDB()
 {
-    // Map to Docker Environment Variables, fall back to cPanel defaults
+    // !! DB credentials MUST come from environment variables. !!
+    // Dev: set in Docker Compose. cPanel: set via .user.ini or SetEnv in .htaccess.
+    // Do NOT add hardcoded fallback passwords here — this file is version-controlled.
     $host = getenv('DB_HOST') ?: 'localhost';
     $username = getenv('DB_USER') ?: 'root';
-    $password = getenv('DB_PASS') !== false ? getenv('DB_PASS') : 'Nurdiansyah@024';
+    $password = (getenv('DB_PASS') !== false) ? getenv('DB_PASS') : '';
     $dbname = getenv('DB_NAME') ?: 'uygpuazs_nurdiansyahlabs_db';
 
     try {

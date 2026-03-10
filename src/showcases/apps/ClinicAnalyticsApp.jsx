@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 const DEPTS = ['Semua', 'IGD', 'Rawat Inap', 'Poliklinik', 'Radiologi', 'Laboratorium']
 const MONTHLY_PATIENTS = {
     'Januari': { igd: 234, rawat: 87, poli: 412, radio: 98, lab: 201 },
@@ -15,7 +14,6 @@ const CONDITIONS = [
     { name: 'Lainnya', patients: 831, pct: 48, color: '#e2e8f0' },
 ]
 export default function ClinicAnalyticsApp() {
-    const navigate = useNavigate()
     const [dept, setDept] = useState('Semua')
     const [month, setMonth] = useState('Maret')
     const d = MONTHLY_PATIENTS[month]
@@ -37,7 +35,7 @@ export default function ClinicAnalyticsApp() {
             </div>
             <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
                 {/* KPIs */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '1rem', marginBottom: '2rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
                     {[{ l: 'Total Pasien', v: String(d.igd + d.rawat + d.poli + d.radio + d.lab), i: '👥', c: '#2563eb' }, { l: 'Bed Terisi', v: `${BEDS.occupied}/${BEDS.total}`, i: '🛏', c: '#dc2626' }, { l: 'BOR', v: `${Math.round((BEDS.occupied / BEDS.total) * 100)}%`, i: '📊', c: '#f59e0b' }, { l: 'Bed Kosong', v: String(BEDS.available), i: '✅', c: '#16a34a' }].map(m => (
                         <div key={m.l} style={{ background: '#fff', borderRadius: '14px', padding: '1.5rem', border: '1px solid #bfdbfe' }}>
                             <div style={{ fontSize: '1.5rem', marginBottom: '8px' }}>{m.i}</div>
@@ -46,7 +44,7 @@ export default function ClinicAnalyticsApp() {
                         </div>
                     ))}
                 </div>
-                <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '1.5rem', marginBottom: '2rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
                     {/* Bar chart per dept */}
                     <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #bfdbfe' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.5rem' }}>

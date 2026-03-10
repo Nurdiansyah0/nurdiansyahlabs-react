@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState, useEffect, useMemo } from 'react'
 import { getOptimizedImg } from '../../utils/imgHelper'
-const rackData = Array.from({ length: 96 }).map((_, i) => {
+// rackData factory — called once inside useMemo
+const buildRackData = () => Array.from({ length: 96 }).map((_, i) => {
     const isAisle = i % 12 === 5 || i % 12 === 6
     if (isAisle) return { isAisle: true }
     let c = '#d1fae5', s = 'Empty', p = Math.floor(Math.random() * 30)
@@ -31,11 +31,12 @@ const ITEMS = [
     { sku: 'SKU-7719-B', name: 'Safety Helmet', qty: 25, loc: 'Zone B-33', cat: 'Safety', last: '1h ago' },
 ]
 export default function WarehouseApp() {
-    const navigate = useNavigate()
     const [page, setPage] = useState('dashboard')
     const [scans, setScans] = useState(initScans)
     const [hovered, setHovered] = useState(null)
     const [notifOpen, setNotifOpen] = useState(false)
+    // useMemo: rack layout is computed once and never randomises again
+    const rackData = useMemo(() => buildRackData(), [])
     useEffect(() => { const t = setInterval(() => setScans(p => [rnd(), ...p.slice(0, 9)]), 4000); return () => clearInterval(t) }, [])
     const addScan = () => setScans(p => [rnd(), ...p.slice(0, 9)])
     const PAGES = [{ k: 'dashboard', i: '📊', l: 'Dashboard' }, { k: 'inventory', i: '📦', l: 'Inventory' }, { k: 'inbound', i: '⬇️', l: 'Inbound' }, { k: 'outbound', i: '⬆️', l: 'Outbound' }, { k: 'reports', i: '📈', l: 'Reports' }]
@@ -78,7 +79,7 @@ export default function WarehouseApp() {
                 {page === 'dashboard' && (
                     <div style={{ flex: 1, overflowY: 'auto', padding: '2rem', background: '#f3f4f6', display: 'grid', gridTemplateColumns: '1fr 350px', gap: '2rem' }}>
                         <div>
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '1rem', marginBottom: '2rem' }}>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
                                 {[{ l: 'Total Pallets', v: '1,284', t: '+12 today', c: '#3b82f6' }, { l: 'Capacity Used', v: '84%', t: 'Zone C full', c: '#f59e0b' }, { l: 'Pending Putaway', v: `${42 + scans.filter(s => s.type === 'in').length}`, t: 'Needs action', c: '#ef4444' }, { l: 'Orders to Pick', v: `${156 - scans.filter(s => s.type === 'out').length}`, t: 'Cutoff 14:00', c: '#10b981' }].map(m => (
                                     <div key={m.l} style={{ background: '#fff', borderRadius: '12px', padding: '1.25rem', border: '1px solid #e5e7eb' }}>
                                         <div style={{ fontSize: '0.75rem', color: '#6b7280', fontWeight: 600, marginBottom: '8px' }}>{m.l}</div>
