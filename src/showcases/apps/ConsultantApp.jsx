@@ -4,11 +4,7 @@ import { getOptimizedImg } from '../../utils/imgHelper'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ShieldCheck, Truck, CreditCard, ChevronRight, Plus, Menu, X, Phone, MapPin, Globe, CheckCircle } from 'lucide-react'
 
-const FALLBACK_PRODUCTS = [
-    { id: 1, name: 'Ayam Kampung Asli', price: 75000, desc: 'Daging kenyal dengan kaldu yang sangat gurih. Bebas suntik hormon dan diternak lepas liar (free-range). Sangat cocok untuk soto, sup, dan masakan tradisional.', img: 'https://images.pexels.com/photos/2233729/pexels-photo-2233729.jpeg', tag: 'Best Seller' },
-    { id: 2, name: 'Ayam KUB (Kampung Unggul)', price: 85000, desc: 'Ayam Kampung Unggul Balitbangtan. Memiliki cita rasa daging yang mirip ayam kampung asli namun dengan bobot yang lebih besar dan daging lebih empuk.', img: 'https://images.pexels.com/photos/1769279/pexels-photo-1769279.jpeg', tag: 'Favorit Restoran' },
-    { id: 3, name: 'Ayam Kampung Super', price: 80000, desc: 'Persilangan ayam bangkok dan petelur. Dagingnya tebal, empuk, dan cepat matang. Pilihan paling ekonomis untuk warung makan dan katering di Batam.', img: 'https://images.pexels.com/photos/1405930/pexels-photo-1405930.jpeg', tag: 'Ekonomis' },
-]
+
 
 const BRAND = {
     primary: 'emerald', // Using tailwind names now
@@ -32,15 +28,15 @@ export default function ConsultantApp() {
                         name: p.name,
                         price: parseFloat(p.price),
                         desc: p.description,
-                        img: p.image_url || FALLBACK_PRODUCTS[0].img,
+                        img: p.image_url || 'https://images.pexels.com/photos/2233729/pexels-photo-2233729.jpeg',
                         tag: p.category || 'Fresh'
                     }))
                     setProducts(formattedProducts)
                 } else {
-                    setProducts(FALLBACK_PRODUCTS)
+                    setProducts([])
                 }
             })
-            .catch(() => setProducts(FALLBACK_PRODUCTS))
+            .catch(() => setProducts([]))
             .finally(() => setLoading(false))
     }, [])
 
@@ -239,7 +235,11 @@ export default function ConsultantApp() {
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {products.map((item, idx) => (
+                        {products.length === 0 && !loading ? (
+                            <div className="col-span-full text-center py-16 bg-slate-50 rounded-3xl border border-slate-100">
+                                <p className="text-slate-500 font-medium text-lg">Belum ada stok ayam yang tersedia saat ini.</p>
+                            </div>
+                        ) : products.map((item, idx) => (
                             <motion.div
                                 layout
                                 initial={{ opacity: 0, y: 20 }}
