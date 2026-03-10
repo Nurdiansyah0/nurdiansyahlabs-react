@@ -1,11 +1,6 @@
 import { useState, useEffect } from 'react'
 import { getOptimizedImg } from '../../utils/imgHelper'
-const FALLBACK_MENU = [
-    { id: 1, name: 'Siomay Campur Biasa', price: 15000, cat: 'Siomay', img: '/assets/Siomay_01.jpg', desc: 'Siomay ikan tenggiri asli dengan siraman bumbu kacang gurih manis.' },
-    { id: 2, name: 'Siomay Paket Komplit', price: 25000, cat: 'Paket Spesial', img: '/assets/Siomay_All_Paket.jpeg', desc: 'Isian lengkap: Siomay, Tahu, Telur, Kentang, Kol, dan Pare.' },
-    { id: 3, name: 'Siomay Porsi Besar (Ekstra Bumbu)', price: 30000, cat: 'Paket Spesial', img: '/assets/Siomay_pkt.jpeg', desc: 'Porsi kenyang dengan ekstra siraman bumbu kacang kental yang medok mantap.' },
-    { id: 4, name: 'Nastar Wisman Toples', price: 95000, cat: 'Kue Kering', img: '/assets/Nastar.jpeg', desc: 'Nastar premium renyah lumer di mulut dengan isian selai nanas asli dan butter Wisman.' },
-]
+
 const BRAND = {
     primary: '#f9a826',      // Golden yellow (like Nastar & Siomay highlights)
     primaryHover: '#f59e0b', // Slightly darker yellow for hover states 
@@ -33,10 +28,10 @@ export default function WarungMakanApp() {
                     }))
                     setMenu(formattedMenu)
                 } else {
-                    setMenu(FALLBACK_MENU)
+                    setMenu([])
                 }
             })
-            .catch(() => setMenu(FALLBACK_MENU))
+            .catch(() => setMenu([]))
             .finally(() => setLoading(false))
     }, [])
     const filtered = cat === 'Semua' ? menu : menu.filter(m => m.cat === cat)
@@ -104,7 +99,11 @@ export default function WarungMakanApp() {
                     ))}
                 </div>
                 <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(320px,1fr))', gap: '2.5rem' }}>
-                    {filtered.map(item => (
+                    {filtered.length === 0 && !loading ? (
+                        <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '3rem', color: '#666', fontSize: '1.2rem', background: '#fff', borderRadius: '24px', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }}>
+                            <p>Belum ada menu yang tersedia di kategori ini saat ini.</p>
+                        </div>
+                    ) : filtered.map(item => (
                         <div key={item.id} style={{ background: '#fff', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.08)', transition: 'transform 0.3s ease', cursor: 'default' }}>
                             <img src={getOptimizedImg(item.img, { w: 600, h: 400 })} alt={item.name} style={{ width: '100%', height: '250px', objectFit: 'cover' }} />
                             <div style={{ padding: '2rem' }}>

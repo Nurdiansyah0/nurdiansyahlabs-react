@@ -95,14 +95,7 @@ const detectLocationAndSetLanguage = async () => {
     } catch (e) { console.warn("Locale detect failed", e); }
 };
 // ── DATA ───────────────────────────────────────────────────────────────────
-const FALLBACK_CARS = [
-    { id: 1, name: 'Honda Brio', type: 'City Car', price: 350000, seats: 5, trans: 'Matic', luggage: 2, cat: 'Lepas Kunci', img: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500&fit=crop' },
-    { id: 2, name: 'Toyota Avanza', type: 'MPV', price: 450000, seats: 7, trans: 'Matic', luggage: 3, cat: 'Lepas Kunci', img: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500&fit=crop' },
-    { id: 3, name: 'Toyota Innova Reborn', type: 'Premium MPV', price: 750000, seats: 7, trans: 'Matic', luggage: 4, cat: 'Dengan Sopir', img: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500&fit=crop' },
-    { id: 4, name: 'Toyota Rush', type: 'SUV', price: 500000, seats: 7, trans: 'Manual', luggage: 3, cat: 'Lepas Kunci', img: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500&fit=crop' },
-    { id: 5, name: 'Daihatsu Rocky', type: 'SUV', price: 450000, seats: 5, trans: 'Matic', luggage: 2, cat: 'Lepas Kunci', img: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500&fit=crop' },
-    { id: 6, name: 'Toyota Alphard', type: 'VVIP Luxury', price: 2500000, seats: 7, trans: 'Matic', luggage: 5, cat: 'Dengan Sopir', img: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500&fit=crop' }
-];
+
 const exchangeRates = {
     'id': { rate: 1, symbol: 'Rp', locale: 'id-ID' },
     'en': { rate: 0.000086, symbol: 'S$', locale: 'en-SG' },
@@ -205,22 +198,22 @@ function Fleet() {
                             luggage: p.extras?.luggage || 2,
                             cat: (p.category?.toLowerCase().includes('sopir') || p.category === 'Dengan Sopir') ? 'Dengan Sopir' : 'Lepas Kunci',
                             // Handle both image_url and img fields for maximum compatibility
-                            img: p.image_url || p.img || 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=400&fit=crop'
+                            img: p.image_url || p.img || 'https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg'
                         }));
                         setAllCars(formatted);
                         setFilteredCars(formatted);
                     } else {
-                        // If status is success but data is empty, use fallbacks but could also show empty state
-                        setAllCars(FALLBACK_CARS);
-                        setFilteredCars(FALLBACK_CARS);
+                        // If status is success but data is empty
+                        setAllCars([]);
+                        setFilteredCars([]);
                     }
                 } else {
                     throw new Error('API Error');
                 }
             }).catch((err) => {
                 console.error("Fetch error:", err);
-                setAllCars(FALLBACK_CARS);
-                setFilteredCars(FALLBACK_CARS);
+                setAllCars([]);
+                setFilteredCars([]);
             }).finally(() => setLoading(false));
     }, []);
     const filter = (type) => {
@@ -267,7 +260,11 @@ function Fleet() {
                 <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     {loading ? <div className="col-span-full text-center py-12">Loading...</div> :
                         <AnimatePresence mode='popLayout'>
-                            {filteredCars.map((car) => {
+                            {filteredCars.length === 0 ? (
+                                <div className="col-span-full text-center py-16 bg-gray-50 rounded-3xl border border-gray-100">
+                                    <p className="text-gray-500 font-medium text-lg">Belum ada armada kendaraan yang tersedia saat ini.</p>
+                                </div>
+                            ) : filteredCars.map((car) => {
                                 const price = formatPrice(car.price);
                                 return (
                                     <motion.div

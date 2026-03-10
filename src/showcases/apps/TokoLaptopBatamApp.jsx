@@ -19,10 +19,7 @@ import {
 } from 'lucide-react'
 import { getOptimizedImg } from '../../utils/imgHelper'
 
-const FALLBACK_PRODUCTS = [
-    { id: 'f1', name: 'MacBook Pro M3 Max', price: 54999000, category: 'Laptops', image_url: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800&q=80', extras: { colors: ['Space Black', 'Silver'], sizes: ['36GB / 1TB'] }, description: 'Chip M3 Max paling bertenaga untuk profesional.' },
-    { id: 'f2', name: 'iPhone 15 Pro Max', price: 22999000, category: 'Gadgets', image_url: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=800&q=80', extras: { colors: ['Natural Titanium'], sizes: ['256GB'] }, description: 'Titanium design dengan A17 Pro chip.' }
-]
+
 
 const CATEGORIES = [
     { id: 'all', label: 'Semua', icon: Search },
@@ -49,10 +46,10 @@ export default function TokoLaptopBatamApp() {
                 if (res.status === 'success' && res.data?.length > 0) {
                     setProducts(res.data)
                 } else {
-                    setProducts(FALLBACK_PRODUCTS)
+                    setProducts([])
                 }
             })
-            .catch(() => setProducts(FALLBACK_PRODUCTS))
+            .catch(() => setProducts([]))
             .finally(() => setLoading(false))
     }, [])
 
@@ -204,7 +201,11 @@ export default function TokoLaptopBatamApp() {
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                         <AnimatePresence mode='popLayout'>
-                            {filteredProducts.map((p, idx) => (
+                            {filteredProducts.length === 0 && !loading ? (
+                                <div className="col-span-full text-center py-16 bg-slate-50 rounded-3xl border border-slate-100">
+                                    <p className="text-slate-500 font-medium text-lg">Belum ada produk yang tersedia saat ini.</p>
+                                </div>
+                            ) : filteredProducts.map((p, idx) => (
                                 <motion.div
                                     layout
                                     initial={{ opacity: 0, scale: 0.9 }}
