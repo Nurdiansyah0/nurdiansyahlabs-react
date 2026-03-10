@@ -1,10 +1,11 @@
 FROM php:8.2-apache
 
-# Install required PHP extensions for MySQL and Composer
+# Install required PHP extensions for MySQL and Composer + Python for ML
 RUN apt-get update && apt-get install -y \
     unzip \
     git \
     libzip-dev \
+    python3 \
     && docker-php-ext-install pdo pdo_mysql zip
 
 # Enable Apache mod_rewrite

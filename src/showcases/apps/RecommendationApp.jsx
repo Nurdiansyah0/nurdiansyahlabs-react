@@ -102,20 +102,44 @@ function ProductCard({ product, onFeedback, onExplain, isNew }) {
             onMouseEnter={e => e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.12)'}
             onMouseLeave={e => e.currentTarget.style.boxShadow = isNew ? '0 0 0 3px rgba(124,58,237,0.08)' : '0 2px 8px rgba(0,0,0,0.04)'}
         >
-            {/* Card Header */}
-            <div style={{ background: 'linear-gradient(135deg, #f8f7ff, #ede9fe)', padding: '1.25rem', textAlign: 'center', position: 'relative' }}>
+            {/* Card Header (Image) */}
+            <div style={{
+                height: 160, position: 'relative', background: '#f3f4f6',
+                backgroundImage: `url(${product.imageUrl})`,
+                backgroundSize: 'cover', backgroundPosition: 'center',
+                borderBottom: '1px solid #e5e7eb'
+            }}>
                 {isNew && (
-                    <div style={{ position: 'absolute', top: 8, right: 8, background: '#7c3aed', color: '#fff', fontSize: '0.6rem', fontWeight: 700, padding: '2px 6px', borderRadius: 99, letterSpacing: '0.05em' }}>
+                    <div style={{ position: 'absolute', top: 8, right: 8, background: '#7c3aed', color: '#fff', fontSize: '0.6rem', fontWeight: 700, padding: '2px 6px', borderRadius: 99, letterSpacing: '0.05em', zIndex: 10 }}>
                         NEW RECO
                     </div>
                 )}
-                <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>{emoji}</div>
-                <div style={{ fontSize: '0.7rem', color: '#7c3aed', fontWeight: 600, letterSpacing: '0.08em' }}>{product.category} · {product.brand}</div>
+
+                {/* Fallback pattern if image is missing */}
+                {!product.imageUrl && (
+                    <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justify: 'center', background: 'linear-gradient(135deg, #f8f7ff, #ede9fe)' }}>
+                        <div style={{ fontSize: '3rem', opacity: 0.8 }}>{emoji}</div>
+                    </div>
+                )}
+
+                {/* Category Badge over Image */}
+                <div style={{
+                    position: 'absolute', bottom: 8, left: 8,
+                    background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(4px)',
+                    padding: '2px 8px', borderRadius: 6,
+                    fontSize: '0.65rem', color: '#5b21b6', fontWeight: 700, letterSpacing: '0.05em'
+                }}>
+                    {emoji} {product.category}
+                </div>
             </div>
 
             {/* Card Body */}
-            <div style={{ padding: '1rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#1e1b4b', lineHeight: 1.3 }}>{product.name}</div>
+            <div style={{ padding: '0.85rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                {/* Brand & Name */}
+                <div>
+                    <div style={{ fontSize: '0.65rem', color: '#6b7280', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase' }}>{product.brand}</div>
+                    <div style={{ fontWeight: 800, fontSize: '0.95rem', color: '#1e1b4b', lineHeight: 1.25, marginTop: 2 }}>{product.name}</div>
+                </div>
 
                 {/* Price & Sold */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -200,12 +224,19 @@ function ExplainPanel({ data, onClose }) {
 
                 <div style={{ marginBottom: '1rem' }}>
                     <div style={{ fontSize: '0.78rem', fontWeight: 700, color: '#374151', marginBottom: '0.75rem' }}>🔗 Similar Products (Content-Based)</div>
-                    {(top_similar_products || []).map(p => (
-                        <div key={p.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 0', borderBottom: '1px solid #f3f4f6' }}>
-                            <span style={{ fontSize: '0.82rem', color: '#374151' }}>{CATEGORY_EMOJIS[p.category] || '📦'} {p.name}</span>
-                            <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#7c3aed' }}>{fmt(p.price)}</span>
-                        </div>
-                    ))}
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px' }}>
+                        {(top_similar_products || []).map(p => (
+                            <div key={p.id} style={{ border: '1px solid #f3f4f6', borderRadius: 8, overflow: 'hidden' }}>
+                                <div style={{ height: 60, background: '#f3f4f6', backgroundImage: `url(${p.imageUrl})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+                                    {!p.imageUrl && <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{CATEGORY_EMOJIS[p.category]}</div>}
+                                </div>
+                                <div style={{ padding: '6px', fontSize: '0.7rem', textAlign: 'center' }}>
+                                    <div style={{ fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{p.name}</div>
+                                    <div style={{ color: '#7c3aed', fontWeight: 800 }}>{fmt(p.price)}</div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
 
                 <div style={{ background: '#f8f7ff', borderRadius: 10, padding: '0.75rem', fontSize: '0.78rem', color: '#5b21b6', lineHeight: 1.6 }}>
