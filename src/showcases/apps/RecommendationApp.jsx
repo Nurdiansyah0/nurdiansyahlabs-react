@@ -47,10 +47,10 @@ async function apiFetch(action, { method = 'GET', body } = {}) {
 
 // ── Sub-components ───────────────────────────────────────────────────────────
 
-function ServiceBadge({ online }) {
+function ServiceBadge({ online, mode }) {
     return (
         <div style={{
-            display: 'flex', alignItems: 'center', gap: '6px',
+            display: 'flex', alignItems: 'center', gap: '8px',
             padding: '4px 12px', borderRadius: '999px',
             background: online ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)',
             border: `1px solid ${online ? '#10b981' : '#ef4444'}`,
@@ -63,7 +63,7 @@ function ServiceBadge({ online }) {
                 animation: online ? 'pulse 2s infinite' : 'none',
                 display: 'inline-block',
             }} />
-            {online ? 'Python ML Service Online' : 'ML Service Offline'}
+            {online ? `RecoEngine ${mode || 'Online'}` : 'ML Service Offline'}
         </div>
     )
 }
@@ -226,6 +226,7 @@ export default function RecommendationApp() {
     const [recommendations, setRecommendations] = useState([])
     const [loading, setLoading] = useState(false)
     const [serviceOnline, setServiceOnline] = useState(null)
+    const [serviceMode, setServiceMode] = useState('')
     const [explainData, setExplainData] = useState(null)
     const [newProductIds, setNewProductIds] = useState(new Set())
     const [serviceError, setServiceError] = useState('')
@@ -234,7 +235,10 @@ export default function RecommendationApp() {
     // Check ML service health
     useEffect(() => {
         apiFetch('health')
-            .then(d => setServiceOnline(!d.error))
+            .then(d => {
+                setServiceOnline(!d.error && d.status === 'ok')
+                if (d.service) setServiceMode(d.service.replace('RecoEngine-', ''))
+            })
             .catch(() => setServiceOnline(false))
     }, [])
 
@@ -326,7 +330,7 @@ export default function RecommendationApp() {
                                 Hybrid SVD Collaborative Filtering + TF-IDF Content Similarity · Same architecture as Netflix & Tokopedia
                             </p>
                         </div>
-                        <ServiceBadge online={serviceOnline} />
+                        <ServiceBadge online={serviceOnline} mode={serviceMode} />
                     </div>
 
                     {/* Architecture pills */}
