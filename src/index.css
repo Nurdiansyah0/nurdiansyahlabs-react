@@ -6,6 +6,10 @@
   padding: 0;
 }
 
+@tailwind components;
+@tailwind utilities;
+
+
 :root {
   --indigo-50: #eef2ff;
   --indigo-100: #e0e7ff;

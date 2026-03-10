@@ -1,25 +1,43 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import path from 'path'
+import { fileURLToPath } from 'url'
 
-// In production (cPanel), the PHP API lives at /api/trends.php
-// In dev, the Node.js backend runs on localhost:3001
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
 export default defineConfig({
     plugins: [react()],
     server: {
         port: 5173,
         host: true,
-        // Proxy /api/* to the Node.js backend during local dev
         proxy: {
             '/api': {
-                target: 'http://localhost:3001',
+                target: process.env.BACKEND_URL || 'http://localhost:8000',
                 changeOrigin: true,
             }
         }
     },
     build: {
-        // Output to dist/ for cPanel upload
         outDir: 'dist',
-        // Ensure assets are hashed for cache busting
-        assetsDir: 'assets'
+        assetsDir: 'assets',
+        minify: 'terser',
+        terserOptions: {
+            compress: {
+                drop_console: true,
+                drop_debugger: true
+            }
+        },
+        rollupOptions: {
+            output: {
+                manualChunks: {
+                    vendor: ['react', 'react-dom'],
+                    router: ['react-router-dom'],
+                    animation: ['framer-motion'],
+                    charts: ['recharts'],
+                    icons: ['lucide-react']
+                }
+            }
+        }
     }
 })

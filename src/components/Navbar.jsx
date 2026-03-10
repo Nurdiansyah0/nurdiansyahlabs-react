@@ -26,9 +26,10 @@ export default function Navbar() {
     }, [mobileOpen])
 
     const links = [
-        { href: '#services', label: t('nav.services') },
-        { href: '#why-us', label: t('nav.whyUs') },
-        { href: '#contact', label: t('nav.contact') },
+        { href: '/#services', label: t('nav.services') },
+        { href: '/#why-us', label: t('nav.whyUs') },
+        { href: '/blog', label: 'Insights & Tips' },
+        { href: '/#contact', label: t('nav.contact') },
     ]
 
     return (
@@ -65,12 +66,21 @@ export default function Navbar() {
                     {/* Desktop links */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }} className="desktop-nav">
                         {links.map(l => (
-                            <a key={l.href} href={l.href}
-                                style={{ color: '#4b5563', fontWeight: 500, fontSize: '0.95rem', transition: 'color 0.2s', minHeight: 0 }}
-                                onMouseEnter={e => e.target.style.color = '#4338ca'}
-                                onMouseLeave={e => e.target.style.color = '#4b5563'}>
-                                {l.label}
-                            </a>
+                            l.href.startsWith('/') && !l.href.includes('#') ? (
+                                <Link key={l.href} to={l.href}
+                                    style={{ color: '#4b5563', fontWeight: 500, fontSize: '0.95rem', transition: 'color 0.2s', minHeight: 0, textDecoration: 'none' }}
+                                    onMouseEnter={e => e.target.style.color = '#4338ca'}
+                                    onMouseLeave={e => e.target.style.color = '#4b5563'}>
+                                    {l.label}
+                                </Link>
+                            ) : (
+                                <a key={l.href} href={l.href}
+                                    style={{ color: '#4b5563', fontWeight: 500, fontSize: '0.95rem', transition: 'color 0.2s', minHeight: 0, textDecoration: 'none' }}
+                                    onMouseEnter={e => e.target.style.color = '#4338ca'}
+                                    onMouseLeave={e => e.target.style.color = '#4b5563'}>
+                                    {l.label}
+                                </a>
+                            )
                         ))}
 
                         {/* Language selector */}
@@ -146,22 +156,41 @@ export default function Navbar() {
                     background: '#fff',
                 }}>
                     {links.map(l => (
-                        <a
-                            key={l.href}
-                            href={l.href}
-                            onClick={() => setMobileOpen(false)}
-                            style={{
-                                color: '#374151', fontWeight: 500, padding: '10px 12px',
-                                borderRadius: '8px', fontSize: '1rem',
-                                display: 'flex', alignItems: 'center',
-                                minHeight: '44px',
-                                transition: 'background 0.15s',
-                            }}
-                            onMouseEnter={e => e.currentTarget.style.background = '#f3f4f6'}
-                            onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
-                        >
-                            {l.label}
-                        </a>
+                        l.href.startsWith('/') && !l.href.includes('#') ? (
+                            <Link
+                                key={l.href}
+                                to={l.href}
+                                onClick={() => setMobileOpen(false)}
+                                style={{
+                                    color: '#374151', fontWeight: 500, padding: '10px 12px',
+                                    borderRadius: '8px', fontSize: '1rem',
+                                    display: 'flex', alignItems: 'center',
+                                    minHeight: '44px', textDecoration: 'none',
+                                    transition: 'background 0.15s',
+                                }}
+                                onMouseEnter={e => e.currentTarget.style.background = '#f3f4f6'}
+                                onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                            >
+                                {l.label}
+                            </Link>
+                        ) : (
+                            <a
+                                key={l.href}
+                                href={l.href}
+                                onClick={() => setMobileOpen(false)}
+                                style={{
+                                    color: '#374151', fontWeight: 500, padding: '10px 12px',
+                                    borderRadius: '8px', fontSize: '1rem',
+                                    display: 'flex', alignItems: 'center',
+                                    minHeight: '44px', textDecoration: 'none',
+                                    transition: 'background 0.15s',
+                                }}
+                                onMouseEnter={e => e.currentTarget.style.background = '#f3f4f6'}
+                                onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                            >
+                                {l.label}
+                            </a>
+                        )
                     ))}
 
                     {/* Mobile language selector */}

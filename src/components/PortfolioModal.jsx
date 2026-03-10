@@ -1,7 +1,9 @@
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { X, Lightbulb, MessageCircle, PlayCircle, ArrowRight } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useResponsive } from '../hooks/useResponsive'
+import { useTracker } from '../hooks/useTracker'
 
 const portfolioData = {
     A: {
@@ -11,10 +13,10 @@ const portfolioData = {
         badgeBg: '#eff6ff', badgeColor: '#1d4ed8',
         headerBg: 'linear-gradient(135deg, #eff6ff 0%, #fff 100%)',
         projects: [
-            { image: '/assets/projects/img_batik_store.png', tag: 'E-Commerce', tagBg: '#eff6ff', tagColor: '#1d4ed8', title: 'Toko Batik Nusantara', desc: 'Product catalog, WhatsApp order, Google Maps & CTA funnels.', route: '/showcase/landing-page/toko-batik' },
-            { image: '/assets/projects/img_consultant_port.png', tag: 'Personal Brand', tagBg: '#f0f9ff', tagColor: '#0369a1', title: 'Consultant Portfolio Site', desc: 'Clean, minimalist portfolio with testimonials & packages.', route: '/showcase/landing-page/consultant-portfolio' },
+            { image: 'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=600&fit=crop', tag: 'E-Commerce', tagBg: '#eff6ff', tagColor: '#1d4ed8', title: 'Batam Laptop Center', desc: 'Tech product catalog, variants, dynamic cart & checkout flow.', route: '/showcase/landing-page/toko-laptop-batam' },
+            { image: '/assets/Ayam_Kampung_Super_1,2Kg.jpeg', tag: 'Agrobisnis', tagBg: '#f0fdf4', tagColor: '#16a34a', title: 'Batam Chicken Farm', desc: 'B2B Supplier Ayam Kampung dengan WhatsApp Order Management.', route: '/showcase/landing-page/batam-chicken-supplier' },
             { image: '/assets/projects/img_fnb_order.png', tag: 'F&B', tagBg: '#fefce8', tagColor: '#a16207', title: 'Warung Makan Bu Sari', desc: 'Digital menu, online ordering funnel, promo section.', route: '/showcase/landing-page/warung-makan' },
-            { image: '/assets/projects/img_salon_booking.png', tag: 'Beauty & Wellness', tagBg: '#fdf2f8', tagColor: '#9d174d', title: 'Salon Cantik Pro', desc: 'Booking form, gallery section, animated promo banners.', route: '/showcase/landing-page/salon-cantik' },
+            { image: '/assets/projects/img_batam_rental.png', tag: 'Automotive', tagBg: '#fef2f2', tagColor: '#b91c1c', title: 'Batam Rental Mobil', desc: 'Car rental with Python-based real-time market price scraping.', route: '/showcase/landing-page/batam-rental-mobil' },
         ]
     },
     B: {
@@ -25,7 +27,7 @@ const portfolioData = {
         headerBg: 'linear-gradient(135deg, #eef2ff 0%, #fff 100%)',
         projects: [
             { image: '/assets/projects/img_pos_system.png', tag: 'POS System', tagBg: '#eef2ff', tagColor: '#4338ca', title: 'Koperasi ARFF POS & Member', desc: 'Full cooperative management: POS cashier, member accounts, admin dashboard.', route: '/showcase/fullstack/koperasi-pos' },
-            { image: '/assets/projects/img_warehouse_sys.png', tag: 'Inventory', tagBg: '#f0fdf4', tagColor: '#166534', title: 'Warehouse Management System', desc: 'Real-time stock tracking, purchase orders, barcode scanning & alerts.', route: '/showcase/fullstack/warehouse' },
+            { image: '/assets/projects/img_warehouse_sys.png', tag: 'Inventory', tagBg: '#f0fdf4', tagColor: '#166534', title: 'Warehouse Management System', desc: 'Real-time stock tracking, purchase orders, barcode scanning & alerts.', route: '/showcase/fullstack/warehouse-wms' },
             { image: '/assets/projects/img_vehicle_inspect.png', tag: 'Inspection', tagBg: '#fffbeb', tagColor: '#92400e', title: 'Vehicle Inspection Platform', desc: 'Digital inspection with photo uploads, findings log & inspector assignment.', route: '/showcase/fullstack/vehicle-inspection' },
             { image: '/assets/projects/img_hr_attendance.png', tag: 'HR System', tagBg: '#faf5ff', tagColor: '#6b21a8', title: 'Employee Attendance Portal', desc: 'GPS check-in, leave management, payroll automation & reporting.', route: '/showcase/fullstack/attendance' },
         ]
@@ -108,7 +110,15 @@ export default function PortfolioModal({ serviceKey, onClose }) {
     const navigate = useNavigate()
     const { t } = useLanguage()
     const { isMobile, isSm } = useResponsive()
+    const { trackEvent } = useTracker()
     const data = portfolioData[serviceKey]
+
+    // Track modal open
+    useEffect(() => {
+        if (data) {
+            trackEvent('view_showcase_modal', { service: data.badgeLabel, title: data.title })
+        }
+    }, [data, trackEvent])
 
     // Lock body scroll & ESC key
     useEffect(() => {
@@ -167,21 +177,14 @@ export default function PortfolioModal({ serviceKey, onClose }) {
                     </button>
                 </div>
 
-                {/* Hint bar */}
-                <div style={{
-                    padding: isSm ? '0.65rem 1.25rem' : '0.85rem 2.5rem',
-                    background: '#fafafa', borderBottom: '1px solid #f0f0f0',
-                    display: 'flex', alignItems: 'center', gap: '8px',
-                    fontSize: isSm ? '0.78rem' : '0.85rem', color: '#64748b',
-                }}>
-                    <Lightbulb size={16} style={{ color: '#eab308', flexShrink: 0 }} />
-                    {t('modal.hint')}
-                </div>
 
                 {/* Projects grid */}
                 <div className="modal-grid">
                     {data.projects.map(p => (
-                        <ProjectCard key={p.title} project={p} onNavigate={(route) => navigate(route)} t={t} />
+                        <ProjectCard key={p.title} project={p} onNavigate={(route) => {
+                            trackEvent('click_project', { title: p.title, route })
+                            navigate(route)
+                        }} t={t} />
                     ))}
                 </div>
 

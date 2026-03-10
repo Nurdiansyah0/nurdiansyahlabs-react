@@ -1,0 +1,124 @@
+{
+    "showcases": [
+        {
+            "slug": "toko-laptop-batam",
+            "categorySlug": "landing-page",
+            "title": "Batam Laptop Center",
+            "description": "Landing page e-commerce teknologi dengan integrasi aplikasi nyata yang interaktif.",
+            "category": "Landing Page",
+            "accentColor": "#1d4ed8"
+        },
+        {
+            "slug": "batam-chicken-supplier",
+            "categorySlug": "landing-page",
+            "title": "Batam Chicken Supplier",
+            "description": "B2B/B2C landing page — Direct WhatsApp Order Integration.",
+            "category": "Landing Page",
+            "accentColor": "#1d4ed8"
+        },
+        {
+            "slug": "warung-makan",
+            "categorySlug": "landing-page",
+            "title": "Alyuna Siomay",
+            "description": "F&B landing page — Whatsapp Direct Order Integration.",
+            "category": "Landing Page",
+            "accentColor": "#1d4ed8"
+        },
+        {
+            "slug": "batam-rental-mobil",
+            "categorySlug": "landing-page",
+            "title": "Batam Rental Mobil",
+            "description": "Landing page penyewaan mobil dengan integrasi scraper Python untuk data harga kompetitif.",
+            "category": "Landing Page",
+            "accentColor": "#1d4ed8"
+        },
+        {
+            "slug": "koperasi-pos",
+            "categorySlug": "fullstack",
+            "title": "Koperasi POS System",
+            "description": "Sistem Point of Sales (POS) lengkap untuk manajemen koperasi, inventaris, dan transaksi.",
+            "category": "Fullstack",
+            "accentColor": "#4338ca"
+        },
+        {
+            "slug": "warehouse-wms",
+            "categorySlug": "fullstack",
+            "title": "Warehouse/OS – WMS Dashboard",
+            "description": "Sistem manajemen gudang (WMS) untuk pelacakan inventaris real-time.",
+            "category": "Fullstack",
+            "accentColor": "#10b981"
+        },
+        {
+            "slug": "vehicle-inspection",
+            "categorySlug": "fullstack",
+            "title": "Inspect Pro – Vehicle Condition",
+            "description": "Aplikasi inspeksi kendaraan untuk penilaian kondisi mobil secara digital.",
+            "category": "Fullstack",
+            "accentColor": "#f59e0b"
+        },
+        {
+            "slug": "attendance",
+            "categorySlug": "fullstack",
+            "title": "Employee Attendance Portal",
+            "description": "Portal absensi karyawan dengan pelaporan otomatis dan integrasi peta.",
+            "category": "Fullstack",
+            "accentColor": "#8b5cf6"
+        },
+        {
+            "slug": "retail-sales",
+            "categorySlug": "data-analyst",
+            "title": "Retail Sales Monitor",
+            "description": "Dashboard monitor penjualan ritel dengan visualisasi indikator performa utama (KPI).",
+            "category": "Data Analyst",
+            "accentColor": "#0ea5e9"
+        },
+        {
+            "slug": "ecommerce-analytics",
+            "categorySlug": "data-analyst",
+            "title": "Tokopedia Seller Analytics",
+            "description": "Analisis data penjualan Tokopedia untuk optimasi strategi pemasaran e-commerce.",
+            "category": "Data Analyst",
+            "accentColor": "#10b981"
+        },
+        {
+            "slug": "clinic-analytics",
+            "categorySlug": "data-analyst",
+            "title": "Clinic Management Analytics",
+            "description": "Dashboard analisis data medis untuk memantau performa klinik dan kepuasan pasien.",
+            "category": "Data Analyst",
+            "accentColor": "#0ea5e9"
+        },
+        {
+            "slug": "crop-yield",
+            "categorySlug": "data-analyst",
+            "title": "Crop Yield Trend Report",
+            "description": "Laporan tren hasil panen dengan visualisasi pertumbuhan dan prediksi musiman.",
+            "category": "Data Analyst",
+            "accentColor": "#d97706"
+        },
+        {
+            "slug": "sales-forecasting",
+            "categorySlug": "data-science",
+            "title": "B2B Sales Forecasting",
+            "description": "Prediksi penjualan B2B menggunakan algoritma ARIMA untuk perencanaan bisnis.",
+            "category": "Data Science",
+            "accentColor": "#4f46e5"
+        },
+        {
+            "slug": "customer-clustering",
+            "categorySlug": "data-science",
+            "title": "Customer Segmentation (K-Means)",
+            "description": "Segmentasi pelanggan otomatis menggunakan clustering K-Means untuk target pemasaran.",
+            "category": "Data Science",
+            "accentColor": "#3b82f6"
+        },
+        {
+            "slug": "churn-prediction",
+            "categorySlug": "data-science",
+            "title": "Churn Prediction (XGBoost)",
+            "description": "Prediksi risiko kehilangan pelanggan menggunakan model machine learning XGBoost.",
+            "category": "Data Science",
+            "accentColor": "#ef4444"
+        }
+    ]
+}

@@ -1,0 +1,32 @@
+{
+    "services": [
+        {
+            "slug": "web-development",
+            "title": "Jasa Web Developer Fullstack Indonesia",
+            "description": "Jasa pembuatan sistem web lengkap, dari database hingga antarmuka pengguna. Menggunakan teknologi modern seperti React, Node.js, dan PHP.",
+            "category": "Service",
+            "price": "Mulai Rp 5.000.000"
+        },
+        {
+            "slug": "landing-page",
+            "title": "Jasa Landing Page Profesional Indonesia",
+            "description": "Pembuatan landing page yang responsif, cepat, dan dioptimalkan untuk konversi tinggi bagi UMKM dan startup.",
+            "category": "Service",
+            "price": "Mulai Rp 1.750.000"
+        },
+        {
+            "slug": "data-analyst",
+            "title": "Jasa Analisis Data Bisnis & Dashboard Power BI",
+            "description": "Ubah data bisnis Anda menjadi wawasan yang dapat ditindaklanjuti dengan dashboard interaktif dan laporan mendalam.",
+            "category": "Service",
+            "price": "Mulai Rp 3.000.000"
+        },
+        {
+            "slug": "machine-learning",
+            "title": "Jasa Data Science & Machine Learning Indonesia",
+            "description": "Solusi cerdas dengan AI untuk prediksi penjualan, segmentasi pelanggan, dan deteksi anomali.",
+            "category": "Service",
+            "price": "Mulai Rp 4.500.000"
+        }
+    ]
+}

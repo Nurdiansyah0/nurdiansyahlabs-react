@@ -48,7 +48,7 @@ function ServiceCard({ service, onClick, index, t, formatCurrency, isMobile }) {
             onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && onClick()}
             style={{
                 background: '#fff', borderRadius: '20px',
-                padding: isMobile ? '1.1rem' : '1.5rem',
+                padding: 'var(--card-padding)',
                 border: `1.5px solid ${hovered ? service.accentColor + '40' : '#e5e7eb'}`,
                 boxShadow: hovered ? `0 20px 40px -10px ${service.accentColor}22` : '0 2px 12px rgba(0,0,0,0.04)',
                 transform: hovered ? 'translateY(-6px)' : 'translateY(0)',
@@ -110,7 +110,7 @@ export default function Services() {
                         {t('svc.hint')}
                     </p>
                 </div>
-                <div className="services-grid">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
                     {services.map((s, idx) => (
                         <ServiceCard
                             key={s.key}

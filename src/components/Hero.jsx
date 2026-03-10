@@ -2,6 +2,7 @@ import { m } from 'framer-motion'
 import { MessageCircle } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useResponsive } from '../hooks/useResponsive'
+import TechStack3D from './TechStack3D'
 
 export default function Hero() {
     const { t } = useLanguage()
@@ -9,34 +10,18 @@ export default function Hero() {
 
     return (
         <section style={{
-            background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 40%, #1e3a8a 100%)',
+            background: '#090818', // Deep space background matched with TechStack3D
             color: '#fff',
-            padding: isSm ? '3rem 0 4rem' : '5rem 0 6rem',
+            padding: 'var(--section-py) 0',
             position: 'relative', overflow: 'hidden',
+            minHeight: '100vh',
+            display: 'flex',
+            alignItems: 'center'
         }}>
-            {/* Decorative blobs */}
-            <m.div
-                animate={{ scale: [1, 1.05, 1], opacity: [0.5, 0.8, 0.5] }}
-                transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-                style={{
-                    position: 'absolute', top: '-80px', right: '-80px',
-                    width: isSm ? '220px' : '400px', height: isSm ? '220px' : '400px',
-                    background: 'rgba(99,102,241,0.15)', borderRadius: '50%',
-                    filter: 'blur(40px)', pointerEvents: 'none',
-                }}
-            />
-            <m.div
-                animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.7, 0.4] }}
-                transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-                style={{
-                    position: 'absolute', bottom: '-100px', left: '-60px',
-                    width: isSm ? '180px' : '350px', height: isSm ? '180px' : '350px',
-                    background: 'rgba(59,130,246,0.12)', borderRadius: '50%',
-                    filter: 'blur(50px)', pointerEvents: 'none',
-                }}
-            />
+            {/* 3D Cinematic OceanX Background */}
+            <TechStack3D />
 
-            <div className="container" style={{ textAlign: 'center', position: 'relative' }}>
+            <div className="container" style={{ textAlign: 'center', position: 'relative', zIndex: 10 }}>
                 {/* Badge */}
                 <m.div
                     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
