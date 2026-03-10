@@ -7,32 +7,32 @@ export default function ShowcaseLayout({ children, title, subtitle, githubUrl, s
     return (
         <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: '#f8fafc' }}>
 
-            {/* Minimal Top Header */}
-            <div style={{
-                background: '#fff',
-                borderBottom: '1px solid #e2e8f0',
-                padding: '0.5rem 1.5rem',
-                display: 'flex',
-                justifyContent: 'flex-end',
-                alignItems: 'center',
-                position: 'sticky',
-                top: 0,
-                zIndex: 100,
-                minHeight: '48px'
-            }}>
-                <a href="https://wa.me/6282176012461" target="_blank" rel="noreferrer" style={{
-                    background: '#22c55e', color: '#fff',
-                    padding: '6px 16px', borderRadius: '8px',
-                    fontWeight: 700, fontSize: '0.82rem',
-                    textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px',
-                    transition: 'background 0.2s'
+            {/* Floating Contact Button */}
+            <a href="https://wa.me/6282176012461" target="_blank" rel="noreferrer" style={{
+                position: 'fixed',
+                bottom: isMobile ? '1.5rem' : '2rem',
+                right: isMobile ? '1.5rem' : '2rem',
+                zIndex: 1000,
+                background: '#22c55e', color: '#fff',
+                padding: '12px 20px', borderRadius: '50px',
+                fontWeight: 700, fontSize: '0.9rem',
+                textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                boxShadow: '0 4px 12px rgba(34, 197, 94, 0.3)'
+            }}
+                onMouseEnter={e => {
+                    e.currentTarget.style.background = '#16a34a';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = '0 6px 16px rgba(34, 197, 94, 0.4)';
                 }}
-                    onMouseEnter={e => e.currentTarget.style.background = '#16a34a'}
-                    onMouseLeave={e => e.currentTarget.style.background = '#22c55e'}>
-                    <MessageCircle size={16} />
-                    Contact Developer
-                </a>
-            </div>
+                onMouseLeave={e => {
+                    e.currentTarget.style.background = '#22c55e';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(34, 197, 94, 0.3)';
+                }}>
+                <MessageCircle size={20} />
+                Contact Developer
+            </a>
 
             {/* ── Page header ──────────────────────────────────────── */}
             <div style={{

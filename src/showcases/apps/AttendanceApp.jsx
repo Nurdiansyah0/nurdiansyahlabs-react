@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { getOptimizedImg } from '../../utils/imgHelper'
 const EMPLOYEES = [
     { id: 1, name: 'Budi Santoso', dept: 'Engineering', pos: 'Senior Dev', img: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&fit=crop', status: 'present' },
     { id: 2, name: 'Siti Rahayu', dept: 'Product', pos: 'Product Manager', img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&fit=crop', status: 'present' },
@@ -94,7 +95,7 @@ export default function AttendanceApp() {
                             {filtered.map((e, i) => (
                                 <div key={e.id} style={{ display: 'grid', gridTemplateColumns: '2.5fr 1.5fr 1.5fr 1fr 1.5fr', padding: '12px 1.5rem', borderTop: i > 0 ? '1px solid #f1f5f9' : 'none', alignItems: 'center' }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                        <img src={e.img} style={{ width: '36px', height: '36px', borderRadius: '50%', objectFit: 'cover' }} alt={e.name} />
+                                        <img src={getOptimizedImg(e.img, { w: 100, h: 100 })} style={{ width: '36px', height: '36px', borderRadius: '50%', objectFit: 'cover' }} alt={e.name} />
                                         <div style={{ fontWeight: 600, color: '#0f172a', fontSize: '0.9rem' }}>{e.name}</div>
                                     </div>
                                     <div style={{ fontSize: '0.85rem', color: '#475569' }}>{e.dept}</div>
@@ -112,7 +113,7 @@ export default function AttendanceApp() {
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(220px,1fr))', gap: '1.5rem' }}>
                             {employees.map(e => (
                                 <div key={e.id} style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', textAlign: 'center', border: '1px solid #e2e8f0' }}>
-                                    <img src={e.img} style={{ width: '72px', height: '72px', borderRadius: '50%', objectFit: 'cover', marginBottom: '1rem', border: '3px solid #e0e7ff' }} alt={e.name} />
+                                    <img src={getOptimizedImg(e.img, { w: 150, h: 150 })} style={{ width: '72px', height: '72px', borderRadius: '50%', objectFit: 'cover', marginBottom: '1rem', border: '3px solid #e0e7ff' }} alt={e.name} />
                                     <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '2px' }}>{e.name}</div>
                                     <div style={{ fontSize: '0.8rem', color: '#64748b', marginBottom: '8px' }}>{e.pos} · {e.dept}</div>
                                     <span style={{ background: STATUS_CLR[e.status], color: STATUS_TXT[e.status], padding: '4px 12px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 700 }}>{STATUS_LBL[e.status]}</span>
@@ -169,7 +170,7 @@ export default function AttendanceApp() {
                                     <div key={e.id} onClick={() => setSelectedEmp(e)} style={{ display: 'flex', gap: '12px', alignItems: 'center', padding: '12px', border: '1px solid #e2e8f0', borderRadius: '10px', cursor: 'pointer', transition: 'all 0.15s' }}
                                         onMouseEnter={el => el.currentTarget.style.borderColor = '#6366f1'}
                                         onMouseLeave={el => el.currentTarget.style.borderColor = '#e2e8f0'}>
-                                        <img src={e.img} style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover' }} alt={e.name} />
+                                        <img src={getOptimizedImg(e.img, { w: 100, h: 100 })} style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover' }} alt={e.name} />
                                         <div style={{ flex: 1 }}><div style={{ fontWeight: 600, color: '#0f172a' }}>{e.name}</div><div style={{ fontSize: '0.8rem', color: '#64748b' }}>{e.dept} · {e.pos}</div></div>
                                         <span style={{ fontSize: '0.75rem', color: '#dc2626', fontWeight: 700 }}>Belum Hadir</span>
                                     </div>
@@ -178,7 +179,7 @@ export default function AttendanceApp() {
                             </div>
                         ) : (
                             <div style={{ textAlign: 'center' }}>
-                                <img src={selectedEmp.img} style={{ width: '72px', height: '72px', borderRadius: '50%', objectFit: 'cover', marginBottom: '1rem' }} alt={selectedEmp.name} />
+                                <img src={getOptimizedImg(selectedEmp.img, { w: 150, h: 150 })} style={{ width: '72px', height: '72px', borderRadius: '50%', objectFit: 'cover', marginBottom: '1rem' }} alt={selectedEmp.name} />
                                 <div style={{ fontWeight: 700, fontSize: '1.1rem', color: '#0f172a', marginBottom: '0.5rem' }}>{selectedEmp.name}</div>
                                 <div style={{ color: '#64748b', fontSize: '0.85rem', marginBottom: '1.5rem' }}>{selectedEmp.dept} · {selectedEmp.pos}</div>
                                 <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: '1.5rem' }}>Waktu: <strong><Clock /></strong></div>

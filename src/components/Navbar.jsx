@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Menu, X, MessageCircle, Globe, ChevronDown } from 'lucide-react'
 import { useLanguage, langNames } from '../i18n/LanguageContext'
 import { useResponsive } from '../hooks/useResponsive'
+import { getOptimizedImg } from '../utils/imgHelper'
 
 export default function Navbar() {
     const [mobileOpen, setMobileOpen] = useState(false)
@@ -50,7 +51,7 @@ export default function Navbar() {
                     {/* Logo */}
                     <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', minHeight: 0 }}>
                         <img
-                            src="/assets/logo.svg"
+                            src={getOptimizedImg("/assets/logo.svg", { w: 100 })}
                             alt="NurdiansyahLabs Logo"
                             style={{ width: isSm ? '28px' : '36px', height: isSm ? '28px' : '36px' }}
                         />

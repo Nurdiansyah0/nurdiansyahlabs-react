@@ -1,6 +1,8 @@
 <?php
 // /home/nurdiansyah/Nurdiansyah/react-app/api/products.php
 // Centralized API for Portfolio CMS Products
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 require_once __DIR__ . '/../database/db.php';
 
 header('Content-Type: application/json');

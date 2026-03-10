@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { getOptimizedImg } from '../../utils/imgHelper'
 const rackData = Array.from({ length: 96 }).map((_, i) => {
     const isAisle = i % 12 === 5 || i % 12 === 6
     if (isAisle) return { isAisle: true }
@@ -52,7 +53,7 @@ export default function WarehouseApp() {
                     {PAGES.map(p => <div key={p.k} onClick={() => setPage(p.k)} style={{ padding: '10px 12px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', background: page === p.k ? 'rgba(16,185,129,0.15)' : 'transparent', color: page === p.k ? '#10b981' : '#9ca3af', fontSize: '0.85rem', fontWeight: page === p.k ? 600 : 400, transition: 'all 0.15s' }}>{p.i} {p.l}</div>)}
                 </div>
                 <div style={{ padding: '1rem', borderTop: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&fit=crop" style={{ width: '32px', height: '32px', borderRadius: '50%' }} alt="user" />
+                    <img src={getOptimizedImg("https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d", { w: 100, h: 100 })} style={{ width: '32px', height: '32px', borderRadius: '50%' }} alt="user" />
                     <div><div style={{ fontSize: '0.8rem', fontWeight: 700 }}>Warehouse Admin</div><div style={{ fontSize: '0.7rem', color: '#6b7280' }}>Shift A</div></div>
                 </div>
             </div>

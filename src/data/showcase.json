@@ -4,15 +4,15 @@
             "slug": "toko-laptop-batam",
             "categorySlug": "landing-page",
             "title": "Batam Laptop Center",
-            "description": "Landing page e-commerce teknologi dengan integrasi aplikasi nyata yang interaktif.",
+            "description": "Premium pre-loved laptop specialist & tech solution partner based in Batam.",
             "category": "Landing Page",
             "accentColor": "#1d4ed8"
         },
         {
             "slug": "batam-chicken-supplier",
             "categorySlug": "landing-page",
-            "title": "Batam Chicken Supplier",
-            "description": "B2B/B2C landing page — Direct WhatsApp Order Integration.",
+            "title": "Batam Chicken Center",
+            "description": "Pemasok ayam potong segar & karkas berkualitas untuk restoran dan rumah tangga di Kepri.",
             "category": "Landing Page",
             "accentColor": "#1d4ed8"
         },
@@ -20,7 +20,7 @@
             "slug": "warung-makan",
             "categorySlug": "landing-page",
             "title": "Alyuna Siomay",
-            "description": "F&B landing page — Whatsapp Direct Order Integration.",
+            "description": "Siomay Bandung autentik & Frozen Food premium dengan layanan pesan antar area Batam.",
             "category": "Landing Page",
             "accentColor": "#1d4ed8"
         },
@@ -28,7 +28,7 @@
             "slug": "batam-rental-mobil",
             "categorySlug": "landing-page",
             "title": "Batam Rental Mobil",
-            "description": "Landing page penyewaan mobil dengan integrasi scraper Python untuk data harga kompetitif.",
+            "description": "Solusi sewa mobil harian & bulanan murah di Batam dengan armada unit terbaru.",
             "category": "Landing Page",
             "accentColor": "#1d4ed8"
         },
@@ -36,31 +36,31 @@
             "slug": "koperasi-pos",
             "categorySlug": "fullstack",
             "title": "Koperasi POS System",
-            "description": "Sistem Point of Sales (POS) lengkap untuk manajemen koperasi, inventaris, dan transaksi.",
+            "description": "Software kasir & akuntansi digital untuk efisiensi transaksi dan operasional koperasi modern.",
             "category": "Fullstack",
             "accentColor": "#4338ca"
         },
         {
             "slug": "warehouse-wms",
             "categorySlug": "fullstack",
-            "title": "Warehouse/OS – WMS Dashboard",
-            "description": "Sistem manajemen gudang (WMS) untuk pelacakan inventaris real-time.",
+            "title": "LogiStack – Warehouse WMS",
+            "description": "Enterprise Resource Planning untuk manajemen gudang, stok real-time, dan logistik ekspor-impor.",
             "category": "Fullstack",
             "accentColor": "#10b981"
         },
         {
             "slug": "vehicle-inspection",
             "categorySlug": "fullstack",
-            "title": "Inspect Pro – Vehicle Condition",
-            "description": "Aplikasi inspeksi kendaraan untuk penilaian kondisi mobil secara digital.",
+            "title": "Inspect Pro – Batam Car Check",
+            "description": "Platform digital jasa inspeksi mobil bekas (second) profesional untuk transparansi kondisi unit.",
             "category": "Fullstack",
             "accentColor": "#f59e0b"
         },
         {
             "slug": "attendance",
             "categorySlug": "fullstack",
-            "title": "Employee Attendance Portal",
-            "description": "Portal absensi karyawan dengan pelaporan otomatis dan integrasi peta.",
+            "title": "E-HRMS Attendance Portal",
+            "description": "Aplikasi absensi karyawan berbasis GPS & Biometrik dengan integrasi penggajian otomatis.",
             "category": "Fullstack",
             "accentColor": "#8b5cf6"
         },
@@ -68,55 +68,55 @@
             "slug": "retail-sales",
             "categorySlug": "data-analyst",
             "title": "Retail Sales Monitor",
-            "description": "Dashboard monitor penjualan ritel dengan visualisasi indikator performa utama (KPI).",
+            "description": "Dashboard intelijen bisnis untuk analisis tren penjualan dan performa cabang secara real-time.",
             "category": "Data Analyst",
             "accentColor": "#0ea5e9"
         },
         {
             "slug": "ecommerce-analytics",
             "categorySlug": "data-analyst",
-            "title": "Tokopedia Seller Analytics",
-            "description": "Analisis data penjualan Tokopedia untuk optimasi strategi pemasaran e-commerce.",
+            "title": "Marketplace Seller Analytics",
+            "description": "Analisis big data e-commerce untuk optimasi listing produk dan prediksi stok gudang.",
             "category": "Data Analyst",
             "accentColor": "#10b981"
         },
         {
             "slug": "clinic-analytics",
             "categorySlug": "data-analyst",
-            "title": "Clinic Management Analytics",
-            "description": "Dashboard analisis data medis untuk memantau performa klinik dan kepuasan pasien.",
+            "title": "HealthMetric – Clinic Analytics",
+            "description": "Analisis manajemen layanan kesehatan untuk optimalisasi kunjungan pasien dan efisiensi staf.",
             "category": "Data Analyst",
             "accentColor": "#0ea5e9"
         },
         {
             "slug": "crop-yield",
             "categorySlug": "data-analyst",
-            "title": "Crop Yield Trend Report",
-            "description": "Laporan tren hasil panen dengan visualisasi pertumbuhan dan prediksi musiman.",
+            "title": "AgriTech Yield Report",
+            "description": "Analisis prediktif hasil panen berdasarkan data cuaca dan historis lahan pertanian.",
             "category": "Data Analyst",
             "accentColor": "#d97706"
         },
         {
             "slug": "sales-forecasting",
             "categorySlug": "data-science",
-            "title": "B2B Sales Forecasting",
-            "description": "Prediksi penjualan B2B menggunakan algoritma ARIMA untuk perencanaan bisnis.",
+            "title": "AI Sales Forecasting",
+            "description": "Prediksi permintaan pasar menggunakan machine learning untuk minimalisir risiko overstock.",
             "category": "Data Science",
             "accentColor": "#4f46e5"
         },
         {
             "slug": "customer-clustering",
             "categorySlug": "data-science",
-            "title": "Customer Segmentation (K-Means)",
-            "description": "Segmentasi pelanggan otomatis menggunakan clustering K-Means untuk target pemasaran.",
+            "title": "Customer Segmentation Engine",
+            "description": "Personalisasi pemasaran dengan algoritma K-Means untuk memahami perilaku segmen pelanggan.",
             "category": "Data Science",
             "accentColor": "#3b82f6"
         },
         {
             "slug": "churn-prediction",
             "categorySlug": "data-science",
-            "title": "Churn Prediction (XGBoost)",
-            "description": "Prediksi risiko kehilangan pelanggan menggunakan model machine learning XGBoost.",
+            "title": "Retention Pro – Churn Radar",
+            "description": "Sistem deteksi dini retensi pelanggan untuk mencegah kehilangan pengguna layanan aktif.",
             "category": "Data Science",
             "accentColor": "#ef4444"
         }

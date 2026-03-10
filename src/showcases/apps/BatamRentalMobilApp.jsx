@@ -4,6 +4,7 @@ import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Globe, MapPin, Wrench, HeadphonesIcon, Users, Settings, Briefcase, CheckCircle, ChevronRight, Phone } from 'lucide-react';
+import { getOptimizedImg } from '../../utils/imgHelper';
 // ── COLOR THEME ─────────────────────────────────────────────────────────────
 const BRAND = {
     primary: '#003399',      // BCA Blue
@@ -95,10 +96,10 @@ const detectLocationAndSetLanguage = async () => {
 };
 // ── DATA ───────────────────────────────────────────────────────────────────
 const FALLBACK_CARS = [
-    { id: 1, name: 'Honda Brio', type: 'City Car', price: 350000, seats: 5, trans: 'Matic', luggage: 2, cat: 'Lepas Kunci', img: '/assets/Honda_Brio_Grey.png' },
-    { id: 2, name: 'Toyota Avanza', type: 'MPV', price: 450000, seats: 7, trans: 'Matic', luggage: 3, cat: 'Lepas Kunci', img: '/assets/New_Avanza.jpg' },
-    { id: 3, name: 'Toyota Innova Reborn', type: 'Premium MPV', price: 750000, seats: 7, trans: 'Matic', luggage: 4, cat: 'Dengan Sopir', img: '/assets/Toyota_Innova.png' },
-    { id: 4, name: 'Toyota Rush', type: 'SUV', price: 500000, seats: 7, trans: 'Manual', luggage: 3, cat: 'Lepas Kunci', img: '/assets/Toyota_Rush_Black.png' },
+    { id: 1, name: 'Honda Brio', type: 'City Car', price: 350000, seats: 5, trans: 'Matic', luggage: 2, cat: 'Lepas Kunci', img: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500&fit=crop' },
+    { id: 2, name: 'Toyota Avanza', type: 'MPV', price: 450000, seats: 7, trans: 'Matic', luggage: 3, cat: 'Lepas Kunci', img: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500&fit=crop' },
+    { id: 3, name: 'Toyota Innova Reborn', type: 'Premium MPV', price: 750000, seats: 7, trans: 'Matic', luggage: 4, cat: 'Dengan Sopir', img: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500&fit=crop' },
+    { id: 4, name: 'Toyota Rush', type: 'SUV', price: 500000, seats: 7, trans: 'Manual', luggage: 3, cat: 'Lepas Kunci', img: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500&fit=crop' },
     { id: 5, name: 'Daihatsu Rocky', type: 'SUV', price: 450000, seats: 5, trans: 'Matic', luggage: 2, cat: 'Lepas Kunci', img: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500&fit=crop' },
     { id: 6, name: 'Toyota Alphard', type: 'VVIP Luxury', price: 2500000, seats: 7, trans: 'Matic', luggage: 5, cat: 'Dengan Sopir', img: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500&fit=crop' }
 ];
@@ -279,7 +280,7 @@ function Fleet() {
                                                     {car.cat}
                                                 </span>
                                             </div>
-                                            <img src={car.img} alt={car.name} className="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-500" />
+                                            <img src={getOptimizedImg(car.img, { w: 500, h: 300 })} alt={car.name} className="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-500" />
                                         </div>
                                         <div className="p-8 flex-grow flex flex-col">
                                             <div className="mb-4">

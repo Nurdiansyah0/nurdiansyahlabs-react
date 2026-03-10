@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { m } from 'framer-motion'
 import { MessageCircle, Loader2 } from 'lucide-react'
 import { useTracker } from '../hooks/useTracker'
+import { getOptimizedImg } from '../utils/imgHelper'
 
 // Generate structured data for any other slugs not in predefined list
 function generateGenericData(slug) {
@@ -182,7 +183,7 @@ export default function BlogPage() {
                 {/* Top bar */}
                 <div style={{ background: '#fff', borderBottom: '1px solid #e2e8f0', padding: '0.75rem 1.5rem', display: 'flex', alignItems: 'center', gap: '12px' }}>
                     <Link to="/" style={{ color: '#4f46e5', fontWeight: 700, fontSize: '0.85rem', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <img src="/assets/logo.svg" alt="NurdiansyahLabs" style={{ width: '20px', height: '20px' }} />
+                        <img src={getOptimizedImg("/assets/logo.svg", { w: 50 })} alt="NurdiansyahLabs" style={{ width: '20px', height: '20px' }} />
                         NurdiansyahLabs
                     </Link>
                     <span style={{ color: '#94a3b8', fontSize: '0.8rem' }}>›</span>

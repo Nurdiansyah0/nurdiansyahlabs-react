@@ -42,11 +42,11 @@ export default function ServicePage() {
                     <div className="grid md:grid-cols-2 gap-8">
                         <div className="space-y-4">
                             <h3 className="font-bold text-indigo-600">✓ Berorientasi Hasil</h3>
-                            <p className="text-slate-600">Kami tidak hanya membangun website, kami membangun solusi bisnis yang mengonversi pengunjung menjadi pelanggan.</p>
+                            <p className="text-slate-600">Kami fokus membangun solusi digital yang mengonversi trafik menjadi pelanggan.</p>
                         </div>
                         <div className="space-y-4">
                             <h3 className="font-bold text-indigo-600">✓ Teknologi Modern</h3>
-                            <p className="text-slate-600">Pengerjaan dengan stack teknologi terbaru untuk memastikan performa maksimal dan keamanan tingkat tinggi.</p>
+                            <p className="text-slate-600">Menggunakan tech-stack terbaru untuk performa maksimal dan keamanan tinggi.</p>
                         </div>
                     </div>
 

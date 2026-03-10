@@ -7,15 +7,14 @@
  * Usage: php setup_mysql.php or run it from a local browser.
  */
 
-$host = 'localhost';             // Change if using a remote server
-$username = 'uygpuazs_root';              // Change to your MySQL User
-$password = 'Nurdiansyah@024';                  // Change to your MySQL Password
-$dbname = 'uygpuazs_nurdiansyahlabs_db';  // Change to your desired Database Name
+require_once __DIR__ . '/db.php';
 
 try {
-    // Connect directly to the specific database assigned by cPanel
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo = getDB();
+    if (!$pdo) {
+        throw new PDOException("Database connection failed. Please check your credentials in db.php");
+    }
+
 
     echo "✅ Connected to Database `$dbname` successfully.\n";
 
@@ -71,7 +70,47 @@ try {
     ");
     echo "✅ Table `analytics` created successfully.\n";
 
-    echo "\n🎉 All database schemas have been fully synchronized to match your application's JSON structure!\n";
+    // 5. Create the Products Table (for Portfolio Apps)
+    $pdo->exec("
+        CREATE TABLE IF NOT EXISTS `products` (
+            `id` INT AUTO_INCREMENT PRIMARY KEY,
+            `app_id` VARCHAR(50) NOT NULL,
+            `name` VARCHAR(255) NOT NULL,
+            `description` TEXT,
+            `price` DECIMAL(15,2) DEFAULT 0.00,
+            `category` VARCHAR(100),
+            `image_url` VARCHAR(255),
+            `extras` JSON NULL,
+            `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            INDEX (`app_id`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    ");
+    echo "✅ Table `products` created successfully.\n";
+
+    // 6. Create Admin Users Table
+    $pdo->exec("DROP TABLE IF EXISTS `admin_users` "); // Ensure clean schema for the fix
+    $pdo->exec("
+        CREATE TABLE IF NOT EXISTS `admin_users` (
+            `id` INT AUTO_INCREMENT PRIMARY KEY,
+            `username` VARCHAR(50) UNIQUE NOT NULL,
+            `password_hash` VARCHAR(255) NOT NULL,
+            `email` VARCHAR(255) NOT NULL,
+            `token` VARCHAR(255) NULL,
+            `reset_token` VARCHAR(255) NULL,
+            `reset_expires` TIMESTAMP NULL DEFAULT NULL,
+            `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    ");
+
+    // Insert Default admin: Admin / Nurdiansyah@024
+    $hashed = '$2y$10$BnwY8oWZPA4W7pHyQjrJN.GoxVaDLtuOBHjd5ms7zooZsZ7q57UcS';
+    $stmt = $pdo->prepare("INSERT IGNORE INTO admin_users (username, password_hash, email) VALUES (?, ?, ?)");
+    $stmt->execute(['Admin', $hashed, 'nudiansyahdian28.adv@gmail.com']);
+    echo "✅ Table `admin_users` created and default user initialized (Admin / Nurdiansyah@024).\n";
+
+    echo "\n🎉 All database schemas have been fully synchronized to match your application's structure!\n";
 
 } catch (PDOException $e) {
     die("\n❌ Database Error: " . $e->getMessage() . "\n");
