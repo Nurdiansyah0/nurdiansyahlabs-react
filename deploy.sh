@@ -45,12 +45,12 @@ echo "🐘 Adding PHP Backend (API & Database)..."
 mkdir -p "$BUILD_DIR/api"
 mkdir -p "$BUILD_DIR/database"
 
-# Copy API but exclude diagnostics/temp files
-rsync -av --exclude='diagnose_env.php' --exclude='truncate_db.php' "$API_SRC/" "$BUILD_DIR/api/"
+# Copy API and remove sensitive diagnostics
+cp -r "$API_SRC"/* "$BUILD_DIR/api/"
+rm -f "$BUILD_DIR/api/diagnose_env.php" "$BUILD_DIR/api/truncate_db.php"
 
 # Copy database schema but exclude JSON data and migration scripts
 cp database/schema.sql "$BUILD_DIR/database/"
-# Optional: if you want to keep db.php for connection
 cp database/db.php "$BUILD_DIR/database/"
 cp database/.htaccess "$BUILD_DIR/database/" 2>/dev/null || true
 
