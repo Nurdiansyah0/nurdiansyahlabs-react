@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 const PRODUCTS = [
     { id: 1, name: 'Beras Premium 5kg', price: 75000, stock: 24, cat: 'Sembako', img: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=300&fit=crop' },
     { id: 2, name: 'Minyak Goreng 2L', price: 34500, stock: 12, cat: 'Sembako', img: 'https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?w=300&fit=crop' },
@@ -15,7 +14,6 @@ const PRODUCTS = [
 const MEMBERS = [{ id: 1, no: 'KOP-001', name: 'Budi Santoso', saldo: 'Rp 1.25Jt' }, { id: 2, no: 'KOP-002', name: 'Siti Rahayu', saldo: 'Rp 890rb' }, { id: 3, no: 'KOP-003', name: 'Ahmad Hidayat', saldo: 'Rp 2.1Jt' }, { id: 4, no: 'KOP-004', name: 'Dewi Lestari', saldo: 'Rp 450rb' }]
 const fmt = n => n.toLocaleString('id-ID')
 export default function KoperasiPOSApp() {
-    const navigate = useNavigate()
     const [page, setPage] = useState('pos')
     const [cat, setCat] = useState('Semua')
     const [search, setSearch] = useState('')
@@ -54,7 +52,12 @@ export default function KoperasiPOSApp() {
                     ))}
                 </div>
                 <div style={{ padding: '1rem', borderTop: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&fit=crop" style={{ width: '32px', height: '32px', borderRadius: '50%' }} alt="admin" />
+                    {/* SVG avatar — no external image dependency */}
+                    <svg width="32" height="32" viewBox="0 0 32 32" style={{ borderRadius: '50%', flexShrink: 0 }} fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="16" cy="16" r="16" fill="#4f46e5" />
+                        <circle cx="16" cy="13" r="5" fill="#c7d2fe" />
+                        <ellipse cx="16" cy="26" rx="9" ry="5.5" fill="#c7d2fe" />
+                    </svg>
                     <div><div style={{ fontSize: '0.8rem', fontWeight: 700 }}>Admin Kasir</div><div style={{ fontSize: '0.7rem', color: '#c7d2fe' }}>Shift Pagi</div></div>
                 </div>
             </div>
@@ -62,7 +65,7 @@ export default function KoperasiPOSApp() {
             {page === 'dashboard' && (
                 <div style={{ flex: 1, background: '#eef2ff', padding: '2rem', overflowY: 'auto' }}>
                     <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#1e1b4b', marginBottom: '2rem' }}>Dashboard Koperasi</h1>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '1rem', marginBottom: '2rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
                         {[{ l: 'Total Anggota', v: '248', c: '#4f46e5', i: '👥' }, { l: 'Transaksi Hari Ini', v: '34', c: '#10b981', i: '🛒' }, { l: 'Pendapatan', v: 'Rp 4.2Jt', c: '#f59e0b', i: '💰' }, { l: 'Stok Rendah', v: '7', c: '#ef4444', i: '⚠️' }].map(m => (
                             <div key={m.l} style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #e0e7ff' }}>
                                 <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>{m.i}</div>

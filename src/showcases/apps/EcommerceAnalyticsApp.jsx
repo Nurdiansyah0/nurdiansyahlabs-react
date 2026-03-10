@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 const PLATFORMS = ['Tokopedia', 'Shopee', 'Lazada', 'Bukalapak']
 const DATA = {
     Tokopedia: { orders: 4821, revenue: 'Rp 98.5Jt', ctr: '4.2%', conv: '3.8%', return: '1.2%', color: '#3b82f6' },
@@ -10,13 +9,12 @@ const DATA = {
 const FUNNEL = ['Impresi', 'Klik', 'Keranjang', 'Checkout', 'Selesai']
 const FUNNEL_VALS = [100000, 42000, 8400, 4200, 3200]
 export default function EcommerceAnalyticsApp() {
-    const navigate = useNavigate()
     const [activePlat, setActivePlat] = useState('Shopee')
     const d = DATA[activePlat]
     const maxFunnel = FUNNEL_VALS[0]
     return (
         <div style={{ minHeight: '100vh', background: '#f8fafc', fontFamily: '"Inter",sans-serif' }}>
-            
+
             <div style={{ background: 'linear-gradient(135deg,#0f172a,#1e293b)', padding: '2rem', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
                 <div style={{ fontSize: '0.7rem', color: '#94a3b8', letterSpacing: '0.15em', marginBottom: '4px' }}>E-COMMERCE ANALYTICS</div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -27,7 +25,7 @@ export default function EcommerceAnalyticsApp() {
                 </div>
             </div>
             <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5,1fr)', gap: '1rem', marginBottom: '2rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
                     {[[`Orders (${activePlat})`, d.orders.toLocaleString(), '📦'], [`Revenue`, d.revenue, '💰'], ['CTR', d.ctr, '👁'], ['Conversion', d.conv, '✅'], ['Return Rate', d.return, '↩']].map(([l, v, i]) => (
                         <div key={l} style={{ background: '#fff', borderRadius: '14px', padding: '1.25rem', border: '1px solid #e2e8f0', textAlign: 'center' }}>
                             <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>{i}</div>
@@ -36,7 +34,7 @@ export default function EcommerceAnalyticsApp() {
                         </div>
                     ))}
                 </div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '2rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
                     {/* Funnel */}
                     <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #e2e8f0' }}>
                         <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#0f172a', marginBottom: '1.5rem' }}>Conversion Funnel</h3>
@@ -73,7 +71,7 @@ export default function EcommerceAnalyticsApp() {
                 {/* Summary recommendations */}
                 <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #e2e8f0' }}>
                     <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#0f172a', marginBottom: '1rem' }}>Rekomendasi AI</h3>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
                         {[{ icon: '📈', title: 'Optimalkan Shopee Ads', desc: 'CTR Shopee 5.8% tertinggi. Tingkatkan budget iklan 20% untuk scaling lebih maksimal.', color: '#ef4444' }, { icon: '⚡', title: 'Perbaiki Funnel Checkout', desc: 'Dropout 50% di tahap checkout. Tambahkan metode pembayaran COD untuk mengurangi friction.', color: '#f59e0b' }, { icon: '🎯', title: 'Retarget Lazada', desc: 'Conversion rate Lazada terendah 2.7%. Buat bundle promo untuk meningkatkan AOV.', color: '#3b82f6' }].map(r => (
                             <div key={r.title} style={{ background: '#f8fafc', borderRadius: '10px', padding: '1.25rem', border: '1px solid #e2e8f0' }}>
                                 <div style={{ fontSize: '1.3rem', marginBottom: '0.75rem' }}>{r.icon}</div>

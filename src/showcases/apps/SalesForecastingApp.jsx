@@ -1,11 +1,9 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des']
 const ACTUAL = [42, 45, 48, 38, 51, 55, 49, 58, 62, 68, 65, 72]
 const FORECAST = [null, null, null, null, null, null, null, null, null, null, 72, 78, 84, 89, 95]
 const PERIODS = [6, 12, 24]
 export default function SalesForecastingApp() {
-    const navigate = useNavigate()
     const [period, setPeriod] = useState(12)
     const [model, setModel] = useState('ARIMA')
     const maxVal = Math.max(...ACTUAL, ...FORECAST.filter(Boolean))
@@ -13,9 +11,7 @@ export default function SalesForecastingApp() {
     const accuracy = { ARIMA: '94.2%', Prophet: '91.8%', 'LSTM': '96.1%', 'Linear Reg': '88.5%' }
     return (
         <div style={{ minHeight: '100vh', background: '#fafafa', fontFamily: '"Inter",sans-serif' }}>
-            <div style={{ background: '#1a1a2e', padding: '8px 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            </div>
-            <div style={{ background: 'linear-gradient(135deg,#1a1a2e,#16213e)', padding: '1.5rem 2rem', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ background: 'linear-gradient(135deg,#1a1a2e,#16213e)', padding: '1.5rem 2rem', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
                 <div>
                     <div style={{ fontSize: '0.7rem', color: '#a78bfa', letterSpacing: '0.15em', marginBottom: '4px' }}>DATA SCIENCE / TIME SERIES</div>
                     <h1 style={{ fontSize: '1.5rem', fontWeight: 800, margin: 0 }}>Sales Forecasting</h1>
@@ -30,7 +26,7 @@ export default function SalesForecastingApp() {
                 </div>
             </div>
             <div style={{ padding: '2rem', maxWidth: '1100px', margin: '0 auto' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '1rem', marginBottom: '2rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
                     {[['Model Akurasi', accuracy[model], '🎯', '#7c3aed'], ['RMSE', '4.82', '📉', '#2563eb'], ['Tren', 'Naik +18%', '📈', '#16a34a'], ['Horizon Forecast', `${period} bulan`, '⏳', '#f59e0b']].map(([l, v, i, c]) => (
                         <div key={l} style={{ background: '#fff', borderRadius: '14px', padding: '1.5rem', border: '1px solid #e5e7eb', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
                             <div style={{ fontSize: '1.5rem', marginBottom: '8px' }}>{i}</div>
@@ -67,7 +63,7 @@ export default function SalesForecastingApp() {
                         ))}
                     </div>
                 </div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
                     <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #e5e7eb' }}>
                         <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#1a1a2e', marginBottom: '1rem' }}>Model Comparison</h3>
                         {Object.entries(accuracy).map(([m, a]) => (

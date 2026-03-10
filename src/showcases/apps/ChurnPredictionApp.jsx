@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 const CUSTOMERS = [
     { id: 1, name: 'Budi Santoso', tenure: 36, usage: 8.2, support: 2, risk: 0.82, churn: true, country: 'Jakarta', plan: 'Basic' },
     { id: 2, name: 'Siti Rahayu', tenure: 24, usage: 12.5, support: 0, risk: 0.31, churn: false, country: 'Bandung', plan: 'Premium' },
@@ -18,16 +17,13 @@ const SHAP = [
     { feature: 'Lokasi geografis', impact: 0.12, dir: 'pos' },
 ]
 export default function ChurnPredictionApp() {
-    const navigate = useNavigate()
     const [threshold, setThreshold] = useState(0.5)
     const [selected, setSelected] = useState(null)
     const atRisk = CUSTOMERS.filter(c => c.risk >= threshold)
     const safe = CUSTOMERS.filter(c => c.risk < threshold)
     return (
         <div style={{ minHeight: '100vh', background: '#fff5f5', fontFamily: '"Inter",sans-serif' }}>
-            <div style={{ background: '#7f1d1d', padding: '8px 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            </div>
-            <div style={{ background: 'linear-gradient(135deg,#7f1d1d,#b91c1c)', padding: '1.5rem 2rem', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ background: 'linear-gradient(135deg,#7f1d1d,#b91c1c)', padding: '1.5rem 2rem', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
                 <div>
                     <div style={{ fontSize: '0.7rem', color: '#fca5a5', letterSpacing: '0.15em', marginBottom: '4px' }}>DATA SCIENCE / CLASSIFICATION</div>
                     <h1 style={{ fontSize: '1.5rem', fontWeight: 800, margin: 0 }}>Customer Churn Prediction</h1>
@@ -45,7 +41,7 @@ export default function ChurnPredictionApp() {
             </div>
             <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
                 {/* Threshold slider */}
-                <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #fee2e2', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '2rem' }}>
+                <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #fee2e2', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap' }}>
                     <div style={{ flex: 1 }}>
                         <div style={{ fontWeight: 700, color: '#374151', marginBottom: '8px', fontSize: '0.9rem' }}>Risk Threshold: <span style={{ color: '#dc2626', fontWeight: 800 }}>{threshold.toFixed(2)}</span></div>
                         <input type="range" min={0} max={100} value={threshold * 100} onChange={e => setThreshold(e.target.value / 100)} style={{ width: '100%', accentColor: '#dc2626' }} />
@@ -62,7 +58,7 @@ export default function ChurnPredictionApp() {
                         </div>
                     </div>
                 </div>
-                <div style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: '1.5rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
                     {/* Risk Table */}
                     <div style={{ background: '#fff', borderRadius: '16px', border: '1px solid #fee2e2', overflow: 'hidden' }}>
                         <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid #fee2e2', background: '#fff5f5', display: 'flex', justifyContent: 'space-between' }}>

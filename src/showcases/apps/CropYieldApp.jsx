@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 const REGIONS = ['Jawa Tengah', 'Jawa Timur', 'Sulawesi Selatan', 'Sumatera Utara', 'Kalimantan Timur']
 const CROPS = ['Padi', 'Jagung', 'Kedelai', 'Singkong', 'Tebu']
 const DATA = {
@@ -17,7 +16,6 @@ const RECS = {
     'Tebu': 'Butuh sinar penuh dan air cukup. Rekomendasi: varietas PS 881 untuk rendemen tinggi.',
 }
 export default function CropYieldApp() {
-    const navigate = useNavigate()
     const [crop, setCrop] = useState('Padi')
     const [region, setRegion] = useState('Semua')
     const d = DATA[crop]
@@ -27,9 +25,7 @@ export default function CropYieldApp() {
     const bestRegion = Object.entries(d).sort(([, a], [, b]) => b - a)[0][0]
     return (
         <div style={{ minHeight: '100vh', background: '#f0fdf4', fontFamily: '"Inter",sans-serif' }}>
-            <div style={{ background: '#14532d', padding: '8px 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            </div>
-            <div style={{ background: 'linear-gradient(135deg,#14532d,#166534)', padding: '1.5rem 2rem', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ background: 'linear-gradient(135deg,#14532d,#166534)', padding: '1.5rem 2rem', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
                 <div>
                     <div style={{ fontSize: '0.7rem', color: '#86efac', letterSpacing: '0.15em', marginBottom: '4px' }}>CROP YIELD ANALYTICS</div>
                     <h1 style={{ fontSize: '1.5rem', fontWeight: 800, margin: 0 }}>Analisis Hasil Panen</h1>
@@ -46,7 +42,7 @@ export default function CropYieldApp() {
             </div>
             <div style={{ padding: '2rem', maxWidth: '1100px', margin: '0 auto' }}>
                 {/* KPIs */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '1rem', marginBottom: '2rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
                     {[['Rata-rata Hasil', `${avgYield} ton/ha`, '🌾', '#16a34a'], ['Hasil Terbaik', `${Math.max(...Object.values(d)).toFixed(1)} ton/ha`, '🏆', '#d97706'], ['Wilayah Terbaik', bestRegion, '📍', '#2563eb'], ['Total Komoditas', `${CROPS.length} jenis`, '🌱', '#7c3aed']].map(([l, v, i, c]) => (
                         <div key={l} style={{ background: '#fff', borderRadius: '14px', padding: '1.5rem', border: '1px solid #bbf7d0' }}>
                             <div style={{ fontSize: '1.5rem', marginBottom: '8px' }}>{i}</div>
@@ -55,7 +51,7 @@ export default function CropYieldApp() {
                         </div>
                     ))}
                 </div>
-                <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '1.5rem', marginBottom: '2rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
                     {/* Bar chart */}
                     <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #bbf7d0' }}>
                         <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#14532d', marginBottom: '1.5rem' }}>Hasil Panen {crop} per Wilayah (ton/ha)</h3>
