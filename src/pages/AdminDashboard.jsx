@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { m } from 'framer-motion'
-import { Lock, FileText, Users, BarChart3, LogOut, Loader2, Plus, Trash2, Edit2, Save, X, Rss, Eye, EyeOff } from 'lucide-react'
+import { Lock, FileText, Users, BarChart3, LogOut, Loader2, Plus, Trash2, Edit2, Save, X, Rss, Eye, EyeOff, Wrench, Laptop } from 'lucide-react'
 import { LineChart, Line, AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
+import { getOptimizedImg } from '../utils/imgHelper'
 
 export default function AdminDashboard() {
     // Auth State
@@ -219,11 +220,34 @@ export default function AdminDashboard() {
         e.preventDefault()
         try {
             const method = isCreating ? 'POST' : 'PUT'
+            // Clean up variants/colors: handle both string (internal edit state) and array formats
+            const dataToSave = { ...editingPost }
+            if (dataToSave.extras) {
+                // Sizes cleanup
+                if (typeof dataToSave.extras.sizes === 'string') {
+                    dataToSave.extras.sizes = dataToSave.extras.sizes.split(',').map(s => s.trim()).filter(Boolean)
+                } else if (Array.isArray(dataToSave.extras.sizes)) {
+                    dataToSave.extras.sizes = dataToSave.extras.sizes.map(s => s.trim()).filter(Boolean)
+                }
+
+                // Colors cleanup
+                if (typeof dataToSave.extras.colors === 'string') {
+                    dataToSave.extras.colors = dataToSave.extras.colors.split(',').map(c => c.trim()).filter(Boolean)
+                } else if (Array.isArray(dataToSave.extras.colors)) {
+                    dataToSave.extras.colors = dataToSave.extras.colors.map(c => c.trim()).filter(Boolean)
+                }
+            }
+
+            // Clean up price: strip IDR separators (dots) before sending to DB
+            if (dataToSave.price && typeof dataToSave.price === 'string') {
+                dataToSave.price = dataToSave.price.replace(/\./g, '')
+            }
+
             const endpoint = activeTab === 'products' ? '/api/products.php' : '/api/admin.php?action=posts'
             const res = await authFetch(endpoint, {
                 method,
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(editingPost)
+                body: JSON.stringify(dataToSave)
             })
 
             if (res.ok) {
@@ -493,7 +517,7 @@ export default function AdminDashboard() {
                                     <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: '6px', color: '#475569' }}>Feature Image (Optional)</label>
                                     <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
                                         {editingPost.img && (
-                                            <img src={editingPost.img} alt="Preview" style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '8px', border: '1px solid #e2e8f0' }} />
+                                            <img src={getOptimizedImg(editingPost.img, { w: 200, h: 200 })} alt="Preview" style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '8px', border: '1px solid #e2e8f0' }} />
                                         )}
                                         <div style={{ flexGrow: 1 }}>
                                             <input type="file" accept="image/*" onChange={handleImageUpload} disabled={uploadingImage} style={{ marginBottom: '8px' }} />
@@ -539,7 +563,17 @@ export default function AdminDashboard() {
                                 <div style={{ display: 'flex', gap: '1rem' }}>
                                     <div style={{ flex: 1 }}>
                                         <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: '6px', color: '#475569' }}>Price (IDR)</label>
-                                        <input required type="number" value={editingPost.price} onChange={e => setEditingPost({ ...editingPost, price: e.target.value })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box' }} placeholder="150000" />
+                                        <input
+                                            required
+                                            type="text"
+                                            value={editingPost.price ? Number(editingPost.price.toString().replace(/\./g, '')).toLocaleString('id-ID') : ''}
+                                            onChange={e => {
+                                                const val = e.target.value.replace(/\D/g, ''); // Allow only digits
+                                                setEditingPost({ ...editingPost, price: val })
+                                            }}
+                                            style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box' }}
+                                            placeholder="12.000.000"
+                                        />
                                     </div>
                                     <div style={{ flex: 1 }}>
                                         <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: '6px', color: '#475569' }}>Category / Tag</label>
@@ -549,8 +583,31 @@ export default function AdminDashboard() {
                                                 <option value="Lepas Kunci">Lepas Kunci (Self Drive)</option>
                                                 <option value="Dengan Sopir">Dengan Sopir (With Driver)</option>
                                             </select>
+                                        ) : editingPost.app_id === 'warung-makan' ? (
+                                            <select value={editingPost.category || ''} onChange={e => setEditingPost({ ...editingPost, category: e.target.value })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box' }}>
+                                                <option value="">-- Pilih Kategori --</option>
+                                                <option value="Siomay">Siomay (Satuan)</option>
+                                                <option value="Paket Spesial">Paket Spesial (Berbagai Isi)</option>
+                                                <option value="Kue Kering">Kue Kering / Nastar</option>
+                                            </select>
+                                        ) : editingPost.app_id === 'toko-laptop-batam' ? (
+                                            <select value={editingPost.category || ''} onChange={e => setEditingPost({ ...editingPost, category: e.target.value })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box' }}>
+                                                <option value="">-- Pilih Kategori --</option>
+                                                <option value="Laptops">Laptops / MacBooks</option>
+                                                <option value="Gadgets">Gadgets / Smartphones</option>
+                                                <option value="Monitors">Monitors / Peripherals</option>
+                                            </select>
+                                        ) : editingPost.app_id === 'batam-chicken-supplier' ? (
+                                            <select value={editingPost.category || ''} onChange={e => setEditingPost({ ...editingPost, category: e.target.value })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box' }}>
+                                                <option value="">-- Pilih Label --</option>
+                                                <option value="Best Seller">Best Seller</option>
+                                                <option value="Favorit Restoran">Favorit Restoran</option>
+                                                <option value="Ekonomis">Ekonomis</option>
+                                                <option value="Fresh">Fresh Potong Suhu Ruang</option>
+                                                <option value="Frozen">Frozen / Beku</option>
+                                            </select>
                                         ) : (
-                                            <input type="text" value={editingPost.category || ''} onChange={e => setEditingPost({ ...editingPost, category: e.target.value })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box' }} placeholder="Gaming / Best Seller" />
+                                            <input type="text" value={editingPost.category || ''} onChange={e => setEditingPost({ ...editingPost, category: e.target.value })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box' }} placeholder="Ketik Kategori / Tag..." />
                                         )}
                                     </div>
                                 </div>
@@ -562,7 +619,7 @@ export default function AdminDashboard() {
                                     <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: '6px', color: '#475569' }}>Product Image</label>
                                     <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
                                         {editingPost.image_url && (
-                                            <img src={editingPost.image_url} alt="Preview" style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '8px', border: '1px solid #e2e8f0' }} />
+                                            <img src={getOptimizedImg(editingPost.image_url, { w: 200, h: 200 })} alt="Preview" style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '8px', border: '1px solid #e2e8f0' }} />
                                         )}
                                         <div style={{ flexGrow: 1 }}>
                                             <input type="file" accept="image/*" onChange={(e) => {
@@ -601,6 +658,24 @@ export default function AdminDashboard() {
                                             <div style={{ flex: 1, minWidth: '120px' }}>
                                                 <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: '6px' }}>Luggage (Bags)</label>
                                                 <input type="number" value={editingPost.extras?.luggage || 2} onChange={e => setEditingPost({ ...editingPost, extras: { ...editingPost.extras, luggage: parseInt(e.target.value) } })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0' }} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {editingPost.app_id === 'toko-laptop-batam' && (
+                                    <div style={{ background: '#f0fdf4', padding: '1.5rem', borderRadius: '12px', border: '1px solid #bbf7d0' }}>
+                                        <h3 style={{ fontSize: '1rem', margin: '0 0 1rem', color: '#166534', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                            <Laptop size={18} /> Device Configurations
+                                        </h3>
+                                        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                                            <div style={{ flex: 1, minWidth: '120px' }}>
+                                                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: '6px' }}>Variants / Sizes (Comma separated)</label>
+                                                <input type="text" value={Array.isArray(editingPost.extras?.sizes) ? editingPost.extras.sizes.join(', ') : (editingPost.extras?.sizes || '')} onChange={e => setEditingPost({ ...editingPost, extras: { ...editingPost.extras, sizes: e.target.value } })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0' }} placeholder="256GB, 512GB, 1TB" />
+                                            </div>
+                                            <div style={{ flex: 1, minWidth: '120px' }}>
+                                                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: '6px' }}>Colors (Comma separated)</label>
+                                                <input type="text" value={Array.isArray(editingPost.extras?.colors) ? editingPost.extras.colors.join(', ') : (editingPost.extras?.colors || '')} onChange={e => setEditingPost({ ...editingPost, extras: { ...editingPost.extras, colors: e.target.value } })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0' }} placeholder="Space Black, Silver" />
                                             </div>
                                         </div>
                                     </div>
@@ -685,7 +760,7 @@ export default function AdminDashboard() {
                                         <div key={product.id} style={{ display: 'flex', flexDirection: 'column', border: '1px solid #e2e8f0', borderRadius: '12px', overflow: 'hidden' }}>
                                             <div style={{ height: '160px', background: '#f8fafc', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                                 {product.image_url ? (
-                                                    <img src={product.image_url} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                                                    <img src={getOptimizedImg(product.image_url, { w: 400, h: 300 })} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                                                 ) : (
                                                     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
                                                         <img

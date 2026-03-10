@@ -8,12 +8,16 @@ function getDB()
 {
     // Map to Docker Environment Variables, fall back to cPanel defaults
     $host = getenv('DB_HOST') ?: 'localhost';
-    $username = getenv('DB_USER') ?: 'uygpuazs_root';
+    $username = getenv('DB_USER') ?: 'root';
     $password = getenv('DB_PASS') !== false ? getenv('DB_PASS') : 'Nurdiansyah@024';
     $dbname = getenv('DB_NAME') ?: 'uygpuazs_nurdiansyahlabs_db';
 
     try {
-        $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+        if ($host === 'localhost' || $host === '127.0.0.1') {
+            $pdo = new PDO("mysql:host=$host;dbname=$dbname;unix_socket=/run/mysqld/mysqld.sock", $username, $password);
+        } else {
+            $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+        }
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         // Ensure returning associative arrays by default for easy JSON encoding
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { getOptimizedImg } from '../../utils/imgHelper'
 const FALLBACK_MENU = [
     { id: 1, name: 'Siomay Campur Biasa', price: 15000, cat: 'Siomay', img: '/assets/Siomay_01.jpg', desc: 'Siomay ikan tenggiri asli dengan siraman bumbu kacang gurih manis.' },
     { id: 2, name: 'Siomay Paket Komplit', price: 25000, cat: 'Paket Spesial', img: '/assets/Siomay_All_Paket.jpeg', desc: 'Isian lengkap: Siomay, Tahu, Telur, Kentang, Kol, dan Pare.' },
@@ -48,7 +49,7 @@ export default function WarungMakanApp() {
             {/* Navbar */}
             <div style={{ background: BRAND.primary, padding: '1rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#111', position: 'sticky', top: 0, zIndex: 100, boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                    <img src="/assets/Logo_alyuna.jpeg" alt="Alyuna Siomay" style={{ width: '45px', height: '45px', borderRadius: '50%', objectFit: 'cover', border: '2px solid #111' }} />
+                    <img src={getOptimizedImg("/assets/Logo_alyuna.jpeg", { w: 100, h: 100 })} alt="Alyuna Siomay" style={{ width: '45px', height: '45px', borderRadius: '50%', objectFit: 'cover', border: '2px solid #111' }} />
                     <div style={{ fontWeight: 900, fontSize: '1.4rem', letterSpacing: '0.05em' }}>ALYUNA SIOMAY</div>
                 </div>
                 <div style={{ display: 'flex', gap: '2rem', fontSize: '0.9rem', fontWeight: 600 }}>
@@ -62,11 +63,11 @@ export default function WarungMakanApp() {
             {/* Hero */}
             <div style={{ background: '#1c2125', minHeight: '60vh', display: 'flex', position: 'relative', overflow: 'hidden' }}>
                 <div style={{ flex: 1, overflow: 'hidden', position: 'absolute', inset: 0 }}>
-                    <img src="/assets/Background_Siomay.jpeg" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.5 }} alt="Siomay Background" />
+                    <img src={getOptimizedImg('/assets/Background_Siomay.jpeg', { w: 1200, h: 800 })} style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.5 }} alt="Siomay Background" />
                 </div>
                 <div style={{ position: 'relative', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <div style={{ textAlign: 'center', background: 'rgba(28, 33, 37, 0.7)', padding: '4rem 5rem', borderRadius: '30px', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.15)' }}>
-                        <img src="/assets/Logo_alyuna.jpeg" alt="Alyuna Siomay Logo" style={{ width: '140px', height: '140px', borderRadius: '50%', objectFit: 'cover', marginBottom: '1.5rem', border: '5px solid #fff', boxShadow: '0 10px 25px rgba(0,0,0,0.5)' }} />
+                        <img src={getOptimizedImg("/assets/Logo_alyuna.jpeg", { w: 300, h: 300 })} alt="Alyuna Siomay Logo" style={{ width: '140px', height: '140px', borderRadius: '50%', objectFit: 'cover', marginBottom: '1.5rem', border: '5px solid #fff', boxShadow: '0 10px 25px rgba(0,0,0,0.5)' }} />
                         <h1 style={{ color: '#fff', fontSize: '4rem', fontWeight: 900, margin: '0 0 1rem', textShadow: '2px 2px 10px rgba(0,0,0,0.8)' }}>ALYUNA SIOMAY</h1>
                         <p style={{ color: BRAND.accent, marginBottom: '2.5rem', fontSize: '1.3rem', fontWeight: 600 }}>Siomay Tenggiri Asli • Bumbu Kacang Kental</p>
                         <button onClick={() => document.getElementById('menu').scrollIntoView({ behavior: 'smooth' })} style={{ background: BRAND.primary, color: '#111', border: 'none', padding: '16px 40px', borderRadius: '30px', fontWeight: 900, cursor: 'pointer', fontSize: '1.2rem', boxShadow: '0 4px 15px rgba(249, 168, 38, 0.4)' }}>Lihat Menu Siomay</button>
@@ -77,7 +78,7 @@ export default function WarungMakanApp() {
             <div style={{ background: '#fff', padding: '6rem 2rem', position: 'relative' }}>
                 <div style={{ maxWidth: '1000px', margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '2rem' }}>
                     <div style={{ position: 'relative' }}>
-                        <img src="/assets/Logo_alyuna.jpeg" alt="Alyuna Siomay & Nastar" style={{ width: '120px', height: '120px', borderRadius: '50%', objectFit: 'cover', boxShadow: '0 8px 25px rgba(0,0,0,0.1)' }} />
+                        <img src={getOptimizedImg("/assets/Logo_alyuna.jpeg", { w: 250, h: 250 })} alt="Alyuna Siomay & Nastar" style={{ width: '120px', height: '120px', borderRadius: '50%', objectFit: 'cover', boxShadow: '0 8px 25px rgba(0,0,0,0.1)' }} />
                         <div style={{ position: 'absolute', bottom: '-10px', right: '-10px', background: '#f5cd4f', borderRadius: '50%', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>👩‍🍳</div>
                     </div>
                     <div>
@@ -105,7 +106,7 @@ export default function WarungMakanApp() {
                 <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(320px,1fr))', gap: '2.5rem' }}>
                     {filtered.map(item => (
                         <div key={item.id} style={{ background: '#fff', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.08)', transition: 'transform 0.3s ease', cursor: 'default' }}>
-                            <img src={item.img} alt={item.name} style={{ width: '100%', height: '250px', objectFit: 'cover' }} />
+                            <img src={getOptimizedImg(item.img, { w: 600, h: 400 })} alt={item.name} style={{ width: '100%', height: '250px', objectFit: 'cover' }} />
                             <div style={{ padding: '2rem' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
                                     <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#1c2125', margin: 0, flex: 1 }}>{item.name}</h3>
@@ -143,7 +144,7 @@ export default function WarungMakanApp() {
             </div>
             {/* Footer */}
             <div style={{ background: '#1c2125', color: '#888', textAlign: 'center', padding: '3rem 2rem', fontSize: '0.9rem' }}>
-                <img src="/assets/Logo_alyuna.jpeg" alt="Alyuna" style={{ width: '40px', height: '40px', borderRadius: '50%', opacity: 0.5, marginBottom: '1rem' }} />
+                <img src={getOptimizedImg("/assets/Logo_alyuna.jpeg", { w: 100, h: 100 })} alt="Alyuna" style={{ width: '40px', height: '40px', borderRadius: '50%', opacity: 0.5, marginBottom: '1rem' }} />
                 <p>&copy; {new Date().getFullYear()} Alyuna Siomay. Buka Tiap Hari, Sedia Pesanan Partai Besar.</p>
             </div>
         </div>

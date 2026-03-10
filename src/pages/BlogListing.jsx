@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { m } from 'framer-motion'
 import { ArrowRight, BookOpen, Loader2 } from 'lucide-react'
+import { getOptimizedImg } from '../utils/imgHelper'
 
 export default function BlogListing() {
     const [articles, setArticles] = useState([])
@@ -92,7 +93,7 @@ export default function BlogListing() {
                                 <Link to={`/blog/${article.slug}`} style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', height: '100%' }}>
                                     <div style={{ height: '200px', background: article.accentLight, position: 'relative', overflow: 'hidden' }}>
                                         {article.img ? (
-                                            <img src={article.img} alt={article.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                            <img src={getOptimizedImg(article.img, { w: 600, h: 400 })} alt={article.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                         ) : (
                                             <div style={{ width: '100%', height: '100%', background: `linear-gradient(135deg, ${article.accent}, #0f172a)`, opacity: 0.1 }} />
                                         )}

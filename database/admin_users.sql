@@ -16,4 +16,4 @@ DELETE FROM admin_users WHERE username = 'Admin';
 -- Insert default admin user: Admin / Nurdiansyah@024
 -- Note: bcrypt hash of "Nurdiansyah@024"
 INSERT INTO admin_users (username, password_hash, email) 
-VALUES ('Admin', '$2y$10$A61vH.P/lAXY5Y8tN0iInOS7xT5j9T6J1rR/W4wR9Wf6O4T5zF16K', 'nudiansyahdian28.adv@gmail.com');
+VALUES ('Admin', '$2y$10$BnwY8oWZPA4W7pHyQjrJN.GoxVaDLtuOBHjd5ms7zooZsZ7q57UcS', 'nudiansyahdian28.adv@gmail.com');
