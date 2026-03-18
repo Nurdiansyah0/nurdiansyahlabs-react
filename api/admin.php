@@ -7,9 +7,8 @@
  */
 
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type, X-Admin-Token');
+require_once __DIR__ . '/cors.php';
+setCorsHeaders(['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']);
 
 // Handle preflight OPTIONS request
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -18,23 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 // ── Database-Backed Authentication ───────────────────────────────────────────
-$providedToken = $_SERVER['HTTP_X_ADMIN_TOKEN'] ?? '';
-
-if (empty($providedToken) && function_exists('apache_request_headers')) {
-    $requestHeaders = apache_request_headers();
-    if (isset($requestHeaders['X-Admin-Token'])) {
-        $providedToken = $requestHeaders['X-Admin-Token'];
-    } elseif (isset($requestHeaders['x-admin-token'])) {
-        $providedToken = $requestHeaders['x-admin-token'];
-    }
-}
-
-if (empty($providedToken)) {
-    http_response_code(401);
-    echo json_encode(['error' => 'Unauthorized']);
-    exit;
-}
-
+require_once __DIR__ . '/auth_middleware.php';
 require_once __DIR__ . '/../database/db.php';
 $pdo = getDB();
 
@@ -44,14 +27,7 @@ if (!$pdo) {
     exit;
 }
 
-// Verify token against database
-$stmt = $pdo->prepare("SELECT id FROM admin_users WHERE token = :token");
-$stmt->execute(['token' => $providedToken]);
-if (!$stmt->fetch()) {
-    http_response_code(401);
-    echo json_encode(['error' => 'Unauthorized or expired session']);
-    exit;
-}
+verifyAdminToken($pdo);
 
 $method = $_SERVER['REQUEST_METHOD'];
 $action = $_GET['action'] ?? '';
@@ -72,7 +48,7 @@ if ($method === 'DELETE' && $action === 'leads') {
         echo json_encode(['error' => 'Lead ID required']);
         exit;
     }
-    
+
     $stmt = $pdo->prepare("DELETE FROM leads WHERE id = :id");
     if ($stmt->execute(['id' => $id])) {
         http_response_code(200);
@@ -128,21 +104,33 @@ if ($method === 'POST' && $action === 'posts') {
         'serviceLabel' => $input['serviceLabel'] ?? 'Service',
         'accent' => $input['accent'] ?? '#4f46e5',
         'accentLight' => $input['accentLight'] ?? '#eef2ff',
-        'img' => $input['img'] ?? null,
+        'images' => isset($input['images']) && is_array($input['images']) ? json_encode($input['images']) : json_encode([]),
         'faqs' => json_encode($input['faqs'] ?? []),
         'content' => $input['content'] ?? ''
     ];
 
-    $sql = "INSERT INTO posts (slug, title, description, service, serviceLabel, accent, accentLight, img, faqs, content) 
-            VALUES (:slug, :title, :description, :service, :serviceLabel, :accent, :accentLight, :img, :faqs, :content)";
+    $sql = "INSERT INTO posts (slug, title, description, service, serviceLabel, accent, accentLight, images, faqs, content) 
+            VALUES (:slug, :title, :description, :service, :serviceLabel, :accent, :accentLight, :images, :faqs, :content)";
 
     $stmt = $pdo->prepare($sql);
+    $success = $stmt->execute([
+        'slug' => $newPost['slug'],
+        'title' => $newPost['title'],
+        'description' => $newPost['description'],
+        'service' => $newPost['service'],
+        'serviceLabel' => $newPost['serviceLabel'],
+        'accent' => $newPost['accent'],
+        'accentLight' => $newPost['accentLight'],
+        'images' => $newPost['images'],
+        'faqs' => $newPost['faqs'],
+        'content' => $newPost['content']
+    ]);
 
     // Convert faqs to array for returning newly created object to frontend correctly
     $returnPost = $newPost;
     $returnPost['faqs'] = json_decode($newPost['faqs'], true);
 
-    if ($stmt->execute($newPost)) {
+    if ($success) {
 
         // Append to sitemap.xml
         $sitemapFile = __DIR__ . '/../../public/sitemap.xml';
@@ -207,7 +195,7 @@ if ($method === 'PUT' && $action === 'posts') {
         'serviceLabel' => $input['serviceLabel'] ?? $existingPost['serviceLabel'],
         'accent' => $input['accent'] ?? $existingPost['accent'],
         'accentLight' => $input['accentLight'] ?? $existingPost['accentLight'],
-        'img' => isset($input['img']) ? $input['img'] : $existingPost['img'],
+        'images' => isset($input['images']) && is_array($input['images']) ? json_encode($input['images']) : $existingPost['images'],
         'faqs' => isset($input['faqs']) ? json_encode($input['faqs']) : $existingPost['faqs'],
         'content' => $input['content'] ?? $existingPost['content']
     ];
@@ -219,7 +207,7 @@ if ($method === 'PUT' && $action === 'posts') {
             serviceLabel = :serviceLabel, 
             accent = :accent, 
             accentLight = :accentLight, 
-            img = :img, 
+            images = :images, 
             faqs = :faqs, 
             content = :content 
             WHERE slug = :slug";

@@ -321,7 +321,17 @@ export default function AdminDashboard() {
             })
             const data = await res.json()
             if (res.ok && data.status === 'success') {
-                setEditingPost(prev => ({ ...prev, img: data.url }))
+                const newImgData = data.image_data || { url: data.url, alt: 'Uploaded Image', is_primary: true }
+
+                if (activeTab === 'posts') {
+                    setEditingPost(prev => ({
+                        ...prev,
+                        images: [...(prev.images || []), newImgData]
+                    }))
+                } else {
+                    // Products still use single image_url for now
+                    setEditingPost(prev => ({ ...prev, image_url: data.url }))
+                }
             } else {
                 alert(data.error || 'Failed to upload image')
             }
@@ -514,16 +524,28 @@ export default function AdminDashboard() {
                                     <textarea required value={editingPost.description} onChange={e => setEditingPost({ ...editingPost, description: e.target.value })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box', minHeight: '80px', fontFamily: 'inherit' }} />
                                 </div>
                                 <div>
-                                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: '6px', color: '#475569' }}>Feature Image (Optional)</label>
-                                    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                                        {editingPost.img && (
-                                            <img src={getOptimizedImg(editingPost.img, { w: 200, h: 200 })} alt="Preview" style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '8px', border: '1px solid #e2e8f0' }} />
-                                        )}
-                                        <div style={{ flexGrow: 1 }}>
-                                            <input type="file" accept="image/*" onChange={handleImageUpload} disabled={uploadingImage} style={{ marginBottom: '8px' }} />
-                                            {uploadingImage && <span style={{ fontSize: '0.85rem', color: '#64748b', display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}><m.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: 'linear' }} style={{ display: 'flex' }}><Loader2 size={14} /></m.div> Uploading...</span>}
-                                            <input type="text" value={editingPost.img || ''} readOnly style={{ width: '100%', padding: '0.6rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box', background: '#f8fafc', fontSize: '0.85rem', color: '#94a3b8' }} placeholder="No image uploaded... Select a file above to upload." />
+                                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: '6px', color: '#475569' }}>Post Images (CDN Supported)</label>
+
+                                    {/* Display Existing Images */}
+                                    {editingPost.images && editingPost.images.length > 0 && (
+                                        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '10px' }}>
+                                            {editingPost.images.map((imgObj, idx) => (
+                                                <div key={idx} style={{ position: 'relative' }}>
+                                                    <img src={getOptimizedImg(imgObj.url, { w: 200, h: 200 })} alt={imgObj.alt || 'Preview'} style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '8px', border: '1px solid #e2e8f0' }} />
+                                                    <button type="button" onClick={() => {
+                                                        setEditingPost(prev => ({
+                                                            ...prev,
+                                                            images: prev.images.filter((_, i) => i !== idx)
+                                                        }))
+                                                    }} style={{ position: 'absolute', top: '-5px', right: '-5px', background: '#ef4444', color: '#fff', border: 'none', borderRadius: '50%', width: '20px', height: '20px', cursor: 'pointer', fontSize: '0.7rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>&times;</button>
+                                                </div>
+                                            ))}
                                         </div>
+                                    )}
+
+                                    <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                                        <input type="file" accept="image/*" onChange={handleImageUpload} disabled={uploadingImage} style={{ marginBottom: '8px' }} />
+                                        {uploadingImage && <span style={{ fontSize: '0.85rem', color: '#64748b', display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}><m.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: 'linear' }} style={{ display: 'flex' }}><Loader2 size={14} /></m.div> Uploading to CDN...</span>}
                                     </div>
                                 </div>
                                 <div>
@@ -706,7 +728,7 @@ export default function AdminDashboard() {
                                             <Rss size={16} /> Auto-Gen JP (Jap)
                                         </button>
                                     </div>
-                                    <button onClick={() => { setIsCreating(true); setEditingPost({ slug: '', title: '', description: '', content: '', serviceLabel: 'Update', accent: '#4f46e5', accentLight: '#eef2ff' }) }} style={{ background: '#4f46e5', color: '#fff', border: 'none', padding: '0.6rem 1rem', borderRadius: '8px', fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                    <button onClick={() => { setIsCreating(true); setEditingPost({ slug: '', title: '', description: '', content: '', serviceLabel: 'Update', accent: '#4f46e5', accentLight: '#eef2ff', images: [] }) }} style={{ background: '#4f46e5', color: '#fff', border: 'none', padding: '0.6rem 1rem', borderRadius: '8px', fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
                                         <Plus size={16} /> New Article
                                     </button>
                                 </div>

@@ -35,8 +35,16 @@ if (isset($_GET['slug'])) {
 
 // ── GET All Posts (Minimal format for listing) ───────────────────────────────
 // We strip out the full content column to save bandwidth on the listing page
-$stmt = $pdo->query("SELECT slug, title, description, service, serviceLabel, accent, accentLight, img FROM posts ORDER BY created_at DESC");
+$stmt = $pdo->query("SELECT slug, title, description, service, serviceLabel, accent, accentLight, images FROM posts ORDER BY created_at DESC");
 $posts = $stmt->fetchAll();
+
+foreach ($posts as &$post) {
+    if (!empty($post['images'])) {
+        $post['images'] = json_decode($post['images'], true);
+    } else {
+        $post['images'] = [];
+    }
+}
 
 http_response_code(200);
 echo json_encode(['total' => count($posts), 'posts' => $posts]);

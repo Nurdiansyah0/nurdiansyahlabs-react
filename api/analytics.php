@@ -7,9 +7,8 @@
  */
 
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type, X-Admin-Token');
+require_once __DIR__ . '/cors.php';
+setCorsHeaders(['GET', 'OPTIONS']);
 
 // Preflight OPTIONS
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -18,23 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 // ── Database-Backed Authentication ───────────────────────────────────────────
-$providedToken = $_SERVER['HTTP_X_ADMIN_TOKEN'] ?? '';
-
-if (empty($providedToken) && function_exists('apache_request_headers')) {
-    $requestHeaders = apache_request_headers();
-    if (isset($requestHeaders['X-Admin-Token'])) {
-        $providedToken = $requestHeaders['X-Admin-Token'];
-    } elseif (isset($requestHeaders['x-admin-token'])) {
-        $providedToken = $requestHeaders['x-admin-token'];
-    }
-}
-
-if (empty($providedToken)) {
-    http_response_code(401);
-    echo json_encode(['error' => 'Unauthorized']);
-    exit;
-}
-
+require_once __DIR__ . '/auth_middleware.php';
 require_once __DIR__ . '/../database/db.php';
 $pdo = getDB();
 
@@ -44,14 +27,7 @@ if (!$pdo) {
     exit;
 }
 
-// Verify token against database
-$stmt = $pdo->prepare("SELECT id FROM admin_users WHERE token = :token");
-$stmt->execute(['token' => $providedToken]);
-if (!$stmt->fetch()) {
-    http_response_code(401);
-    echo json_encode(['error' => 'Unauthorized or expired session']);
-    exit;
-}
+verifyAdminToken($pdo);
 
 try {
     // ── High-Performance SQL Aggregations ────────────────────────────────────

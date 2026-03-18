@@ -41,14 +41,14 @@ if (!$input) {
 $rawIp = $_SERVER['REMOTE_ADDR'] ?? 'Unknown';
 $hashedIp = substr(hash('sha256', $rawIp . 'NURDIANSYAH_SECRET_SALT'), 0, 16);
 
-$type = htmlspecialchars($input['type'] ?? 'unknown');
-$path = htmlspecialchars($input['path'] ?? '/');
+$type = substr(trim($input['type'] ?? 'unknown'), 0, 50);
+$path = substr(trim($input['path'] ?? '/'), 0, 500);
 // Re-format legacy slug payload into 'route' or 'path' if needed by the frontend format
-$route = htmlspecialchars($input['slug'] ?? '');
+$route = substr(trim($input['slug'] ?? ''), 0, 500);
 $duration = (int) ($input['duration'] ?? 0);
 $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown';
-$title = trim(htmlspecialchars($input['title'] ?? ''));
-$service = htmlspecialchars($input['service'] ?? '');
+$title = substr(trim($input['title'] ?? ''), 0, 255);
+$service = substr(trim($input['service'] ?? ''), 0, 100);
 $timestamp = date('Y-m-d H:i:s'); // DB format DATETIME
 
 $sql = "INSERT INTO analytics (type, path, visitorId, timestamp, title, service, duration, route, userAgent)

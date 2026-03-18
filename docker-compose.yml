@@ -32,20 +32,21 @@ services:
       - ./database:/var/www/html/database
     depends_on:
       - db
+    env_file:
+      - .env
     environment:
       - DB_HOST=db
-      - DB_USER=root
-      - DB_PASS=rootpassword
-      - DB_NAME=nurdiansyahlabs_db
 
   db:
     image: mysql:8.0
     container_name: react-app-db
     ports:
-      - "3306:3306"
+      - "127.0.0.1:3306:3306"
+    env_file:
+      - .env
     environment:
-      - MYSQL_ROOT_PASSWORD=rootpassword
-      - MYSQL_DATABASE=nurdiansyahlabs_db
+      - MYSQL_ROOT_PASSWORD=${DB_PASS:-changeme}
+      - MYSQL_DATABASE=${DB_NAME:-nurdiansyahlabs_db}
     volumes:
       # Persist DB data
       - db_data:/var/lib/mysql

@@ -7,6 +7,8 @@
  * Stores data directly into the leads MySQL table and sends an email notification.
  */
 
+require_once __DIR__ . '/vendor/autoload.php';
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -93,8 +95,7 @@ $ip = $_SERVER['REMOTE_ADDR'] ?? 'Unknown';
 
 // ── Send Email Notification (Via Gmail SMTP) ─────────────────────────
 
-// Require the Composer autoloader
-require 'vendor/autoload.php';
+// Composer autoloader is loaded at top of file
 
 $mail = new PHPMailer(true);
 

@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import { LanguageProvider } from './i18n/LanguageContext'
 import { LazyMotion } from 'framer-motion'
 import PageTracker from './components/PageTracker'
+import ErrorBoundary from './components/ErrorBoundary'
 import { getOptimizedImg } from './utils/imgHelper'
 
 // Eagerly load the Home page because it's required for the initial render
@@ -18,6 +19,7 @@ const BlogListing = lazy(() => import('./pages/BlogListing'))
 const BlogPage = lazy(() => import('./pages/BlogPage'))
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard'))
 const ServicePage = lazy(() => import('./pages/ServicePage'))
+const NotFound = lazy(() => import('./pages/NotFound'))
 
 const loadFeatures = () => import('framer-motion').then(res => res.domAnimation)
 
@@ -25,6 +27,7 @@ const loadFeatures = () => import('framer-motion').then(res => res.domAnimation)
 export default function App() {
     return (
         <LanguageProvider>
+            <ErrorBoundary>
             <LazyMotion features={loadFeatures}>
                 <PageTracker />
                 <Suspense fallback={<div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><img src={getOptimizedImg("/assets/logo.svg", { w: 100 })} width="50" alt="Loading..." style={{ animation: 'pulse 1.5s infinite' }} /></div>}>
@@ -41,9 +44,11 @@ export default function App() {
                         <Route path="/blog/:slug" element={<BlogPage />} />
                         <Route path="/admin" element={<AdminDashboard />} />
                         <Route path="/services/:slug" element={<ServicePage />} />
+                        <Route path="*" element={<NotFound />} />
                     </Routes>
                 </Suspense>
             </LazyMotion>
+            </ErrorBoundary>
         </LanguageProvider>
     )
 }
