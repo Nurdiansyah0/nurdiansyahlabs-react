@@ -15,7 +15,7 @@ try {
         throw new PDOException("Database connection failed. Please check your credentials in db.php");
     }
 
-
+    $dbname = $pdo->query("SELECT DATABASE()")->fetchColumn();
     echo "✅ Connected to Database `$dbname` successfully.\n";
 
     // 2. Create the Posts Table (matches posts.json)

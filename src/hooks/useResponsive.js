@@ -88,7 +88,7 @@ export function useResponsive() {
                 if (mql.removeEventListener) {
                     mql.removeEventListener('change', handler)
                 } else {
-                    mql.addListener(handler)
+                    mql.removeListener(handler)
                 }
             })
             window.removeEventListener('resize', handleResize)

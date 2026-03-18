@@ -83,13 +83,13 @@ export default function ContactForm() {
                         >
                             <CheckCircle size={40} />
                         </m.div>
-                        <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.5rem' }}>Pesan Terkirim!</h3>
-                        <p style={{ color: '#64748b', lineHeight: 1.6 }}>Terima kasih atas pesan Anda. Kami akan segera menghubungi Anda melalui kontak yang diberikan.</p>
+                        <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.5rem' }}>{t('contact.successTitle') !== 'contact.successTitle' ? t('contact.successTitle') : 'Message Sent!'}</h3>
+                        <p style={{ color: '#64748b', lineHeight: 1.6 }}>{t('contact.successDesc') !== 'contact.successDesc' ? t('contact.successDesc') : 'Thank you for your message. We will contact you shortly.'}</p>
                         <button
                             onClick={() => setStatus('idle')}
                             style={{ marginTop: '2rem', background: '#f1f5f9', color: '#475569', border: 'none', padding: '10px 24px', borderRadius: '9999px', fontWeight: 600, cursor: 'pointer' }}
                         >
-                            Kirim Pesan Lain
+                            {t('contact.sendAnother') !== 'contact.sendAnother' ? t('contact.sendAnother') : 'Send Another'}
                         </button>
                     </m.div>
                 ) : (
@@ -177,7 +177,7 @@ export default function ContactForm() {
                                     <m.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}>
                                         <Loader2 size={20} />
                                     </m.div>
-                                    Mengirim Pesan...
+                                    {t('contact.sending') !== 'contact.sending' ? t('contact.sending') : 'Sending...'}
                                 </>
                             ) : (
                                 t('contact.btnSubmit')

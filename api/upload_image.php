@@ -1,8 +1,7 @@
 <?php
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type, X-Admin-Token');
+require_once __DIR__ . '/cors.php';
+setCorsHeaders(['POST', 'OPTIONS']);
 
 // Handle preflight
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -11,18 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 // Authentication
-$providedToken = $_SERVER['HTTP_X_ADMIN_TOKEN'] ?? '';
-if (empty($providedToken) && function_exists('apache_request_headers')) {
-    $requestHeaders = apache_request_headers();
-    $providedToken = $requestHeaders['X-Admin-Token'] ?? $requestHeaders['x-admin-token'] ?? '';
-}
-
-if (empty($providedToken)) {
-    http_response_code(401);
-    echo json_encode(['error' => 'Unauthorized']);
-    exit;
-}
-
+require_once __DIR__ . '/auth_middleware.php';
 require_once __DIR__ . '/../database/db.php';
 $pdo = getDB();
 
@@ -32,13 +20,7 @@ if (!$pdo) {
     exit;
 }
 
-$stmt = $pdo->prepare("SELECT id FROM admin_users WHERE token = :token");
-$stmt->execute(['token' => $providedToken]);
-if (!$stmt->fetch()) {
-    http_response_code(401);
-    echo json_encode(['error' => 'Unauthorized or expired session']);
-    exit;
-}
+verifyAdminToken($pdo);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
@@ -58,6 +40,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    // Validate actual MIME type (prevents disguised file uploads)
+    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+    $mime = finfo_file($finfo, $file['tmp_name']);
+    finfo_close($finfo);
+    $allowedMimes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+    if (!in_array($mime, $allowedMimes, true)) {
+        http_response_code(400);
+        echo json_encode(['error' => 'File content does not match an allowed image type.']);
+        exit;
+    }
+
+    // Validate file size (max 5MB)
+    $maxSize = 5 * 1024 * 1024;
+    if ($file['size'] > $maxSize) {
+        http_response_code(400);
+        echo json_encode(['error' => 'File too large. Maximum size: 5MB.']);
+        exit;
+    }
+
     // Determine correct upload path based on environment (Vite vs. cPanel production)
     $isLocalDev = is_dir(__DIR__ . '/../public');
     $uploadDir = $isLocalDev ? __DIR__ . '/../public/upload_articles' : __DIR__ . '/../upload_articles';
@@ -70,9 +71,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $destination = $uploadDir . '/' . $filename;
 
     if (move_uploaded_file($file['tmp_name'], $destination)) {
-        // Return relative path. It is accessible statically via /upload_articles/
+        // Return structured data array suitable for the `images` JSON column
+        $imageUrl = '/upload_articles/' . $filename;
+
+        $structuredData = [
+            'url' => $imageUrl,
+            'alt' => str_replace(['_', '-'], ' ', pathinfo($file['name'], PATHINFO_FILENAME)),
+            'is_primary' => true // Default to primary for single uploads
+        ];
+
         http_response_code(200);
-        echo json_encode(['status' => 'success', 'url' => '/upload_articles/' . $filename]);
+        echo json_encode(['status' => 'success', 'url' => $imageUrl, 'image_data' => $structuredData]);
     } else {
         http_response_code(500);
         echo json_encode(['error' => 'Failed to move uploaded file.']);

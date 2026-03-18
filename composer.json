@@ -1,0 +1,5 @@
+{
+    "require-dev": {
+        "composer/semver": "^3.4"
+    }
+}

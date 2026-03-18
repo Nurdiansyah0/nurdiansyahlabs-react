@@ -4,13 +4,14 @@
  * Handles Login, Forgot Password, and Reset Password
  */
 
+require_once __DIR__ . '/vendor/autoload.php';
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type');
+require_once __DIR__ . '/cors.php';
+setCorsHeaders(['POST', 'OPTIONS']);
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
@@ -92,26 +93,22 @@ if ($action === 'forgot_password') {
         $updateStmt->execute(['token' => $resetToken, 'expires' => $expires, 'id' => $user['id']]);
 
         // Send Email via PHPMailer
-        // Load the Composer autoloader
-        if (!class_exists('PHPMailer\PHPMailer\PHPMailer')) {
-            require_once __DIR__ . '/vendor/autoload.php';
-        }
-
         $mail = new PHPMailer(true);
 
         try {
             $mail->isSMTP();
             $mail->Host       = 'smtp.gmail.com';
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'Nudiansyahdian28.adv@gmail.com';
-            $mail->Password   = 'qevs ydnh vxkg ixof'; // the app password used in contact.php
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-            $mail->Port       = 465;
+            $mail->Username   = getenv('SMTP_USER') ?: 'Nudiansyahdian28.adv@gmail.com';
+            $mail->Password   = getenv('SMTP_PASS') ?: '';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port       = 587;
 
             $mail->setFrom('Nudiansyahdian28.adv@gmail.com', 'NurdiansyahLabs Admin');
             $mail->addAddress($user['email'], $user['username']);
 
-            $resetLink = "http://localhost:5173/admin?reset=" . $resetToken;
+            $siteUrl = getenv('SITE_URL') ?: 'https://nurdiansyahlabs.com';
+            $resetLink = $siteUrl . "/admin?reset=" . $resetToken;
 
             $mail->isHTML(true);
             $mail->Subject = 'Password Reset Request';
