@@ -89,40 +89,47 @@ def _groq_generate(keyword, volume, lang):
 
     if lang == 'id':
         system_prompt = (
-            "Kamu adalah analis data digital dan penulis konten SEO profesional. "
-            "Tulis artikel jurnalisme data dalam Bahasa Indonesia yang sangat human-like. "
-            "Artikel harus mengandung keyword utama, subheadings H2/H3, tone analitis tapi engaging, "
-            "dan diakhiri dengan call-to-action ke NurdiansyahLabs.com."
+            "Kamu adalah pakar SEO, Copywriter B2B, dan Data Scientist. "
+            "Tugasmu adalah menulis artikel SEO (Human-like) yang 'memelintir' (twist) topik trending apa pun agar relevan secara bisnis dengan salah satu dari 4 layanan utama NurdiansyahLabs: "
+            "1. Jasa Landing Page / Front-end, "
+            "2. Jasa Fullstack Web Developer, "
+            "3. Konsultan Data Analyst, "
+            "4. Jasa Data Science & AI. "
+            "Gunakan analogi yang cerdas, tone profesional tapi engaging, dan masukkan Long-Tail Keywords (seperti 'jasa pembuatan website', 'konsultan data', dll) secara natural."
         )
         user_prompt = (
-            f"Tulis artikel SEO tentang topik trending **{keyword}** yang baru saja memiliki "
-            f"**{volume} pencarian** di Google hari ini. Artikel harus:\n"
-            f"1. Judul yang menarik dan SEO-friendly (format: 'Membongkar/Mengapa/Fakta: ...')\n"
-            f"2. Intro 3 kalimat yang langsung hook pembaca\n"
-            f"3. Minimal 3 section H2 dengan analisis mendalam tentang dampak digital\n"
-            f"4. CTA organik ke https://nurdiansyahlabs.com\n"
-            f"5. 2 FAQ relevan\n\n"
-            f"Return ONLY valid JSON:\n"
-            f'{{"title":"...", "description":"...", "content":"...[markdown]...", '
-            f'"faqs":[{{"q":"...","a":"..."}}]}}'
+            f"Tulis artikel SEO 'Silo Strategy' tentang topik viral: **{keyword}** (Pencarian: {volume}).\n"
+            f"INSTRUKSI WAJIB:\n"
+            f"1. Judul clickbait tapi nyambung dengan Bisnis/Teknologi (Contoh format: 'Heboh {keyword}, Apa Pelajarannya untuk Strategi Data Bisnis Anda?').\n"
+            f"2. Intro 3 kalimat yang membahas {keyword} sebagai 'hook' awal.\n"
+            f"3. Paragraf transisi yang SANGAT HALUS (smooth) untuk menghubungkan tren tersebut dengan pentingnya teknologi (Web Dev / Data / AI) bagi UMKM atau Perusahaan.\n"
+            f"4. Minimal 3 Subheading H2 yang membahas solusi/dampak bisnis dari kacamata IT.\n"
+            f"5. Soft-Selling CTA (Call to Action) organik di akhir paragraf, mengajak pembaca untuk konsultasi IT / Data ke [NurdiansyahLabs](https://nurdiansyahlabs.com).\n"
+            f"6. 2 FAQ (Tanya Jawab) yang relevan untuk target Google Featured Snippet.\n\n"
+            f"Kembalikan HANYA JSON yang valid:\n"
+            f'{{"title":"...", "description":"...", "content":"...[markdown format]...", "faqs":[{{"q":"...","a":"..."}}]}}'
         )
     else:
         system_prompt = (
-            "You are a data journalist and SEO content strategist. Write a human-like, "
-            "in-depth data journalism article. Include H2/H3 headings, analytical tone, "
-            "and a closing call-to-action to NurdiansyahLabs.com."
+            "You are a B2B SEO Specialist, Copywriter, and Tech Consultant. "
+            "Your task is to write an SEO article that cleverly 'twists' any trending topic to make it highly relevant to one of NurdiansyahLabs' 4 core services: "
+            "1. Landing Page / Front-end, "
+            "2. Fullstack Web Development, "
+            "3. Data Analytics Consulting, "
+            "4. Data Science & AI Services. "
+            "Use sharp analogies, professional yet engaging tone, and inject Long-Tail Keywords naturally."
         )
         user_prompt = (
-            f"Write an SEO article on trending topic **{keyword}** with **{volume} searches** "
-            f"recorded today. Article must:\n"
-            f"1. Compelling SEO title\n"
-            f"2. 3-sentence hook intro\n"
-            f"3. At least 3 H2 sections analyzing digital/business implications\n"
-            f"4. Organic CTA to https://nurdiansyahlabs.com\n"
-            f"5. 2 relevant FAQs\n\n"
+            f"Write an SEO 'Silo Strategy' article on the viral topic: **{keyword}** (Search volume: {volume}).\n"
+            f"STRICT INSTRUCTIONS:\n"
+            f"1. A catchy B2B/Tech relevant title (e.g., 'What the {keyword} Trend Teaches Us About Data Strategy').\n"
+            f"2. A hook intro briefly discussing the {keyword} trend.\n"
+            f"3. A smooth psychological transition linking the trend to technology (Web Dev / Data / AI) implications for businesses.\n"
+            f"4. At least 3 H2 subheadings analyzing the business/tech impact of this trend.\n"
+            f"5. A persuasive, organic soft-selling CTA at the end pointing to [NurdiansyahLabs](https://nurdiansyahlabs.com) for IT/Data solutions.\n"
+            f"6. 2 relevant FAQs optimized for Google Featured Snippets.\n\n"
             f"Return ONLY valid JSON:\n"
-            f'{{"title":"...", "description":"...", "content":"...[markdown]...", '
-            f'"faqs":[{{"q":"...","a":"..."}}]}}'
+            f'{{"title":"...", "description":"...", "content":"...[markdown format]...", "faqs":[{{"q":"...","a":"..."}}]}}'
         )
 
     payload = json.dumps({
