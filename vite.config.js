@@ -2,23 +2,13 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import vitePrerender from 'vite-plugin-prerender'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const Renderer = vitePrerender.PuppeteerRenderer
-
 export default defineConfig({
     plugins: [
-        react(),
-        vitePrerender({
-            staticDir: path.join(__dirname, 'dist'),
-            routes: ['/', '/blog', '/trends', '/admin'],
-            renderer: new Renderer({
-                renderAfterDocumentEvent: 'render-event'
-            })
-        })
+        react()
     ],
     server: {
         port: 5173,
