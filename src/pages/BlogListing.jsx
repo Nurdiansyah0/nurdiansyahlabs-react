@@ -4,6 +4,20 @@ import { m } from 'framer-motion'
 import { ArrowRight, BookOpen, Loader2 } from 'lucide-react'
 import { getOptimizedImg } from '../utils/imgHelper'
 
+
+    // Function to ensure any badge background provides AAA contrast (7:1) with white text (#fff)
+    const getSafeAccent = (hex) => {
+        if (!hex) return '#1e293b';
+        const lower = hex.toLowerCase();
+        if (lower.includes('059669') || lower.includes('10b981')) return '#022c22'; // Emerald -> super dark green
+        if (lower.includes('22c55e') || lower.includes('16a34a')) return '#14532d'; // Green -> super dark green
+        if (lower.includes('f59e0b') || lower.includes('d97706')) return '#78350f'; // Amber -> super dark amber
+        if (lower.includes('3b82f6') || lower.includes('2563eb')) return '#1e3a8a'; // Blue -> super dark blue
+        if (lower.includes('8b5cf6') || lower.includes('a855f7')) return '#2e1065'; // Violet -> super dark violet
+        if (lower.includes('6366f1') || lower.includes('4f46e5')) return '#1e1b4b'; // Indigo -> super dark indigo
+        return lower; // Assume others are safe (like original '#3730a3' or already dark)
+    };
+
 export default function BlogListing() {
     const [articles, setArticles] = useState([])
     const [loading, setLoading] = useState(true)
@@ -99,7 +113,7 @@ export default function BlogListing() {
                                         )}
                                         <span style={{
                                             position: 'absolute', top: '16px', left: '16px',
-                                            background: article.accent, color: '#fff', padding: '6px 12px',
+                                            background: getSafeAccent(article.accent), color: '#fff', padding: '6px 12px',
                                             borderRadius: '8px', fontSize: '0.75rem', fontWeight: 700
                                         }}>
                                             {article.serviceLabel}

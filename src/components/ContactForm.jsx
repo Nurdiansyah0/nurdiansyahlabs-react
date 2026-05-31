@@ -128,7 +128,7 @@ export default function ContactForm() {
 
                         <div>
                             <label style={labelStyle}>{t('contact.serviceLabel')}</label>
-                            <select
+                            <select aria-label="Select Service"
                                 name="service" value={formData.service} onChange={handleChange}
                                 style={{ ...inputStyle, appearance: 'none', cursor: 'pointer' }}
                                 disabled={status === 'submitting'}
