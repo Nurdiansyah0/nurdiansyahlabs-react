@@ -169,11 +169,11 @@ export default function PortfolioModal({ serviceKey, onClose }) {
                             background: '#f1f5f9', border: 'none', borderRadius: '50%',
                             width: '44px', height: '44px', minWidth: '44px', minHeight: '44px',
                             display: 'flex', alignItems: 'center', justifyContent: 'center',
-                            cursor: 'pointer', fontSize: '1rem', color: '#475569', flexShrink: 0,
+                            cursor: 'pointer', fontSize: '1rem', color: '#1e293b', flexShrink: 0,
                             transition: 'background 0.2s, color 0.2s',
                         }}
                         onMouseEnter={e => { e.currentTarget.style.background = '#e2e8f0'; e.currentTarget.style.color = '#334155' }}
-                        onMouseLeave={e => { e.currentTarget.style.background = '#f1f5f9'; e.currentTarget.style.color = '#475569' }}>
+                        onMouseLeave={e => { e.currentTarget.style.background = '#f1f5f9'; e.currentTarget.style.color = '#1e293b' }}>
                         <X size={18} />
                     </button>
                 </div>

@@ -70,7 +70,7 @@ export default function KoperasiPOSApp() {
                             <div key={m.l} style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #e0e7ff' }}>
                                 <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>{m.i}</div>
                                 <div style={{ fontSize: '1.8rem', fontWeight: 800, color: '#1e1b4b' }}>{m.v}</div>
-                                <div style={{ fontSize: '0.8rem', color: '#475569', marginTop: '4px' }}>{m.l}</div>
+                                <div style={{ fontSize: '0.8rem', color: '#1e293b', marginTop: '4px' }}>{m.l}</div>
                             </div>
                         ))}
                     </div>
@@ -78,7 +78,7 @@ export default function KoperasiPOSApp() {
                         <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#1e1b4b', marginBottom: '1rem' }}>Transaksi Terbaru</h2>
                         {[{ n: 'Budi Santoso', t: 'Rp 184.500', time: '10:32', s: 'Lunas' }, { n: 'Siti Rahayu', t: 'Rp 67.000', time: '09:15', s: 'Lunas' }, { n: 'Walk-in', t: 'Rp 245.000', time: '08:45', s: 'Lunas' }, { n: 'Ahmad Hidayat', t: 'Rp 128.000', time: '08:12', s: 'Kredit' }].map((tx, i) => (
                             <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 0', borderBottom: i < 3 ? '1px solid #f1f5f9' : 'none' }}>
-                                <div><div style={{ fontWeight: 600, color: '#1e1b4b', fontSize: '0.9rem' }}>{tx.n}</div><div style={{ fontSize: '0.75rem', color: '#475569' }}>{tx.time}</div></div>
+                                <div><div style={{ fontWeight: 600, color: '#1e1b4b', fontSize: '0.9rem' }}>{tx.n}</div><div style={{ fontSize: '0.75rem', color: '#1e293b' }}>{tx.time}</div></div>
                                 <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
                                     <span style={{ background: tx.s === 'Lunas' ? '#d1fae5' : '#fef3c7', color: tx.s === 'Lunas' ? '#065f46' : '#d97706', fontSize: '0.7rem', fontWeight: 700, padding: '2px 8px', borderRadius: '4px' }}>{tx.s}</span>
                                     <div style={{ fontWeight: 700, color: '#3730a3' }}>{tx.t}</div>
@@ -93,15 +93,15 @@ export default function KoperasiPOSApp() {
                 <div style={{ flex: 1, background: '#eef2ff', padding: '2rem', overflowY: 'auto' }}>
                     <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#1e1b4b', marginBottom: '2rem' }}>Data Anggota Koperasi</h1>
                     <div style={{ background: '#fff', borderRadius: '16px', border: '1px solid #e0e7ff', overflow: 'hidden' }}>
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr 2fr 1fr 1fr', padding: '1rem 1.5rem', background: '#f8fafc', fontSize: '0.8rem', fontWeight: 600, color: '#475569' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr 2fr 1fr 1fr', padding: '1rem 1.5rem', background: '#f8fafc', fontSize: '0.8rem', fontWeight: 600, color: '#1e293b' }}>
                             {['No.', 'No. Anggota', 'Nama', 'Saldo SHU', 'Status'].map(h => <div key={h}>{h}</div>)}
                         </div>
                         {MEMBERS.map((m, i) => (
                             <div key={m.id} style={{ display: 'grid', gridTemplateColumns: '1fr 2fr 2fr 1fr 1fr', padding: '1rem 1.5rem', borderTop: '1px solid #f1f5f9', alignItems: 'center' }}>
-                                <div style={{ fontSize: '0.85rem', color: '#475569' }}>{i + 1}</div>
+                                <div style={{ fontSize: '0.85rem', color: '#1e293b' }}>{i + 1}</div>
                                 <div style={{ fontFamily: 'monospace', color: '#3730a3', fontWeight: 700, fontSize: '0.85rem' }}>{m.no}</div>
                                 <div style={{ fontWeight: 600, color: '#1e1b4b', fontSize: '0.9rem' }}>{m.name}</div>
-                                <div style={{ color: '#475569', fontSize: '0.85rem' }}>{m.saldo}</div>
+                                <div style={{ color: '#1e293b', fontSize: '0.85rem' }}>{m.saldo}</div>
                                 <div><span style={{ background: '#d1fae5', color: '#065f46', fontSize: '0.7rem', fontWeight: 700, padding: '3px 8px', borderRadius: '4px' }}>Aktif</span></div>
                             </div>
                         ))}
@@ -113,13 +113,13 @@ export default function KoperasiPOSApp() {
                 <div style={{ flex: 1, background: '#eef2ff', padding: '2rem', overflowY: 'auto' }}>
                     <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#1e1b4b', marginBottom: '2rem' }}>Inventori Barang</h1>
                     <div style={{ background: '#fff', borderRadius: '16px', border: '1px solid #e0e7ff', overflow: 'hidden' }}>
-                        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', padding: '1rem 1.5rem', background: '#f8fafc', fontSize: '0.8rem', fontWeight: 600, color: '#475569' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', padding: '1rem 1.5rem', background: '#f8fafc', fontSize: '0.8rem', fontWeight: 600, color: '#1e293b' }}>
                             {['Produk', 'Kategori', 'Stok', 'Harga'].map(h => <div key={h}>{h}</div>)}
                         </div>
                         {PRODUCTS.map(p => (
                             <div key={p.id} style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', padding: '1rem 1.5rem', borderTop: '1px solid #f1f5f9', alignItems: 'center' }}>
                                 <div style={{ fontWeight: 600, color: '#1e1b4b', fontSize: '0.9rem' }}>{p.name}</div>
-                                <div style={{ fontSize: '0.8rem', color: '#475569' }}>{p.cat}</div>
+                                <div style={{ fontSize: '0.8rem', color: '#1e293b' }}>{p.cat}</div>
                                 <div><span style={{ background: p.stock < 10 ? '#fee2e2' : '#d1fae5', color: p.stock < 10 ? '#dc2626' : '#065f46', fontSize: '0.75rem', fontWeight: 700, padding: '2px 8px', borderRadius: '4px' }}>{p.stock} unit</span></div>
                                 <div style={{ fontWeight: 700, color: '#3730a3', fontSize: '0.9rem' }}>Rp {fmt(p.price)}</div>
                             </div>
@@ -134,7 +134,7 @@ export default function KoperasiPOSApp() {
                     <div style={{ flex: 1, background: '#eef2ff', padding: '1.5rem', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
                         <div style={{ display: 'flex', gap: '10px', marginBottom: '1rem', flexWrap: 'wrap' }}>
                             <div style={{ position: 'relative', flex: 1, maxWidth: '350px' }}>
-                                <span style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', color: '#4b5563' }}>🔍</span>
+                                <span style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', color: '#1f2937' }}>🔍</span>
                                 <input aria-label="Form input" value={search} onChange={e => setSearch(e.target.value)} placeholder="Cari produk..." style={{ width: '100%', padding: '10px 10px 10px 32px', borderRadius: '10px', border: '1px solid #e0e7ff', outline: 'none', fontSize: '0.9rem', boxSizing: 'border-box' }} />
                             </div>
                             <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
@@ -159,16 +159,16 @@ export default function KoperasiPOSApp() {
                     {/* Cart */}
                     <div style={{ width: '360px', background: '#fff', display: 'flex', flexDirection: 'column', borderLeft: '1px solid #e0e7ff', flexShrink: 0 }}>
                         <div style={{ padding: '1.25rem', borderBottom: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <div><div style={{ fontWeight: 800, fontSize: '1.1rem', color: '#1e1b4b' }}>Pesanan Baru</div><div style={{ fontSize: '0.75rem', color: '#475569' }}>{invNum}</div></div>
+                            <div><div style={{ fontWeight: 800, fontSize: '1.1rem', color: '#1e1b4b' }}>Pesanan Baru</div><div style={{ fontSize: '0.75rem', color: '#1e293b' }}>{invNum}</div></div>
                             <button aria-label="Action button" onClick={() => setCart([])} style={{ background: '#fee2e2', color: '#b91c1c', border: 'none', borderRadius: '6px', padding: '6px', cursor: 'pointer', fontSize: '0.8rem' }}>🗑</button>
                         </div>
                         <div style={{ flex: 1, overflowY: 'auto', padding: '1rem' }}>
-                            {cart.length === 0 && <div style={{ textAlign: 'center', padding: '2rem', color: '#475569' }}><div style={{ fontSize: '2rem' }}>🛒</div><p style={{ fontSize: '0.85rem' }}>Klik produk untuk menambahkan</p></div>}
+                            {cart.length === 0 && <div style={{ textAlign: 'center', padding: '2rem', color: '#1e293b' }}><div style={{ fontSize: '2rem' }}>🛒</div><p style={{ fontSize: '0.85rem' }}>Klik produk untuk menambahkan</p></div>}
                             {cart.map(item => (
                                 <div key={item.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0', borderBottom: '1px solid #f8fafc' }}>
                                     <div style={{ flex: 1, minWidth: 0, marginRight: '8px' }}>
                                         <div style={{ fontWeight: 600, fontSize: '0.85rem', color: '#1e1b4b', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.name}</div>
-                                        <div style={{ fontSize: '0.75rem', color: '#475569' }}>Rp {fmt(item.price)}</div>
+                                        <div style={{ fontSize: '0.75rem', color: '#1e293b' }}>Rp {fmt(item.price)}</div>
                                     </div>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                                         <button aria-label="Action button" onClick={() => upd(item.id, -1)} style={{ width: '22px', height: '22px', borderRadius: '4px', border: '1px solid #e2e8f0', background: '#fff', cursor: 'pointer', fontWeight: 700, fontSize: '0.8rem' }}>-</button>
@@ -183,16 +183,16 @@ export default function KoperasiPOSApp() {
                         <div style={{ padding: '0.75rem 1rem', background: '#f8fafc', borderTop: '1px solid #f1f5f9' }}>
                             <div onClick={() => setShowMember(!showMember)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: member ? '#eef2ff' : '#fff', padding: '8px 12px', borderRadius: '8px', border: '1px solid #e2e8f0', cursor: 'pointer' }}>
                                 <span style={{ fontSize: '0.85rem', fontWeight: 600, color: '#1e1b4b' }}>{member ? `👤 ${member.name}` : '👤 Pilih Anggota'}</span>
-                                <span style={{ fontSize: '0.7rem', color: '#475569' }}>{showMember ? '▲' : '▼'}</span>
+                                <span style={{ fontSize: '0.7rem', color: '#1e293b' }}>{showMember ? '▲' : '▼'}</span>
                             </div>
                             {showMember && <div style={{ marginTop: '6px', background: '#fff', borderRadius: '8px', border: '1px solid #e2e8f0', overflow: 'hidden' }}>
-                                <div onClick={() => { setMember(null); setShowMember(false) }} style={{ padding: '8px 12px', cursor: 'pointer', fontSize: '0.8rem', color: '#475569', borderBottom: '1px solid #f1f5f9' }}>— Tanpa Anggota —</div>
-                                {MEMBERS.map(m => <div key={m.id} onClick={() => { setMember(m); setShowMember(false) }} style={{ padding: '8px 12px', cursor: 'pointer', fontSize: '0.85rem', fontWeight: 600, color: '#1e1b4b', background: member?.id === m.id ? '#eef2ff' : 'transparent' }}>{m.name} <span style={{ color: '#475569', fontWeight: 400 }}>({m.no})</span></div>)}
+                                <div onClick={() => { setMember(null); setShowMember(false) }} style={{ padding: '8px 12px', cursor: 'pointer', fontSize: '0.8rem', color: '#1e293b', borderBottom: '1px solid #f1f5f9' }}>— Tanpa Anggota —</div>
+                                {MEMBERS.map(m => <div key={m.id} onClick={() => { setMember(m); setShowMember(false) }} style={{ padding: '8px 12px', cursor: 'pointer', fontSize: '0.85rem', fontWeight: 600, color: '#1e1b4b', background: member?.id === m.id ? '#eef2ff' : 'transparent' }}>{m.name} <span style={{ color: '#1e293b', fontWeight: 400 }}>({m.no})</span></div>)}
                             </div>}
                         </div>
                         {/* Summary */}
                         <div style={{ padding: '1.25rem', borderTop: '1px solid #f1f5f9' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px', fontSize: '0.85rem', color: '#475569' }}><span>Subtotal ({cart.reduce((s, c) => s + c.qty, 0)} item)</span><span>Rp {fmt(total)}</span></div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px', fontSize: '0.85rem', color: '#1e293b' }}><span>Subtotal ({cart.reduce((s, c) => s + c.qty, 0)} item)</span><span>Rp {fmt(total)}</span></div>
                             {member && <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px', fontSize: '0.85rem', color: '#047857' }}><span>Diskon Anggota (5%)</span><span>-Rp {fmt(discount)}</span></div>}
                             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.25rem', fontWeight: 800, fontSize: '1.1rem', color: '#1e1b4b' }}><span>Total</span><span style={{ color: '#3730a3' }}>Rp {fmt(total - discount)}</span></div>
                             <button aria-label="Action button" onClick={checkout} disabled={!cart.length} style={{ width: '100%', padding: '14px', background: cart.length ? '#3730a3' : '#cbd5e1', color: '#fff', border: 'none', borderRadius: '12px', fontWeight: 700, cursor: cart.length ? 'pointer' : 'not-allowed', fontSize: '0.95rem', boxShadow: cart.length ? '0 4px 12px rgba(79,70,229,0.3)' : 'none' }}>Proses Pembayaran</button>
@@ -206,13 +206,13 @@ export default function KoperasiPOSApp() {
                     <div onClick={e => e.stopPropagation()} style={{ background: '#fff', borderRadius: '20px', padding: '2.5rem', maxWidth: '380px', width: '90%', textAlign: 'center', boxShadow: '0 25px 50px rgba(0,0,0,0.2)' }}>
                         <div style={{ width: '56px', height: '56px', background: '#d1fae5', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.25rem', fontSize: '1.5rem' }}>✓</div>
                         <h2 style={{ fontWeight: 800, color: '#1e1b4b', marginBottom: '0.5rem' }}>Pembayaran Berhasil!</h2>
-                        <div style={{ fontFamily: 'monospace', color: '#475569', marginBottom: '1rem', fontSize: '0.9rem' }}>{receipt.inv}</div>
+                        <div style={{ fontFamily: 'monospace', color: '#1e293b', marginBottom: '1rem', fontSize: '0.9rem' }}>{receipt.inv}</div>
                         {receipt.member && <div style={{ color: '#3730a3', fontSize: '0.85rem', fontWeight: 600, marginBottom: '0.5rem' }}>Anggota: {receipt.member.name}</div>}
                         <div style={{ background: '#f8fafc', borderRadius: '10px', padding: '1rem', marginBottom: '1.25rem', textAlign: 'left' }}>
                             {receipt.items.map(i => <div key={i.id} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', padding: '4px 0', borderBottom: '1px solid #f1f5f9' }}><span>{i.name} ×{i.qty}</span><span style={{ fontWeight: 600 }}>Rp {fmt(i.price * i.qty)}</span></div>)}
                             <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 800, fontSize: '1rem', marginTop: '10px', paddingTop: '10px', borderTop: '2px solid #e5e7eb', color: '#3730a3' }}><span>Total</span><span>Rp {fmt(receipt.total)}</span></div>
                         </div>
-                        <div style={{ color: '#475569', fontSize: '0.8rem', marginBottom: '1.5rem' }}>• {receipt.time}</div>
+                        <div style={{ color: '#1e293b', fontSize: '0.8rem', marginBottom: '1.5rem' }}>• {receipt.time}</div>
                         <button aria-label="Action button" onClick={() => setReceipt(null)} style={{ width: '100%', background: '#3730a3', color: '#fff', border: 'none', padding: '12px', borderRadius: '10px', fontWeight: 700, cursor: 'pointer' }}>Transaksi Baru</button>
                     </div>
                 </div>

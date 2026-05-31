@@ -40,7 +40,7 @@ export default function ClinicAnalyticsApp() {
                         <div key={m.l} style={{ background: '#fff', borderRadius: '14px', padding: '1.5rem', border: '1px solid #bfdbfe' }}>
                             <div style={{ fontSize: '1.5rem', marginBottom: '8px' }}>{m.i}</div>
                             <div style={{ fontSize: '1.8rem', fontWeight: 800, color: m.c, marginBottom: '4px' }}>{m.v}</div>
-                            <div style={{ fontSize: '0.8rem', color: '#475569' }}>{m.l}</div>
+                            <div style={{ fontSize: '0.8rem', color: '#1e293b' }}>{m.l}</div>
                         </div>
                     ))}
                 </div>

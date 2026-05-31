@@ -81,7 +81,7 @@ export default function TokoLaptopBatamApp() {
                     </div>
                     <div>
                         <div className="font-black text-xl tracking-tighter leading-none italic uppercase">BATAM<span className="text-blue-600">TECH</span></div>
-                        <div className="text-[10px] font-bold text-slate-400 tracking-widest uppercase mt-0.5">Premium Pre-loved Specialist</div>
+                        <div className="text-[10px] font-bold text-slate-600 tracking-widest uppercase mt-0.5">Premium Pre-loved Specialist</div>
                     </div>
                 </motion.div>
 
@@ -196,7 +196,7 @@ export default function TokoLaptopBatamApp() {
                 {loading ? (
                     <div className="h-96 flex flex-col items-center justify-center gap-4">
                         <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
-                        <p className="font-bold text-slate-400 uppercase">Memuat koleksi terbaik...</p>
+                        <p className="font-bold text-slate-600 uppercase">Memuat koleksi terbaik...</p>
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
@@ -247,9 +247,9 @@ export default function TokoLaptopBatamApp() {
 
             {/* Footer */}
             <footer className="bg-slate-900 py-20 px-8">
-                <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 text-slate-400">
+                <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 text-slate-600">
                     <div className="col-span-2">
-                        <div className="font-black text-2xl tracking-tighter italic text-white mb-6 uppercase">BATAM<span className="text-blue-500">TECH</span></div>
+                        <div className="font-black text-2xl tracking-tighter italic text-white mb-6 uppercase">BATAM<span className="text-blue-700">TECH</span></div>
                         <p className="max-w-sm leading-relaxed mb-8">Spesialis gadget pre-loved (second-hand) premium tangan pertama dari Batam. Menghadirkan kualitas unit "Like New" dengan harga yang menghemat kantong Anda.</p>
                         <div className="flex gap-4">
                             {['Instagram', 'Youtube', 'X'].map(social => (
@@ -260,17 +260,17 @@ export default function TokoLaptopBatamApp() {
                     <div>
                         <h4 className="text-white font-black mb-6 uppercase tracking-wider text-sm">Lokasi Kami</h4>
                         <div className="space-y-4 text-sm font-medium">
-                            <p className="flex gap-3"><span className="text-blue-500">📍</span> Mega Mall Batam Centre, Lt 2</p>
-                            <p className="flex gap-3"><span className="text-blue-500">📍</span> Nagoya Hill, Blok A No. 12</p>
-                            <p className="flex gap-3"><span className="text-blue-500">📍</span> Kepri Mall, Lantai Dasar</p>
+                            <p className="flex gap-3"><span className="text-blue-700">📍</span> Mega Mall Batam Centre, Lt 2</p>
+                            <p className="flex gap-3"><span className="text-blue-700">📍</span> Nagoya Hill, Blok A No. 12</p>
+                            <p className="flex gap-3"><span className="text-blue-700">📍</span> Kepri Mall, Lantai Dasar</p>
                         </div>
                     </div>
                     <div>
                         <h4 className="text-white font-black mb-6 uppercase tracking-wider text-sm">Layanan</h4>
                         <div className="space-y-4 text-sm font-medium">
-                            <p className="flex gap-3"><span className="text-blue-500">⚡</span> Fast Response (09.00 - 21.00)</p>
-                            <p className="flex gap-3"><span className="text-blue-500">🤝</span> Jaminan Unit Mulus & Original</p>
-                            <p className="flex gap-3"><span className="text-blue-500">🛡️</span> After-Sales Support Luar Kota</p>
+                            <p className="flex gap-3"><span className="text-blue-700">⚡</span> Fast Response (09.00 - 21.00)</p>
+                            <p className="flex gap-3"><span className="text-blue-700">🤝</span> Jaminan Unit Mulus & Original</p>
+                            <p className="flex gap-3"><span className="text-blue-700">🛡️</span> After-Sales Support Luar Kota</p>
                         </div>
                     </div>
                 </div>
@@ -299,7 +299,7 @@ export default function TokoLaptopBatamApp() {
                                 <img src={getOptimizedImg(selectedProduct.image_url, { w: 800, h: 800 })} className="w-full h-auto drop-shadow-xl mix-blend-multiply" alt={selectedProduct.name} />
                                 <button aria-label="Action button"
                                     onClick={() => setSelectedProduct(null)}
-                                    className="absolute top-6 left-6 w-12 h-12 bg-white rounded-full flex items-center justify-center text-slate-400 hover:text-slate-900 shadow-sm transition-colors"
+                                    className="absolute top-6 left-6 w-12 h-12 bg-white rounded-full flex items-center justify-center text-slate-600 hover:text-slate-900 shadow-sm transition-colors"
                                 >
                                     <X size={20} />
                                 </button>
@@ -312,7 +312,7 @@ export default function TokoLaptopBatamApp() {
 
                                 <div className="space-y-6 mb-10 overflow-y-auto pr-2">
                                     <div>
-                                        <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 uppercase">Pilih Varian</h4>
+                                        <h4 className="text-[10px] font-black text-slate-600 uppercase tracking-widest mb-3 uppercase">Pilih Varian</h4>
                                         <div className="flex flex-wrap gap-2">
                                             {selectedProduct.extras?.sizes?.map(size => (
                                                 <button aria-label="Action button"
@@ -326,7 +326,7 @@ export default function TokoLaptopBatamApp() {
                                         </div>
                                     </div>
                                     <div>
-                                        <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 uppercase">Warna</h4>
+                                        <h4 className="text-[10px] font-black text-slate-600 uppercase tracking-widest mb-3 uppercase">Warna</h4>
                                         <div className="flex flex-wrap gap-2">
                                             {selectedProduct.extras?.colors?.map(color => (
                                                 <button aria-label="Action button"
@@ -344,7 +344,7 @@ export default function TokoLaptopBatamApp() {
 
                                 <button aria-label="Action button"
                                     onClick={handleWhatsAppOrder}
-                                    className="mt-auto w-full h-16 bg-green-500 text-white rounded-2xl font-black text-lg flex items-center justify-center gap-3 shadow-xl shadow-green-500/20 hover:bg-green-600 transition-all uppercase"
+                                    className="mt-auto w-full h-16 bg-green-700 text-white rounded-2xl font-black text-lg flex items-center justify-center gap-3 shadow-xl shadow-green-500/20 hover:bg-green-600 transition-all uppercase"
                                 >
                                     Pesan Lewat WhatsApp <ArrowRight size={20} />
                                 </button>

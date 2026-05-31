@@ -287,23 +287,23 @@ function Fleet() {
                                             </div>
                                             <div className="grid grid-cols-3 gap-4 mb-8 py-4 border-y border-gray-50">
                                                 <div className="flex flex-col items-center gap-1">
-                                                    <Users size={18} className="text-gray-400" />
+                                                    <Users size={18} className="text-gray-600" />
                                                     <span className="text-xs font-bold text-gray-600">{car.seats} Seats</span>
                                                 </div>
                                                 <div className="flex flex-col items-center gap-1 border-x border-gray-100">
-                                                    <Settings size={18} className="text-gray-400" />
+                                                    <Settings size={18} className="text-gray-600" />
                                                     <span className="text-xs font-bold text-gray-600">{car.trans}</span>
                                                 </div>
                                                 <div className="flex flex-col items-center gap-1">
-                                                    <Briefcase size={18} className="text-gray-400" />
+                                                    <Briefcase size={18} className="text-gray-600" />
                                                     <span className="text-xs font-bold text-gray-600">{car.luggage} Bags</span>
                                                 </div>
                                             </div>
                                             <div className="mt-auto pt-4 flex items-center justify-between">
                                                 <div className="flex flex-col">
-                                                    <span className="text-[10px] text-gray-400 font-black uppercase tracking-widest">{t('price_start')}</span>
+                                                    <span className="text-[10px] text-gray-600 font-black uppercase tracking-widest">{t('price_start')}</span>
                                                     <span className="text-2xl font-black text-gray-900">{price}</span>
-                                                    <span className="text-[10px] text-gray-400 font-bold">/ {currentLang === 'id' ? 'Hari' : 'Day'}</span>
+                                                    <span className="text-[10px] text-gray-600 font-bold">/ {currentLang === 'id' ? 'Hari' : 'Day'}</span>
                                                 </div>
                                                 <button aria-label="Action button"
                                                     onClick={() => openWhatsApp(currentLang, { name: car.name, type: car.type, price })}
@@ -344,7 +344,7 @@ export default function BatamRentalMobilApp() {
                         </div>
                         <div className="flex flex-col">
                             <span className="font-black text-2xl tracking-tighter leading-none" style={{ color: BRAND.primary }}>BATAMRENT</span>
-                            <span className="text-[10px] font-black tracking-[0.2em] text-gray-400 uppercase">Premium Car Rental</span>
+                            <span className="text-[10px] font-black tracking-[0.2em] text-gray-600 uppercase">Premium Car Rental</span>
                         </div>
                     </div>
                     <div className="hidden md:flex items-center gap-8">
@@ -438,20 +438,20 @@ export default function BatamRentalMobilApp() {
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                             <div>
-                                <h2 className="text-4xl font-black mb-8 leading-tight">Ready to explore Batam?<br /><span className="text-blue-500">Contact us now for best prices.</span></h2>
+                                <h2 className="text-4xl font-black mb-8 leading-tight">Ready to explore Batam?<br /><span className="text-blue-700">Contact us now for best prices.</span></h2>
                                 <div className="space-y-6">
                                     <div className="flex items-start gap-4">
                                         <div className="w-12 h-12 rounded-xl bg-blue-600/20 flex items-center justify-center flex-shrink-0 border border-blue-500/30"><MapPin className="text-blue-400" /></div>
                                         <div>
                                             <h4 className="font-bold text-lg">Our Office</h4>
-                                            <p className="text-gray-400">Rumjis, Batam Center, Kepulauan Riau, Indonesia</p>
+                                            <p className="text-gray-600">Rumjis, Batam Center, Kepulauan Riau, Indonesia</p>
                                         </div>
                                     </div>
                                     <div className="flex items-start gap-4">
                                         <div className="w-12 h-12 rounded-xl bg-blue-600/20 flex items-center justify-center flex-shrink-0 border border-blue-500/30"><Phone className="text-blue-400" /></div>
                                         <div>
                                             <h4 className="font-bold text-lg">24/7 Hotline</h4>
-                                            <p className="text-gray-400">+62 821 7601 2461</p>
+                                            <p className="text-gray-600">+62 821 7601 2461</p>
                                         </div>
                                     </div>
                                 </div>
@@ -471,7 +471,7 @@ export default function BatamRentalMobilApp() {
                         </div>
                         <span className="font-black text-xl tracking-tighter" style={{ color: BRAND.primary }}>BATAMRENT</span>
                     </div>
-                    <p className="text-gray-400 text-sm font-bold tracking-widest uppercase">© 2026 Batam Rental Mobil. Professional Choice.</p>
+                    <p className="text-gray-600 text-sm font-bold tracking-widest uppercase">© 2026 Batam Rental Mobil. Professional Choice.</p>
                     <div className="flex gap-4">
                         {['Instagram', 'Facebook', 'TikTok'].map(sm => (
                             <span key={sm} className="w-10 h-10 rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center hover:bg-blue-50 transition-colors cursor-pointer"><ChevronRight size={16} /></span>

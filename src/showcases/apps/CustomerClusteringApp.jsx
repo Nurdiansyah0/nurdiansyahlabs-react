@@ -40,7 +40,7 @@ export default function CustomerClusteringApp() {
                             </div>
                             <div style={{ fontWeight: 800, fontSize: '1.5rem', color: '#0f172a', marginBottom: '2px' }}>{c.count}</div>
                             <div style={{ fontWeight: 700, color: c.color, fontSize: '0.9rem', marginBottom: '2px' }}>{c.name}</div>
-                            <div style={{ fontSize: '0.75rem', color: '#475569' }}>{c.revenue}</div>
+                            <div style={{ fontSize: '0.75rem', color: '#1e293b' }}>{c.revenue}</div>
                         </div>
                     ))}
                 </div>
@@ -50,8 +50,8 @@ export default function CustomerClusteringApp() {
                         <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#312e81', marginBottom: '1rem' }}>RFM Scatter Plot</h2>
                         <div style={{ position: 'relative', height: '240px', background: '#f8f9ff', borderRadius: '8px', border: '1px solid #e5e7eb', overflow: 'hidden' }}>
                             {/* Axes */}
-                            <div style={{ position: 'absolute', bottom: '10px', left: '0', right: '0', fontSize: '0.65rem', color: '#475569', textAlign: 'center' }}>Frekuensi →</div>
-                            <div style={{ position: 'absolute', top: '0', bottom: '0', left: '8px', display: 'flex', alignItems: 'center', fontSize: '0.65rem', color: '#475569', writingMode: 'vertical-lr', textAlign: 'center' }}>← Recency</div>
+                            <div style={{ position: 'absolute', bottom: '10px', left: '0', right: '0', fontSize: '0.65rem', color: '#1e293b', textAlign: 'center' }}>Frekuensi →</div>
+                            <div style={{ position: 'absolute', top: '0', bottom: '0', left: '8px', display: 'flex', alignItems: 'center', fontSize: '0.65rem', color: '#1e293b', writingMode: 'vertical-lr', textAlign: 'center' }}>← Recency</div>
                             {SCATTER_POINTS.filter(p => selected === null || p.cluster === selected.id).map((p, i) => (
                                 <div key={i} style={{ position: 'absolute', left: `${15 + p.x * 16}%`, top: `${10 + p.y * 14}%`, width: '8px', height: '8px', borderRadius: '50%', background: p.color, opacity: 0.75, transition: 'all 0.2s' }} />
                             ))}
@@ -85,7 +85,7 @@ export default function CustomerClusteringApp() {
                                 <p style={{ fontSize: '0.85rem', color: '#374151', lineHeight: 1.7, marginBottom: '1rem' }}>{selected.desc}</p>
                                 <div style={{ background: '#fff', borderRadius: '10px', padding: '1rem', display: 'inline-block' }}><span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#374151' }}>💡 Action: </span><span style={{ fontSize: '0.85rem', color: selected.color, fontWeight: 700 }}>{selected.action}</span></div>
                             </div>
-                            <button aria-label="Action button" onClick={() => setSelected(null)} style={{ background: 'none', border: 'none', fontSize: '1.2rem', cursor: 'pointer', color: '#475569' }}>✕</button>
+                            <button aria-label="Action button" onClick={() => setSelected(null)} style={{ background: 'none', border: 'none', fontSize: '1.2rem', cursor: 'pointer', color: '#1e293b' }}>✕</button>
                         </div>
                     </div>
                 )}
