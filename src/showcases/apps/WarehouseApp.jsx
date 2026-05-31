@@ -51,11 +51,11 @@ export default function WarehouseApp() {
                     </div>
                 </div>
                 <div style={{ padding: '1rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                    {PAGES.map(p => <div key={p.k} onClick={() => setPage(p.k)} style={{ padding: '10px 12px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', background: page === p.k ? 'rgba(16,185,129,0.15)' : 'transparent', color: page === p.k ? '#047857' : '#1f2937', fontSize: '0.85rem', fontWeight: page === p.k ? 600 : 400, transition: 'all 0.15s' }}>{p.i} {p.l}</div>)}
+                    {PAGES.map(p => <div key={p.k} onClick={() => setPage(p.k)} style={{ padding: '10px 12px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', background: page === p.k ? 'rgba(52,211,153,0.15)' : 'transparent', color: page === p.k ? '#34d399' : '#9ca3af', fontSize: '0.85rem', fontWeight: page === p.k ? 600 : 400, transition: 'all 0.15s' }}>{p.i} {p.l}</div>)}
                 </div>
                 <div style={{ padding: '1rem', borderTop: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <img src={getOptimizedImg("https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d", { w: 100, h: 100 })} style={{ width: '32px', height: '32px', borderRadius: '50%' }} alt="user" />
-                    <div><div style={{ fontSize: '0.8rem', fontWeight: 700 }}>Warehouse Admin</div><div style={{ fontSize: '0.7rem', color: '#6b7280' }}>Shift A</div></div>
+                    <img src={getOptimizedImg("https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d", { w: 100, h: 100 })} style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover' }} alt="user" />
+                    <div><div style={{ fontSize: '0.8rem', fontWeight: 700 }}>Warehouse Admin</div><div style={{ fontSize: '0.7rem', color: '#9ca3af' }}>Shift A</div></div>
                 </div>
             </div>
             {/* Content */}
@@ -70,7 +70,7 @@ export default function WarehouseApp() {
                             <span style={{ fontSize: '1.2rem' }}>🔔</span>
                             <div style={{ position: 'absolute', top: '-3px', right: '-3px', background: '#b91c1c', width: '7px', height: '7px', borderRadius: '50%' }} />
                             {notifOpen && <div style={{ position: 'absolute', top: '30px', right: 0, background: '#fff', borderRadius: '12px', boxShadow: '0 10px 30px rgba(0,0,0,0.15)', width: '280px', zIndex: 100, overflow: 'hidden' }}>
-                                {[{ t: 'Zone C capacity at 98%', c: '#b91c1c' }, { t: '5 urgent putaway pending', c: '#b45309' }, { t: 'Outbound batch #442 completed', c: '#047857' }].map((n, i) => <div key={i} style={{ padding: '12px 16px', borderBottom: '1px solid #f1f5f9', display: 'flex', gap: '10px', alignItems: 'center' }}><div style={{ width: '8px', height: '8px', borderRadius: '50%', flexShrink: 0, background: n.c }} /><div style={{ fontSize: '0.8rem', color: '#111827' }}>{n.t}</div></div>)}
+                                {[{ t: 'Zone C capacity at 98%', c: '#7f1d1d' }, { t: '5 urgent putaway pending', c: '#78350f' }, { t: 'Outbound batch #442 completed', c: '#064e3b' }].map((n, i) => <div key={i} style={{ padding: '12px 16px', borderBottom: '1px solid #f1f5f9', display: 'flex', gap: '10px', alignItems: 'center' }}><div style={{ width: '8px', height: '8px', borderRadius: '50%', flexShrink: 0, background: n.c }} /><div style={{ fontSize: '0.8rem', color: '#111827' }}>{n.t}</div></div>)}
                             </div>}
                         </div>
                     </div>
@@ -80,7 +80,7 @@ export default function WarehouseApp() {
                     <div style={{ flex: 1, overflowY: 'auto', padding: '2rem', background: '#f3f4f6', display: 'grid', gridTemplateColumns: '1fr 350px', gap: '2rem' }}>
                         <div>
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
-                                {[{ l: 'Total Pallets', v: '1,284', t: '+12 today', c: '#1d4ed8' }, { l: 'Capacity Used', v: '84%', t: 'Zone C full', c: '#b45309' }, { l: 'Pending Putaway', v: `${42 + scans.filter(s => s.type === 'in').length}`, t: 'Needs action', c: '#b91c1c' }, { l: 'Orders to Pick', v: `${156 - scans.filter(s => s.type === 'out').length}`, t: 'Cutoff 14:00', c: '#047857' }].map(m => (
+                                {[{ l: 'Total Pallets', v: '1,284', t: '+12 today', c: '#1e3a8a' }, { l: 'Capacity Used', v: '84%', t: 'Zone C full', c: '#78350f' }, { l: 'Pending Putaway', v: `${42 + scans.filter(s => s.type === 'in').length}`, t: 'Needs action', c: '#7f1d1d' }, { l: 'Orders to Pick', v: `${156 - scans.filter(s => s.type === 'out').length}`, t: 'Cutoff 14:00', c: '#064e3b' }].map(m => (
                                     <div key={m.l} style={{ background: '#fff', borderRadius: '12px', padding: '1.25rem', border: '1px solid #e5e7eb' }}>
                                         <div style={{ fontSize: '0.75rem', color: '#6b7280', fontWeight: 600, marginBottom: '8px' }}>{m.l}</div>
                                         <div style={{ fontSize: '1.8rem', fontWeight: 800, color: '#111827', marginBottom: '4px' }}>{m.v}</div>
@@ -115,7 +115,7 @@ export default function WarehouseApp() {
                             <div style={{ flex: 1, overflowY: 'auto', padding: '1rem' }}>
                                 {scans.map((s, i) => (
                                     <div key={`${s.sku}-${i}`} style={{ display: 'flex', gap: '10px', padding: '10px 0', borderBottom: i < scans.length - 1 ? '1px solid #f3f4f6' : 'none', alignItems: 'flex-start' }}>
-                                        <div style={{ width: '30px', height: '30px', borderRadius: '7px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: '0.75rem', background: s.type === 'in' ? '#d1fae5' : s.type === 'out' ? '#fee2e2' : s.type === 'move' ? '#fef3c7' : '#e0e7ff', color: s.type === 'in' ? '#065f46' : s.type === 'out' ? '#dc2626' : s.type === 'move' ? '#d97706' : '#3730a3' }}>
+                                        <div style={{ width: '30px', height: '30px', borderRadius: '7px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: '0.75rem', background: s.type === 'in' ? '#d1fae5' : s.type === 'out' ? '#fee2e2' : s.type === 'move' ? '#fef3c7' : '#e0e7ff', color: s.type === 'in' ? '#065f46' : s.type === 'out' ? '#991b1b' : s.type === 'move' ? '#78350f' : '#312e81' }}>
                                             {s.type === 'in' ? '↓' : s.type === 'out' ? '↑' : s.type === 'move' ? '⇄' : '✓'}
                                         </div>
                                         <div style={{ flex: 1 }}>
@@ -144,7 +144,7 @@ export default function WarehouseApp() {
                                     <div style={{ fontFamily: 'monospace', fontWeight: 700, color: '#047857', fontSize: '0.8rem' }}>{item.sku}</div>
                                     <div style={{ fontSize: '0.8rem', color: '#6b7280' }}>{item.cat}</div>
                                     <div style={{ fontWeight: 600, color: '#111827', fontSize: '0.9rem' }}>{item.name}</div>
-                                    <div><span style={{ background: item.qty < 10 ? '#fee2e2' : '#d1fae5', color: item.qty < 10 ? '#dc2626' : '#065f46', padding: '3px 8px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 700 }}>{item.qty}</span></div>
+                                    <div><span style={{ background: item.qty < 10 ? '#fee2e2' : '#d1fae5', color: item.qty < 10 ? '#991b1b' : '#065f46', padding: '3px 8px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 700 }}>{item.qty}</span></div>
                                     <div style={{ fontSize: '0.8rem', color: '#374151', fontFamily: 'monospace' }}>{item.loc}</div>
                                     <div style={{ fontSize: '0.75rem', color: '#1f2937' }}>{item.last}</div>
                                 </div>
@@ -162,9 +162,9 @@ export default function WarehouseApp() {
                                 {page === 'inbound' ? `${scans.filter(s => s.type === 'in').length} putaway scans recorded today.` : page === 'outbound' ? `${scans.filter(s => s.type === 'out').length} picks completed today.` : 'Generating report...'}
                             </p>
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1rem', marginBottom: '2rem' }}>
-                                {(page === 'reports' ? [['Total Moves', String(scans.length), '#1d4ed8'], ['Inbound', String(scans.filter(s => s.type === 'in').length), '#047857'], ['Outbound', String(scans.filter(s => s.type === 'out').length), '#b45309']] :
-                                    page === 'inbound' ? [['Pending', String(42 + scans.filter(s => s.type === 'in').length), '#b91c1c'], ['Completed', '127', '#047857'], ['Today Scans', String(scans.filter(s => s.type === 'in').length), '#1d4ed8']] :
-                                        [['Queued', '23', '#b45309'], ['Dispatched', '89', '#047857'], ['Today Picks', String(scans.filter(s => s.type === 'out').length), '#1d4ed8']]
+                                {(page === 'reports' ? [['Total Moves', String(scans.length), '#1e3a8a'], ['Inbound', String(scans.filter(s => s.type === 'in').length), '#064e3b'], ['Outbound', String(scans.filter(s => s.type === 'out').length), '#78350f']] :
+                                    page === 'inbound' ? [['Pending', String(42 + scans.filter(s => s.type === 'in').length), '#7f1d1d'], ['Completed', '127', '#064e3b'], ['Today Scans', String(scans.filter(s => s.type === 'in').length), '#1e3a8a']] :
+                                        [['Queued', '23', '#78350f'], ['Dispatched', '89', '#064e3b'], ['Today Picks', String(scans.filter(s => s.type === 'out').length), '#1e3a8a']]
                                 ).map(([l, v, c]) => (
                                     <div key={l} style={{ background: '#f9fafb', borderRadius: '10px', padding: '1rem' }}>
                                         <div style={{ fontSize: '1.5rem', fontWeight: 800, color: c }}>{v}</div>
