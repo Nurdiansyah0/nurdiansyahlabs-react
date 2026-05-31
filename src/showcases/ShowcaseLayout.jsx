@@ -16,7 +16,7 @@ export default function ShowcaseLayout({ children }) {
         }}>
             
             {/* Fully Responsive App Shell (PWA Compatible) */}
-            <div style={{ 
+            <main style={{ 
                 width: '100%', 
                 flex: 1,
                 position: 'relative',
@@ -26,7 +26,7 @@ export default function ShowcaseLayout({ children }) {
                 transform: 'translateZ(0)' // Constrain fixed elements inside viewport
             }}>
                 {children}
-            </div>
+            </main>
 
             {/* SEO Hook - Floating Badge to Main Web */}
             <a 
