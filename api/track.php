@@ -26,6 +26,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 require_once __DIR__ . '/../database/db.php';
 $pdo = getDB();
 
+if (!$pdo) {
+    http_response_code(500);
+    echo json_encode(['error' => 'Database connection failed']);
+    exit;
+}
+
 // ── SQLite Real-Time State (for SSE stream.php) ───────────────────────────────
 function writeRealtimeSQLite(string $path, string $visitorHash): void {
     $cacheDir = __DIR__ . '/cache';
@@ -47,7 +53,7 @@ function writeRealtimeSQLite(string $path, string $visitorHash): void {
         // Keep table lean — delete rows older than 24h
         $db->exec("DELETE FROM realtime_visitors WHERE last_seen < datetime('now', '-24 hours')");
         $db->close();
-    } catch (Exception $e) { /* Silent fail — never break main track flow */ }
+    } catch (Throwable $e) { /* Silent fail — never break main track flow */ }
 }
 
 
