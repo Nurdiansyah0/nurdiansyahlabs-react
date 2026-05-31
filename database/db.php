@@ -15,11 +15,8 @@ function getDB()
     $dbname = getenv('DB_NAME') ?: 'uygpuazs_nurdiansyahlabs_db';
 
     try {
-        if ($host === 'localhost' || $host === '127.0.0.1') {
-            $pdo = new PDO("mysql:host=$host;dbname=$dbname;unix_socket=/run/mysqld/mysqld.sock", $username, $password);
-        } else {
-            $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-        }
+        // Biarkan PHP yang menentukan socket default dari php.ini (hapus unix_socket statis)
+        $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         // Ensure returning associative arrays by default for easy JSON encoding
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
