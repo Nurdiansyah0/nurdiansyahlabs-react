@@ -110,7 +110,7 @@ export default function SmartVisionApp() {
                 }
             }
         } catch (err) {
-            setCameraError("Kamera diblokir oleh browser. Silakan izinkan akses kamera pada ikon gembok di URL bar Anda.")
+            setCameraError(`Kamera gagal diakses: ${err.message || err.name}. Pastikan URL menggunakan HTTPS atau periksa izin gembok browser.`)
         }
     }
 
