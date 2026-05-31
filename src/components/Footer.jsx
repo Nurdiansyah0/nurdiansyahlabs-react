@@ -15,9 +15,16 @@ export default function Footer() {
                     <img src="/assets/logo-dark.svg" alt="NurdiansyahLabs Logo" style={{ width: '26px', height: '26px' }} />
                     <span>Nurdiansyah<span style={{ color: '#818cf8' }}>Labs</span></span>
                 </div>
-                {/* Copyright */}
-                <div style={{ fontSize: '0.82rem' }}>
+                {/* Copyright & Live Deploy Status */}
+                <div style={{ fontSize: '0.82rem', display: 'flex', alignItems: 'center', gap: '12px' }}>
                     {t('footer.copy')}
+                    <a href="https://github.com/Nurdiansyah0/nurdiansyahlabs-react/actions" target="_blank" rel="noreferrer" title="Live CI/CD Pipeline Status">
+                        <img 
+                            src="https://github.com/Nurdiansyah0/nurdiansyahlabs-react/actions/workflows/deploy.yml/badge.svg" 
+                            alt="Deploy Status" 
+                            style={{ height: '20px', borderRadius: '4px' }} 
+                        />
+                    </a>
                 </div>
                 {/* Social icons */}
                 <div style={{ display: 'flex', gap: '1.25rem' }}>
