@@ -31,10 +31,10 @@ export default function CropYieldApp() {
                     <h1 style={{ fontSize: '1.5rem', fontWeight: 800, margin: 0 }}>Analisis Hasil Panen</h1>
                 </div>
                 <div style={{ display: 'flex', gap: '1rem' }}>
-                    <select aria-label="Select option" aria-label="Select option" value={crop} onChange={e => setCrop(e.target.value)} style={{ background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.3)', color: '#fff', padding: '8px 14px', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', cursor: 'pointer' }}>
+                    <select aria-label="Select option" value={crop} onChange={e => setCrop(e.target.value)} style={{ background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.3)', color: '#fff', padding: '8px 14px', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', cursor: 'pointer' }}>
                         {CROPS.map(c => <option key={c} value={c} style={{ color: '#000' }}>{c}</option>)}
                     </select>
-                    <select aria-label="Select option" aria-label="Select option" value={region} onChange={e => setRegion(e.target.value)} style={{ background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.3)', color: '#fff', padding: '8px 14px', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', cursor: 'pointer' }}>
+                    <select aria-label="Select option" value={region} onChange={e => setRegion(e.target.value)} style={{ background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.3)', color: '#fff', padding: '8px 14px', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', cursor: 'pointer' }}>
                         <option value="Semua" style={{ color: '#000' }}>Semua Wilayah</option>
                         {REGIONS.map(r => <option key={r} value={r} style={{ color: '#000' }}>{r}</option>)}
                     </select>
