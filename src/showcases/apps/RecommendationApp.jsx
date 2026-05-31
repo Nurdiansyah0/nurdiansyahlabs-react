@@ -35,7 +35,8 @@ const CATEGORY_EMOJIS = {
 
 // ── Fetch hooks ──────────────────────────────────────────────────────────────
 async function apiFetch(action, { method = 'GET', body } = {}) {
-    const url = `${API_BASE}?action=${action}`
+    // Append timestamp to aggressively bust Browser, LiteSpeed, and Cloudflare caches
+    const url = `${API_BASE}?action=${action}&_t=${Date.now()}`
     const opts = {
         method,
         headers: { 'Content-Type': 'application/json' },
