@@ -11,7 +11,7 @@ ServerSignature Off
     Header set X-Frame-Options "SAMEORIGIN"
     Header set X-XSS-Protection "1; mode=block"
     Header set Referrer-Policy "strict-origin-when-cross-origin"
-    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(self)"
 </IfModule>
 
 # ── Gzip Compression ──────────────────────────────────────────────────────────
