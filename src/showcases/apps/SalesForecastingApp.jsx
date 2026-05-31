@@ -31,7 +31,7 @@ export default function SalesForecastingApp() {
                         <div key={l} style={{ background: '#fff', borderRadius: '14px', padding: '1.5rem', border: '1px solid #e5e7eb', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
                             <div style={{ fontSize: '1.5rem', marginBottom: '8px' }}>{i}</div>
                             <div style={{ fontSize: '1.5rem', fontWeight: 800, color: c, marginBottom: '4px' }}>{v}</div>
-                            <div style={{ fontSize: '0.75rem', color: '#475569' }}>{l}</div>
+                            <div style={{ fontSize: '0.75rem', color: '#1e293b' }}>{l}</div>
                         </div>
                     ))}
                 </div>
@@ -47,12 +47,12 @@ export default function SalesForecastingApp() {
                     <div style={{ display: 'flex', gap: '6px', alignItems: 'flex-end', height: '200px', paddingBottom: '0.5rem', position: 'relative' }}>
                         {/* Gridlines */}
                         <div style={{ position: 'absolute', inset: 0, display: 'grid', gridTemplateRows: 'repeat(4,1fr)', pointerEvents: 'none' }}>
-                            {[100, 75, 50, 25].map(p => <div key={p} style={{ borderTop: '1px solid #f1f5f9', position: 'relative' }}><span style={{ position: 'absolute', left: 0, top: '-8px', fontSize: '0.6rem', color: '#475569' }}>{Math.round(maxVal * p / 100)}</span></div>)}
+                            {[100, 75, 50, 25].map(p => <div key={p} style={{ borderTop: '1px solid #f1f5f9', position: 'relative' }}><span style={{ position: 'absolute', left: 0, top: '-8px', fontSize: '0.6rem', color: '#1e293b' }}>{Math.round(maxVal * p / 100)}</span></div>)}
                         </div>
                         {ACTUAL.map((v, i) => (
                             <div key={`a${i}`} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
                                 <div style={{ height: `${(v / maxVal) * 180}px`, width: '100%', background: '#4338ca', borderRadius: '4px 4px 0 0', transition: 'height 0.4s', minHeight: '4px', position: 'relative' }} title={`${forecastMonths[i]}: ${v}K`} />
-                                <div style={{ fontSize: '0.55rem', color: '#475569', transform: 'rotate(-30deg)', whiteSpace: 'nowrap' }}>{MONTHS[i]}</div>
+                                <div style={{ fontSize: '0.55rem', color: '#1e293b', transform: 'rotate(-30deg)', whiteSpace: 'nowrap' }}>{MONTHS[i]}</div>
                             </div>
                         ))}
                         {FORECAST.slice(10).map((v, i) => (
@@ -70,8 +70,8 @@ export default function SalesForecastingApp() {
                             <div key={m} onClick={() => setModel(m)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 12px', borderRadius: '8px', marginBottom: '6px', background: model === m ? '#f5f3ff' : '#f8fafc', border: `1px solid ${model === m ? '#5b21b6' : '#e5e7eb'}`, cursor: 'pointer', transition: 'all 0.15s' }}>
                                 <span style={{ fontWeight: model === m ? 700 : 500, color: model === m ? '#5b21b6' : '#374151', fontSize: '0.9rem' }}>{m}</span>
                                 <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                                    <div style={{ width: '80px', height: '8px', background: '#f1f5f9', borderRadius: '4px', overflow: 'hidden' }}><div style={{ height: '100%', background: model === m ? '#5b21b6' : '#475569', borderRadius: '4px', width: a }} /></div>
-                                    <span style={{ fontWeight: 700, color: model === m ? '#5b21b6' : '#475569', fontSize: '0.85rem' }}>{a}</span>
+                                    <div style={{ width: '80px', height: '8px', background: '#f1f5f9', borderRadius: '4px', overflow: 'hidden' }}><div style={{ height: '100%', background: model === m ? '#5b21b6' : '#1e293b', borderRadius: '4px', width: a }} /></div>
+                                    <span style={{ fontWeight: 700, color: model === m ? '#5b21b6' : '#1e293b', fontSize: '0.85rem' }}>{a}</span>
                                 </div>
                             </div>
                         ))}
@@ -82,11 +82,11 @@ export default function SalesForecastingApp() {
                             const base = ACTUAL[ACTUAL.length - 1]
                             const proj = Math.round(base * (1 + 0.06 * (i + 1)))
                             return <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid #f1f5f9', fontSize: '0.85rem' }}>
-                                <span style={{ color: '#475569' }}>{MONTHS[(11 + i + 1) % 12]} {i < 1 ? '2025' : '2025'}</span>
+                                <span style={{ color: '#1e293b' }}>{MONTHS[(11 + i + 1) % 12]} {i < 1 ? '2025' : '2025'}</span>
                                 <span style={{ fontWeight: 700, color: '#5b21b6' }}>{proj}K unit</span>
                             </div>
                         })}
-                        {period > 6 && <div style={{ textAlign: 'center', color: '#475569', fontSize: '0.8rem', padding: '8px 0' }}>+{period - 6} bulan lagi...</div>}
+                        {period > 6 && <div style={{ textAlign: 'center', color: '#1e293b', fontSize: '0.8rem', padding: '8px 0' }}>+{period - 6} bulan lagi...</div>}
                     </div>
                 </div>
             </div>

@@ -55,12 +55,12 @@ export default function ConsultantApp() {
             {/* Navbar */}
             <nav className="sticky top-0 inset-x-0 h-20 bg-white/95 backdrop-blur-xl z-[100] border-b border-slate-100 px-5 md:px-8 flex items-center justify-between">
                 <div className="flex items-center gap-3 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-                    <div className="w-12 h-12 bg-emerald-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-emerald-200 group-hover:rotate-6 transition-transform">
+                    <div className="w-12 h-12 bg-emerald-700 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-emerald-200 group-hover:rotate-6 transition-transform">
                         <span className="text-2xl">🐓</span>
                     </div>
                     <div>
-                        <div className="font-black text-xl tracking-tighter leading-none text-emerald-600 uppercase">BATAM<span className="text-emerald-900">CHICKEN</span></div>
-                        <div className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">Center & Supplier</div>
+                        <div className="font-black text-xl tracking-tighter leading-none text-emerald-700 uppercase">BATAM<span className="text-emerald-900">CHICKEN</span></div>
+                        <div className="text-[10px] font-black tracking-[0.2em] text-slate-600 uppercase">Center & Supplier</div>
                     </div>
                 </div>
 
@@ -72,14 +72,14 @@ export default function ConsultantApp() {
                                 const id = item.toLowerCase()
                                 document.getElementById(id === 'home' ? 'hero' : id)?.scrollIntoView({ behavior: 'smooth' })
                             }}
-                            className="text-sm font-bold text-slate-500 hover:text-emerald-600 transition-colors uppercase tracking-widest"
+                            className="text-sm font-bold text-slate-500 hover:text-emerald-700 transition-colors uppercase tracking-widest"
                         >
                             {item}
                         </button>
                     ))}
                     <button aria-label="Action button"
                         onClick={orderCustom}
-                        className="bg-emerald-600 text-white px-6 py-3 rounded-2xl font-black text-sm uppercase tracking-wider shadow-lg shadow-emerald-200 hover:bg-emerald-700 transition-all"
+                        className="bg-emerald-700 text-white px-6 py-3 rounded-2xl font-black text-sm uppercase tracking-wider shadow-lg shadow-emerald-200 hover:bg-emerald-700 transition-all"
                     >
                         Order Partai Besar
                     </button>
@@ -114,7 +114,7 @@ export default function ConsultantApp() {
                         ))}
                         <button aria-label="Action button"
                             onClick={orderCustom}
-                            className="w-full bg-emerald-600 text-white py-4 rounded-2xl font-black uppercase shadow-lg"
+                            className="w-full bg-emerald-700 text-white py-4 rounded-2xl font-black uppercase shadow-lg"
                         >
                             Order Partai Besar
                         </button>
@@ -135,7 +135,7 @@ export default function ConsultantApp() {
                         </div>
                         <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[1.05] mb-6 md:mb-8 uppercase">
                             Ayam Segar, <br />
-                            <span className="text-emerald-600">Terbaik di Batam</span>
+                            <span className="text-emerald-700">Terbaik di Batam</span>
                         </h1>
                         <p className="text-base md:text-xl text-slate-500 mb-8 md:mb-10 leading-relaxed max-w-xl font-medium">
                             Ayam kampung asli tanpa suntikan hormon. Dipotong harian untuk menjamin kesegaran maksimal langsung dari peternakan kami ke dapur Anda.
@@ -143,7 +143,7 @@ export default function ConsultantApp() {
                         <div className="flex flex-wrap items-center gap-4">
                             <button aria-label="Action button"
                                 onClick={() => document.getElementById('produk').scrollIntoView({ behavior: 'smooth' })}
-                                className="h-14 md:h-16 px-8 md:px-10 bg-emerald-600 text-white rounded-2xl font-black flex items-center gap-3 shadow-xl shadow-emerald-200 hover:bg-emerald-700 hover:scale-[1.02] transition-all uppercase tracking-wider text-sm md:text-base"
+                                className="h-14 md:h-16 px-8 md:px-10 bg-emerald-700 text-white rounded-2xl font-black flex items-center gap-3 shadow-xl shadow-emerald-200 hover:bg-emerald-700 hover:scale-[1.02] transition-all uppercase tracking-wider text-sm md:text-base"
                             >
                                 Lihat Produk <ChevronRight size={20} />
                             </button>
@@ -155,7 +155,7 @@ export default function ConsultantApp() {
                                         </div>
                                     ))}
                                 </div>
-                                <span className="text-[10px] md:text-xs font-black text-slate-400 uppercase tracking-widest">+2k Suplai Restoran</span>
+                                <span className="text-[10px] md:text-xs font-black text-slate-600 uppercase tracking-widest">+2k Suplai Restoran</span>
                             </div>
                         </div>
                     </motion.div>
@@ -176,7 +176,7 @@ export default function ConsultantApp() {
                         </div>
                         {/* Trust Badge */}
                         <div className="absolute -bottom-6 -left-6 md:bottom-10 md:-left-10 bg-white p-5 rounded-3xl shadow-2xl border border-slate-50 flex items-center gap-4 max-w-[200px] md:max-w-xs animate-bounce-slow">
-                            <div className="w-12 md:w-14 h-12 md:h-14 bg-amber-100 rounded-2xl flex items-center justify-center text-amber-600 flex-shrink-0">
+                            <div className="w-12 md:w-14 h-12 md:h-14 bg-amber-100 rounded-2xl flex items-center justify-center text-amber-700 flex-shrink-0">
                                 <CheckCircle size={32} />
                             </div>
                             <div>
@@ -193,7 +193,7 @@ export default function ConsultantApp() {
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16 md:mb-20">
                         <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight uppercase mb-4">Kenapa Memilih Kami?</h2>
-                        <div className="w-20 h-1.5 bg-emerald-600 mx-auto rounded-full" />
+                        <div className="w-20 h-1.5 bg-emerald-700 mx-auto rounded-full" />
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                         {[
@@ -223,7 +223,7 @@ export default function ConsultantApp() {
                         <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight mb-4 uppercase leading-none">Varian Produk Kami</h2>
                         <p className="text-slate-500 font-medium">Pasokan rutin untuk kebutuhan harian maupun bisnis katering Anda.</p>
                     </div>
-                    <div className="flex items-center gap-2 text-emerald-600 font-black text-xs uppercase tracking-widest bg-emerald-50 px-5 py-3 rounded-2xl border border-emerald-100">
+                    <div className="flex items-center gap-2 text-emerald-700 font-black text-xs uppercase tracking-widest bg-emerald-50 px-5 py-3 rounded-2xl border border-emerald-100">
                         <Truck size={16} /> Gratis Ongkir Area Batam Center*
                     </div>
                 </div>
@@ -231,7 +231,7 @@ export default function ConsultantApp() {
                 {loading ? (
                     <div className="h-96 flex flex-col items-center justify-center gap-4">
                         <div className="w-12 h-12 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin" />
-                        <p className="font-black text-slate-400 uppercase tracking-widest text-xs">Memuat Produk...</p>
+                        <p className="font-black text-slate-600 uppercase tracking-widest text-xs">Memuat Produk...</p>
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -250,7 +250,7 @@ export default function ConsultantApp() {
                             >
                                 <div className="h-48 md:h-56 bg-emerald-50/50 rounded-[32px] mb-6 p-4 overflow-hidden relative">
                                     <div className="absolute top-4 right-4 z-10">
-                                        <span className="px-4 py-1.5 bg-white/90 backdrop-blur-md rounded-xl text-[10px] font-black uppercase tracking-widest text-emerald-600 shadow-sm border border-emerald-50">
+                                        <span className="px-4 py-1.5 bg-white/90 backdrop-blur-md rounded-xl text-[10px] font-black uppercase tracking-widest text-emerald-700 shadow-sm border border-emerald-50">
                                             {item.tag}
                                         </span>
                                     </div>
@@ -261,18 +261,18 @@ export default function ConsultantApp() {
                                     />
                                 </div>
                                 <div className="flex-1 px-2">
-                                    <h2 className="font-black text-xl text-slate-900 leading-tight mb-2 tracking-tight group-hover:text-emerald-600 transition-colors uppercase">{item.name}</h2>
+                                    <h2 className="font-black text-xl text-slate-900 leading-tight mb-2 tracking-tight group-hover:text-emerald-700 transition-colors uppercase">{item.name}</h2>
                                     <p className="text-sm text-slate-500 mb-6 line-clamp-3 leading-relaxed font-medium">{item.desc}</p>
                                 </div>
                                 <div className="flex flex-col gap-4 mt-auto pt-6 border-t border-slate-50 px-2">
                                     <div className="flex items-center justify-between">
                                         <div className="flex flex-col">
-                                            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Harga / Kg</span>
-                                            <span className="font-black text-2xl text-emerald-600 tracking-tight">Rp {fmt(item.price)}</span>
+                                            <span className="text-[10px] font-black text-slate-600 uppercase tracking-widest">Harga / Kg</span>
+                                            <span className="font-black text-2xl text-emerald-700 tracking-tight">Rp {fmt(item.price)}</span>
                                         </div>
                                         <button aria-label="Action button"
                                             onClick={() => orderViaWA(item)}
-                                            className="w-12 h-12 bg-slate-900 text-white rounded-2xl flex items-center justify-center group-hover:bg-emerald-600 transition-all shadow-lg hover:rotate-6 active:scale-95"
+                                            className="w-12 h-12 bg-slate-900 text-white rounded-2xl flex items-center justify-center group-hover:bg-emerald-700 transition-all shadow-lg hover:rotate-6 active:scale-95"
                                         >
                                             <Plus size={24} />
                                         </button>
@@ -296,15 +296,15 @@ export default function ConsultantApp() {
                             ></iframe>
                         </div>
                         <div className="w-full md:w-1/2 flex flex-col gap-6">
-                            <div className="inline-flex w-fit px-4 py-2 bg-emerald-50 text-emerald-600 rounded-xl text-xs font-black tracking-widest uppercase border border-emerald-100">Our Location</div>
+                            <div className="inline-flex w-fit px-4 py-2 bg-emerald-50 text-emerald-700 rounded-xl text-xs font-black tracking-widest uppercase border border-emerald-100">Our Location</div>
                             <h2 className="text-3xl md:text-4xl font-black text-slate-900 uppercase tracking-tighter leading-none">Mampir Langsung ke Farm Kami</h2>
                             <p className="text-slate-500 leading-relaxed font-medium">Buka setiap hari (07:00 - 17:00). Kawasan Barelang, Batam. Dapatkan harga khusus untuk pembelian langsung di tempat.</p>
                             <div className="space-y-4 pt-4 border-t border-slate-50">
                                 <div className="flex items-center gap-4 text-sm font-bold text-slate-700">
-                                    <MapPin className="text-emerald-600" size={20} /> Barelang Bridge Area, Batam
+                                    <MapPin className="text-emerald-700" size={20} /> Barelang Bridge Area, Batam
                                 </div>
                                 <div className="flex items-center gap-4 text-sm font-bold text-slate-700">
-                                    <Phone className="text-emerald-600" size={20} /> +62 821-7601-2461
+                                    <Phone className="text-emerald-700" size={20} /> +62 821-7601-2461
                                 </div>
                             </div>
                         </div>
@@ -314,7 +314,7 @@ export default function ConsultantApp() {
 
             {/* Final CTA */}
             <section className="py-24 px-5 md:px-8 text-center bg-white">
-                <div className="max-w-4xl mx-auto py-20 px-10 bg-emerald-600 rounded-[50px] shadow-2xl shadow-emerald-200 relative overflow-hidden">
+                <div className="max-w-4xl mx-auto py-20 px-10 bg-emerald-700 rounded-[50px] shadow-2xl shadow-emerald-200 relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-32 -mt-32" />
                     <div className="absolute bottom-0 left-0 w-64 h-64 bg-emerald-900/10 rounded-full blur-3xl -ml-32 -mb-32" />
 
@@ -331,8 +331,8 @@ export default function ConsultantApp() {
 
             {/* Footer */}
             <footer className="py-12 border-t border-slate-50 text-center">
-                <div className="font-black text-xl tracking-tighter uppercase mb-4 text-emerald-600">BATAM<span className="text-slate-900">CHICKEN</span></div>
-                <p className="text-[10px] md:text-xs font-black text-slate-400 uppercase tracking-[0.3em]">© {new Date().getFullYear()} Batam Chicken Center. All rights reserved.</p>
+                <div className="font-black text-xl tracking-tighter uppercase mb-4 text-emerald-700">BATAM<span className="text-slate-900">CHICKEN</span></div>
+                <p className="text-[10px] md:text-xs font-black text-slate-600 uppercase tracking-[0.3em]">© {new Date().getFullYear()} Batam Chicken Center. All rights reserved.</p>
             </footer>
         </div>
     )

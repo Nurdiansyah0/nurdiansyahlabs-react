@@ -49,7 +49,7 @@ export default function BlogListing() {
                     <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 900, color: '#0f172a', marginBottom: '1rem', letterSpacing: '-0.03em' }}>
                         Insights & <span style={{ color: '#3730a3' }}>News</span>
                     </h1>
-                    <p style={{ fontSize: '1.1rem', color: '#475569', maxWidth: '600px', margin: '0 auto', lineHeight: 1.6 }}>
+                    <p style={{ fontSize: '1.1rem', color: '#1e293b', maxWidth: '600px', margin: '0 auto', lineHeight: 1.6 }}>
                         Pelajari tips terbaru seputar web development, analisis data, bisnis digital, dan teknologi machine learning.
                     </p>
                 </m.div>
@@ -109,7 +109,7 @@ export default function BlogListing() {
                                         <h2 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.75rem', lineHeight: 1.4 }}>
                                             {article.title}
                                         </h2>
-                                        <p style={{ fontSize: '0.9rem', color: '#475569', lineHeight: 1.6, marginBottom: '1.5rem', flex: 1 }}>
+                                        <p style={{ fontSize: '0.9rem', color: '#1e293b', lineHeight: 1.6, marginBottom: '1.5rem', flex: 1 }}>
                                             {article.description.length > 120 ? article.description.slice(0, 120) + '...' : article.description}
                                         </p>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: article.accent, fontWeight: 700, fontSize: '0.9rem' }}>

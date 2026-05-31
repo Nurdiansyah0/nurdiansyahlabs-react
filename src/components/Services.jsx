@@ -59,9 +59,9 @@ function ServiceCard({ service, onClick, index, t, formatCurrency, isMobile }) {
                 <service.icon size={22} color={service.iconColor} />
             </div>
             <h3 style={{ fontWeight: 700, fontSize: '1rem', color: '#111827', marginBottom: '3px' }}>{t(service.tTitle)}</h3>
-            <p style={{ fontSize: '0.78rem', color: '#4b5563', fontStyle: 'italic', marginBottom: '0.65rem' }}>{t(service.tTagline)}</p>
+            <p style={{ fontSize: '0.78rem', color: '#1f2937', fontStyle: 'italic', marginBottom: '0.65rem' }}>{t(service.tTagline)}</p>
             <div style={{ marginBottom: '0.85rem' }}>
-                <div style={{ fontSize: '0.72rem', color: '#4b5563' }}>{t('svc.startingFrom')}</div>
+                <div style={{ fontSize: '0.72rem', color: '#1f2937' }}>{t('svc.startingFrom')}</div>
                 <div style={{ fontWeight: 800, fontSize: '1.25rem', color: service.accentColor }}>
                     {formatCurrency(service.priceIDR)}{' '}
                     <span style={{ fontSize: '0.78rem', fontWeight: 400, color: '#6b7280' }}>
@@ -78,7 +78,7 @@ function ServiceCard({ service, onClick, index, t, formatCurrency, isMobile }) {
                 ))}
             </ul>
             <div style={{ borderTop: '1px solid #f3f4f6', paddingTop: '0.65rem', marginBottom: '0.65rem' }}>
-                <div style={{ fontSize: '0.62rem', fontWeight: 700, color: '#4b5563', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{t('svc.idealFor')}</div>
+                <div style={{ fontSize: '0.62rem', fontWeight: 700, color: '#1f2937', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{t('svc.idealFor')}</div>
                 <div style={{ fontSize: '0.82rem', fontWeight: 600, color: '#1f2937', marginTop: '2px' }}>{t(service.tIdeal)}</div>
             </div>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: service.badgeBg, color: service.badgeColor, padding: '5px 12px', borderRadius: '9999px', fontSize: '0.72rem', fontWeight: 600, width: 'fit-content' }}>

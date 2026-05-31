@@ -136,7 +136,7 @@ export default function TerminalEasterEgg() {
                             <Terminal size={16} />
                             <span>cPanel Terminal - uygpuazs@waguri</span>
                         </div>
-                        <button aria-label="Action button" onClick={() => setIsOpen(false)} className="text-slate-400 hover:text-white transition-colors">
+                        <button aria-label="Action button" onClick={() => setIsOpen(false)} className="text-slate-600 hover:text-white transition-colors">
                             <X size={16} />
                         </button>
                     </div>

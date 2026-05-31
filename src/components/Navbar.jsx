@@ -69,16 +69,16 @@ export default function Navbar() {
                         {links.map(l => (
                             l.href.startsWith('/') && !l.href.includes('#') ? (
                                 <Link key={l.href} to={l.href}
-                                    style={{ color: '#4b5563', fontWeight: 500, fontSize: '0.95rem', transition: 'color 0.2s', minHeight: 0, textDecoration: 'none' }}
+                                    style={{ color: '#1f2937', fontWeight: 500, fontSize: '0.95rem', transition: 'color 0.2s', minHeight: 0, textDecoration: 'none' }}
                                     onMouseEnter={e => e.target.style.color = '#4338ca'}
-                                    onMouseLeave={e => e.target.style.color = '#4b5563'}>
+                                    onMouseLeave={e => e.target.style.color = '#1f2937'}>
                                     {l.label}
                                 </Link>
                             ) : (
                                 <a key={l.href} href={l.href}
-                                    style={{ color: '#4b5563', fontWeight: 500, fontSize: '0.95rem', transition: 'color 0.2s', minHeight: 0, textDecoration: 'none' }}
+                                    style={{ color: '#1f2937', fontWeight: 500, fontSize: '0.95rem', transition: 'color 0.2s', minHeight: 0, textDecoration: 'none' }}
                                     onMouseEnter={e => e.target.style.color = '#4338ca'}
-                                    onMouseLeave={e => e.target.style.color = '#4b5563'}>
+                                    onMouseLeave={e => e.target.style.color = '#1f2937'}>
                                     {l.label}
                                 </a>
                             )

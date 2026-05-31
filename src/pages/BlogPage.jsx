@@ -186,20 +186,20 @@ export default function BlogPage() {
                         <img src={getOptimizedImg("/assets/logo.svg", { w: 50 })} alt="NurdiansyahLabs" style={{ width: '20px', height: '20px' }} />
                         NurdiansyahLabs
                     </Link>
-                    <span style={{ color: '#475569', fontSize: '0.8rem' }}>›</span>
-                    <span style={{ color: '#475569', fontSize: '0.8rem' }}>Blog</span>
+                    <span style={{ color: '#1e293b', fontSize: '0.8rem' }}>›</span>
+                    <span style={{ color: '#1e293b', fontSize: '0.8rem' }}>Blog</span>
                     {post?.geo_origin && (
                         <>
-                            <span style={{ color: '#475569', fontSize: '0.8rem' }}>›</span>
+                            <span style={{ color: '#1e293b', fontSize: '0.8rem' }}>›</span>
                             <span style={{
-                                background: '#f1f5f9', color: '#475569', fontSize: '0.7rem',
+                                background: '#f1f5f9', color: '#1e293b', fontSize: '0.7rem',
                                 padding: '2px 6px', borderRadius: '4px', fontWeight: 600, display: 'flex', gap: '4px', alignItems: 'center'
                             }}>
                                 🌐 {post.geo_origin}
                             </span>
                         </>
                     )}
-                    <span style={{ color: '#475569', fontSize: '0.8rem' }}>›</span>
+                    <span style={{ color: '#1e293b', fontSize: '0.8rem' }}>›</span>
                     <span style={{ color: '#0f172a', fontSize: '0.8rem', fontWeight: 600, maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                         {actualSlug.split('/').pop()}
                     </span>
@@ -218,7 +218,7 @@ export default function BlogPage() {
                         >
                             {post.title}
                         </m.h1>
-                        <p style={{ color: '#475569', fontSize: '1rem', lineHeight: 1.6, marginBottom: '1.25rem' }}>{post.description}</p>
+                        <p style={{ color: '#1e293b', fontSize: '1rem', lineHeight: 1.6, marginBottom: '1.25rem' }}>{post.description}</p>
                         <a
                             href="https://wa.me/6282176012461?text=Halo, saya tertarik dengan layanan NurdiansyahLabs"
                             target="_blank" rel="noreferrer"
@@ -255,7 +255,7 @@ export default function BlogPage() {
                                         style={{ background: '#fff', borderRadius: '12px', padding: '1rem 1.25rem', border: '1px solid #e2e8f0' }}
                                     >
                                         <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '6px' }}>❓ {faq.q}</div>
-                                        <div style={{ color: '#475569', fontSize: '0.9rem', lineHeight: 1.6 }}>{faq.a}</div>
+                                        <div style={{ color: '#1e293b', fontSize: '0.9rem', lineHeight: 1.6 }}>{faq.a}</div>
                                     </m.div>
                                 ))}
                             </div>

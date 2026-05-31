@@ -26,7 +26,7 @@ export default function ServicePage() {
                     <h1 className="text-4xl md:text-5xl font-black mt-2 mb-4 leading-tight">{service.title}</h1>
                     <p className="text-xl text-indigo-100 max-w-2xl">{service.description}</p>
                     <div className="mt-8 flex gap-4">
-                        <a href="https://wa.me/6282176012461" className="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-xl font-bold transition-all transform hover:scale-105">
+                        <a href="https://wa.me/6282176012461" className="bg-green-500 hover:bg-green-700 text-white px-8 py-3 rounded-xl font-bold transition-all transform hover:scale-105">
                             Konsultasi Sekarang
                         </a>
                         <Link to="/" className="bg-white/10 hover:bg-white/20 text-white px-8 py-3 rounded-xl font-bold backdrop-blur-sm transition-all">
