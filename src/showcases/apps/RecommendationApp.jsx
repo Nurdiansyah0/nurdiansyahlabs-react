@@ -337,7 +337,7 @@ export default function RecommendationApp() {
     }, [selectedUser])
 
     const historyProducts = useMemo(() => {
-        if (!selectedUser) return []
+        if (!selectedUser || !selectedUser.history) return []
         return selectedUser.history.map(id => ({ id, name: `Product #${id}` }))
     }, [selectedUser])
 
