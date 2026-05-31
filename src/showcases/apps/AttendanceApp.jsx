@@ -211,7 +211,7 @@ export default function AttendanceApp() {
                                 <div key={k} style={{ marginBottom: '1rem' }}>
                                     <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#475569', marginBottom: '6px' }}>{l}</label>
                                     {k === 'type' ? (
-                                        <select aria-label="Select option" aria-label="Select option" value={leaveForm[k]} onChange={e => setLeaveForm(p => ({ ...p, [k]: e.target.value }))} style={{ width: '100%', padding: '10px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '0.9rem', boxSizing: 'border-box', outline: 'none' }}>
+                                        <select aria-label="Select option" value={leaveForm[k]} onChange={e => setLeaveForm(p => ({ ...p, [k]: e.target.value }))} style={{ width: '100%', padding: '10px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '0.9rem', boxSizing: 'border-box', outline: 'none' }}>
                                             <option value="">Pilih jenis cuti</option>
                                             {['Cuti Tahunan', 'Cuti Sakit', 'Cuti Melahirkan', 'Cuti Penting', 'Izin Tidak Berbayar'].map(t => <option key={t}>{t}</option>)}
                                         </select>

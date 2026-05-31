@@ -37,10 +37,10 @@ export default function RetailSalesApp() {
                     <h1 style={{ fontSize: '1.5rem', fontWeight: 800, margin: 0 }}>Retail Sales Analytics</h1>
                 </div>
                 <div style={{ display: 'flex', gap: '1rem' }}>
-                    <select aria-label="Select option" aria-label="Select option" value={period} onChange={e => setPeriod(e.target.value)} style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', padding: '8px 14px', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', cursor: 'pointer' }}>
+                    <select aria-label="Select option" value={period} onChange={e => setPeriod(e.target.value)} style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', padding: '8px 14px', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', cursor: 'pointer' }}>
                         {Object.keys(MONTHLY).map(p => <option key={p} value={p} style={{ color: '#000' }}>{p}</option>)}
                     </select>
-                    <select aria-label="Select option" aria-label="Select option" value={branch} onChange={e => setBranch(e.target.value)} style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', padding: '8px 14px', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', cursor: 'pointer' }}>
+                    <select aria-label="Select option" value={branch} onChange={e => setBranch(e.target.value)} style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', padding: '8px 14px', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', cursor: 'pointer' }}>
                         {Object.keys(BRANCHES).map(b => <option key={b} value={b} style={{ color: '#000' }}>{b}</option>)}
                     </select>
                 </div>
