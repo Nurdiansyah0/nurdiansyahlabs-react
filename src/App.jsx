@@ -8,6 +8,7 @@ import { getOptimizedImg } from './utils/imgHelper'
 
 // Eagerly load the Home page because it's required for the initial render
 import Home from './pages/Home'
+import TerminalEasterEgg from './components/TerminalEasterEgg'
 
 // Lazy load all other routes to reduce First Load JS payload
 const LandingPageShowcase = lazy(() => import('./showcases/LandingPageShowcase'))
@@ -30,6 +31,7 @@ export default function App() {
             <ErrorBoundary>
             <LazyMotion features={loadFeatures}>
                 <PageTracker />
+                <TerminalEasterEgg />
                 <Suspense fallback={<div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><img src={getOptimizedImg("/assets/logo.svg", { w: 100 })} width="50" alt="Loading..." style={{ animation: 'pulse 1.5s infinite' }} /></div>}>
                     <Routes>
                         <Route path="/" element={<Home />} />

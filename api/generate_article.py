@@ -18,6 +18,52 @@ import hashlib
 import urllib.request
 import urllib.error
 from datetime import datetime
+import sqlite3
+
+# ──────────────────────────────────────────────────────────────────────────────
+# CACHE CONFIGURATION
+# ──────────────────────────────────────────────────────────────────────────────
+CACHE_DIR = os.path.join(os.path.dirname(__file__), 'cache')
+CACHE_DB = os.path.join(CACHE_DIR, 'ai_cache.sqlite')
+
+def init_cache_db():
+    os.makedirs(CACHE_DIR, exist_ok=True)
+    with sqlite3.connect(CACHE_DB) as conn:
+        conn.execute('''
+            CREATE TABLE IF NOT EXISTS article_cache (
+                keyword_hash TEXT PRIMARY KEY,
+                keyword TEXT,
+                volume TEXT,
+                lang TEXT,
+                response_json TEXT,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        ''')
+
+def get_cached_article(keyword_hash):
+    if not os.path.exists(CACHE_DB):
+        return None
+    try:
+        with sqlite3.connect(CACHE_DB) as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT response_json FROM article_cache WHERE keyword_hash = ?", (keyword_hash,))
+            row = cursor.fetchone()
+            if row:
+                return json.loads(row[0])
+    except Exception:
+        pass
+    return None
+
+def set_cached_article(keyword_hash, keyword, volume, lang, response_json):
+    init_cache_db()
+    try:
+        with sqlite3.connect(CACHE_DB) as conn:
+            conn.execute('''
+                INSERT OR REPLACE INTO article_cache (keyword_hash, keyword, volume, lang, response_json)
+                VALUES (?, ?, ?, ?, ?)
+            ''', (keyword_hash, keyword, volume, lang, json.dumps(response_json)))
+    except Exception:
+        pass
 
 # ──────────────────────────────────────────────────────────────────────────────
 # CONFIGURATION
@@ -33,6 +79,13 @@ GROQ_TIMEOUT = 15   # seconds
 # ──────────────────────────────────────────────────────────────────────────────
 def _groq_generate(keyword, volume, lang):
     """Call Groq's free API with llama-3.1-8b-instant. Pure urllib, zero extra deps."""
+    
+    # 1. Check Edge Cache first
+    keyword_hash = hashlib.md5(f"{keyword.lower()}_{lang}".encode()).hexdigest()
+    cached_data = get_cached_article(keyword_hash)
+    if cached_data:
+        cached_data["mode"] = "groq_llm_cached"  # Indicate it was served from cache
+        return cached_data
 
     if lang == 'id':
         system_prompt = (
@@ -100,7 +153,7 @@ def _groq_generate(keyword, volume, lang):
     data = json.loads(text)
 
     # Normalize field names
-    return {
+    result_data = {
         "status": "success",
         "mode": "groq_llm",
         "title": data.get("title", f"Trending Now: {keyword}"),
@@ -108,6 +161,11 @@ def _groq_generate(keyword, volume, lang):
         "faqs": data.get("faqs", []),
         "content": data.get("content", "")
     }
+    
+    # Save to Edge Cache for future requests
+    set_cached_article(keyword_hash, keyword, volume, lang, result_data)
+    
+    return result_data
 
 
 # ──────────────────────────────────────────────────────────────────────────────

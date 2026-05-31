@@ -19,8 +19,41 @@ import sys
 import json
 import math
 import logging
+import os
+import sqlite3
 
 logging.basicConfig(stream=sys.stderr, level=logging.WARNING)
+
+# ── SQLite Vector Cache ────────────────────────────────────────────────────────
+_CACHE_DIR = os.path.join(os.path.dirname(__file__), 'cache')
+_VECTOR_DB  = os.path.join(_CACHE_DIR, 'ai_cache.sqlite')
+
+def _db_conn():
+    os.makedirs(_CACHE_DIR, exist_ok=True)
+    conn = sqlite3.connect(_VECTOR_DB)
+    conn.execute('''
+        CREATE TABLE IF NOT EXISTS tfidf_cache (
+            key   TEXT PRIMARY KEY,
+            value TEXT
+        )
+    ''')
+    return conn
+
+def _cache_get(key):
+    try:
+        with _db_conn() as c:
+            row = c.execute('SELECT value FROM tfidf_cache WHERE key=?', (key,)).fetchone()
+            return json.loads(row[0]) if row else None
+    except Exception:
+        return None
+
+def _cache_set(key, value):
+    try:
+        with _db_conn() as c:
+            c.execute('INSERT OR REPLACE INTO tfidf_cache (key, value) VALUES (?,?)',
+                      (key, json.dumps(value)))
+    except Exception:
+        pass
 
 # ── Same product catalog & users as main.py ────────────────────────────────────
 PRODUCTS: list[dict] = [
@@ -92,19 +125,20 @@ PID_IDX = {p["id"]: i for i, p in enumerate(PRODUCTS)}
 
 # ── Lightweight TF-IDF (no sklearn) ───────────────────────────────────────────
 def build_tfidf():
-    """Pure-Python TF-IDF so ml_compute.py works even without sklearn installed."""
+    """Pure-Python TF-IDF — result persisted to SQLite so next spawn is <1ms."""
+    cached = _cache_get("tfidf_vectors_v1")
+    if cached:
+        return cached
+
     import math
     corpus = [f"{p['name']} {p['category']} {p['brand']} {p['tags']}" for p in PRODUCTS]
-    # Tokenize
     tokenized = [doc.lower().split() for doc in corpus]
-    # DF per token
     df: dict[str, int] = {}
     for tokens in tokenized:
         for t in set(tokens):
             df[t] = df.get(t, 0) + 1
     N = len(tokenized)
     idf = {t: math.log(N / max(v, 1)) for t, v in df.items()}
-    # TF-IDF vectors
     vectors: list[dict[str, float]] = []
     for tokens in tokenized:
         tf: dict[str, float] = {}
@@ -112,9 +146,10 @@ def build_tfidf():
             tf[t] = tf.get(t, 0) + 1
         length = len(tokens)
         vec = {t: (count / length) * idf.get(t, 0) for t, count in tf.items()}
-        # Normalise
         norm = math.sqrt(sum(v * v for v in vec.values())) or 1
         vectors.append({t: v / norm for t, v in vec.items()})
+
+    _cache_set("tfidf_vectors_v1", vectors)  # Persist for next spawn
     return vectors
 
 
@@ -123,6 +158,7 @@ def cosine(a: dict, b: dict) -> float:
 
 
 TFIDF = build_tfidf()
+
 
 
 def content_score(history_ids: list[int]) -> list[float]:
