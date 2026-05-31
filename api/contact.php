@@ -108,33 +108,75 @@ $mail = new PHPMailer(true);
 try {
     // Server settings
     $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com';             // Gmail SMTP server
-    $mail->SMTPAuth = true;                         // Enable SMTP authentication
-
-    // SMTP credentials from environment variables (set in cPanel .user.ini or Docker)
-    $mail->Username = getenv('SMTP_USER') ?: 'Nudiansyahdian28.adv@gmail.com';
-    $mail->Password = getenv('SMTP_PASS') ?: '';
-
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port = 587;                            // TCP port to connect to
+    
+    // Baca konfigurasi SMTP dari env.local.php (jika ada) atau fallback
+    $smtpHost = defined('SMTP_HOST') ? SMTP_HOST : (getenv('SMTP_HOST') ?: 'mail.nurdiansyahlabs.com');
+    $smtpUser = defined('SMTP_USER') ? SMTP_USER : (getenv('SMTP_USER') ?: 'admin@nurdiansyahlabs.com');
+    $smtpPass = defined('SMTP_PASS') ? SMTP_PASS : (getenv('SMTP_PASS') ?: '');
+    $smtpPort = defined('SMTP_PORT') ? SMTP_PORT : (getenv('SMTP_PORT') ?: 465); // 465 for SSL, 587 for TLS
+    
+    $mail->Host = $smtpHost;
+    $mail->SMTPAuth = true;
+    $mail->Username = $smtpUser;
+    $mail->Password = $smtpPass;
+    $mail->SMTPSecure = ($smtpPort == 465) ? PHPMailer::ENCRYPTION_SMTPS : PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port = $smtpPort;
 
     // Recipients
-    $mail->setFrom('Nudiansyahdian28.adv@gmail.com', 'NurdiansyahLabs Website');
-    $mail->addAddress(ADMIN_EMAIL);                   // Sends to the ADMIN_EMAIL you defined at the top
-    $mail->addReplyTo($contact, $name);               // Replies go directly to the person who filled the form
+    $mail->setFrom($smtpUser, 'NurdiansyahLabs System');
+    $mail->addAddress(ADMIN_EMAIL);
+    if (filter_var($contact, FILTER_VALIDATE_EMAIL)) {
+        $mail->addReplyTo($contact, $name);
+    }
 
     // Content
-    $mail->isHTML(false);                             // Set email format to plain text
-    $mail->Subject = "⭐ New Lead from $name (" . ($service ?: 'General Inquiry') . ")";
+    $mail->isHTML(true); // Set email format to HTML
+    $mail->Subject = "🚀 New Lead: $name (" . ($service ?: 'General Inquiry') . ")";
 
-    $body = "New contact form submission:\n\n";
-    $body .= "Name: $name\n";
-    $body .= "Contact: $contact\n";
-    $body .= "Service Interest: " . ($service ?: 'None specified') . "\n";
-    $body .= "IP: $ip\n\n";
-    $body .= "Message:\n$message\n";
+    // HTML Email Template
+    $mail->Body = "
+    <div style='font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);'>
+        <div style='background-color: #0f172a; padding: 24px; text-align: center;'>
+            <h2 style='color: #ffffff; margin: 0; font-size: 24px; font-weight: bold;'>New Lead Notification</h2>
+            <p style='color: #94a3b8; margin: 8px 0 0 0; font-size: 14px;'>NurdiansyahLabs Web Platform</p>
+        </div>
+        <div style='padding: 32px; background-color: #ffffff;'>
+            <table style='width: 100%; border-collapse: collapse;'>
+                <tr>
+                    <td style='padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 14px; width: 35%;'><strong>Full Name</strong></td>
+                    <td style='padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #0f172a; font-size: 15px; font-weight: bold;'>{$name}</td>
+                </tr>
+                <tr>
+                    <td style='padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 14px;'><strong>Contact Info</strong></td>
+                    <td style='padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #0284c7; font-size: 15px; font-weight: bold;'>
+                        <a href='mailto:{$contact}' style='color: #0284c7; text-decoration: none;'>{$contact}</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td style='padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 14px;'><strong>Service Interest</strong></td>
+                    <td style='padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #0f172a; font-size: 15px;'>
+                        <span style='background-color: #e0f2fe; color: #0369a1; padding: 4px 8px; border-radius: 4px; font-size: 13px; font-weight: bold;'>
+                            " . ($service ?: 'General Inquiry') . "
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style='padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 14px;'><strong>IP Address</strong></td>
+                    <td style='padding: 12px 0; border-bottom: 1px solid #f1f5f9; color: #0f172a; font-size: 14px;'>{$ip}</td>
+                </tr>
+            </table>
+            <div style='margin-top: 24px; padding: 16px; background-color: #f8fafc; border-left: 4px solid #3b82f6; border-radius: 4px;'>
+                <p style='margin: 0; color: #64748b; font-size: 12px; font-weight: bold; text-transform: uppercase;'>Message</p>
+                <p style='margin: 8px 0 0 0; color: #334155; font-size: 15px; line-height: 1.6; white-space: pre-wrap;'>{$message}</p>
+            </div>
+        </div>
+        <div style='background-color: #f1f5f9; padding: 16px; text-align: center; color: #94a3b8; font-size: 12px;'>
+            <p style='margin: 0;'>This email was automatically generated by NurdiansyahLabs CRM System.</p>
+        </div>
+    </div>
+    ";
 
-    $mail->Body = $body;
+    $mail->AltBody = "New Lead: {$name} | Contact: {$contact} | Service: {$service} | Message: {$message}";
 
     $mail->send();
 
