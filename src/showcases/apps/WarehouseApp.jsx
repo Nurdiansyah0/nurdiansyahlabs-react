@@ -5,7 +5,7 @@ const buildRackData = () => Array.from({ length: 96 }).map((_, i) => {
     const isAisle = i % 12 === 5 || i % 12 === 6
     if (isAisle) return { isAisle: true }
     let c = '#d1fae5', s = 'Empty', p = Math.floor(Math.random() * 30)
-    if (i % 7 === 0) { c = '#ef4444'; s = 'Full'; p = 100 }
+    if (i % 7 === 0) { c = '#b91c1c'; s = 'Full'; p = 100 }
     else if (i % 5 === 0) { c = '#fbbf24'; s = 'High'; p = 75 + Math.floor(Math.random() * 20) }
     else if (i % 2 === 0 && i % 4 !== 0) { c = '#34d399'; s = 'Optimal'; p = 40 + Math.floor(Math.random() * 30) }
     return { isAisle: false, color: c, status: s, pct: p, name: `Rack ${String.fromCharCode(65 + Math.floor(i / 12))}-${(i % 12) + 1}` }
@@ -46,12 +46,12 @@ export default function WarehouseApp() {
             <div style={{ width: '220px', background: '#111827', color: '#fff', flexShrink: 0, display: 'flex', flexDirection: 'column' }}>
                 <div style={{ padding: '1.25rem 1rem', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <div style={{ background: '#10b981', width: '28px', height: '28px', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.9rem' }}>📦</div>
+                        <div style={{ background: '#047857', width: '28px', height: '28px', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.9rem' }}>📦</div>
                         <span style={{ fontWeight: 700, fontSize: '0.9rem' }}>WAREHOUSE/OS</span>
                     </div>
                 </div>
                 <div style={{ padding: '1rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                    {PAGES.map(p => <div key={p.k} onClick={() => setPage(p.k)} style={{ padding: '10px 12px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', background: page === p.k ? 'rgba(16,185,129,0.15)' : 'transparent', color: page === p.k ? '#10b981' : '#4b5563', fontSize: '0.85rem', fontWeight: page === p.k ? 600 : 400, transition: 'all 0.15s' }}>{p.i} {p.l}</div>)}
+                    {PAGES.map(p => <div key={p.k} onClick={() => setPage(p.k)} style={{ padding: '10px 12px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', background: page === p.k ? 'rgba(16,185,129,0.15)' : 'transparent', color: page === p.k ? '#047857' : '#4b5563', fontSize: '0.85rem', fontWeight: page === p.k ? 600 : 400, transition: 'all 0.15s' }}>{p.i} {p.l}</div>)}
                 </div>
                 <div style={{ padding: '1rem', borderTop: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <img src={getOptimizedImg("https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d", { w: 100, h: 100 })} style={{ width: '32px', height: '32px', borderRadius: '50%' }} alt="user" />
@@ -64,13 +64,13 @@ export default function WarehouseApp() {
                 <div style={{ padding: '1rem 2rem', background: '#fff', borderBottom: '1px solid #e5e7eb', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <h1 style={{ fontSize: '1.25rem', fontWeight: 800, margin: 0, color: '#111827' }}>{PAGES.find(p => p.k === page)?.l}</h1>
                     <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                        <div style={{ width: '8px', height: '8px', background: '#22c55e', borderRadius: '50%', boxShadow: '0 0 0 3px #dcfce7' }} />
+                        <div style={{ width: '8px', height: '8px', background: '#166534', borderRadius: '50%', boxShadow: '0 0 0 3px #dcfce7' }} />
                         <span style={{ fontSize: '0.8rem', color: '#6b7280' }}>Live</span>
                         <div style={{ position: 'relative', cursor: 'pointer' }} onClick={() => setNotifOpen(!notifOpen)}>
                             <span style={{ fontSize: '1.2rem' }}>🔔</span>
-                            <div style={{ position: 'absolute', top: '-3px', right: '-3px', background: '#ef4444', width: '7px', height: '7px', borderRadius: '50%' }} />
+                            <div style={{ position: 'absolute', top: '-3px', right: '-3px', background: '#b91c1c', width: '7px', height: '7px', borderRadius: '50%' }} />
                             {notifOpen && <div style={{ position: 'absolute', top: '30px', right: 0, background: '#fff', borderRadius: '12px', boxShadow: '0 10px 30px rgba(0,0,0,0.15)', width: '280px', zIndex: 100, overflow: 'hidden' }}>
-                                {[{ t: 'Zone C capacity at 98%', c: '#ef4444' }, { t: '5 urgent putaway pending', c: '#f59e0b' }, { t: 'Outbound batch #442 completed', c: '#10b981' }].map((n, i) => <div key={i} style={{ padding: '12px 16px', borderBottom: '1px solid #f1f5f9', display: 'flex', gap: '10px', alignItems: 'center' }}><div style={{ width: '8px', height: '8px', borderRadius: '50%', flexShrink: 0, background: n.c }} /><div style={{ fontSize: '0.8rem', color: '#111827' }}>{n.t}</div></div>)}
+                                {[{ t: 'Zone C capacity at 98%', c: '#b91c1c' }, { t: '5 urgent putaway pending', c: '#b45309' }, { t: 'Outbound batch #442 completed', c: '#047857' }].map((n, i) => <div key={i} style={{ padding: '12px 16px', borderBottom: '1px solid #f1f5f9', display: 'flex', gap: '10px', alignItems: 'center' }}><div style={{ width: '8px', height: '8px', borderRadius: '50%', flexShrink: 0, background: n.c }} /><div style={{ fontSize: '0.8rem', color: '#111827' }}>{n.t}</div></div>)}
                             </div>}
                         </div>
                     </div>
@@ -80,7 +80,7 @@ export default function WarehouseApp() {
                     <div style={{ flex: 1, overflowY: 'auto', padding: '2rem', background: '#f3f4f6', display: 'grid', gridTemplateColumns: '1fr 350px', gap: '2rem' }}>
                         <div>
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
-                                {[{ l: 'Total Pallets', v: '1,284', t: '+12 today', c: '#3b82f6' }, { l: 'Capacity Used', v: '84%', t: 'Zone C full', c: '#f59e0b' }, { l: 'Pending Putaway', v: `${42 + scans.filter(s => s.type === 'in').length}`, t: 'Needs action', c: '#ef4444' }, { l: 'Orders to Pick', v: `${156 - scans.filter(s => s.type === 'out').length}`, t: 'Cutoff 14:00', c: '#10b981' }].map(m => (
+                                {[{ l: 'Total Pallets', v: '1,284', t: '+12 today', c: '#1d4ed8' }, { l: 'Capacity Used', v: '84%', t: 'Zone C full', c: '#b45309' }, { l: 'Pending Putaway', v: `${42 + scans.filter(s => s.type === 'in').length}`, t: 'Needs action', c: '#b91c1c' }, { l: 'Orders to Pick', v: `${156 - scans.filter(s => s.type === 'out').length}`, t: 'Cutoff 14:00', c: '#047857' }].map(m => (
                                     <div key={m.l} style={{ background: '#fff', borderRadius: '12px', padding: '1.25rem', border: '1px solid #e5e7eb' }}>
                                         <div style={{ fontSize: '0.75rem', color: '#6b7280', fontWeight: 600, marginBottom: '8px' }}>{m.l}</div>
                                         <div style={{ fontSize: '1.8rem', fontWeight: 800, color: '#111827', marginBottom: '4px' }}>{m.v}</div>
@@ -93,7 +93,7 @@ export default function WarehouseApp() {
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
                                     <h2 style={{ fontSize: '1rem', fontWeight: 700, margin: 0, color: '#111827' }}>Live Floor Map</h2>
                                     <div style={{ display: 'flex', gap: '1rem', fontSize: '0.7rem', color: '#6b7280' }}>
-                                        {[['#d1fae5', 'Empty'], ['#34d399', 'Optimal'], ['#fbbf24', 'High'], ['#ef4444', 'Full']].map(([c, l]) => <span key={l} style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><div style={{ width: '8px', height: '8px', background: c, borderRadius: '2px' }} />{l}</span>)}
+                                        {[['#d1fae5', 'Empty'], ['#34d399', 'Optimal'], ['#fbbf24', 'High'], ['#b91c1c', 'Full']].map(([c, l]) => <span key={l} style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><div style={{ width: '8px', height: '8px', background: c, borderRadius: '2px' }} />{l}</span>)}
                                     </div>
                                 </div>
                                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12,1fr)', gap: '5px', background: '#f9fafb', padding: '1rem', borderRadius: '8px', border: '1px solid #e5e7eb' }}>
@@ -110,12 +110,12 @@ export default function WarehouseApp() {
                         <div style={{ background: '#fff', borderRadius: '16px', border: '1px solid #e5e7eb', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
                             <div style={{ padding: '1.25rem', borderBottom: '1px solid #e5e7eb', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <h2 style={{ fontSize: '1rem', fontWeight: 700, margin: 0, color: '#111827' }}>Recent Scans</h2>
-                                <div style={{ width: '8px', height: '8px', background: '#22c55e', borderRadius: '50%', boxShadow: '0 0 0 3px #dcfce7' }} />
+                                <div style={{ width: '8px', height: '8px', background: '#166534', borderRadius: '50%', boxShadow: '0 0 0 3px #dcfce7' }} />
                             </div>
                             <div style={{ flex: 1, overflowY: 'auto', padding: '1rem' }}>
                                 {scans.map((s, i) => (
                                     <div key={`${s.sku}-${i}`} style={{ display: 'flex', gap: '10px', padding: '10px 0', borderBottom: i < scans.length - 1 ? '1px solid #f3f4f6' : 'none', alignItems: 'flex-start' }}>
-                                        <div style={{ width: '30px', height: '30px', borderRadius: '7px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: '0.75rem', background: s.type === 'in' ? '#d1fae5' : s.type === 'out' ? '#fee2e2' : s.type === 'move' ? '#fef3c7' : '#e0e7ff', color: s.type === 'in' ? '#059669' : s.type === 'out' ? '#dc2626' : s.type === 'move' ? '#d97706' : '#4f46e5' }}>
+                                        <div style={{ width: '30px', height: '30px', borderRadius: '7px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: '0.75rem', background: s.type === 'in' ? '#d1fae5' : s.type === 'out' ? '#fee2e2' : s.type === 'move' ? '#fef3c7' : '#e0e7ff', color: s.type === 'in' ? '#065f46' : s.type === 'out' ? '#dc2626' : s.type === 'move' ? '#d97706' : '#3730a3' }}>
                                             {s.type === 'in' ? '↓' : s.type === 'out' ? '↑' : s.type === 'move' ? '⇄' : '✓'}
                                         </div>
                                         <div style={{ flex: 1 }}>
@@ -141,10 +141,10 @@ export default function WarehouseApp() {
                             </div>
                             {ITEMS.map((item, i) => (
                                 <div key={item.sku} style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 2fr 1fr 1fr 1fr', padding: '1rem 1.5rem', borderTop: i > 0 ? '1px solid #f3f4f6' : 'none', alignItems: 'center' }}>
-                                    <div style={{ fontFamily: 'monospace', fontWeight: 700, color: '#10b981', fontSize: '0.8rem' }}>{item.sku}</div>
+                                    <div style={{ fontFamily: 'monospace', fontWeight: 700, color: '#047857', fontSize: '0.8rem' }}>{item.sku}</div>
                                     <div style={{ fontSize: '0.8rem', color: '#6b7280' }}>{item.cat}</div>
                                     <div style={{ fontWeight: 600, color: '#111827', fontSize: '0.9rem' }}>{item.name}</div>
-                                    <div><span style={{ background: item.qty < 10 ? '#fee2e2' : '#d1fae5', color: item.qty < 10 ? '#dc2626' : '#059669', padding: '3px 8px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 700 }}>{item.qty}</span></div>
+                                    <div><span style={{ background: item.qty < 10 ? '#fee2e2' : '#d1fae5', color: item.qty < 10 ? '#dc2626' : '#065f46', padding: '3px 8px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 700 }}>{item.qty}</span></div>
                                     <div style={{ fontSize: '0.8rem', color: '#374151', fontFamily: 'monospace' }}>{item.loc}</div>
                                     <div style={{ fontSize: '0.75rem', color: '#4b5563' }}>{item.last}</div>
                                 </div>
@@ -162,9 +162,9 @@ export default function WarehouseApp() {
                                 {page === 'inbound' ? `${scans.filter(s => s.type === 'in').length} putaway scans recorded today.` : page === 'outbound' ? `${scans.filter(s => s.type === 'out').length} picks completed today.` : 'Generating report...'}
                             </p>
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1rem', marginBottom: '2rem' }}>
-                                {(page === 'reports' ? [['Total Moves', String(scans.length), '#3b82f6'], ['Inbound', String(scans.filter(s => s.type === 'in').length), '#10b981'], ['Outbound', String(scans.filter(s => s.type === 'out').length), '#f59e0b']] :
-                                    page === 'inbound' ? [['Pending', String(42 + scans.filter(s => s.type === 'in').length), '#ef4444'], ['Completed', '127', '#10b981'], ['Today Scans', String(scans.filter(s => s.type === 'in').length), '#3b82f6']] :
-                                        [['Queued', '23', '#f59e0b'], ['Dispatched', '89', '#10b981'], ['Today Picks', String(scans.filter(s => s.type === 'out').length), '#3b82f6']]
+                                {(page === 'reports' ? [['Total Moves', String(scans.length), '#1d4ed8'], ['Inbound', String(scans.filter(s => s.type === 'in').length), '#047857'], ['Outbound', String(scans.filter(s => s.type === 'out').length), '#b45309']] :
+                                    page === 'inbound' ? [['Pending', String(42 + scans.filter(s => s.type === 'in').length), '#b91c1c'], ['Completed', '127', '#047857'], ['Today Scans', String(scans.filter(s => s.type === 'in').length), '#1d4ed8']] :
+                                        [['Queued', '23', '#b45309'], ['Dispatched', '89', '#047857'], ['Today Picks', String(scans.filter(s => s.type === 'out').length), '#1d4ed8']]
                                 ).map(([l, v, c]) => (
                                     <div key={l} style={{ background: '#f9fafb', borderRadius: '10px', padding: '1rem' }}>
                                         <div style={{ fontSize: '1.5rem', fontWeight: 800, color: c }}>{v}</div>

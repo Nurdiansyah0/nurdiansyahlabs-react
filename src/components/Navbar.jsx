@@ -60,7 +60,7 @@ export default function Navbar() {
                             fontWeight: 800, color: '#312e81', letterSpacing: '-0.02em',
                             whiteSpace: 'nowrap',
                         }}>
-                            Nurdiansyah<span style={{ color: '#4f46e5' }}>Labs</span>
+                            Nurdiansyah<span style={{ color: '#3730a3' }}>Labs</span>
                         </span>
                     </Link>
 
@@ -93,7 +93,7 @@ export default function Navbar() {
                                 color: '#374151', fontSize: '0.82rem', fontWeight: 600, cursor: 'pointer',
                                 minHeight: '36px',
                             }}>
-                                <Globe size={14} color="#4f46e5" />
+                                <Globe size={14} color="#3730a3" />
                                 {lang.toUpperCase()}
                                 <ChevronDown size={12} />
                             </button>
@@ -122,13 +122,13 @@ export default function Navbar() {
                         </div>
 
                         <a href="https://wa.me/6282176012461" target="_blank" rel="noreferrer" style={{
-                            background: '#22c55e', color: '#fff', padding: '8px 20px',
+                            background: '#166534', color: '#fff', padding: '8px 20px',
                             borderRadius: '9999px', fontWeight: 600, fontSize: '0.9rem',
                             display: 'inline-flex', alignItems: 'center', gap: '6px',
                             transition: 'background 0.2s', minHeight: 0,
                         }}
                             onMouseEnter={e => e.currentTarget.style.background = '#16a34a'}
-                            onMouseLeave={e => e.currentTarget.style.background = '#22c55e'}>
+                            onMouseLeave={e => e.currentTarget.style.background = '#166534'}>
                             <MessageCircle size={18} /> WhatsApp
                         </a>
                     </div>
@@ -214,7 +214,7 @@ export default function Navbar() {
                         target="_blank" rel="noreferrer"
                         style={{
                             display: 'flex', alignItems: 'center', justifyContent: 'center',
-                            gap: '8px', background: '#22c55e', color: '#fff',
+                            gap: '8px', background: '#166534', color: '#fff',
                             padding: '12px 20px', borderRadius: '9999px', fontWeight: 600,
                             fontSize: '1rem', textAlign: 'center', minHeight: '44px',
                         }}>

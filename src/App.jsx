@@ -33,6 +33,7 @@ export default function App() {
                 <PageTracker />
                 <TerminalEasterEgg />
                 <Suspense fallback={<div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><img src={getOptimizedImg("/assets/logo.svg", { w: 100 })} width="50" alt="Loading..." style={{ animation: 'pulse 1.5s infinite' }} /></div>}>
+                    <main id="main-content">
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/showcase/landing-page/:projectId" element={<LandingPageShowcase />} />
@@ -48,6 +49,7 @@ export default function App() {
                         <Route path="/services/:slug" element={<ServicePage />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>
+                    </main>
                 </Suspense>
             </LazyMotion>
             </ErrorBoundary>

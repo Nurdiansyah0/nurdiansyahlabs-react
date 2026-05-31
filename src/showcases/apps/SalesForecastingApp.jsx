@@ -27,7 +27,7 @@ export default function SalesForecastingApp() {
             </div>
             <div style={{ padding: '2rem', maxWidth: '1100px', margin: '0 auto' }}>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
-                    {[['Model Akurasi', accuracy[model], '🎯', '#7c3aed'], ['RMSE', '4.82', '📉', '#2563eb'], ['Tren', 'Naik +18%', '📈', '#16a34a'], ['Horizon Forecast', `${period} bulan`, '⏳', '#f59e0b']].map(([l, v, i, c]) => (
+                    {[['Model Akurasi', accuracy[model], '🎯', '#5b21b6'], ['RMSE', '4.82', '📉', '#2563eb'], ['Tren', 'Naik +18%', '📈', '#16a34a'], ['Horizon Forecast', `${period} bulan`, '⏳', '#b45309']].map(([l, v, i, c]) => (
                         <div key={l} style={{ background: '#fff', borderRadius: '14px', padding: '1.5rem', border: '1px solid #e5e7eb', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
                             <div style={{ fontSize: '1.5rem', marginBottom: '8px' }}>{i}</div>
                             <div style={{ fontSize: '1.5rem', fontWeight: 800, color: c, marginBottom: '4px' }}>{v}</div>
@@ -40,8 +40,8 @@ export default function SalesForecastingApp() {
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
                         <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#1a1a2e', margin: 0 }}>Forecast Chart — Model: {model}</h2>
                         <div style={{ display: 'flex', gap: '1.5rem', fontSize: '0.78rem' }}>
-                            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><div style={{ width: '20px', height: '3px', background: '#6366f1', borderRadius: '2px' }} /> Aktual</span>
-                            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><div style={{ width: '20px', height: '3px', background: '#f59e0b', borderRadius: '2px', borderTop: '2px dashed #f59e0b' }} /> Forecast</span>
+                            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><div style={{ width: '20px', height: '3px', background: '#4338ca', borderRadius: '2px' }} /> Aktual</span>
+                            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><div style={{ width: '20px', height: '3px', background: '#b45309', borderRadius: '2px', borderTop: '2px dashed #b45309' }} /> Forecast</span>
                         </div>
                     </div>
                     <div style={{ display: 'flex', gap: '6px', alignItems: 'flex-end', height: '200px', paddingBottom: '0.5rem', position: 'relative' }}>
@@ -51,14 +51,14 @@ export default function SalesForecastingApp() {
                         </div>
                         {ACTUAL.map((v, i) => (
                             <div key={`a${i}`} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
-                                <div style={{ height: `${(v / maxVal) * 180}px`, width: '100%', background: '#6366f1', borderRadius: '4px 4px 0 0', transition: 'height 0.4s', minHeight: '4px', position: 'relative' }} title={`${forecastMonths[i]}: ${v}K`} />
+                                <div style={{ height: `${(v / maxVal) * 180}px`, width: '100%', background: '#4338ca', borderRadius: '4px 4px 0 0', transition: 'height 0.4s', minHeight: '4px', position: 'relative' }} title={`${forecastMonths[i]}: ${v}K`} />
                                 <div style={{ fontSize: '0.55rem', color: '#475569', transform: 'rotate(-30deg)', whiteSpace: 'nowrap' }}>{MONTHS[i]}</div>
                             </div>
                         ))}
                         {FORECAST.slice(10).map((v, i) => (
                             v && <div key={`f${i}`} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
-                                <div style={{ height: `${(v / maxVal) * 180}px`, width: '100%', background: '#fef3c7', border: '2px dashed #f59e0b', borderRadius: '4px 4px 0 0', transition: 'height 0.4s', minHeight: '4px' }} title={`Forecast: ${v}K`} />
-                                <div style={{ fontSize: '0.55rem', color: '#f59e0b', transform: 'rotate(-30deg)', whiteSpace: 'nowrap' }}>{['Nov', 'Des', 'Jan'][i]}</div>
+                                <div style={{ height: `${(v / maxVal) * 180}px`, width: '100%', background: '#fef3c7', border: '2px dashed #b45309', borderRadius: '4px 4px 0 0', transition: 'height 0.4s', minHeight: '4px' }} title={`Forecast: ${v}K`} />
+                                <div style={{ fontSize: '0.55rem', color: '#b45309', transform: 'rotate(-30deg)', whiteSpace: 'nowrap' }}>{['Nov', 'Des', 'Jan'][i]}</div>
                             </div>
                         ))}
                     </div>
@@ -67,11 +67,11 @@ export default function SalesForecastingApp() {
                     <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #e5e7eb' }}>
                         <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#1a1a2e', marginBottom: '1rem' }}>Model Comparison</h2>
                         {Object.entries(accuracy).map(([m, a]) => (
-                            <div key={m} onClick={() => setModel(m)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 12px', borderRadius: '8px', marginBottom: '6px', background: model === m ? '#f5f3ff' : '#f8fafc', border: `1px solid ${model === m ? '#7c3aed' : '#e5e7eb'}`, cursor: 'pointer', transition: 'all 0.15s' }}>
-                                <span style={{ fontWeight: model === m ? 700 : 500, color: model === m ? '#7c3aed' : '#374151', fontSize: '0.9rem' }}>{m}</span>
+                            <div key={m} onClick={() => setModel(m)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 12px', borderRadius: '8px', marginBottom: '6px', background: model === m ? '#f5f3ff' : '#f8fafc', border: `1px solid ${model === m ? '#5b21b6' : '#e5e7eb'}`, cursor: 'pointer', transition: 'all 0.15s' }}>
+                                <span style={{ fontWeight: model === m ? 700 : 500, color: model === m ? '#5b21b6' : '#374151', fontSize: '0.9rem' }}>{m}</span>
                                 <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                                    <div style={{ width: '80px', height: '8px', background: '#f1f5f9', borderRadius: '4px', overflow: 'hidden' }}><div style={{ height: '100%', background: model === m ? '#7c3aed' : '#475569', borderRadius: '4px', width: a }} /></div>
-                                    <span style={{ fontWeight: 700, color: model === m ? '#7c3aed' : '#475569', fontSize: '0.85rem' }}>{a}</span>
+                                    <div style={{ width: '80px', height: '8px', background: '#f1f5f9', borderRadius: '4px', overflow: 'hidden' }}><div style={{ height: '100%', background: model === m ? '#5b21b6' : '#475569', borderRadius: '4px', width: a }} /></div>
+                                    <span style={{ fontWeight: 700, color: model === m ? '#5b21b6' : '#475569', fontSize: '0.85rem' }}>{a}</span>
                                 </div>
                             </div>
                         ))}
@@ -83,7 +83,7 @@ export default function SalesForecastingApp() {
                             const proj = Math.round(base * (1 + 0.06 * (i + 1)))
                             return <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid #f1f5f9', fontSize: '0.85rem' }}>
                                 <span style={{ color: '#475569' }}>{MONTHS[(11 + i + 1) % 12]} {i < 1 ? '2025' : '2025'}</span>
-                                <span style={{ fontWeight: 700, color: '#7c3aed' }}>{proj}K unit</span>
+                                <span style={{ fontWeight: 700, color: '#5b21b6' }}>{proj}K unit</span>
                             </div>
                         })}
                         {period > 6 && <div style={{ textAlign: 'center', color: '#475569', fontSize: '0.8rem', padding: '8px 0' }}>+{period - 6} bulan lagi...</div>}

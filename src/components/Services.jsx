@@ -8,8 +8,8 @@ import PortfolioModal from './PortfolioModal'
 
 const services = [
     {
-        key: 'A', icon: Layers, iconBg: '#dbeafe', iconColor: '#1d4ed8', accentColor: '#1d4ed8',
-        badgeBg: '#eff6ff', badgeColor: '#1d4ed8', priceIDR: 1750000, priceNote: '',
+        key: 'A', icon: Layers, iconBg: '#dbeafe', iconColor: '#1e3a8a', accentColor: '#1e3a8a',
+        badgeBg: '#eff6ff', badgeColor: '#1e3a8a', priceIDR: 1750000, priceNote: '',
         tTitle: 'svc.a.title', tTagline: 'svc.a.tagline',
         tFeatures: ['svc.a.f1', 'svc.a.f2', 'svc.a.f3', 'svc.a.f4'], tIdeal: 'svc.a.ideal',
     },
@@ -20,14 +20,14 @@ const services = [
         tFeatures: ['svc.b.f1', 'svc.b.f2', 'svc.b.f3', 'svc.b.f4'], tIdeal: 'svc.b.ideal',
     },
     {
-        key: 'C', icon: PieChart, iconBg: '#d1fae5', iconColor: '#059669', accentColor: '#059669',
-        badgeBg: '#ecfdf5', badgeColor: '#059669', priceIDR: 3000000, priceNote: 'svc.perMonth',
+        key: 'C', icon: PieChart, iconBg: '#d1fae5', iconColor: '#065f46', accentColor: '#065f46',
+        badgeBg: '#ecfdf5', badgeColor: '#065f46', priceIDR: 3000000, priceNote: 'svc.perMonth',
         tTitle: 'svc.c.title', tTagline: 'svc.c.tagline',
         tFeatures: ['svc.c.f1', 'svc.c.f2', 'svc.c.f3', 'svc.c.f4'], tIdeal: 'svc.c.ideal',
     },
     {
-        key: 'D', icon: Brain, iconBg: '#ede9fe', iconColor: '#7c3aed', accentColor: '#7c3aed',
-        badgeBg: '#f5f3ff', badgeColor: '#7c3aed', priceIDR: 4500000, priceNote: 'svc.perMonth',
+        key: 'D', icon: Brain, iconBg: '#ede9fe', iconColor: '#5b21b6', accentColor: '#5b21b6',
+        badgeBg: '#f5f3ff', badgeColor: '#5b21b6', priceIDR: 4500000, priceNote: 'svc.perMonth',
         tTitle: 'svc.d.title', tTagline: 'svc.d.tagline',
         tFeatures: ['svc.d.f1', 'svc.d.f2', 'svc.d.f3', 'svc.d.f4'], tIdeal: 'svc.d.ideal',
     },
@@ -72,7 +72,7 @@ function ServiceCard({ service, onClick, index, t, formatCurrency, isMobile }) {
             <ul style={{ listStyle: 'none', flexGrow: 1, display: 'flex', flexDirection: 'column', gap: '6px', marginBottom: '0.85rem' }}>
                 {service.tFeatures.map(fKey => (
                     <li key={fKey} style={{ display: 'flex', gap: '8px', fontSize: '0.82rem', color: '#374151', alignItems: 'flex-start' }}>
-                        <CheckCircle size={16} style={{ color: '#22c55e', marginTop: '2px', flexShrink: 0 }} />
+                        <CheckCircle size={16} style={{ color: '#166534', marginTop: '2px', flexShrink: 0 }} />
                         {t(fKey)}
                     </li>
                 ))}
@@ -105,7 +105,7 @@ export default function Services() {
                         {t('svc.title')}
                     </h2>
                     <p style={{ color: '#6b7280', fontSize: isMobile ? '0.95rem' : '1.05rem', marginBottom: '0.5rem' }}>{t('svc.subtitle')}</p>
-                    <p style={{ color: '#4f46e5', fontSize: '0.82rem', fontWeight: 500, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}>
+                    <p style={{ color: '#3730a3', fontSize: '0.82rem', fontWeight: 500, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}>
                         <MousePointerClick size={20} />
                         {t('svc.hint')}
                     </p>

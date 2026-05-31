@@ -7,10 +7,10 @@ const MONTHLY_PATIENTS = {
 }
 const BEDS = { total: 120, occupied: 98, available: 22, emergency: 6 }
 const CONDITIONS = [
-    { name: 'Hipertensi', patients: 312, pct: 18, color: '#ef4444' },
-    { name: 'Diabetes', patients: 245, pct: 14, color: '#f59e0b' },
-    { name: 'ISPA', patients: 198, pct: 11, color: '#3b82f6' },
-    { name: 'Jantung', patients: 167, pct: 9, color: '#8b5cf6' },
+    { name: 'Hipertensi', patients: 312, pct: 18, color: '#b91c1c' },
+    { name: 'Diabetes', patients: 245, pct: 14, color: '#b45309' },
+    { name: 'ISPA', patients: 198, pct: 11, color: '#1d4ed8' },
+    { name: 'Jantung', patients: 167, pct: 9, color: '#6d28d9' },
     { name: 'Lainnya', patients: 831, pct: 48, color: '#e2e8f0' },
 ]
 export default function ClinicAnalyticsApp() {
@@ -22,7 +22,7 @@ export default function ClinicAnalyticsApp() {
     return (
         <div style={{ minHeight: '100vh', background: '#f0f7ff', fontFamily: '"Inter",sans-serif' }}>
 
-            <div style={{ background: 'linear-gradient(135deg,#1e3a8a,#1d4ed8)', padding: '1.5rem 2rem', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ background: 'linear-gradient(135deg,#1e3a8a,#1e3a8a)', padding: '1.5rem 2rem', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                     <div style={{ fontSize: '0.7rem', color: '#93c5fd', letterSpacing: '0.15em', marginBottom: '4px' }}>CLINIC HEALTH ANALYTICS</div>
                     <h1 style={{ fontSize: '1.5rem', fontWeight: 800, margin: 0 }}>Dashboard Analitik RS Sejahtera</h1>
@@ -36,7 +36,7 @@ export default function ClinicAnalyticsApp() {
             <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
                 {/* KPIs */}
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
-                    {[{ l: 'Total Pasien', v: String(d.igd + d.rawat + d.poli + d.radio + d.lab), i: '👥', c: '#2563eb' }, { l: 'Bed Terisi', v: `${BEDS.occupied}/${BEDS.total}`, i: '🛏', c: '#dc2626' }, { l: 'BOR', v: `${Math.round((BEDS.occupied / BEDS.total) * 100)}%`, i: '📊', c: '#f59e0b' }, { l: 'Bed Kosong', v: String(BEDS.available), i: '✅', c: '#16a34a' }].map(m => (
+                    {[{ l: 'Total Pasien', v: String(d.igd + d.rawat + d.poli + d.radio + d.lab), i: '👥', c: '#2563eb' }, { l: 'Bed Terisi', v: `${BEDS.occupied}/${BEDS.total}`, i: '🛏', c: '#dc2626' }, { l: 'BOR', v: `${Math.round((BEDS.occupied / BEDS.total) * 100)}%`, i: '📊', c: '#b45309' }, { l: 'Bed Kosong', v: String(BEDS.available), i: '✅', c: '#16a34a' }].map(m => (
                         <div key={m.l} style={{ background: '#fff', borderRadius: '14px', padding: '1.5rem', border: '1px solid #bfdbfe' }}>
                             <div style={{ fontSize: '1.5rem', marginBottom: '8px' }}>{m.i}</div>
                             <div style={{ fontSize: '1.8rem', fontWeight: 800, color: m.c, marginBottom: '4px' }}>{m.v}</div>
@@ -53,7 +53,7 @@ export default function ClinicAnalyticsApp() {
                                 {DEPTS.map(d => <option key={d}>{d}</option>)}
                             </select>
                         </div>
-                        {[['IGD', d.igd, '#ef4444'], ['Rawat Inap', d.rawat, '#8b5cf6'], ['Poliklinik', d.poli, '#2563eb'], ['Radiologi', d.radio, '#f59e0b'], ['Laboratorium', d.lab, '#16a34a']].map(([name, val, color]) => (
+                        {[['IGD', d.igd, '#b91c1c'], ['Rawat Inap', d.rawat, '#6d28d9'], ['Poliklinik', d.poli, '#2563eb'], ['Radiologi', d.radio, '#b45309'], ['Laboratorium', d.lab, '#16a34a']].map(([name, val, color]) => (
                             <div key={name} style={{ marginBottom: '1rem', opacity: dept === 'Semua' || dept === name ? 1 : 0.3 }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px', fontSize: '0.85rem' }}>
                                     <span style={{ color: '#374151', fontWeight: 500 }}>{name}</span>
@@ -86,7 +86,7 @@ export default function ClinicAnalyticsApp() {
                     <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#1e3a8a', marginBottom: '1.5rem' }}>Status Bed Real-Time</h2>
                     <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                         {Array.from({ length: BEDS.total }).map((_, i) => (
-                            <div key={i} style={{ width: '28px', height: '28px', borderRadius: '4px', background: i < BEDS.occupied ? (i < BEDS.emergency ? '#fca5a5' : '#93c5fd') : '#d1fae5', border: '1px solid', borderColor: i < BEDS.occupied ? (i < BEDS.emergency ? '#ef4444' : '#3b82f6') : '#86efac', cursor: 'default' }} title={i < BEDS.emergency ? 'Emergency' : i < BEDS.occupied ? 'Terisi' : 'Kosong'} />
+                            <div key={i} style={{ width: '28px', height: '28px', borderRadius: '4px', background: i < BEDS.occupied ? (i < BEDS.emergency ? '#fca5a5' : '#93c5fd') : '#d1fae5', border: '1px solid', borderColor: i < BEDS.occupied ? (i < BEDS.emergency ? '#b91c1c' : '#1d4ed8') : '#86efac', cursor: 'default' }} title={i < BEDS.emergency ? 'Emergency' : i < BEDS.occupied ? 'Terisi' : 'Kosong'} />
                         ))}
                     </div>
                     <div style={{ display: 'flex', gap: '1.5rem', marginTop: '1rem', fontSize: '0.78rem' }}>

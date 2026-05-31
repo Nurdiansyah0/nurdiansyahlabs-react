@@ -38,13 +38,13 @@ export default function CTA() {
                                 target="_blank" rel="noreferrer"
                                 style={{
                                     display: 'inline-flex', alignItems: 'center', gap: '10px',
-                                    background: '#22c55e', color: '#fff',
+                                    background: '#166534', color: '#fff',
                                     padding: '14px 28px', borderRadius: '9999px', fontWeight: 700,
                                     boxShadow: '0 8px 32px rgba(34,197,94,0.4)',
                                     transition: 'all 0.2s', textDecoration: 'none'
                                 }}
                                 onMouseEnter={e => { e.currentTarget.style.background = '#16a34a'; e.currentTarget.style.transform = 'scale(1.04)' }}
-                                onMouseLeave={e => { e.currentTarget.style.background = '#22c55e'; e.currentTarget.style.transform = 'scale(1)' }}>
+                                onMouseLeave={e => { e.currentTarget.style.background = '#166534'; e.currentTarget.style.transform = 'scale(1)' }}>
                                 <MessageCircle size={20} />
                                 {t('cta.btn')}
                             </a>
@@ -65,7 +65,7 @@ export default function CTA() {
                         </div>
 
                         <div style={{ color: '#818cf8', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <div style={{ width: '8px', height: '8px', background: '#22c55e', borderRadius: '50%', boxShadow: '0 0 10px #22c55e' }} />
+                            <div style={{ width: '8px', height: '8px', background: '#166534', borderRadius: '50%', boxShadow: '0 0 10px #166534' }} />
                             {t('cta.info')}
                         </div>
                     </m.div>

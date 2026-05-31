@@ -11,7 +11,7 @@ function generateGenericData(slug) {
     return {
         title: `${keyword.charAt(0).toUpperCase() + keyword.slice(1)} – NurdiansyahLabs`,
         description: `Layanan ${keyword} profesional di Indonesia. Hubungi NurdiansyahLabs untuk konsultasi gratis.`,
-        service: 'A', serviceLabel: 'NurdiansyahLabs', accent: '#4f46e5', accentLight: '#eef2ff',
+        service: 'A', serviceLabel: 'NurdiansyahLabs', accent: '#3730a3', accentLight: '#eef2ff',
         faqs: [], content: `Kami menyediakan layanan **${keyword}** profesional untuk bisnis Anda di Indonesia.`,
     }
 }
@@ -163,7 +163,7 @@ export default function BlogPage() {
         return (
             <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f8fafc' }}>
                 <m.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}>
-                    <Loader2 size={40} color="#4f46e5" />
+                    <Loader2 size={40} color="#3730a3" />
                 </m.div>
             </div>
         )
@@ -182,7 +182,7 @@ export default function BlogPage() {
             <div style={{ minHeight: '100vh', background: '#f8fafc', fontFamily: "'Inter', sans-serif" }}>
                 {/* Top bar */}
                 <div style={{ background: '#fff', borderBottom: '1px solid #e2e8f0', padding: '0.75rem 1.5rem', display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <Link to="/" style={{ color: '#4f46e5', fontWeight: 700, fontSize: '0.85rem', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Link to="/" style={{ color: '#3730a3', fontWeight: 700, fontSize: '0.85rem', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}>
                         <img src={getOptimizedImg("/assets/logo.svg", { w: 50 })} alt="NurdiansyahLabs" style={{ width: '20px', height: '20px' }} />
                         NurdiansyahLabs
                     </Link>
@@ -224,7 +224,7 @@ export default function BlogPage() {
                             target="_blank" rel="noreferrer"
                             style={{
                                 display: 'inline-flex', alignItems: 'center', gap: '8px',
-                                background: '#22c55e', color: '#fff', padding: '0.7rem 1.5rem',
+                                background: '#166534', color: '#fff', padding: '0.7rem 1.5rem',
                                 borderRadius: '10px', fontWeight: 700, fontSize: '0.9rem', textDecoration: 'none'
                             }}
                         >
@@ -280,7 +280,7 @@ export default function BlogPage() {
                         </div>
                         <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
                             <a href="https://wa.me/6282176012461" target="_blank" rel="noreferrer"
-                                style={{ background: '#22c55e', color: '#fff', padding: '0.65rem 1.4rem', borderRadius: '10px', fontWeight: 700, textDecoration: 'none' }}>
+                                style={{ background: '#166534', color: '#fff', padding: '0.65rem 1.4rem', borderRadius: '10px', fontWeight: 700, textDecoration: 'none' }}>
                                 <MessageCircle size={18} /> WhatsApp
                             </a>
                             <Link to="/" style={{ background: 'rgba(255,255,255,0.15)', color: '#fff', padding: '0.65rem 1.4rem', borderRadius: '10px', fontWeight: 700, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.3)' }}>

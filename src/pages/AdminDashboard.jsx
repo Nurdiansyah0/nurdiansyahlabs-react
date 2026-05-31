@@ -347,7 +347,7 @@ export default function AdminDashboard() {
         return (
             <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f8fafc' }}>
                 <div style={{ background: '#fff', padding: '2.5rem', borderRadius: '16px', boxShadow: '0 10px 25px rgba(0,0,0,0.05)', width: '100%', maxWidth: '400px' }}>
-                    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem', color: '#4f46e5' }}>
+                    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem', color: '#3730a3' }}>
                         <Lock size={48} />
                     </div>
                     <h1 style={{ textAlign: 'center', fontSize: '1.5rem', fontWeight: 800, marginBottom: '2rem', color: '#0f172a' }}>
@@ -382,12 +382,12 @@ export default function AdminDashboard() {
                                     </div>
                                 </div>
                                 <div style={{ textAlign: 'right', marginTop: '0.5rem' }}>
-                                    <span style={{ fontSize: '0.8rem', color: '#4f46e5', cursor: 'pointer', fontWeight: 600 }} onClick={() => { setAuthView('forgot'); setAuthError(''); setAuthMessage('') }}>Forgot Password?</span>
+                                    <span style={{ fontSize: '0.8rem', color: '#3730a3', cursor: 'pointer', fontWeight: 600 }} onClick={() => { setAuthView('forgot'); setAuthError(''); setAuthMessage('') }}>Forgot Password?</span>
                                 </div>
                             </div>
 
-                            {authError && <div style={{ color: '#ef4444', fontSize: '0.85rem' }}>{authError}</div>}
-                            <button aria-label="Action button" type="submit" style={{ background: '#4f46e5', color: '#fff', padding: '0.8rem', borderRadius: '8px', border: 'none', fontWeight: 700, cursor: 'pointer', marginTop: '0.5rem' }}>
+                            {authError && <div style={{ color: '#b91c1c', fontSize: '0.85rem' }}>{authError}</div>}
+                            <button aria-label="Action button" type="submit" style={{ background: '#3730a3', color: '#fff', padding: '0.8rem', borderRadius: '8px', border: 'none', fontWeight: 700, cursor: 'pointer', marginTop: '0.5rem' }}>
                                 Sign In
                             </button>
                         </form>
@@ -405,10 +405,10 @@ export default function AdminDashboard() {
                                 required
                             />
 
-                            {authMessage && <div style={{ color: '#10b981', fontSize: '0.85rem', background: '#d1fae5', padding: '0.5rem', borderRadius: '4px' }}>{authMessage}</div>}
-                            {authError && <div style={{ color: '#ef4444', fontSize: '0.85rem' }}>{authError}</div>}
+                            {authMessage && <div style={{ color: '#047857', fontSize: '0.85rem', background: '#d1fae5', padding: '0.5rem', borderRadius: '4px' }}>{authMessage}</div>}
+                            {authError && <div style={{ color: '#b91c1c', fontSize: '0.85rem' }}>{authError}</div>}
 
-                            <button aria-label="Action button" type="submit" style={{ background: '#4f46e5', color: '#fff', padding: '0.8rem', borderRadius: '8px', border: 'none', fontWeight: 700, cursor: 'pointer', marginTop: '0.5rem' }}>
+                            <button aria-label="Action button" type="submit" style={{ background: '#3730a3', color: '#fff', padding: '0.8rem', borderRadius: '8px', border: 'none', fontWeight: 700, cursor: 'pointer', marginTop: '0.5rem' }}>
                                 Send Reset Link
                             </button>
                             <div style={{ textAlign: 'center', marginTop: '1rem' }}>
@@ -437,10 +437,10 @@ export default function AdminDashboard() {
                                 </div>
                             </div>
 
-                            {authMessage && <div style={{ color: '#10b981', fontSize: '0.85rem', background: '#d1fae5', padding: '0.5rem', borderRadius: '4px' }}>{authMessage}</div>}
-                            {authError && <div style={{ color: '#ef4444', fontSize: '0.85rem' }}>{authError}</div>}
+                            {authMessage && <div style={{ color: '#047857', fontSize: '0.85rem', background: '#d1fae5', padding: '0.5rem', borderRadius: '4px' }}>{authMessage}</div>}
+                            {authError && <div style={{ color: '#b91c1c', fontSize: '0.85rem' }}>{authError}</div>}
 
-                            <button aria-label="Action button" type="submit" style={{ background: '#4f46e5', color: '#fff', padding: '0.8rem', borderRadius: '8px', border: 'none', fontWeight: 700, cursor: 'pointer', marginTop: '0.5rem' }}>
+                            <button aria-label="Action button" type="submit" style={{ background: '#3730a3', color: '#fff', padding: '0.8rem', borderRadius: '8px', border: 'none', fontWeight: 700, cursor: 'pointer', marginTop: '0.5rem' }}>
                                 Save New Password
                             </button>
                         </form>
@@ -456,7 +456,7 @@ export default function AdminDashboard() {
             {/* Topbar */}
             <div style={{ background: '#0f172a', padding: '1rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#fff' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontWeight: 700 }}>
-                    <div style={{ background: '#4f46e5', padding: '6px', borderRadius: '8px' }}>
+                    <div style={{ background: '#3730a3', padding: '6px', borderRadius: '8px' }}>
                         <Lock size={18} color="#fff" />
                     </div>
                     NurdiansyahLabs Admin
@@ -471,25 +471,25 @@ export default function AdminDashboard() {
                 <div style={{ width: '250px', display: 'flex', flexDirection: 'column', gap: '8px', flexShrink: 0 }}>
                     <button aria-label="Action button"
                         onClick={() => { setActiveTab('analytics'); setEditingPost(null); setIsCreating(false) }}
-                        style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '1rem', borderRadius: '12px', border: 'none', background: activeTab === 'analytics' ? '#e0e7ff' : 'transparent', color: activeTab === 'analytics' ? '#4f46e5' : '#475569', fontWeight: 600, cursor: 'pointer', transition: 'all 0.2s', textAlign: 'left' }}
+                        style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '1rem', borderRadius: '12px', border: 'none', background: activeTab === 'analytics' ? '#e0e7ff' : 'transparent', color: activeTab === 'analytics' ? '#3730a3' : '#475569', fontWeight: 600, cursor: 'pointer', transition: 'all 0.2s', textAlign: 'left' }}
                     >
                         <BarChart3 size={20} /> Analytics
                     </button>
                     <button aria-label="Action button"
                         onClick={() => { setActiveTab('posts'); setEditingPost(null); setIsCreating(false) }}
-                        style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '1rem', borderRadius: '12px', border: 'none', background: activeTab === 'posts' ? '#e0e7ff' : 'transparent', color: activeTab === 'posts' ? '#4f46e5' : '#475569', fontWeight: 600, cursor: 'pointer', transition: 'all 0.2s', textAlign: 'left' }}
+                        style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '1rem', borderRadius: '12px', border: 'none', background: activeTab === 'posts' ? '#e0e7ff' : 'transparent', color: activeTab === 'posts' ? '#3730a3' : '#475569', fontWeight: 600, cursor: 'pointer', transition: 'all 0.2s', textAlign: 'left' }}
                     >
                         <FileText size={20} /> Blog Articles
                     </button>
                     <button aria-label="Action button"
                         onClick={() => { setActiveTab('leads'); setEditingPost(null); setIsCreating(false) }}
-                        style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '1rem', borderRadius: '12px', border: 'none', background: activeTab === 'leads' ? '#e0e7ff' : 'transparent', color: activeTab === 'leads' ? '#4f46e5' : '#475569', fontWeight: 600, cursor: 'pointer', transition: 'all 0.2s', textAlign: 'left' }}
+                        style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '1rem', borderRadius: '12px', border: 'none', background: activeTab === 'leads' ? '#e0e7ff' : 'transparent', color: activeTab === 'leads' ? '#3730a3' : '#475569', fontWeight: 600, cursor: 'pointer', transition: 'all 0.2s', textAlign: 'left' }}
                     >
                         <Users size={20} /> Leads Inbox
                     </button>
                     <button aria-label="Action button"
                         onClick={() => { setActiveTab('products'); setEditingPost(null); setIsCreating(false) }}
-                        style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '1rem', borderRadius: '12px', border: 'none', background: activeTab === 'products' ? '#e0e7ff' : 'transparent', color: activeTab === 'products' ? '#4f46e5' : '#475569', fontWeight: 600, cursor: 'pointer', transition: 'all 0.2s', textAlign: 'left' }}
+                        style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '1rem', borderRadius: '12px', border: 'none', background: activeTab === 'products' ? '#e0e7ff' : 'transparent', color: activeTab === 'products' ? '#3730a3' : '#475569', fontWeight: 600, cursor: 'pointer', transition: 'all 0.2s', textAlign: 'left' }}
                     >
                         <BarChart3 size={20} /> Products (CMS)
                     </button>
@@ -499,7 +499,7 @@ export default function AdminDashboard() {
                 <div style={{ flexGrow: 1, background: '#fff', borderRadius: '16px', padding: '2rem', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
                     {loading && !editingPost && (
                         <div style={{ display: 'flex', justifyContent: 'center', padding: '4rem' }}>
-                            <m.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}><Loader2 size={32} color="#4f46e5" /></m.div>
+                            <m.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}><Loader2 size={32} color="#3730a3" /></m.div>
                         </div>
                     )}
 
@@ -537,7 +537,7 @@ export default function AdminDashboard() {
                                                             ...prev,
                                                             images: prev.images.filter((_, i) => i !== idx)
                                                         }))
-                                                    }} style={{ position: 'absolute', top: '-5px', right: '-5px', background: '#ef4444', color: '#fff', border: 'none', borderRadius: '50%', width: '20px', height: '20px', cursor: 'pointer', fontSize: '0.7rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>&times;</button>
+                                                    }} style={{ position: 'absolute', top: '-5px', right: '-5px', background: '#b91c1c', color: '#fff', border: 'none', borderRadius: '50%', width: '20px', height: '20px', cursor: 'pointer', fontSize: '0.7rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>&times;</button>
                                                 </div>
                                             ))}
                                         </div>
@@ -553,7 +553,7 @@ export default function AdminDashboard() {
                                     <textarea aria-label="Text input" required value={editingPost.content} onChange={e => setEditingPost({ ...editingPost, content: e.target.value })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box', minHeight: '300px', fontFamily: 'monospace' }} placeholder="Supports ## Headlines, - Lists, and **Bold** text." />
                                 </div>
                                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                                    <button aria-label="Action button" type="submit" style={{ background: '#22c55e', color: '#fff', padding: '0.8rem 2rem', borderRadius: '8px', border: 'none', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                    <button aria-label="Action button" type="submit" style={{ background: '#166534', color: '#fff', padding: '0.8rem 2rem', borderRadius: '8px', border: 'none', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
                                         <Save size={18} /> Save Article
                                     </button>
                                 </div>
@@ -703,7 +703,7 @@ export default function AdminDashboard() {
                                     </div>
                                 )}
                                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                                    <button aria-label="Action button" type="submit" style={{ background: '#22c55e', color: '#fff', padding: '0.8rem 2rem', borderRadius: '8px', border: 'none', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                    <button aria-label="Action button" type="submit" style={{ background: '#166534', color: '#fff', padding: '0.8rem 2rem', borderRadius: '8px', border: 'none', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
                                         <Save size={18} /> Save Product
                                     </button>
                                 </div>
@@ -718,7 +718,7 @@ export default function AdminDashboard() {
                                 <h2 style={{ margin: 0, color: '#0f172a' }}>Live Articles ({posts.length})</h2>
                                 <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
                                     <div style={{ display: 'flex', gap: '8px' }}>
-                                        <button aria-label="Action button" onClick={() => handleGenerateTrendPost('ID')} disabled={loading} style={{ background: '#059669', color: '#fff', border: 'none', padding: '0.6rem 1rem', borderRadius: '8px', fontWeight: 600, cursor: loading ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', gap: '6px', opacity: loading ? 0.7 : 1 }}>
+                                        <button aria-label="Action button" onClick={() => handleGenerateTrendPost('ID')} disabled={loading} style={{ background: '#065f46', color: '#fff', border: 'none', padding: '0.6rem 1rem', borderRadius: '8px', fontWeight: 600, cursor: loading ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', gap: '6px', opacity: loading ? 0.7 : 1 }}>
                                             <Rss size={16} /> Auto-Gen ID (Indo)
                                         </button>
                                         <button aria-label="Action button" onClick={() => handleGenerateTrendPost('US')} disabled={loading} style={{ background: '#2563eb', color: '#fff', border: 'none', padding: '0.6rem 1rem', borderRadius: '8px', fontWeight: 600, cursor: loading ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', gap: '6px', opacity: loading ? 0.7 : 1 }}>
@@ -728,7 +728,7 @@ export default function AdminDashboard() {
                                             <Rss size={16} /> Auto-Gen JP (Jap)
                                         </button>
                                     </div>
-                                    <button aria-label="Action button" onClick={() => { setIsCreating(true); setEditingPost({ slug: '', title: '', description: '', content: '', serviceLabel: 'Update', accent: '#4f46e5', accentLight: '#eef2ff', images: [] }) }} style={{ background: '#4f46e5', color: '#fff', border: 'none', padding: '0.6rem 1rem', borderRadius: '8px', fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                    <button aria-label="Action button" onClick={() => { setIsCreating(true); setEditingPost({ slug: '', title: '', description: '', content: '', serviceLabel: 'Update', accent: '#3730a3', accentLight: '#eef2ff', images: [] }) }} style={{ background: '#3730a3', color: '#fff', border: 'none', padding: '0.6rem 1rem', borderRadius: '8px', fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
                                         <Plus size={16} /> New Article
                                     </button>
                                 </div>
@@ -741,8 +741,8 @@ export default function AdminDashboard() {
                                             <div style={{ fontSize: '0.8rem', color: '#475569' }}>/blog/{post.slug}</div>
                                         </div>
                                         <div style={{ display: 'flex', gap: '8px' }}>
-                                            <button aria-label="Action button" onClick={() => { setIsCreating(false); setEditingPost(post) }} style={{ background: '#f1f5f9', color: '#3b82f6', border: 'none', padding: '8px', borderRadius: '8px', cursor: 'pointer' }}><Edit2 size={16} /></button>
-                                            <button aria-label="Action button" onClick={() => handleDeletePost(post.slug)} style={{ background: '#fef2f2', color: '#ef4444', border: 'none', padding: '8px', borderRadius: '8px', cursor: 'pointer' }}><Trash2 size={16} /></button>
+                                            <button aria-label="Action button" onClick={() => { setIsCreating(false); setEditingPost(post) }} style={{ background: '#f1f5f9', color: '#1d4ed8', border: 'none', padding: '8px', borderRadius: '8px', cursor: 'pointer' }}><Edit2 size={16} /></button>
+                                            <button aria-label="Action button" onClick={() => handleDeletePost(post.slug)} style={{ background: '#fef2f2', color: '#b91c1c', border: 'none', padding: '8px', borderRadius: '8px', cursor: 'pointer' }}><Trash2 size={16} /></button>
                                         </div>
                                     </div>
                                 ))}
@@ -764,7 +764,7 @@ export default function AdminDashboard() {
                                         <option value="warung-makan">🍜 Alyuna Siomay</option>
                                     </select>
 
-                                    <button aria-label="Action button" onClick={() => { setIsCreating(true); setEditingPost({ app_id: productApp, name: '', price: '', description: '', image_url: '', category: '', extras: {} }) }} style={{ background: '#4f46e5', color: '#fff', border: 'none', padding: '0.6rem 1rem', borderRadius: '8px', fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                    <button aria-label="Action button" onClick={() => { setIsCreating(true); setEditingPost({ app_id: productApp, name: '', price: '', description: '', image_url: '', category: '', extras: {} }) }} style={{ background: '#3730a3', color: '#fff', border: 'none', padding: '0.6rem 1rem', borderRadius: '8px', fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
                                         <Plus size={16} /> Add Product
                                     </button>
                                 </div>
@@ -802,7 +802,7 @@ export default function AdminDashboard() {
                                             <div style={{ padding: '1.25rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
                                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
                                                     <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#0f172a', fontWeight: 700, flex: 1 }}>{product.name}</h3>
-                                                    <span style={{ background: '#e0e7ff', color: '#4f46e5', padding: '2px 8px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 700 }}>{product.category || 'General'}</span>
+                                                    <span style={{ background: '#e0e7ff', color: '#3730a3', padding: '2px 8px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 700 }}>{product.category || 'General'}</span>
                                                 </div>
                                                 <div style={{ fontSize: '1.2rem', fontWeight: 800, color: '#2563eb', marginBottom: '1rem' }}>
                                                     Rp {Number(product.price).toLocaleString('id-ID')}
@@ -811,8 +811,8 @@ export default function AdminDashboard() {
                                                     {product.description?.substring(0, 80)}...
                                                 </p>
                                                 <div style={{ display: 'flex', gap: '8px', borderTop: '1px solid #f1f5f9', paddingTop: '1rem' }}>
-                                                    <button aria-label="Action button" onClick={() => { setIsCreating(false); setEditingPost(product) }} style={{ flex: 1, background: '#f1f5f9', color: '#3b82f6', border: 'none', padding: '8px', borderRadius: '6px', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '6px', fontWeight: 600 }}><Edit2 size={16} /> Edit</button>
-                                                    <button aria-label="Action button" onClick={() => handleDeleteProduct(product.id)} style={{ flex: 1, background: '#fef2f2', color: '#ef4444', border: 'none', padding: '8px', borderRadius: '6px', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '6px', fontWeight: 600 }}><Trash2 size={16} /> Delete</button>
+                                                    <button aria-label="Action button" onClick={() => { setIsCreating(false); setEditingPost(product) }} style={{ flex: 1, background: '#f1f5f9', color: '#1d4ed8', border: 'none', padding: '8px', borderRadius: '6px', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '6px', fontWeight: 600 }}><Edit2 size={16} /> Edit</button>
+                                                    <button aria-label="Action button" onClick={() => handleDeleteProduct(product.id)} style={{ flex: 1, background: '#fef2f2', color: '#b91c1c', border: 'none', padding: '8px', borderRadius: '6px', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '6px', fontWeight: 600 }}><Trash2 size={16} /> Delete</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -843,11 +843,11 @@ export default function AdminDashboard() {
                                             <tr key={i} style={{ borderBottom: '1px solid #e2e8f0' }}>
                                                 <td style={{ padding: '1rem', color: '#475569', whiteSpace: 'nowrap' }}>{new Date(lead.timestamp).toLocaleDateString()}</td>
                                                 <td style={{ padding: '1rem', fontWeight: 600, color: '#0f172a' }}>{lead.name}</td>
-                                                <td style={{ padding: '1rem', color: '#4f46e5' }}>{lead.contact}</td>
+                                                <td style={{ padding: '1rem', color: '#3730a3' }}>{lead.contact}</td>
                                                 <td style={{ padding: '1rem' }}><span style={{ background: '#f1f5f9', padding: '4px 8px', borderRadius: '4px', fontSize: '0.8rem', color: '#475569' }}>{lead.service}</span></td>
                                                 <td style={{ padding: '1rem', color: '#475569', minWidth: '300px' }}>{lead.message}</td>
                                                 <td style={{ padding: '1rem', textAlign: 'right' }}>
-                                                    <button aria-label="Action button" onClick={() => handleDeleteLead(lead.id)} style={{ background: '#fef2f2', color: '#ef4444', border: 'none', padding: '8px', borderRadius: '8px', cursor: 'pointer' }} title="Delete Lead">
+                                                    <button aria-label="Action button" onClick={() => handleDeleteLead(lead.id)} style={{ background: '#fef2f2', color: '#b91c1c', border: 'none', padding: '8px', borderRadius: '8px', cursor: 'pointer' }} title="Delete Lead">
                                                         <Trash2 size={16} />
                                                     </button>
                                                 </td>
@@ -871,11 +871,11 @@ export default function AdminDashboard() {
                                 </div>
                                 <div style={{ background: '#f8fafc', padding: '1.5rem', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
                                     <div style={{ fontSize: '0.85rem', color: '#475569', fontWeight: 600, textTransform: 'uppercase', marginBottom: '8px' }}>Unique Visitors</div>
-                                    <div style={{ fontSize: '2rem', fontWeight: 800, color: '#4f46e5' }}>{analyticsData.kpis.uniqueVisitors}</div>
+                                    <div style={{ fontSize: '2rem', fontWeight: 800, color: '#3730a3' }}>{analyticsData.kpis.uniqueVisitors}</div>
                                 </div>
                                 <div style={{ background: '#f8fafc', padding: '1.5rem', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
                                     <div style={{ fontSize: '0.85rem', color: '#475569', fontWeight: 600, textTransform: 'uppercase', marginBottom: '8px' }}>Events Logged</div>
-                                    <div style={{ fontSize: '2rem', fontWeight: 800, color: '#22c55e' }}>{analyticsData.kpis.totalEventsLogged}</div>
+                                    <div style={{ fontSize: '2rem', fontWeight: 800, color: '#166534' }}>{analyticsData.kpis.totalEventsLogged}</div>
                                 </div>
                             </div>
 
@@ -890,15 +890,15 @@ export default function AdminDashboard() {
                                             <AreaChart data={analyticsData.timelineChart}>
                                                 <defs>
                                                     <linearGradient id="colorViews" x1="0" y1="0" x2="0" y2="1">
-                                                        <stop offset="5%" stopColor="#4f46e5" stopOpacity={0.3} />
-                                                        <stop offset="95%" stopColor="#4f46e5" stopOpacity={0} />
+                                                        <stop offset="5%" stopColor="#3730a3" stopOpacity={0.3} />
+                                                        <stop offset="95%" stopColor="#3730a3" stopOpacity={0} />
                                                     </linearGradient>
                                                 </defs>
                                                 <XAxis dataKey="date" stroke="#475569" fontSize={12} tickLine={false} axisLine={false} />
                                                 <YAxis stroke="#475569" fontSize={12} tickLine={false} axisLine={false} allowDecimals={false} />
                                                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
                                                 <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
-                                                <Area type="monotone" dataKey="views" stroke="#4f46e5" strokeWidth={3} fillOpacity={1} fill="url(#colorViews)" />
+                                                <Area type="monotone" dataKey="views" stroke="#3730a3" strokeWidth={3} fillOpacity={1} fill="url(#colorViews)" />
                                             </AreaChart>
                                         </ResponsiveContainer>
                                     </div>
@@ -914,7 +914,7 @@ export default function AdminDashboard() {
                                                     <XAxis type="number" hide />
                                                     <YAxis dataKey="name" type="category" stroke="#475569" fontSize={11} tickLine={false} axisLine={false} />
                                                     <Tooltip cursor={{ fill: '#f1f5f9' }} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
-                                                    <Bar dataKey="views" fill="#22c55e" radius={[0, 4, 4, 0]} barSize={24} />
+                                                    <Bar dataKey="views" fill="#166534" radius={[0, 4, 4, 0]} barSize={24} />
                                                 </BarChart>
                                             </ResponsiveContainer>
                                         </div>
@@ -929,7 +929,7 @@ export default function AdminDashboard() {
                                                     <XAxis type="number" hide />
                                                     <YAxis dataKey="name" type="category" stroke="#475569" fontSize={11} tickLine={false} axisLine={false} />
                                                     <Tooltip cursor={{ fill: '#f1f5f9' }} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} />
-                                                    <Bar dataKey="clicks" fill="#f59e0b" radius={[0, 4, 4, 0]} barSize={24} />
+                                                    <Bar dataKey="clicks" fill="#b45309" radius={[0, 4, 4, 0]} barSize={24} />
                                                 </BarChart>
                                             </ResponsiveContainer>
                                         </div>
