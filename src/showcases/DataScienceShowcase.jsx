@@ -14,7 +14,7 @@ const appMapping = {
     'sales-forecasting': <SalesForecastingApp />,
     'customer-clustering': <CustomerClusteringApp />,
     'churn-prediction': <ChurnPredictionApp />,
-    'recommendation': <RecommendationApp />
+    'smart-vision': <RecommendationApp />
 }
 
 export default function DataScienceShowcase() {
