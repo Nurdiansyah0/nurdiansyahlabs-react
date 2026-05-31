@@ -3,14 +3,14 @@ import { m, AnimatePresence } from 'framer-motion'
 import { useLanguage } from '../i18n/LanguageContext'
 
 const SERVICE_LABELS = {
-    landing_page: { label: 'Landing Page', color: '#1d4ed8', bg: '#dbeafe', icon: 'fa-layer-group' },
+    landing_page: { label: 'Landing Page', color: '#1e3a8a', bg: '#dbeafe', icon: 'fa-layer-group' },
     fullstack: { label: 'Fullstack Dev', color: '#4338ca', bg: '#e0e7ff', icon: 'fa-code' },
-    data_analyst: { label: 'Data Analyst', color: '#059669', bg: '#d1fae5', icon: 'fa-chart-pie' },
-    data_science: { label: 'Data Scientist', color: '#7c3aed', bg: '#ede9fe', icon: 'fa-brain' },
+    data_analyst: { label: 'Data Analyst', color: '#065f46', bg: '#d1fae5', icon: 'fa-chart-pie' },
+    data_science: { label: 'Data Scientist', color: '#5b21b6', bg: '#ede9fe', icon: 'fa-brain' },
 }
 
 function ScoreBar({ score }) {
-    const color = score >= 70 ? '#22c55e' : score >= 40 ? '#f59e0b' : '#475569'
+    const color = score >= 70 ? '#166534' : score >= 40 ? '#b45309' : '#475569'
     return (
         <div style={{ background: '#f1f5f9', borderRadius: '9999px', height: '8px', width: '100%', overflow: 'hidden' }}>
             <m.div
@@ -25,9 +25,9 @@ function ScoreBar({ score }) {
 
 function KeywordCard({ item, index }) {
     const svc = SERVICE_LABELS[item.service] || {}
-    const scoreColor = item.score >= 70 ? '#22c55e' : item.score >= 40 ? '#f59e0b' : '#475569'
+    const scoreColor = item.score >= 70 ? '#166534' : item.score >= 40 ? '#b45309' : '#475569'
     const trendArrow = item.trend > 5 ? '↑' : item.trend < -5 ? '↓' : '→'
-    const trendColor = item.trend > 5 ? '#22c55e' : item.trend < -5 ? '#ef4444' : '#475569'
+    const trendColor = item.trend > 5 ? '#166534' : item.trend < -5 ? '#b91c1c' : '#475569'
 
     return (
         <m.div
@@ -146,7 +146,7 @@ export default function TrendsDashboard() {
                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '0.75rem' }}>
                         <div style={{
                             width: '44px', height: '44px', borderRadius: '12px',
-                            background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
+                            background: 'linear-gradient(135deg, #4338ca, #6d28d9)',
                             display: 'flex', alignItems: 'center', justifyContent: 'center'
                         }}>
                             <i className="fas fa-chart-line" style={{ fontSize: '1.2rem', color: '#fff' }} />
@@ -178,8 +178,8 @@ export default function TrendsDashboard() {
                             style={{
                                 padding: '0.85rem 1.1rem', fontWeight: 700, fontSize: '0.8rem', border: 'none',
                                 cursor: 'pointer', whiteSpace: 'nowrap', background: 'transparent',
-                                color: activeFilter === key ? '#4f46e5' : '#475569',
-                                borderBottom: activeFilter === key ? '2.5px solid #4f46e5' : '2.5px solid transparent',
+                                color: activeFilter === key ? '#3730a3' : '#475569',
+                                borderBottom: activeFilter === key ? '2.5px solid #3730a3' : '2.5px solid transparent',
                                 transition: 'all 0.2s'
                             }}
                         >

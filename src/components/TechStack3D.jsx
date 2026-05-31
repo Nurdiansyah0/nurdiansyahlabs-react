@@ -3,10 +3,10 @@ import { m, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { useResponsive } from '../hooks/useResponsive'
 
 const pillars = [
-    { id: 'landing', type: 'web', label: 'Landing Pages', color: '#10b981', x: '15%', y: '25%', z: 50, delay: 0 },
-    { id: 'fullstack', type: 'database', label: 'Fullstack Apps', color: '#3b82f6', x: '85%', y: '25%', z: 150, delay: 0.5 },
-    { id: 'data_science', type: 'ai', label: 'Data Science', color: '#8b5cf6', x: '20%', y: '75%', z: 250, delay: 1.0 },
-    { id: 'data_analyst', type: 'chart', label: 'Data Analytics', color: '#f59e0b', x: '80%', y: '80%', z: 350, delay: 1.5 }
+    { id: 'landing', type: 'web', label: 'Landing Pages', color: '#047857', x: '15%', y: '25%', z: 50, delay: 0 },
+    { id: 'fullstack', type: 'database', label: 'Fullstack Apps', color: '#1d4ed8', x: '85%', y: '25%', z: 150, delay: 0.5 },
+    { id: 'data_science', type: 'ai', label: 'Data Science', color: '#6d28d9', x: '20%', y: '75%', z: 250, delay: 1.0 },
+    { id: 'data_analyst', type: 'chart', label: 'Data Analytics', color: '#b45309', x: '80%', y: '80%', z: 350, delay: 1.5 }
 ]
 
 export default function TechStack3D() {
@@ -86,7 +86,7 @@ export default function TechStack3D() {
                     <m.div
                         style={{
                             width: '300px', height: '300px', borderRadius: '50%',
-                            background: 'radial-gradient(circle, #ffffff, #3b82f6 40%, transparent 70%)',
+                            background: 'radial-gradient(circle, #ffffff, #1d4ed8 40%, transparent 70%)',
                             boxShadow: '0 0 200px 100px rgba(59, 130, 246, 0.5)',
                             mixBlendMode: 'screen', opacity: 0.9
                         }}

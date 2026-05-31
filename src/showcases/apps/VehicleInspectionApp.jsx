@@ -40,7 +40,7 @@ export default function VehicleInspectionApp() {
                     </div>
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1rem', marginBottom: '2rem' }}>
-                    {[['Total Item', String(done), '#3b82f6'], ['Baik', String(Object.values(checks).filter(v => v === 'Baik').length), '#10b981'], ['Masalah', String(issues), '#ef4444']].map(([l, v, c]) => (
+                    {[['Total Item', String(done), '#1d4ed8'], ['Baik', String(Object.values(checks).filter(v => v === 'Baik').length), '#047857'], ['Masalah', String(issues), '#b91c1c']].map(([l, v, c]) => (
                         <div key={l} style={{ background: '#f8fafc', borderRadius: '10px', padding: '1rem', textAlign: 'center' }}>
                             <div style={{ fontSize: '1.8rem', fontWeight: 800, color: c }}>{v}</div>
                             <div style={{ fontSize: '0.75rem', color: '#6b7280', marginTop: '4px' }}>{l}</div>
@@ -60,7 +60,7 @@ export default function VehicleInspectionApp() {
                 )}
                 <div style={{ display: 'flex', gap: '1rem' }}>
                     <button aria-label="Action button" onClick={() => { setSubmitted(false); setChecks({}); setNotes({}); setActiveTab(0) }} style={{ flex: 1, background: '#1e293b', color: '#fff', border: 'none', padding: '12px', borderRadius: '8px', fontWeight: 600, cursor: 'pointer' }}>Inspeksi Baru</button>
-                    <button aria-label="Action button" onClick={() => window.print()} style={{ flex: 1, background: '#3b82f6', color: '#fff', border: 'none', padding: '12px', borderRadius: '8px', fontWeight: 600, cursor: 'pointer' }}>🖨 Cetak Laporan</button>
+                    <button aria-label="Action button" onClick={() => window.print()} style={{ flex: 1, background: '#1d4ed8', color: '#fff', border: 'none', padding: '12px', borderRadius: '8px', fontWeight: 600, cursor: 'pointer' }}>🖨 Cetak Laporan</button>
                 </div>
             </div>
         </div>
@@ -75,11 +75,11 @@ export default function VehicleInspectionApp() {
                 </div>
                 <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
                     <div style={{ textAlign: 'center' }}>
-                        <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#3b82f6' }}>{pct}%</div>
+                        <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#1d4ed8' }}>{pct}%</div>
                         <div style={{ fontSize: '0.7rem', color: '#475569' }}>Progress</div>
                     </div>
                     <div style={{ textAlign: 'center' }}>
-                        <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#ef4444' }}>{issues}</div>
+                        <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#b91c1c' }}>{issues}</div>
                         <div style={{ fontSize: '0.7rem', color: '#475569' }}>Issues</div>
                     </div>
                 </div>
@@ -92,7 +92,7 @@ export default function VehicleInspectionApp() {
                         <div style={{ display: 'grid', gap: '1rem' }}>
                             {VEHICLES.map(v => (
                                 <div key={v.id} onClick={() => setSelectedVeh(v)} style={{ padding: '1.25rem', border: '2px solid #e2e8f0', borderRadius: '12px', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', transition: 'all 0.15s' }}
-                                    onMouseEnter={e => { e.currentTarget.style.borderColor = '#3b82f6'; e.currentTarget.style.background = '#f0f7ff' }}
+                                    onMouseEnter={e => { e.currentTarget.style.borderColor = '#1d4ed8'; e.currentTarget.style.background = '#f0f7ff' }}
                                     onMouseLeave={e => { e.currentTarget.style.borderColor = '#e2e8f0'; e.currentTarget.style.background = '#fff' }}>
                                     <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
                                         <div style={{ fontSize: '2rem' }}>🚗</div>
@@ -140,7 +140,7 @@ export default function VehicleInspectionApp() {
                                         <div key={item} style={{ padding: '1rem 1.5rem', borderBottom: '1px solid #f1f5f9', display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '1rem', alignItems: 'center' }}>
                                             <div style={{ fontWeight: 500, color: '#374151', fontSize: '0.9rem' }}>{item}</div>
                                             {OPT.map(o => (
-                                                <button aria-label="Action button" key={o} onClick={() => setCheck(section, item, o)} style={{ padding: '7px', borderRadius: '7px', border: '1px solid', borderColor: val === o ? (o === 'Baik' ? '#10b981' : o === 'Cacat' ? '#ef4444' : '#f59e0b') : '#e2e8f0', background: val === o ? (o === 'Baik' ? '#d1fae5' : o === 'Cacat' ? '#fee2e2' : '#fef3c7') : '#fff', color: val === o ? (o === 'Baik' ? '#059669' : o === 'Cacat' ? '#dc2626' : '#d97706') : '#475569', fontWeight: val === o ? 700 : 400, cursor: 'pointer', fontSize: '0.8rem' }}>
+                                                <button aria-label="Action button" key={o} onClick={() => setCheck(section, item, o)} style={{ padding: '7px', borderRadius: '7px', border: '1px solid', borderColor: val === o ? (o === 'Baik' ? '#047857' : o === 'Cacat' ? '#b91c1c' : '#b45309') : '#e2e8f0', background: val === o ? (o === 'Baik' ? '#d1fae5' : o === 'Cacat' ? '#fee2e2' : '#fef3c7') : '#fff', color: val === o ? (o === 'Baik' ? '#065f46' : o === 'Cacat' ? '#dc2626' : '#d97706') : '#475569', fontWeight: val === o ? 700 : 400, cursor: 'pointer', fontSize: '0.8rem' }}>
                                                     {o === 'Baik' ? '✓ ' : o === 'Cacat' ? '⚠ ' : '✕ '}{o}
                                                 </button>
                                             ))}
@@ -159,7 +159,7 @@ export default function VehicleInspectionApp() {
                         <div style={{ background: '#fff', borderRadius: '16px', border: '1px solid #e2e8f0', padding: '2rem' }}>
                             <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#1e293b', marginBottom: '1.5rem' }}>Ringkasan Inspeksi</h2>
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '1rem', marginBottom: '2rem' }}>
-                                {[['Total Diperiksa', String(done), '#3b82f6'], ['Baik', String(Object.values(checks).filter(v => v === 'Baik').length), '#10b981'], ['Cacat', String(Object.values(checks).filter(v => v === 'Cacat').length), '#ef4444'], ['Tidak Ada', String(Object.values(checks).filter(v => v === 'Tidak Ada').length), '#f59e0b']].map(([l, v, c]) => (
+                                {[['Total Diperiksa', String(done), '#1d4ed8'], ['Baik', String(Object.values(checks).filter(v => v === 'Baik').length), '#047857'], ['Cacat', String(Object.values(checks).filter(v => v === 'Cacat').length), '#b91c1c'], ['Tidak Ada', String(Object.values(checks).filter(v => v === 'Tidak Ada').length), '#b45309']].map(([l, v, c]) => (
                                     <div key={l} style={{ background: '#f8fafc', borderRadius: '10px', padding: '1rem', textAlign: 'center' }}>
                                         <div style={{ fontSize: '1.8rem', fontWeight: 800, color: c }}>{v}</div>
                                         <div style={{ fontSize: '0.75rem', color: '#6b7280', marginTop: '4px' }}>{l}</div>

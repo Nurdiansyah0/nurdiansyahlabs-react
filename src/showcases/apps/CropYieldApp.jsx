@@ -43,7 +43,7 @@ export default function CropYieldApp() {
             <div style={{ padding: '2rem', maxWidth: '1100px', margin: '0 auto' }}>
                 {/* KPIs */}
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
-                    {[['Rata-rata Hasil', `${avgYield} ton/ha`, '🌾', '#16a34a'], ['Hasil Terbaik', `${Math.max(...Object.values(d)).toFixed(1)} ton/ha`, '🏆', '#d97706'], ['Wilayah Terbaik', bestRegion, '📍', '#2563eb'], ['Total Komoditas', `${CROPS.length} jenis`, '🌱', '#7c3aed']].map(([l, v, i, c]) => (
+                    {[['Rata-rata Hasil', `${avgYield} ton/ha`, '🌾', '#16a34a'], ['Hasil Terbaik', `${Math.max(...Object.values(d)).toFixed(1)} ton/ha`, '🏆', '#d97706'], ['Wilayah Terbaik', bestRegion, '📍', '#2563eb'], ['Total Komoditas', `${CROPS.length} jenis`, '🌱', '#5b21b6']].map(([l, v, i, c]) => (
                         <div key={l} style={{ background: '#fff', borderRadius: '14px', padding: '1.5rem', border: '1px solid #bbf7d0' }}>
                             <div style={{ fontSize: '1.5rem', marginBottom: '8px' }}>{i}</div>
                             <div style={{ fontSize: typeof v === 'string' && v.length > 10 ? '1rem' : '1.5rem', fontWeight: 800, color: c, marginBottom: '4px', lineHeight: 1.2 }}>{v}</div>

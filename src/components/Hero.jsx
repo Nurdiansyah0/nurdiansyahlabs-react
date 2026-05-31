@@ -86,7 +86,7 @@ export default function Hero() {
                         href="https://wa.me/6282176012461"
                         target="_blank" rel="noreferrer"
                         style={{
-                            background: '#22c55e', color: '#fff',
+                            background: '#166534', color: '#fff',
                             padding: isSm ? '11px 22px' : '14px 32px',
                             borderRadius: '10px', fontWeight: 700,
                             fontSize: isSm ? '0.9rem' : '1rem',
@@ -95,7 +95,7 @@ export default function Hero() {
                             transition: 'all 0.2s', minHeight: '44px',
                         }}
                         onMouseEnter={e => { e.currentTarget.style.background = '#16a34a'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-                        onMouseLeave={e => { e.currentTarget.style.background = '#22c55e'; e.currentTarget.style.transform = 'translateY(0)' }}>
+                        onMouseLeave={e => { e.currentTarget.style.background = '#166534'; e.currentTarget.style.transform = 'translateY(0)' }}>
                         <MessageCircle size={18} style={{ fontSize: '1.1rem' }} /> {t('hero.cta2')}
                     </a>
                 </m.div>

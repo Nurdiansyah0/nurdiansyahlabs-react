@@ -1,9 +1,9 @@
 import { useState, useMemo } from 'react'
 const CLUSTERS = [
-    { id: 0, name: 'Champions', color: '#6366f1', bg: '#ede9fe', count: 312, rfm: 'R:5 F:5 M:5', revenue: 'Rp 4.8Jt avg', desc: 'Top customers dengan frekuensi dan nilai transaksi tertinggi. Fidelitas sangat tinggi.', action: 'Reward dengan loyalty program eksklusif' },
-    { id: 1, name: 'Loyal', color: '#10b981', bg: '#d1fae5', count: 489, rfm: 'R:4 F:4 M:3', revenue: 'Rp 2.1Jt avg', desc: 'Pelanggan setia dengan pembelian rutin. Nilai transaksi sedang namun konsisten.', action: 'Upsell produk premium dan cross-sell' },
-    { id: 2, name: 'At Risk', color: '#f59e0b', bg: '#fef3c7', count: 234, rfm: 'R:2 F:3 M:3', revenue: 'Rp 1.4Jt avg', desc: 'Pelanggan yang pernah aktif namun jarang bertransaksi belakangan ini.', action: 'Kirim personalized re-engagement email' },
-    { id: 3, name: 'Lost', color: '#ef4444', bg: '#fee2e2', count: 178, rfm: 'R:1 F:1 M:2', revenue: 'Rp 0.8Jt avg', desc: 'Pelanggan yang sudah lama tidak melakukan transaksi. Perlu win-back campaign.', action: 'Tawarkan diskon besar sekali pakai' },
+    { id: 0, name: 'Champions', color: '#4338ca', bg: '#ede9fe', count: 312, rfm: 'R:5 F:5 M:5', revenue: 'Rp 4.8Jt avg', desc: 'Top customers dengan frekuensi dan nilai transaksi tertinggi. Fidelitas sangat tinggi.', action: 'Reward dengan loyalty program eksklusif' },
+    { id: 1, name: 'Loyal', color: '#047857', bg: '#d1fae5', count: 489, rfm: 'R:4 F:4 M:3', revenue: 'Rp 2.1Jt avg', desc: 'Pelanggan setia dengan pembelian rutin. Nilai transaksi sedang namun konsisten.', action: 'Upsell produk premium dan cross-sell' },
+    { id: 2, name: 'At Risk', color: '#b45309', bg: '#fef3c7', count: 234, rfm: 'R:2 F:3 M:3', revenue: 'Rp 1.4Jt avg', desc: 'Pelanggan yang pernah aktif namun jarang bertransaksi belakangan ini.', action: 'Kirim personalized re-engagement email' },
+    { id: 3, name: 'Lost', color: '#b91c1c', bg: '#fee2e2', count: 178, rfm: 'R:1 F:1 M:2', revenue: 'Rp 0.8Jt avg', desc: 'Pelanggan yang sudah lama tidak melakukan transaksi. Perlu win-back campaign.', action: 'Tawarkan diskon besar sekali pakai' },
 ]
 // Scatter plot data — generated once per mount via useMemo in the component
 const generateScatterPoints = () => CLUSTERS.flatMap(c => Array.from({ length: 20 }).map(() => ({
@@ -19,7 +19,7 @@ export default function CustomerClusteringApp() {
     const total = CLUSTERS.reduce((s, c) => s + c.count, 0)
     return (
         <div style={{ minHeight: '100vh', background: '#f8f9ff', fontFamily: '"Inter",sans-serif' }}>
-            <div style={{ background: 'linear-gradient(135deg,#312e81,#4f46e5)', padding: '1.5rem 2rem', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+            <div style={{ background: 'linear-gradient(135deg,#312e81,#3730a3)', padding: '1.5rem 2rem', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
                 <div>
                     <div style={{ fontSize: '0.7rem', color: '#c7d2fe', letterSpacing: '0.15em', marginBottom: '4px' }}>DATA SCIENCE / CLUSTERING</div>
                     <h1 style={{ fontSize: '1.5rem', fontWeight: 800, margin: 0 }}>Customer Clustering – RFM Analysis</h1>

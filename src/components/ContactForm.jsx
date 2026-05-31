@@ -110,7 +110,7 @@ export default function ContactForm() {
                                 type="text" name="name" required value={formData.name} onChange={handleChange}
                                 placeholder={t('contact.namePlaceholder')} style={inputStyle}
                                 disabled={status === 'submitting'}
-                                onFocus={e => e.target.style.borderColor = '#4f46e5'}
+                                onFocus={e => e.target.style.borderColor = '#3730a3'}
                                 onBlur={e => e.target.style.borderColor = '#e2e8f0'}
                             />
                         </div>
@@ -121,7 +121,7 @@ export default function ContactForm() {
                                 type="text" name="contact" required value={formData.contact} onChange={handleChange}
                                 placeholder={t('contact.emailPlaceholder')} style={inputStyle}
                                 disabled={status === 'submitting'}
-                                onFocus={e => e.target.style.borderColor = '#4f46e5'}
+                                onFocus={e => e.target.style.borderColor = '#3730a3'}
                                 onBlur={e => e.target.style.borderColor = '#e2e8f0'}
                             />
                         </div>
@@ -132,7 +132,7 @@ export default function ContactForm() {
                                 name="service" value={formData.service} onChange={handleChange}
                                 style={{ ...inputStyle, appearance: 'none', cursor: 'pointer' }}
                                 disabled={status === 'submitting'}
-                                onFocus={e => e.target.style.borderColor = '#4f46e5'}
+                                onFocus={e => e.target.style.borderColor = '#3730a3'}
                                 onBlur={e => e.target.style.borderColor = '#e2e8f0'}
                             >
                                 <option value="">{t('contact.serviceOptionMap')}</option>
@@ -151,7 +151,7 @@ export default function ContactForm() {
                                 placeholder={t('contact.msgPlaceholder')}
                                 style={{ ...inputStyle, minHeight: '120px', resize: 'vertical' }}
                                 disabled={status === 'submitting'}
-                                onFocus={e => e.target.style.borderColor = '#4f46e5'}
+                                onFocus={e => e.target.style.borderColor = '#3730a3'}
                                 onBlur={e => e.target.style.borderColor = '#e2e8f0'}
                             />
                         </div>
@@ -161,14 +161,14 @@ export default function ContactForm() {
                             disabled={status === 'submitting'}
                             style={{
                                 width: '100%', padding: '16px', borderRadius: '12px',
-                                background: status === 'submitting' ? '#a5b4fc' : '#4f46e5',
+                                background: status === 'submitting' ? '#a5b4fc' : '#3730a3',
                                 color: '#fff', border: 'none', fontWeight: 700, fontSize: '1rem',
                                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
                                 cursor: status === 'submitting' ? 'not-allowed' : 'pointer',
                                 transition: 'background 0.2s, transform 0.1s'
                             }}
                             onMouseEnter={e => { if (status !== 'submitting') e.currentTarget.style.background = '#4338ca' }}
-                            onMouseLeave={e => { if (status !== 'submitting') e.currentTarget.style.background = '#4f46e5' }}
+                            onMouseLeave={e => { if (status !== 'submitting') e.currentTarget.style.background = '#3730a3' }}
                             onMouseDown={e => { if (status !== 'submitting') e.currentTarget.style.transform = 'scale(0.98)' }}
                             onMouseUp={e => { if (status !== 'submitting') e.currentTarget.style.transform = 'scale(1)' }}
                         >

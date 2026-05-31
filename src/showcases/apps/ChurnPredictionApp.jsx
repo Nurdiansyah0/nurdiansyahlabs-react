@@ -53,7 +53,7 @@ export default function ChurnPredictionApp() {
                             <div style={{ fontSize: '0.75rem', color: '#475569' }}>At Risk</div>
                         </div>
                         <div style={{ background: '#d1fae5', borderRadius: '10px', padding: '1rem', textAlign: 'center', minWidth: '80px' }}>
-                            <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#059669' }}>{safe.length}</div>
+                            <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#065f46' }}>{safe.length}</div>
                             <div style={{ fontSize: '0.75rem', color: '#475569' }}>Safe</div>
                         </div>
                     </div>
@@ -73,11 +73,11 @@ export default function ChurnPredictionApp() {
                                     <div style={{ fontSize: '0.8rem', color: '#475569' }}>{c.plan}</div>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                                         <div style={{ flex: 1, height: '6px', background: '#f1f5f9', borderRadius: '3px', overflow: 'hidden' }}>
-                                            <div style={{ height: '100%', background: c.risk > 0.7 ? '#dc2626' : c.risk > 0.4 ? '#f59e0b' : '#10b981', width: `${c.risk * 100}%` }} />
+                                            <div style={{ height: '100%', background: c.risk > 0.7 ? '#dc2626' : c.risk > 0.4 ? '#b45309' : '#047857', width: `${c.risk * 100}%` }} />
                                         </div>
-                                        <span style={{ fontSize: '0.78rem', fontWeight: 700, color: c.risk > 0.7 ? '#dc2626' : c.risk > 0.4 ? '#d97706' : '#059669', minWidth: '30px' }}>{(c.risk * 100).toFixed(0)}%</span>
+                                        <span style={{ fontSize: '0.78rem', fontWeight: 700, color: c.risk > 0.7 ? '#dc2626' : c.risk > 0.4 ? '#d97706' : '#065f46', minWidth: '30px' }}>{(c.risk * 100).toFixed(0)}%</span>
                                     </div>
-                                    <span style={{ background: isRisk ? '#fee2e2' : '#d1fae5', color: isRisk ? '#dc2626' : '#059669', fontSize: '0.72rem', fontWeight: 700, padding: '3px 8px', borderRadius: '5px', textAlign: 'center' }}>{isRisk ? 'At Risk' : 'Safe'}</span>
+                                    <span style={{ background: isRisk ? '#fee2e2' : '#d1fae5', color: isRisk ? '#dc2626' : '#065f46', fontSize: '0.72rem', fontWeight: 700, padding: '3px 8px', borderRadius: '5px', textAlign: 'center' }}>{isRisk ? 'At Risk' : 'Safe'}</span>
                                 </div>
                             )
                         })}
@@ -90,7 +90,7 @@ export default function ChurnPredictionApp() {
                                 <div key={s.feature} style={{ marginBottom: '12px' }}>
                                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px', fontSize: '0.8rem' }}>
                                         <span style={{ color: '#374151' }}>{s.feature}</span>
-                                        <span style={{ fontWeight: 700, color: s.dir === 'pos' ? '#dc2626' : '#059669' }}>{s.dir === 'pos' ? '+' : ''}{s.impact}</span>
+                                        <span style={{ fontWeight: 700, color: s.dir === 'pos' ? '#dc2626' : '#065f46' }}>{s.dir === 'pos' ? '+' : ''}{s.impact}</span>
                                     </div>
                                     <div style={{ height: '8px', background: '#f1f5f9', borderRadius: '4px', overflow: 'hidden' }}>
                                         <div style={{ height: '100%', background: s.dir === 'pos' ? '#fca5a5' : '#86efac', borderRadius: '4px', width: `${Math.abs(s.impact) * 100}%`, transition: 'width 0.4s' }} />
@@ -109,7 +109,7 @@ export default function ChurnPredictionApp() {
                                         <span style={{ color: '#475569' }}>{k}</span><span style={{ fontWeight: 700, color: '#374151' }}>{v}</span>
                                     </div>
                                 ))}
-                                <div style={{ marginTop: '1rem', padding: '10px', background: selected.risk >= threshold ? '#dc2626' : '#059669', borderRadius: '8px', textAlign: 'center', color: '#fff', fontWeight: 700, fontSize: '0.9rem' }}>
+                                <div style={{ marginTop: '1rem', padding: '10px', background: selected.risk >= threshold ? '#dc2626' : '#065f46', borderRadius: '8px', textAlign: 'center', color: '#fff', fontWeight: 700, fontSize: '0.9rem' }}>
                                     Risk Score: {(selected.risk * 100).toFixed(0)}% — {selected.risk >= threshold ? '⚠️ Segment: At Risk' : '✅ Segment: Safe'}
                                 </div>
                             </div>

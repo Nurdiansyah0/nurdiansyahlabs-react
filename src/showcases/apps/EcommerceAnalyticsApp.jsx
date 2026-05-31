@@ -1,10 +1,10 @@
 import { useState } from 'react'
 const PLATFORMS = ['Tokopedia', 'Shopee', 'Lazada', 'Bukalapak']
 const DATA = {
-    Tokopedia: { orders: 4821, revenue: 'Rp 98.5Jt', ctr: '4.2%', conv: '3.8%', return: '1.2%', color: '#3b82f6' },
-    Shopee: { orders: 6344, revenue: 'Rp 127.2Jt', ctr: '5.8%', conv: '4.5%', return: '1.8%', color: '#ef4444' },
-    Lazada: { orders: 2190, revenue: 'Rp 54.1Jt', ctr: '2.9%', conv: '2.7%', return: '0.9%', color: '#f59e0b' },
-    Bukalapak: { orders: 1420, revenue: 'Rp 28.9Jt', ctr: '2.1%', conv: '2.0%', return: '1.5%', color: '#10b981' },
+    Tokopedia: { orders: 4821, revenue: 'Rp 98.5Jt', ctr: '4.2%', conv: '3.8%', return: '1.2%', color: '#1d4ed8' },
+    Shopee: { orders: 6344, revenue: 'Rp 127.2Jt', ctr: '5.8%', conv: '4.5%', return: '1.8%', color: '#b91c1c' },
+    Lazada: { orders: 2190, revenue: 'Rp 54.1Jt', ctr: '2.9%', conv: '2.7%', return: '0.9%', color: '#b45309' },
+    Bukalapak: { orders: 1420, revenue: 'Rp 28.9Jt', ctr: '2.1%', conv: '2.0%', return: '1.5%', color: '#047857' },
 }
 const FUNNEL = ['Impresi', 'Klik', 'Keranjang', 'Checkout', 'Selesai']
 const FUNNEL_VALS = [100000, 42000, 8400, 4200, 3200]
@@ -72,7 +72,7 @@ export default function EcommerceAnalyticsApp() {
                 <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #e2e8f0' }}>
                     <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#0f172a', marginBottom: '1rem' }}>Rekomendasi AI</h2>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
-                        {[{ icon: '📈', title: 'Optimalkan Shopee Ads', desc: 'CTR Shopee 5.8% tertinggi. Tingkatkan budget iklan 20% untuk scaling lebih maksimal.', color: '#ef4444' }, { icon: '⚡', title: 'Perbaiki Funnel Checkout', desc: 'Dropout 50% di tahap checkout. Tambahkan metode pembayaran COD untuk mengurangi friction.', color: '#f59e0b' }, { icon: '🎯', title: 'Retarget Lazada', desc: 'Conversion rate Lazada terendah 2.7%. Buat bundle promo untuk meningkatkan AOV.', color: '#3b82f6' }].map(r => (
+                        {[{ icon: '📈', title: 'Optimalkan Shopee Ads', desc: 'CTR Shopee 5.8% tertinggi. Tingkatkan budget iklan 20% untuk scaling lebih maksimal.', color: '#b91c1c' }, { icon: '⚡', title: 'Perbaiki Funnel Checkout', desc: 'Dropout 50% di tahap checkout. Tambahkan metode pembayaran COD untuk mengurangi friction.', color: '#b45309' }, { icon: '🎯', title: 'Retarget Lazada', desc: 'Conversion rate Lazada terendah 2.7%. Buat bundle promo untuk meningkatkan AOV.', color: '#1d4ed8' }].map(r => (
                             <div key={r.title} style={{ background: '#f8fafc', borderRadius: '10px', padding: '1.25rem', border: '1px solid #e2e8f0' }}>
                                 <div style={{ fontSize: '1.3rem', marginBottom: '0.75rem' }}>{r.icon}</div>
                                 <div style={{ fontWeight: 700, color: '#0f172a', fontSize: '0.9rem', marginBottom: '0.5rem' }}>{r.title}</div>

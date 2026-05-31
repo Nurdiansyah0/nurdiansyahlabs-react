@@ -43,11 +43,11 @@ export default function BlogListing() {
                     animate={{ opacity: 1, y: 0 }}
                     style={{ textAlign: 'center', marginBottom: '4rem' }}
                 >
-                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#eef2ff', color: '#4f46e5', padding: '8px 16px', borderRadius: '20px', fontWeight: 700, fontSize: '0.9rem', marginBottom: '1rem' }}>
+                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#eef2ff', color: '#3730a3', padding: '8px 16px', borderRadius: '20px', fontWeight: 700, fontSize: '0.9rem', marginBottom: '1rem' }}>
                         <BookOpen size={18} /> Our Blog
                     </div>
                     <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 900, color: '#0f172a', marginBottom: '1rem', letterSpacing: '-0.03em' }}>
-                        Insights & <span style={{ color: '#4f46e5' }}>News</span>
+                        Insights & <span style={{ color: '#3730a3' }}>News</span>
                     </h1>
                     <p style={{ fontSize: '1.1rem', color: '#475569', maxWidth: '600px', margin: '0 auto', lineHeight: 1.6 }}>
                         Pelajari tips terbaru seputar web development, analisis data, bisnis digital, dan teknologi machine learning.

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 // Minimal recharts-style bar chart using pure divs
-const BAR_COLORS = ['#6366f1', '#8b5cf6', '#ec4899', '#ef4444', '#f59e0b']
+const BAR_COLORS = ['#4338ca', '#6d28d9', '#ec4899', '#b91c1c', '#b45309']
 const MONTHLY = {
     '2024 Q4': [{ m: 'Okt', rev: 4850, cost: 2100, profit: 2750 }, { m: 'Nov', rev: 6200, cost: 2400, profit: 3800 }, { m: 'Des', rev: 8400, cost: 2800, profit: 5600 }],
     '2025 Q1': [{ m: 'Jan', rev: 5100, cost: 2200, profit: 2900 }, { m: 'Feb', rev: 5800, cost: 2350, profit: 3450 }, { m: 'Mar', rev: 6700, cost: 2500, profit: 4200 }],
@@ -52,7 +52,7 @@ export default function RetailSalesApp() {
                         <div key={l} style={{ background: '#fff', borderRadius: '14px', padding: '1.5rem', border: '1px solid #e2e8f0' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
                                 <span style={{ fontSize: '1.5rem' }}>{i}</span>
-                                <span style={{ background: '#d1fae5', color: '#059669', fontSize: '0.75rem', fontWeight: 700, padding: '3px 8px', borderRadius: '6px' }}>{t}</span>
+                                <span style={{ background: '#d1fae5', color: '#065f46', fontSize: '0.75rem', fontWeight: 700, padding: '3px 8px', borderRadius: '6px' }}>{t}</span>
                             </div>
                             <div style={{ fontSize: '1.6rem', fontWeight: 800, color: '#0f172a', marginBottom: '4px' }}>{v}</div>
                             <div style={{ fontSize: '0.8rem', color: '#475569' }}>{l}</div>
@@ -62,7 +62,7 @@ export default function RetailSalesApp() {
                 {/* Tab nav */}
                 <div style={{ display: 'flex', gap: '8px', marginBottom: '1.5rem' }}>
                     {[['overview', 'Overview'], ['products', 'Produk Terlaris'], ['branches', 'Perbandingan Cabang']].map(([k, l]) => (
-                        <button aria-label="Action button" key={k} onClick={() => setTab(k)} style={{ padding: '9px 20px', borderRadius: '8px', background: tab === k ? '#6366f1' : '#fff', color: tab === k ? '#fff' : '#475569', fontWeight: tab === k ? 700 : 500, cursor: 'pointer', fontSize: '0.85rem', border: tab !== k ? '1px solid #e2e8f0' : 'none' }}>{l}</button>
+                        <button aria-label="Action button" key={k} onClick={() => setTab(k)} style={{ padding: '9px 20px', borderRadius: '8px', background: tab === k ? '#4338ca' : '#fff', color: tab === k ? '#fff' : '#475569', fontWeight: tab === k ? 700 : 500, cursor: 'pointer', fontSize: '0.85rem', border: tab !== k ? '1px solid #e2e8f0' : 'none' }}>{l}</button>
                     ))}
                 </div>
                 {tab === 'overview' && (
@@ -72,17 +72,17 @@ export default function RetailSalesApp() {
                             <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'flex-end', height: '200px', padding: '0 0 0.5rem' }}>
                                 {data.map((d, i) => (
                                     <div key={d.m} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
-                                        <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#6366f1' }}>{(d.rev / 1000).toFixed(1)}K</div>
+                                        <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#4338ca' }}>{(d.rev / 1000).toFixed(1)}K</div>
                                         <div style={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', height: '160px', gap: '2px' }}>
                                             <div style={{ height: `${(d.profit / maxRev) * 160}px`, background: '#c7d2fe', borderRadius: '4px 4px 0 0', minHeight: '4px', transition: 'height 0.3s' }} />
-                                            <div style={{ height: `${((d.rev - d.profit) / maxRev) * 160}px`, background: '#6366f1', borderRadius: '0', minHeight: '4px' }} />
+                                            <div style={{ height: `${((d.rev - d.profit) / maxRev) * 160}px`, background: '#4338ca', borderRadius: '0', minHeight: '4px' }} />
                                         </div>
                                         <div style={{ fontSize: '0.8rem', color: '#475569', fontWeight: 600 }}>{d.m}</div>
                                     </div>
                                 ))}
                             </div>
                             <div style={{ display: 'flex', gap: '1.5rem', marginTop: '1rem', fontSize: '0.78rem' }}>
-                                <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><div style={{ width: '12px', height: '12px', background: '#6366f1', borderRadius: '2px' }} /> Revenue</span>
+                                <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><div style={{ width: '12px', height: '12px', background: '#4338ca', borderRadius: '2px' }} /> Revenue</span>
                                 <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><div style={{ width: '12px', height: '12px', background: '#c7d2fe', borderRadius: '2px' }} /> Profit</span>
                             </div>
                         </div>
@@ -92,10 +92,10 @@ export default function RetailSalesApp() {
                                 <div key={d.m} style={{ padding: '12px 0', borderBottom: i < data.length - 1 ? '1px solid #f1f5f9' : 'none' }}>
                                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
                                         <span style={{ fontWeight: 700, color: '#0f172a', fontSize: '0.9rem' }}>{d.m}</span>
-                                        <span style={{ fontWeight: 800, color: '#6366f1', fontSize: '0.9rem' }}>Rp {d.rev.toLocaleString()}</span>
+                                        <span style={{ fontWeight: 800, color: '#4338ca', fontSize: '0.9rem' }}>Rp {d.rev.toLocaleString()}</span>
                                     </div>
                                     <div style={{ height: '6px', background: '#f1f5f9', borderRadius: '3px', overflow: 'hidden' }}>
-                                        <div style={{ height: '100%', background: '#6366f1', borderRadius: '3px', width: `${(d.rev / maxRev) * 100}%`, transition: 'width 0.3s' }} />
+                                        <div style={{ height: '100%', background: '#4338ca', borderRadius: '3px', width: `${(d.rev / maxRev) * 100}%`, transition: 'width 0.3s' }} />
                                     </div>
                                 </div>
                             ))}
@@ -115,7 +115,7 @@ export default function RetailSalesApp() {
                                 </div>
                                 <span style={{ fontSize: '0.8rem', background: '#f1f5f9', color: '#475569', padding: '4px 10px', borderRadius: '4px', fontWeight: 600, display: 'inline-block' }}>{p.cat}</span>
                                 <span style={{ fontWeight: 700, color: '#374151' }}>{p.sales}</span>
-                                <span style={{ fontWeight: 700, color: '#6366f1' }}>{p.rev}</span>
+                                <span style={{ fontWeight: 700, color: '#4338ca' }}>{p.rev}</span>
                             </div>
                         ))}
                     </div>
@@ -126,7 +126,7 @@ export default function RetailSalesApp() {
                             <div key={name} style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #e2e8f0' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
                                     <span style={{ fontWeight: 700, color: '#0f172a' }}>{name}</span>
-                                    <span style={{ background: '#d1fae5', color: '#059669', fontSize: '0.75rem', fontWeight: 700, padding: '3px 8px', borderRadius: '6px' }}>{info.growth}</span>
+                                    <span style={{ background: '#d1fae5', color: '#065f46', fontSize: '0.75rem', fontWeight: 700, padding: '3px 8px', borderRadius: '6px' }}>{info.growth}</span>
                                 </div>
                                 <div style={{ fontSize: '1.5rem', fontWeight: 800, color: BAR_COLORS[i], marginBottom: '8px' }}>{info.rev}</div>
                                 <div style={{ fontSize: '0.8rem', color: '#475569' }}>📦 {info.orders} pesanan · 💳 {info.avg}/transaksi</div>

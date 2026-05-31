@@ -11,10 +11,10 @@ const portfolioData = {
         title: 'A. Landing Page Development',
         subtitle: "Professional landing pages built for real clients",
         badgeLabel: 'SERVICE A',
-        badgeBg: '#eff6ff', badgeColor: '#1d4ed8',
+        badgeBg: '#eff6ff', badgeColor: '#1e3a8a',
         headerBg: 'linear-gradient(135deg, #eff6ff 0%, #fff 100%)',
         projects: [
-            { image: '/assets/projects/screenshots/ss_laptop.png', tag: 'E-Commerce', tagBg: '#eff6ff', tagColor: '#1d4ed8', title: 'Batam Laptop Center', desc: 'Tech product catalog, variants, dynamic cart & checkout flow.', route: '/showcase/landing-page/toko-laptop-batam' },
+            { image: '/assets/projects/screenshots/ss_laptop.png', tag: 'E-Commerce', tagBg: '#eff6ff', tagColor: '#1e3a8a', title: 'Batam Laptop Center', desc: 'Tech product catalog, variants, dynamic cart & checkout flow.', route: '/showcase/landing-page/toko-laptop-batam' },
             { image: '/assets/projects/screenshots/ss_chicken.png', tag: 'Agrobisnis', tagBg: '#f0fdf4', tagColor: '#16a34a', title: 'Batam Chicken Center', desc: 'B2B Supplier Ayam Kampung dengan WhatsApp Order Management.', route: '/showcase/landing-page/batam-chicken-supplier' },
             { image: '/assets/projects/screenshots/ss_siomay.png', tag: 'F&B', tagBg: '#fefce8', tagColor: '#a16207', title: 'Alyuna Siomay', desc: 'Digital menu, online ordering funnel, promo section.', route: '/showcase/landing-page/warung-makan' },
             { image: '/assets/projects/screenshots/ss_rental.png', tag: 'Automotive', tagBg: '#fef2f2', tagColor: '#b91c1c', title: 'Batam Rental Mobil', desc: 'Car rental with Python-based real-time market price scraping.', route: '/showcase/landing-page/batam-rental-mobil' },
@@ -37,10 +37,10 @@ const portfolioData = {
         title: 'C. Data Analyst',
         subtitle: 'Interactive dashboards & business insight reports delivered',
         badgeLabel: 'SERVICE C',
-        badgeBg: '#ecfdf5', badgeColor: '#059669',
+        badgeBg: '#ecfdf5', badgeColor: '#065f46',
         headerBg: 'linear-gradient(135deg, #ecfdf5 0%, #fff 100%)',
         projects: [
-            { image: '/assets/projects/img_dashboard_sales.png', tag: 'Sales Dashboard', tagBg: '#ecfdf5', tagColor: '#059669', title: 'Retail Sales Monitor', desc: 'Power BI tracking daily sales, best-selling SKUs, revenue by branch for 12 outlets.', route: '/showcase/data-analyst/retail-sales' },
+            { image: '/assets/projects/img_dashboard_sales.png', tag: 'Sales Dashboard', tagBg: '#ecfdf5', tagColor: '#065f46', title: 'Retail Sales Monitor', desc: 'Power BI tracking daily sales, best-selling SKUs, revenue by branch for 12 outlets.', route: '/showcase/data-analyst/retail-sales' },
             { image: '/assets/projects/img_ecommerce_analytics.png', tag: 'E-Commerce', tagBg: '#f0fdfa', tagColor: '#0d9488', title: 'Tokopedia Seller Analytics', desc: 'Monthly reports on conversion rate, cart abandonment & top product performance.', route: '/showcase/data-analyst/ecommerce-analytics' },
             { image: '/assets/projects/img_clinic_data.png', tag: 'Healthcare', tagBg: '#f0fdf4', tagColor: '#166534', title: 'Clinic Patient Flow Analysis', desc: 'Tableau dashboard on patient visits, wait times & doctor utilization.', route: '/showcase/data-analyst/clinic-analytics' },
             { image: '/assets/projects/img_agri_dashboard.png', tag: 'Agriculture', tagBg: '#fefce8', tagColor: '#a16207', title: 'Crop Yield Trend Report', desc: 'Seasonal yield comparison, cost vs revenue, regional performance heatmaps.', route: '/showcase/data-analyst/crop-yield' },
@@ -50,13 +50,13 @@ const portfolioData = {
         title: 'D. Data Scientist',
         subtitle: 'Machine learning and AI solutions that drive smart decisions',
         badgeLabel: 'SERVICE D',
-        badgeBg: '#f5f3ff', badgeColor: '#7c3aed',
+        badgeBg: '#f5f3ff', badgeColor: '#5b21b6',
         headerBg: 'linear-gradient(135deg, #f5f3ff 0%, #fff 100%)',
         projects: [
-            { image: '/assets/projects/img_sales_forecast.png', tag: 'Forecasting', tagBg: '#f5f3ff', tagColor: '#7c3aed', title: 'Sales Forecasting Model (LSTM)', desc: 'Time-series LSTM predicting next 30/60/90-day revenue with 92% accuracy.', route: '/showcase/data-science/sales-forecasting' },
+            { image: '/assets/projects/img_sales_forecast.png', tag: 'Forecasting', tagBg: '#f5f3ff', tagColor: '#5b21b6', title: 'Sales Forecasting Model (LSTM)', desc: 'Time-series LSTM predicting next 30/60/90-day revenue with 92% accuracy.', route: '/showcase/data-science/sales-forecasting' },
             { image: '/assets/projects/img_customer_cluster.png', tag: 'Segmentation', tagBg: '#fdf4ff', tagColor: '#a21caf', title: 'Customer Clustering (RFM)', desc: 'K-Means segments into Champion, At-Risk, and Lost groups for targeted campaigns.', route: '/showcase/data-science/customer-clustering' },
             { image: '/assets/projects/img_churn_model.png', tag: 'Churn Prediction', tagBg: '#fef2f2', tagColor: '#b91c1c', title: 'Subscriber Churn Detector', desc: 'XGBoost model predicting churn for 10k+ subscribers with SHAP explainability.', route: '/showcase/data-science/churn-prediction' },
-            { image: '/assets/projects/img_recommend_engine.png', tag: 'Recommendation', tagBg: '#eff6ff', tagColor: '#1d4ed8', title: 'Product Recommendation Engine', desc: 'Collaborative filtering system boosting cross-sell by 23%.', route: '/showcase/data-science/recommendation' },
+            { image: '/assets/projects/img_recommend_engine.png', tag: 'Recommendation', tagBg: '#eff6ff', tagColor: '#1e3a8a', title: 'Product Recommendation Engine', desc: 'Collaborative filtering system boosting cross-sell by 23%.', route: '/showcase/data-science/recommendation' },
         ]
     }
 }
@@ -98,7 +98,7 @@ function ProjectCard({ project, onNavigate, t }) {
                 </span>
                 <div style={{ fontWeight: 800, fontSize: '0.9rem', color: '#111827', marginBottom: '5px', lineHeight: 1.3 }}>{project.title}</div>
                 <div style={{ fontSize: '0.78rem', color: '#6b7280', lineHeight: 1.5, marginBottom: '10px', flexGrow: 1 }}>{project.desc}</div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#4f46e5', fontSize: '0.78rem', fontWeight: 700 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#3730a3', fontSize: '0.78rem', fontWeight: 700 }}>
                     <PlayCircle size={15} style={{ fontSize: '0.9rem' }} /> {t('modal.viewDemo')}
                     <ArrowRight size={12} style={{ fontSize: '0.65rem', marginLeft: '4px', transform: hovered ? 'translateX(3px)' : 'none', transition: 'transform 0.2s' }} />
                 </div>
@@ -199,7 +199,7 @@ export default function PortfolioModal({ serviceKey, onClose }) {
                         target="_blank" rel="noreferrer"
                         style={{
                             display: 'inline-flex', alignItems: 'center', gap: '8px',
-                            background: '#22c55e', color: '#fff',
+                            background: '#166534', color: '#fff',
                             padding: isSm ? '10px 22px' : '12px 28px',
                             borderRadius: '9999px', fontWeight: 700,
                             fontSize: isSm ? '0.85rem' : '0.95rem',

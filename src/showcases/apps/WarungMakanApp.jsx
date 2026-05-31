@@ -3,7 +3,7 @@ import { getOptimizedImg } from '../../utils/imgHelper'
 
 const BRAND = {
     primary: '#f9a826',      // Golden yellow (like Nastar & Siomay highlights)
-    primaryHover: '#f59e0b', // Slightly darker yellow for hover states 
+    primaryHover: '#b45309', // Slightly darker yellow for hover states 
     accent: '#f5cd4f',       // Light yellow compliment
     darkBg: '#1c2125'        // Soft black background
 };

@@ -150,7 +150,7 @@ export default function SmartVisionApp() {
                 <div style={{ maxWidth: 1280, margin: '0 auto', padding: '1.5rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
                     <div>
                         <div style={{ fontSize: '0.68rem', color: '#00ffcc', letterSpacing: '0.15em', fontWeight: 800, marginBottom: 4 }}>DATA SCIENCE / COMPUTER VISION</div>
-                        <h1 style={{ margin: 0, fontSize: '1.6rem', fontWeight: 900, letterSpacing: '-0.02em', background: 'linear-gradient(90deg, #00ffcc, #3b82f6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                        <h1 style={{ margin: 0, fontSize: '1.6rem', fontWeight: 900, letterSpacing: '-0.02em', background: 'linear-gradient(90deg, #00ffcc, #1d4ed8)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                             Smart Vision AI
                         </h1>
                     </div>
@@ -218,8 +218,8 @@ export default function SmartVisionApp() {
                         <div>
                             <div style={{ fontSize: '0.75rem', color: '#475569', fontWeight: 600 }}>MODEL STATUS</div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: 4 }}>
-                                <div style={{ width: 8, height: 8, borderRadius: '50%', background: isModelReady ? '#00ffcc' : '#f59e0b', animation: isModelLoading ? 'pulse-neon 1s infinite' : 'none' }} />
-                                <span style={{ fontSize: '0.85rem', fontWeight: 700, color: isModelReady ? '#00ffcc' : '#f59e0b' }}>
+                                <div style={{ width: 8, height: 8, borderRadius: '50%', background: isModelReady ? '#00ffcc' : '#b45309', animation: isModelLoading ? 'pulse-neon 1s infinite' : 'none' }} />
+                                <span style={{ fontSize: '0.85rem', fontWeight: 700, color: isModelReady ? '#00ffcc' : '#b45309' }}>
                                     {isModelLoading ? 'Downloading Neural Network (5MB)...' : 'COCO-SSD Ready (90 Classes)'}
                                 </span>
                             </div>
@@ -231,8 +231,8 @@ export default function SmartVisionApp() {
                             style={{
                                 padding: '10px 24px', borderRadius: '8px', fontWeight: 800, cursor: isModelReady ? 'pointer' : 'not-allowed',
                                 background: isCameraActive ? 'rgba(239, 68, 68, 0.1)' : 'rgba(0, 255, 204, 0.1)',
-                                color: isCameraActive ? '#ef4444' : '#00ffcc',
-                                border: `1px solid ${isCameraActive ? '#ef4444' : '#00ffcc'}`,
+                                color: isCameraActive ? '#b91c1c' : '#00ffcc',
+                                border: `1px solid ${isCameraActive ? '#b91c1c' : '#00ffcc'}`,
                                 transition: 'all 0.2s',
                                 boxShadow: isCameraActive ? 'none' : '0 0 15px rgba(0,255,204,0.15)'
                             }}

@@ -22,7 +22,7 @@ export default function NotFound() {
             <Link
                 to="/"
                 style={{
-                    background: '#4f46e5', color: '#fff',
+                    background: '#3730a3', color: '#fff',
                     padding: '12px 28px', borderRadius: '10px', fontWeight: 700,
                     fontSize: '0.95rem', textDecoration: 'none',
                     display: 'inline-flex', alignItems: 'center',
