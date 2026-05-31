@@ -49,6 +49,9 @@ ServerSignature Off
     RewriteCond %{DOCUMENT_ROOT}/index_b.html -f
     RewriteRule ^$ /index_b.html [L]
 
+    # ── Sitemap Routing ────────────────────────────────────────────
+    RewriteRule ^sitemap\.xml$ /api/sitemap.php [L]
+
     # ── React Router: SPA Fallback ─────────────────────────────────────────
     # Must come AFTER A/B rules
     RewriteCond %{REQUEST_FILENAME} !-f
