@@ -31,12 +31,13 @@ export const getOptimizedImg = (src, options = {}) => {
         fullUrl = `${host}${fullUrl}`;
     }
 
-    // 3. Local Environment Guard
+    // 3. Local Environment Guard & Bypass Domains
     // Public CDNs (like wsrv.nl) cannot access your "localhost".
-    // We must skip optimization for local dev URLs to prevent 404s.
+    // We also bypass external avatar services that block proxying (pravatar) or don't need it.
     const isLocal = fullUrl.includes('localhost') || fullUrl.includes('127.0.0.1') || fullUrl.includes('::1');
+    const isBypassed = fullUrl.includes('pravatar.cc') || fullUrl.includes('ui-avatars.com');
 
-    if (isLocal) {
+    if (isLocal || isBypassed) {
         return src;
     }
 
