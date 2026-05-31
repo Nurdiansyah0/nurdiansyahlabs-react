@@ -296,7 +296,16 @@ function route_to_sql_fallback(string $action, array $payload): string
                 "method" => "lite-engine",
                 "data" => array_slice($data, 0, $payload['limit'] ?? 8)
             ]);
-        default:
+        case 'users':
+            return json_encode(["status" => "success", "data" => [
+                ["id" => "U001", "name" => "Budi (Fallback)", "persona" => "Fallback User", "history" => [1, 4, 7]],
+                ["id" => "U002", "name" => "Siti (Fallback)", "persona" => "Fallback User", "history" => [40]],
+            ]]);
+        case 'categories':
+            return json_encode(["status" => "success", "data" => ["Laptop", "Smartphone", "Audio", "Buku"]]);
+        case 'products':
             return json_encode(["status" => "success", "data" => $products]);
+        default:
+            return json_encode(["status" => "success", "data" => []]);
     }
 }
