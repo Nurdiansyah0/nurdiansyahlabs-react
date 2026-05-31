@@ -55,7 +55,7 @@ export default function TerminalEasterEgg() {
 
         switch (baseCmd) {
             case 'help':
-                newHistory.push({ type: 'system', text: 'Available commands: help, whoami, clear, about, capabilities, sudo, neofetch' });
+                newHistory.push({ type: 'system', text: 'Available commands: help, whoami, clear, about, capabilities, sudo, neofetch, deploy-seo-sniper' });
                 break;
             case 'whoami':
                 newHistory.push({ type: 'system', text: 'uygpuazs (cPanel User)' });
@@ -93,6 +93,18 @@ export default function TerminalEasterEgg() {
                 break;
             case 'sudo':
                 newHistory.push({ type: 'system', text: 'Nice try, but you are not in the sudoers file. This incident will be reported to Nurdiansyah.' });
+                break;
+            case 'deploy-seo-sniper':
+                newHistory.push(
+                    { type: 'system', text: '[WARNING] Initiating SEO Sniper Protocol v2.0...' },
+                    { type: 'system', text: 'Connecting to Pollinations AI LLM Cluster... [OK]' },
+                    { type: 'system', text: 'Bypassing WAF & spoofing Chrome User-Agent... [OK]' },
+                    { type: 'system', text: 'Scanning Google Trends (geo=ID)... [Found: 5 viral keywords]' },
+                    { type: 'system', text: 'Generating Long-Tail B2B Content...' },
+                    { type: 'system', text: 'Injecting Schema.org JSON-LD Entities...' },
+                    { type: 'system', text: 'Deploying Prerendered HTML payloads to Edge CDN...' },
+                    { type: 'system', text: '[SUCCESS] Target Acquired. NurdiansyahLabs is now locked on Google Rank #1.' }
+                );
                 break;
             default:
                 newHistory.push({ type: 'error', text: `bash: ${cmd}: command not found` });
