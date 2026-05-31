@@ -195,7 +195,7 @@ export default function Navbar() {
                     ))}
 
                     {/* Mobile language selector */}
-                    <select
+                    <select aria-label="Select Language"
                         value={lang}
                         onChange={e => setLang(e.target.value)}
                         style={{
