@@ -1,83 +1,81 @@
 import { useResponsive } from '../hooks/useResponsive'
-import { MessageCircle } from 'lucide-react'
+import { ExternalLink } from 'lucide-react'
 
-export default function ShowcaseLayout({ children, title, subtitle, githubUrl, service, accentColor, isResponsive = false }) {
-    const { isMobile, width } = useResponsive()
+export default function ShowcaseLayout({ children }) {
+    const { isMobile } = useResponsive()
 
     return (
-        <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: '#f8fafc' }}>
+        <div style={{ minHeight: '100vh', width: '100%', position: 'relative', background: '#fff', overflowX: 'hidden' }}>
+            {/* The Actual Project (No longer wrapped in mockup scaling) */}
+            <div style={{ width: '100%', minHeight: '100vh' }}>
+                {children}
+            </div>
 
-            {/* Floating Contact Button */}
-            <a href="https://wa.me/6282176012461" target="_blank" rel="noreferrer" style={{
-                position: 'fixed',
-                bottom: isMobile ? '1.5rem' : '2rem',
-                right: isMobile ? '1.5rem' : '2rem',
-                zIndex: 1000,
-                background: '#22c55e', color: '#fff',
-                padding: '12px 20px', borderRadius: '50px',
-                fontWeight: 700, fontSize: '0.9rem',
-                textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px',
-                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                boxShadow: '0 4px 12px rgba(34, 197, 94, 0.3)'
-            }}
+            {/* SEO Hook - Floating Badge to Main Web */}
+            <a 
+                href="https://nurdiansyahlabs.com" 
+                target="_blank" 
+                rel="noopener noreferrer dofollow"
+                style={{
+                    position: 'fixed',
+                    bottom: isMobile ? '1rem' : '2rem',
+                    right: isMobile ? '1rem' : '2rem',
+                    zIndex: 99999, // Ensure it's above everything
+                    background: 'rgba(15, 23, 42, 0.85)',
+                    backdropFilter: 'blur(16px)',
+                    WebkitBackdropFilter: 'blur(16px)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    color: '#fff',
+                    padding: isMobile ? '10px 14px' : '12px 20px',
+                    borderRadius: '100px',
+                    fontFamily: '"Inter", sans-serif',
+                    textDecoration: 'none',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '12px',
+                    boxShadow: '0 10px 30px -5px rgba(0, 0, 0, 0.3)',
+                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                }}
                 onMouseEnter={e => {
-                    e.currentTarget.style.background = '#16a34a';
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.boxShadow = '0 6px 16px rgba(34, 197, 94, 0.4)';
+                    e.currentTarget.style.transform = 'translateY(-4px) scale(1.02)';
+                    e.currentTarget.style.background = 'rgba(15, 23, 42, 0.95)';
+                    e.currentTarget.style.boxShadow = '0 20px 40px -5px rgba(0, 0, 0, 0.4)';
+                    e.currentTarget.style.border = '1px solid rgba(255, 255, 255, 0.2)';
                 }}
                 onMouseLeave={e => {
-                    e.currentTarget.style.background = '#22c55e';
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(34, 197, 94, 0.3)';
-                }}>
-                <MessageCircle size={20} />
-                Contact Developer
-            </a>
-
-            {/* ── Page header ──────────────────────────────────────── */}
-            <div style={{
-                background: `linear-gradient(135deg, ${accentColor}15 0%, #fff 100%)`,
-                padding: isMobile ? '1.25rem 1rem' : '2rem 1.5rem',
-                borderBottom: '1px solid #e2e8f0',
-            }}>
-                <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-                    <h1 style={{
-                        fontSize: 'clamp(1.1rem, 4vw, 2rem)',
-                        fontWeight: 800, color: '#0f172a', marginBottom: '3px',
-                        lineHeight: 1.3,
+                    e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                    e.currentTarget.style.background = 'rgba(15, 23, 42, 0.85)';
+                    e.currentTarget.style.boxShadow = '0 10px 30px -5px rgba(0, 0, 0, 0.3)';
+                    e.currentTarget.style.border = '1px solid rgba(255, 255, 255, 0.1)';
+                }}
+            >
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', lineHeight: 1.2 }}>
+                    <span style={{ opacity: 0.7, fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+                        Live Project By
+                    </span>
+                    <span style={{ 
+                        background: 'linear-gradient(to right, #60a5fa, #a78bfa)', 
+                        WebkitBackgroundClip: 'text', 
+                        WebkitTextFillColor: 'transparent',
+                        fontWeight: 900,
+                        fontSize: isMobile ? '0.8rem' : '0.95rem',
+                        letterSpacing: '-0.02em'
                     }}>
-                        {title}
-                    </h1>
-                    <p style={{ color: '#64748b', fontSize: isMobile ? '0.8rem' : '0.95rem' }}>{subtitle}</p>
+                        Nurdiansyah Labs
+                    </span>
                 </div>
-            </div>
-
-            {/* ── Content: wrap in a horizontally-scrollable container on mobile ── */}
-            <div style={{
-                flex: 1,
-                overflowX: isMobile && !isResponsive ? 'auto' : 'visible',
-                WebkitOverflowScrolling: 'touch',
-            }}>
-                {isMobile && !isResponsive ? (
-                    <div style={{
-                        position: 'relative',
-                        width: '100%',
-                        overflow: 'hidden',
-                    }}>
-                        <div
-                            style={{
-                                width: '1024px',
-                                transform: `scale(${width / 1024})`,
-                                transformOrigin: 'top left',
-                            }}
-                        >
-                            {children}
-                        </div>
-                    </div>
-                ) : (
-                    children
-                )}
-            </div>
+                <div style={{ 
+                    background: 'rgba(255, 255, 255, 0.1)', 
+                    padding: '8px', 
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#a78bfa'
+                }}>
+                    <ExternalLink size={16} strokeWidth={2.5} />
+                </div>
+            </a>
         </div>
     )
 }
