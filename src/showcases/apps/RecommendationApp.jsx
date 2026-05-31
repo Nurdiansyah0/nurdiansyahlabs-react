@@ -205,7 +205,7 @@ export default function SmartVisionApp() {
 
                         {/* Offline / Loading State */}
                         {!isCameraActive && (
-                            <div style={{ textAlign: 'center', color: '#94a3b8' }}>
+                            <div style={{ textAlign: 'center', color: '#475569' }}>
                                 <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>👁️</div>
                                 <h2 style={{ margin: 0, fontSize: '1.2rem', color: '#f8fafc' }}>Camera Offline</h2>
                                 <p style={{ fontSize: '0.85rem', marginTop: 8 }}>Click start below to initialize real-time object detection.</p>
@@ -216,7 +216,7 @@ export default function SmartVisionApp() {
                     {/* Controls */}
                     <div className="glass-panel" style={{ padding: '1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <div>
-                            <div style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 600 }}>MODEL STATUS</div>
+                            <div style={{ fontSize: '0.75rem', color: '#475569', fontWeight: 600 }}>MODEL STATUS</div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: 4 }}>
                                 <div style={{ width: 8, height: 8, borderRadius: '50%', background: isModelReady ? '#00ffcc' : '#f59e0b', animation: isModelLoading ? 'pulse-neon 1s infinite' : 'none' }} />
                                 <span style={{ fontSize: '0.85rem', fontWeight: 700, color: isModelReady ? '#00ffcc' : '#f59e0b' }}>
@@ -246,12 +246,12 @@ export default function SmartVisionApp() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                     
                     <div className="glass-panel" style={{ padding: '1.5rem' }}>
-                        <div style={{ fontSize: '0.7rem', color: '#94a3b8', fontWeight: 800, letterSpacing: '0.1em', marginBottom: '1rem' }}>📡 LIVE TELEMETRY</div>
+                        <div style={{ fontSize: '0.7rem', color: '#475569', fontWeight: 800, letterSpacing: '0.1em', marginBottom: '1rem' }}>📡 LIVE TELEMETRY</div>
                         
                         <div style={{ fontSize: '2.5rem', fontWeight: 900, color: '#00ffcc', lineHeight: 1 }}>
                             {detections.length}
                         </div>
-                        <div style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: 4, marginBottom: '1.5rem' }}>Objects Detected in Frame</div>
+                        <div style={{ fontSize: '0.75rem', color: '#475569', marginTop: 4, marginBottom: '1.5rem' }}>Objects Detected in Frame</div>
 
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', maxHeight: 300, overflowY: 'auto' }}>
                             {detections.length === 0 ? (
@@ -273,7 +273,7 @@ export default function SmartVisionApp() {
                     </div>
 
                     <div className="glass-panel" style={{ padding: '1.5rem' }}>
-                        <div style={{ fontSize: '0.7rem', color: '#94a3b8', fontWeight: 800, letterSpacing: '0.1em', marginBottom: '1rem' }}>🧠 HOW IT WORKS</div>
+                        <div style={{ fontSize: '0.7rem', color: '#475569', fontWeight: 800, letterSpacing: '0.1em', marginBottom: '1rem' }}>🧠 HOW IT WORKS</div>
                         <p style={{ fontSize: '0.8rem', color: '#cbd5e1', lineHeight: 1.6, margin: 0 }}>
                             This application uses <strong>TensorFlow.js</strong> to run a pre-trained Deep Learning model (COCO-SSD) directly in your browser.
                             <br /><br />

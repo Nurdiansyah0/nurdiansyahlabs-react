@@ -45,16 +45,16 @@ export default function ChurnPredictionApp() {
                     <div style={{ flex: 1 }}>
                         <div style={{ fontWeight: 700, color: '#374151', marginBottom: '8px', fontSize: '0.9rem' }}>Risk Threshold: <span style={{ color: '#dc2626', fontWeight: 800 }}>{threshold.toFixed(2)}</span></div>
                         <input aria-label="Form input" type="range" min={0} max={100} value={threshold * 100} onChange={e => setThreshold(e.target.value / 100)} style={{ width: '100%', accentColor: '#dc2626' }} />
-                        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem', color: '#94a3b8', marginTop: '4px' }}><span>0.00 (Semua)</span><span>1.00 (Tidak ada)</span></div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem', color: '#475569', marginTop: '4px' }}><span>0.00 (Semua)</span><span>1.00 (Tidak ada)</span></div>
                     </div>
                     <div style={{ display: 'flex', gap: '1rem' }}>
                         <div style={{ background: '#fee2e2', borderRadius: '10px', padding: '1rem', textAlign: 'center', minWidth: '80px' }}>
                             <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#dc2626' }}>{atRisk.length}</div>
-                            <div style={{ fontSize: '0.75rem', color: '#64748b' }}>At Risk</div>
+                            <div style={{ fontSize: '0.75rem', color: '#475569' }}>At Risk</div>
                         </div>
                         <div style={{ background: '#d1fae5', borderRadius: '10px', padding: '1rem', textAlign: 'center', minWidth: '80px' }}>
                             <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#059669' }}>{safe.length}</div>
-                            <div style={{ fontSize: '0.75rem', color: '#64748b' }}>Safe</div>
+                            <div style={{ fontSize: '0.75rem', color: '#475569' }}>Safe</div>
                         </div>
                     </div>
                 </div>
@@ -63,14 +63,14 @@ export default function ChurnPredictionApp() {
                     <div style={{ background: '#fff', borderRadius: '16px', border: '1px solid #fee2e2', overflow: 'hidden' }}>
                         <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid #fee2e2', background: '#fff5f5', display: 'flex', justifyContent: 'space-between' }}>
                             <h2 style={{ margin: 0, fontSize: '1rem', fontWeight: 700, color: '#7f1d1d' }}>Risk Table</h2>
-                            <span style={{ fontSize: '0.8rem', color: '#64748b' }}>{CUSTOMERS.length} pelanggan</span>
+                            <span style={{ fontSize: '0.8rem', color: '#475569' }}>{CUSTOMERS.length} pelanggan</span>
                         </div>
                         {CUSTOMERS.sort((a, b) => b.risk - a.risk).map((c, i) => {
                             const isRisk = c.risk >= threshold
                             return (
                                 <div key={c.id} onClick={() => setSelected(selected?.id === c.id ? null : c)} style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', padding: '12px 1.5rem', borderTop: i > 0 ? '1px solid #fff5f5' : 'none', cursor: 'pointer', background: selected?.id === c.id ? '#fff5f5' : '#fff', alignItems: 'center', transition: 'background 0.1s' }}>
                                     <div style={{ fontWeight: 600, color: '#374151', fontSize: '0.9rem' }}>{c.name}</div>
-                                    <div style={{ fontSize: '0.8rem', color: '#64748b' }}>{c.plan}</div>
+                                    <div style={{ fontSize: '0.8rem', color: '#475569' }}>{c.plan}</div>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                                         <div style={{ flex: 1, height: '6px', background: '#f1f5f9', borderRadius: '3px', overflow: 'hidden' }}>
                                             <div style={{ height: '100%', background: c.risk > 0.7 ? '#dc2626' : c.risk > 0.4 ? '#f59e0b' : '#10b981', width: `${c.risk * 100}%` }} />
@@ -102,11 +102,11 @@ export default function ChurnPredictionApp() {
                             <div style={{ background: '#fff5f5', borderRadius: '16px', padding: '1.5rem', border: '1px solid #fca5a5' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
                                     <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#7f1d1d', margin: 0 }}>{selected.name}</h2>
-                                    <button aria-label="Action button" onClick={() => setSelected(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8' }}>✕</button>
+                                    <button aria-label="Action button" onClick={() => setSelected(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#475569' }}>✕</button>
                                 </div>
                                 {[['Plan', selected.plan], ['Tenure', `${selected.tenure} bulan`], ['Usage', `${selected.usage} GB/bln`], ['Support Calls', selected.support], ['Lokasi', selected.country]].map(([k, v]) => (
                                     <div key={k} style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid #fee2e2', fontSize: '0.85rem' }}>
-                                        <span style={{ color: '#64748b' }}>{k}</span><span style={{ fontWeight: 700, color: '#374151' }}>{v}</span>
+                                        <span style={{ color: '#475569' }}>{k}</span><span style={{ fontWeight: 700, color: '#374151' }}>{v}</span>
                                     </div>
                                 ))}
                                 <div style={{ marginTop: '1rem', padding: '10px', background: selected.risk >= threshold ? '#dc2626' : '#059669', borderRadius: '8px', textAlign: 'center', color: '#fff', fontWeight: 700, fontSize: '0.9rem' }}>

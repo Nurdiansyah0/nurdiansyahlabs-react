@@ -16,7 +16,7 @@ export default function EcommerceAnalyticsApp() {
         <div style={{ minHeight: '100vh', background: '#f8fafc', fontFamily: '"Inter",sans-serif' }}>
 
             <div style={{ background: 'linear-gradient(135deg,#0f172a,#1e293b)', padding: '2rem', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                <div style={{ fontSize: '0.7rem', color: '#94a3b8', letterSpacing: '0.15em', marginBottom: '4px' }}>E-COMMERCE ANALYTICS</div>
+                <div style={{ fontSize: '0.7rem', color: '#475569', letterSpacing: '0.15em', marginBottom: '4px' }}>E-COMMERCE ANALYTICS</div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <h1 style={{ fontSize: '1.5rem', fontWeight: 800, margin: 0 }}>Multi-Platform Dashboard</h1>
                     <div style={{ display: 'flex', gap: '8px' }}>
@@ -30,7 +30,7 @@ export default function EcommerceAnalyticsApp() {
                         <div key={l} style={{ background: '#fff', borderRadius: '14px', padding: '1.25rem', border: '1px solid #e2e8f0', textAlign: 'center' }}>
                             <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>{i}</div>
                             <div style={{ fontSize: '1.4rem', fontWeight: 800, color: d.color, marginBottom: '4px' }}>{v}</div>
-                            <div style={{ fontSize: '0.75rem', color: '#64748b' }}>{l}</div>
+                            <div style={{ fontSize: '0.75rem', color: '#475569' }}>{l}</div>
                         </div>
                     ))}
                 </div>
@@ -47,7 +47,7 @@ export default function EcommerceAnalyticsApp() {
                                 <div style={{ height: '16px', background: '#f1f5f9', borderRadius: '8px', overflow: 'hidden' }}>
                                     <div style={{ height: '100%', background: d.color, borderRadius: '8px', width: `${(FUNNEL_VALS[i] / maxFunnel) * 100}%`, opacity: 1 - i * 0.12, transition: 'width 0.4s' }} />
                                 </div>
-                                {i < FUNNEL.length - 1 && <div style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: '3px' }}>↓ {((FUNNEL_VALS[i + 1] / FUNNEL_VALS[i]) * 100).toFixed(1)}% lanjut</div>}
+                                {i < FUNNEL.length - 1 && <div style={{ fontSize: '0.7rem', color: '#475569', marginTop: '3px' }}>↓ {((FUNNEL_VALS[i + 1] / FUNNEL_VALS[i]) * 100).toFixed(1)}% lanjut</div>}
                             </div>
                         ))}
                     </div>
@@ -62,7 +62,7 @@ export default function EcommerceAnalyticsApp() {
                                 </div>
                                 <div style={{ textAlign: 'right' }}>
                                     <div style={{ fontWeight: 800, color: pd.color, fontSize: '0.9rem' }}>{pd.revenue}</div>
-                                    <div style={{ fontSize: '0.75rem', color: '#64748b' }}>Conv: {pd.conv}</div>
+                                    <div style={{ fontSize: '0.75rem', color: '#475569' }}>Conv: {pd.conv}</div>
                                 </div>
                             </div>
                         ))}
@@ -76,7 +76,7 @@ export default function EcommerceAnalyticsApp() {
                             <div key={r.title} style={{ background: '#f8fafc', borderRadius: '10px', padding: '1.25rem', border: '1px solid #e2e8f0' }}>
                                 <div style={{ fontSize: '1.3rem', marginBottom: '0.75rem' }}>{r.icon}</div>
                                 <div style={{ fontWeight: 700, color: '#0f172a', fontSize: '0.9rem', marginBottom: '0.5rem' }}>{r.title}</div>
-                                <div style={{ fontSize: '0.8rem', color: '#64748b', lineHeight: 1.6 }}>{r.desc}</div>
+                                <div style={{ fontSize: '0.8rem', color: '#475569', lineHeight: 1.6 }}>{r.desc}</div>
                             </div>
                         ))}
                     </div>

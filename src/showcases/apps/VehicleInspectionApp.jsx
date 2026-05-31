@@ -70,17 +70,17 @@ export default function VehicleInspectionApp() {
             
             <div style={{ background: '#1e293b', padding: '1.5rem 3rem', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
-                    <div style={{ fontSize: '0.7rem', letterSpacing: '0.15em', color: '#94a3b8', marginBottom: '4px' }}>VEHICLE INSPECTION</div>
+                    <div style={{ fontSize: '0.7rem', letterSpacing: '0.15em', color: '#475569', marginBottom: '4px' }}>VEHICLE INSPECTION</div>
                     <div style={{ fontSize: '1.3rem', fontWeight: 800 }}>Form Inspeksi Kendaraan</div>
                 </div>
                 <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
                     <div style={{ textAlign: 'center' }}>
                         <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#3b82f6' }}>{pct}%</div>
-                        <div style={{ fontSize: '0.7rem', color: '#94a3b8' }}>Progress</div>
+                        <div style={{ fontSize: '0.7rem', color: '#475569' }}>Progress</div>
                     </div>
                     <div style={{ textAlign: 'center' }}>
                         <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#ef4444' }}>{issues}</div>
-                        <div style={{ fontSize: '0.7rem', color: '#94a3b8' }}>Issues</div>
+                        <div style={{ fontSize: '0.7rem', color: '#475569' }}>Issues</div>
                     </div>
                 </div>
             </div>
@@ -96,14 +96,14 @@ export default function VehicleInspectionApp() {
                                     onMouseLeave={e => { e.currentTarget.style.borderColor = '#e2e8f0'; e.currentTarget.style.background = '#fff' }}>
                                     <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
                                         <div style={{ fontSize: '2rem' }}>🚗</div>
-                                        <div><div style={{ fontWeight: 700, color: '#1e293b' }}>{v.plate}</div><div style={{ fontSize: '0.85rem', color: '#64748b' }}>{v.type} · {v.color}</div></div>
+                                        <div><div style={{ fontWeight: 700, color: '#1e293b' }}>{v.plate}</div><div style={{ fontSize: '0.85rem', color: '#475569' }}>{v.type} · {v.color}</div></div>
                                     </div>
-                                    <div style={{ textAlign: 'right' }}><div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Pemilik</div><div style={{ fontSize: '0.9rem', fontWeight: 600, color: '#475569' }}>{v.owner}</div></div>
+                                    <div style={{ textAlign: 'right' }}><div style={{ fontSize: '0.8rem', color: '#475569' }}>Pemilik</div><div style={{ fontSize: '0.9rem', fontWeight: 600, color: '#475569' }}>{v.owner}</div></div>
                                 </div>
                             ))}
                         </div>
                         <div style={{ marginTop: '1.5rem' }}>
-                            <div style={{ fontSize: '0.85rem', color: '#64748b', marginBottom: '8px' }}>Nama Inspektor</div>
+                            <div style={{ fontSize: '0.85rem', color: '#475569', marginBottom: '8px' }}>Nama Inspektor</div>
                             <input aria-label="Form input" value={inspector.name} onChange={e => setInspector(p => ({ ...p, name: e.target.value }))} placeholder="Nama inspektor..." style={{ width: '100%', padding: '10px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '0.9rem', boxSizing: 'border-box' }} />
                         </div>
                     </div>
@@ -114,14 +114,14 @@ export default function VehicleInspectionApp() {
                     <div style={{ background: '#fff', borderRadius: '12px', padding: '1rem 1.5rem', marginBottom: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', border: '1px solid #e2e8f0' }}>
                         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
                             <span style={{ fontSize: '1.5rem' }}>🚗</span>
-                            <div><div style={{ fontWeight: 700, color: '#1e293b' }}>{selectedVeh.plate} – {selectedVeh.type}</div><div style={{ fontSize: '0.8rem', color: '#64748b' }}>{selectedVeh.owner}</div></div>
+                            <div><div style={{ fontWeight: 700, color: '#1e293b' }}>{selectedVeh.plate} – {selectedVeh.type}</div><div style={{ fontSize: '0.8rem', color: '#475569' }}>{selectedVeh.owner}</div></div>
                         </div>
-                        <button aria-label="Action button" onClick={() => setSelectedVeh(null)} style={{ background: 'none', border: '1px solid #e2e8f0', color: '#64748b', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', fontSize: '0.8rem' }}>Ganti Kendaraan</button>
+                        <button aria-label="Action button" onClick={() => setSelectedVeh(null)} style={{ background: 'none', border: '1px solid #e2e8f0', color: '#475569', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', fontSize: '0.8rem' }}>Ganti Kendaraan</button>
                     </div>
                     {/* Tab nav */}
                     <div style={{ display: 'flex', background: '#fff', borderRadius: '12px', padding: '6px', marginBottom: '1.5rem', gap: '6px', border: '1px solid #e2e8f0' }}>
                         {TABS.map((t, i) => (
-                            <button aria-label="Action button" key={t} onClick={() => setActiveTab(i)} style={{ flex: 1, padding: '10px', border: 'none', borderRadius: '8px', background: activeTab === i ? '#1e293b' : 'transparent', color: activeTab === i ? '#fff' : '#64748b', fontWeight: activeTab === i ? 700 : 500, cursor: 'pointer', fontSize: '0.85rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+                            <button aria-label="Action button" key={t} onClick={() => setActiveTab(i)} style={{ flex: 1, padding: '10px', border: 'none', borderRadius: '8px', background: activeTab === i ? '#1e293b' : 'transparent', color: activeTab === i ? '#fff' : '#475569', fontWeight: activeTab === i ? 700 : 500, cursor: 'pointer', fontSize: '0.85rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
                                 {i < 4 ? ['🔍', '🪑', '⚙️', '📋'][i] : ''} {t}
                             </button>
                         ))}
@@ -140,7 +140,7 @@ export default function VehicleInspectionApp() {
                                         <div key={item} style={{ padding: '1rem 1.5rem', borderBottom: '1px solid #f1f5f9', display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '1rem', alignItems: 'center' }}>
                                             <div style={{ fontWeight: 500, color: '#374151', fontSize: '0.9rem' }}>{item}</div>
                                             {OPT.map(o => (
-                                                <button aria-label="Action button" key={o} onClick={() => setCheck(section, item, o)} style={{ padding: '7px', borderRadius: '7px', border: '1px solid', borderColor: val === o ? (o === 'Baik' ? '#10b981' : o === 'Cacat' ? '#ef4444' : '#f59e0b') : '#e2e8f0', background: val === o ? (o === 'Baik' ? '#d1fae5' : o === 'Cacat' ? '#fee2e2' : '#fef3c7') : '#fff', color: val === o ? (o === 'Baik' ? '#059669' : o === 'Cacat' ? '#dc2626' : '#d97706') : '#94a3b8', fontWeight: val === o ? 700 : 400, cursor: 'pointer', fontSize: '0.8rem' }}>
+                                                <button aria-label="Action button" key={o} onClick={() => setCheck(section, item, o)} style={{ padding: '7px', borderRadius: '7px', border: '1px solid', borderColor: val === o ? (o === 'Baik' ? '#10b981' : o === 'Cacat' ? '#ef4444' : '#f59e0b') : '#e2e8f0', background: val === o ? (o === 'Baik' ? '#d1fae5' : o === 'Cacat' ? '#fee2e2' : '#fef3c7') : '#fff', color: val === o ? (o === 'Baik' ? '#059669' : o === 'Cacat' ? '#dc2626' : '#d97706') : '#475569', fontWeight: val === o ? 700 : 400, cursor: 'pointer', fontSize: '0.8rem' }}>
                                                     {o === 'Baik' ? '✓ ' : o === 'Cacat' ? '⚠ ' : '✕ '}{o}
                                                 </button>
                                             ))}

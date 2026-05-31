@@ -27,7 +27,7 @@ export default function DataScienceShowcase() {
 
     if (!project) return (
         <ShowcaseLayout title="Project Not Found" subtitle="" service="Data Science" accentColor="#4f46e5">
-            <div style={{ textAlign: 'center', padding: '5rem', color: '#94a3b8' }}>
+            <div style={{ textAlign: 'center', padding: '5rem', color: '#475569' }}>
                 <i className="fas fa-exclamation-circle" style={{ fontSize: '3rem', marginBottom: '1rem', display: 'block' }}></i>
                 <h2>Project "{projectId}" not found</h2>
             </div>

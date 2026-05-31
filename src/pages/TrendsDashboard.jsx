@@ -10,7 +10,7 @@ const SERVICE_LABELS = {
 }
 
 function ScoreBar({ score }) {
-    const color = score >= 70 ? '#22c55e' : score >= 40 ? '#f59e0b' : '#64748b'
+    const color = score >= 70 ? '#22c55e' : score >= 40 ? '#f59e0b' : '#475569'
     return (
         <div style={{ background: '#f1f5f9', borderRadius: '9999px', height: '8px', width: '100%', overflow: 'hidden' }}>
             <m.div
@@ -25,9 +25,9 @@ function ScoreBar({ score }) {
 
 function KeywordCard({ item, index }) {
     const svc = SERVICE_LABELS[item.service] || {}
-    const scoreColor = item.score >= 70 ? '#22c55e' : item.score >= 40 ? '#f59e0b' : '#94a3b8'
+    const scoreColor = item.score >= 70 ? '#22c55e' : item.score >= 40 ? '#f59e0b' : '#475569'
     const trendArrow = item.trend > 5 ? '↑' : item.trend < -5 ? '↓' : '→'
-    const trendColor = item.trend > 5 ? '#22c55e' : item.trend < -5 ? '#ef4444' : '#94a3b8'
+    const trendColor = item.trend > 5 ? '#22c55e' : item.trend < -5 ? '#ef4444' : '#475569'
 
     return (
         <m.div
@@ -58,7 +58,7 @@ function KeywordCard({ item, index }) {
                     <div style={{ fontSize: '1.6rem', fontWeight: 900, color: scoreColor, lineHeight: 1 }}>
                         {item.score}
                     </div>
-                    <div style={{ fontSize: '0.65rem', color: '#94a3b8', fontWeight: 600 }}>SCORE</div>
+                    <div style={{ fontSize: '0.65rem', color: '#475569', fontWeight: 600 }}>SCORE</div>
                 </div>
             </div>
 
@@ -66,7 +66,7 @@ function KeywordCard({ item, index }) {
             <ScoreBar score={item.score} />
 
             {/* Stats */}
-            <div style={{ display: 'flex', gap: '1rem', fontSize: '0.75rem', color: '#64748b' }}>
+            <div style={{ display: 'flex', gap: '1rem', fontSize: '0.75rem', color: '#475569' }}>
                 <div><strong style={{ color: '#475569' }}>{item.latest}</strong> current</div>
                 <div><strong style={{ color: '#475569' }}>{item.avg}</strong> avg (90d)</div>
                 <div style={{ color: trendColor, fontWeight: 700 }}>{trendArrow} {Math.abs(item.trend)} trend</div>
@@ -136,7 +136,7 @@ export default function TrendsDashboard() {
     })()
 
     return (
-        <div style={{ minHeight: '100vh', background: '#f8fafc', fontFamily: "'Inter', sans-serif" }}>
+        <main style={{ minHeight: '100vh', background: '#f8fafc', fontFamily: "'Inter', sans-serif" }}>
             {/* Header */}
             <div style={{
                 background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%)',
@@ -161,7 +161,7 @@ export default function TrendsDashboard() {
                         </div>
                     </div>
                     {data?.lastUpdated && (
-                        <div style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: '0.5rem' }}>
+                        <div style={{ fontSize: '0.75rem', color: '#475569', marginTop: '0.5rem' }}>
                             Last updated: {new Date(data.lastUpdated).toLocaleString('id-ID')}
                         </div>
                     )}
@@ -178,7 +178,7 @@ export default function TrendsDashboard() {
                             style={{
                                 padding: '0.85rem 1.1rem', fontWeight: 700, fontSize: '0.8rem', border: 'none',
                                 cursor: 'pointer', whiteSpace: 'nowrap', background: 'transparent',
-                                color: activeFilter === key ? '#4f46e5' : '#64748b',
+                                color: activeFilter === key ? '#4f46e5' : '#475569',
                                 borderBottom: activeFilter === key ? '2.5px solid #4f46e5' : '2.5px solid transparent',
                                 transition: 'all 0.2s'
                             }}
@@ -198,7 +198,7 @@ export default function TrendsDashboard() {
                     </div>
                 )}
                 {error === 'offline' && (
-                    <div style={{ textAlign: 'center', padding: '4rem', color: '#64748b' }}>
+                    <div style={{ textAlign: 'center', padding: '4rem', color: '#475569' }}>
                         <i className="fas fa-server" style={{ fontSize: '2rem', marginBottom: '1rem', opacity: 0.4 }} />
                         <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '0.5rem' }}>Backend not running</div>
                         <div style={{ fontSize: '0.85rem' }}>
@@ -207,7 +207,7 @@ export default function TrendsDashboard() {
                     </div>
                 )}
                 {error === 'loading' && (
-                    <div style={{ textAlign: 'center', padding: '4rem', color: '#64748b' }}>
+                    <div style={{ textAlign: 'center', padding: '4rem', color: '#475569' }}>
                         <div style={{ fontSize: '2rem', marginBottom: '1rem' }}>⏳</div>
                         <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '0.5rem' }}>Fetching Google Trends data…</div>
                         <div style={{ fontSize: '0.85rem' }}>This takes ~2 minutes on first load. Page auto-refreshes.</div>
@@ -221,7 +221,7 @@ export default function TrendsDashboard() {
                             <div style={{ fontWeight: 700, color: '#0f172a' }}>
                                 {displayed.length} keyword{displayed.length !== 1 ? 's' : ''} found
                             </div>
-                            <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
+                            <div style={{ fontSize: '0.75rem', color: '#475569' }}>
                                 Score = search interest × momentum (0–100)
                             </div>
                         </div>
@@ -275,6 +275,6 @@ export default function TrendsDashboard() {
                     </m.div>
                 )}
             </div>
-        </div>
+        </main>
     )
 }

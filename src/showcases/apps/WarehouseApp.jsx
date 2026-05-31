@@ -51,7 +51,7 @@ export default function WarehouseApp() {
                     </div>
                 </div>
                 <div style={{ padding: '1rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                    {PAGES.map(p => <div key={p.k} onClick={() => setPage(p.k)} style={{ padding: '10px 12px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', background: page === p.k ? 'rgba(16,185,129,0.15)' : 'transparent', color: page === p.k ? '#10b981' : '#9ca3af', fontSize: '0.85rem', fontWeight: page === p.k ? 600 : 400, transition: 'all 0.15s' }}>{p.i} {p.l}</div>)}
+                    {PAGES.map(p => <div key={p.k} onClick={() => setPage(p.k)} style={{ padding: '10px 12px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', background: page === p.k ? 'rgba(16,185,129,0.15)' : 'transparent', color: page === p.k ? '#10b981' : '#4b5563', fontSize: '0.85rem', fontWeight: page === p.k ? 600 : 400, transition: 'all 0.15s' }}>{p.i} {p.l}</div>)}
                 </div>
                 <div style={{ padding: '1rem', borderTop: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <img src={getOptimizedImg("https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d", { w: 100, h: 100 })} style={{ width: '32px', height: '32px', borderRadius: '50%' }} alt="user" />
@@ -122,7 +122,7 @@ export default function WarehouseApp() {
                                             <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#111827' }}>{s.action} <span style={{ fontFamily: 'monospace', fontSize: '0.72rem', color: '#6b7280' }}>{s.sku}</span></div>
                                             <div style={{ fontSize: '0.72rem', color: '#6b7280' }}>{s.loc} · <span style={{ fontWeight: 700 }}>{s.user}</span></div>
                                         </div>
-                                        <div style={{ fontSize: '0.65rem', color: '#9ca3af', whiteSpace: 'nowrap' }}>{s.time}</div>
+                                        <div style={{ fontSize: '0.65rem', color: '#4b5563', whiteSpace: 'nowrap' }}>{s.time}</div>
                                     </div>
                                 ))}
                             </div>
@@ -146,7 +146,7 @@ export default function WarehouseApp() {
                                     <div style={{ fontWeight: 600, color: '#111827', fontSize: '0.9rem' }}>{item.name}</div>
                                     <div><span style={{ background: item.qty < 10 ? '#fee2e2' : '#d1fae5', color: item.qty < 10 ? '#dc2626' : '#059669', padding: '3px 8px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 700 }}>{item.qty}</span></div>
                                     <div style={{ fontSize: '0.8rem', color: '#374151', fontFamily: 'monospace' }}>{item.loc}</div>
-                                    <div style={{ fontSize: '0.75rem', color: '#9ca3af' }}>{item.last}</div>
+                                    <div style={{ fontSize: '0.75rem', color: '#4b5563' }}>{item.last}</div>
                                 </div>
                             ))}
                         </div>

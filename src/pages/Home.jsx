@@ -15,10 +15,12 @@ export default function Home() {
                 canonical="/"
             />
             <Navbar />
+            <main>
             <Hero />
             <Services />
             <WhyUs />
             <CTA />
+            </main>
             <Footer />
         </>
     )
