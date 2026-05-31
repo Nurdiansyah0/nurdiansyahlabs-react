@@ -48,10 +48,16 @@ jobs:
 
           echo "--- Menyiapkan folder Cache ---"
           mkdir -p dist/cache
+          if [ -f api/cache/.htaccess ]; then cp api/cache/.htaccess dist/cache/.htaccess; fi
           echo "# Cache dir — writable by PHP" > dist/cache/.gitkeep
 
-          echo "--- Menyalin .htaccess untuk React Router ---"
-          if [ -f api/.htaccess ]; then cp api/.htaccess dist/.htaccess; fi
+          echo "--- Menyalin .htaccess utama (A/B Testing + React Router) ---"
+          if [ -f public/.htaccess ]; then
+            cp public/.htaccess dist/.htaccess
+            echo "✅ .htaccess (A/B + SPA fallback) disalin."
+          elif [ -f api/.htaccess ]; then
+            cp api/.htaccess dist/.htaccess
+          fi
 
       # ─── 6. Security Hardening ───────────────────────────────────
       - name: 🔐 Harden PHP for Production
