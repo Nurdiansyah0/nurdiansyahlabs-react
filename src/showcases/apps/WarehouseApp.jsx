@@ -65,7 +65,7 @@ export default function WarehouseApp() {
                     <h1 style={{ fontSize: '1.25rem', fontWeight: 800, margin: 0, color: '#111827' }}>{PAGES.find(p => p.k === page)?.l}</h1>
                     <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
                         <div style={{ width: '8px', height: '8px', background: '#166534', borderRadius: '50%', boxShadow: '0 0 0 3px #dcfce7' }} />
-                        <span style={{ fontSize: '0.8rem', color: '#6b7280' }}>Live</span>
+                        <span style={{ fontSize: '0.8rem', color: '#4b5563' }}>Live</span>
                         <div style={{ position: 'relative', cursor: 'pointer' }} onClick={() => setNotifOpen(!notifOpen)}>
                             <span style={{ fontSize: '1.2rem' }}>🔔</span>
                             <div style={{ position: 'absolute', top: '-3px', right: '-3px', background: '#b91c1c', width: '7px', height: '7px', borderRadius: '50%' }} />
@@ -82,7 +82,7 @@ export default function WarehouseApp() {
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
                                 {[{ l: 'Total Pallets', v: '1,284', t: '+12 today', c: '#1e3a8a' }, { l: 'Capacity Used', v: '84%', t: 'Zone C full', c: '#78350f' }, { l: 'Pending Putaway', v: `${42 + scans.filter(s => s.type === 'in').length}`, t: 'Needs action', c: '#7f1d1d' }, { l: 'Orders to Pick', v: `${156 - scans.filter(s => s.type === 'out').length}`, t: 'Cutoff 14:00', c: '#064e3b' }].map(m => (
                                     <div key={m.l} style={{ background: '#fff', borderRadius: '12px', padding: '1.25rem', border: '1px solid #e5e7eb' }}>
-                                        <div style={{ fontSize: '0.75rem', color: '#6b7280', fontWeight: 600, marginBottom: '8px' }}>{m.l}</div>
+                                        <div style={{ fontSize: '0.75rem', color: '#4b5563', fontWeight: 600, marginBottom: '8px' }}>{m.l}</div>
                                         <div style={{ fontSize: '1.8rem', fontWeight: 800, color: '#111827', marginBottom: '4px' }}>{m.v}</div>
                                         <div style={{ fontSize: '0.75rem', fontWeight: 600, color: m.c }}>{m.t}</div>
                                     </div>
@@ -92,7 +92,7 @@ export default function WarehouseApp() {
                             <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #e5e7eb' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
                                     <h2 style={{ fontSize: '1rem', fontWeight: 700, margin: 0, color: '#111827' }}>Live Floor Map</h2>
-                                    <div style={{ display: 'flex', gap: '1rem', fontSize: '0.7rem', color: '#6b7280' }}>
+                                    <div style={{ display: 'flex', gap: '1rem', fontSize: '0.7rem', color: '#4b5563' }}>
                                         {[['#d1fae5', 'Empty'], ['#34d399', 'Optimal'], ['#fbbf24', 'High'], ['#b91c1c', 'Full']].map(([c, l]) => <span key={l} style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><div style={{ width: '8px', height: '8px', background: c, borderRadius: '2px' }} />{l}</span>)}
                                     </div>
                                 </div>
@@ -119,8 +119,8 @@ export default function WarehouseApp() {
                                             {s.type === 'in' ? '↓' : s.type === 'out' ? '↑' : s.type === 'move' ? '⇄' : '✓'}
                                         </div>
                                         <div style={{ flex: 1 }}>
-                                            <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#111827' }}>{s.action} <span style={{ fontFamily: 'monospace', fontSize: '0.72rem', color: '#6b7280' }}>{s.sku}</span></div>
-                                            <div style={{ fontSize: '0.72rem', color: '#6b7280' }}>{s.loc} · <span style={{ fontWeight: 700 }}>{s.user}</span></div>
+                                            <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#111827' }}>{s.action} <span style={{ fontFamily: 'monospace', fontSize: '0.72rem', color: '#4b5563' }}>{s.sku}</span></div>
+                                            <div style={{ fontSize: '0.72rem', color: '#4b5563' }}>{s.loc} · <span style={{ fontWeight: 700 }}>{s.user}</span></div>
                                         </div>
                                         <div style={{ fontSize: '0.65rem', color: '#1f2937', whiteSpace: 'nowrap' }}>{s.time}</div>
                                     </div>
@@ -136,13 +136,13 @@ export default function WarehouseApp() {
                 {page === 'inventory' && (
                     <div style={{ flex: 1, overflowY: 'auto', padding: '2rem', background: '#f3f4f6' }}>
                         <div style={{ background: '#fff', borderRadius: '16px', border: '1px solid #e5e7eb', overflow: 'hidden' }}>
-                            <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 2fr 1fr 1fr 1fr', padding: '1rem 1.5rem', background: '#f9fafb', fontSize: '0.8rem', fontWeight: 600, color: '#6b7280', borderBottom: '1px solid #e5e7eb' }}>
+                            <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 2fr 1fr 1fr 1fr', padding: '1rem 1.5rem', background: '#f9fafb', fontSize: '0.8rem', fontWeight: 600, color: '#4b5563', borderBottom: '1px solid #e5e7eb' }}>
                                 {['SKU', 'Category', 'Item Name', 'Qty', 'Location', 'Last Updated'].map(h => <div key={h}>{h}</div>)}
                             </div>
                             {ITEMS.map((item, i) => (
                                 <div key={item.sku} style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 2fr 1fr 1fr 1fr', padding: '1rem 1.5rem', borderTop: i > 0 ? '1px solid #f3f4f6' : 'none', alignItems: 'center' }}>
                                     <div style={{ fontFamily: 'monospace', fontWeight: 700, color: '#047857', fontSize: '0.8rem' }}>{item.sku}</div>
-                                    <div style={{ fontSize: '0.8rem', color: '#6b7280' }}>{item.cat}</div>
+                                    <div style={{ fontSize: '0.8rem', color: '#4b5563' }}>{item.cat}</div>
                                     <div style={{ fontWeight: 600, color: '#111827', fontSize: '0.9rem' }}>{item.name}</div>
                                     <div><span style={{ background: item.qty < 10 ? '#fee2e2' : '#d1fae5', color: item.qty < 10 ? '#991b1b' : '#065f46', padding: '3px 8px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 700 }}>{item.qty}</span></div>
                                     <div style={{ fontSize: '0.8rem', color: '#374151', fontFamily: 'monospace' }}>{item.loc}</div>
@@ -158,7 +158,7 @@ export default function WarehouseApp() {
                         <div style={{ background: '#fff', borderRadius: '16px', padding: '3rem', maxWidth: '600px', width: '100%', textAlign: 'center', border: '1px solid #e5e7eb' }}>
                             <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>{page === 'inbound' ? '⬇️' : page === 'outbound' ? '⬆️' : '📈'}</div>
                             <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#111827', marginBottom: '1rem' }}>{page === 'inbound' ? 'Inbound' : 'Outbound'} {page === 'reports' ? 'Reports' : ''}</h2>
-                            <p style={{ color: '#6b7280', lineHeight: 1.7, marginBottom: '2rem' }}>
+                            <p style={{ color: '#4b5563', lineHeight: 1.7, marginBottom: '2rem' }}>
                                 {page === 'inbound' ? `${scans.filter(s => s.type === 'in').length} putaway scans recorded today.` : page === 'outbound' ? `${scans.filter(s => s.type === 'out').length} picks completed today.` : 'Generating report...'}
                             </p>
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1rem', marginBottom: '2rem' }}>
@@ -168,7 +168,7 @@ export default function WarehouseApp() {
                                 ).map(([l, v, c]) => (
                                     <div key={l} style={{ background: '#f9fafb', borderRadius: '10px', padding: '1rem' }}>
                                         <div style={{ fontSize: '1.5rem', fontWeight: 800, color: c }}>{v}</div>
-                                        <div style={{ fontSize: '0.75rem', color: '#6b7280', marginTop: '4px' }}>{l}</div>
+                                        <div style={{ fontSize: '0.75rem', color: '#4b5563', marginTop: '4px' }}>{l}</div>
                                     </div>
                                 ))}
                             </div>

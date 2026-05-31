@@ -36,24 +36,24 @@ export default function VehicleInspectionApp() {
                     <div style={{ fontSize: '2.5rem' }}>{issues > 0 ? '⚠️' : '✅'}</div>
                     <div>
                         <div style={{ fontWeight: 800, fontSize: '1.1rem', color: '#111827' }}>Inspeksi Selesai</div>
-                        <div style={{ color: '#6b7280', fontSize: '0.9rem' }}>Kendaraan: {selectedVeh?.plate} · {selectedVeh?.type}</div>
+                        <div style={{ color: '#4b5563', fontSize: '0.9rem' }}>Kendaraan: {selectedVeh?.plate} · {selectedVeh?.type}</div>
                     </div>
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1rem', marginBottom: '2rem' }}>
                     {[['Total Item', String(done), '#1d4ed8'], ['Baik', String(Object.values(checks).filter(v => v === 'Baik').length), '#047857'], ['Masalah', String(issues), '#b91c1c']].map(([l, v, c]) => (
                         <div key={l} style={{ background: '#f8fafc', borderRadius: '10px', padding: '1rem', textAlign: 'center' }}>
                             <div style={{ fontSize: '1.8rem', fontWeight: 800, color: c }}>{v}</div>
-                            <div style={{ fontSize: '0.75rem', color: '#6b7280', marginTop: '4px' }}>{l}</div>
+                            <div style={{ fontSize: '0.75rem', color: '#4b5563', marginTop: '4px' }}>{l}</div>
                         </div>
                     ))}
                 </div>
                 {issues > 0 && (
                     <div style={{ background: '#fff5f5', borderRadius: '10px', padding: '1rem', marginBottom: '1.5rem', border: '1px solid #fecaca' }}>
-                        <div style={{ fontWeight: 700, color: '#dc2626', marginBottom: '0.75rem', fontSize: '0.9rem' }}>Item Bermasalah:</div>
+                        <div style={{ fontWeight: 700, color: '#991b1b', marginBottom: '0.75rem', fontSize: '0.9rem' }}>Item Bermasalah:</div>
                         {Object.entries(checks).filter(([, v]) => v !== 'Baik').map(([k, v]) => (
                             <div key={k} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', padding: '4px 0', borderBottom: '1px solid #fee2e2' }}>
                                 <span style={{ color: '#374151' }}>{k.split(':')[1]}</span>
-                                <span style={{ color: '#dc2626', fontWeight: 700 }}>{v}</span>
+                                <span style={{ color: '#991b1b', fontWeight: 700 }}>{v}</span>
                             </div>
                         ))}
                     </div>
@@ -140,7 +140,7 @@ export default function VehicleInspectionApp() {
                                         <div key={item} style={{ padding: '1rem 1.5rem', borderBottom: '1px solid #f1f5f9', display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '1rem', alignItems: 'center' }}>
                                             <div style={{ fontWeight: 500, color: '#374151', fontSize: '0.9rem' }}>{item}</div>
                                             {OPT.map(o => (
-                                                <button aria-label="Action button" key={o} onClick={() => setCheck(section, item, o)} style={{ padding: '7px', borderRadius: '7px', border: '1px solid', borderColor: val === o ? (o === 'Baik' ? '#047857' : o === 'Cacat' ? '#b91c1c' : '#b45309') : '#e2e8f0', background: val === o ? (o === 'Baik' ? '#d1fae5' : o === 'Cacat' ? '#fee2e2' : '#fef3c7') : '#fff', color: val === o ? (o === 'Baik' ? '#065f46' : o === 'Cacat' ? '#dc2626' : '#d97706') : '#1e293b', fontWeight: val === o ? 700 : 400, cursor: 'pointer', fontSize: '0.8rem' }}>
+                                                <button aria-label="Action button" key={o} onClick={() => setCheck(section, item, o)} style={{ padding: '7px', borderRadius: '7px', border: '1px solid', borderColor: val === o ? (o === 'Baik' ? '#047857' : o === 'Cacat' ? '#b91c1c' : '#b45309') : '#e2e8f0', background: val === o ? (o === 'Baik' ? '#d1fae5' : o === 'Cacat' ? '#fee2e2' : '#fef3c7') : '#fff', color: val === o ? (o === 'Baik' ? '#065f46' : o === 'Cacat' ? '#991b1b' : '#92400e') : '#1e293b', fontWeight: val === o ? 700 : 400, cursor: 'pointer', fontSize: '0.8rem' }}>
                                                     {o === 'Baik' ? '✓ ' : o === 'Cacat' ? '⚠ ' : '✕ '}{o}
                                                 </button>
                                             ))}
@@ -162,7 +162,7 @@ export default function VehicleInspectionApp() {
                                 {[['Total Diperiksa', String(done), '#1d4ed8'], ['Baik', String(Object.values(checks).filter(v => v === 'Baik').length), '#047857'], ['Cacat', String(Object.values(checks).filter(v => v === 'Cacat').length), '#b91c1c'], ['Tidak Ada', String(Object.values(checks).filter(v => v === 'Tidak Ada').length), '#b45309']].map(([l, v, c]) => (
                                     <div key={l} style={{ background: '#f8fafc', borderRadius: '10px', padding: '1rem', textAlign: 'center' }}>
                                         <div style={{ fontSize: '1.8rem', fontWeight: 800, color: c }}>{v}</div>
-                                        <div style={{ fontSize: '0.75rem', color: '#6b7280', marginTop: '4px' }}>{l}</div>
+                                        <div style={{ fontSize: '0.75rem', color: '#4b5563', marginTop: '4px' }}>{l}</div>
                                     </div>
                                 ))}
                             </div>

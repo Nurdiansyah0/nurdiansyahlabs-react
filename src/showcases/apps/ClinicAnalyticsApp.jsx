@@ -36,7 +36,7 @@ export default function ClinicAnalyticsApp() {
             <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
                 {/* KPIs */}
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
-                    {[{ l: 'Total Pasien', v: String(d.igd + d.rawat + d.poli + d.radio + d.lab), i: '👥', c: '#2563eb' }, { l: 'Bed Terisi', v: `${BEDS.occupied}/${BEDS.total}`, i: '🛏', c: '#dc2626' }, { l: 'BOR', v: `${Math.round((BEDS.occupied / BEDS.total) * 100)}%`, i: '📊', c: '#b45309' }, { l: 'Bed Kosong', v: String(BEDS.available), i: '✅', c: '#16a34a' }].map(m => (
+                    {[{ l: 'Total Pasien', v: String(d.igd + d.rawat + d.poli + d.radio + d.lab), i: '👥', c: '#1e40af' }, { l: 'Bed Terisi', v: `${BEDS.occupied}/${BEDS.total}`, i: '🛏', c: '#991b1b' }, { l: 'BOR', v: `${Math.round((BEDS.occupied / BEDS.total) * 100)}%`, i: '📊', c: '#b45309' }, { l: 'Bed Kosong', v: String(BEDS.available), i: '✅', c: '#166534' }].map(m => (
                         <div key={m.l} style={{ background: '#fff', borderRadius: '14px', padding: '1.5rem', border: '1px solid #bfdbfe' }}>
                             <div style={{ fontSize: '1.5rem', marginBottom: '8px' }}>{m.i}</div>
                             <div style={{ fontSize: '1.8rem', fontWeight: 800, color: m.c, marginBottom: '4px' }}>{m.v}</div>
@@ -53,7 +53,7 @@ export default function ClinicAnalyticsApp() {
                                 {DEPTS.map(d => <option key={d}>{d}</option>)}
                             </select>
                         </div>
-                        {[['IGD', d.igd, '#b91c1c'], ['Rawat Inap', d.rawat, '#6d28d9'], ['Poliklinik', d.poli, '#2563eb'], ['Radiologi', d.radio, '#b45309'], ['Laboratorium', d.lab, '#16a34a']].map(([name, val, color]) => (
+                        {[['IGD', d.igd, '#b91c1c'], ['Rawat Inap', d.rawat, '#6d28d9'], ['Poliklinik', d.poli, '#1e40af'], ['Radiologi', d.radio, '#b45309'], ['Laboratorium', d.lab, '#166534']].map(([name, val, color]) => (
                             <div key={name} style={{ marginBottom: '1rem', opacity: dept === 'Semua' || dept === name ? 1 : 0.3 }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px', fontSize: '0.85rem' }}>
                                     <span style={{ color: '#374151', fontWeight: 500 }}>{name}</span>
