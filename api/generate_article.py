@@ -68,23 +68,23 @@ def set_cached_article(keyword_hash, keyword, volume, lang, response_json):
 # ──────────────────────────────────────────────────────────────────────────────
 # CONFIGURATION
 # ──────────────────────────────────────────────────────────────────────────────
-GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
-GROQ_ENDPOINT = "https://api.groq.com/openai/v1/chat/completions"
-GROQ_MODEL = "llama-3.1-8b-instant"
-GROQ_TIMEOUT = 15   # seconds
+# Using Pollinations AI - a 100% FREE, KEYLESS public LLM endpoint
+# It routes to LLaMA/Mistral behind the scenes with no auth required.
+LLM_ENDPOINT = "https://text.pollinations.ai/openai"
+LLM_TIMEOUT = 45
 
 
 # ──────────────────────────────────────────────────────────────────────────────
-# MODE 1: GROQ LLM API (Machine Learning - Real AI)
+# MODE 1: KEYLESS LLM (Pollinations AI)
 # ──────────────────────────────────────────────────────────────────────────────
-def _groq_generate(keyword, volume, lang):
-    """Call Groq's free API with llama-3.1-8b-instant. Pure urllib, zero extra deps."""
+def _llm_generate(keyword, volume, lang):
+    """Call Keyless Free API. Pure urllib, zero extra deps."""
     
     # 1. Check Edge Cache first
     keyword_hash = hashlib.md5(f"{keyword.lower()}_{lang}".encode()).hexdigest()
     cached_data = get_cached_article(keyword_hash)
     if cached_data:
-        cached_data["mode"] = "groq_llm_cached"  # Indicate it was served from cache
+        cached_data["mode"] = "llm_cached"  # Indicate it was served from cache
         return cached_data
 
     if lang == 'id':
@@ -95,45 +95,32 @@ def _groq_generate(keyword, volume, lang):
             "2. Jasa Fullstack Web Developer, "
             "3. Konsultan Data Analyst, "
             "4. Jasa Data Science & AI. "
-            "Gunakan analogi yang cerdas, tone profesional tapi engaging, dan masukkan Long-Tail Keywords (seperti 'jasa pembuatan website', 'konsultan data', dll) secara natural."
+            "Gunakan analogi yang cerdas, tone profesional tapi engaging, dan masukkan Long-Tail Keywords secara natural. Hasilkan format JSON."
         )
         user_prompt = (
             f"Tulis artikel SEO 'Silo Strategy' tentang topik viral: **{keyword}** (Pencarian: {volume}).\n"
             f"INSTRUKSI WAJIB:\n"
-            f"1. Judul clickbait tapi nyambung dengan Bisnis/Teknologi (Contoh format: 'Heboh {keyword}, Apa Pelajarannya untuk Strategi Data Bisnis Anda?').\n"
+            f"1. Judul clickbait tapi nyambung dengan Bisnis/Teknologi.\n"
             f"2. Intro 3 kalimat yang membahas {keyword} sebagai 'hook' awal.\n"
-            f"3. Paragraf transisi yang SANGAT HALUS (smooth) untuk menghubungkan tren tersebut dengan pentingnya teknologi (Web Dev / Data / AI) bagi UMKM atau Perusahaan.\n"
-            f"4. Minimal 3 Subheading H2 yang membahas solusi/dampak bisnis dari kacamata IT.\n"
-            f"5. Soft-Selling CTA (Call to Action) organik di akhir paragraf, mengajak pembaca untuk konsultasi IT / Data ke [NurdiansyahLabs](https://nurdiansyahlabs.com).\n"
-            f"6. 2 FAQ (Tanya Jawab) yang relevan untuk target Google Featured Snippet.\n\n"
+            f"3. Paragraf transisi yang SANGAT HALUS untuk menghubungkan tren tersebut dengan teknologi.\n"
+            f"4. Minimal 3 Subheading H2 yang membahas solusi bisnis dari kacamata IT.\n"
+            f"5. Soft-Selling CTA organik di akhir paragraf mengajak pembaca ke [NurdiansyahLabs](https://nurdiansyahlabs.com).\n"
+            f"6. 2 FAQ (Tanya Jawab) relevan.\n\n"
             f"Kembalikan HANYA JSON yang valid:\n"
             f'{{"title":"...", "description":"...", "content":"...[markdown format]...", "faqs":[{{"q":"...","a":"..."}}]}}'
         )
     else:
         system_prompt = (
             "You are a B2B SEO Specialist, Copywriter, and Tech Consultant. "
-            "Your task is to write an SEO article that cleverly 'twists' any trending topic to make it highly relevant to one of NurdiansyahLabs' 4 core services: "
-            "1. Landing Page / Front-end, "
-            "2. Fullstack Web Development, "
-            "3. Data Analytics Consulting, "
-            "4. Data Science & AI Services. "
-            "Use sharp analogies, professional yet engaging tone, and inject Long-Tail Keywords naturally."
+            "Your task is to write an SEO article that cleverly 'twists' any trending topic to make it highly relevant to one of NurdiansyahLabs' 4 core services. Generate in JSON format."
         )
         user_prompt = (
             f"Write an SEO 'Silo Strategy' article on the viral topic: **{keyword}** (Search volume: {volume}).\n"
-            f"STRICT INSTRUCTIONS:\n"
-            f"1. A catchy B2B/Tech relevant title (e.g., 'What the {keyword} Trend Teaches Us About Data Strategy').\n"
-            f"2. A hook intro briefly discussing the {keyword} trend.\n"
-            f"3. A smooth psychological transition linking the trend to technology (Web Dev / Data / AI) implications for businesses.\n"
-            f"4. At least 3 H2 subheadings analyzing the business/tech impact of this trend.\n"
-            f"5. A persuasive, organic soft-selling CTA at the end pointing to [NurdiansyahLabs](https://nurdiansyahlabs.com) for IT/Data solutions.\n"
-            f"6. 2 relevant FAQs optimized for Google Featured Snippets.\n\n"
             f"Return ONLY valid JSON:\n"
             f'{{"title":"...", "description":"...", "content":"...[markdown format]...", "faqs":[{{"q":"...","a":"..."}}]}}'
         )
 
     payload = json.dumps({
-        "model": GROQ_MODEL,
         "messages": [
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_prompt}
@@ -144,19 +131,29 @@ def _groq_generate(keyword, volume, lang):
     }).encode('utf-8')
 
     req = urllib.request.Request(
-        GROQ_ENDPOINT,
+        LLM_ENDPOINT,
         data=payload,
         headers={
-            "Authorization": f"Bearer {GROQ_API_KEY}",
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         },
         method="POST"
     )
 
-    with urllib.request.urlopen(req, timeout=GROQ_TIMEOUT) as resp:
+    with urllib.request.urlopen(req, timeout=LLM_TIMEOUT) as resp:
         raw = json.loads(resp.read().decode('utf-8'))
 
-    text = raw['choices'][0]['message']['content']
+    text = raw['choices'][0]['message']['content'].strip()
+    
+    # Clean up markdown code blocks if the LLM adds them
+    if text.startswith("```json"):
+        text = text[7:]
+    if text.startswith("```"):
+        text = text[3:]
+    if text.endswith("```"):
+        text = text[:-3]
+    text = text.strip()
+
     data = json.loads(text)
 
     # Normalize field names
@@ -357,13 +354,12 @@ def generate_article(keyword, volume, lang='id'):
     if lang not in ('id', 'en'):
         lang = 'en'
 
-    # Mode 1: Groq LLM (Real Machine Learning)
-    if GROQ_API_KEY:
-        try:
-            result = _groq_generate(keyword, volume, lang)
-            return json.dumps(result, ensure_ascii=False)
-        except (urllib.error.URLError, urllib.error.HTTPError, json.JSONDecodeError, KeyError):
-            pass  # Fallthrough to Mode 2
+    # Mode 1: Keyless LLM (Pollinations AI)
+    try:
+        result = _llm_generate(keyword, volume, lang)
+        return json.dumps(result, ensure_ascii=False)
+    except (urllib.error.URLError, urllib.error.HTTPError, json.JSONDecodeError, KeyError):
+        pass  # Fallthrough to Mode 2
 
     # Mode 2: Markov Chain NLG (Local ML)
     try:
