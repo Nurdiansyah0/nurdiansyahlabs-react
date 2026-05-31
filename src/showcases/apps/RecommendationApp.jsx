@@ -54,13 +54,15 @@ export default function SmartVisionApp() {
         if (!videoRef.current || !canvasRef.current || !modelRef.current || !isCameraActive) return
         
         const video = videoRef.current
-        if (video.readyState !== 4) {
+        // HAVE_CURRENT_DATA = 2. Live streams sometimes fluctuate or stay at 3.
+        if (video.readyState < 2) {
             requestRef.current = requestAnimationFrame(detectFrame)
             return
         }
 
         try {
-            const predictions = await modelRef.current.detect(video)
+            // Parameter: (element, maxNumBoxes, minScore). Default minScore = 0.5, diturunkan ke 0.3
+            const predictions = await modelRef.current.detect(video, 20, 0.3)
             setDetections(predictions)
             
             const ctx = canvasRef.current.getContext('2d')
