@@ -3,10 +3,10 @@ import { m, AnimatePresence } from 'framer-motion'
 import { useLanguage } from '../i18n/LanguageContext'
 
 const SERVICE_LABELS = {
-    landing_page: { label: 'Landing Page', color: '#1e3a8a', bg: '#dbeafe', icon: 'fa-layer-group' },
-    fullstack: { label: 'Fullstack Dev', color: '#4338ca', bg: '#e0e7ff', icon: 'fa-code' },
-    data_analyst: { label: 'Data Analyst', color: '#065f46', bg: '#d1fae5', icon: 'fa-chart-pie' },
-    data_science: { label: 'Data Scientist', color: '#5b21b6', bg: '#ede9fe', icon: 'fa-brain' },
+    landing_page: { label: 'Landing Page', color: '#172554', bg: '#dbeafe', icon: 'fa-layer-group' },
+    fullstack: { label: 'Fullstack Dev', color: '#1e1b4b', bg: '#e0e7ff', icon: 'fa-code' },
+    data_analyst: { label: 'Data Analyst', color: '#022c22', bg: '#d1fae5', icon: 'fa-chart-pie' },
+    data_science: { label: 'Data Scientist', color: '#2e1065', bg: '#ede9fe', icon: 'fa-brain' },
 }
 
 function ScoreBar({ score }) {

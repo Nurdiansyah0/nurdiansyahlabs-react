@@ -208,7 +208,7 @@ export default function BlogPage() {
                 {/* Hero */}
                 <div style={{ background: `linear-gradient(135deg, ${post.accentLight} 0%, #fff 100%)`, padding: '3rem 1.5rem 2rem', borderBottom: '1px solid #e2e8f0' }}>
                     <div style={{ maxWidth: '760px', margin: '0 auto' }}>
-                        <span style={{ fontSize: '0.72rem', fontWeight: 700, padding: '4px 12px', borderRadius: '9999px', background: post.accent, color: '#fff', marginBottom: '1rem', display: 'inline-block' }}>
+                        <span style={{ fontSize: '0.72rem', fontWeight: 700, padding: '4px 12px', borderRadius: '9999px', background: post.accent === "#f59e0b" ? "#92400e" : post.accent, color: '#fff', marginBottom: '1rem', display: 'inline-block' }}>
                             {post.serviceLabel}
                         </span>
                         <m.h1
@@ -268,7 +268,7 @@ export default function BlogPage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.4 }}
                         style={{
-                            marginTop: '2rem', background: `linear-gradient(135deg, ${post.accent}, #0f172a)`,
+                            marginTop: '2rem', background: `linear-gradient(135deg, ${post.accent === "#f59e0b" ? "#92400e" : post.accent}, #0f172a)`,
                             borderRadius: '16px', padding: '2rem', color: '#fff', textAlign: 'center'
                         }}
                     >
