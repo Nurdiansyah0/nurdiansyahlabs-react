@@ -143,7 +143,7 @@ export default function WarungMakanApp() {
             </div>
             {/* Footer */}
             <div style={{ background: '#1c2125', color: '#888', textAlign: 'center', padding: '3rem 2rem', fontSize: '0.9rem' }}>
-                <img src={getOptimizedImg("/assets/Logo_alyuna.jpeg", { w: 100, h: 100 })} alt="Alyuna" style={{ width: '40px', height: '40px', borderRadius: '50%', opacity: 0.5, marginBottom: '1rem' }} />
+                <img src={getOptimizedImg("/assets/Logo_alyuna.jpeg", { w: 100, h: 100 })} alt="Alyuna" style={{ width: '40px', height: '40px', borderRadius: '50%', opacity: 0.5, marginBottom: '1rem', objectFit: 'cover' }} />
                 <p>&copy; {new Date().getFullYear()} Alyuna Siomay. Buka Tiap Hari, Sedia Pesanan Partai Besar.</p>
             </div>
         </div>
