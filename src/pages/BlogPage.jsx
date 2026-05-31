@@ -186,11 +186,11 @@ export default function BlogPage() {
                         <img src={getOptimizedImg("/assets/logo.svg", { w: 50 })} alt="NurdiansyahLabs" style={{ width: '20px', height: '20px' }} />
                         NurdiansyahLabs
                     </Link>
-                    <span style={{ color: '#94a3b8', fontSize: '0.8rem' }}>›</span>
-                    <span style={{ color: '#64748b', fontSize: '0.8rem' }}>Blog</span>
+                    <span style={{ color: '#475569', fontSize: '0.8rem' }}>›</span>
+                    <span style={{ color: '#475569', fontSize: '0.8rem' }}>Blog</span>
                     {post?.geo_origin && (
                         <>
-                            <span style={{ color: '#94a3b8', fontSize: '0.8rem' }}>›</span>
+                            <span style={{ color: '#475569', fontSize: '0.8rem' }}>›</span>
                             <span style={{
                                 background: '#f1f5f9', color: '#475569', fontSize: '0.7rem',
                                 padding: '2px 6px', borderRadius: '4px', fontWeight: 600, display: 'flex', gap: '4px', alignItems: 'center'
@@ -199,7 +199,7 @@ export default function BlogPage() {
                             </span>
                         </>
                     )}
-                    <span style={{ color: '#94a3b8', fontSize: '0.8rem' }}>›</span>
+                    <span style={{ color: '#475569', fontSize: '0.8rem' }}>›</span>
                     <span style={{ color: '#0f172a', fontSize: '0.8rem', fontWeight: 600, maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                         {actualSlug.split('/').pop()}
                     </span>

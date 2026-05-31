@@ -47,7 +47,7 @@ export default function CropYieldApp() {
                         <div key={l} style={{ background: '#fff', borderRadius: '14px', padding: '1.5rem', border: '1px solid #bbf7d0' }}>
                             <div style={{ fontSize: '1.5rem', marginBottom: '8px' }}>{i}</div>
                             <div style={{ fontSize: typeof v === 'string' && v.length > 10 ? '1rem' : '1.5rem', fontWeight: 800, color: c, marginBottom: '4px', lineHeight: 1.2 }}>{v}</div>
-                            <div style={{ fontSize: '0.75rem', color: '#64748b' }}>{l}</div>
+                            <div style={{ fontSize: '0.75rem', color: '#475569' }}>{l}</div>
                         </div>
                     ))}
                 </div>
@@ -66,7 +66,7 @@ export default function CropYieldApp() {
                                         <div style={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', height: '160px' }}>
                                             <div style={{ height: `${h}px`, background: `hsl(${120 + i * 15},60%,45%)`, borderRadius: '6px 6px 0 0', transition: 'height 0.4s', minHeight: '8px' }} />
                                         </div>
-                                        <div style={{ fontSize: '0.65rem', color: '#64748b', fontWeight: 600, textAlign: 'center', lineHeight: 1.2 }}>{r.split(' ')[0]}</div>
+                                        <div style={{ fontSize: '0.65rem', color: '#475569', fontWeight: 600, textAlign: 'center', lineHeight: 1.2 }}>{r.split(' ')[0]}</div>
                                     </div>
                                 )
                             })}
@@ -81,7 +81,7 @@ export default function CropYieldApp() {
                                 <p style={{ fontSize: '0.82rem', color: '#374151', lineHeight: 1.7, margin: 0 }}>{RECS[crop]}</p>
                             </div>
                         </div>
-                        <div style={{ fontSize: '0.8rem', color: '#64748b', marginBottom: '1rem' }}>Perbandingan Wilayah:</div>
+                        <div style={{ fontSize: '0.8rem', color: '#475569', marginBottom: '1rem' }}>Perbandingan Wilayah:</div>
                         {Object.entries(d).sort(([, a], [, b]) => b - a).map(([r, v], i) => (
                             <div key={r} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 0', borderBottom: i < REGIONS.length - 1 ? '1px solid #f0fdf4' : 'none' }}>
                                 <span style={{ fontSize: '0.82rem', color: '#374151' }}>{i + 1}. {r}</span>

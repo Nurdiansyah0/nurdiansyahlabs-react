@@ -33,7 +33,7 @@ export default function RetailSalesApp() {
             
             <div style={{ background: '#1e293b', padding: '1.5rem 2rem', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
-                    <div style={{ fontSize: '0.7rem', color: '#94a3b8', letterSpacing: '0.15em', marginBottom: '4px' }}>DATA ANALYTICS DASHBOARD</div>
+                    <div style={{ fontSize: '0.7rem', color: '#475569', letterSpacing: '0.15em', marginBottom: '4px' }}>DATA ANALYTICS DASHBOARD</div>
                     <h1 style={{ fontSize: '1.5rem', fontWeight: 800, margin: 0 }}>Retail Sales Analytics</h1>
                 </div>
                 <div style={{ display: 'flex', gap: '1rem' }}>
@@ -55,14 +55,14 @@ export default function RetailSalesApp() {
                                 <span style={{ background: '#d1fae5', color: '#059669', fontSize: '0.75rem', fontWeight: 700, padding: '3px 8px', borderRadius: '6px' }}>{t}</span>
                             </div>
                             <div style={{ fontSize: '1.6rem', fontWeight: 800, color: '#0f172a', marginBottom: '4px' }}>{v}</div>
-                            <div style={{ fontSize: '0.8rem', color: '#64748b' }}>{l}</div>
+                            <div style={{ fontSize: '0.8rem', color: '#475569' }}>{l}</div>
                         </div>
                     ))}
                 </div>
                 {/* Tab nav */}
                 <div style={{ display: 'flex', gap: '8px', marginBottom: '1.5rem' }}>
                     {[['overview', 'Overview'], ['products', 'Produk Terlaris'], ['branches', 'Perbandingan Cabang']].map(([k, l]) => (
-                        <button aria-label="Action button" key={k} onClick={() => setTab(k)} style={{ padding: '9px 20px', borderRadius: '8px', background: tab === k ? '#6366f1' : '#fff', color: tab === k ? '#fff' : '#64748b', fontWeight: tab === k ? 700 : 500, cursor: 'pointer', fontSize: '0.85rem', border: tab !== k ? '1px solid #e2e8f0' : 'none' }}>{l}</button>
+                        <button aria-label="Action button" key={k} onClick={() => setTab(k)} style={{ padding: '9px 20px', borderRadius: '8px', background: tab === k ? '#6366f1' : '#fff', color: tab === k ? '#fff' : '#475569', fontWeight: tab === k ? 700 : 500, cursor: 'pointer', fontSize: '0.85rem', border: tab !== k ? '1px solid #e2e8f0' : 'none' }}>{l}</button>
                     ))}
                 </div>
                 {tab === 'overview' && (
@@ -77,7 +77,7 @@ export default function RetailSalesApp() {
                                             <div style={{ height: `${(d.profit / maxRev) * 160}px`, background: '#c7d2fe', borderRadius: '4px 4px 0 0', minHeight: '4px', transition: 'height 0.3s' }} />
                                             <div style={{ height: `${((d.rev - d.profit) / maxRev) * 160}px`, background: '#6366f1', borderRadius: '0', minHeight: '4px' }} />
                                         </div>
-                                        <div style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 600 }}>{d.m}</div>
+                                        <div style={{ fontSize: '0.8rem', color: '#475569', fontWeight: 600 }}>{d.m}</div>
                                     </div>
                                 ))}
                             </div>
@@ -104,7 +104,7 @@ export default function RetailSalesApp() {
                 )}
                 {tab === 'products' && (
                     <div style={{ background: '#fff', borderRadius: '16px', border: '1px solid #e2e8f0', overflow: 'hidden' }}>
-                        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', padding: '12px 1.5rem', background: '#f8fafc', fontWeight: 600, color: '#64748b', fontSize: '0.8rem', borderBottom: '1px solid #e2e8f0' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', padding: '12px 1.5rem', background: '#f8fafc', fontWeight: 600, color: '#475569', fontSize: '0.8rem', borderBottom: '1px solid #e2e8f0' }}>
                             {['Produk', 'Kategori', 'Terjual', 'Revenue'].map(h => <div key={h}>{h}</div>)}
                         </div>
                         {TOP_PRODUCTS.map((p, i) => (
@@ -129,7 +129,7 @@ export default function RetailSalesApp() {
                                     <span style={{ background: '#d1fae5', color: '#059669', fontSize: '0.75rem', fontWeight: 700, padding: '3px 8px', borderRadius: '6px' }}>{info.growth}</span>
                                 </div>
                                 <div style={{ fontSize: '1.5rem', fontWeight: 800, color: BAR_COLORS[i], marginBottom: '8px' }}>{info.rev}</div>
-                                <div style={{ fontSize: '0.8rem', color: '#64748b' }}>📦 {info.orders} pesanan · 💳 {info.avg}/transaksi</div>
+                                <div style={{ fontSize: '0.8rem', color: '#475569' }}>📦 {info.orders} pesanan · 💳 {info.avg}/transaksi</div>
                             </div>
                         ))}
                     </div>
