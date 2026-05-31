@@ -571,7 +571,7 @@ export default function AdminDashboard() {
                             <form onSubmit={handleSavePost} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                                 <div>
                                     <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: '6px', color: '#475569' }}>Target App / Landing Page</label>
-                                    <select required value={editingPost.app_id} onChange={e => setEditingPost({ ...editingPost, app_id: e.target.value })} disabled={!isCreating} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box' }}>
+                                    <select aria-label="Select option" aria-label="Select option" required value={editingPost.app_id} onChange={e => setEditingPost({ ...editingPost, app_id: e.target.value })} disabled={!isCreating} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box' }}>
                                         <option value="toko-laptop-batam">💻 Batam Laptop Center</option>
                                         <option value="batam-chicken-supplier">🐓 Batam Chicken Farm</option>
                                         <option value="batam-rental-mobil">🚗 Batam Rental Mobil</option>
@@ -600,27 +600,27 @@ export default function AdminDashboard() {
                                     <div style={{ flex: 1 }}>
                                         <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: '6px', color: '#475569' }}>Category / Tag</label>
                                         {editingPost.app_id === 'batam-rental-mobil' ? (
-                                            <select value={editingPost.category || ''} onChange={e => setEditingPost({ ...editingPost, category: e.target.value })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box' }}>
+                                            <select aria-label="Select option" aria-label="Select option" value={editingPost.category || ''} onChange={e => setEditingPost({ ...editingPost, category: e.target.value })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box' }}>
                                                 <option value="">-- Choose Category --</option>
                                                 <option value="Lepas Kunci">Lepas Kunci (Self Drive)</option>
                                                 <option value="Dengan Sopir">Dengan Sopir (With Driver)</option>
                                             </select>
                                         ) : editingPost.app_id === 'warung-makan' ? (
-                                            <select value={editingPost.category || ''} onChange={e => setEditingPost({ ...editingPost, category: e.target.value })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box' }}>
+                                            <select aria-label="Select option" aria-label="Select option" value={editingPost.category || ''} onChange={e => setEditingPost({ ...editingPost, category: e.target.value })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box' }}>
                                                 <option value="">-- Pilih Kategori --</option>
                                                 <option value="Siomay">Siomay (Satuan)</option>
                                                 <option value="Paket Spesial">Paket Spesial (Berbagai Isi)</option>
                                                 <option value="Kue Kering">Kue Kering / Nastar</option>
                                             </select>
                                         ) : editingPost.app_id === 'toko-laptop-batam' ? (
-                                            <select value={editingPost.category || ''} onChange={e => setEditingPost({ ...editingPost, category: e.target.value })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box' }}>
+                                            <select aria-label="Select option" aria-label="Select option" value={editingPost.category || ''} onChange={e => setEditingPost({ ...editingPost, category: e.target.value })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box' }}>
                                                 <option value="">-- Pilih Kategori --</option>
                                                 <option value="Laptops">Laptops / MacBooks</option>
                                                 <option value="Gadgets">Gadgets / Smartphones</option>
                                                 <option value="Monitors">Monitors / Peripherals</option>
                                             </select>
                                         ) : editingPost.app_id === 'batam-chicken-supplier' ? (
-                                            <select value={editingPost.category || ''} onChange={e => setEditingPost({ ...editingPost, category: e.target.value })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box' }}>
+                                            <select aria-label="Select option" aria-label="Select option" value={editingPost.category || ''} onChange={e => setEditingPost({ ...editingPost, category: e.target.value })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box' }}>
                                                 <option value="">-- Pilih Label --</option>
                                                 <option value="Best Seller">Best Seller</option>
                                                 <option value="Favorit Restoran">Favorit Restoran</option>
@@ -672,7 +672,7 @@ export default function AdminDashboard() {
                                             </div>
                                             <div style={{ flex: 1, minWidth: '120px' }}>
                                                 <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: '6px' }}>Transmission</label>
-                                                <select value={editingPost.extras?.trans || 'Matic'} onChange={e => setEditingPost({ ...editingPost, extras: { ...editingPost.extras, trans: e.target.value } })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+                                                <select aria-label="Select option" aria-label="Select option" value={editingPost.extras?.trans || 'Matic'} onChange={e => setEditingPost({ ...editingPost, extras: { ...editingPost.extras, trans: e.target.value } })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
                                                     <option value="Matic">Matic</option>
                                                     <option value="Manual">Manual</option>
                                                 </select>
@@ -757,7 +757,7 @@ export default function AdminDashboard() {
                                 <h2 style={{ margin: 0, color: '#0f172a' }}>Manage Products</h2>
 
                                 <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                                    <select value={productApp} onChange={e => setProductApp(e.target.value)} style={{ padding: '0.6rem 1rem', borderRadius: '8px', border: '1px solid #e2e8f0', background: '#fff' }}>
+                                    <select aria-label="Select option" aria-label="Select option" value={productApp} onChange={e => setProductApp(e.target.value)} style={{ padding: '0.6rem 1rem', borderRadius: '8px', border: '1px solid #e2e8f0', background: '#fff' }}>
                                         <option value="toko-laptop-batam">💻 Batam Laptop Center</option>
                                         <option value="batam-chicken-supplier">🐓 Batam Chicken Farm</option>
                                         <option value="batam-rental-mobil">🚗 Batam Rental Mobil</option>

@@ -67,7 +67,7 @@ export default function ShowcaseLayout({ children }) {
                 }}
             >
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', lineHeight: 1.2 }}>
-                    <span style={{ opacity: 0.7, fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+                    <span style={{ opacity: 0.85, fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
                         Live Project By
                     </span>
                     <span style={{ 

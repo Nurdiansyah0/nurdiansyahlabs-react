@@ -17,10 +17,10 @@ export default function SalesForecastingApp() {
                     <h1 style={{ fontSize: '1.5rem', fontWeight: 800, margin: 0 }}>Sales Forecasting</h1>
                 </div>
                 <div style={{ display: 'flex', gap: '1rem' }}>
-                    <select value={model} onChange={e => setModel(e.target.value)} style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', padding: '8px 14px', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', cursor: 'pointer' }}>
+                    <select aria-label="Select option" aria-label="Select option" value={model} onChange={e => setModel(e.target.value)} style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', padding: '8px 14px', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', cursor: 'pointer' }}>
                         {Object.keys(accuracy).map(m => <option key={m} value={m} style={{ color: '#000' }}>{m}</option>)}
                     </select>
-                    <select value={period} onChange={e => setPeriod(Number(e.target.value))} style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', padding: '8px 14px', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', cursor: 'pointer' }}>
+                    <select aria-label="Select option" aria-label="Select option" value={period} onChange={e => setPeriod(Number(e.target.value))} style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', padding: '8px 14px', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', cursor: 'pointer' }}>
                         {PERIODS.map(p => <option key={p} value={p} style={{ color: '#000' }}>+{p} bulan</option>)}
                     </select>
                 </div>

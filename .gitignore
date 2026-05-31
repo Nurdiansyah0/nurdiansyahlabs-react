@@ -30,3 +30,4 @@ api/truncate_db.php
 diagnose_env.php
 truncate_db.php
 diagnose_db.php
+.unlighthouse
