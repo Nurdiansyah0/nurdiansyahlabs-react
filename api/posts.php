@@ -85,16 +85,43 @@ if (!$pdo) {
     exit;
 }
 
-// We strip out the full content column to save bandwidth on the listing page
-$stmt = $pdo->query("SELECT slug, title, description, service, serviceLabel, accent, accentLight, images FROM posts ORDER BY created_at DESC");
+// Ensure the `images` column exists (fallback schema patch in case migration wasn't run on cPanel)
+try {
+    $pdo->query("SELECT images FROM posts LIMIT 1");
+} catch (PDOException $e) {
+    if (strpos($e->getMessage(), 'Unknown column') !== false) {
+        try {
+            $pdo->exec("ALTER TABLE posts ADD COLUMN images JSON NULL AFTER img");
+        } catch (Exception $ex) {
+            // If ALTER fails (e.g. no privileges), we will handle it below
+        }
+    }
+}
+
+try {
+    // Attempt to fetch with `images` column
+    $stmt = $pdo->query("SELECT slug, title, description, service, serviceLabel, accent, accentLight, images FROM posts ORDER BY created_at DESC");
+} catch (PDOException $e) {
+    // If it STILL fails (ALTER didn't work), fallback to fetching all and mapping `img`
+    $stmt = $pdo->query("SELECT * FROM posts ORDER BY created_at DESC");
+}
+
 $posts = $stmt->fetchAll();
 
 foreach ($posts as &$post) {
-    if (!empty($post['images'])) {
-        $post['images'] = json_decode($post['images'], true);
+    $imgData = $post['images'] ?? $post['img'] ?? null;
+    if (!empty($imgData)) {
+        $decoded = json_decode($imgData, true);
+        if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+            $post['images'] = $decoded;
+        } else {
+            $post['images'] = [['url' => $imgData, 'is_primary' => true]];
+        }
     } else {
         $post['images'] = [];
     }
+    unset($post['content']); // Remove large content to save bandwidth
+    unset($post['img']); // Remove raw img
 }
 
 $response = ['total' => count($posts), 'posts' => $posts];

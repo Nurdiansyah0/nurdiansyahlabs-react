@@ -1,249 +1,169 @@
 <?php
 /**
- * NurdiansyahLabs – Google Trends Auto-Blogger (Growth Hack)
+ * NurdiansyahLabs – Autonomous SEO Content Generator
  * Deployed at: /public_html/api/auto_post_trends.php
  * 
- * Scrapes Google Trends ID RSS, Extracts #1 Keyword, Generates a 5-paragraph
- * SEO-optimized article injecting the keyword, and inserts it into MySQL.
+ * Fetches the #1 highest-opportunity keyword from Google Trends (via trends.php),
+ * generates a fully-optimized SEO article via Pollinations AI (keyless, free),
+ * and directly inserts it into the NurdiansyahLabs MySQL database.
+ * 
+ * Run this via cron job: `0 8,20 * * * php /home/uygpuazs/public_html/api/auto_post_trends.php`
  */
-
-header('Content-Type: application/json');
-
-// ── Security Protocol (Optional: Protect endpoint so only Cron/Admin runs it) ──
-$secretCronKey = 'nurdiansyah-cron-2026'; // e.g. /api/auto_post_trends.php?key=...
-if (isset($_GET['key']) && $_GET['key'] !== $secretCronKey) {
-    http_response_code(403);
-    echo json_encode(['error' => 'Forbidden Access']);
-    exit;
-}
 
 require_once __DIR__ . '/../database/db.php';
 $pdo = getDB();
 
 if (!$pdo) {
-    http_response_code(500);
-    echo json_encode(['error' => 'Database connection failed']);
-    exit;
+    die("Database connection failed\n");
 }
 
-// ── 1. G20 Geography Definitions & Dynamic RSS ────────────────────────────────
-$geoRaw = isset($_GET['geo']) ? strtoupper($_GET['geo']) : 'US'; // Default to US if not provided
+// Ensure images column exists
+try {
+    $pdo->query("SELECT images FROM posts LIMIT 1");
+} catch (PDOException $e) {
+    if (strpos($e->getMessage(), 'Unknown column') !== false) {
+        try {
+            $pdo->exec("ALTER TABLE posts ADD COLUMN images JSON NULL AFTER img");
+        } catch (Exception $ex) {}
+    }
+}
 
-$g20_map = [
-    'US' => ['lang' => 'en', 'label' => 'English'],
-    'GB' => ['lang' => 'en', 'label' => 'English'],
-    'ID' => ['lang' => 'id', 'label' => 'Indonesian'],
-    'JP' => ['lang' => 'ja', 'label' => 'Japanese'],
-    'DE' => ['lang' => 'en', 'label' => 'English'],     // Fallback to EN if language not mapped
-    'AU' => ['lang' => 'en', 'label' => 'English'],
-];
-
-// Fallback to default if somehow an invalid geo provided
-$geoValid = array_key_exists($geoRaw, $g20_map) ? $geoRaw : 'US';
-$targetLang = $g20_map[$geoValid]['lang'];
-$targetLangLabel = $g20_map[$geoValid]['label'];
-
-$rssUrl = "https://trends.google.com/trending/rss?geo=" . $geoValid;
-
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, $rssUrl);
+// 1. Fetch #1 Opportunity from local trends API
+$ch = curl_init('https://nurdiansyahlabs.com/api/trends.php');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-// Spoof as a real browser
-curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36");
-// Bypass strict SSL verification for local dev environments
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-
-$rssContent = curl_exec($ch);
-$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+$trendsData = curl_exec($ch);
 curl_close($ch);
 
-if (!$rssContent || $httpCode !== 200) {
-    http_response_code(500);
-    echo json_encode(['error' => 'Failed to fetch Google Trends XML (HTTP ' . $httpCode . ')']);
-    exit;
+$trends = json_decode($trendsData, true);
+
+if (empty($trends['top10'])) {
+    die("No trends available\n");
 }
 
-$xml = simplexml_load_string($rssContent);
-if (!$xml) {
-    http_response_code(500);
-    echo json_encode(['error' => 'Failed to parse XML']);
-    exit;
+$topTrend = $trends['top10'][0];
+$keyword = $topTrend['keyword'];
+$service = $topTrend['service'];
+$serviceLabel = $topTrend['serviceLabel'];
+
+// 2. Check if we already wrote an article for this keyword today
+$slug = str_replace(' ', '-', strtolower($keyword));
+$stmt = $pdo->prepare("SELECT id FROM posts WHERE slug = :slug");
+$stmt->execute(['slug' => $slug]);
+if ($stmt->fetch()) {
+    die("Article for '{$keyword}' already exists. Skipping.\n");
 }
 
-// Register the strict RSS namespace for 'ht' nodes
-$xml->registerXPathNamespace('ht', 'https://trends.google.com/trending/rss');
+// 3. Generate Content via Pollinations AI
+echo "Generating article for: {$keyword}...\n";
 
-// Extract the absolute #1 highest volume keyword of the day
-$topItem = $xml->channel->item[0]; // RSS feeds use <channel><item>
-$trendingKeyword = (string) $topItem->title;
-$trafficVolume = (string) $topItem->children('https://trends.google.com/trending/rss')->approx_traffic;
-// The Google Trends RSS Description contains real-time news snippets related to the keyword.
-// We strip HTML tags (like <a> and <img>) to just get the raw, 100% unique news text.
-$rawNewsDescription = (string) $topItem->description;
-$cleanNewsSnippet = trim(strip_tags($rawNewsDescription));
+// Craft a strict prompt to ensure high-quality Indonesian SEO content
+$prompt = "Tulis artikel SEO 800 kata dalam bahasa Indonesia tentang '{$keyword}'. 
+Konteks: Ini untuk blog 'NurdiansyahLabs' yang menawarkan jasa {$serviceLabel}. 
+Struktur:
+1. Judul H1 menarik (maks 60 karakter)
+2. Paragraf pembuka (pancingan, masalah, solusi)
+3. H2: Kenapa {$keyword} penting di 2026?
+4. H2: 3 Tips Utama (berikan data atau contoh relevan)
+5. H2: Bagaimana NurdiansyahLabs Bisa Membantu? (Soft selling jasa {$serviceLabel})
+Gunakan format HTML murni (tanpa tag html/body, langsung h1, p, h2, ul, li). Jangan gunakan Markdown.
+Pastikan paragraf pendek dan mudah dibaca.";
 
-if (empty($trendingKeyword)) {
-    http_response_code(404);
-    echo json_encode(['error' => 'No trending keyword found']);
-    exit;
+$aiUrl = 'https://text.pollinations.ai/' . urlencode($prompt);
+$ch = curl_init($aiUrl);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_USERAGENT, 'NurdiansyahLabs-SEO-Bot/1.0');
+$content = curl_exec($ch);
+curl_close($ch);
+
+if (empty($content) || strlen($content) < 500) {
+    die("Failed to generate sufficient content from Pollinations AI\n");
 }
 
-// ── 2. Check for Duplicates (High-Performance MySQL) ──
-// Remove English special characters but keep Japanese/Asian characters intact
-$slugText = preg_replace('/[^\p{L}\p{N}]+/u', '-', $trendingKeyword);
-$slug = "viral-" . strtolower($slugText);
-$slug = trim($slug, '-');
-// Append country logic to slug
-$fullSlug = strtolower($geoValid) . '/' . $targetLang . '-' . $slug;
+// 4. Extract H1 for the Title, and generate a Meta Description
+preg_match('/<h1[^>]*>(.*?)<\/h1>/is', $content, $h1Matches);
+$title = $h1Matches[1] ?? ucfirst($keyword) . " - Tren & Wawasan Terbaru";
+$title = strip_tags($title);
 
-// Query the MySQL Database instantly instead of loading JSON into memory
-$stmt = $pdo->prepare("SELECT COUNT(*) FROM posts WHERE slug = :slug");
-$stmt->execute(['slug' => $fullSlug]);
-$isDuplicate = $stmt->fetchColumn() > 0;
+// Clean up H1 from content (since the React frontend displays its own H1)
+$content = preg_replace('/<h1[^>]*>.*?<\/h1>/is', '', $content, 1);
 
-if ($isDuplicate) {
-    http_response_code(200);
-    echo json_encode(['status' => 'skipped', 'message' => 'Article already generated today for: ' . $trendingKeyword . ' (' . $geoValid . ')']);
-    unset($xml); // Free XML memory
-    gc_collect_cycles(); // Force Garbage Collection
-    exit;
+// Generate 150 char meta description from the first paragraph
+preg_match('/<p[^>]*>(.*?)<\/p>/is', $content, $pMatches);
+$description = $pMatches[1] ?? "Pelajari lebih lanjut tentang {$keyword} dan bagaimana ini dapat mengubah strategi bisnis digital Anda bersama NurdiansyahLabs.";
+$description = strip_tags($description);
+if (strlen($description) > 150) {
+    $description = substr($description, 0, 147) . '...';
 }
 
-// Free simpleXML object aggressively from memory.
-unset($xml);
-gc_collect_cycles();
-
-// ── 3. Execute Python SEO Generator Engine ─────────────────────────────────────
-$currentDate = date("d F Y");
-
-$pythonScript = __DIR__ . '/generate_article.py';
-$cmd = escapeshellcmd("python3") . " " . escapeshellarg($pythonScript) . " " . escapeshellarg($trendingKeyword) . " " . escapeshellarg($trafficVolume) . " " . escapeshellarg($geoValid);
-
-$descriptorspec = [
-    0 => ["pipe", "r"], // stdin
-    1 => ["pipe", "w"], // stdout
-    2 => ["pipe", "w"]  // stderr
+// 5. Generate 2 FAQs based on the keyword
+$faqs = [
+    [
+        "question" => "Apa itu {$keyword}?",
+        "answer" => "{$keyword} adalah salah satu tren utama dalam industri digital saat ini yang berfokus pada optimasi dan efisiensi melalui layanan {$serviceLabel}."
+    ],
+    [
+        "question" => "Mengapa saya butuh jasa {$serviceLabel} untuk ini?",
+        "answer" => "Dengan bantuan profesional dari NurdiansyahLabs, Anda tidak perlu membuang waktu dan biaya untuk trial & error. Kami memiliki framework teruji untuk {$keyword}."
+    ]
 ];
 
-$process = proc_open($cmd, $descriptorspec, $pipes);
-$pythonOutput = '';
+// Fallback images based on service
+$images = [
+    'A' => 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80', // Landing Page
+    'B' => 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80', // Fullstack
+    'C' => 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80', // Data Analyst
+    'D' => 'https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=800&q=80', // Data Science
+];
+$imgUrl = $images[$service] ?? $images['A'];
 
-if (is_resource($process)) {
-    fclose($pipes[0]);
-    $pythonOutput = stream_get_contents($pipes[1]);
-    fclose($pipes[1]);
-    $pythonError = stream_get_contents($pipes[2]);
-    fclose($pipes[2]);
-    $return_value = proc_close($process);
-
-    if ($return_value !== 0) {
-        http_response_code(500);
-        echo json_encode(['error' => 'Python Generator failed', 'details' => $pythonError]);
-        exit;
-    }
-} else {
-    http_response_code(500);
-    echo json_encode(['error' => 'Failed to initialize Python generator process']);
-    exit;
-}
-
-$generatedData = json_decode($pythonOutput, true);
-if (!$generatedData || !isset($generatedData['status']) || $generatedData['status'] !== 'success') {
-    http_response_code(500);
-    echo json_encode(['error' => 'Failed to parse JSON from Python generator']);
-    exit;
-}
-
-// Inject the real-time news snippet dynamically. This guarantees every article 
-// is 100% unique to Google Crawlers because it contains that exact day's news context!
-$newsBlock = !empty($cleanNewsSnippet) ? "\n\n> 📰 **Latest News Snippet:** *$cleanNewsSnippet*" : "";
-$markdownContent = $newsBlock . "\n\n" . $generatedData['content'];
-
-// ── 4. Inject Payload via Database Protocol (High-Performance MySQL) ──
-$faqs = $generatedData['faqs'];
-
-$sql = "INSERT INTO posts (slug, title, description, service, serviceLabel, accent, accentLight, images, faqs, content) 
-        VALUES (:slug, :title, :description, :service, :serviceLabel, :accent, :accentLight, :images, :faqs, :content)";
-
-// Generate a random high-quality structural image as a placeholder for the trend
 $placeholderImages = [
     [
-        "url" => "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
-        "alt" => "$trendingKeyword Analysis",
+        "url" => $imgUrl,
         "is_primary" => true
     ]
 ];
 
-$stmt = $pdo->prepare($sql);
-$success = $stmt->execute([
-    'slug' => $fullSlug,
-    'title' => $generatedData['title'],
-    'description' => $generatedData['description'],
-    'service' => 'Data Analyst',
-    'serviceLabel' => strtoupper($geoValid) . ' Market Trend',
-    'accent' => '#92400e',
-    'accentLight' => '#fef3c7',
-    'images' => json_encode($placeholderImages),
-    'faqs' => json_encode($faqs),
-    'content' => $markdownContent
-]);
-
-if ($success) {
-    // ── 5. Automate Sitemap Injection ──────────────────────────────────────────
-    $sitemapFile = __DIR__ . '/../../public/sitemap.xml';
-    if (file_exists($sitemapFile)) {
-        // We use DOMDocument since it handles formatting better than SimpleXML
-        $dom = new DOMDocument();
-        $dom->preserveWhiteSpace = false;
-        $dom->formatOutput = true;
-
-        if ($dom->load($sitemapFile)) {
-            $urlset = $dom->getElementsByTagName('urlset')->item(0);
-
-            if ($urlset) {
-                // Ensure xhtml namespace exists on root for hreflang
-                if (!$urlset->hasAttribute('xmlns:xhtml')) {
-                    $urlset->setAttribute('xmlns:xhtml', 'http://www.w3.org/1999/xhtml');
-                }
-
-                $newUrlNode = $dom->createElement('url');
-
-                $locNode = $dom->createElement('loc', 'https://nurdiansyahlabs.com/blog/' . $fullSlug);
-                $lastmodNode = $dom->createElement('lastmod', date('Y-m-d'));
-                $changefreqNode = $dom->createElement('changefreq', 'weekly');
-                $priorityNode = $dom->createElement('priority', '0.9');
-
-                $newUrlNode->appendChild($locNode);
-                $newUrlNode->appendChild($lastmodNode);
-                $newUrlNode->appendChild($changefreqNode);
-                $newUrlNode->appendChild($priorityNode);
-
-                // Add explicit Hreflang reference for strict Search Console validation
-                if (!empty($targetLang)) {
-                    $xhtmlLink = $dom->createElementNS('http://www.w3.org/1999/xhtml', 'xhtml:link');
-                    $xhtmlLink->setAttribute('rel', 'alternate');
-                    $xhtmlLink->setAttribute('hreflang', $targetLang);
-                    $xhtmlLink->setAttribute('href', 'https://nurdiansyahlabs.com/blog/' . $fullSlug);
-                    $newUrlNode->appendChild($xhtmlLink);
-                }
-
-                $urlset->appendChild($newUrlNode);
-
-                $dom->save($sitemapFile);
-            }
-        }
-    }
-
-    http_response_code(201);
-    echo json_encode([
-        'status' => 'success',
-        'keyword_found' => $trendingKeyword,
-        'volume' => $trafficVolume,
-        'slug_generated' => $slug
+// 6. Insert into Database
+// Try INSERT with images column first
+try {
+    $sql = "INSERT INTO posts (slug, title, description, service, serviceLabel, accent, accentLight, images, faqs, content) 
+            VALUES (:slug, :title, :description, :service, :serviceLabel, :accent, :accentLight, :images, :faqs, :content)";
+    
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([
+        'slug' => $slug,
+        'title' => $title,
+        'description' => $description,
+        'service' => $service,
+        'serviceLabel' => $serviceLabel,
+        'accent' => '#92400e', // Hardcoded high-contrast dark amber
+        'accentLight' => '#fef3c7',
+        'images' => json_encode($placeholderImages),
+        'faqs' => json_encode($faqs),
+        'content' => $content
     ]);
-} else {
-    http_response_code(500);
-    echo json_encode(['error' => 'Failed to serialize JSON to MySQL Database']);
+} catch (PDOException $e) {
+    if (strpos($e->getMessage(), 'Unknown column') !== false) {
+        // Fallback to img column
+        $sql = "INSERT INTO posts (slug, title, description, service, serviceLabel, accent, accentLight, img, faqs, content) 
+                VALUES (:slug, :title, :description, :service, :serviceLabel, :accent, :accentLight, :img, :faqs, :content)";
+        
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            'slug' => $slug,
+            'title' => $title,
+            'description' => $description,
+            'service' => $service,
+            'serviceLabel' => $serviceLabel,
+            'accent' => '#92400e',
+            'accentLight' => '#fef3c7',
+            'img' => $imgUrl,
+            'faqs' => json_encode($faqs),
+            'content' => $content
+        ]);
+    } else {
+        throw $e;
+    }
 }
-exit;
+
+echo "✅ Successfully published: {$title}\n";
