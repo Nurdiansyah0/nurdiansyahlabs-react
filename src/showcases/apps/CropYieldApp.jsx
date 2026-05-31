@@ -43,7 +43,7 @@ export default function CropYieldApp() {
             <div style={{ padding: '2rem', maxWidth: '1100px', margin: '0 auto' }}>
                 {/* KPIs */}
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
-                    {[['Rata-rata Hasil', `${avgYield} ton/ha`, '🌾', '#16a34a'], ['Hasil Terbaik', `${Math.max(...Object.values(d)).toFixed(1)} ton/ha`, '🏆', '#d97706'], ['Wilayah Terbaik', bestRegion, '📍', '#2563eb'], ['Total Komoditas', `${CROPS.length} jenis`, '🌱', '#5b21b6']].map(([l, v, i, c]) => (
+                    {[['Rata-rata Hasil', `${avgYield} ton/ha`, '🌾', '#14532d'], ['Hasil Terbaik', `${Math.max(...Object.values(d)).toFixed(1)} ton/ha`, '🏆', '#78350f'], ['Wilayah Terbaik', bestRegion, '📍', '#1e3a8a'], ['Total Komoditas', `${CROPS.length} jenis`, '🌱', '#4c1d95']].map(([l, v, i, c]) => (
                         <div key={l} style={{ background: '#fff', borderRadius: '14px', padding: '1.5rem', border: '1px solid #bbf7d0' }}>
                             <div style={{ fontSize: '1.5rem', marginBottom: '8px' }}>{i}</div>
                             <div style={{ fontSize: typeof v === 'string' && v.length > 10 ? '1rem' : '1.5rem', fontWeight: 800, color: c, marginBottom: '4px', lineHeight: 1.2 }}>{v}</div>
@@ -62,7 +62,7 @@ export default function CropYieldApp() {
                                 const faded = region !== 'Semua' && region !== r
                                 return (
                                     <div key={r} onClick={() => setRegion(region === r ? 'Semua' : r)} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px', cursor: 'pointer', opacity: faded ? 0.3 : 1, transition: 'opacity 0.2s' }}>
-                                        <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#16a34a' }}>{val}</div>
+                                        <div style={{ fontSize: '0.7rem', fontWeight: 700, color: '#14532d' }}>{val}</div>
                                         <div style={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', height: '160px' }}>
                                             <div style={{ height: `${h}px`, background: `hsl(${120 + i * 15},60%,45%)`, borderRadius: '6px 6px 0 0', transition: 'height 0.4s', minHeight: '8px' }} />
                                         </div>
@@ -85,7 +85,7 @@ export default function CropYieldApp() {
                         {Object.entries(d).sort(([, a], [, b]) => b - a).map(([r, v], i) => (
                             <div key={r} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 0', borderBottom: i < REGIONS.length - 1 ? '1px solid #f0fdf4' : 'none' }}>
                                 <span style={{ fontSize: '0.82rem', color: '#374151' }}>{i + 1}. {r}</span>
-                                <span style={{ fontWeight: 700, color: i === 0 ? '#16a34a' : '#1e293b', fontSize: '0.85rem' }}>{v} t/ha</span>
+                                <span style={{ fontWeight: 700, color: i === 0 ? '#14532d' : '#1e293b', fontSize: '0.85rem' }}>{v} t/ha</span>
                             </div>
                         ))}
                     </div>
