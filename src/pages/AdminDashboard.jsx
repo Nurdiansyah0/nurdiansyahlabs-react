@@ -356,7 +356,7 @@ export default function AdminDashboard() {
 
                     {authView === 'login' && (
                         <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                            <input
+                            <input aria-label="Form input"
                                 type="text"
                                 placeholder="Username"
                                 value={usernameInput}
@@ -366,7 +366,7 @@ export default function AdminDashboard() {
                             />
                             <div style={{ position: 'relative' }}>
                                 <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-                                    <input
+                                    <input aria-label="Form input"
                                         type={showPassword ? 'text' : 'password'}
                                         placeholder="Password"
                                         value={passwordInput}
@@ -387,7 +387,7 @@ export default function AdminDashboard() {
                             </div>
 
                             {authError && <div style={{ color: '#ef4444', fontSize: '0.85rem' }}>{authError}</div>}
-                            <button type="submit" style={{ background: '#4f46e5', color: '#fff', padding: '0.8rem', borderRadius: '8px', border: 'none', fontWeight: 700, cursor: 'pointer', marginTop: '0.5rem' }}>
+                            <button aria-label="Action button" type="submit" style={{ background: '#4f46e5', color: '#fff', padding: '0.8rem', borderRadius: '8px', border: 'none', fontWeight: 700, cursor: 'pointer', marginTop: '0.5rem' }}>
                                 Sign In
                             </button>
                         </form>
@@ -396,7 +396,7 @@ export default function AdminDashboard() {
                     {authView === 'forgot' && (
                         <form onSubmit={handleForgotPassword} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                             <p style={{ fontSize: '0.9rem', color: '#64748b', textAlign: 'center', marginBottom: '0.5rem' }}>Enter your username or email address and we will send you a link to reset your password.</p>
-                            <input
+                            <input aria-label="Form input"
                                 type="text"
                                 placeholder="Username or Email"
                                 value={usernameInput}
@@ -408,7 +408,7 @@ export default function AdminDashboard() {
                             {authMessage && <div style={{ color: '#10b981', fontSize: '0.85rem', background: '#d1fae5', padding: '0.5rem', borderRadius: '4px' }}>{authMessage}</div>}
                             {authError && <div style={{ color: '#ef4444', fontSize: '0.85rem' }}>{authError}</div>}
 
-                            <button type="submit" style={{ background: '#4f46e5', color: '#fff', padding: '0.8rem', borderRadius: '8px', border: 'none', fontWeight: 700, cursor: 'pointer', marginTop: '0.5rem' }}>
+                            <button aria-label="Action button" type="submit" style={{ background: '#4f46e5', color: '#fff', padding: '0.8rem', borderRadius: '8px', border: 'none', fontWeight: 700, cursor: 'pointer', marginTop: '0.5rem' }}>
                                 Send Reset Link
                             </button>
                             <div style={{ textAlign: 'center', marginTop: '1rem' }}>
@@ -421,7 +421,7 @@ export default function AdminDashboard() {
                         <form onSubmit={handleResetPassword} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                             <p style={{ fontSize: '0.9rem', color: '#64748b', textAlign: 'center', marginBottom: '0.5rem' }}>Please enter your new password below.</p>
                             <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
-                                <input
+                                <input aria-label="Form input"
                                     type={showPassword ? 'text' : 'password'}
                                     placeholder="New Password"
                                     value={passwordInput}
@@ -440,7 +440,7 @@ export default function AdminDashboard() {
                             {authMessage && <div style={{ color: '#10b981', fontSize: '0.85rem', background: '#d1fae5', padding: '0.5rem', borderRadius: '4px' }}>{authMessage}</div>}
                             {authError && <div style={{ color: '#ef4444', fontSize: '0.85rem' }}>{authError}</div>}
 
-                            <button type="submit" style={{ background: '#4f46e5', color: '#fff', padding: '0.8rem', borderRadius: '8px', border: 'none', fontWeight: 700, cursor: 'pointer', marginTop: '0.5rem' }}>
+                            <button aria-label="Action button" type="submit" style={{ background: '#4f46e5', color: '#fff', padding: '0.8rem', borderRadius: '8px', border: 'none', fontWeight: 700, cursor: 'pointer', marginTop: '0.5rem' }}>
                                 Save New Password
                             </button>
                         </form>
@@ -461,7 +461,7 @@ export default function AdminDashboard() {
                     </div>
                     NurdiansyahLabs Admin
                 </div>
-                <button onClick={handleLogout} style={{ background: 'transparent', color: '#94a3b8', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <button aria-label="Action button" onClick={handleLogout} style={{ background: 'transparent', color: '#94a3b8', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <LogOut size={16} /> Logout
                 </button>
             </div>
@@ -469,25 +469,25 @@ export default function AdminDashboard() {
             <div style={{ display: 'flex', maxWidth: '1200px', margin: '0 auto', padding: '2rem', gap: '2rem' }}>
                 {/* Sidebar */}
                 <div style={{ width: '250px', display: 'flex', flexDirection: 'column', gap: '8px', flexShrink: 0 }}>
-                    <button
+                    <button aria-label="Action button"
                         onClick={() => { setActiveTab('analytics'); setEditingPost(null); setIsCreating(false) }}
                         style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '1rem', borderRadius: '12px', border: 'none', background: activeTab === 'analytics' ? '#e0e7ff' : 'transparent', color: activeTab === 'analytics' ? '#4f46e5' : '#64748b', fontWeight: 600, cursor: 'pointer', transition: 'all 0.2s', textAlign: 'left' }}
                     >
                         <BarChart3 size={20} /> Analytics
                     </button>
-                    <button
+                    <button aria-label="Action button"
                         onClick={() => { setActiveTab('posts'); setEditingPost(null); setIsCreating(false) }}
                         style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '1rem', borderRadius: '12px', border: 'none', background: activeTab === 'posts' ? '#e0e7ff' : 'transparent', color: activeTab === 'posts' ? '#4f46e5' : '#64748b', fontWeight: 600, cursor: 'pointer', transition: 'all 0.2s', textAlign: 'left' }}
                     >
                         <FileText size={20} /> Blog Articles
                     </button>
-                    <button
+                    <button aria-label="Action button"
                         onClick={() => { setActiveTab('leads'); setEditingPost(null); setIsCreating(false) }}
                         style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '1rem', borderRadius: '12px', border: 'none', background: activeTab === 'leads' ? '#e0e7ff' : 'transparent', color: activeTab === 'leads' ? '#4f46e5' : '#64748b', fontWeight: 600, cursor: 'pointer', transition: 'all 0.2s', textAlign: 'left' }}
                     >
                         <Users size={20} /> Leads Inbox
                     </button>
-                    <button
+                    <button aria-label="Action button"
                         onClick={() => { setActiveTab('products'); setEditingPost(null); setIsCreating(false) }}
                         style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '1rem', borderRadius: '12px', border: 'none', background: activeTab === 'products' ? '#e0e7ff' : 'transparent', color: activeTab === 'products' ? '#4f46e5' : '#64748b', fontWeight: 600, cursor: 'pointer', transition: 'all 0.2s', textAlign: 'left' }}
                     >
@@ -508,20 +508,20 @@ export default function AdminDashboard() {
                         <div>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
                                 <h2 style={{ margin: 0 }}>{isCreating ? 'Write New Article' : 'Edit Article'}</h2>
-                                <button onClick={() => { setEditingPost(null); setIsCreating(false) }} style={{ background: '#f1f5f9', border: 'none', padding: '8px', borderRadius: '50%', cursor: 'pointer' }}><X size={20} /></button>
+                                <button aria-label="Action button" onClick={() => { setEditingPost(null); setIsCreating(false) }} style={{ background: '#f1f5f9', border: 'none', padding: '8px', borderRadius: '50%', cursor: 'pointer' }}><X size={20} /></button>
                             </div>
                             <form onSubmit={handleSavePost} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                                 <div>
                                     <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: '6px', color: '#475569' }}>URL Slug</label>
-                                    <input required disabled={!isCreating} type="text" value={editingPost.slug} onChange={e => setEditingPost({ ...editingPost, slug: e.target.value.toLowerCase().replace(/\s+/g, '-') })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box', background: !isCreating ? '#f1f5f9' : '#fff' }} placeholder="e.g. why-need-data-analyst" />
+                                    <input aria-label="Form input" required disabled={!isCreating} type="text" value={editingPost.slug} onChange={e => setEditingPost({ ...editingPost, slug: e.target.value.toLowerCase().replace(/\s+/g, '-') })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box', background: !isCreating ? '#f1f5f9' : '#fff' }} placeholder="e.g. why-need-data-analyst" />
                                 </div>
                                 <div>
                                     <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: '6px', color: '#475569' }}>Title</label>
-                                    <input required type="text" value={editingPost.title} onChange={e => setEditingPost({ ...editingPost, title: e.target.value })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box' }} />
+                                    <input aria-label="Form input" required type="text" value={editingPost.title} onChange={e => setEditingPost({ ...editingPost, title: e.target.value })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box' }} />
                                 </div>
                                 <div>
                                     <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: '6px', color: '#475569' }}>Description / Excerpt</label>
-                                    <textarea required value={editingPost.description} onChange={e => setEditingPost({ ...editingPost, description: e.target.value })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box', minHeight: '80px', fontFamily: 'inherit' }} />
+                                    <textarea aria-label="Text input" required value={editingPost.description} onChange={e => setEditingPost({ ...editingPost, description: e.target.value })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box', minHeight: '80px', fontFamily: 'inherit' }} />
                                 </div>
                                 <div>
                                     <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: '6px', color: '#475569' }}>Post Images (CDN Supported)</label>
@@ -532,7 +532,7 @@ export default function AdminDashboard() {
                                             {editingPost.images.map((imgObj, idx) => (
                                                 <div key={idx} style={{ position: 'relative' }}>
                                                     <img src={getOptimizedImg(imgObj.url, { w: 200, h: 200 })} alt={imgObj.alt || 'Preview'} style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '8px', border: '1px solid #e2e8f0' }} />
-                                                    <button type="button" onClick={() => {
+                                                    <button aria-label="Action button" type="button" onClick={() => {
                                                         setEditingPost(prev => ({
                                                             ...prev,
                                                             images: prev.images.filter((_, i) => i !== idx)
@@ -544,16 +544,16 @@ export default function AdminDashboard() {
                                     )}
 
                                     <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                                        <input type="file" accept="image/*" onChange={handleImageUpload} disabled={uploadingImage} style={{ marginBottom: '8px' }} />
+                                        <input aria-label="Form input" type="file" accept="image/*" onChange={handleImageUpload} disabled={uploadingImage} style={{ marginBottom: '8px' }} />
                                         {uploadingImage && <span style={{ fontSize: '0.85rem', color: '#64748b', display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}><m.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: 'linear' }} style={{ display: 'flex' }}><Loader2 size={14} /></m.div> Uploading to CDN...</span>}
                                     </div>
                                 </div>
                                 <div>
                                     <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: '6px', color: '#475569' }}>Markdown Content</label>
-                                    <textarea required value={editingPost.content} onChange={e => setEditingPost({ ...editingPost, content: e.target.value })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box', minHeight: '300px', fontFamily: 'monospace' }} placeholder="Supports ## Headlines, - Lists, and **Bold** text." />
+                                    <textarea aria-label="Text input" required value={editingPost.content} onChange={e => setEditingPost({ ...editingPost, content: e.target.value })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box', minHeight: '300px', fontFamily: 'monospace' }} placeholder="Supports ## Headlines, - Lists, and **Bold** text." />
                                 </div>
                                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                                    <button type="submit" style={{ background: '#22c55e', color: '#fff', padding: '0.8rem 2rem', borderRadius: '8px', border: 'none', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                    <button aria-label="Action button" type="submit" style={{ background: '#22c55e', color: '#fff', padding: '0.8rem 2rem', borderRadius: '8px', border: 'none', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
                                         <Save size={18} /> Save Article
                                     </button>
                                 </div>
@@ -566,7 +566,7 @@ export default function AdminDashboard() {
                         <div>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
                                 <h2 style={{ margin: 0 }}>{isCreating ? 'Add New Product' : 'Edit Product'}</h2>
-                                <button onClick={() => { setEditingPost(null); setIsCreating(false) }} style={{ background: '#f1f5f9', border: 'none', padding: '8px', borderRadius: '50%', cursor: 'pointer' }}><X size={20} /></button>
+                                <button aria-label="Action button" onClick={() => { setEditingPost(null); setIsCreating(false) }} style={{ background: '#f1f5f9', border: 'none', padding: '8px', borderRadius: '50%', cursor: 'pointer' }}><X size={20} /></button>
                             </div>
                             <form onSubmit={handleSavePost} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                                 <div>
@@ -580,12 +580,12 @@ export default function AdminDashboard() {
                                 </div>
                                 <div>
                                     <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: '6px', color: '#475569' }}>Product Name</label>
-                                    <input required type="text" value={editingPost.name} onChange={e => setEditingPost({ ...editingPost, name: e.target.value })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box' }} placeholder="Asus ROG Strix / Ayam Kampung" />
+                                    <input aria-label="Form input" required type="text" value={editingPost.name} onChange={e => setEditingPost({ ...editingPost, name: e.target.value })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box' }} placeholder="Asus ROG Strix / Ayam Kampung" />
                                 </div>
                                 <div style={{ display: 'flex', gap: '1rem' }}>
                                     <div style={{ flex: 1 }}>
                                         <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: '6px', color: '#475569' }}>Price (IDR)</label>
-                                        <input
+                                        <input aria-label="Form input"
                                             required
                                             type="text"
                                             value={editingPost.price ? Number(editingPost.price.toString().replace(/\./g, '')).toLocaleString('id-ID') : ''}
@@ -629,13 +629,13 @@ export default function AdminDashboard() {
                                                 <option value="Frozen">Frozen / Beku</option>
                                             </select>
                                         ) : (
-                                            <input type="text" value={editingPost.category || ''} onChange={e => setEditingPost({ ...editingPost, category: e.target.value })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box' }} placeholder="Ketik Kategori / Tag..." />
+                                            <input aria-label="Form input" type="text" value={editingPost.category || ''} onChange={e => setEditingPost({ ...editingPost, category: e.target.value })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box' }} placeholder="Ketik Kategori / Tag..." />
                                         )}
                                     </div>
                                 </div>
                                 <div>
                                     <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: '6px', color: '#475569' }}>Description</label>
-                                    <textarea required value={editingPost.description} onChange={e => setEditingPost({ ...editingPost, description: e.target.value })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box', minHeight: '80px', fontFamily: 'inherit' }} />
+                                    <textarea aria-label="Text input" required value={editingPost.description} onChange={e => setEditingPost({ ...editingPost, description: e.target.value })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box', minHeight: '80px', fontFamily: 'inherit' }} />
                                 </div>
                                 <div>
                                     <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 700, marginBottom: '6px', color: '#475569' }}>Product Image</label>
@@ -644,7 +644,7 @@ export default function AdminDashboard() {
                                             <img src={getOptimizedImg(editingPost.image_url, { w: 200, h: 200 })} alt="Preview" style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '8px', border: '1px solid #e2e8f0' }} />
                                         )}
                                         <div style={{ flexGrow: 1 }}>
-                                            <input type="file" accept="image/*" onChange={(e) => {
+                                            <input aria-label="Form input" type="file" accept="image/*" onChange={(e) => {
                                                 const file = e.target.files?.[0]; if (!file) return;
                                                 setUploadingImage(true);
                                                 const formData = new FormData(); formData.append('image', file);
@@ -655,7 +655,7 @@ export default function AdminDashboard() {
                                                     }).finally(() => setUploadingImage(false));
                                             }} disabled={uploadingImage} style={{ marginBottom: '8px' }} />
                                             {uploadingImage && <span style={{ fontSize: '0.85rem', color: '#64748b' }}>Uploading...</span>}
-                                            <input type="text" value={editingPost.image_url || ''} readOnly style={{ width: '100%', padding: '0.6rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box', background: '#f8fafc', fontSize: '0.85rem', color: '#94a3b8' }} placeholder="No image uploaded..." />
+                                            <input aria-label="Form input" type="text" value={editingPost.image_url || ''} readOnly style={{ width: '100%', padding: '0.6rem', borderRadius: '8px', border: '1px solid #e2e8f0', boxSizing: 'border-box', background: '#f8fafc', fontSize: '0.85rem', color: '#94a3b8' }} placeholder="No image uploaded..." />
                                         </div>
                                     </div>
                                 </div>
@@ -668,7 +668,7 @@ export default function AdminDashboard() {
                                         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                                             <div style={{ flex: 1, minWidth: '120px' }}>
                                                 <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: '6px' }}>Seats</label>
-                                                <input type="number" value={editingPost.extras?.seats || 5} onChange={e => setEditingPost({ ...editingPost, extras: { ...editingPost.extras, seats: parseInt(e.target.value) } })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0' }} />
+                                                <input aria-label="Form input" type="number" value={editingPost.extras?.seats || 5} onChange={e => setEditingPost({ ...editingPost, extras: { ...editingPost.extras, seats: parseInt(e.target.value) } })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0' }} />
                                             </div>
                                             <div style={{ flex: 1, minWidth: '120px' }}>
                                                 <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: '6px' }}>Transmission</label>
@@ -679,7 +679,7 @@ export default function AdminDashboard() {
                                             </div>
                                             <div style={{ flex: 1, minWidth: '120px' }}>
                                                 <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: '6px' }}>Luggage (Bags)</label>
-                                                <input type="number" value={editingPost.extras?.luggage || 2} onChange={e => setEditingPost({ ...editingPost, extras: { ...editingPost.extras, luggage: parseInt(e.target.value) } })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0' }} />
+                                                <input aria-label="Form input" type="number" value={editingPost.extras?.luggage || 2} onChange={e => setEditingPost({ ...editingPost, extras: { ...editingPost.extras, luggage: parseInt(e.target.value) } })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0' }} />
                                             </div>
                                         </div>
                                     </div>
@@ -693,17 +693,17 @@ export default function AdminDashboard() {
                                         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                                             <div style={{ flex: 1, minWidth: '120px' }}>
                                                 <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: '6px' }}>Variants / Sizes (Comma separated)</label>
-                                                <input type="text" value={Array.isArray(editingPost.extras?.sizes) ? editingPost.extras.sizes.join(', ') : (editingPost.extras?.sizes || '')} onChange={e => setEditingPost({ ...editingPost, extras: { ...editingPost.extras, sizes: e.target.value } })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0' }} placeholder="256GB, 512GB, 1TB" />
+                                                <input aria-label="Form input" type="text" value={Array.isArray(editingPost.extras?.sizes) ? editingPost.extras.sizes.join(', ') : (editingPost.extras?.sizes || '')} onChange={e => setEditingPost({ ...editingPost, extras: { ...editingPost.extras, sizes: e.target.value } })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0' }} placeholder="256GB, 512GB, 1TB" />
                                             </div>
                                             <div style={{ flex: 1, minWidth: '120px' }}>
                                                 <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: '6px' }}>Colors (Comma separated)</label>
-                                                <input type="text" value={Array.isArray(editingPost.extras?.colors) ? editingPost.extras.colors.join(', ') : (editingPost.extras?.colors || '')} onChange={e => setEditingPost({ ...editingPost, extras: { ...editingPost.extras, colors: e.target.value } })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0' }} placeholder="Space Black, Silver" />
+                                                <input aria-label="Form input" type="text" value={Array.isArray(editingPost.extras?.colors) ? editingPost.extras.colors.join(', ') : (editingPost.extras?.colors || '')} onChange={e => setEditingPost({ ...editingPost, extras: { ...editingPost.extras, colors: e.target.value } })} style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0' }} placeholder="Space Black, Silver" />
                                             </div>
                                         </div>
                                     </div>
                                 )}
                                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                                    <button type="submit" style={{ background: '#22c55e', color: '#fff', padding: '0.8rem 2rem', borderRadius: '8px', border: 'none', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                    <button aria-label="Action button" type="submit" style={{ background: '#22c55e', color: '#fff', padding: '0.8rem 2rem', borderRadius: '8px', border: 'none', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
                                         <Save size={18} /> Save Product
                                     </button>
                                 </div>
@@ -718,17 +718,17 @@ export default function AdminDashboard() {
                                 <h2 style={{ margin: 0, color: '#0f172a' }}>Live Articles ({posts.length})</h2>
                                 <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
                                     <div style={{ display: 'flex', gap: '8px' }}>
-                                        <button onClick={() => handleGenerateTrendPost('ID')} disabled={loading} style={{ background: '#059669', color: '#fff', border: 'none', padding: '0.6rem 1rem', borderRadius: '8px', fontWeight: 600, cursor: loading ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', gap: '6px', opacity: loading ? 0.7 : 1 }}>
+                                        <button aria-label="Action button" onClick={() => handleGenerateTrendPost('ID')} disabled={loading} style={{ background: '#059669', color: '#fff', border: 'none', padding: '0.6rem 1rem', borderRadius: '8px', fontWeight: 600, cursor: loading ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', gap: '6px', opacity: loading ? 0.7 : 1 }}>
                                             <Rss size={16} /> Auto-Gen ID (Indo)
                                         </button>
-                                        <button onClick={() => handleGenerateTrendPost('US')} disabled={loading} style={{ background: '#2563eb', color: '#fff', border: 'none', padding: '0.6rem 1rem', borderRadius: '8px', fontWeight: 600, cursor: loading ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', gap: '6px', opacity: loading ? 0.7 : 1 }}>
+                                        <button aria-label="Action button" onClick={() => handleGenerateTrendPost('US')} disabled={loading} style={{ background: '#2563eb', color: '#fff', border: 'none', padding: '0.6rem 1rem', borderRadius: '8px', fontWeight: 600, cursor: loading ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', gap: '6px', opacity: loading ? 0.7 : 1 }}>
                                             <Rss size={16} /> Auto-Gen US (Eng)
                                         </button>
-                                        <button onClick={() => handleGenerateTrendPost('JP')} disabled={loading} style={{ background: '#db2777', color: '#fff', border: 'none', padding: '0.6rem 1rem', borderRadius: '8px', fontWeight: 600, cursor: loading ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', gap: '6px', opacity: loading ? 0.7 : 1 }}>
+                                        <button aria-label="Action button" onClick={() => handleGenerateTrendPost('JP')} disabled={loading} style={{ background: '#db2777', color: '#fff', border: 'none', padding: '0.6rem 1rem', borderRadius: '8px', fontWeight: 600, cursor: loading ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', gap: '6px', opacity: loading ? 0.7 : 1 }}>
                                             <Rss size={16} /> Auto-Gen JP (Jap)
                                         </button>
                                     </div>
-                                    <button onClick={() => { setIsCreating(true); setEditingPost({ slug: '', title: '', description: '', content: '', serviceLabel: 'Update', accent: '#4f46e5', accentLight: '#eef2ff', images: [] }) }} style={{ background: '#4f46e5', color: '#fff', border: 'none', padding: '0.6rem 1rem', borderRadius: '8px', fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                    <button aria-label="Action button" onClick={() => { setIsCreating(true); setEditingPost({ slug: '', title: '', description: '', content: '', serviceLabel: 'Update', accent: '#4f46e5', accentLight: '#eef2ff', images: [] }) }} style={{ background: '#4f46e5', color: '#fff', border: 'none', padding: '0.6rem 1rem', borderRadius: '8px', fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
                                         <Plus size={16} /> New Article
                                     </button>
                                 </div>
@@ -741,8 +741,8 @@ export default function AdminDashboard() {
                                             <div style={{ fontSize: '0.8rem', color: '#64748b' }}>/blog/{post.slug}</div>
                                         </div>
                                         <div style={{ display: 'flex', gap: '8px' }}>
-                                            <button onClick={() => { setIsCreating(false); setEditingPost(post) }} style={{ background: '#f1f5f9', color: '#3b82f6', border: 'none', padding: '8px', borderRadius: '8px', cursor: 'pointer' }}><Edit2 size={16} /></button>
-                                            <button onClick={() => handleDeletePost(post.slug)} style={{ background: '#fef2f2', color: '#ef4444', border: 'none', padding: '8px', borderRadius: '8px', cursor: 'pointer' }}><Trash2 size={16} /></button>
+                                            <button aria-label="Action button" onClick={() => { setIsCreating(false); setEditingPost(post) }} style={{ background: '#f1f5f9', color: '#3b82f6', border: 'none', padding: '8px', borderRadius: '8px', cursor: 'pointer' }}><Edit2 size={16} /></button>
+                                            <button aria-label="Action button" onClick={() => handleDeletePost(post.slug)} style={{ background: '#fef2f2', color: '#ef4444', border: 'none', padding: '8px', borderRadius: '8px', cursor: 'pointer' }}><Trash2 size={16} /></button>
                                         </div>
                                     </div>
                                 ))}
@@ -764,7 +764,7 @@ export default function AdminDashboard() {
                                         <option value="warung-makan">🍜 Alyuna Siomay</option>
                                     </select>
 
-                                    <button onClick={() => { setIsCreating(true); setEditingPost({ app_id: productApp, name: '', price: '', description: '', image_url: '', category: '', extras: {} }) }} style={{ background: '#4f46e5', color: '#fff', border: 'none', padding: '0.6rem 1rem', borderRadius: '8px', fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                    <button aria-label="Action button" onClick={() => { setIsCreating(true); setEditingPost({ app_id: productApp, name: '', price: '', description: '', image_url: '', category: '', extras: {} }) }} style={{ background: '#4f46e5', color: '#fff', border: 'none', padding: '0.6rem 1rem', borderRadius: '8px', fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
                                         <Plus size={16} /> Add Product
                                     </button>
                                 </div>
@@ -811,8 +811,8 @@ export default function AdminDashboard() {
                                                     {product.description?.substring(0, 80)}...
                                                 </p>
                                                 <div style={{ display: 'flex', gap: '8px', borderTop: '1px solid #f1f5f9', paddingTop: '1rem' }}>
-                                                    <button onClick={() => { setIsCreating(false); setEditingPost(product) }} style={{ flex: 1, background: '#f1f5f9', color: '#3b82f6', border: 'none', padding: '8px', borderRadius: '6px', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '6px', fontWeight: 600 }}><Edit2 size={16} /> Edit</button>
-                                                    <button onClick={() => handleDeleteProduct(product.id)} style={{ flex: 1, background: '#fef2f2', color: '#ef4444', border: 'none', padding: '8px', borderRadius: '6px', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '6px', fontWeight: 600 }}><Trash2 size={16} /> Delete</button>
+                                                    <button aria-label="Action button" onClick={() => { setIsCreating(false); setEditingPost(product) }} style={{ flex: 1, background: '#f1f5f9', color: '#3b82f6', border: 'none', padding: '8px', borderRadius: '6px', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '6px', fontWeight: 600 }}><Edit2 size={16} /> Edit</button>
+                                                    <button aria-label="Action button" onClick={() => handleDeleteProduct(product.id)} style={{ flex: 1, background: '#fef2f2', color: '#ef4444', border: 'none', padding: '8px', borderRadius: '6px', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '6px', fontWeight: 600 }}><Trash2 size={16} /> Delete</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -847,7 +847,7 @@ export default function AdminDashboard() {
                                                 <td style={{ padding: '1rem' }}><span style={{ background: '#f1f5f9', padding: '4px 8px', borderRadius: '4px', fontSize: '0.8rem', color: '#475569' }}>{lead.service}</span></td>
                                                 <td style={{ padding: '1rem', color: '#475569', minWidth: '300px' }}>{lead.message}</td>
                                                 <td style={{ padding: '1rem', textAlign: 'right' }}>
-                                                    <button onClick={() => handleDeleteLead(lead.id)} style={{ background: '#fef2f2', color: '#ef4444', border: 'none', padding: '8px', borderRadius: '8px', cursor: 'pointer' }} title="Delete Lead">
+                                                    <button aria-label="Action button" onClick={() => handleDeleteLead(lead.id)} style={{ background: '#fef2f2', color: '#ef4444', border: 'none', padding: '8px', borderRadius: '8px', cursor: 'pointer' }} title="Delete Lead">
                                                         <Trash2 size={16} />
                                                     </button>
                                                 </td>

@@ -62,13 +62,13 @@ export default function RetailSalesApp() {
                 {/* Tab nav */}
                 <div style={{ display: 'flex', gap: '8px', marginBottom: '1.5rem' }}>
                     {[['overview', 'Overview'], ['products', 'Produk Terlaris'], ['branches', 'Perbandingan Cabang']].map(([k, l]) => (
-                        <button key={k} onClick={() => setTab(k)} style={{ padding: '9px 20px', borderRadius: '8px', background: tab === k ? '#6366f1' : '#fff', color: tab === k ? '#fff' : '#64748b', fontWeight: tab === k ? 700 : 500, cursor: 'pointer', fontSize: '0.85rem', border: tab !== k ? '1px solid #e2e8f0' : 'none' }}>{l}</button>
+                        <button aria-label="Action button" key={k} onClick={() => setTab(k)} style={{ padding: '9px 20px', borderRadius: '8px', background: tab === k ? '#6366f1' : '#fff', color: tab === k ? '#fff' : '#64748b', fontWeight: tab === k ? 700 : 500, cursor: 'pointer', fontSize: '0.85rem', border: tab !== k ? '1px solid #e2e8f0' : 'none' }}>{l}</button>
                     ))}
                 </div>
                 {tab === 'overview' && (
                     <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '1.5rem' }}>
                         <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #e2e8f0' }}>
-                            <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#0f172a', marginBottom: '1.5rem' }}>Revenue Bulanan ({period})</h3>
+                            <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#0f172a', marginBottom: '1.5rem' }}>Revenue Bulanan ({period})</h2>
                             <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'flex-end', height: '200px', padding: '0 0 0.5rem' }}>
                                 {data.map((d, i) => (
                                     <div key={d.m} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
@@ -87,7 +87,7 @@ export default function RetailSalesApp() {
                             </div>
                         </div>
                         <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #e2e8f0' }}>
-                            <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#0f172a', marginBottom: '1rem' }}>Ringkasan {period}</h3>
+                            <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#0f172a', marginBottom: '1rem' }}>Ringkasan {period}</h2>
                             {data.map((d, i) => (
                                 <div key={d.m} style={{ padding: '12px 0', borderBottom: i < data.length - 1 ? '1px solid #f1f5f9' : 'none' }}>
                                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>

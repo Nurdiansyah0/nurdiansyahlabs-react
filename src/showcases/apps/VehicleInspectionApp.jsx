@@ -59,8 +59,8 @@ export default function VehicleInspectionApp() {
                     </div>
                 )}
                 <div style={{ display: 'flex', gap: '1rem' }}>
-                    <button onClick={() => { setSubmitted(false); setChecks({}); setNotes({}); setActiveTab(0) }} style={{ flex: 1, background: '#1e293b', color: '#fff', border: 'none', padding: '12px', borderRadius: '8px', fontWeight: 600, cursor: 'pointer' }}>Inspeksi Baru</button>
-                    <button onClick={() => window.print()} style={{ flex: 1, background: '#3b82f6', color: '#fff', border: 'none', padding: '12px', borderRadius: '8px', fontWeight: 600, cursor: 'pointer' }}>🖨 Cetak Laporan</button>
+                    <button aria-label="Action button" onClick={() => { setSubmitted(false); setChecks({}); setNotes({}); setActiveTab(0) }} style={{ flex: 1, background: '#1e293b', color: '#fff', border: 'none', padding: '12px', borderRadius: '8px', fontWeight: 600, cursor: 'pointer' }}>Inspeksi Baru</button>
+                    <button aria-label="Action button" onClick={() => window.print()} style={{ flex: 1, background: '#3b82f6', color: '#fff', border: 'none', padding: '12px', borderRadius: '8px', fontWeight: 600, cursor: 'pointer' }}>🖨 Cetak Laporan</button>
                 </div>
             </div>
         </div>
@@ -104,7 +104,7 @@ export default function VehicleInspectionApp() {
                         </div>
                         <div style={{ marginTop: '1.5rem' }}>
                             <div style={{ fontSize: '0.85rem', color: '#64748b', marginBottom: '8px' }}>Nama Inspektor</div>
-                            <input value={inspector.name} onChange={e => setInspector(p => ({ ...p, name: e.target.value }))} placeholder="Nama inspektor..." style={{ width: '100%', padding: '10px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '0.9rem', boxSizing: 'border-box' }} />
+                            <input aria-label="Form input" value={inspector.name} onChange={e => setInspector(p => ({ ...p, name: e.target.value }))} placeholder="Nama inspektor..." style={{ width: '100%', padding: '10px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '0.9rem', boxSizing: 'border-box' }} />
                         </div>
                     </div>
                 </div>
@@ -116,12 +116,12 @@ export default function VehicleInspectionApp() {
                             <span style={{ fontSize: '1.5rem' }}>🚗</span>
                             <div><div style={{ fontWeight: 700, color: '#1e293b' }}>{selectedVeh.plate} – {selectedVeh.type}</div><div style={{ fontSize: '0.8rem', color: '#64748b' }}>{selectedVeh.owner}</div></div>
                         </div>
-                        <button onClick={() => setSelectedVeh(null)} style={{ background: 'none', border: '1px solid #e2e8f0', color: '#64748b', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', fontSize: '0.8rem' }}>Ganti Kendaraan</button>
+                        <button aria-label="Action button" onClick={() => setSelectedVeh(null)} style={{ background: 'none', border: '1px solid #e2e8f0', color: '#64748b', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', fontSize: '0.8rem' }}>Ganti Kendaraan</button>
                     </div>
                     {/* Tab nav */}
                     <div style={{ display: 'flex', background: '#fff', borderRadius: '12px', padding: '6px', marginBottom: '1.5rem', gap: '6px', border: '1px solid #e2e8f0' }}>
                         {TABS.map((t, i) => (
-                            <button key={t} onClick={() => setActiveTab(i)} style={{ flex: 1, padding: '10px', border: 'none', borderRadius: '8px', background: activeTab === i ? '#1e293b' : 'transparent', color: activeTab === i ? '#fff' : '#64748b', fontWeight: activeTab === i ? 700 : 500, cursor: 'pointer', fontSize: '0.85rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+                            <button aria-label="Action button" key={t} onClick={() => setActiveTab(i)} style={{ flex: 1, padding: '10px', border: 'none', borderRadius: '8px', background: activeTab === i ? '#1e293b' : 'transparent', color: activeTab === i ? '#fff' : '#64748b', fontWeight: activeTab === i ? 700 : 500, cursor: 'pointer', fontSize: '0.85rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
                                 {i < 4 ? ['🔍', '🪑', '⚙️', '📋'][i] : ''} {t}
                             </button>
                         ))}
@@ -140,7 +140,7 @@ export default function VehicleInspectionApp() {
                                         <div key={item} style={{ padding: '1rem 1.5rem', borderBottom: '1px solid #f1f5f9', display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '1rem', alignItems: 'center' }}>
                                             <div style={{ fontWeight: 500, color: '#374151', fontSize: '0.9rem' }}>{item}</div>
                                             {OPT.map(o => (
-                                                <button key={o} onClick={() => setCheck(section, item, o)} style={{ padding: '7px', borderRadius: '7px', border: '1px solid', borderColor: val === o ? (o === 'Baik' ? '#10b981' : o === 'Cacat' ? '#ef4444' : '#f59e0b') : '#e2e8f0', background: val === o ? (o === 'Baik' ? '#d1fae5' : o === 'Cacat' ? '#fee2e2' : '#fef3c7') : '#fff', color: val === o ? (o === 'Baik' ? '#059669' : o === 'Cacat' ? '#dc2626' : '#d97706') : '#94a3b8', fontWeight: val === o ? 700 : 400, cursor: 'pointer', fontSize: '0.8rem' }}>
+                                                <button aria-label="Action button" key={o} onClick={() => setCheck(section, item, o)} style={{ padding: '7px', borderRadius: '7px', border: '1px solid', borderColor: val === o ? (o === 'Baik' ? '#10b981' : o === 'Cacat' ? '#ef4444' : '#f59e0b') : '#e2e8f0', background: val === o ? (o === 'Baik' ? '#d1fae5' : o === 'Cacat' ? '#fee2e2' : '#fef3c7') : '#fff', color: val === o ? (o === 'Baik' ? '#059669' : o === 'Cacat' ? '#dc2626' : '#d97706') : '#94a3b8', fontWeight: val === o ? 700 : 400, cursor: 'pointer', fontSize: '0.8rem' }}>
                                                     {o === 'Baik' ? '✓ ' : o === 'Cacat' ? '⚠ ' : '✕ '}{o}
                                                 </button>
                                             ))}
@@ -148,8 +148,8 @@ export default function VehicleInspectionApp() {
                                     )
                                 })}
                                 <div style={{ padding: '1rem 1.5rem', display: 'flex', justifyContent: 'space-between' }}>
-                                    {activeTab > 0 ? <button onClick={() => setActiveTab(activeTab - 1)} style={{ background: '#f1f5f9', border: 'none', padding: '10px 20px', borderRadius: '8px', cursor: 'pointer', fontWeight: 600, color: '#475569' }}>← Sebelumnya</button> : <div />}
-                                    <button onClick={() => setActiveTab(activeTab + 1)} style={{ background: '#1e293b', color: '#fff', border: 'none', padding: '10px 20px', borderRadius: '8px', cursor: 'pointer', fontWeight: 600 }}>Selanjutnya →</button>
+                                    {activeTab > 0 ? <button aria-label="Action button" onClick={() => setActiveTab(activeTab - 1)} style={{ background: '#f1f5f9', border: 'none', padding: '10px 20px', borderRadius: '8px', cursor: 'pointer', fontWeight: 600, color: '#475569' }}>← Sebelumnya</button> : <div />}
+                                    <button aria-label="Action button" onClick={() => setActiveTab(activeTab + 1)} style={{ background: '#1e293b', color: '#fff', border: 'none', padding: '10px 20px', borderRadius: '8px', cursor: 'pointer', fontWeight: 600 }}>Selanjutnya →</button>
                                 </div>
                             </div>
                         )
@@ -170,7 +170,7 @@ export default function VehicleInspectionApp() {
                                 <span style={{ fontSize: '1.5rem' }}>{issues > 0 ? '⚠️' : '✅'}</span>
                                 <span style={{ fontWeight: 600, color: '#374151' }}>{issues > 0 ? `Ditemukan ${issues} item bermasalah. Perlu penanganan sebelum kendaraan dioperasikan.` : 'Semua item dalam kondisi baik. Kendaraan siap beroperasi.'}</span>
                             </div>
-                            <button onClick={() => !inspector.name ? alert('Isi nama inspektor dulu!') : setSubmitted(true)} style={{ width: '100%', background: '#1e293b', color: '#fff', border: 'none', padding: '14px', borderRadius: '10px', fontWeight: 700, cursor: 'pointer', fontSize: '0.95rem' }}>✅ Selesaikan &amp; Simpan Laporan</button>
+                            <button aria-label="Action button" onClick={() => !inspector.name ? alert('Isi nama inspektor dulu!') : setSubmitted(true)} style={{ width: '100%', background: '#1e293b', color: '#fff', border: 'none', padding: '14px', borderRadius: '10px', fontWeight: 700, cursor: 'pointer', fontSize: '0.95rem' }}>✅ Selesaikan &amp; Simpan Laporan</button>
                         </div>
                     )}
                 </div>

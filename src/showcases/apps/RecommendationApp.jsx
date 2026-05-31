@@ -185,7 +185,7 @@ export default function SmartVisionApp() {
                                     <div style={{ fontWeight: 800, color: '#fff', fontSize: '0.95rem' }}>Akses Kamera Ditolak</div>
                                     <div style={{ color: '#fee2e2', fontSize: '0.8rem', marginTop: '2px', lineHeight: 1.4 }}>{cameraError}</div>
                                 </div>
-                                <button onClick={() => setCameraError('')} style={{ marginLeft: 'auto', background: 'rgba(255,255,255,0.2)', border: 'none', borderRadius: '8px', padding: '6px 12px', color: '#fff', fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer' }}>Tutup</button>
+                                <button aria-label="Action button" onClick={() => setCameraError('')} style={{ marginLeft: 'auto', background: 'rgba(255,255,255,0.2)', border: 'none', borderRadius: '8px', padding: '6px 12px', color: '#fff', fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer' }}>Tutup</button>
                             </div>
                         )}
 
@@ -207,7 +207,7 @@ export default function SmartVisionApp() {
                         {!isCameraActive && (
                             <div style={{ textAlign: 'center', color: '#94a3b8' }}>
                                 <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>👁️</div>
-                                <h3 style={{ margin: 0, fontSize: '1.2rem', color: '#f8fafc' }}>Camera Offline</h3>
+                                <h2 style={{ margin: 0, fontSize: '1.2rem', color: '#f8fafc' }}>Camera Offline</h2>
                                 <p style={{ fontSize: '0.85rem', marginTop: 8 }}>Click start below to initialize real-time object detection.</p>
                             </div>
                         )}
@@ -225,7 +225,7 @@ export default function SmartVisionApp() {
                             </div>
                         </div>
 
-                        <button 
+                        <button aria-label="Action button" 
                             disabled={!isModelReady}
                             onClick={isCameraActive ? stopCamera : startCamera}
                             style={{

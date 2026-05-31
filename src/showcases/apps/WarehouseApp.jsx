@@ -127,7 +127,7 @@ export default function WarehouseApp() {
                                 ))}
                             </div>
                             <div style={{ padding: '1rem', borderTop: '1px solid #e5e7eb' }}>
-                                <button onClick={addScan} style={{ width: '100%', background: '#111827', color: '#fff', border: 'none', padding: '10px', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer' }}>📷 Scan New Item</button>
+                                <button aria-label="Action button" onClick={addScan} style={{ width: '100%', background: '#111827', color: '#fff', border: 'none', padding: '10px', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer' }}>📷 Scan New Item</button>
                             </div>
                         </div>
                     </div>
@@ -172,7 +172,7 @@ export default function WarehouseApp() {
                                     </div>
                                 ))}
                             </div>
-                            <button onClick={addScan} style={{ background: '#111827', color: '#fff', border: 'none', padding: '12px 28px', borderRadius: '8px', fontWeight: 600, cursor: 'pointer' }}>+ Simulate Scan</button>
+                            <button aria-label="Action button" onClick={addScan} style={{ background: '#111827', color: '#fff', border: 'none', padding: '12px 28px', borderRadius: '8px', fontWeight: 600, cursor: 'pointer' }}>+ Simulate Scan</button>
                         </div>
                     </div>
                 )}

@@ -20,7 +20,7 @@ export default function EcommerceAnalyticsApp() {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <h1 style={{ fontSize: '1.5rem', fontWeight: 800, margin: 0 }}>Multi-Platform Dashboard</h1>
                     <div style={{ display: 'flex', gap: '8px' }}>
-                        {PLATFORMS.map(p => <button key={p} onClick={() => setActivePlat(p)} style={{ padding: '8px 16px', borderRadius: '8px', border: 'none', background: activePlat === p ? DATA[p].color : 'rgba(255,255,255,0.1)', color: '#fff', fontWeight: 600, cursor: 'pointer', fontSize: '0.85rem', transition: 'all 0.2s' }}>{p}</button>)}
+                        {PLATFORMS.map(p => <button aria-label="Action button" key={p} onClick={() => setActivePlat(p)} style={{ padding: '8px 16px', borderRadius: '8px', border: 'none', background: activePlat === p ? DATA[p].color : 'rgba(255,255,255,0.1)', color: '#fff', fontWeight: 600, cursor: 'pointer', fontSize: '0.85rem', transition: 'all 0.2s' }}>{p}</button>)}
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@ export default function EcommerceAnalyticsApp() {
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
                     {/* Funnel */}
                     <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #e2e8f0' }}>
-                        <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#0f172a', marginBottom: '1.5rem' }}>Conversion Funnel</h3>
+                        <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#0f172a', marginBottom: '1.5rem' }}>Conversion Funnel</h2>
                         {FUNNEL.map((stage, i) => (
                             <div key={stage} style={{ marginBottom: '1rem' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
@@ -53,7 +53,7 @@ export default function EcommerceAnalyticsApp() {
                     </div>
                     {/* Platform comparison */}
                     <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #e2e8f0' }}>
-                        <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#0f172a', marginBottom: '1.5rem' }}>Perbandingan Platform</h3>
+                        <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#0f172a', marginBottom: '1.5rem' }}>Perbandingan Platform</h2>
                         {Object.entries(DATA).map(([name, pd]) => (
                             <div key={name} style={{ padding: '12px 0', borderBottom: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -70,7 +70,7 @@ export default function EcommerceAnalyticsApp() {
                 </div>
                 {/* Summary recommendations */}
                 <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #e2e8f0' }}>
-                    <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#0f172a', marginBottom: '1rem' }}>Rekomendasi AI</h3>
+                    <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#0f172a', marginBottom: '1rem' }}>Rekomendasi AI</h2>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
                         {[{ icon: '📈', title: 'Optimalkan Shopee Ads', desc: 'CTR Shopee 5.8% tertinggi. Tingkatkan budget iklan 20% untuk scaling lebih maksimal.', color: '#ef4444' }, { icon: '⚡', title: 'Perbaiki Funnel Checkout', desc: 'Dropout 50% di tahap checkout. Tambahkan metode pembayaran COD untuk mengurangi friction.', color: '#f59e0b' }, { icon: '🎯', title: 'Retarget Lazada', desc: 'Conversion rate Lazada terendah 2.7%. Buat bundle promo untuk meningkatkan AOV.', color: '#3b82f6' }].map(r => (
                             <div key={r.title} style={{ background: '#f8fafc', borderRadius: '10px', padding: '1.25rem', border: '1px solid #e2e8f0' }}>

@@ -54,7 +54,7 @@ export default function CropYieldApp() {
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
                     {/* Bar chart */}
                     <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #bbf7d0' }}>
-                        <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#14532d', marginBottom: '1.5rem' }}>Hasil Panen {crop} per Wilayah (ton/ha)</h3>
+                        <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#14532d', marginBottom: '1.5rem' }}>Hasil Panen {crop} per Wilayah (ton/ha)</h2>
                         <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'flex-end', height: '180px', paddingBottom: '0.5rem' }}>
                             {REGIONS.map((r, i) => {
                                 const val = d[r]
@@ -74,7 +74,7 @@ export default function CropYieldApp() {
                     </div>
                     {/* AI Recommendation */}
                     <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #bbf7d0' }}>
-                        <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#14532d', marginBottom: '1rem' }}>Rekomendasi 🌱</h3>
+                        <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#14532d', marginBottom: '1rem' }}>Rekomendasi 🌱</h2>
                         <div style={{ background: '#f0fdf4', borderRadius: '10px', padding: '1rem', marginBottom: '1rem', border: '1px solid #bbf7d0' }}>
                             <div style={{ display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
                                 <span style={{ fontSize: '1.2rem' }}>🤖</span>

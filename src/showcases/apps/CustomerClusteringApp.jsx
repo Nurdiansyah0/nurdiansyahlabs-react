@@ -47,7 +47,7 @@ export default function CustomerClusteringApp() {
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
                     {/* Scatter plot simulation */}
                     <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #e5e7eb' }}>
-                        <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#312e81', marginBottom: '1rem' }}>RFM Scatter Plot</h3>
+                        <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#312e81', marginBottom: '1rem' }}>RFM Scatter Plot</h2>
                         <div style={{ position: 'relative', height: '240px', background: '#f8f9ff', borderRadius: '8px', border: '1px solid #e5e7eb', overflow: 'hidden' }}>
                             {/* Axes */}
                             <div style={{ position: 'absolute', bottom: '10px', left: '0', right: '0', fontSize: '0.65rem', color: '#94a3b8', textAlign: 'center' }}>Frekuensi →</div>
@@ -62,7 +62,7 @@ export default function CustomerClusteringApp() {
                     </div>
                     {/* Distribution */}
                     <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #e5e7eb' }}>
-                        <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#312e81', marginBottom: '1.5rem' }}>Distribusi Segmen</h3>
+                        <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#312e81', marginBottom: '1.5rem' }}>Distribusi Segmen</h2>
                         {CLUSTERS.map(c => (
                             <div key={c.id} style={{ marginBottom: '1rem', opacity: selected && selected.id !== c.id ? 0.3 : 1, transition: 'opacity 0.2s' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
@@ -81,11 +81,11 @@ export default function CustomerClusteringApp() {
                     <div style={{ background: selected.bg, borderRadius: '16px', padding: '1.5rem', border: `1px solid ${selected.color}40` }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                             <div>
-                                <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: selected.color, margin: '0 0 0.5rem' }}>{selected.name} Segment</h3>
+                                <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: selected.color, margin: '0 0 0.5rem' }}>{selected.name} Segment</h2>
                                 <p style={{ fontSize: '0.85rem', color: '#374151', lineHeight: 1.7, marginBottom: '1rem' }}>{selected.desc}</p>
                                 <div style={{ background: '#fff', borderRadius: '10px', padding: '1rem', display: 'inline-block' }}><span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#374151' }}>💡 Action: </span><span style={{ fontSize: '0.85rem', color: selected.color, fontWeight: 700 }}>{selected.action}</span></div>
                             </div>
-                            <button onClick={() => setSelected(null)} style={{ background: 'none', border: 'none', fontSize: '1.2rem', cursor: 'pointer', color: '#94a3b8' }}>✕</button>
+                            <button aria-label="Action button" onClick={() => setSelected(null)} style={{ background: 'none', border: 'none', fontSize: '1.2rem', cursor: 'pointer', color: '#94a3b8' }}>✕</button>
                         </div>
                     </div>
                 )}

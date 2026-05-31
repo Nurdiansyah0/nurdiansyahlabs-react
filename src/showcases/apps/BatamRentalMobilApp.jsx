@@ -125,7 +125,7 @@ function LanguageSwitcher() {
     const currentLang = languages.find(l => l.code === i18n.language) || languages[1];
     return (
         <div className="relative inline-block text-left" ref={dropdownRef}>
-            <button onClick={() => setIsOpen(!isOpen)} className="inline-flex items-center justify-center w-full rounded-full border border-gray-200 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
+            <button aria-label="Action button" onClick={() => setIsOpen(!isOpen)} className="inline-flex items-center justify-center w-full rounded-full border border-gray-200 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
                 <Globe className="mr-2 h-4 w-4" style={{ color: BRAND.primary }} />
                 {currentLang.label}
             </button>
@@ -137,7 +137,7 @@ function LanguageSwitcher() {
                     >
                         <div className="py-1 flex flex-col">
                             {languages.map((lang) => (
-                                <button key={lang.code} onClick={() => { i18n.changeLanguage(lang.code); setIsOpen(false); }} className={`block w-full text-left px-4 py-2.5 text-sm transition-colors ${i18n.language === lang.code ? 'bg-blue-50 text-blue-800 font-semibold' : 'text-gray-700 hover:bg-gray-50 hover:text-blue-600'}`}>
+                                <button aria-label="Action button" key={lang.code} onClick={() => { i18n.changeLanguage(lang.code); setIsOpen(false); }} className={`block w-full text-left px-4 py-2.5 text-sm transition-colors ${i18n.language === lang.code ? 'bg-blue-50 text-blue-800 font-semibold' : 'text-gray-700 hover:bg-gray-50 hover:text-blue-600'}`}>
                                     {lang.label}
                                 </button>
                             ))}
@@ -164,7 +164,7 @@ function Services() {
                     {services.map((s, i) => (
                         <div key={i} className="bg-white p-10 rounded-3xl shadow-sm border border-gray-100 group transition-all hover:shadow-xl">
                             <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-2xl mb-8 transform group-hover:scale-110 transition-all shadow-lg" style={{ background: `linear-gradient(135deg, ${BRAND.primary}, ${BRAND.accent})` }}>{s.icon}</div>
-                            <h3 className="text-2xl font-bold text-gray-900 mb-4">{t(s.titleKey, s.defaultTitle)}</h3>
+                            <h2 className="text-2xl font-bold text-gray-900 mb-4">{t(s.titleKey, s.defaultTitle)}</h2>
                             <p className="text-gray-500 leading-relaxed font-medium">{t(s.descKey, s.defaultDesc)}</p>
                         </div>
                     ))}
@@ -247,7 +247,7 @@ function Fleet() {
                 {/* Filter Bar */}
                 <div className="flex flex-wrap justify-center gap-3 mb-16">
                     {filters.map(f => (
-                        <button
+                        <button aria-label="Action button"
                             key={f.id}
                             onClick={() => filter(f.id)}
                             className={`px-6 py-2.5 rounded-full font-bold transition-all border ${activeFilter === f.id ? 'text-white border-transparent' : 'text-gray-600 bg-white border-gray-200 hover:border-blue-600'}`}
@@ -282,7 +282,7 @@ function Fleet() {
                                         <div className="p-8 flex-grow flex flex-col">
                                             <div className="mb-4">
                                                 <span className="text-blue-600 text-xs font-black uppercase tracking-widest block mb-2">{car.type}</span>
-                                                <h3 className="text-2xl font-black text-gray-900 mb-2">{car.name}</h3>
+                                                <h2 className="text-2xl font-black text-gray-900 mb-2">{car.name}</h2>
                                                 <p className="text-gray-500 text-sm line-clamp-2 leading-relaxed h-10 mb-4">{car.desc}</p>
                                             </div>
                                             <div className="grid grid-cols-3 gap-4 mb-8 py-4 border-y border-gray-50">
@@ -305,7 +305,7 @@ function Fleet() {
                                                     <span className="text-2xl font-black text-gray-900">{price}</span>
                                                     <span className="text-[10px] text-gray-400 font-bold">/ {currentLang === 'id' ? 'Hari' : 'Day'}</span>
                                                 </div>
-                                                <button
+                                                <button aria-label="Action button"
                                                     onClick={() => openWhatsApp(currentLang, { name: car.name, type: car.type, price })}
                                                     className="h-14 px-8 rounded-2xl font-black text-gray-900 shadow-lg hover:brightness-105 transition-all flex items-center gap-2"
                                                     style={{ backgroundColor: BRAND.secondary }}
@@ -352,7 +352,7 @@ export default function BatamRentalMobilApp() {
                             <a key={item} href={`#${item.toLowerCase()}`} className="text-sm font-bold text-gray-500 hover:text-blue-900 transition-colors uppercase tracking-widest">{item}</a>
                         ))}
                         <LanguageSwitcher />
-                        <button
+                        <button aria-label="Action button"
                             onClick={() => openWhatsApp(i18n.language)}
                             className="flex items-center gap-2 px-6 py-3 rounded-full font-bold text-gray-900 shadow-md hover:shadow-xl transition-all"
                             style={{ backgroundColor: BRAND.secondary }}
@@ -372,7 +372,7 @@ export default function BatamRentalMobilApp() {
                     <div className="absolute inset-0 z-0">
                         {/* Background Video or High-Qual Image */}
                         <div className="absolute inset-0 bg-black">
-                            <iframe
+                            <iframe title="Embedded Content"
                                 className="absolute opacity-40 w-full h-full object-cover pointer-events-none scale-110"
                                 style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
                                 src="https://www.youtube.com/embed/w4goi8YBrfg?autoplay=1&mute=1&loop=1&playlist=w4goi8YBrfg&controls=0&showinfo=0&rel=0"
@@ -408,7 +408,7 @@ export default function BatamRentalMobilApp() {
                                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}
                                 className="flex flex-wrap gap-4"
                             >
-                                <button
+                                <button aria-label="Action button"
                                     onClick={() => document.getElementById('fleet').scrollIntoView({ behavior: 'smooth' })}
                                     className="px-10 py-5 bg-white text-blue-900 rounded-2xl font-black text-lg transition-all shadow-2xl hover:bg-blue-50 flex items-center gap-3"
                                 >

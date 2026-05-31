@@ -136,7 +136,7 @@ export default function TerminalEasterEgg() {
                             <Terminal size={16} />
                             <span>cPanel Terminal - uygpuazs@waguri</span>
                         </div>
-                        <button onClick={() => setIsOpen(false)} className="text-slate-400 hover:text-white transition-colors">
+                        <button aria-label="Action button" onClick={() => setIsOpen(false)} className="text-slate-400 hover:text-white transition-colors">
                             <X size={16} />
                         </button>
                     </div>
@@ -153,7 +153,7 @@ export default function TerminalEasterEgg() {
                         ))}
                         <form onSubmit={handleCommand} className="flex items-center gap-2 mt-2">
                             <span className="text-blue-400 shrink-0">[uygpuazs@waguri ~]$</span>
-                            <input
+                            <input aria-label="Form input"
                                 ref={inputRef}
                                 type="text"
                                 value={input}

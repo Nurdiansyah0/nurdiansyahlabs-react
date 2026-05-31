@@ -64,8 +64,8 @@ export default function AttendanceApp() {
                         <div style={{ fontSize: '0.8rem', color: '#64748b' }}>Senin, 3 Maret 2025</div>
                     </div>
                     <div style={{ display: 'flex', gap: '1rem' }}>
-                        <button onClick={() => setLeaveModal(true)} style={{ background: '#f1f5f9', color: '#475569', border: 'none', padding: '8px 16px', borderRadius: '8px', cursor: 'pointer', fontWeight: 600, fontSize: '0.85rem' }}>📅 Ajukan Cuti</button>
-                        <button onClick={() => setCheckinModal(true)} style={{ background: '#6366f1', color: '#fff', border: 'none', padding: '8px 16px', borderRadius: '8px', cursor: 'pointer', fontWeight: 700, fontSize: '0.85rem' }}>✓ Check-in</button>
+                        <button aria-label="Action button" onClick={() => setLeaveModal(true)} style={{ background: '#f1f5f9', color: '#475569', border: 'none', padding: '8px 16px', borderRadius: '8px', cursor: 'pointer', fontWeight: 600, fontSize: '0.85rem' }}>📅 Ajukan Cuti</button>
+                        <button aria-label="Action button" onClick={() => setCheckinModal(true)} style={{ background: '#6366f1', color: '#fff', border: 'none', padding: '8px 16px', borderRadius: '8px', cursor: 'pointer', fontWeight: 700, fontSize: '0.85rem' }}>✓ Check-in</button>
                     </div>
                 </div>
                 {/* Attendance Page */}
@@ -82,9 +82,9 @@ export default function AttendanceApp() {
                         </div>
                         {/* Filters */}
                         <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
-                            <input value={search} onChange={e => setSearch(e.target.value)} placeholder="🔍 Cari karyawan..." style={{ padding: '9px 14px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', minWidth: '200px' }} />
+                            <input aria-label="Form input" value={search} onChange={e => setSearch(e.target.value)} placeholder="🔍 Cari karyawan..." style={{ padding: '9px 14px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', minWidth: '200px' }} />
                             <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                                {DEPTS.map(d => <button key={d} onClick={() => setDept(d)} style={{ padding: '8px 14px', borderRadius: '8px', background: dept === d ? '#6366f1' : '#fff', color: dept === d ? '#fff' : '#64748b', fontWeight: dept === d ? 700 : 400, cursor: 'pointer', fontSize: '0.8rem', border: dept === d ? 'none' : '1px solid #e2e8f0' }}>{d}</button>)}
+                                {DEPTS.map(d => <button aria-label="Action button" key={d} onClick={() => setDept(d)} style={{ padding: '8px 14px', borderRadius: '8px', background: dept === d ? '#6366f1' : '#fff', color: dept === d ? '#fff' : '#64748b', fontWeight: dept === d ? 700 : 400, cursor: 'pointer', fontSize: '0.8rem', border: dept === d ? 'none' : '1px solid #e2e8f0' }}>{d}</button>)}
                             </div>
                         </div>
                         {/* Table */}
@@ -138,7 +138,7 @@ export default function AttendanceApp() {
                                         </div>
                                     ))}
                                 </div>
-                                <button onClick={() => setLeaveModal(true)} style={{ background: '#6366f1', color: '#fff', border: 'none', padding: '12px 28px', borderRadius: '8px', fontWeight: 700, cursor: 'pointer', width: '100%' }}>+ Ajukan Cuti Baru</button>
+                                <button aria-label="Action button" onClick={() => setLeaveModal(true)} style={{ background: '#6366f1', color: '#fff', border: 'none', padding: '12px 28px', borderRadius: '8px', fontWeight: 700, cursor: 'pointer', width: '100%' }}>+ Ajukan Cuti Baru</button>
                             </>) : (<>
                                 <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📊</div>
                                 <h2 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#0f172a', marginBottom: '1.5rem' }}>Laporan Absensi</h2>
@@ -150,7 +150,7 @@ export default function AttendanceApp() {
                                         </div>
                                     ))}
                                 </div>
-                                <button onClick={() => window.print()} style={{ background: '#0f172a', color: '#fff', border: 'none', padding: '12px 28px', borderRadius: '8px', fontWeight: 700, cursor: 'pointer', width: '100%' }}>🖨 Export Laporan</button>
+                                <button aria-label="Action button" onClick={() => window.print()} style={{ background: '#0f172a', color: '#fff', border: 'none', padding: '12px 28px', borderRadius: '8px', fontWeight: 700, cursor: 'pointer', width: '100%' }}>🖨 Export Laporan</button>
                             </>)}
                         </div>
                     </div>
@@ -162,7 +162,7 @@ export default function AttendanceApp() {
                     <div onClick={e => e.stopPropagation()} style={{ background: '#fff', borderRadius: '20px', padding: '2rem', maxWidth: '480px', width: '90%', maxHeight: '80vh', overflowY: 'auto' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
                             <h2 style={{ fontSize: '1.1rem', fontWeight: 800, margin: 0, color: '#0f172a' }}>Manual Check-in</h2>
-                            <button onClick={() => setCheckinModal(false)} style={{ background: 'none', border: 'none', fontSize: '1.2rem', cursor: 'pointer', color: '#94a3b8' }}>✕</button>
+                            <button aria-label="Action button" onClick={() => setCheckinModal(false)} style={{ background: 'none', border: 'none', fontSize: '1.2rem', cursor: 'pointer', color: '#94a3b8' }}>✕</button>
                         </div>
                         {!selectedEmp ? (
                             <div style={{ display: 'grid', gap: '10px' }}>
@@ -184,10 +184,10 @@ export default function AttendanceApp() {
                                 <div style={{ color: '#64748b', fontSize: '0.85rem', marginBottom: '1.5rem' }}>{selectedEmp.dept} · {selectedEmp.pos}</div>
                                 <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: '1.5rem' }}>Waktu: <strong><Clock /></strong></div>
                                 <div style={{ display: 'flex', gap: '1rem' }}>
-                                    <button onClick={() => doCheckin(selectedEmp.id, 'present')} style={{ flex: 1, background: '#d1fae5', color: '#059669', border: 'none', padding: '12px', borderRadius: '8px', fontWeight: 700, cursor: 'pointer' }}>✓ Hadir</button>
-                                    <button onClick={() => doCheckin(selectedEmp.id, 'late')} style={{ flex: 1, background: '#fef3c7', color: '#d97706', border: 'none', padding: '12px', borderRadius: '8px', fontWeight: 700, cursor: 'pointer' }}>⏰ Terlambat</button>
+                                    <button aria-label="Action button" onClick={() => doCheckin(selectedEmp.id, 'present')} style={{ flex: 1, background: '#d1fae5', color: '#059669', border: 'none', padding: '12px', borderRadius: '8px', fontWeight: 700, cursor: 'pointer' }}>✓ Hadir</button>
+                                    <button aria-label="Action button" onClick={() => doCheckin(selectedEmp.id, 'late')} style={{ flex: 1, background: '#fef3c7', color: '#d97706', border: 'none', padding: '12px', borderRadius: '8px', fontWeight: 700, cursor: 'pointer' }}>⏰ Terlambat</button>
                                 </div>
-                                <button onClick={() => setSelectedEmp(null)} style={{ width: '100%', marginTop: '0.75rem', background: 'none', border: '1px solid #e2e8f0', padding: '10px', borderRadius: '8px', cursor: 'pointer', color: '#64748b', fontSize: '0.85rem' }}>← Kembali</button>
+                                <button aria-label="Action button" onClick={() => setSelectedEmp(null)} style={{ width: '100%', marginTop: '0.75rem', background: 'none', border: '1px solid #e2e8f0', padding: '10px', borderRadius: '8px', cursor: 'pointer', color: '#64748b', fontSize: '0.85rem' }}>← Kembali</button>
                             </div>
                         )}
                     </div>
@@ -201,11 +201,11 @@ export default function AttendanceApp() {
                             <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>✅</div>
                             <h2 style={{ fontWeight: 800, color: '#0f172a', marginBottom: '0.5rem' }}>Berhasil!</h2>
                             <p style={{ color: '#64748b', marginBottom: '1.5rem', fontSize: '0.9rem' }}>Pengajuan cuti telah dikirim ke HR untuk ditinjau.</p>
-                            <button onClick={() => { setLeaveModal(false); setLeaveSuccess(false) }} style={{ background: '#6366f1', color: '#fff', border: 'none', padding: '12px 28px', borderRadius: '8px', fontWeight: 700, cursor: 'pointer', width: '100%' }}>Tutup</button>
+                            <button aria-label="Action button" onClick={() => { setLeaveModal(false); setLeaveSuccess(false) }} style={{ background: '#6366f1', color: '#fff', border: 'none', padding: '12px 28px', borderRadius: '8px', fontWeight: 700, cursor: 'pointer', width: '100%' }}>Tutup</button>
                         </div>) : (<>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
                                 <h2 style={{ fontSize: '1.1rem', fontWeight: 800, margin: 0, color: '#0f172a' }}>Ajukan Cuti</h2>
-                                <button onClick={() => setLeaveModal(false)} style={{ background: 'none', border: 'none', fontSize: '1.2rem', cursor: 'pointer', color: '#94a3b8' }}>✕</button>
+                                <button aria-label="Action button" onClick={() => setLeaveModal(false)} style={{ background: 'none', border: 'none', fontSize: '1.2rem', cursor: 'pointer', color: '#94a3b8' }}>✕</button>
                             </div>
                             {[['emp', 'Nama Karyawan'], ['type', 'Jenis Cuti'], ['from', 'Tanggal Mulai'], ['to', 'Tanggal Selesai'], ['reason', 'Alasan Cuti']].map(([k, l]) => (
                                 <div key={k} style={{ marginBottom: '1rem' }}>
@@ -216,11 +216,11 @@ export default function AttendanceApp() {
                                             {['Cuti Tahunan', 'Cuti Sakit', 'Cuti Melahirkan', 'Cuti Penting', 'Izin Tidak Berbayar'].map(t => <option key={t}>{t}</option>)}
                                         </select>
                                     ) : (
-                                        <input type={k === 'from' || k === 'to' ? 'date' : 'text'} value={leaveForm[k]} onChange={e => setLeaveForm(p => ({ ...p, [k]: e.target.value }))} style={{ width: '100%', padding: '10px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '0.9rem', boxSizing: 'border-box', outline: 'none' }} />
+                                        <input aria-label="Form input" type={k === 'from' || k === 'to' ? 'date' : 'text'} value={leaveForm[k]} onChange={e => setLeaveForm(p => ({ ...p, [k]: e.target.value }))} style={{ width: '100%', padding: '10px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '0.9rem', boxSizing: 'border-box', outline: 'none' }} />
                                     )}
                                 </div>
                             ))}
-                            <button onClick={() => leaveForm.emp && leaveForm.type && leaveForm.from && leaveForm.to ? setLeaveSuccess(true) : alert('Lengkapi semua field!')} style={{ width: '100%', background: '#6366f1', color: '#fff', border: 'none', padding: '12px', borderRadius: '8px', fontWeight: 700, cursor: 'pointer', marginTop: '0.5rem' }}>Kirim Pengajuan →</button>
+                            <button aria-label="Action button" onClick={() => leaveForm.emp && leaveForm.type && leaveForm.from && leaveForm.to ? setLeaveSuccess(true) : alert('Lengkapi semua field!')} style={{ width: '100%', background: '#6366f1', color: '#fff', border: 'none', padding: '12px', borderRadius: '8px', fontWeight: 700, cursor: 'pointer', marginTop: '0.5rem' }}>Kirim Pengajuan →</button>
                         </>)}
                     </div>
                 </div>

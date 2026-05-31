@@ -86,7 +86,7 @@ export default function Navbar() {
 
                         {/* Language selector */}
                         <div style={{ position: 'relative' }}>
-                            <button onClick={() => setLangOpen(!langOpen)} style={{
+                            <button aria-label="Action button" onClick={() => setLangOpen(!langOpen)} style={{
                                 display: 'flex', alignItems: 'center', gap: '6px',
                                 padding: '6px 12px', borderRadius: '8px',
                                 border: '1px solid #e5e7eb', background: '#f9fafb',
@@ -105,7 +105,7 @@ export default function Navbar() {
                                     width: '200px', maxHeight: '320px', overflowY: 'auto', zIndex: 999,
                                 }}>
                                     {supportedLangs.map(code => (
-                                        <button key={code} onClick={() => { setLang(code); setLangOpen(false) }}
+                                        <button aria-label="Action button" key={code} onClick={() => { setLang(code); setLangOpen(false) }}
                                             style={{
                                                 display: 'block', width: '100%', textAlign: 'left',
                                                 padding: '8px 12px', borderRadius: '8px', border: 'none',
@@ -134,7 +134,7 @@ export default function Navbar() {
                     </div>
 
                     {/* Mobile hamburger */}
-                    <button
+                    <button aria-label="Action button"
                         onClick={() => setMobileOpen(!mobileOpen)}
                         className="hamburger-btn"
                         aria-label={mobileOpen ? "Close menu" : "Open menu"}

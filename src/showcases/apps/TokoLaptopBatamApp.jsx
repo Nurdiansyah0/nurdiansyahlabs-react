@@ -87,7 +87,7 @@ export default function TokoLaptopBatamApp() {
 
                 <div className="hidden lg:flex items-center gap-8 text-sm font-bold text-slate-500">
                     {CATEGORIES.filter(c => c.id !== 'all').map(cat => (
-                        <button
+                        <button aria-label="Action button"
                             key={cat.id}
                             onClick={() => { setActiveTab(cat.id); document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' }) }}
                             className="hover:text-blue-600 transition-colors uppercase"
@@ -118,7 +118,7 @@ export default function TokoLaptopBatamApp() {
                             Elektronik pre-loved kualitas grade A+. Lulus QC 21 poin, garansi toko, dan harga Batam yang tak tertandingi.
                         </p>
                         <div className="flex items-center gap-4">
-                            <button
+                            <button aria-label="Action button"
                                 onClick={() => document.getElementById('catalog').scrollIntoView({ behavior: 'smooth' })}
                                 className="h-16 px-8 bg-blue-600 text-white rounded-2xl font-black text-lg flex items-center gap-3 shadow-xl shadow-blue-500/20 hover:bg-blue-700 hover:shadow-2xl transition-all uppercase"
                             >
@@ -165,7 +165,7 @@ export default function TokoLaptopBatamApp() {
                                 <f.icon size={28} />
                             </div>
                             <div>
-                                <h3 className="font-black text-slate-900 mb-2 uppercase">{f.title}</h3>
+                                <h2 className="font-black text-slate-900 mb-2 uppercase">{f.title}</h2>
                                 <p className="text-sm text-slate-500 leading-relaxed">{f.desc}</p>
                             </div>
                         </div>
@@ -182,7 +182,7 @@ export default function TokoLaptopBatamApp() {
                     </div>
                     <div className="flex gap-2 p-1.5 bg-slate-100 rounded-[20px] w-fit">
                         {CATEGORIES.map(cat => (
-                            <button
+                            <button aria-label="Action button"
                                 key={cat.id}
                                 onClick={() => setActiveTab(cat.id)}
                                 className={`h-12 px-6 rounded-2xl flex items-center gap-2 text-sm font-bold transition-all uppercase ${activeTab === cat.id ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
@@ -229,7 +229,7 @@ export default function TokoLaptopBatamApp() {
                                     </div>
                                     <div className="flex-1">
                                         <div className="text-[10px] font-black tracking-widest uppercase text-blue-600 mb-2">{p.category}</div>
-                                        <h3 className="font-black text-lg text-slate-900 leading-tight mb-2 tracking-tight group-hover:text-blue-600 transition-colors uppercase">{p.name}</h3>
+                                        <h2 className="font-black text-lg text-slate-900 leading-tight mb-2 tracking-tight group-hover:text-blue-600 transition-colors uppercase">{p.name}</h2>
                                         <p className="text-sm text-slate-500 mb-6 line-clamp-2 leading-relaxed">{p.description}</p>
                                     </div>
                                     <div className="flex items-center justify-between mt-auto pt-6 border-t border-slate-50">
@@ -297,7 +297,7 @@ export default function TokoLaptopBatamApp() {
                         >
                             <div className="bg-slate-50 rounded-[32px] p-12 flex items-center justify-center relative">
                                 <img src={getOptimizedImg(selectedProduct.image_url, { w: 800, h: 800 })} className="w-full h-auto drop-shadow-xl mix-blend-multiply" alt={selectedProduct.name} />
-                                <button
+                                <button aria-label="Action button"
                                     onClick={() => setSelectedProduct(null)}
                                     className="absolute top-6 left-6 w-12 h-12 bg-white rounded-full flex items-center justify-center text-slate-400 hover:text-slate-900 shadow-sm transition-colors"
                                 >
@@ -315,7 +315,7 @@ export default function TokoLaptopBatamApp() {
                                         <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 uppercase">Pilih Varian</h4>
                                         <div className="flex flex-wrap gap-2">
                                             {selectedProduct.extras?.sizes?.map(size => (
-                                                <button
+                                                <button aria-label="Action button"
                                                     key={size}
                                                     onClick={() => setSelectedSize(size)}
                                                     className={`px-5 h-11 border-2 rounded-xl text-sm font-bold transition-all uppercase ${selectedSize === size ? 'border-blue-600 text-blue-600 bg-blue-50' : 'border-slate-100 text-slate-600 hover:border-blue-600 hover:text-blue-600'}`}
@@ -329,7 +329,7 @@ export default function TokoLaptopBatamApp() {
                                         <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 uppercase">Warna</h4>
                                         <div className="flex flex-wrap gap-2">
                                             {selectedProduct.extras?.colors?.map(color => (
-                                                <button
+                                                <button aria-label="Action button"
                                                     key={color}
                                                     onClick={() => setSelectedColor(color)}
                                                     className={`px-5 h-11 rounded-xl text-sm font-bold transition-all uppercase ${selectedColor === color ? 'bg-slate-900 text-white' : 'bg-slate-50 text-slate-600 hover:bg-slate-900 hover:text-white'}`}
@@ -342,7 +342,7 @@ export default function TokoLaptopBatamApp() {
                                     <p className="text-slate-500 leading-relaxed text-sm italic">"{selectedProduct.description}"</p>
                                 </div>
 
-                                <button
+                                <button aria-label="Action button"
                                     onClick={handleWhatsAppOrder}
                                     className="mt-auto w-full h-16 bg-green-500 text-white rounded-2xl font-black text-lg flex items-center justify-center gap-3 shadow-xl shadow-green-500/20 hover:bg-green-600 transition-all uppercase"
                                 >
