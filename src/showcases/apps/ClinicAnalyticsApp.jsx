@@ -28,7 +28,7 @@ export default function ClinicAnalyticsApp() {
                     <h1 style={{ fontSize: '1.5rem', fontWeight: 800, margin: 0 }}>Dashboard Analitik RS Sejahtera</h1>
                 </div>
                 <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                    <select value={month} onChange={e => setMonth(e.target.value)} style={{ background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.3)', color: '#fff', padding: '8px 14px', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', cursor: 'pointer' }}>
+                    <select aria-label="Select option" aria-label="Select option" value={month} onChange={e => setMonth(e.target.value)} style={{ background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.3)', color: '#fff', padding: '8px 14px', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', cursor: 'pointer' }}>
                         {Object.keys(MONTHLY_PATIENTS).map(m => <option key={m} value={m} style={{ color: '#000' }}>{m}</option>)}
                     </select>
                 </div>
@@ -49,7 +49,7 @@ export default function ClinicAnalyticsApp() {
                     <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #bfdbfe' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
                             <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#1e3a8a', margin: 0 }}>Kunjungan per Departemen — {month}</h3>
-                            <select value={dept} onChange={e => setDept(e.target.value)} style={{ padding: '6px 12px', border: '1px solid #bfdbfe', borderRadius: '6px', fontSize: '0.8rem', outline: 'none', cursor: 'pointer' }}>
+                            <select aria-label="Select option" aria-label="Select option" value={dept} onChange={e => setDept(e.target.value)} style={{ padding: '6px 12px', border: '1px solid #bfdbfe', borderRadius: '6px', fontSize: '0.8rem', outline: 'none', cursor: 'pointer' }}>
                                 {DEPTS.map(d => <option key={d}>{d}</option>)}
                             </select>
                         </div>
