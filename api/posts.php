@@ -14,6 +14,12 @@ header('Access-Control-Allow-Methods: GET');
 require_once __DIR__ . '/../database/db.php';
 $pdo = getDB();
 
+if (!$pdo) {
+    http_response_code(500);
+    echo json_encode(['status' => 'error', 'message' => 'Database connection failed']);
+    exit;
+}
+
 // ── GET Single Post ──────────────────────────────────────────────────────────
 if (isset($_GET['slug'])) {
     $slug = trim($_GET['slug']);

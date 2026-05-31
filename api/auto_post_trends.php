@@ -20,6 +20,12 @@ if (isset($_GET['key']) && $_GET['key'] !== $secretCronKey) {
 require_once __DIR__ . '/../database/db.php';
 $pdo = getDB();
 
+if (!$pdo) {
+    http_response_code(500);
+    echo json_encode(['error' => 'Database connection failed']);
+    exit;
+}
+
 // ── 1. G20 Geography Definitions & Dynamic RSS ────────────────────────────────
 $geoRaw = isset($_GET['geo']) ? strtoupper($_GET['geo']) : 'US'; // Default to US if not provided
 

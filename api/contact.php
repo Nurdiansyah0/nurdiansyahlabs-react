@@ -35,6 +35,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 require_once __DIR__ . '/../database/db.php';
 $pdo = getDB();
 
+if (!$pdo) {
+    http_response_code(500);
+    echo json_encode(['status' => 'error', 'message' => 'Database connection failed']);
+    exit;
+}
+
 define('ADMIN_EMAIL', 'Nudiansyahdian28.adv@gmail.com');
 
 // ── Read JSON payload ────────────────────────────────────────────────────────

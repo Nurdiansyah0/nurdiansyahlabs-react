@@ -30,6 +30,7 @@ $allOk     = true;
 try {
     require_once __DIR__ . '/../database/db.php';
     $pdo = getDB();
+    if (!$pdo) throw new Exception("Database connection failed");
     $pdo->query('SELECT 1');
     $results['mysql'] = ['status' => 'ok'];
 } catch (Exception $e) {
