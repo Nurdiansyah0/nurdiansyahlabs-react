@@ -28,6 +28,28 @@ const SEO = ({ title, description, keywords, canonical, image, type = 'website' 
             <meta name="twitter:title" content={fullTitle} />
             <meta name="twitter:description" content={description || defaultDesc} />
             {image && <meta name="twitter:image" content={`${siteUrl}${image}`} />}
+
+            {/* Schema.org JSON-LD (Entity Recognition) */}
+            <script type="application/ld+json">
+                {JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "ProfessionalService",
+                    "name": "NurdiansyahLabs",
+                    "image": `${siteUrl}/assets/Logo.png`,
+                    "url": siteUrl,
+                    "telephone": "+6282176012461",
+                    "address": {
+                        "@type": "PostalAddress",
+                        "addressLocality": "Indonesia",
+                        "addressCountry": "ID"
+                    },
+                    "description": "Enterprise-grade web development, SEO, and Data Analytics.",
+                    "sameAs": [
+                        "https://github.com/Nurdiansyah0",
+                        "https://www.linkedin.com/in/nurdiansyah-ds"
+                    ]
+                })}
+            </script>
         </Helmet>
     );
 };
