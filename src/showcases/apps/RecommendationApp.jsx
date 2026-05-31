@@ -10,6 +10,7 @@ export default function SmartVisionApp() {
     const [isModelLoading, setIsModelLoading] = useState(true)
     const [isModelReady, setIsModelReady] = useState(false)
     const [isCameraActive, setIsCameraActive] = useState(false)
+    const [cameraError, setCameraError] = useState('')
     const [detections, setDetections] = useState([])
     
     const videoRef = useRef(null)
@@ -92,6 +93,7 @@ export default function SmartVisionApp() {
     }, [isCameraActive])
 
     const startCamera = async () => {
+        setCameraError('')
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ 
                 video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } } 
@@ -108,7 +110,7 @@ export default function SmartVisionApp() {
                 }
             }
         } catch (err) {
-            alert("Camera access denied. Please allow camera permissions in your browser. " + err.message)
+            setCameraError("Kamera diblokir oleh browser. Silakan izinkan akses kamera pada ikon gembok di URL bar Anda.")
         }
     }
 
@@ -159,6 +161,24 @@ export default function SmartVisionApp() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                     <div className="glass-panel" style={{ padding: '1rem', position: 'relative', overflow: 'hidden', minHeight: 480, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         
+                        {/* Custom Error UI */}
+                        {cameraError && (
+                            <div style={{
+                                position: 'absolute', top: 16, left: 16, right: 16, zIndex: 100,
+                                background: 'rgba(239, 68, 68, 0.9)', backdropFilter: 'blur(8px)',
+                                border: '1px solid #fca5a5', borderRadius: '12px', padding: '1rem 1.25rem',
+                                display: 'flex', alignItems: 'center', gap: '12px',
+                                boxShadow: '0 4px 20px rgba(239, 68, 68, 0.4)'
+                            }}>
+                                <div style={{ fontSize: '1.8rem' }}>🛑</div>
+                                <div>
+                                    <div style={{ fontWeight: 800, color: '#fff', fontSize: '0.95rem' }}>Akses Kamera Ditolak</div>
+                                    <div style={{ color: '#fee2e2', fontSize: '0.8rem', marginTop: '2px', lineHeight: 1.4 }}>{cameraError}</div>
+                                </div>
+                                <button onClick={() => setCameraError('')} style={{ marginLeft: 'auto', background: 'rgba(255,255,255,0.2)', border: 'none', borderRadius: '8px', padding: '6px 12px', color: '#fff', fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer' }}>Tutup</button>
+                            </div>
+                        )}
+
                         {/* Video Layer */}
                         <video 
                             ref={videoRef} 
