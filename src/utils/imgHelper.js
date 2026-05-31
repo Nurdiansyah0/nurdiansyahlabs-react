@@ -36,7 +36,7 @@ export const getOptimizedImg = (src, options = {}) => {
     // We also bypass external avatar services that block proxying (pravatar) 
     // AND our own domain, because Cloudflare / Hotlink Protection might block the proxy.
     const isLocal = fullUrl.includes('localhost') || fullUrl.includes('127.0.0.1') || fullUrl.includes('::1');
-    const isBypassed = fullUrl.includes('pravatar.cc') || fullUrl.includes('ui-avatars.com') || fullUrl.includes(window.location.hostname) || fullUrl.includes('nurdiansyahlabs.com');
+    const isBypassed = fullUrl.includes('pravatar.cc') || fullUrl.includes('ui-avatars.com') || fullUrl.includes(window.location.hostname) || fullUrl.includes('nurdiansyahlabs.com') || fullUrl.includes('unsplash.com');
 
     if (isLocal || isBypassed) {
         return src;
