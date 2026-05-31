@@ -66,7 +66,7 @@ export default function ConsultantApp() {
 
                 <div className="hidden md:flex items-center gap-8">
                     {['Home', 'Produk', 'Keunggulan', 'Lokasi'].map(item => (
-                        <button
+                        <button aria-label="Action button"
                             key={item}
                             onClick={() => {
                                 const id = item.toLowerCase()
@@ -77,7 +77,7 @@ export default function ConsultantApp() {
                             {item}
                         </button>
                     ))}
-                    <button
+                    <button aria-label="Action button"
                         onClick={orderCustom}
                         className="bg-emerald-600 text-white px-6 py-3 rounded-2xl font-black text-sm uppercase tracking-wider shadow-lg shadow-emerald-200 hover:bg-emerald-700 transition-all"
                     >
@@ -85,7 +85,7 @@ export default function ConsultantApp() {
                     </button>
                 </div>
 
-                <button className="md:hidden text-slate-900" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+                <button aria-label="Action button" className="md:hidden text-slate-900" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
                     {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
                 </button>
             </nav>
@@ -100,7 +100,7 @@ export default function ConsultantApp() {
                         className="fixed inset-x-0 top-20 bg-white border-b border-slate-100 z-[90] p-6 flex flex-col gap-6 md:hidden shadow-2xl"
                     >
                         {['Home', 'Produk', 'Keunggulan', 'Lokasi'].map(item => (
-                            <button
+                            <button aria-label="Action button"
                                 key={item}
                                 onClick={() => {
                                     const id = item.toLowerCase()
@@ -112,7 +112,7 @@ export default function ConsultantApp() {
                                 {item}
                             </button>
                         ))}
-                        <button
+                        <button aria-label="Action button"
                             onClick={orderCustom}
                             className="w-full bg-emerald-600 text-white py-4 rounded-2xl font-black uppercase shadow-lg"
                         >
@@ -141,7 +141,7 @@ export default function ConsultantApp() {
                             Ayam kampung asli tanpa suntikan hormon. Dipotong harian untuk menjamin kesegaran maksimal langsung dari peternakan kami ke dapur Anda.
                         </p>
                         <div className="flex flex-wrap items-center gap-4">
-                            <button
+                            <button aria-label="Action button"
                                 onClick={() => document.getElementById('produk').scrollIntoView({ behavior: 'smooth' })}
                                 className="h-14 md:h-16 px-8 md:px-10 bg-emerald-600 text-white rounded-2xl font-black flex items-center gap-3 shadow-xl shadow-emerald-200 hover:bg-emerald-700 hover:scale-[1.02] transition-all uppercase tracking-wider text-sm md:text-base"
                             >
@@ -208,7 +208,7 @@ export default function ConsultantApp() {
                                 className="bg-slate-50 p-8 rounded-[32px] border border-slate-100/50 hover:bg-emerald-50 transition-colors"
                             >
                                 <div className="text-4xl mb-6">{item.icon}</div>
-                                <h3 className="font-black text-lg text-slate-900 uppercase mb-3 tracking-tight">{item.title}</h3>
+                                <h2 className="font-black text-lg text-slate-900 uppercase mb-3 tracking-tight">{item.title}</h2>
                                 <p className="text-sm text-slate-500 leading-relaxed font-medium">{item.desc}</p>
                             </motion.div>
                         ))}
@@ -261,7 +261,7 @@ export default function ConsultantApp() {
                                     />
                                 </div>
                                 <div className="flex-1 px-2">
-                                    <h3 className="font-black text-xl text-slate-900 leading-tight mb-2 tracking-tight group-hover:text-emerald-600 transition-colors uppercase">{item.name}</h3>
+                                    <h2 className="font-black text-xl text-slate-900 leading-tight mb-2 tracking-tight group-hover:text-emerald-600 transition-colors uppercase">{item.name}</h2>
                                     <p className="text-sm text-slate-500 mb-6 line-clamp-3 leading-relaxed font-medium">{item.desc}</p>
                                 </div>
                                 <div className="flex flex-col gap-4 mt-auto pt-6 border-t border-slate-50 px-2">
@@ -270,7 +270,7 @@ export default function ConsultantApp() {
                                             <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Harga / Kg</span>
                                             <span className="font-black text-2xl text-emerald-600 tracking-tight">Rp {fmt(item.price)}</span>
                                         </div>
-                                        <button
+                                        <button aria-label="Action button"
                                             onClick={() => orderViaWA(item)}
                                             className="w-12 h-12 bg-slate-900 text-white rounded-2xl flex items-center justify-center group-hover:bg-emerald-600 transition-all shadow-lg hover:rotate-6 active:scale-95"
                                         >
@@ -320,7 +320,7 @@ export default function ConsultantApp() {
 
                     <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-8 relative z-10 leading-tight">Suplai Restoran <br />Partai Besar?</h2>
                     <p className="text-emerald-50 mb-12 text-lg md:text-xl font-medium relative z-10 opacity-90">Dapatkan katalog harga grosir khusus B2B untuk menekan budget operasional Anda.</p>
-                    <button
+                    <button aria-label="Action button"
                         onClick={orderCustom}
                         className="bg-white text-emerald-900 px-12 py-5 rounded-2xl font-black text-lg md:text-xl uppercase shadow-2xl hover:scale-105 active:scale-95 transition-all relative z-10"
                     >

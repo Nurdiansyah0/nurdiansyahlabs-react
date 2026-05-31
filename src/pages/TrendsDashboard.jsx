@@ -172,7 +172,7 @@ export default function TrendsDashboard() {
             <div style={{ background: '#fff', borderBottom: '1px solid #e2e8f0', padding: '0 1.5rem' }}>
                 <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', gap: '4px', overflowX: 'auto' }}>
                     {[['all', 'fa-fire', '🔥 Top Opportunities'], ...Object.entries(SERVICE_LABELS).map(([k, v]) => [k, v.icon, v.label])].map(([key, icon, label]) => (
-                        <button
+                        <button aria-label="Action button"
                             key={key}
                             onClick={() => setActiveFilter(key)}
                             style={{

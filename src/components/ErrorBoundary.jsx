@@ -35,7 +35,7 @@ export default class ErrorBoundary extends React.Component {
                     <p style={{ color: '#6b7280', marginBottom: '2rem', maxWidth: '400px', lineHeight: 1.6 }}>
                         An unexpected error occurred. Please try refreshing the page.
                     </p>
-                    <button
+                    <button aria-label="Action button"
                         onClick={() => window.location.reload()}
                         style={{
                             background: '#4f46e5', color: '#fff', border: 'none',

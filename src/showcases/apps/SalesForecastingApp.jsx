@@ -38,7 +38,7 @@ export default function SalesForecastingApp() {
                 {/* Chart */}
                 <div style={{ background: '#fff', borderRadius: '16px', padding: '2rem', border: '1px solid #e5e7eb', marginBottom: '1.5rem', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
-                        <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#1a1a2e', margin: 0 }}>Forecast Chart — Model: {model}</h3>
+                        <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#1a1a2e', margin: 0 }}>Forecast Chart — Model: {model}</h2>
                         <div style={{ display: 'flex', gap: '1.5rem', fontSize: '0.78rem' }}>
                             <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><div style={{ width: '20px', height: '3px', background: '#6366f1', borderRadius: '2px' }} /> Aktual</span>
                             <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><div style={{ width: '20px', height: '3px', background: '#f59e0b', borderRadius: '2px', borderTop: '2px dashed #f59e0b' }} /> Forecast</span>
@@ -65,7 +65,7 @@ export default function SalesForecastingApp() {
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
                     <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #e5e7eb' }}>
-                        <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#1a1a2e', marginBottom: '1rem' }}>Model Comparison</h3>
+                        <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#1a1a2e', marginBottom: '1rem' }}>Model Comparison</h2>
                         {Object.entries(accuracy).map(([m, a]) => (
                             <div key={m} onClick={() => setModel(m)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 12px', borderRadius: '8px', marginBottom: '6px', background: model === m ? '#f5f3ff' : '#f8fafc', border: `1px solid ${model === m ? '#7c3aed' : '#e5e7eb'}`, cursor: 'pointer', transition: 'all 0.15s' }}>
                                 <span style={{ fontWeight: model === m ? 700 : 500, color: model === m ? '#7c3aed' : '#374151', fontSize: '0.9rem' }}>{m}</span>
@@ -77,7 +77,7 @@ export default function SalesForecastingApp() {
                         ))}
                     </div>
                     <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #e5e7eb' }}>
-                        <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#1a1a2e', marginBottom: '1rem' }}>📅 Proyeksi {period} Bulan</h3>
+                        <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#1a1a2e', marginBottom: '1rem' }}>📅 Proyeksi {period} Bulan</h2>
                         {Array.from({ length: Math.min(period, 6) }).map((_, i) => {
                             const base = ACTUAL[ACTUAL.length - 1]
                             const proj = Math.round(base * (1 + 0.06 * (i + 1)))

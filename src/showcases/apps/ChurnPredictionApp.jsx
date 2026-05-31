@@ -44,7 +44,7 @@ export default function ChurnPredictionApp() {
                 <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #fee2e2', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap' }}>
                     <div style={{ flex: 1 }}>
                         <div style={{ fontWeight: 700, color: '#374151', marginBottom: '8px', fontSize: '0.9rem' }}>Risk Threshold: <span style={{ color: '#dc2626', fontWeight: 800 }}>{threshold.toFixed(2)}</span></div>
-                        <input type="range" min={0} max={100} value={threshold * 100} onChange={e => setThreshold(e.target.value / 100)} style={{ width: '100%', accentColor: '#dc2626' }} />
+                        <input aria-label="Form input" type="range" min={0} max={100} value={threshold * 100} onChange={e => setThreshold(e.target.value / 100)} style={{ width: '100%', accentColor: '#dc2626' }} />
                         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem', color: '#94a3b8', marginTop: '4px' }}><span>0.00 (Semua)</span><span>1.00 (Tidak ada)</span></div>
                     </div>
                     <div style={{ display: 'flex', gap: '1rem' }}>
@@ -62,7 +62,7 @@ export default function ChurnPredictionApp() {
                     {/* Risk Table */}
                     <div style={{ background: '#fff', borderRadius: '16px', border: '1px solid #fee2e2', overflow: 'hidden' }}>
                         <div style={{ padding: '1.25rem 1.5rem', borderBottom: '1px solid #fee2e2', background: '#fff5f5', display: 'flex', justifyContent: 'space-between' }}>
-                            <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 700, color: '#7f1d1d' }}>Risk Table</h3>
+                            <h2 style={{ margin: 0, fontSize: '1rem', fontWeight: 700, color: '#7f1d1d' }}>Risk Table</h2>
                             <span style={{ fontSize: '0.8rem', color: '#64748b' }}>{CUSTOMERS.length} pelanggan</span>
                         </div>
                         {CUSTOMERS.sort((a, b) => b.risk - a.risk).map((c, i) => {
@@ -85,7 +85,7 @@ export default function ChurnPredictionApp() {
                     {/* SHAP + Detail */}
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                         <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #fee2e2' }}>
-                            <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#7f1d1d', marginBottom: '1.25rem' }}>Feature Importance (SHAP)</h3>
+                            <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#7f1d1d', marginBottom: '1.25rem' }}>Feature Importance (SHAP)</h2>
                             {SHAP.map(s => (
                                 <div key={s.feature} style={{ marginBottom: '12px' }}>
                                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px', fontSize: '0.8rem' }}>
@@ -101,8 +101,8 @@ export default function ChurnPredictionApp() {
                         {selected && (
                             <div style={{ background: '#fff5f5', borderRadius: '16px', padding: '1.5rem', border: '1px solid #fca5a5' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
-                                    <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#7f1d1d', margin: 0 }}>{selected.name}</h3>
-                                    <button onClick={() => setSelected(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8' }}>✕</button>
+                                    <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#7f1d1d', margin: 0 }}>{selected.name}</h2>
+                                    <button aria-label="Action button" onClick={() => setSelected(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8' }}>✕</button>
                                 </div>
                                 {[['Plan', selected.plan], ['Tenure', `${selected.tenure} bulan`], ['Usage', `${selected.usage} GB/bln`], ['Support Calls', selected.support], ['Lokasi', selected.country]].map(([k, v]) => (
                                     <div key={k} style={{ display: 'flex', justifyContent: 'space-between', padding: '6px 0', borderBottom: '1px solid #fee2e2', fontSize: '0.85rem' }}>

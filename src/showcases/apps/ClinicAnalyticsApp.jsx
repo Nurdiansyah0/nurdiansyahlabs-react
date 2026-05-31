@@ -48,7 +48,7 @@ export default function ClinicAnalyticsApp() {
                     {/* Bar chart per dept */}
                     <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #bfdbfe' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
-                            <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#1e3a8a', margin: 0 }}>Kunjungan per Departemen — {month}</h3>
+                            <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#1e3a8a', margin: 0 }}>Kunjungan per Departemen — {month}</h2>
                             <select aria-label="Select option" aria-label="Select option" value={dept} onChange={e => setDept(e.target.value)} style={{ padding: '6px 12px', border: '1px solid #bfdbfe', borderRadius: '6px', fontSize: '0.8rem', outline: 'none', cursor: 'pointer' }}>
                                 {DEPTS.map(d => <option key={d}>{d}</option>)}
                             </select>
@@ -67,7 +67,7 @@ export default function ClinicAnalyticsApp() {
                     </div>
                     {/* Diagnosis distribution */}
                     <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #bfdbfe' }}>
-                        <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#1e3a8a', marginBottom: '1.5rem' }}>Diagnosis Terbanyak</h3>
+                        <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#1e3a8a', marginBottom: '1.5rem' }}>Diagnosis Terbanyak</h2>
                         {CONDITIONS.map(c => (
                             <div key={c.name} style={{ marginBottom: '1rem' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
@@ -83,7 +83,7 @@ export default function ClinicAnalyticsApp() {
                 </div>
                 {/* Bed occupancy visual */}
                 <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #bfdbfe' }}>
-                    <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#1e3a8a', marginBottom: '1.5rem' }}>Status Bed Real-Time</h3>
+                    <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#1e3a8a', marginBottom: '1.5rem' }}>Status Bed Real-Time</h2>
                     <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                         {Array.from({ length: BEDS.total }).map((_, i) => (
                             <div key={i} style={{ width: '28px', height: '28px', borderRadius: '4px', background: i < BEDS.occupied ? (i < BEDS.emergency ? '#fca5a5' : '#93c5fd') : '#d1fae5', border: '1px solid', borderColor: i < BEDS.occupied ? (i < BEDS.emergency ? '#ef4444' : '#3b82f6') : '#86efac', cursor: 'default' }} title={i < BEDS.emergency ? 'Emergency' : i < BEDS.occupied ? 'Terisi' : 'Kosong'} />
