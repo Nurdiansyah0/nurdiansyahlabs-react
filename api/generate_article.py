@@ -98,15 +98,14 @@ def _llm_generate(keyword, volume, lang):
             "Gunakan analogi yang cerdas, tone profesional tapi engaging, dan masukkan Long-Tail Keywords secara natural. Hasilkan format JSON."
         )
         user_prompt = (
-            f"Tulis artikel SEO 'Silo Strategy' tentang topik viral: **{keyword}** (Pencarian: {volume}).\n"
-            f"INSTRUKSI WAJIB:\n"
+            f"Tulis artikel SEO 'Silo Strategy' SINGKAT tentang topik viral: **{keyword}** (Pencarian: {volume}).\n"
+            f"INSTRUKSI WAJIB (MAKSIMAL 300 KATA TOTAL):\n"
             f"1. Judul clickbait tapi nyambung dengan Bisnis/Teknologi.\n"
-            f"2. Intro 3 kalimat yang membahas {keyword} sebagai 'hook' awal.\n"
-            f"3. Paragraf transisi yang SANGAT HALUS untuk menghubungkan tren tersebut dengan teknologi.\n"
-            f"4. Minimal 3 Subheading H2 yang membahas solusi bisnis dari kacamata IT.\n"
-            f"5. Soft-Selling CTA organik di akhir paragraf mengajak pembaca ke [NurdiansyahLabs](https://nurdiansyahlabs.com).\n"
-            f"6. 2 FAQ (Tanya Jawab) relevan.\n\n"
-            f"Kembalikan HANYA JSON yang valid:\n"
+            f"2. Intro 2 kalimat yang membahas {keyword} sebagai 'hook'.\n"
+            f"3. 1 Subheading H2 yang membahas solusi bisnis dari kacamata IT secara singkat.\n"
+            f"4. Soft-Selling CTA organik mengajak pembaca ke [NurdiansyahLabs](https://nurdiansyahlabs.com).\n"
+            f"5. 1 FAQ (Tanya Jawab) relevan.\n\n"
+            f"Kembalikan HANYA JSON yang valid dan SINGKAT agar tidak terpotong:\n"
             f'{{"title":"...", "description":"...", "content":"...[markdown format]...", "faqs":[{{"q":"...","a":"..."}}]}}'
         )
     else:
@@ -115,8 +114,13 @@ def _llm_generate(keyword, volume, lang):
             "Your task is to write an SEO article that cleverly 'twists' any trending topic to make it highly relevant to one of NurdiansyahLabs' 4 core services. Generate in JSON format."
         )
         user_prompt = (
-            f"Write an SEO 'Silo Strategy' article on the viral topic: **{keyword}** (Search volume: {volume}).\n"
-            f"Return ONLY valid JSON:\n"
+            f"Write a SHORT SEO 'Silo Strategy' article on the viral topic: **{keyword}** (Search volume: {volume}).\n"
+            f"STRICT INSTRUCTIONS (MAX 300 WORDS):\n"
+            f"1. A catchy B2B/Tech title.\n"
+            f"2. A short hook intro linking to business tech.\n"
+            f"3. One H2 subheading analyzing the business impact.\n"
+            f"4. A soft CTA to [NurdiansyahLabs](https://nurdiansyahlabs.com).\n"
+            f"Return ONLY valid SHORT JSON to avoid truncation:\n"
             f'{{"title":"...", "description":"...", "content":"...[markdown format]...", "faqs":[{{"q":"...","a":"..."}}]}}'
         )
 
@@ -131,7 +135,7 @@ def _llm_generate(keyword, volume, lang):
     }).encode('utf-8')
 
     req = urllib.request.Request(
-        LLM_ENDPOINT,
+        "https://text.pollinations.ai/",
         data=payload,
         headers={
             "Content-Type": "application/json",
@@ -141,10 +145,8 @@ def _llm_generate(keyword, volume, lang):
     )
 
     with urllib.request.urlopen(req, timeout=LLM_TIMEOUT) as resp:
-        raw = json.loads(resp.read().decode('utf-8'))
+        text = resp.read().decode('utf-8').strip()
 
-    text = raw['choices'][0]['message']['content'].strip()
-    
     # Clean up markdown code blocks if the LLM adds them
     if text.startswith("```json"):
         text = text[7:]
@@ -159,7 +161,7 @@ def _llm_generate(keyword, volume, lang):
     # Normalize field names
     result_data = {
         "status": "success",
-        "mode": "groq_llm",
+        "mode": "llm_keyless",
         "title": data.get("title", f"Trending Now: {keyword}"),
         "description": data.get("description", ""),
         "faqs": data.get("faqs", []),
@@ -358,7 +360,7 @@ def generate_article(keyword, volume, lang='id'):
     try:
         result = _llm_generate(keyword, volume, lang)
         return json.dumps(result, ensure_ascii=False)
-    except (urllib.error.URLError, urllib.error.HTTPError, json.JSONDecodeError, KeyError):
+    except Exception:
         pass  # Fallthrough to Mode 2
 
     # Mode 2: Markov Chain NLG (Local ML)
