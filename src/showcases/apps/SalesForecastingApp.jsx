@@ -27,7 +27,7 @@ export default function SalesForecastingApp() {
             </div>
             <div style={{ padding: '2rem', maxWidth: '1100px', margin: '0 auto' }}>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
-                    {[['Model Akurasi', accuracy[model], '🎯', '#5b21b6'], ['RMSE', '4.82', '📉', '#2563eb'], ['Tren', 'Naik +18%', '📈', '#16a34a'], ['Horizon Forecast', `${period} bulan`, '⏳', '#b45309']].map(([l, v, i, c]) => (
+                    {[['Model Akurasi', accuracy[model], '🎯', '#5b21b6'], ['RMSE', '4.82', '📉', '#1e40af'], ['Tren', 'Naik +18%', '📈', '#166534'], ['Horizon Forecast', `${period} bulan`, '⏳', '#b45309']].map(([l, v, i, c]) => (
                         <div key={l} style={{ background: '#fff', borderRadius: '14px', padding: '1.5rem', border: '1px solid #e5e7eb', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
                             <div style={{ fontSize: '1.5rem', marginBottom: '8px' }}>{i}</div>
                             <div style={{ fontSize: '1.5rem', fontWeight: 800, color: c, marginBottom: '4px' }}>{v}</div>

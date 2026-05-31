@@ -80,7 +80,7 @@ export default function KoperasiPOSApp() {
                             <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 0', borderBottom: i < 3 ? '1px solid #f1f5f9' : 'none' }}>
                                 <div><div style={{ fontWeight: 600, color: '#1e1b4b', fontSize: '0.9rem' }}>{tx.n}</div><div style={{ fontSize: '0.75rem', color: '#1e293b' }}>{tx.time}</div></div>
                                 <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-                                    <span style={{ background: tx.s === 'Lunas' ? '#d1fae5' : '#fef3c7', color: tx.s === 'Lunas' ? '#065f46' : '#d97706', fontSize: '0.7rem', fontWeight: 700, padding: '2px 8px', borderRadius: '4px' }}>{tx.s}</span>
+                                    <span style={{ background: tx.s === 'Lunas' ? '#d1fae5' : '#fef3c7', color: tx.s === 'Lunas' ? '#065f46' : '#92400e', fontSize: '0.7rem', fontWeight: 700, padding: '2px 8px', borderRadius: '4px' }}>{tx.s}</span>
                                     <div style={{ fontWeight: 700, color: '#3730a3' }}>{tx.t}</div>
                                 </div>
                             </div>
@@ -120,7 +120,7 @@ export default function KoperasiPOSApp() {
                             <div key={p.id} style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', padding: '1rem 1.5rem', borderTop: '1px solid #f1f5f9', alignItems: 'center' }}>
                                 <div style={{ fontWeight: 600, color: '#1e1b4b', fontSize: '0.9rem' }}>{p.name}</div>
                                 <div style={{ fontSize: '0.8rem', color: '#1e293b' }}>{p.cat}</div>
-                                <div><span style={{ background: p.stock < 10 ? '#fee2e2' : '#d1fae5', color: p.stock < 10 ? '#dc2626' : '#065f46', fontSize: '0.75rem', fontWeight: 700, padding: '2px 8px', borderRadius: '4px' }}>{p.stock} unit</span></div>
+                                <div><span style={{ background: p.stock < 10 ? '#fee2e2' : '#d1fae5', color: p.stock < 10 ? '#991b1b' : '#065f46', fontSize: '0.75rem', fontWeight: 700, padding: '2px 8px', borderRadius: '4px' }}>{p.stock} unit</span></div>
                                 <div style={{ fontWeight: 700, color: '#3730a3', fontSize: '0.9rem' }}>Rp {fmt(p.price)}</div>
                             </div>
                         ))}

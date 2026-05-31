@@ -13,7 +13,7 @@ const EMPLOYEES = [
 ]
 const DEPTS = ['Semua', 'Engineering', 'Product', 'Marketing', 'Design', 'HR', 'Finance']
 const STATUS_CLR = { present: '#d1fae5', late: '#fef3c7', absent: '#fee2e2', leave: '#dbeafe' }
-const STATUS_TXT = { present: '#065f46', late: '#d97706', absent: '#dc2626', leave: '#2563eb' }
+const STATUS_TXT = { present: '#065f46', late: '#92400e', absent: '#991b1b', leave: '#1e40af' }
 const STATUS_LBL = { present: 'Hadir', late: 'Terlambat', absent: 'Tidak Hadir', leave: 'Cuti' }
 function Clock() {
     const [time, setTime] = useState(new Date())
@@ -172,7 +172,7 @@ export default function AttendanceApp() {
                                         onMouseLeave={el => el.currentTarget.style.borderColor = '#e2e8f0'}>
                                         <img src={getOptimizedImg(e.img, { w: 100, h: 100 })} style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover' }} alt={e.name} />
                                         <div style={{ flex: 1 }}><div style={{ fontWeight: 600, color: '#0f172a' }}>{e.name}</div><div style={{ fontSize: '0.8rem', color: '#1e293b' }}>{e.dept} · {e.pos}</div></div>
-                                        <span style={{ fontSize: '0.75rem', color: '#dc2626', fontWeight: 700 }}>Belum Hadir</span>
+                                        <span style={{ fontSize: '0.75rem', color: '#991b1b', fontWeight: 700 }}>Belum Hadir</span>
                                     </div>
                                 ))}
                                 {employees.filter(e => e.status === 'absent').length === 0 && <div style={{ textAlign: 'center', padding: '2rem', color: '#1e293b' }}>✅ Semua karyawan sudah absen</div>}
@@ -185,7 +185,7 @@ export default function AttendanceApp() {
                                 <div style={{ fontSize: '0.8rem', color: '#1e293b', marginBottom: '1.5rem' }}>Waktu: <strong><Clock /></strong></div>
                                 <div style={{ display: 'flex', gap: '1rem' }}>
                                     <button aria-label="Action button" onClick={() => doCheckin(selectedEmp.id, 'present')} style={{ flex: 1, background: '#d1fae5', color: '#065f46', border: 'none', padding: '12px', borderRadius: '8px', fontWeight: 700, cursor: 'pointer' }}>✓ Hadir</button>
-                                    <button aria-label="Action button" onClick={() => doCheckin(selectedEmp.id, 'late')} style={{ flex: 1, background: '#fef3c7', color: '#d97706', border: 'none', padding: '12px', borderRadius: '8px', fontWeight: 700, cursor: 'pointer' }}>⏰ Terlambat</button>
+                                    <button aria-label="Action button" onClick={() => doCheckin(selectedEmp.id, 'late')} style={{ flex: 1, background: '#fef3c7', color: '#92400e', border: 'none', padding: '12px', borderRadius: '8px', fontWeight: 700, cursor: 'pointer' }}>⏰ Terlambat</button>
                                 </div>
                                 <button aria-label="Action button" onClick={() => setSelectedEmp(null)} style={{ width: '100%', marginTop: '0.75rem', background: 'none', border: '1px solid #e2e8f0', padding: '10px', borderRadius: '8px', cursor: 'pointer', color: '#1e293b', fontSize: '0.85rem' }}>← Kembali</button>
                             </div>

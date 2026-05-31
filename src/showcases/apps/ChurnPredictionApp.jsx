@@ -43,13 +43,13 @@ export default function ChurnPredictionApp() {
                 {/* Threshold slider */}
                 <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #fee2e2', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap' }}>
                     <div style={{ flex: 1 }}>
-                        <div style={{ fontWeight: 700, color: '#374151', marginBottom: '8px', fontSize: '0.9rem' }}>Risk Threshold: <span style={{ color: '#dc2626', fontWeight: 800 }}>{threshold.toFixed(2)}</span></div>
-                        <input aria-label="Form input" type="range" min={0} max={100} value={threshold * 100} onChange={e => setThreshold(e.target.value / 100)} style={{ width: '100%', accentColor: '#dc2626' }} />
+                        <div style={{ fontWeight: 700, color: '#374151', marginBottom: '8px', fontSize: '0.9rem' }}>Risk Threshold: <span style={{ color: '#991b1b', fontWeight: 800 }}>{threshold.toFixed(2)}</span></div>
+                        <input aria-label="Form input" type="range" min={0} max={100} value={threshold * 100} onChange={e => setThreshold(e.target.value / 100)} style={{ width: '100%', accentColor: '#991b1b' }} />
                         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem', color: '#1e293b', marginTop: '4px' }}><span>0.00 (Semua)</span><span>1.00 (Tidak ada)</span></div>
                     </div>
                     <div style={{ display: 'flex', gap: '1rem' }}>
                         <div style={{ background: '#fee2e2', borderRadius: '10px', padding: '1rem', textAlign: 'center', minWidth: '80px' }}>
-                            <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#dc2626' }}>{atRisk.length}</div>
+                            <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#991b1b' }}>{atRisk.length}</div>
                             <div style={{ fontSize: '0.75rem', color: '#1e293b' }}>At Risk</div>
                         </div>
                         <div style={{ background: '#d1fae5', borderRadius: '10px', padding: '1rem', textAlign: 'center', minWidth: '80px' }}>
@@ -73,11 +73,11 @@ export default function ChurnPredictionApp() {
                                     <div style={{ fontSize: '0.8rem', color: '#1e293b' }}>{c.plan}</div>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                                         <div style={{ flex: 1, height: '6px', background: '#f1f5f9', borderRadius: '3px', overflow: 'hidden' }}>
-                                            <div style={{ height: '100%', background: c.risk > 0.7 ? '#dc2626' : c.risk > 0.4 ? '#b45309' : '#047857', width: `${c.risk * 100}%` }} />
+                                            <div style={{ height: '100%', background: c.risk > 0.7 ? '#991b1b' : c.risk > 0.4 ? '#b45309' : '#047857', width: `${c.risk * 100}%` }} />
                                         </div>
-                                        <span style={{ fontSize: '0.78rem', fontWeight: 700, color: c.risk > 0.7 ? '#dc2626' : c.risk > 0.4 ? '#d97706' : '#065f46', minWidth: '30px' }}>{(c.risk * 100).toFixed(0)}%</span>
+                                        <span style={{ fontSize: '0.78rem', fontWeight: 700, color: c.risk > 0.7 ? '#991b1b' : c.risk > 0.4 ? '#92400e' : '#065f46', minWidth: '30px' }}>{(c.risk * 100).toFixed(0)}%</span>
                                     </div>
-                                    <span style={{ background: isRisk ? '#fee2e2' : '#d1fae5', color: isRisk ? '#dc2626' : '#065f46', fontSize: '0.72rem', fontWeight: 700, padding: '3px 8px', borderRadius: '5px', textAlign: 'center' }}>{isRisk ? 'At Risk' : 'Safe'}</span>
+                                    <span style={{ background: isRisk ? '#fee2e2' : '#d1fae5', color: isRisk ? '#991b1b' : '#065f46', fontSize: '0.72rem', fontWeight: 700, padding: '3px 8px', borderRadius: '5px', textAlign: 'center' }}>{isRisk ? 'At Risk' : 'Safe'}</span>
                                 </div>
                             )
                         })}
@@ -90,7 +90,7 @@ export default function ChurnPredictionApp() {
                                 <div key={s.feature} style={{ marginBottom: '12px' }}>
                                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px', fontSize: '0.8rem' }}>
                                         <span style={{ color: '#374151' }}>{s.feature}</span>
-                                        <span style={{ fontWeight: 700, color: s.dir === 'pos' ? '#dc2626' : '#065f46' }}>{s.dir === 'pos' ? '+' : ''}{s.impact}</span>
+                                        <span style={{ fontWeight: 700, color: s.dir === 'pos' ? '#991b1b' : '#065f46' }}>{s.dir === 'pos' ? '+' : ''}{s.impact}</span>
                                     </div>
                                     <div style={{ height: '8px', background: '#f1f5f9', borderRadius: '4px', overflow: 'hidden' }}>
                                         <div style={{ height: '100%', background: s.dir === 'pos' ? '#fca5a5' : '#86efac', borderRadius: '4px', width: `${Math.abs(s.impact) * 100}%`, transition: 'width 0.4s' }} />
@@ -109,7 +109,7 @@ export default function ChurnPredictionApp() {
                                         <span style={{ color: '#1e293b' }}>{k}</span><span style={{ fontWeight: 700, color: '#374151' }}>{v}</span>
                                     </div>
                                 ))}
-                                <div style={{ marginTop: '1rem', padding: '10px', background: selected.risk >= threshold ? '#dc2626' : '#065f46', borderRadius: '8px', textAlign: 'center', color: '#fff', fontWeight: 700, fontSize: '0.9rem' }}>
+                                <div style={{ marginTop: '1rem', padding: '10px', background: selected.risk >= threshold ? '#991b1b' : '#065f46', borderRadius: '8px', textAlign: 'center', color: '#fff', fontWeight: 700, fontSize: '0.9rem' }}>
                                     Risk Score: {(selected.risk * 100).toFixed(0)}% — {selected.risk >= threshold ? '⚠️ Segment: At Risk' : '✅ Segment: Safe'}
                                 </div>
                             </div>
