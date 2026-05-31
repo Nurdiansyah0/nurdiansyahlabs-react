@@ -1,42 +1,101 @@
-name: Deploy to cPanel
+name: 🚀 CI/CD — Build & Deploy to cPanel
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch: # Allows manual trigger from GitHub Actions UI
 
 jobs:
-  web-deploy:
-    name: 🎉 Deploy
+  build-and-deploy:
+    name: 🔨 Build → 🔐 Harden → 📂 Deploy
     runs-on: ubuntu-latest
+
     steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v4
+      # ─── 1. Checkout ─────────────────────────────────────────────
+      - name: 📦 Checkout Repository
+        uses: actions/checkout@v4
 
-    - name: Use Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
+      # ─── 2. Setup Node.js ─────────────────────────────────────────
+      - name: ⚙️ Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm' # Cache node_modules untuk build lebih cepat
 
-    - name: 📦 Install Dependencies
-      run: npm install
+      # ─── 3. Install Dependencies ──────────────────────────────────
+      - name: 📥 Install NPM Dependencies
+        run: npm ci # Lebih cepat dan deterministik daripada npm install
 
-    - name: 🔨 Build Project
-      run: npm run build
+      # ─── 4. Build React App ───────────────────────────────────────
+      - name: 🔨 Build React App (Vite)
+        run: npm run build
+        env:
+          NODE_ENV: production
 
-    - name: 📄 Copy Backend Files
-      run: |
-        cp backend-php/.htaccess dist/.htaccess
-        mkdir -p dist/api
-        cp backend-php/api/trends.php dist/api/trends.php
-        mkdir -p dist/cache
-        echo "# Cache dir" > dist/cache/.gitkeep
+      # ─── 5. Prepare Full Deployment Package ───────────────────────
+      - name: 🗂️ Prepare Deployment Package
+        run: |
+          echo "--- Menyiapkan folder API Backend ---"
+          mkdir -p dist/api
+          cp -r api/* dist/api/ 2>/dev/null || echo "Folder api/ kosong atau tidak ada."
 
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-      with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./dist/
-        server-dir: ./public_html/
+          echo "--- Menyiapkan folder Database ---"
+          mkdir -p dist/database
+          if [ -f database/schema.sql ]; then cp database/schema.sql dist/database/; fi
+          if [ -f database/db.php ]; then cp database/db.php dist/database/; fi
+          if [ -f database/.htaccess ]; then cp database/.htaccess dist/database/; fi
+
+          echo "--- Menyiapkan folder Cache ---"
+          mkdir -p dist/cache
+          echo "# Cache dir — writable by PHP" > dist/cache/.gitkeep
+
+          echo "--- Menyalin .htaccess untuk React Router ---"
+          if [ -f api/.htaccess ]; then cp api/.htaccess dist/.htaccess; fi
+
+      # ─── 6. Security Hardening ───────────────────────────────────
+      - name: 🔐 Harden PHP for Production
+        run: |
+          echo "--- Mematikan display_errors di semua PHP ---"
+          find dist/api -name "*.php" 2>/dev/null | xargs sed -i \
+            -e 's/ini_set.*display_errors.*1.*/ini_set("display_errors", 0);/g' \
+            -e 's/error_reporting(E_ALL)/error_reporting(0)/g' || true
+
+          echo "--- Menghapus file debug/diagnosa dari production ---"
+          rm -f dist/api/diagnose_env.php \
+                dist/api/diagnose_network.php \
+                dist/api/truncate_db.php \
+                dist/api/diagnose_db.php || true
+
+          echo "✅ PHP hardening selesai."
+
+      # ─── 7. Generate Deploy Manifest ─────────────────────────────
+      - name: 📋 Generate Deploy Manifest
+        run: |
+          cat > dist/deploy_manifest.txt << EOF
+          NurdiansyahLabs — GitHub Actions Deploy Manifest
+          =================================================
+          Timestamp : $(date -u '+%Y-%m-%d %H:%M:%S UTC')
+          Git Commit: ${{ github.sha }}
+          Git Branch: ${{ github.ref_name }}
+          Triggered : ${{ github.actor }}
+          Node      : $(node --version)
+          NPM       : $(npm --version)
+          EOF
+          echo "✅ Manifest digenerate."
+
+      # ─── 8. Deploy via FTP ───────────────────────────────────────
+      - name: 📂 Deploy to cPanel via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./dist/
+          server-dir: ./public_html/
+          dangerous-clean-slate: false # Set true HANYA jika ingin hapus semua file lama
+          exclude: |
+            **/.git*
+            **/.env*
+            **/node_modules/**
+            **/deploy_manifest.txt # Jangan overwrite, biarkan yang di server
