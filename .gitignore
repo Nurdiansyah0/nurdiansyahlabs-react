@@ -14,6 +14,7 @@ venv/
 !/database/schema.sql
 .env
 .env.*
+env.local.php
 
 # OS files
 .DS_Store

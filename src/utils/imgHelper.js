@@ -22,14 +22,13 @@ export const getOptimizedImg = (src, options = {}) => {
     }
 
     // 2. Normalize and Clean the URL for the CDN
-    // Public CDNs work best with "clean" source URLs.
-    // We strip existing query parameters to avoid conflicts with wsrv.nl parameters.
-    let cleanSrc = src.split('?')[0];
-    let fullUrl = cleanSrc;
+    // We should NOT strip query parameters because external image providers (Pravatar, Unsplash)
+    // rely on them (e.g. ?img=12). Wsrv.nl handles URL-encoded query params perfectly.
+    let fullUrl = src;
 
-    if (cleanSrc.startsWith('/')) {
+    if (fullUrl.startsWith('/')) {
         const host = window.location.origin;
-        fullUrl = `${host}${cleanSrc}`;
+        fullUrl = `${host}${fullUrl}`;
     }
 
     // 3. Local Environment Guard
