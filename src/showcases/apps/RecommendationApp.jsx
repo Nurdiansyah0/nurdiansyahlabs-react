@@ -95,9 +95,17 @@ export default function SmartVisionApp() {
     const startCamera = async () => {
         setCameraError('')
         try {
-            const stream = await navigator.mediaDevices.getUserMedia({ 
-                video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } } 
-            })
+            let stream;
+            try {
+                // Percobaan 1: Coba minta kamera resolusi tinggi (Kamera Belakang jika di HP)
+                stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } } 
+                })
+            } catch (fallbackErr) {
+                // Percobaan 2: Fallback meminta kamera apa saja (Biasa terjadi di beberapa Laptop/Linux)
+                stream = await navigator.mediaDevices.getUserMedia({ video: true })
+            }
+
             if (videoRef.current) {
                 videoRef.current.srcObject = stream
                 videoRef.current.onloadedmetadata = () => {
@@ -110,7 +118,7 @@ export default function SmartVisionApp() {
                 }
             }
         } catch (err) {
-            setCameraError(`Kamera gagal diakses: ${err.message || err.name}. Pastikan URL menggunakan HTTPS atau periksa izin gembok browser.`)
+            setCameraError(`Kamera gagal diakses: ${err.message || err.name}. Pastikan kamera tidak dipakai aplikasi lain (Zoom/Meet) atau coba tombol fungsi fisik (Fn+Kamera).`)
         }
     }
 
