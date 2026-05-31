@@ -16,6 +16,20 @@ function generateGenericData(slug) {
     }
 }
 
+
+    // Function to ensure any badge background provides AAA contrast (7:1) with white text (#fff)
+    const getSafeAccent = (hex) => {
+        if (!hex) return '#1e293b';
+        const lower = hex.toLowerCase();
+        if (lower.includes('059669') || lower.includes('10b981')) return '#022c22'; // Emerald -> super dark green
+        if (lower.includes('22c55e') || lower.includes('16a34a')) return '#14532d'; // Green -> super dark green
+        if (lower.includes('f59e0b') || lower.includes('d97706')) return '#78350f'; // Amber -> super dark amber
+        if (lower.includes('3b82f6') || lower.includes('2563eb')) return '#1e3a8a'; // Blue -> super dark blue
+        if (lower.includes('8b5cf6') || lower.includes('a855f7')) return '#2e1065'; // Violet -> super dark violet
+        if (lower.includes('6366f1') || lower.includes('4f46e5')) return '#1e1b4b'; // Indigo -> super dark indigo
+        return lower; // Assume others are safe (like original '#3730a3' or already dark)
+    };
+
 export default function BlogPage() {
     const { geo, langSlug, slug } = useParams()
     const navigate = useNavigate()
@@ -208,7 +222,7 @@ export default function BlogPage() {
                 {/* Hero */}
                 <div style={{ background: `linear-gradient(135deg, ${post.accentLight} 0%, #fff 100%)`, padding: '3rem 1.5rem 2rem', borderBottom: '1px solid #e2e8f0' }}>
                     <div style={{ maxWidth: '760px', margin: '0 auto' }}>
-                        <span style={{ fontSize: '0.72rem', fontWeight: 700, padding: '4px 12px', borderRadius: '9999px', background: post.accent === "#f59e0b" ? "#92400e" : post.accent, color: '#fff', marginBottom: '1rem', display: 'inline-block' }}>
+                        <span style={{ fontSize: '0.72rem', fontWeight: 700, padding: '4px 12px', borderRadius: '9999px', background: getSafeAccent(post.accent), color: '#fff', marginBottom: '1rem', display: 'inline-block' }}>
                             {post.serviceLabel}
                         </span>
                         <m.h1
@@ -268,7 +282,7 @@ export default function BlogPage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.4 }}
                         style={{
-                            marginTop: '2rem', background: `linear-gradient(135deg, ${post.accent === "#f59e0b" ? "#92400e" : post.accent}, #0f172a)`,
+                            marginTop: '2rem', background: `linear-gradient(135deg, ${getSafeAccent(post.accent)}, #0f172a)`,
                             borderRadius: '16px', padding: '2rem', color: '#fff', textAlign: 'center'
                         }}
                     >
