@@ -121,12 +121,12 @@
             "accentColor": "#ef4444"
         },
         {
-            "slug": "recommendation",
+            "slug": "smart-vision",
             "categorySlug": "data-science",
-            "title": "RecoEngine – AI Recommendation System",
-            "description": "Hybrid recommendation engine powered by Python/FastAPI with SVD collaborative filtering and TF-IDF content similarity — the same architecture behind Netflix, Tokopedia, and Amazon.",
+            "title": "Smart Vision AI – Object Detection",
+            "description": "Real-time computer vision application using TensorFlow.js and COCO-SSD to detect objects directly in the browser via WebRTC.",
             "category": "Data Science",
-            "accentColor": "#7c3aed"
+            "accentColor": "#00ffcc"
         }
     ]
 }
