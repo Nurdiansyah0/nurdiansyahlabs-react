@@ -1,13 +1,34 @@
 import { useResponsive } from '../hooks/useResponsive'
-import { ExternalLink } from 'lucide-react'
+import { ExternalLink, Smartphone } from 'lucide-react'
 
 export default function ShowcaseLayout({ children }) {
     const { isMobile } = useResponsive()
 
     return (
-        <div style={{ minHeight: '100vh', width: '100%', position: 'relative', background: '#fff', overflowX: 'hidden' }}>
-            {/* The Actual Project (No longer wrapped in mockup scaling) */}
-            <div style={{ width: '100%', minHeight: '100vh' }}>
+        <div style={{ 
+            minHeight: '100vh', 
+            width: '100%', 
+            position: 'relative', 
+            background: isMobile ? '#fff' : '#0f172a', // Dark modern background for desktop to frame the app
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+            overflowX: 'hidden'
+        }}>
+            
+            {/* PWA Mobile-First App Shell Simulator */}
+            <div style={{ 
+                width: '100%', 
+                maxWidth: '480px', // Standard Mobile/PWA strict constraint
+                minHeight: '100vh',
+                background: '#fff',
+                position: 'relative',
+                boxShadow: isMobile ? 'none' : '0 0 50px rgba(0, 0, 0, 0.5)',
+                overflowX: 'hidden',
+                // Hardware acceleration & momentum scroll for native PWA feel
+                WebkitOverflowScrolling: 'touch',
+                transform: 'translateZ(0)'
+            }}>
                 {children}
             </div>
 
