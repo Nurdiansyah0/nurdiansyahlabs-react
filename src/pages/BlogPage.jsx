@@ -110,7 +110,7 @@ export default function BlogPage() {
             url: pageUrl,
             author: { '@type': 'Person', name: 'Nurdiansyah', url: 'https://nurdiansyahlabs.com' },
             publisher: { '@type': 'Organization', name: 'NurdiansyahLabs', logo: { '@type': 'ImageObject', url: 'https://nurdiansyahlabs.com/assets/logo.svg' } },
-            datePublished: '2026-02-21',
+            datePublished: post.created_at ? post.created_at.split(' ')[0] : '2026-02-21',
             dateModified: new Date().toISOString().split('T')[0],
         })
         document.head.appendChild(script)

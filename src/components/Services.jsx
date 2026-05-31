@@ -97,8 +97,61 @@ export default function Services() {
     const openModal = (key) => setSearchParams({ service: key })
     const closeModal = () => { searchParams.delete('service'); setSearchParams(searchParams) }
 
+    const schemaMarkup = {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "NurdiansyahLabs",
+        "url": "https://nurdiansyahlabs.com",
+        "image": "https://nurdiansyahlabs.com/assets/android-chrome-512x512.png",
+        "description": "Jasa Web Developer Profesional dan Data Analyst di Indonesia.",
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "ID"
+        },
+        "priceRange": "$$$",
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Layanan Digital NurdiansyahLabs",
+            "itemListElement": [
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Jasa Pembuatan Landing Page",
+                        "description": "Solusi Landing Page SEO Friendly dan responsif untuk konversi maksimal."
+                    },
+                    "priceCurrency": "IDR",
+                    "price": "1750000"
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Jasa Fullstack Web Development",
+                        "description": "Pembuatan website kustom, dashboard sistem informasi, dan e-commerce."
+                    },
+                    "priceCurrency": "IDR",
+                    "price": "5000000"
+                },
+                {
+                    "@type": "Offer",
+                    "itemOffered": {
+                        "@type": "Service",
+                        "name": "Jasa Data Analyst",
+                        "description": "Pembuatan Dashboard interaktif dengan Power BI & Tableau untuk bisnis."
+                    },
+                    "priceCurrency": "IDR",
+                    "price": "3000000"
+                }
+            ]
+        }
+    };
+
     return (
         <section id="services" style={{ padding: 'var(--section-py) 0', background: '#fff' }}>
+            <script type="application/ld+json">
+                {JSON.stringify(schemaMarkup)}
+            </script>
             <div className="container">
                 <div style={{ textAlign: 'center', marginBottom: isMobile ? '2.5rem' : '3.5rem' }}>
                     <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', fontWeight: 800, color: '#111827', marginBottom: '0.5rem', letterSpacing: '-0.02em' }}>
