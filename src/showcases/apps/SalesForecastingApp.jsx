@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { Brain, TrendingUp, Activity, ChevronDown, Database, Zap, Cpu, Network } from 'lucide-react'
+import { Brain, TrendingUp, Activity, ChevronDown, Database, Zap, Cpu, Network, Target } from 'lucide-react'
 import { Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, Area, ComposedChart } from 'recharts'
 
 const TS_DATA = {
