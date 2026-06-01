@@ -21,13 +21,13 @@ const services = [
     },
     {
         key: 'C', icon: PieChart, iconBg: '#d1fae5', iconColor: '#065f46', accentColor: '#065f46',
-        badgeBg: '#ecfdf5', badgeColor: '#065f46', priceIDR: 3000000, priceNote: 'svc.perMonth',
+        badgeBg: '#ecfdf5', badgeColor: '#065f46', priceIDR: 3000000, priceNote: '',
         tTitle: 'svc.c.title', tTagline: 'svc.c.tagline',
         tFeatures: ['svc.c.f1', 'svc.c.f2', 'svc.c.f3', 'svc.c.f4'], tIdeal: 'svc.c.ideal',
     },
     {
         key: 'D', icon: Brain, iconBg: '#ede9fe', iconColor: '#5b21b6', accentColor: '#5b21b6',
-        badgeBg: '#f5f3ff', badgeColor: '#5b21b6', priceIDR: 4500000, priceNote: 'svc.perMonth',
+        badgeBg: '#f5f3ff', badgeColor: '#5b21b6', priceIDR: 4500000, priceNote: '',
         tTitle: 'svc.d.title', tTagline: 'svc.d.tagline',
         tFeatures: ['svc.d.f1', 'svc.d.f2', 'svc.d.f3', 'svc.d.f4'], tIdeal: 'svc.d.ideal',
     },
