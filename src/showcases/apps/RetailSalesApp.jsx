@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { TrendingUp, ShoppingBag, CreditCard, Target, MapPin, DollarSign, Package } from 'lucide-react'
+import { useState, useRef, useEffect } from 'react'
+import { TrendingUp, ShoppingBag, CreditCard, Target, MapPin, DollarSign, Package, ChevronDown, Calendar } from 'lucide-react'
 import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, AreaChart, Area } from 'recharts'
 
 const MONTHLY = {
@@ -31,6 +31,52 @@ const TOP_PRODUCTS = [
     { id: 5, name: 'Sarung Batik Eksklusif', sales: 310, rev: 'Rp 4.9Jt', cat: 'Sarung', trend: '+5%' },
 ]
 
+function CustomDropdown({ value, options, onChange, icon: Icon, label }) {
+    const [isOpen, setIsOpen] = useState(false);
+    const ref = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (ref.current && !ref.current.contains(event.target)) setIsOpen(false);
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
+    return (
+        <div className="relative w-full md:w-auto" ref={ref}>
+            <button 
+                type="button"
+                onClick={() => setIsOpen(!isOpen)}
+                className="w-full flex items-center justify-between gap-3 bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-white px-4 py-2.5 rounded-xl text-sm font-medium transition-all focus:ring-2 focus:ring-blue-500 outline-none shadow-sm"
+            >
+                <div className="flex items-center gap-2">
+                    {Icon && <Icon className="w-4 h-4 text-blue-400" />}
+                    <span className="text-slate-400 hidden sm:inline">{label}:</span>
+                    <span className="font-bold tracking-wide">{value}</span>
+                </div>
+                <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+            </button>
+            
+            {isOpen && (
+                <div className="absolute top-full left-0 right-0 md:right-auto mt-2 w-full md:min-w-[180px] bg-white rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.3)] border border-slate-200 py-2 z-50">
+                    {options.map(opt => (
+                        <button
+                            key={opt}
+                            onClick={() => { onChange(opt); setIsOpen(false); }}
+                            className={`w-full text-left px-4 py-2.5 text-sm transition-colors ${
+                                value === opt ? 'bg-blue-50/80 text-blue-700 font-bold border-l-2 border-blue-600' : 'text-slate-600 font-medium hover:bg-slate-50 border-l-2 border-transparent hover:text-slate-900'
+                            }`}
+                        >
+                            {opt}
+                        </button>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+}
+
 export default function RetailSalesApp() {
     const [period, setPeriod] = useState('2025 Q1')
     const [branch, setBranch] = useState('Semua')
@@ -47,19 +93,21 @@ export default function RetailSalesApp() {
                         <div className="text-xs font-bold tracking-widest text-blue-400 mb-1 uppercase">Executive Dashboard</div>
                         <h1 className="text-2xl md:text-3xl font-black text-white m-0">Retail Sales Analytics</h1>
                     </div>
-                    <div className="flex flex-wrap gap-3 w-full md:w-auto">
-                        <select aria-label="Select option" 
-                            className="bg-slate-800 border border-slate-700 text-white px-4 py-2 rounded-lg text-sm font-medium focus:ring-2 focus:ring-blue-500 outline-none cursor-pointer flex-1 md:flex-none"
-                            value={period} onChange={e => setPeriod(e.target.value)}
-                        >
-                            {Object.keys(MONTHLY).map(p => <option key={p} value={p}>{p}</option>)}
-                        </select>
-                        <select aria-label="Select option" 
-                            className="bg-slate-800 border border-slate-700 text-white px-4 py-2 rounded-lg text-sm font-medium focus:ring-2 focus:ring-blue-500 outline-none cursor-pointer flex-1 md:flex-none"
-                            value={branch} onChange={e => setBranch(e.target.value)}
-                        >
-                            {Object.keys(BRANCHES).map(b => <option key={b} value={b}>{b}</option>)}
-                        </select>
+                    <div className="flex flex-col sm:flex-row w-full md:w-auto gap-3">
+                        <CustomDropdown 
+                            label="Periode" 
+                            icon={Calendar} 
+                            value={period} 
+                            options={Object.keys(MONTHLY)} 
+                            onChange={setPeriod} 
+                        />
+                        <CustomDropdown 
+                            label="Cabang" 
+                            icon={MapPin} 
+                            value={branch} 
+                            options={Object.keys(BRANCHES)} 
+                            onChange={setBranch} 
+                        />
                     </div>
                 </div>
             </div>
