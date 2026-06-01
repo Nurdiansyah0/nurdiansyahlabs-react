@@ -79,7 +79,7 @@ export default function CropYieldApp() {
     const bestRegion = Object.entries(d).sort(([, a], [, b]) => b - a)[0][0]
     return (
         <div style={{ minHeight: '100vh', background: '#f0fdf4', fontFamily: '"Inter",sans-serif' }}>
-            <div style={{ background: 'linear-gradient(135deg,#14532d,#166534)', padding: '1.5rem 2rem', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+            <div style={{ background: 'linear-gradient(135deg,#14532d,#166534)', padding: '1.5rem 2rem', color: '#fff' }} className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
                     <div style={{ fontSize: '0.7rem', color: '#86efac', letterSpacing: '0.15em', marginBottom: '4px' }}>CROP YIELD ANALYTICS</div>
                     <h1 style={{ fontSize: '1.5rem', fontWeight: 800, margin: 0 }}>Analisis Hasil Panen</h1>

@@ -75,7 +75,7 @@ export default function ClinicAnalyticsApp() {
     return (
         <div style={{ minHeight: '100vh', background: '#f0f7ff', fontFamily: '"Inter",sans-serif' }}>
 
-            <div style={{ background: 'linear-gradient(135deg,#1e3a8a,#1e3a8a)', padding: '1.5rem 2rem', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ background: 'linear-gradient(135deg,#1e3a8a,#1e3a8a)', padding: '1.5rem 2rem', color: '#fff' }} className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
                     <div style={{ fontSize: '0.7rem', color: '#93c5fd', letterSpacing: '0.15em', marginBottom: '4px' }}>CLINIC HEALTH ANALYTICS</div>
                     <h1 style={{ fontSize: '1.5rem', fontWeight: 800, margin: 0 }}>Dashboard Analitik RS Sejahtera</h1>

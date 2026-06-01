@@ -69,9 +69,9 @@ export default function EcommerceAnalyticsApp() {
 
             <div style={{ background: 'linear-gradient(135deg,#0f172a,#1e293b)', padding: '2rem', color: '#fff', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
                 <div style={{ fontSize: '0.7rem', color: '#1e293b', letterSpacing: '0.15em', marginBottom: '4px' }}>E-COMMERCE ANALYTICS</div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mt-2">
                     <h1 style={{ fontSize: '1.5rem', fontWeight: 800, margin: 0 }}>Multi-Platform Dashboard</h1>
-                    <div style={{ display: 'flex', gap: '8px', width: '100%', marginTop: '1rem' }} className="md:w-auto md:mt-0">
+                    <div className="w-full md:w-auto">
                         <CustomDropdown 
                             label="Platform" 
                             icon={Store} 
