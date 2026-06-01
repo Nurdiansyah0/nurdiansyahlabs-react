@@ -1,92 +1,214 @@
-import { useState } from 'react'
-const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des']
-const ACTUAL = [42, 45, 48, 38, 51, 55, 49, 58, 62, 68, 65, 72]
-const FORECAST = [null, null, null, null, null, null, null, null, null, null, 72, 78, 84, 89, 95]
-const PERIODS = [6, 12, 24]
-export default function SalesForecastingApp() {
-    const [period, setPeriod] = useState(12)
-    const [model, setModel] = useState('ARIMA')
-    const maxVal = Math.max(...ACTUAL, ...FORECAST.filter(Boolean))
-    const forecastMonths = [...MONTHS, 'Jan', 'Feb', 'Mar']
-    const accuracy = { ARIMA: '94.2%', Prophet: '91.8%', 'LSTM': '96.1%', 'Linear Reg': '88.5%' }
+import { useState, useRef, useEffect } from 'react'
+import { Brain, TrendingUp, Activity, ChevronDown, Database, Zap, Cpu, Network } from 'lucide-react'
+import { Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, Area, ComposedChart } from 'recharts'
+
+const TS_DATA = {
+    'LSTM Neural Network': [
+        { month: 'Jan', actual: 4200 }, { month: 'Feb', actual: 4500 }, { month: 'Mar', actual: 4800 }, { month: 'Apr', actual: 3800 }, { month: 'Mei', actual: 5100 }, { month: 'Jun', actual: 5500 }, { month: 'Jul', actual: 4900 }, { month: 'Ags', actual: 5800 }, { month: 'Sep', actual: 6200 },
+        { month: 'Okt', actual: 6800, forecast: 6800, confidence: [6800, 6800] },
+        { month: 'Nov', forecast: 7200, confidence: [6900, 7500] }, { month: 'Des', forecast: 7800, confidence: [7300, 8300] }, { month: 'Jan', forecast: 8400, confidence: [7600, 9200] }, { month: 'Feb', forecast: 8900, confidence: [8000, 9800] }, { month: 'Mar', forecast: 9500, confidence: [8300, 10700] },
+    ],
+    'XGBoost Regressor': [
+        { month: 'Jan', actual: 4200 }, { month: 'Feb', actual: 4500 }, { month: 'Mar', actual: 4800 }, { month: 'Apr', actual: 3800 }, { month: 'Mei', actual: 5100 }, { month: 'Jun', actual: 5500 }, { month: 'Jul', actual: 4900 }, { month: 'Ags', actual: 5800 }, { month: 'Sep', actual: 6200 },
+        { month: 'Okt', actual: 6800, forecast: 6800, confidence: [6800, 6800] },
+        { month: 'Nov', forecast: 7100, confidence: [6800, 7400] }, { month: 'Des', forecast: 7500, confidence: [7100, 7900] }, { month: 'Jan', forecast: 8000, confidence: [7400, 8600] }, { month: 'Feb', forecast: 8300, confidence: [7600, 9000] }, { month: 'Mar', forecast: 8700, confidence: [7900, 9500] },
+    ],
+    'Facebook Prophet': [
+        { month: 'Jan', actual: 4200 }, { month: 'Feb', actual: 4500 }, { month: 'Mar', actual: 4800 }, { month: 'Apr', actual: 3800 }, { month: 'Mei', actual: 5100 }, { month: 'Jun', actual: 5500 }, { month: 'Jul', actual: 4900 }, { month: 'Ags', actual: 5800 }, { month: 'Sep', actual: 6200 },
+        { month: 'Okt', actual: 6800, forecast: 6800, confidence: [6800, 6800] },
+        { month: 'Nov', forecast: 7300, confidence: [6700, 7900] }, { month: 'Des', forecast: 7600, confidence: [6800, 8400] }, { month: 'Jan', forecast: 8100, confidence: [7000, 9200] }, { month: 'Feb', forecast: 8500, confidence: [7200, 9800] }, { month: 'Mar', forecast: 8900, confidence: [7400, 10400] },
+    ]
+}
+
+const MODELS = {
+    'LSTM Neural Network': { rmse: '241.5', mae: '185.2', mape: '4.2%', r2: '0.96', desc: 'Deep learning architecture optimized for complex non-linear sequential patterns.', time: '1.24s', icon: Network },
+    'XGBoost Regressor': { rmse: '284.1', mae: '210.8', mape: '5.8%', r2: '0.92', desc: 'Gradient boosting decision tree algorithm, excellent for structured tabular features.', time: '0.42s', icon: Cpu },
+    'Facebook Prophet': { rmse: '315.6', mae: '245.3', mape: '6.5%', r2: '0.88', desc: 'Additive regression model highly robust to missing data and extreme trend shifts.', time: '0.85s', icon: TrendingUp },
+}
+
+function CustomDropdown({ value, options, onChange, icon: Icon, label }) {
+    const [isOpen, setIsOpen] = useState(false);
+    const ref = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (ref.current && !ref.current.contains(event.target)) setIsOpen(false);
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
     return (
-        <div style={{ minHeight: '100vh', background: '#fafafa', fontFamily: '"Inter",sans-serif' }}>
-            <div style={{ background: 'linear-gradient(135deg,#1a1a2e,#16213e)', padding: '1.5rem 2rem', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-                <div>
-                    <div style={{ fontSize: '0.7rem', color: '#a78bfa', letterSpacing: '0.15em', marginBottom: '4px' }}>DATA SCIENCE / TIME SERIES</div>
-                    <h1 style={{ fontSize: '1.5rem', fontWeight: 800, margin: 0 }}>Sales Forecasting</h1>
+        <div className="relative w-full md:w-auto min-w-[240px]" ref={ref}>
+            <button 
+                type="button"
+                onClick={() => setIsOpen(!isOpen)}
+                className="w-full flex items-center justify-between gap-3 bg-indigo-900/40 hover:bg-indigo-900/60 border border-indigo-500/30 text-white px-4 py-2.5 rounded-xl text-sm font-medium transition-all focus:ring-2 focus:ring-indigo-400 outline-none backdrop-blur-md"
+            >
+                <div className="flex items-center gap-2">
+                    {Icon && <Icon className="w-4 h-4 text-indigo-400" />}
+                    <span className="text-indigo-200 hidden sm:inline">{label}:</span>
+                    <span className="font-bold tracking-wide">{value}</span>
                 </div>
-                <div style={{ display: 'flex', gap: '1rem' }}>
-                    <select aria-label="Select option" value={model} onChange={e => setModel(e.target.value)} style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', padding: '8px 14px', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', cursor: 'pointer' }}>
-                        {Object.keys(accuracy).map(m => <option key={m} value={m} style={{ color: '#000' }}>{m}</option>)}
-                    </select>
-                    <select aria-label="Select option" value={period} onChange={e => setPeriod(Number(e.target.value))} style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', padding: '8px 14px', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', cursor: 'pointer' }}>
-                        {PERIODS.map(p => <option key={p} value={p} style={{ color: '#000' }}>+{p} bulan</option>)}
-                    </select>
+                <ChevronDown className={`w-4 h-4 text-indigo-400 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+            </button>
+            
+            {isOpen && (
+                <div className="absolute top-full left-0 right-0 mt-2 w-full bg-slate-900 rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)] border border-indigo-500/20 py-2 z-50">
+                    {options.map(opt => (
+                        <button
+                            key={opt}
+                            onClick={() => { onChange(opt); setIsOpen(false); }}
+                            className={`w-full text-left px-4 py-2.5 text-sm transition-colors ${
+                                value === opt ? 'bg-indigo-600/20 text-indigo-300 font-bold border-l-2 border-indigo-500' : 'text-slate-300 font-medium hover:bg-slate-800 border-l-2 border-transparent hover:text-white'
+                            }`}
+                        >
+                            {opt}
+                        </button>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+}
+
+export default function SalesForecastingApp() {
+    const [model, setModel] = useState('LSTM Neural Network')
+    const chartData = TS_DATA[model]
+    const metrics = MODELS[model]
+
+    return (
+        <div className="min-h-screen bg-slate-50 font-sans pb-10">
+            {/* Header */}
+            <div className="bg-slate-900 px-4 md:px-8 py-6 text-white shadow-lg border-b border-indigo-900/50">
+                <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <div className="flex items-center gap-2 text-xs font-bold tracking-widest text-indigo-400 mb-1 uppercase">
+                            <Brain className="w-4 h-4" /> Predictive Analytics Studio
+                        </div>
+                        <h1 className="text-2xl md:text-3xl font-black text-white m-0 tracking-tight">Sales Forecasting Model</h1>
+                    </div>
+                    <div className="w-full md:w-auto">
+                        <CustomDropdown 
+                            label="Algorithm" 
+                            icon={Database} 
+                            value={model} 
+                            options={Object.keys(MODELS)} 
+                            onChange={setModel} 
+                        />
+                    </div>
                 </div>
             </div>
-            <div style={{ padding: '2rem', maxWidth: '1100px', margin: '0 auto' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
-                    {[['Model Akurasi', accuracy[model], '🎯', '#5b21b6'], ['RMSE', '4.82', '📉', '#1e40af'], ['Tren', 'Naik +18%', '📈', '#166534'], ['Horizon Forecast', `${period} bulan`, '⏳', '#b45309']].map(([l, v, i, c]) => (
-                        <div key={l} style={{ background: '#fff', borderRadius: '14px', padding: '1.5rem', border: '1px solid #e5e7eb', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
-                            <div style={{ fontSize: '1.5rem', marginBottom: '8px' }}>{i}</div>
-                            <div style={{ fontSize: '1.5rem', fontWeight: 800, color: c, marginBottom: '4px' }}>{v}</div>
-                            <div style={{ fontSize: '0.75rem', color: '#1e293b' }}>{l}</div>
+
+            <div className="max-w-7xl mx-auto px-4 md:px-8 mt-8">
+                {/* Metrics Cards */}
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                    {[
+                        { label: 'Model Accuracy (R²)', value: metrics.r2, icon: Target, color: 'text-indigo-600', bg: 'bg-indigo-100', desc: 'Variance explained' },
+                        { label: 'MAPE', value: metrics.mape, icon: Activity, color: 'text-emerald-600', bg: 'bg-emerald-100', desc: 'Mean Absolute % Error' },
+                        { label: 'RMSE', value: metrics.rmse, icon: TrendingUp, color: 'text-amber-600', bg: 'bg-amber-100', desc: 'Root Mean Square Error' },
+                        { label: 'Inference Time', value: metrics.time, icon: Zap, color: 'text-purple-600', bg: 'bg-purple-100', desc: 'Per 10k predictions' },
+                    ].map((m, i) => (
+                        <div key={i} className="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                            <div className="flex items-center gap-3 mb-3">
+                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${m.bg} ${m.color}`}>
+                                    <m.icon className="w-5 h-5" />
+                                </div>
+                                <div className="text-sm font-semibold text-slate-500">{m.label}</div>
+                            </div>
+                            <div className="text-2xl md:text-3xl font-black text-slate-900 mb-1">{m.value}</div>
+                            <div className="text-xs font-medium text-slate-400">{m.desc}</div>
                         </div>
                     ))}
                 </div>
-                {/* Chart */}
-                <div style={{ background: '#fff', borderRadius: '16px', padding: '2rem', border: '1px solid #e5e7eb', marginBottom: '1.5rem', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
-                        <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#1a1a2e', margin: 0 }}>Forecast Chart — Model: {model}</h2>
-                        <div style={{ display: 'flex', gap: '1.5rem', fontSize: '0.78rem' }}>
-                            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><div style={{ width: '20px', height: '3px', background: '#4338ca', borderRadius: '2px' }} /> Aktual</span>
-                            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><div style={{ width: '20px', height: '3px', background: '#b45309', borderRadius: '2px', borderTop: '2px dashed #b45309' }} /> Forecast</span>
+
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    {/* Main Chart */}
+                    <div className="lg:col-span-2 bg-white rounded-2xl p-4 md:p-6 border border-slate-200 shadow-sm">
+                        <div className="flex justify-between items-start mb-6">
+                            <div>
+                                <h2 className="text-lg font-bold text-slate-900">Demand Forecast Projection</h2>
+                                <p className="text-sm text-slate-500 font-medium mt-1">Historical vs Predicted values with 95% Confidence Interval</p>
+                            </div>
+                            <span className="bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full text-xs font-bold border border-indigo-100 hidden sm:inline-block">
+                                Horizon: +6 Months
+                            </span>
+                        </div>
+                        <div className="h-[350px] w-full">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <ComposedChart data={chartData} margin={{ top: 20, right: 20, left: -20, bottom: 0 }}>
+                                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
+                                    <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12, fontWeight: 500}} dy={10} />
+                                    <YAxis axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12, fontWeight: 500}} />
+                                    <Tooltip 
+                                        contentStyle={{borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 10px 25px -5px rgba(0,0,0,0.1)'}}
+                                        labelStyle={{fontWeight: 'bold', color: '#0f172a', marginBottom: '4px'}}
+                                    />
+                                    <Legend wrapperStyle={{paddingTop: '20px', fontSize: '13px', fontWeight: 500}} />
+                                    
+                                    {/* Confidence Interval Area */}
+                                    <Area type="monotone" dataKey="confidence" name="95% Confidence" fill="#818cf8" stroke="none" fillOpacity={0.15} />
+                                    
+                                    {/* Actual Line */}
+                                    <Line type="monotone" dataKey="actual" name="Actual Sales" stroke="#0f172a" strokeWidth={3} dot={{r: 4, strokeWidth: 2}} activeDot={{r: 6}} />
+                                    
+                                    {/* Forecast Line */}
+                                    <Line type="monotone" dataKey="forecast" name="Model Forecast" stroke="#4f46e5" strokeWidth={3} strokeDasharray="5 5" dot={{r: 4, fill: '#4f46e5'}} activeDot={{r: 6}} />
+                                </ComposedChart>
+                            </ResponsiveContainer>
                         </div>
                     </div>
-                    <div style={{ display: 'flex', gap: '6px', alignItems: 'flex-end', height: '200px', paddingBottom: '0.5rem', position: 'relative' }}>
-                        {/* Gridlines */}
-                        <div style={{ position: 'absolute', inset: 0, display: 'grid', gridTemplateRows: 'repeat(4,1fr)', pointerEvents: 'none' }}>
-                            {[100, 75, 50, 25].map(p => <div key={p} style={{ borderTop: '1px solid #f1f5f9', position: 'relative' }}><span style={{ position: 'absolute', left: 0, top: '-8px', fontSize: '0.6rem', color: '#1e293b' }}>{Math.round(maxVal * p / 100)}</span></div>)}
-                        </div>
-                        {ACTUAL.map((v, i) => (
-                            <div key={`a${i}`} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
-                                <div style={{ height: `${(v / maxVal) * 180}px`, width: '100%', background: '#4338ca', borderRadius: '4px 4px 0 0', transition: 'height 0.4s', minHeight: '4px', position: 'relative' }} title={`${forecastMonths[i]}: ${v}K`} />
-                                <div style={{ fontSize: '0.55rem', color: '#1e293b', transform: 'rotate(-30deg)', whiteSpace: 'nowrap' }}>{MONTHS[i]}</div>
+
+                    {/* Model Details */}
+                    <div className="space-y-6">
+                        <div className="bg-slate-900 rounded-2xl p-6 border border-slate-800 shadow-sm text-white">
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className="p-2 bg-indigo-500/20 rounded-lg">
+                                    <metrics.icon className="w-5 h-5 text-indigo-400" />
+                                </div>
+                                <h3 className="text-lg font-bold text-white">Model Architecture</h3>
                             </div>
-                        ))}
-                        {FORECAST.slice(10).map((v, i) => (
-                            v && <div key={`f${i}`} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
-                                <div style={{ height: `${(v / maxVal) * 180}px`, width: '100%', background: '#fef3c7', border: '2px dashed #b45309', borderRadius: '4px 4px 0 0', transition: 'height 0.4s', minHeight: '4px' }} title={`Forecast: ${v}K`} />
-                                <div style={{ fontSize: '0.55rem', color: '#b45309', transform: 'rotate(-30deg)', whiteSpace: 'nowrap' }}>{['Nov', 'Des', 'Jan'][i]}</div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
-                    <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #e5e7eb' }}>
-                        <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#1a1a2e', marginBottom: '1rem' }}>Model Comparison</h2>
-                        {Object.entries(accuracy).map(([m, a]) => (
-                            <div key={m} onClick={() => setModel(m)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 12px', borderRadius: '8px', marginBottom: '6px', background: model === m ? '#f5f3ff' : '#f8fafc', border: `1px solid ${model === m ? '#5b21b6' : '#e5e7eb'}`, cursor: 'pointer', transition: 'all 0.15s' }}>
-                                <span style={{ fontWeight: model === m ? 700 : 500, color: model === m ? '#5b21b6' : '#374151', fontSize: '0.9rem' }}>{m}</span>
-                                <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                                    <div style={{ width: '80px', height: '8px', background: '#f1f5f9', borderRadius: '4px', overflow: 'hidden' }}><div style={{ height: '100%', background: model === m ? '#5b21b6' : '#1e293b', borderRadius: '4px', width: a }} /></div>
-                                    <span style={{ fontWeight: 700, color: model === m ? '#5b21b6' : '#1e293b', fontSize: '0.85rem' }}>{a}</span>
+                            <p className="text-slate-300 text-sm leading-relaxed mb-6">
+                                {metrics.desc}
+                            </p>
+                            
+                            <div className="space-y-3">
+                                <div className="flex justify-between items-center text-sm border-b border-slate-700 pb-2">
+                                    <span className="text-slate-400">Training Data</span>
+                                    <span className="font-semibold text-slate-200">1.2M records</span>
+                                </div>
+                                <div className="flex justify-between items-center text-sm border-b border-slate-700 pb-2">
+                                    <span className="text-slate-400">Features</span>
+                                    <span className="font-semibold text-slate-200">24 variables</span>
+                                </div>
+                                <div className="flex justify-between items-center text-sm border-b border-slate-700 pb-2">
+                                    <span className="text-slate-400">Loss Function</span>
+                                    <span className="font-semibold text-slate-200">Huber Loss</span>
+                                </div>
+                                <div className="flex justify-between items-center text-sm pb-1">
+                                    <span className="text-slate-400">Optimizer</span>
+                                    <span className="font-semibold text-slate-200">AdamW</span>
                                 </div>
                             </div>
-                        ))}
-                    </div>
-                    <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #e5e7eb' }}>
-                        <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#1a1a2e', marginBottom: '1rem' }}>📅 Proyeksi {period} Bulan</h2>
-                        {Array.from({ length: Math.min(period, 6) }).map((_, i) => {
-                            const base = ACTUAL[ACTUAL.length - 1]
-                            const proj = Math.round(base * (1 + 0.06 * (i + 1)))
-                            return <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid #f1f5f9', fontSize: '0.85rem' }}>
-                                <span style={{ color: '#1e293b' }}>{MONTHS[(11 + i + 1) % 12]} {i < 1 ? '2025' : '2025'}</span>
-                                <span style={{ fontWeight: 700, color: '#5b21b6' }}>{proj}K unit</span>
+                        </div>
+
+                        <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                            <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider mb-4">Pipeline Status</h3>
+                            <div className="space-y-4">
+                                {[
+                                    { step: 'Data Ingestion & Cleaning', status: 'Done', color: 'bg-emerald-500' },
+                                    { step: 'Feature Engineering (Lags)', status: 'Done', color: 'bg-emerald-500' },
+                                    { step: 'Hyperparameter Tuning', status: 'Done', color: 'bg-emerald-500' },
+                                    { step: 'Model Inference', status: 'Active', color: 'bg-blue-500 animate-pulse' },
+                                ].map((p, i) => (
+                                    <div key={i} className="flex items-center gap-3">
+                                        <div className={`w-2.5 h-2.5 rounded-full ${p.color}`}></div>
+                                        <div className="flex-1 text-sm font-medium text-slate-700">{p.step}</div>
+                                        <div className="text-xs font-bold text-slate-400">{p.status}</div>
+                                    </div>
+                                ))}
                             </div>
-                        })}
-                        {period > 6 && <div style={{ textAlign: 'center', color: '#1e293b', fontSize: '0.8rem', padding: '8px 0' }}>+{period - 6} bulan lagi...</div>}
+                        </div>
                     </div>
                 </div>
             </div>
