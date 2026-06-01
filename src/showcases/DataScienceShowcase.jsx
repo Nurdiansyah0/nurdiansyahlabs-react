@@ -9,12 +9,14 @@ import SalesForecastingApp from './apps/SalesForecastingApp'
 import CustomerClusteringApp from './apps/CustomerClusteringApp'
 import ChurnPredictionApp from './apps/ChurnPredictionApp'
 import RecommendationApp from './apps/RecommendationApp'
+import RecommendationPlaceholderApp from './apps/RecommendationPlaceholderApp'
 
 const appMapping = {
     'sales-forecasting': <SalesForecastingApp />,
     'customer-clustering': <CustomerClusteringApp />,
     'churn-prediction': <ChurnPredictionApp />,
-    'smart-vision': <RecommendationApp />
+    'smart-vision': <RecommendationApp />,
+    'recommendation': <RecommendationPlaceholderApp />
 }
 
 export default function DataScienceShowcase() {

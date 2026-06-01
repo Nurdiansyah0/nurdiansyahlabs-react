@@ -155,6 +155,14 @@
             "description": "Real-time computer vision application using TensorFlow.js and COCO-SSD to detect objects directly in the browser via WebRTC.",
             "category": "Data Science",
             "accentColor": "#00ffcc"
+        },
+        {
+            "slug": "recommendation",
+            "categorySlug": "data-science",
+            "title": "Product Recommendation Engine",
+            "description": "Sistem rekomendasi AI cerdas berbasis Collaborative Filtering (Under Construction).",
+            "category": "Data Science",
+            "accentColor": "#f43f5e"
         }
     ]
 }
