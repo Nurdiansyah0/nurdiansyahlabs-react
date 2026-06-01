@@ -1,135 +1,248 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-// Minimal recharts-style bar chart using pure divs
-const BAR_COLORS = ['#4338ca', '#6d28d9', '#ec4899', '#b91c1c', '#b45309']
+import { TrendingUp, ShoppingBag, CreditCard, Target, MapPin, DollarSign, Package } from 'lucide-react'
+import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, AreaChart, Area } from 'recharts'
+
 const MONTHLY = {
-    '2024 Q4': [{ m: 'Okt', rev: 4850, cost: 2100, profit: 2750 }, { m: 'Nov', rev: 6200, cost: 2400, profit: 3800 }, { m: 'Des', rev: 8400, cost: 2800, profit: 5600 }],
-    '2025 Q1': [{ m: 'Jan', rev: 5100, cost: 2200, profit: 2900 }, { m: 'Feb', rev: 5800, cost: 2350, profit: 3450 }, { m: 'Mar', rev: 6700, cost: 2500, profit: 4200 }],
+    '2024 Q4': [
+        { name: 'Okt', revenue: 48.5, profit: 27.5, cost: 21.0 },
+        { name: 'Nov', revenue: 62.0, profit: 38.0, cost: 24.0 },
+        { name: 'Des', revenue: 84.0, profit: 56.0, cost: 28.0 }
+    ],
+    '2025 Q1': [
+        { name: 'Jan', revenue: 51.0, profit: 29.0, cost: 22.0 },
+        { name: 'Feb', revenue: 58.0, profit: 34.5, cost: 23.5 },
+        { name: 'Mar', revenue: 67.0, profit: 42.0, cost: 25.0 }
+    ]
 }
+
 const BRANCHES = {
-    'Semua': { rev: 'Rp 74.2Jt', growth: '+18%', orders: 3241, avg: 'Rp 22.9rb' },
-    'Jakarta': { rev: 'Rp 28.5Jt', growth: '+22%', orders: 1240, avg: 'Rp 23.0rb' },
-    'Bandung': { rev: 'Rp 19.1Jt', growth: '+12%', orders: 890, avg: 'Rp 21.5rb' },
-    'Surabaya': { rev: 'Rp 15.4Jt', growth: '+21%', orders: 658, avg: 'Rp 23.4rb' },
-    'Bali': { rev: 'Rp 11.2Jt', growth: '+8%', orders: 453, avg: 'Rp 24.7rb' },
+    'Semua': { rev: 'Rp 74.2', revFull: 'Rp 74.200.000', growth: '+18.5%', isUp: true, orders: 3241, avg: 'Rp 22.9rb', target: 92 },
+    'Jakarta': { rev: 'Rp 28.5', revFull: 'Rp 28.500.000', growth: '+22.1%', isUp: true, orders: 1240, avg: 'Rp 23.0rb', target: 105 },
+    'Bandung': { rev: 'Rp 19.1', revFull: 'Rp 19.100.000', growth: '+12.4%', isUp: true, orders: 890, avg: 'Rp 21.5rb', target: 85 },
+    'Surabaya': { rev: 'Rp 15.4', revFull: 'Rp 15.400.000', growth: '+21.0%', isUp: true, orders: 658, avg: 'Rp 23.4rb', target: 95 },
+    'Bali': { rev: 'Rp 11.2', revFull: 'Rp 11.200.000', growth: '-4.2%', isUp: false, orders: 453, avg: 'Rp 24.7rb', target: 78 },
 }
+
 const TOP_PRODUCTS = [
-    { n: 'Batik Premium Pria', sales: 523, rev: 'Rp 23.5Jt', cat: 'Kemeja' },
-    { n: 'Dress Batik Wanita', sales: 412, rev: 'Rp 22.6Jt', cat: 'Dress' },
-    { n: 'Kain Batik Tulis', sales: 87, rev: 'Rp 10.4Jt', cat: 'Kain' },
-    { n: 'Set Couple Batik', sales: 198, rev: 'Rp 9.4Jt', cat: 'Set' },
-    { n: 'Sarung Batik Eksklusif', sales: 310, rev: 'Rp 4.9Jt', cat: 'Sarung' },
+    { id: 1, name: 'Batik Premium Pria', sales: 523, rev: 'Rp 23.5Jt', cat: 'Kemeja', trend: '+12%' },
+    { id: 2, name: 'Dress Batik Wanita', sales: 412, rev: 'Rp 22.6Jt', cat: 'Dress', trend: '+8%' },
+    { id: 3, name: 'Kain Batik Tulis', sales: 87, rev: 'Rp 10.4Jt', cat: 'Kain', trend: '-2%' },
+    { id: 4, name: 'Set Couple Batik', sales: 198, rev: 'Rp 9.4Jt', cat: 'Set', trend: '+15%' },
+    { id: 5, name: 'Sarung Batik Eksklusif', sales: 310, rev: 'Rp 4.9Jt', cat: 'Sarung', trend: '+5%' },
 ]
+
 export default function RetailSalesApp() {
-    const navigate = useNavigate()
     const [period, setPeriod] = useState('2025 Q1')
     const [branch, setBranch] = useState('Semua')
     const [tab, setTab] = useState('overview')
     const data = MONTHLY[period]
-    const maxRev = Math.max(...data.map(d => d.rev))
     const binfo = BRANCHES[branch]
+
     return (
-        <div style={{ minHeight: '100vh', background: '#f8fafc', fontFamily: '"Inter",sans-serif' }}>
-            
-            <div style={{ background: '#1e293b', padding: '1.5rem 2rem', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div>
-                    <div style={{ fontSize: '0.7rem', color: '#1e293b', letterSpacing: '0.15em', marginBottom: '4px' }}>DATA ANALYTICS DASHBOARD</div>
-                    <h1 style={{ fontSize: '1.5rem', fontWeight: 800, margin: 0 }}>Retail Sales Analytics</h1>
-                </div>
-                <div style={{ display: 'flex', gap: '1rem' }}>
-                    <select aria-label="Select option" value={period} onChange={e => setPeriod(e.target.value)} style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', padding: '8px 14px', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', cursor: 'pointer' }}>
-                        {Object.keys(MONTHLY).map(p => <option key={p} value={p} style={{ color: '#000' }}>{p}</option>)}
-                    </select>
-                    <select aria-label="Select option" value={branch} onChange={e => setBranch(e.target.value)} style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', padding: '8px 14px', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', cursor: 'pointer' }}>
-                        {Object.keys(BRANCHES).map(b => <option key={b} value={b} style={{ color: '#000' }}>{b}</option>)}
-                    </select>
+        <div className="min-h-screen bg-slate-50 font-sans pb-10">
+            {/* Header */}
+            <div className="bg-slate-900 px-4 md:px-8 py-6 text-white shadow-lg">
+                <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <div className="text-xs font-bold tracking-widest text-blue-400 mb-1 uppercase">Executive Dashboard</div>
+                        <h1 className="text-2xl md:text-3xl font-black text-white m-0">Retail Sales Analytics</h1>
+                    </div>
+                    <div className="flex flex-wrap gap-3 w-full md:w-auto">
+                        <select aria-label="Select option" 
+                            className="bg-slate-800 border border-slate-700 text-white px-4 py-2 rounded-lg text-sm font-medium focus:ring-2 focus:ring-blue-500 outline-none cursor-pointer flex-1 md:flex-none"
+                            value={period} onChange={e => setPeriod(e.target.value)}
+                        >
+                            {Object.keys(MONTHLY).map(p => <option key={p} value={p}>{p}</option>)}
+                        </select>
+                        <select aria-label="Select option" 
+                            className="bg-slate-800 border border-slate-700 text-white px-4 py-2 rounded-lg text-sm font-medium focus:ring-2 focus:ring-blue-500 outline-none cursor-pointer flex-1 md:flex-none"
+                            value={branch} onChange={e => setBranch(e.target.value)}
+                        >
+                            {Object.keys(BRANCHES).map(b => <option key={b} value={b}>{b}</option>)}
+                        </select>
+                    </div>
                 </div>
             </div>
-            <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
+
+            <div className="max-w-7xl mx-auto px-4 md:px-8 mt-8">
                 {/* KPI Cards */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '1rem', marginBottom: '2rem' }}>
-                    {[['Total Revenue', binfo.rev, '📈', binfo.growth], ['Total Pesanan', String(binfo.orders), '🛒', '+15%'], ['Avg. Transaksi', binfo.avg, '💳', '+3%'], ['Konversi', '3.4%', '🎯', '+0.5%']].map(([l, v, i, t]) => (
-                        <div key={l} style={{ background: '#fff', borderRadius: '14px', padding: '1.5rem', border: '1px solid #e2e8f0' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
-                                <span style={{ fontSize: '1.5rem' }}>{i}</span>
-                                <span style={{ background: '#d1fae5', color: '#065f46', fontSize: '0.75rem', fontWeight: 700, padding: '3px 8px', borderRadius: '6px' }}>{t}</span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
+                    {[
+                        { label: 'Total Revenue', value: binfo.revFull, icon: DollarSign, trend: binfo.growth, isUp: binfo.isUp, color: 'text-blue-600', bg: 'bg-blue-100' },
+                        { label: 'Total Pesanan', value: binfo.orders.toLocaleString(), icon: ShoppingBag, trend: '+15.2%', isUp: true, color: 'text-emerald-600', bg: 'bg-emerald-100' },
+                        { label: 'Avg. Transaksi', value: binfo.avg, icon: CreditCard, trend: '+3.1%', isUp: true, color: 'text-amber-600', bg: 'bg-amber-100' },
+                        { label: 'Target KPI', value: `${binfo.target}%`, icon: Target, trend: binfo.target >= 100 ? 'Achieved' : 'Behind', isUp: binfo.target >= 100, color: 'text-purple-600', bg: 'bg-purple-100' },
+                    ].map((kpi, i) => (
+                        <div key={i} className="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                            <div className="flex justify-between items-start mb-4">
+                                <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${kpi.bg} ${kpi.color}`}>
+                                    <kpi.icon className="w-6 h-6" />
+                                </div>
+                                <span className={`px-2.5 py-1 rounded-full text-xs font-bold flex items-center gap-1 ${kpi.isUp ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}`}>
+                                    <TrendingUp className={`w-3 h-3 ${!kpi.isUp && 'rotate-180'}`} />
+                                    {kpi.trend}
+                                </span>
                             </div>
-                            <div style={{ fontSize: '1.6rem', fontWeight: 800, color: '#0f172a', marginBottom: '4px' }}>{v}</div>
-                            <div style={{ fontSize: '0.8rem', color: '#1e293b' }}>{l}</div>
+                            <div className="text-2xl lg:text-3xl font-black text-slate-900 mb-1">{kpi.value}</div>
+                            <div className="text-sm font-medium text-slate-500">{kpi.label}</div>
                         </div>
                     ))}
                 </div>
-                {/* Tab nav */}
-                <div style={{ display: 'flex', gap: '8px', marginBottom: '1.5rem' }}>
-                    {[['overview', 'Overview'], ['products', 'Produk Terlaris'], ['branches', 'Perbandingan Cabang']].map(([k, l]) => (
-                        <button aria-label="Action button" key={k} onClick={() => setTab(k)} style={{ padding: '9px 20px', borderRadius: '8px', background: tab === k ? '#4338ca' : '#fff', color: tab === k ? '#fff' : '#1e293b', fontWeight: tab === k ? 700 : 500, cursor: 'pointer', fontSize: '0.85rem', border: tab !== k ? '1px solid #e2e8f0' : 'none' }}>{l}</button>
+
+                {/* Tabs */}
+                <div className="flex overflow-x-auto gap-2 mb-6 pb-2" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                    {[
+                        { id: 'overview', label: 'Financial Overview', icon: TrendingUp },
+                        { id: 'products', label: 'Top Products', icon: Package },
+                        { id: 'branches', label: 'Branch Performance', icon: MapPin }
+                    ].map(t => (
+                        <button aria-label="Action button" 
+                            key={t.id} 
+                            onClick={() => setTab(t.id)}
+                            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap transition-all ${
+                                tab === t.id ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
+                            }`}
+                        >
+                            <t.icon className="w-4 h-4" /> {t.label}
+                        </button>
                     ))}
                 </div>
+
+                {/* Tab Content */}
                 {tab === 'overview' && (
-                    <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '1.5rem' }}>
-                        <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #e2e8f0' }}>
-                            <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#0f172a', marginBottom: '1.5rem' }}>Revenue Bulanan ({period})</h2>
-                            <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'flex-end', height: '200px', padding: '0 0 0.5rem' }}>
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div className="lg:col-span-2 bg-white rounded-2xl p-4 md:p-6 border border-slate-200 shadow-sm">
+                            <h2 className="text-lg font-bold text-slate-900 mb-6">Revenue vs Profit ({period}) - Juta Rupiah</h2>
+                            <div className="h-[300px] w-full">
+                                <ResponsiveContainer width="100%" height="100%">
+                                    <AreaChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                                        <defs>
+                                            <linearGradient id="colorRev" x1="0" y1="0" x2="0" y2="1">
+                                                <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3}/>
+                                                <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
+                                            </linearGradient>
+                                            <linearGradient id="colorProfit" x1="0" y1="0" x2="0" y2="1">
+                                                <stop offset="5%" stopColor="#10b981" stopOpacity={0.3}/>
+                                                <stop offset="95%" stopColor="#10b981" stopOpacity={0}/>
+                                            </linearGradient>
+                                        </defs>
+                                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
+                                        <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12}} dy={10} />
+                                        <YAxis axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12}} />
+                                        <Tooltip 
+                                            contentStyle={{borderRadius: '12px', border: 'none', boxShadow: '0 10px 25px -5px rgba(0,0,0,0.1)'}}
+                                            formatter={(value) => [`Rp ${value} Jt`, undefined]}
+                                        />
+                                        <Legend iconType="circle" wrapperStyle={{paddingTop: '20px', fontSize: '12px'}} />
+                                        <Area type="monotone" dataKey="revenue" name="Total Revenue" stroke="#3b82f6" strokeWidth={3} fillOpacity={1} fill="url(#colorRev)" />
+                                        <Area type="monotone" dataKey="profit" name="Net Profit" stroke="#10b981" strokeWidth={3} fillOpacity={1} fill="url(#colorProfit)" />
+                                    </AreaChart>
+                                </ResponsiveContainer>
+                            </div>
+                        </div>
+
+                        <div className="bg-white rounded-2xl p-4 md:p-6 border border-slate-200 shadow-sm flex flex-col">
+                            <h2 className="text-lg font-bold text-slate-900 mb-6">Financial Summary</h2>
+                            <div className="flex-1 flex flex-col justify-center gap-6">
                                 {data.map((d, i) => (
-                                    <div key={d.m} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
-                                        <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#4338ca' }}>{(d.rev / 1000).toFixed(1)}K</div>
-                                        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', height: '160px', gap: '2px' }}>
-                                            <div style={{ height: `${(d.profit / maxRev) * 160}px`, background: '#c7d2fe', borderRadius: '4px 4px 0 0', minHeight: '4px', transition: 'height 0.3s' }} />
-                                            <div style={{ height: `${((d.rev - d.profit) / maxRev) * 160}px`, background: '#4338ca', borderRadius: '0', minHeight: '4px' }} />
+                                    <div key={d.name}>
+                                        <div className="flex justify-between items-end mb-2">
+                                            <span className="font-bold text-slate-700">{d.name}</span>
+                                            <div className="text-right">
+                                                <div className="font-black text-blue-600">Rp {d.revenue.toFixed(1)} Jt</div>
+                                                <div className="text-xs font-semibold text-emerald-600">Profit: Rp {d.profit.toFixed(1)} Jt</div>
+                                            </div>
                                         </div>
-                                        <div style={{ fontSize: '0.8rem', color: '#1e293b', fontWeight: 600 }}>{d.m}</div>
+                                        <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden flex">
+                                            <div className="h-full bg-emerald-500 rounded-l-full" style={{ width: `${(d.profit / d.revenue) * 100}%` }}></div>
+                                            <div className="h-full bg-blue-500 rounded-r-full" style={{ width: `${((d.revenue - d.profit) / d.revenue) * 100}%` }}></div>
+                                        </div>
                                     </div>
                                 ))}
                             </div>
-                            <div style={{ display: 'flex', gap: '1.5rem', marginTop: '1rem', fontSize: '0.78rem' }}>
-                                <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><div style={{ width: '12px', height: '12px', background: '#4338ca', borderRadius: '2px' }} /> Revenue</span>
-                                <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><div style={{ width: '12px', height: '12px', background: '#c7d2fe', borderRadius: '2px' }} /> Profit</span>
-                            </div>
-                        </div>
-                        <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #e2e8f0' }}>
-                            <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#0f172a', marginBottom: '1rem' }}>Ringkasan {period}</h2>
-                            {data.map((d, i) => (
-                                <div key={d.m} style={{ padding: '12px 0', borderBottom: i < data.length - 1 ? '1px solid #f1f5f9' : 'none' }}>
-                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
-                                        <span style={{ fontWeight: 700, color: '#0f172a', fontSize: '0.9rem' }}>{d.m}</span>
-                                        <span style={{ fontWeight: 800, color: '#4338ca', fontSize: '0.9rem' }}>Rp {d.rev.toLocaleString()}</span>
-                                    </div>
-                                    <div style={{ height: '6px', background: '#f1f5f9', borderRadius: '3px', overflow: 'hidden' }}>
-                                        <div style={{ height: '100%', background: '#4338ca', borderRadius: '3px', width: `${(d.rev / maxRev) * 100}%`, transition: 'width 0.3s' }} />
-                                    </div>
-                                </div>
-                            ))}
                         </div>
                     </div>
                 )}
+
                 {tab === 'products' && (
-                    <div style={{ background: '#fff', borderRadius: '16px', border: '1px solid #e2e8f0', overflow: 'hidden' }}>
-                        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', padding: '12px 1.5rem', background: '#f8fafc', fontWeight: 600, color: '#1e293b', fontSize: '0.8rem', borderBottom: '1px solid #e2e8f0' }}>
-                            {['Produk', 'Kategori', 'Terjual', 'Revenue'].map(h => <div key={h}>{h}</div>)}
+                    <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                        <div className="p-4 md:p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+                            <h2 className="text-lg font-bold text-slate-900">Top Performing Products</h2>
+                            <span className="text-xs font-semibold text-slate-500 bg-white px-3 py-1 rounded-full border border-slate-200 shadow-sm">Ranked by Revenue</span>
                         </div>
-                        {TOP_PRODUCTS.map((p, i) => (
-                            <div key={p.n} style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', padding: '14px 1.5rem', borderTop: i > 0 ? '1px solid #f1f5f9' : 'none', alignItems: 'center' }}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                                    <div style={{ width: '28px', height: '28px', borderRadius: '6px', background: BAR_COLORS[i] + '20', color: BAR_COLORS[i], fontWeight: 800, fontSize: '0.85rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{i + 1}</div>
-                                    <span style={{ fontWeight: 600, color: '#0f172a', fontSize: '0.9rem' }}>{p.n}</span>
-                                </div>
-                                <span style={{ fontSize: '0.8rem', background: '#f1f5f9', color: '#1e293b', padding: '4px 10px', borderRadius: '4px', fontWeight: 600, display: 'inline-block' }}>{p.cat}</span>
-                                <span style={{ fontWeight: 700, color: '#374151' }}>{p.sales}</span>
-                                <span style={{ fontWeight: 700, color: '#4338ca' }}>{p.rev}</span>
-                            </div>
-                        ))}
+                        <div className="overflow-x-auto">
+                            <table className="w-full text-left min-w-[600px]">
+                                <thead>
+                                    <tr className="bg-slate-50 border-y border-slate-200 text-slate-500 text-xs uppercase tracking-wider">
+                                        <th className="px-6 py-4 font-semibold">Rank</th>
+                                        <th className="px-6 py-4 font-semibold">Product Name</th>
+                                        <th className="px-6 py-4 font-semibold">Category</th>
+                                        <th className="px-6 py-4 font-semibold">Units Sold</th>
+                                        <th className="px-6 py-4 font-semibold">Revenue</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-slate-100">
+                                    {TOP_PRODUCTS.map((p, i) => (
+                                        <tr key={p.id} className="hover:bg-slate-50/80 transition-colors">
+                                            <td className="px-6 py-4">
+                                                <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm ${
+                                                    i === 0 ? 'bg-amber-100 text-amber-600' : 
+                                                    i === 1 ? 'bg-slate-200 text-slate-600' : 
+                                                    i === 2 ? 'bg-orange-100 text-orange-700' : 'bg-slate-100 text-slate-500'
+                                                }`}>
+                                                    #{p.id}
+                                                </div>
+                                            </td>
+                                            <td className="px-6 py-4 font-bold text-slate-900">{p.name}</td>
+                                            <td className="px-6 py-4">
+                                                <span className="bg-slate-100 text-slate-600 px-2.5 py-1 rounded-md text-xs font-semibold">{p.cat}</span>
+                                            </td>
+                                            <td className="px-6 py-4 font-semibold text-slate-600">{p.sales} <span className="text-xs font-medium text-slate-400">units</span></td>
+                                            <td className="px-6 py-4">
+                                                <div className="font-bold text-blue-600">{p.rev}</div>
+                                                <div className={`text-xs font-semibold ${p.trend.startsWith('+') ? 'text-emerald-500' : 'text-rose-500'}`}>{p.trend} vs last period</div>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 )}
+
                 {tab === 'branches' && (
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(220px,1fr))', gap: '1rem' }}>
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-6">
                         {Object.entries(BRANCHES).filter(([k]) => k !== 'Semua').map(([name, info], i) => (
-                            <div key={name} style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #e2e8f0' }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
-                                    <span style={{ fontWeight: 700, color: '#0f172a' }}>{name}</span>
-                                    <span style={{ background: '#d1fae5', color: '#065f46', fontSize: '0.75rem', fontWeight: 700, padding: '3px 8px', borderRadius: '6px' }}>{info.growth}</span>
+                            <div key={name} className="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm relative overflow-hidden group hover:border-blue-300 transition-colors">
+                                <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+                                    <MapPin className="w-24 h-24" />
                                 </div>
-                                <div style={{ fontSize: '1.5rem', fontWeight: 800, color: BAR_COLORS[i], marginBottom: '8px' }}>{info.rev}</div>
-                                <div style={{ fontSize: '0.8rem', color: '#1e293b' }}>📦 {info.orders} pesanan · 💳 {info.avg}/transaksi</div>
+                                <div className="flex justify-between items-start mb-6 relative z-10">
+                                    <div>
+                                        <h3 className="text-lg font-bold text-slate-900">{name}</h3>
+                                        <div className="text-xs font-semibold text-slate-500">Branch Office</div>
+                                    </div>
+                                    <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${info.isUp ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}`}>
+                                        {info.growth}
+                                    </span>
+                                </div>
+                                <div className="relative z-10">
+                                    <div className="text-3xl font-black text-slate-900 mb-4">{info.rev} <span className="text-sm font-semibold text-slate-500">Jt</span></div>
+                                    <div className="space-y-2">
+                                        <div className="flex justify-between text-sm">
+                                            <span className="text-slate-500">Orders</span>
+                                            <span className="font-semibold text-slate-700">{info.orders}</span>
+                                        </div>
+                                        <div className="flex justify-between text-sm">
+                                            <span className="text-slate-500">Avg. Value</span>
+                                            <span className="font-semibold text-slate-700">{info.avg}</span>
+                                        </div>
+                                        <div className="flex justify-between text-sm">
+                                            <span className="text-slate-500">KPI Target</span>
+                                            <span className={`font-semibold ${info.target >= 100 ? 'text-emerald-600' : 'text-amber-600'}`}>{info.target}%</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         ))}
                     </div>
