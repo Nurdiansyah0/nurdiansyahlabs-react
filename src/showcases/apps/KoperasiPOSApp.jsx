@@ -1,17 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useResponsive } from '../../hooks/useResponsive'
-const PRODUCTS = [
-    { id: 1, name: 'Beras Premium 5kg', price: 75000, stock: 24, cat: 'Sembako', img: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=300&fit=crop' },
-    { id: 2, name: 'Minyak Goreng 2L', price: 34500, stock: 12, cat: 'Sembako', img: 'https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?w=300&fit=crop' },
-    { id: 3, name: 'Gula Pasir 1kg', price: 16000, stock: 45, cat: 'Sembako', img: 'https://images.unsplash.com/photo-1581006560933-281b37f44d8c?w=300&fit=crop' },
-    { id: 4, name: 'Telur Ayam 1kg', price: 28000, stock: 8, cat: 'Sembako', img: 'https://images.unsplash.com/photo-1506976785307-8732e854ad03?w=300&fit=crop' },
-    { id: 5, name: 'Susu UHT 1L', price: 18500, stock: 30, cat: 'Minuman', img: 'https://images.unsplash.com/photo-1563636619-e9143da7973b?w=300&fit=crop' },
-    { id: 6, name: 'Kopi Bubuk 200g', price: 24000, stock: 15, cat: 'Minuman', img: 'https://images.unsplash.com/photo-1559525839-b184a4d698c7?w=300&fit=crop' },
-    { id: 7, name: 'Mie Instan (Karton)', price: 115000, stock: 5, cat: 'Snack', img: 'https://images.unsplash.com/photo-1612929633738-8fe44f7ec29a?w=300&fit=crop' },
-    { id: 8, name: 'Keripik Singkong', price: 12000, stock: 35, cat: 'Snack', img: 'https://images.unsplash.com/photo-1621447504864-d8686e12698c?w=300&fit=crop' },
-    { id: 9, name: 'Teh Botol 500ml', price: 5000, stock: 60, cat: 'Minuman', img: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=300&fit=crop' },
-    { id: 10, name: 'Sabun Cuci 1kg', price: 22000, stock: 20, cat: 'Kebutuhan', img: 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=300&fit=crop' },
-]
+import { PRODUCTS } from '../../data/koperasiProducts'
 const MEMBERS = [{ id: 1, no: 'KOP-001', name: 'Budi Santoso', saldo: 'Rp 1.25Jt' }, { id: 2, no: 'KOP-002', name: 'Siti Rahayu', saldo: 'Rp 890rb' }, { id: 3, no: 'KOP-003', name: 'Ahmad Hidayat', saldo: 'Rp 2.1Jt' }, { id: 4, no: 'KOP-004', name: 'Dewi Lestari', saldo: 'Rp 450rb' }]
 const fmt = n => n.toLocaleString('id-ID')
 export default function KoperasiPOSApp() {
@@ -23,6 +12,7 @@ export default function KoperasiPOSApp() {
     const [member, setMember] = useState(null)
     const [showMember, setShowMember] = useState(false)
     const [receipt, setReceipt] = useState(null)
+    const [showCart, setShowCart] = useState(false)
     const [invNum] = useState(`INV-${new Date().toISOString().slice(2, 10).replace(/-/g, '')}-${String(Math.floor(Math.random() * 999) + 1).padStart(3, '0')}`)
     const filtered = PRODUCTS.filter(p => (cat === 'Semua' || p.cat === cat) && (!search || p.name.toLowerCase().includes(search.toLowerCase())))
     const total = cart.reduce((s, c) => s + c.price * c.qty, 0)
@@ -143,7 +133,7 @@ export default function KoperasiPOSApp() {
             )}
             {/* POS */}
             {page === 'pos' && (
-                <div style={{ flex: 1, display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '0', overflow: 'hidden' }}>
+                <div style={{ flex: 1, display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '0', overflow: 'hidden', position: 'relative' }}>
                     {/* Products */}
                     <div style={{ flex: 1, background: '#eef2ff', padding: '1.5rem', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
                         <div style={{ display: 'flex', gap: '10px', marginBottom: '1rem', flexWrap: 'wrap' }}>
@@ -171,7 +161,13 @@ export default function KoperasiPOSApp() {
                         </div>
                     </div>
                     {/* Cart */}
-                    <div style={{ width: isMobile ? '100%' : '360px', height: isMobile ? '50%' : 'auto', background: '#fff', display: 'flex', flexDirection: 'column', borderLeft: isMobile ? 'none' : '1px solid #e0e7ff', borderTop: isMobile ? '1px solid #e0e7ff' : 'none', flexShrink: 0 }}>
+                    {isMobile && (
+                        <button aria-label="Action button" onClick={() => setShowCart(!showCart)} style={{ position: 'absolute', bottom: '1.5rem', right: '1.5rem', background: '#3730a3', color: '#fff', border: 'none', borderRadius: '50%', width: '56px', height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', boxShadow: '0 4px 12px rgba(55,48,163,0.4)', zIndex: 50, cursor: 'pointer' }}>
+                            🛒{cart.length > 0 && <span style={{ position: 'absolute', top: 0, right: 0, background: '#ef4444', color: '#fff', fontSize: '0.65rem', padding: '2px 6px', borderRadius: '10px', fontWeight: 800 }}>{cart.length}</span>}
+                        </button>
+                    )}
+                    <div style={{ width: isMobile ? '100%' : '360px', height: isMobile ? '70%' : 'auto', position: isMobile ? 'absolute' : 'relative', bottom: 0, zIndex: 40, background: '#fff', display: isMobile && !showCart ? 'none' : 'flex', flexDirection: 'column', borderLeft: isMobile ? 'none' : '1px solid #e0e7ff', flexShrink: 0, boxShadow: isMobile ? '0 -4px 20px rgba(0,0,0,0.15)' : 'none', borderRadius: isMobile ? '20px 20px 0 0' : '0' }}>
+                        {isMobile && <div onClick={() => setShowCart(false)} style={{ padding: '8px', textAlign: 'center', background: '#f8fafc', color: '#64748b', fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer', borderRadius: '20px 20px 0 0', borderBottom: '1px solid #f1f5f9' }}>▼ Tutup Keranjang</div>}
                         <div style={{ padding: '1.25rem', borderBottom: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <div><div style={{ fontWeight: 800, fontSize: '1.1rem', color: '#1e1b4b' }}>Pesanan Baru</div><div style={{ fontSize: '0.75rem', color: '#1e293b' }}>{invNum}</div></div>
                             <button aria-label="Action button" onClick={() => setCart([])} style={{ background: '#fee2e2', color: '#b91c1c', border: 'none', borderRadius: '6px', padding: '6px', cursor: 'pointer', fontSize: '0.8rem' }}>🗑</button>
