@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useResponsive } from '../../hooks/useResponsive'
 import { PRODUCTS } from '../../data/koperasiProducts'
+import { Users, ShoppingCart, TrendingUp, AlertCircle, ArrowUpRight, ArrowDownRight, Package, CreditCard, ChevronRight } from 'lucide-react'
 const MEMBERS = [{ id: 1, no: 'KOP-001', name: 'Budi Santoso', saldo: 'Rp 1.25Jt' }, { id: 2, no: 'KOP-002', name: 'Siti Rahayu', saldo: 'Rp 890rb' }, { id: 3, no: 'KOP-003', name: 'Ahmad Hidayat', saldo: 'Rp 2.1Jt' }, { id: 4, no: 'KOP-004', name: 'Dewi Lestari', saldo: 'Rp 450rb' }]
 const fmt = n => n.toLocaleString('id-ID')
 export default function KoperasiPOSApp() {
@@ -67,28 +68,92 @@ export default function KoperasiPOSApp() {
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', paddingBottom: isMobile ? '65px' : '0' }}>
             {/* Dashboard */}
             {page === 'dashboard' && (
-                <div style={{ flex: 1, background: '#eef2ff', padding: isMobile ? '1rem' : '2rem', overflowY: 'auto' }}>
-                    <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#1e1b4b', marginBottom: '2rem' }}>Dashboard Koperasi</h1>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
-                        {[{ l: 'Total Anggota', v: '248', c: '#3730a3', i: '👥' }, { l: 'Transaksi Hari Ini', v: '34', c: '#047857', i: '🛒' }, { l: 'Pendapatan', v: 'Rp 4.2Jt', c: '#b45309', i: '💰' }, { l: 'Stok Rendah', v: '7', c: '#b91c1c', i: '⚠️' }].map(m => (
-                            <div key={m.l} style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #e0e7ff' }}>
-                                <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>{m.i}</div>
-                                <div style={{ fontSize: '1.8rem', fontWeight: 800, color: '#1e1b4b' }}>{m.v}</div>
-                                <div style={{ fontSize: '0.8rem', color: '#1e293b', marginTop: '4px' }}>{m.l}</div>
+                <div style={{ flex: 1, background: '#f8fafc', padding: isMobile ? '1.25rem' : '2.5rem', overflowY: 'auto' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2rem' }}>
+                        <div>
+                            <h1 style={{ fontSize: isMobile ? '1.5rem' : '1.8rem', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.03em' }}>Overview Koperasi</h1>
+                            <p style={{ color: '#64748b', fontSize: '0.9rem', marginTop: '4px' }}>Ringkasan performa dan aktivitas hari ini.</p>
+                        </div>
+                        {!isMobile && (
+                            <button style={{ background: '#4f46e5', color: '#fff', border: 'none', padding: '10px 18px', borderRadius: '8px', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 12px rgba(79, 70, 229, 0.2)' }}>
+                                Unduh Laporan <ArrowUpRight size={16} />
+                            </button>
+                        )}
+                    </div>
+                    
+                    {/* KPI Cards */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.25rem', marginBottom: '2rem' }}>
+                        {[
+                            { title: 'Total Anggota', value: '248', trend: '+12% minggu ini', isUp: true, icon: <Users size={20} color="#4f46e5" />, bg: '#e0e7ff' },
+                            { title: 'Pendapatan Hari Ini', value: 'Rp 4.25M', trend: '+8.4% dari kemarin', isUp: true, icon: <TrendingUp size={20} color="#059669" />, bg: '#d1fae5' },
+                            { title: 'Total Transaksi', value: '156', trend: '-2.1% dari kemarin', isUp: false, icon: <ShoppingCart size={20} color="#ea580c" />, bg: '#ffedd5' },
+                            { title: 'Stok Kritis', value: '7 Item', trend: 'Perlu restock segera', isUp: null, icon: <AlertCircle size={20} color="#e11d48" />, bg: '#ffe4e6' }
+                        ].map((k, i) => (
+                            <div key={i} style={{ background: '#fff', padding: '1.5rem', borderRadius: '16px', border: '1px solid #e2e8f0', boxShadow: '0 1px 3px rgba(0,0,0,0.02)' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.25rem' }}>
+                                    <div style={{ background: k.bg, padding: '10px', borderRadius: '12px' }}>{k.icon}</div>
+                                    {k.isUp !== null && (
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '4px', background: k.isUp ? '#f0fdf4' : '#fef2f2', color: k.isUp ? '#166534' : '#991b1b', padding: '4px 8px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: 600 }}>
+                                            {k.isUp ? <ArrowUpRight size={14} /> : <ArrowDownRight size={14} />} {k.trend}
+                                        </div>
+                                    )}
+                                    {k.isUp === null && <div style={{ color: '#e11d48', fontSize: '0.75rem', fontWeight: 600 }}>{k.trend}</div>}
+                                </div>
+                                <div style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: 500, marginBottom: '4px' }}>{k.title}</div>
+                                <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em' }}>{k.value}</div>
                             </div>
                         ))}
                     </div>
-                    <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #e0e7ff' }}>
-                        <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#1e1b4b', marginBottom: '1rem' }}>Transaksi Terbaru</h2>
-                        {[{ n: 'Budi Santoso', t: 'Rp 184.500', time: '10:32', s: 'Lunas' }, { n: 'Siti Rahayu', t: 'Rp 67.000', time: '09:15', s: 'Lunas' }, { n: 'Walk-in', t: 'Rp 245.000', time: '08:45', s: 'Lunas' }, { n: 'Ahmad Hidayat', t: 'Rp 128.000', time: '08:12', s: 'Kredit' }].map((tx, i) => (
-                            <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 0', borderBottom: i < 3 ? '1px solid #f1f5f9' : 'none' }}>
-                                <div><div style={{ fontWeight: 600, color: '#1e1b4b', fontSize: '0.9rem' }}>{tx.n}</div><div style={{ fontSize: '0.75rem', color: '#1e293b' }}>{tx.time}</div></div>
-                                <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-                                    <span style={{ background: tx.s === 'Lunas' ? '#d1fae5' : '#fef3c7', color: tx.s === 'Lunas' ? '#065f46' : '#92400e', fontSize: '0.7rem', fontWeight: 700, padding: '2px 8px', borderRadius: '4px' }}>{tx.s}</span>
-                                    <div style={{ fontWeight: 700, color: '#3730a3' }}>{tx.t}</div>
-                                </div>
+
+                    <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '1.5rem' }}>
+                        {/* Chart Area */}
+                        <div style={{ flex: 2, background: '#fff', borderRadius: '16px', border: '1px solid #e2e8f0', padding: '1.5rem', boxShadow: '0 1px 3px rgba(0,0,0,0.02)' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+                                <h2 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0f172a' }}>Statistik Penjualan</h2>
+                                <select style={{ border: '1px solid #e2e8f0', borderRadius: '6px', padding: '4px 8px', fontSize: '0.8rem', color: '#475569', background: '#f8fafc', outline: 'none', cursor: 'pointer' }}>
+                                    <option>7 Hari Terakhir</option>
+                                    <option>Bulan Ini</option>
+                                </select>
                             </div>
-                        ))}
+                            {/* Fake Bar Chart */}
+                            <div style={{ height: '200px', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '8px', marginTop: '2rem' }}>
+                                {[40, 70, 45, 90, 60, 100, 80].map((h, i) => (
+                                    <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+                                        <div style={{ width: '100%', maxWidth: '40px', height: `${h}%`, background: h === 100 ? '#4f46e5' : '#c7d2fe', borderRadius: '6px 6px 0 0', transition: 'height 0.5s ease-out', position: 'relative' }}>
+                                            {h === 100 && <div style={{ position: 'absolute', top: '-25px', left: '50%', transform: 'translateX(-50%)', background: '#1e1b4b', color: '#fff', fontSize: '0.65rem', padding: '2px 6px', borderRadius: '4px', fontWeight: 600 }}>Rp 8.2M</div>}
+                                        </div>
+                                        <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 500 }}>{['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'][i]}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Recent Transactions */}
+                        <div style={{ flex: 1, background: '#fff', borderRadius: '16px', border: '1px solid #e2e8f0', padding: '1.5rem', boxShadow: '0 1px 3px rgba(0,0,0,0.02)' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+                                <h2 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0f172a' }}>Transaksi Terkini</h2>
+                                <button style={{ border: 'none', background: 'none', color: '#4f46e5', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center' }}>Semua <ChevronRight size={16} /></button>
+                            </div>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                {[{ n: 'Budi Santoso', t: 'Rp 184.500', time: '10:32', s: 'Lunas', id: 'INV-001' }, { n: 'Siti Rahayu', t: 'Rp 67.000', time: '09:15', s: 'Lunas', id: 'INV-002' }, { n: 'Pelanggan Umum', t: 'Rp 245.000', time: '08:45', s: 'Lunas', id: 'INV-003' }, { n: 'Ahmad Hidayat', t: 'Rp 128.000', time: '08:12', s: 'Kredit', id: 'INV-004' }, { n: 'Dewi Lestari', t: 'Rp 45.000', time: '07:30', s: 'Lunas', id: 'INV-005' }].map((tx, i) => (
+                                    <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '1rem', borderBottom: i < 4 ? '1px solid #f1f5f9' : 'none' }}>
+                                        <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                                            <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: tx.s === 'Kredit' ? '#fff7ed' : '#f0fdf4', color: tx.s === 'Kredit' ? '#ea580c' : '#166534', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                                {tx.s === 'Kredit' ? <CreditCard size={18} /> : <Package size={18} />}
+                                            </div>
+                                            <div>
+                                                <div style={{ fontWeight: 600, color: '#0f172a', fontSize: '0.9rem' }}>{tx.n}</div>
+                                                <div style={{ fontSize: '0.75rem', color: '#64748b', marginTop: '2px' }}>{tx.id} • {tx.time}</div>
+                                            </div>
+                                        </div>
+                                        <div style={{ textAlign: 'right' }}>
+                                            <div style={{ fontWeight: 700, color: '#0f172a', fontSize: '0.9rem' }}>{tx.t}</div>
+                                            <span style={{ color: tx.s === 'Lunas' ? '#10b981' : '#f59e0b', fontSize: '0.75rem', fontWeight: 600 }}>{tx.s}</span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}
@@ -150,7 +215,7 @@ export default function KoperasiPOSApp() {
                                 <div key={p.id} onClick={() => addToCart(p)} style={{ background: '#fff', borderRadius: '14px', padding: '1rem', cursor: 'pointer', border: cart.find(c => c.id === p.id) ? '2px solid #3730a3' : '1px solid #e0e7ff', transition: 'all 0.15s' }}
                                     onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'}
                                     onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}>
-                                    <img src={p.img} style={{ width: '100%', height: '90px', objectFit: 'cover', borderRadius: '8px', marginBottom: '10px' }} alt={p.name} />
+                                    <img src={p.img} referrerPolicy="no-referrer" style={{ width: '100%', height: '90px', objectFit: 'cover', borderRadius: '8px', marginBottom: '10px' }} alt={p.name} />
                                     <div style={{ fontSize: '0.8rem', fontWeight: 600, color: '#1e1b4b', marginBottom: '6px', lineHeight: 1.2 }}>{p.name}</div>
                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <span style={{ fontWeight: 800, color: '#3730a3', fontSize: '0.85rem' }}>Rp {fmt(p.price)}</span>
