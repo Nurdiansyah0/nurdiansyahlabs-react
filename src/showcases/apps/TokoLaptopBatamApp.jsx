@@ -318,13 +318,13 @@ export default function TokoLaptopBatamApp() {
                             </div>
 
                             <div className="p-10 flex flex-col">
-                                <div className="text-xs font-black tracking-[0.2em] uppercase text-blue-600 mb-2 uppercase">{selectedProduct.category}</div>
+                                <div className="text-xs font-black tracking-[0.2em] uppercase text-blue-600 mb-2">{selectedProduct.category}</div>
                                 <h2 className="text-4xl font-black text-slate-900 tracking-tighter leading-tight mb-4 uppercase">{selectedProduct.name}</h2>
                                 <div className="text-3xl font-black text-blue-600 mb-8 tracking-tighter">{formatIDR(selectedProduct.price)}</div>
 
                                 <div className="space-y-6 mb-10 overflow-y-auto pr-2">
                                     <div>
-                                        <h4 className="text-[10px] font-black text-slate-600 uppercase tracking-widest mb-3 uppercase">Pilih Varian</h4>
+                                        <h4 className="text-[10px] font-black text-slate-600 uppercase tracking-widest mb-3">Pilih Varian</h4>
                                         <div className="flex flex-wrap gap-2">
                                             {selectedProduct.extras?.sizes?.map(size => (
                                                 <button aria-label="Action button"
@@ -338,7 +338,7 @@ export default function TokoLaptopBatamApp() {
                                         </div>
                                     </div>
                                     <div>
-                                        <h4 className="text-[10px] font-black text-slate-600 uppercase tracking-widest mb-3 uppercase">Warna</h4>
+                                        <h4 className="text-[10px] font-black text-slate-600 uppercase tracking-widest mb-3">Warna</h4>
                                         <div className="flex flex-wrap gap-2">
                                             {selectedProduct.extras?.colors?.map(color => (
                                                 <button aria-label="Action button"
