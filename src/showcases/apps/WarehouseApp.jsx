@@ -1,195 +1,586 @@
-import { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { useResponsive } from '../../hooks/useResponsive'
 import { getOptimizedImg } from '../../utils/imgHelper'
-// rackData factory — called once inside useMemo
-const buildRackData = () => Array.from({ length: 96 }).map((_, i) => {
-    const isAisle = i % 12 === 5 || i % 12 === 6
-    if (isAisle) return { isAisle: true }
-    let c = '#d1fae5', s = 'Empty', p = Math.floor(Math.random() * 30)
-    if (i % 7 === 0) { c = '#b91c1c'; s = 'Full'; p = 100 }
-    else if (i % 5 === 0) { c = '#fbbf24'; s = 'High'; p = 75 + Math.floor(Math.random() * 20) }
-    else if (i % 2 === 0 && i % 4 !== 0) { c = '#34d399'; s = 'Optimal'; p = 40 + Math.floor(Math.random() * 30) }
-    return { isAisle: false, color: c, status: s, pct: p, name: `Rack ${String.fromCharCode(65 + Math.floor(i / 12))}-${(i % 12) + 1}` }
+import { 
+    LayoutDashboard, Box, ArrowDownToLine, ArrowUpFromLine, 
+    FileText, Bell, Search, Settings, Activity, Filter,
+    MoreVertical, CheckCircle2, AlertCircle, ArrowRightLeft,
+    ChevronDown, Map, PackageSearch, BarChart3, TrendingUp, 
+    Users, Menu, X, Plus, ScanLine, ArrowUpRight, ArrowDownRight,
+    MapPin, Thermometer
+} from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { 
+    AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer
+} from 'recharts'
+
+// --- Mock Data Generators ---
+const buildRackData = () => Array.from({ length: 144 }).map((_, i) => {
+    const col = i % 12;
+    const row = Math.floor(i / 12);
+    // Aisles every 4 columns and 4 rows
+    const isAisle = col % 4 === 3 || row % 4 === 3;
+    
+    if (isAisle) return { isAisle: true };
+    
+    let bg = 'bg-emerald-100 border-emerald-200', dot = 'bg-emerald-500', s = 'Optimal', p = 40 + Math.floor(Math.random() * 30);
+    const rand = Math.random();
+    if (rand < 0.15) { bg = 'bg-rose-100 border-rose-200'; dot = 'bg-rose-500'; s = 'Full'; p = 95 + Math.floor(Math.random() * 5); }
+    else if (rand < 0.3) { bg = 'bg-amber-100 border-amber-200'; dot = 'bg-amber-500'; s = 'High'; p = 75 + Math.floor(Math.random() * 20); }
+    else if (rand < 0.45) { bg = 'bg-slate-50 border-slate-200'; dot = 'bg-slate-300'; s = 'Empty'; p = 0; }
+    
+    return { 
+        isAisle: false, bg, dot, status: s, pct: p, 
+        name: `R-${String.fromCharCode(65 + Math.floor(row / 4))}${(col % 4) + 1}`,
+        temp: 18 + Math.floor(Math.random() * 6) + '°C',
+        skus: Math.floor(Math.random() * 5)
+    };
 })
+
 const initScans = [
-    { action: 'Putaway', sku: 'SKU-8921-A', loc: 'Zone C • Rack 12', time: 'Just now', type: 'in', user: 'JD' },
-    { action: 'Pick', sku: 'SKU-4412-B', loc: 'Zone A • Rack 02', time: '2 min ago', type: 'out', user: 'SM' },
-    { action: 'Relocate', sku: 'SKU-1199-X', loc: 'Z-B to Z-D', time: '12 min ago', type: 'move', user: 'AJ' },
-    { action: 'Inventory Check', sku: 'SKU-2231-A', loc: 'Zone C • Rack 08', time: '32 min ago', type: 'check', user: 'RW' },
+    { id: 'TRX-8911', action: 'Putaway', sku: 'SKU-8921-A', loc: 'Z-C • R-12', time: 'Just now', type: 'in', user: 'JD', status: 'Completed' },
+    { id: 'TRX-8910', action: 'Pick', sku: 'SKU-4412-B', loc: 'Z-A • R-02', time: '2 min ago', type: 'out', user: 'SM', status: 'Completed' },
+    { id: 'TRX-8909', action: 'Relocate', sku: 'SKU-1199-X', loc: 'Z-B → Z-D', time: '12 min ago', type: 'move', user: 'AJ', status: 'In Progress' },
+    { id: 'TRX-8908', action: 'Audit Check', sku: 'SKU-2231-A', loc: 'Z-C • R-08', time: '32 min ago', type: 'check', user: 'RW', status: 'Pending' },
+    { id: 'TRX-8907', action: 'Putaway', sku: 'SKU-6652-Y', loc: 'Z-F • R-44', time: '45 min ago', type: 'in', user: 'NR', status: 'Completed' },
 ]
+
 const rnd = () => {
-    const aa = [{ action: 'Putaway', type: 'in' }, { action: 'Pick', type: 'out' }, { action: 'Relocate', type: 'move' }, { action: 'Check', type: 'check' }]
-    const uu = ['JD', 'SM', 'AJ', 'RW', 'NR']
-    const r = aa[Math.floor(Math.random() * aa.length)]
-    return { ...r, sku: `SKU-${Math.floor(1000 + Math.random() * 9000)}-${['A', 'B', 'C', 'X', 'Y'][Math.floor(Math.random() * 5)]}`, loc: `Zone ${['A', 'B', 'C', 'D'][Math.floor(Math.random() * 4)]} • Rack ${String(Math.floor(1 + Math.random() * 50)).padStart(2, '0')}`, time: 'Just now', user: uu[Math.floor(Math.random() * 5)] }
+    const actions = [
+        { action: 'Putaway', type: 'in' }, { action: 'Pick', type: 'out' }, 
+        { action: 'Relocate', type: 'move' }, { action: 'Audit', type: 'check' }
+    ]
+    const users = ['JD', 'SM', 'AJ', 'RW', 'NR', 'MK']
+    const statuses = ['Completed', 'Completed', 'In Progress', 'Pending']
+    const r = actions[Math.floor(Math.random() * actions.length)]
+    
+    return { 
+        ...r, 
+        id: `TRX-${Math.floor(8000 + Math.random() * 1999)}`,
+        sku: `SKU-${Math.floor(1000 + Math.random() * 9000)}-${['A', 'B', 'C', 'X', 'Y'][Math.floor(Math.random() * 5)]}`, 
+        loc: `Z-${['A', 'B', 'C', 'D'][Math.floor(Math.random() * 4)]} • R-${String(Math.floor(1 + Math.random() * 50)).padStart(2, '0')}`, 
+        time: 'Just now', 
+        user: users[Math.floor(Math.random() * users.length)],
+        status: statuses[Math.floor(Math.random() * statuses.length)]
+    }
 }
+
 const ITEMS = [
-    { sku: 'SKU-8921-A', name: 'Steel Pipe 6m', qty: 48, loc: 'Zone C-12', cat: 'Raw Material', last: '2h ago' },
-    { sku: 'SKU-4412-B', name: 'Paint Drum 20L', qty: 15, loc: 'Zone A-02', cat: 'Chemicals', last: '4h ago' },
-    { sku: 'SKU-1199-X', name: 'Bolt Set M10', qty: 500, loc: 'Zone D-08', cat: 'Hardware', last: '1d ago' },
-    { sku: 'SKU-6652-Y', name: 'Valve 2 inch', qty: 30, loc: 'Zone F-44', cat: 'Parts', last: '3h ago' },
-    { sku: 'SKU-2231-A', name: 'Copper Wire 100m', qty: 8, loc: 'Zone C-08', cat: 'Electrical', last: '2d ago' },
-    { sku: 'SKU-7719-B', name: 'Safety Helmet', qty: 25, loc: 'Zone B-33', cat: 'Safety', last: '1h ago' },
+    { sku: 'SKU-8921-A', name: 'Steel Pipe 6m - Galvanized', qty: 48, min: 20, loc: 'Z-C • R-12', cat: 'Raw Material', status: 'Optimal' },
+    { sku: 'SKU-4412-B', name: 'Polyurethane Paint 20L', qty: 15, min: 25, loc: 'Z-A • R-02', cat: 'Chemicals', status: 'Low Stock' },
+    { sku: 'SKU-1199-X', name: 'Hex Bolt Set M10x50', qty: 500, min: 200, loc: 'Z-D • R-08', cat: 'Hardware', status: 'Optimal' },
+    { sku: 'SKU-6652-Y', name: 'Gate Valve 2 inch Brass', qty: 30, min: 30, loc: 'Z-F • R-44', cat: 'Parts', status: 'Warning' },
+    { sku: 'SKU-2231-A', name: 'Copper Wire 100m Roll', qty: 8, min: 10, loc: 'Z-C • R-08', cat: 'Electrical', status: 'Low Stock' },
+    { sku: 'SKU-7719-B', name: 'Industrial Safety Helmet', qty: 125, min: 50, loc: 'Z-B • R-33', cat: 'Safety', status: 'Optimal' },
+    { sku: 'SKU-3321-C', name: 'Hydraulic Pump Assembly', qty: 4, min: 2, loc: 'Z-E • R-15', cat: 'Machinery', status: 'Optimal' },
+    { sku: 'SKU-9982-X', name: 'Lithium Battery Pack 24V', qty: 0, min: 10, loc: 'Z-A • R-11', cat: 'Electrical', status: 'Out of Stock' },
 ]
+
+const volumeData = [
+    { time: '08:00', in: 120, out: 80 },
+    { time: '10:00', in: 210, out: 150 },
+    { time: '12:00', in: 180, out: 200 },
+    { time: '14:00', in: 250, out: 310 },
+    { time: '16:00', in: 170, out: 190 },
+    { time: '18:00', in: 90, out: 110 },
+]
+
+// --- Components ---
+
+const StatCard = ({ title, value, trend, trendUp, icon: Icon, colorClass }) => (
+    <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+        <div className="flex justify-between items-start mb-4">
+            <div className={`p-2 rounded-lg ${colorClass} bg-opacity-10`}>
+                <Icon className={`w-5 h-5 ${colorClass.replace('bg-', 'text-')}`} />
+            </div>
+            <div className={`flex items-center gap-1 text-xs font-semibold ${trendUp ? 'text-emerald-600' : 'text-rose-600'}`}>
+                {trendUp ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
+                {trend}
+            </div>
+        </div>
+        <div>
+            <h3 className="text-slate-500 text-sm font-medium">{title}</h3>
+            <p className="text-2xl font-bold text-slate-800 mt-1">{value}</p>
+        </div>
+    </div>
+)
+
 export default function WarehouseApp() {
     const { isMobile } = useResponsive()
     const [page, setPage] = useState('dashboard')
     const [scans, setScans] = useState(initScans)
-    const [hovered, setHovered] = useState(null)
-    const [notifOpen, setNotifOpen] = useState(false)
-    // useMemo: rack layout is computed once and never randomises again
+    const [hoveredRack, setHoveredRack] = useState(null)
+    const [sidebarOpen, setSidebarOpen] = useState(!isMobile)
+    
     const rackData = useMemo(() => buildRackData(), [])
-    useEffect(() => { const t = setInterval(() => setScans(p => [rnd(), ...p.slice(0, 9)]), 4000); return () => clearInterval(t) }, [])
-    const addScan = () => setScans(p => [rnd(), ...p.slice(0, 9)])
-    const PAGES = [{ k: 'dashboard', i: '📊', l: 'Dashboard' }, { k: 'inventory', i: '📦', l: 'Inventory' }, { k: 'inbound', i: '⬇️', l: 'Inbound' }, { k: 'outbound', i: '⬆️', l: 'Outbound' }, { k: 'reports', i: '📈', l: 'Reports' }]
+    
+    useEffect(() => { 
+        const t = setInterval(() => setScans(p => [rnd(), ...p.slice(0, 14)]), 5000); 
+        return () => clearInterval(t) 
+    }, [])
+    
+    const addScan = () => setScans(p => [rnd(), ...p.slice(0, 14)])
+
+    const navGroups = [
+        {
+            title: 'MAIN',
+            items: [
+                { k: 'dashboard', i: LayoutDashboard, l: 'Dashboard' },
+                { k: 'map', i: Map, l: 'Live Map' },
+            ]
+        },
+        {
+            title: 'OPERATIONS',
+            items: [
+                { k: 'inventory', i: Box, l: 'Inventory Matrix' },
+                { k: 'inbound', i: ArrowDownToLine, l: 'Inbound Flow' },
+                { k: 'outbound', i: ArrowUpFromLine, l: 'Outbound Flow' },
+            ]
+        },
+        {
+            title: 'ANALYTICS',
+            items: [
+                { k: 'reports', i: BarChart3, l: 'Reporting' },
+                { k: 'activity', i: Activity, l: 'Audit Logs' },
+            ]
+        }
+    ]
+
     return (
-        <div style={{ display: 'flex', height: '100vh', fontFamily: '"Inter",sans-serif', overflow: 'hidden' }}>
-            {/* Sidebar / Bottom Nav */}
-            {!isMobile ? (
-                <div style={{ width: '220px', background: '#111827', color: '#fff', flexShrink: 0, display: 'flex', flexDirection: 'column' }}>
-                    <div style={{ padding: '1.25rem 1rem', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <div style={{ background: '#047857', width: '28px', height: '28px', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.9rem' }}>📦</div>
-                            <span style={{ fontWeight: 700, fontSize: '0.9rem' }}>WAREHOUSE/OS</span>
-                        </div>
+        <div className="flex h-screen bg-slate-50 font-sans overflow-hidden text-slate-800">
+            
+            {/* Sidebar Overlay (Mobile) */}
+            {isMobile && sidebarOpen && (
+                <div 
+                    className="fixed inset-0 bg-slate-900/50 z-40"
+                    onClick={() => setSidebarOpen(false)}
+                />
+            )}
+
+            {/* Sidebar */}
+            <motion.aside 
+                initial={false}
+                animate={{ width: sidebarOpen ? '260px' : '0px', opacity: sidebarOpen ? 1 : 0 }}
+                className={`fixed md:relative z-50 h-full bg-[#0f172a] text-slate-300 flex flex-col flex-shrink-0 shadow-xl overflow-hidden`}
+            >
+                {/* Logo Area */}
+                <div className="h-16 flex items-center px-6 border-b border-slate-800/60 shrink-0">
+                    <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center mr-3 shadow-lg shadow-blue-900/50">
+                        <Box className="w-5 h-5 text-white" />
                     </div>
-                    <div style={{ padding: '1rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                        {PAGES.map(p => <div key={p.k} onClick={() => setPage(p.k)} style={{ padding: '10px 12px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', background: page === p.k ? 'rgba(52,211,153,0.15)' : 'transparent', color: page === p.k ? '#34d399' : '#9ca3af', fontSize: '0.85rem', fontWeight: page === p.k ? 600 : 400, transition: 'all 0.15s' }}>{p.i} {p.l}</div>)}
-                    </div>
-                    <div style={{ padding: '1rem', borderTop: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                        <img src={getOptimizedImg("https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d", { w: 100, h: 100 })} style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover' }} alt="user" />
-                        <div><div style={{ fontSize: '0.8rem', fontWeight: 700 }}>Warehouse Admin</div><div style={{ fontSize: '0.7rem', color: '#9ca3af' }}>Shift A</div></div>
-                    </div>
+                    <span className="text-white font-bold text-lg tracking-tight">OmniWMS</span>
                 </div>
-            ) : (
-                <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, background: '#111827', display: 'flex', justifyContent: 'space-around', padding: '10px 5px', zIndex: 100, borderTop: '1px solid #374151' }}>
-                    {PAGES.map(p => (
-                        <div key={p.k} onClick={() => setPage(p.k)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer', color: page === p.k ? '#34d399' : '#9ca3af', fontSize: '0.65rem', fontWeight: page === p.k ? 700 : 500, padding: '5px' }}>
-                            <span style={{ fontSize: '1.2rem', marginBottom: '4px' }}>{p.i}</span>
-                            <span>{p.l}</span>
+
+                {/* Nav Links */}
+                <div className="flex-1 overflow-y-auto py-6 px-4 space-y-8 scrollbar-hide">
+                    {navGroups.map((group, idx) => (
+                        <div key={idx}>
+                            <h4 className="px-2 text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">{group.title}</h4>
+                            <div className="space-y-1">
+                                {group.items.map(item => {
+                                    const active = page === item.k;
+                                    return (
+                                        <button 
+                                            key={item.k}
+                                            onClick={() => { setPage(item.k); if(isMobile) setSidebarOpen(false); }}
+                                            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+                                                active ? 'bg-blue-600/15 text-blue-400' : 'hover:bg-slate-800/50 hover:text-white'
+                                            }`}
+                                        >
+                                            <item.i className={`w-4 h-4 ${active ? 'text-blue-400' : 'text-slate-400'}`} />
+                                            {item.l}
+                                        </button>
+                                    )
+                                })}
+                            </div>
                         </div>
                     ))}
                 </div>
-            )}
-            {/* Content */}
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', paddingBottom: isMobile ? '65px' : '0' }}>
-                {/* Topbar */}
-                <div style={{ padding: '1rem 2rem', background: '#fff', borderBottom: '1px solid #e5e7eb', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <h1 style={{ fontSize: '1.25rem', fontWeight: 800, margin: 0, color: '#111827' }}>{PAGES.find(p => p.k === page)?.l}</h1>
-                    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                        <div style={{ width: '8px', height: '8px', background: '#166534', borderRadius: '50%', boxShadow: '0 0 0 3px #dcfce7' }} />
-                        <span style={{ fontSize: '0.8rem', color: '#4b5563' }}>Live</span>
-                        <div style={{ position: 'relative', cursor: 'pointer' }} onClick={() => setNotifOpen(!notifOpen)}>
-                            <span style={{ fontSize: '1.2rem' }}>🔔</span>
-                            <div style={{ position: 'absolute', top: '-3px', right: '-3px', background: '#b91c1c', width: '7px', height: '7px', borderRadius: '50%' }} />
-                            {notifOpen && <div style={{ position: 'absolute', top: '30px', right: 0, background: '#fff', borderRadius: '12px', boxShadow: '0 10px 30px rgba(0,0,0,0.15)', width: '280px', zIndex: 100, overflow: 'hidden' }}>
-                                {[{ t: 'Zone C capacity at 98%', c: '#7f1d1d' }, { t: '5 urgent putaway pending', c: '#78350f' }, { t: 'Outbound batch #442 completed', c: '#064e3b' }].map((n, i) => <div key={i} style={{ padding: '12px 16px', borderBottom: '1px solid #f1f5f9', display: 'flex', gap: '10px', alignItems: 'center' }}><div style={{ width: '8px', height: '8px', borderRadius: '50%', flexShrink: 0, background: n.c }} /><div style={{ fontSize: '0.8rem', color: '#111827' }}>{n.t}</div></div>)}
-                            </div>}
+
+                {/* User Profile */}
+                <div className="p-4 border-t border-slate-800/60 bg-slate-900/50">
+                    <div className="flex items-center gap-3">
+                        <img 
+                            src={getOptimizedImg("https://images.unsplash.com/photo-1472099645785-5658abf4ff4e", { w: 100, h: 100 })} 
+                            className="w-10 h-10 rounded-full border-2 border-slate-700 object-cover" 
+                            alt="Admin" 
+                        />
+                        <div className="flex-1 min-w-0">
+                            <p className="text-sm font-semibold text-white truncate">David Chen</p>
+                            <p className="text-xs text-slate-500 truncate">Ops Manager • Shift A</p>
                         </div>
+                        <Settings className="w-4 h-4 text-slate-400 hover:text-white cursor-pointer" />
                     </div>
                 </div>
-                {/* Dashboard */}
-                {page === 'dashboard' && (
-                    <div style={{ flex: 1, overflowY: 'auto', padding: isMobile ? '1rem' : '2rem', background: '#f3f4f6', display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 350px', gap: '2rem' }}>
-                        <div>
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
-                                {[{ l: 'Total Pallets', v: '1,284', t: '+12 today', c: '#1e3a8a' }, { l: 'Capacity Used', v: '84%', t: 'Zone C full', c: '#78350f' }, { l: 'Pending Putaway', v: `${42 + scans.filter(s => s.type === 'in').length}`, t: 'Needs action', c: '#7f1d1d' }, { l: 'Orders to Pick', v: `${156 - scans.filter(s => s.type === 'out').length}`, t: 'Cutoff 14:00', c: '#064e3b' }].map(m => (
-                                    <div key={m.l} style={{ background: '#fff', borderRadius: '12px', padding: '1.25rem', border: '1px solid #e5e7eb' }}>
-                                        <div style={{ fontSize: '0.75rem', color: '#4b5563', fontWeight: 600, marginBottom: '8px' }}>{m.l}</div>
-                                        <div style={{ fontSize: '1.8rem', fontWeight: 800, color: '#111827', marginBottom: '4px' }}>{m.v}</div>
-                                        <div style={{ fontSize: '0.75rem', fontWeight: 600, color: m.c }}>{m.t}</div>
-                                    </div>
-                                ))}
-                            </div>
-                            {/* Floor Map */}
-                            <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #e5e7eb' }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
-                                    <h2 style={{ fontSize: '1rem', fontWeight: 700, margin: 0, color: '#111827' }}>Live Floor Map</h2>
-                                    <div style={{ display: 'flex', gap: '1rem', fontSize: '0.7rem', color: '#4b5563' }}>
-                                        {[['#d1fae5', 'Empty'], ['#34d399', 'Optimal'], ['#fbbf24', 'High'], ['#b91c1c', 'Full']].map(([c, l]) => <span key={l} style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><div style={{ width: '8px', height: '8px', background: c, borderRadius: '2px' }} />{l}</span>)}
-                                    </div>
-                                </div>
-                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12,1fr)', gap: '5px', background: '#f9fafb', padding: '1rem', borderRadius: '8px', border: '1px solid #e5e7eb' }}>
-                                    {rackData.map((r, i) => {
-                                        if (r.isAisle) return <div key={i} style={{ height: '28px' }} />
-                                        return <div key={i} onMouseEnter={() => setHovered(i)} onMouseLeave={() => setHovered(null)} style={{ height: '28px', background: r.color, borderRadius: '4px', border: hovered === i ? '2px solid #111927' : '1px solid rgba(0,0,0,0.05)', cursor: 'pointer', position: 'relative', transition: 'all 0.1s' }}>
-                                            {hovered === i && <div style={{ position: 'absolute', bottom: '100%', left: '50%', transform: 'translateX(-50%)', background: '#111827', color: '#fff', padding: '5px 9px', borderRadius: '5px', fontSize: '0.65rem', whiteSpace: 'nowrap', zIndex: 50, marginBottom: '3px' }}><div style={{ fontWeight: 700 }}>{r.name}</div><div>{r.status} • {r.pct}%</div></div>}
-                                        </div>
-                                    })}
-                                </div>
-                            </div>
-                        </div>
-                        {/* Scans */}
-                        <div style={{ background: '#fff', borderRadius: '16px', border: '1px solid #e5e7eb', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-                            <div style={{ padding: '1.25rem', borderBottom: '1px solid #e5e7eb', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                <h2 style={{ fontSize: '1rem', fontWeight: 700, margin: 0, color: '#111827' }}>Recent Scans</h2>
-                                <div style={{ width: '8px', height: '8px', background: '#166534', borderRadius: '50%', boxShadow: '0 0 0 3px #dcfce7' }} />
-                            </div>
-                            <div style={{ flex: 1, overflowY: 'auto', padding: '1rem' }}>
-                                {scans.map((s, i) => (
-                                    <div key={`${s.sku}-${i}`} style={{ display: 'flex', gap: '10px', padding: '10px 0', borderBottom: i < scans.length - 1 ? '1px solid #f3f4f6' : 'none', alignItems: 'flex-start' }}>
-                                        <div style={{ width: '30px', height: '30px', borderRadius: '7px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: '0.75rem', background: s.type === 'in' ? '#d1fae5' : s.type === 'out' ? '#fee2e2' : s.type === 'move' ? '#fef3c7' : '#e0e7ff', color: s.type === 'in' ? '#065f46' : s.type === 'out' ? '#991b1b' : s.type === 'move' ? '#78350f' : '#312e81' }}>
-                                            {s.type === 'in' ? '↓' : s.type === 'out' ? '↑' : s.type === 'move' ? '⇄' : '✓'}
-                                        </div>
-                                        <div style={{ flex: 1 }}>
-                                            <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#111827' }}>{s.action} <span style={{ fontFamily: 'monospace', fontSize: '0.72rem', color: '#4b5563' }}>{s.sku}</span></div>
-                                            <div style={{ fontSize: '0.72rem', color: '#4b5563' }}>{s.loc} · <span style={{ fontWeight: 700 }}>{s.user}</span></div>
-                                        </div>
-                                        <div style={{ fontSize: '0.65rem', color: '#1f2937', whiteSpace: 'nowrap' }}>{s.time}</div>
-                                    </div>
-                                ))}
-                            </div>
-                            <div style={{ padding: '1rem', borderTop: '1px solid #e5e7eb' }}>
-                                <button aria-label="Action button" onClick={addScan} style={{ width: '100%', background: '#111827', color: '#fff', border: 'none', padding: '10px', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer' }}>📷 Scan New Item</button>
+            </motion.aside>
+
+            {/* Main Content Area */}
+            <main className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
+                
+                {/* Header */}
+                <header className="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 sm:px-6 shrink-0 z-10">
+                    <div className="flex items-center gap-4">
+                        <button 
+                            onClick={() => setSidebarOpen(!sidebarOpen)}
+                            className="p-2 rounded-lg text-slate-500 hover:bg-slate-100 transition-colors"
+                        >
+                            <Menu className="w-5 h-5" />
+                        </button>
+                        
+                        {/* Global Search */}
+                        <div className="hidden md:flex items-center bg-slate-100 rounded-lg px-3 py-1.5 w-64 border border-transparent focus-within:border-blue-300 focus-within:bg-white focus-within:ring-4 focus-within:ring-blue-50 transition-all">
+                            <Search className="w-4 h-4 text-slate-400 mr-2" />
+                            <input 
+                                type="text" 
+                                placeholder="Search SKU, Location, ID..." 
+                                className="bg-transparent border-none outline-none text-sm w-full placeholder:text-slate-400 text-slate-700"
+                            />
+                            <div className="flex items-center gap-1 text-[10px] font-mono text-slate-400 bg-slate-200 px-1.5 py-0.5 rounded">
+                                <span>⌘</span><span>K</span>
                             </div>
                         </div>
                     </div>
-                )}
-                {/* Inventory Table */}
-                {page === 'inventory' && (
-                    <div style={{ flex: 1, overflowY: 'auto', padding: '2rem', background: '#f3f4f6' }}>
-                        <div style={{ background: '#fff', borderRadius: '16px', border: '1px solid #e5e7eb', overflowX: 'auto' }}>
-                            <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 2fr 1fr 1fr 1fr', minWidth: '700px', padding: '1rem 1.5rem', background: '#f9fafb', fontSize: '0.8rem', fontWeight: 600, color: '#4b5563', borderBottom: '1px solid #e5e7eb' }}>
-                                {['SKU', 'Category', 'Item Name', 'Qty', 'Location', 'Last Updated'].map(h => <div key={h}>{h}</div>)}
-                            </div>
-                            {ITEMS.map((item, i) => (
-                                <div key={item.sku} style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 2fr 1fr 1fr 1fr', minWidth: '700px', padding: '1rem 1.5rem', borderTop: i > 0 ? '1px solid #f3f4f6' : 'none', alignItems: 'center' }}>
-                                    <div style={{ fontFamily: 'monospace', fontWeight: 700, color: '#047857', fontSize: '0.8rem' }}>{item.sku}</div>
-                                    <div style={{ fontSize: '0.8rem', color: '#4b5563' }}>{item.cat}</div>
-                                    <div style={{ fontWeight: 600, color: '#111827', fontSize: '0.9rem' }}>{item.name}</div>
-                                    <div><span style={{ background: item.qty < 10 ? '#fee2e2' : '#d1fae5', color: item.qty < 10 ? '#991b1b' : '#065f46', padding: '3px 8px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 700 }}>{item.qty}</span></div>
-                                    <div style={{ fontSize: '0.8rem', color: '#374151', fontFamily: 'monospace' }}>{item.loc}</div>
-                                    <div style={{ fontSize: '0.75rem', color: '#1f2937' }}>{item.last}</div>
-                                </div>
-                            ))}
-                        </div>
+
+                    <div className="flex items-center gap-2 sm:gap-4">
+                        <button className="hidden sm:flex items-center gap-2 bg-slate-900 text-white px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors shadow-sm" onClick={addScan}>
+                            <ScanLine className="w-4 h-4" />
+                            <span>Scan Item</span>
+                        </button>
+                        
+                        <div className="w-px h-6 bg-slate-200 hidden sm:block mx-1"></div>
+                        
+                        <button className="p-2 relative text-slate-500 hover:bg-slate-100 rounded-lg transition-colors">
+                            <Bell className="w-5 h-5" />
+                            <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full border border-white"></span>
+                        </button>
+                        <button className="p-2 text-slate-500 hover:bg-slate-100 rounded-lg transition-colors md:hidden">
+                            <Search className="w-5 h-5" />
+                        </button>
                     </div>
-                )}
-                {/* Inbound / Outbound / Reports — simplified interactive pages */}
-                {(page === 'inbound' || page === 'outbound' || page === 'reports') && (
-                    <div style={{ flex: 1, overflowY: 'auto', padding: '2rem', background: '#f3f4f6', display: 'flex', alignItems: 'flex-start', justifyContent: 'center' }}>
-                        <div style={{ background: '#fff', borderRadius: '16px', padding: '3rem', maxWidth: '600px', width: '100%', textAlign: 'center', border: '1px solid #e5e7eb' }}>
-                            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>{page === 'inbound' ? '⬇️' : page === 'outbound' ? '⬆️' : '📈'}</div>
-                            <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#111827', marginBottom: '1rem' }}>{page === 'inbound' ? 'Inbound' : 'Outbound'} {page === 'reports' ? 'Reports' : ''}</h2>
-                            <p style={{ color: '#4b5563', lineHeight: 1.7, marginBottom: '2rem' }}>
-                                {page === 'inbound' ? `${scans.filter(s => s.type === 'in').length} putaway scans recorded today.` : page === 'outbound' ? `${scans.filter(s => s.type === 'out').length} picks completed today.` : 'Generating report...'}
-                            </p>
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1rem', marginBottom: '2rem' }}>
-                                {(page === 'reports' ? [['Total Moves', String(scans.length), '#1e3a8a'], ['Inbound', String(scans.filter(s => s.type === 'in').length), '#064e3b'], ['Outbound', String(scans.filter(s => s.type === 'out').length), '#78350f']] :
-                                    page === 'inbound' ? [['Pending', String(42 + scans.filter(s => s.type === 'in').length), '#7f1d1d'], ['Completed', '127', '#064e3b'], ['Today Scans', String(scans.filter(s => s.type === 'in').length), '#1e3a8a']] :
-                                        [['Queued', '23', '#78350f'], ['Dispatched', '89', '#064e3b'], ['Today Picks', String(scans.filter(s => s.type === 'out').length), '#1e3a8a']]
-                                ).map(([l, v, c]) => (
-                                    <div key={l} style={{ background: '#f9fafb', borderRadius: '10px', padding: '1rem' }}>
-                                        <div style={{ fontSize: '1.5rem', fontWeight: 800, color: c }}>{v}</div>
-                                        <div style={{ fontSize: '0.75rem', color: '#4b5563', marginTop: '4px' }}>{l}</div>
+                </header>
+
+                {/* Page Content */}
+                <div className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 scrollbar-hide relative">
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={page}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            transition={{ duration: 0.2 }}
+                            className="h-full max-w-7xl mx-auto space-y-6"
+                        >
+                            
+                            {/* Dashboard Page */}
+                            {page === 'dashboard' && (
+                                <>
+                                    {/* Page Title */}
+                                    <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                                        <div>
+                                            <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Operations Overview</h1>
+                                            <p className="text-sm text-slate-500 mt-1">Real-time metrics for Main Facility • Los Angeles</p>
+                                        </div>
+                                        <div className="flex items-center gap-2 text-sm">
+                                            <span className="flex items-center gap-1.5 text-slate-600 bg-white border border-slate-200 px-3 py-1.5 rounded-lg shadow-sm">
+                                                <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                                                Live Sync
+                                            </span>
+                                            <button className="flex items-center gap-1.5 text-slate-600 bg-white border border-slate-200 px-3 py-1.5 rounded-lg shadow-sm hover:bg-slate-50">
+                                                Today <ChevronDown className="w-4 h-4" />
+                                            </button>
+                                        </div>
                                     </div>
-                                ))}
-                            </div>
-                            <button aria-label="Action button" onClick={addScan} style={{ background: '#111827', color: '#fff', border: 'none', padding: '12px 28px', borderRadius: '8px', fontWeight: 600, cursor: 'pointer' }}>+ Simulate Scan</button>
-                        </div>
-                    </div>
-                )}
-            </div>
+
+                                    {/* KPI Cards */}
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                                        <StatCard title="Total Volume Received" value="1,284" trend="12.5%" trendUp={true} icon={ArrowDownToLine} colorClass="bg-blue-500" />
+                                        <StatCard title="Total Volume Shipped" value="892" trend="4.2%" trendUp={true} icon={ArrowUpFromLine} colorClass="bg-emerald-500" />
+                                        <StatCard title="Storage Utilization" value="84.2%" trend="1.1%" trendUp={false} icon={Box} colorClass="bg-amber-500" />
+                                        <StatCard title="Pending Tasks" value={42 + scans.filter(s => s.type === 'in' || s.type === 'move').length} trend="High Priority" trendUp={false} icon={AlertCircle} colorClass="bg-rose-500" />
+                                    </div>
+
+                                    {/* Main Charts & Activity Row */}
+                                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                                        
+                                        {/* Chart Section */}
+                                        <div className="lg:col-span-2 bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+                                            <div className="flex items-center justify-between mb-6">
+                                                <div>
+                                                    <h2 className="text-base font-semibold text-slate-900">Throughput Volume</h2>
+                                                    <p className="text-xs text-slate-500 mt-0.5">Inbound vs Outbound (Items per Hour)</p>
+                                                </div>
+                                                <button className="text-slate-400 hover:text-slate-600"><MoreVertical className="w-5 h-5" /></button>
+                                            </div>
+                                            <div className="h-64 w-full">
+                                                <ResponsiveContainer width="100%" height="100%">
+                                                    <AreaChart data={volumeData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                                                        <defs>
+                                                            <linearGradient id="colorIn" x1="0" y1="0" x2="0" y2="1">
+                                                                <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3}/>
+                                                                <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
+                                                            </linearGradient>
+                                                            <linearGradient id="colorOut" x1="0" y1="0" x2="0" y2="1">
+                                                                <stop offset="5%" stopColor="#10b981" stopOpacity={0.3}/>
+                                                                <stop offset="95%" stopColor="#10b981" stopOpacity={0}/>
+                                                            </linearGradient>
+                                                        </defs>
+                                                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
+                                                        <XAxis dataKey="time" axisLine={false} tickLine={false} tick={{fontSize: 12, fill: '#64748b'}} dy={10} />
+                                                        <YAxis axisLine={false} tickLine={false} tick={{fontSize: 12, fill: '#64748b'}} />
+                                                        <RechartsTooltip 
+                                                            contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+                                                            itemStyle={{ fontSize: '13px', fontWeight: 600 }}
+                                                            labelStyle={{ fontSize: '12px', color: '#64748b', marginBottom: '4px' }}
+                                                        />
+                                                        <Area type="monotone" dataKey="in" name="Inbound" stroke="#3b82f6" strokeWidth={3} fillOpacity={1} fill="url(#colorIn)" />
+                                                        <Area type="monotone" dataKey="out" name="Outbound" stroke="#10b981" strokeWidth={3} fillOpacity={1} fill="url(#colorOut)" />
+                                                    </AreaChart>
+                                                </ResponsiveContainer>
+                                            </div>
+                                        </div>
+
+                                        {/* Recent Activity Log */}
+                                        <div className="bg-white rounded-xl border border-slate-200 shadow-sm flex flex-col h-[350px]">
+                                            <div className="p-5 border-b border-slate-100 flex items-center justify-between shrink-0">
+                                                <h2 className="text-base font-semibold text-slate-900">Live Activity Feed</h2>
+                                                <button className="text-blue-600 text-xs font-medium hover:underline">View All</button>
+                                            </div>
+                                            <div className="flex-1 overflow-y-auto p-2 scrollbar-hide">
+                                                {scans.map((scan, i) => (
+                                                    <div key={scan.id} className="flex gap-4 p-3 hover:bg-slate-50 rounded-lg transition-colors group cursor-pointer">
+                                                        <div className={`mt-0.5 w-8 h-8 rounded-full flex items-center justify-center shrink-0 shadow-sm ${
+                                                            scan.type === 'in' ? 'bg-blue-100 text-blue-600' :
+                                                            scan.type === 'out' ? 'bg-emerald-100 text-emerald-600' :
+                                                            scan.type === 'move' ? 'bg-amber-100 text-amber-600' : 'bg-purple-100 text-purple-600'
+                                                        }`}>
+                                                            {scan.type === 'in' ? <ArrowDownToLine className="w-4 h-4" /> :
+                                                             scan.type === 'out' ? <ArrowUpFromLine className="w-4 h-4" /> :
+                                                             scan.type === 'move' ? <ArrowRightLeft className="w-4 h-4" /> : <CheckCircle2 className="w-4 h-4" />}
+                                                        </div>
+                                                        <div className="flex-1 min-w-0">
+                                                            <div className="flex justify-between items-start mb-0.5">
+                                                                <p className="text-sm font-semibold text-slate-900 truncate">
+                                                                    {scan.action} <span className="text-slate-500 font-normal">#{scan.id.split('-')[1]}</span>
+                                                                </p>
+                                                                <span className="text-[10px] font-medium text-slate-400 whitespace-nowrap">{scan.time}</span>
+                                                            </div>
+                                                            <p className="text-xs text-slate-500 truncate mb-1">
+                                                                <span className="font-mono text-slate-700 bg-slate-100 px-1 py-0.5 rounded mr-1">{scan.sku}</span>
+                                                                to {scan.loc}
+                                                            </p>
+                                                            <div className="flex items-center justify-between">
+                                                                <div className="flex items-center gap-1.5 text-[11px] font-medium text-slate-500">
+                                                                    <div className="w-4 h-4 rounded-full bg-slate-200 flex items-center justify-center text-[8px] text-slate-600">{scan.user}</div>
+                                                                    Operated by {scan.user}
+                                                                </div>
+                                                                <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded-full ${
+                                                                    scan.status === 'Completed' ? 'bg-emerald-100 text-emerald-700' :
+                                                                    scan.status === 'In Progress' ? 'bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-700'
+                                                                }`}>
+                                                                    {scan.status}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    {/* Mini Map Preview */}
+                                    <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
+                                        <div className="flex items-center justify-between mb-4">
+                                            <div>
+                                                <h2 className="text-base font-semibold text-slate-900">Facility Heatmap</h2>
+                                                <p className="text-xs text-slate-500 mt-0.5">Real-time rack occupancy status</p>
+                                            </div>
+                                            <div className="flex gap-3 text-xs font-medium text-slate-600">
+                                                <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-slate-300"></span>Empty</span>
+                                                <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-emerald-500"></span>Optimal</span>
+                                                <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-amber-500"></span>High</span>
+                                                <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-rose-500"></span>Full</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div className="w-full overflow-x-auto pb-2">
+                                            <div className="min-w-[800px] grid grid-cols-[repeat(12,minmax(0,1fr))] gap-2 p-4 bg-slate-50 rounded-lg border border-slate-200 relative">
+                                                {rackData.map((r, i) => {
+                                                    if (r.isAisle) return <div key={i} className="h-10 bg-transparent flex items-center justify-center"><span className="text-[10px] text-slate-300 transform -rotate-90">AISLE</span></div>
+                                                    
+                                                    return (
+                                                        <div 
+                                                            key={i} 
+                                                            onMouseEnter={() => setHoveredRack(i)} 
+                                                            onMouseLeave={() => setHoveredRack(null)}
+                                                            className={`h-10 rounded-md border shadow-sm transition-all duration-200 cursor-pointer relative overflow-hidden group ${r.bg} ${hoveredRack === i ? 'ring-2 ring-slate-400 ring-offset-1 scale-105 z-10' : ''}`}
+                                                        >
+                                                            {/* Fill Bar Indicator */}
+                                                            <div className={`absolute bottom-0 left-0 right-0 opacity-20 ${r.dot}`} style={{ height: `${r.pct}%` }}></div>
+                                                            
+                                                            <div className="absolute inset-0 flex items-center justify-center">
+                                                                <div className={`w-2 h-2 rounded-full shadow-sm ${r.dot}`}></div>
+                                                            </div>
+                                                            
+                                                            {/* Enhanced Tooltip */}
+                                                            {hoveredRack === i && (
+                                                                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-40 bg-slate-900 text-white rounded-lg shadow-xl text-xs z-50 p-3 pointer-events-none border border-slate-700">
+                                                                    <div className="flex justify-between items-center mb-2 border-b border-slate-700 pb-2">
+                                                                        <span className="font-bold flex items-center gap-1"><MapPin className="w-3 h-3 text-blue-400"/> {r.name}</span>
+                                                                        <span className={`px-1.5 py-0.5 rounded font-semibold text-[10px] ${r.status === 'Full' ? 'bg-rose-500/20 text-rose-300' : r.status === 'High' ? 'bg-amber-500/20 text-amber-300' : r.status === 'Optimal' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-slate-700 text-slate-300'}`}>
+                                                                            {r.status}
+                                                                        </span>
+                                                                    </div>
+                                                                    <div className="space-y-1.5 text-[11px] text-slate-300">
+                                                                        <div className="flex justify-between"><span>Capacity:</span> <span className="font-mono text-white">{r.pct}%</span></div>
+                                                                        <div className="flex justify-between"><span>Active SKUs:</span> <span className="font-mono text-white">{r.skus}</span></div>
+                                                                        <div className="flex justify-between items-center">
+                                                                            <span className="flex items-center gap-1"><Thermometer className="w-3 h-3"/> Temp:</span> 
+                                                                            <span className="font-mono text-white">{r.temp}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    {/* Tooltip arrow */}
+                                                                    <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-slate-900 rotate-45 border-r border-b border-slate-700"></div>
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    )
+                                                })}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </>
+                            )}
+
+                            {/* Inventory Page */}
+                            {page === 'inventory' && (
+                                <div className="bg-white rounded-xl shadow-sm border border-slate-200 flex flex-col h-[calc(100vh-120px)]">
+                                    <div className="p-4 sm:p-5 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                                        <div>
+                                            <h1 className="text-xl font-bold text-slate-900">Inventory Matrix</h1>
+                                            <p className="text-sm text-slate-500 mt-0.5">Manage and track all physical assets</p>
+                                        </div>
+                                        <div className="flex items-center gap-3">
+                                            <div className="relative">
+                                                <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                                                <input type="text" placeholder="Search inventory..." className="pl-9 pr-4 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full sm:w-64" />
+                                            </div>
+                                            <button className="flex items-center gap-2 px-4 py-2 bg-white border border-slate-300 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">
+                                                <Filter className="w-4 h-4" /> Filters
+                                            </button>
+                                            <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 shadow-sm">
+                                                <Plus className="w-4 h-4" /> Add Item
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="flex-1 overflow-auto">
+                                        <table className="w-full text-left border-collapse min-w-[800px]">
+                                            <thead className="bg-slate-50 sticky top-0 z-10 shadow-sm border-b border-slate-200">
+                                                <tr>
+                                                    <th className="py-3 px-4 font-semibold text-xs text-slate-500 uppercase tracking-wider w-10">
+                                                        <input type="checkbox" className="rounded border-slate-300 text-blue-600 focus:ring-blue-500" />
+                                                    </th>
+                                                    <th className="py-3 px-4 font-semibold text-xs text-slate-500 uppercase tracking-wider">SKU & Item Name</th>
+                                                    <th className="py-3 px-4 font-semibold text-xs text-slate-500 uppercase tracking-wider">Category</th>
+                                                    <th className="py-3 px-4 font-semibold text-xs text-slate-500 uppercase tracking-wider text-right">Qty / Min</th>
+                                                    <th className="py-3 px-4 font-semibold text-xs text-slate-500 uppercase tracking-wider">Location</th>
+                                                    <th className="py-3 px-4 font-semibold text-xs text-slate-500 uppercase tracking-wider">Status</th>
+                                                    <th className="py-3 px-4 font-semibold text-xs text-slate-500 uppercase tracking-wider w-10"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="divide-y divide-slate-100 bg-white">
+                                                {ITEMS.map((item) => (
+                                                    <tr key={item.sku} className="hover:bg-slate-50/80 transition-colors group">
+                                                        <td className="py-3 px-4">
+                                                            <input type="checkbox" className="rounded border-slate-300 text-blue-600 focus:ring-blue-500" />
+                                                        </td>
+                                                        <td className="py-3 px-4">
+                                                            <div className="flex items-center">
+                                                                <div className="w-10 h-10 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center mr-3 shrink-0">
+                                                                    <PackageSearch className="w-5 h-5 text-slate-400" />
+                                                                </div>
+                                                                <div>
+                                                                    <div className="font-bold text-slate-900 text-sm">{item.name}</div>
+                                                                    <div className="font-mono text-xs text-slate-500 mt-0.5">{item.sku}</div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td className="py-3 px-4">
+                                                            <span className="inline-flex items-center px-2 py-1 rounded-md bg-slate-100 text-slate-600 text-xs font-medium">
+                                                                {item.cat}
+                                                            </span>
+                                                        </td>
+                                                        <td className="py-3 px-4 text-right">
+                                                            <div className="flex flex-col items-end">
+                                                                <span className={`font-bold text-sm ${item.qty === 0 ? 'text-rose-600' : item.qty <= item.min ? 'text-amber-600' : 'text-slate-900'}`}>
+                                                                    {item.qty} <span className="text-xs font-normal text-slate-400">pcs</span>
+                                                                </span>
+                                                                <span className="text-xs text-slate-400 mt-0.5">Min: {item.min}</span>
+                                                            </div>
+                                                        </td>
+                                                        <td className="py-3 px-4">
+                                                            <div className="flex items-center gap-1.5 text-sm text-slate-600 font-mono">
+                                                                <MapPin className="w-3.5 h-3.5 text-slate-400" />
+                                                                {item.loc}
+                                                            </div>
+                                                        </td>
+                                                        <td className="py-3 px-4">
+                                                            <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold ${
+                                                                item.status === 'Optimal' ? 'bg-emerald-100 text-emerald-700' :
+                                                                item.status === 'Low Stock' ? 'bg-amber-100 text-amber-700' :
+                                                                item.status === 'Out of Stock' ? 'bg-rose-100 text-rose-700' : 'bg-slate-100 text-slate-700'
+                                                            }`}>
+                                                                <span className={`w-1.5 h-1.5 rounded-full ${
+                                                                    item.status === 'Optimal' ? 'bg-emerald-500' :
+                                                                    item.status === 'Low Stock' ? 'bg-amber-500' :
+                                                                    item.status === 'Out of Stock' ? 'bg-rose-500' : 'bg-slate-500'
+                                                                }`}></span>
+                                                                {item.status}
+                                                            </span>
+                                                        </td>
+                                                        <td className="py-3 px-4">
+                                                            <button className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-md opacity-0 group-hover:opacity-100 transition-all">
+                                                                <MoreVertical className="w-4 h-4" />
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
+                                    {/* Pagination Footer */}
+                                    <div className="p-4 border-t border-slate-200 flex items-center justify-between bg-white shrink-0">
+                                        <p className="text-xs text-slate-500">Showing <span className="font-medium text-slate-900">1</span> to <span className="font-medium text-slate-900">{ITEMS.length}</span> of <span className="font-medium text-slate-900">4,281</span> results</p>
+                                        <div className="flex gap-1">
+                                            <button className="px-3 py-1 border border-slate-300 rounded text-xs font-medium text-slate-600 hover:bg-slate-50 disabled:opacity-50" disabled>Prev</button>
+                                            <button className="px-3 py-1 bg-blue-600 text-white rounded text-xs font-medium hover:bg-blue-700">1</button>
+                                            <button className="px-3 py-1 border border-slate-300 rounded text-xs font-medium text-slate-600 hover:bg-slate-50">2</button>
+                                            <button className="px-3 py-1 border border-slate-300 rounded text-xs font-medium text-slate-600 hover:bg-slate-50">3</button>
+                                            <button className="px-3 py-1 border border-slate-300 rounded text-xs font-medium text-slate-600 hover:bg-slate-50">Next</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Generic Placeholder for other pages */}
+                            {(page !== 'dashboard' && page !== 'inventory') && (
+                                <div className="h-[calc(100vh-120px)] flex flex-col items-center justify-center bg-white border border-slate-200 border-dashed rounded-2xl text-center p-8">
+                                    <div className="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center mb-4 text-slate-400">
+                                        <FileText className="w-8 h-8" />
+                                    </div>
+                                    <h2 className="text-xl font-bold text-slate-900 capitalize">{page} Module</h2>
+                                    <p className="text-slate-500 mt-2 max-w-sm">This module is part of the Enterprise WMS suite. Data connection is currently established and pending synchronization.</p>
+                                    <button onClick={() => setPage('dashboard')} className="mt-6 px-6 py-2 bg-slate-900 text-white rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors shadow-sm">
+                                        Return to Dashboard
+                                    </button>
+                                </div>
+                            )}
+
+                        </motion.div>
+                    </AnimatePresence>
+                </div>
+            </main>
         </div>
     )
 }
