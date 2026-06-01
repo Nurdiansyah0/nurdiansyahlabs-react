@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import { ChevronDown, Store } from 'lucide-react'
 const PLATFORMS = ['Tokopedia', 'Shopee', 'Lazada', 'Bukalapak']
 const DATA = {
     Tokopedia: { orders: 4821, revenue: 'Rp 98.5Jt', ctr: '4.2%', conv: '3.8%', return: '1.2%', color: '#1d4ed8' },
@@ -8,6 +9,57 @@ const DATA = {
 }
 const FUNNEL = ['Impresi', 'Klik', 'Keranjang', 'Checkout', 'Selesai']
 const FUNNEL_VALS = [100000, 42000, 8400, 4200, 3200]
+
+function CustomDropdown({ value, options, onChange, icon: Icon, label, theme = 'slate' }) {
+    const [isOpen, setIsOpen] = useState(false);
+    const ref = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (ref.current && !ref.current.contains(event.target)) setIsOpen(false);
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
+    const themeColors = {
+        slate: { bg: 'bg-slate-800/60', hover: 'hover:bg-slate-700/80', border: 'border-slate-600', text: 'text-slate-300', icon: 'text-slate-400' }
+    }[theme];
+
+    return (
+        <div className="relative w-full sm:w-auto min-w-[200px]" ref={ref} style={{zIndex: 50}}>
+            <button 
+                type="button"
+                onClick={() => setIsOpen(!isOpen)}
+                className={`w-full flex items-center justify-between gap-3 ${themeColors.bg} ${themeColors.hover} ${themeColors.border} px-4 py-2.5 rounded-xl text-sm font-medium transition-all focus:ring-2 focus:ring-slate-400 outline-none backdrop-blur-sm border`}
+            >
+                <div className="flex items-center gap-2">
+                    {Icon && <Icon className={`w-4 h-4 ${themeColors.icon}`} />}
+                    <span className={`${themeColors.text} hidden sm:inline`}>{label}:</span>
+                    <span className={`font-bold ${themeColors.valText || 'text-white'} tracking-wide`}>{value}</span>
+                </div>
+                <ChevronDown className={`w-4 h-4 ${themeColors.icon} transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+            </button>
+            
+            {isOpen && (
+                <div className="absolute top-full right-0 mt-2 w-full bg-white rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.3)] border border-slate-200 py-2 z-50 max-h-[300px] overflow-y-auto">
+                    {options.map(opt => (
+                        <button
+                            key={opt}
+                            onClick={() => { onChange(opt); setIsOpen(false); }}
+                            className={`w-full text-left px-4 py-2.5 text-sm transition-colors ${
+                                value === opt ? 'bg-slate-100 text-slate-900 font-bold border-l-2 border-slate-600' : 'text-slate-600 font-medium hover:bg-slate-50 border-l-2 border-transparent hover:text-slate-900'
+                            }`}
+                        >
+                            {opt}
+                        </button>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+}
+
 export default function EcommerceAnalyticsApp() {
     const [activePlat, setActivePlat] = useState('Shopee')
     const d = DATA[activePlat]
@@ -19,8 +71,15 @@ export default function EcommerceAnalyticsApp() {
                 <div style={{ fontSize: '0.7rem', color: '#1e293b', letterSpacing: '0.15em', marginBottom: '4px' }}>E-COMMERCE ANALYTICS</div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <h1 style={{ fontSize: '1.5rem', fontWeight: 800, margin: 0 }}>Multi-Platform Dashboard</h1>
-                    <div style={{ display: 'flex', gap: '8px' }}>
-                        {PLATFORMS.map(p => <button aria-label="Action button" key={p} onClick={() => setActivePlat(p)} style={{ padding: '8px 16px', borderRadius: '8px', border: 'none', background: activePlat === p ? DATA[p].color : 'rgba(255,255,255,0.1)', color: '#fff', fontWeight: 600, cursor: 'pointer', fontSize: '0.85rem', transition: 'all 0.2s' }}>{p}</button>)}
+                    <div style={{ display: 'flex', gap: '8px', width: '100%', marginTop: '1rem' }} className="md:w-auto md:mt-0">
+                        <CustomDropdown 
+                            label="Platform" 
+                            icon={Store} 
+                            value={activePlat} 
+                            options={PLATFORMS} 
+                            onChange={setActivePlat} 
+                            theme="slate"
+                        />
                     </div>
                 </div>
             </div>
