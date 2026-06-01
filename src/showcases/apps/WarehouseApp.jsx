@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react'
+import { useResponsive } from '../../hooks/useResponsive'
 import { getOptimizedImg } from '../../utils/imgHelper'
 // rackData factory — called once inside useMemo
 const buildRackData = () => Array.from({ length: 96 }).map((_, i) => {
@@ -31,6 +32,7 @@ const ITEMS = [
     { sku: 'SKU-7719-B', name: 'Safety Helmet', qty: 25, loc: 'Zone B-33', cat: 'Safety', last: '1h ago' },
 ]
 export default function WarehouseApp() {
+    const { isMobile } = useResponsive()
     const [page, setPage] = useState('dashboard')
     const [scans, setScans] = useState(initScans)
     const [hovered, setHovered] = useState(null)
@@ -42,24 +44,35 @@ export default function WarehouseApp() {
     const PAGES = [{ k: 'dashboard', i: '📊', l: 'Dashboard' }, { k: 'inventory', i: '📦', l: 'Inventory' }, { k: 'inbound', i: '⬇️', l: 'Inbound' }, { k: 'outbound', i: '⬆️', l: 'Outbound' }, { k: 'reports', i: '📈', l: 'Reports' }]
     return (
         <div style={{ display: 'flex', height: '100vh', fontFamily: '"Inter",sans-serif', overflow: 'hidden' }}>
-            {/* Sidebar */}
-            <div style={{ width: '220px', background: '#111827', color: '#fff', flexShrink: 0, display: 'flex', flexDirection: 'column' }}>
-                <div style={{ padding: '1.25rem 1rem', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <div style={{ background: '#047857', width: '28px', height: '28px', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.9rem' }}>📦</div>
-                        <span style={{ fontWeight: 700, fontSize: '0.9rem' }}>WAREHOUSE/OS</span>
+            {/* Sidebar / Bottom Nav */}
+            {!isMobile ? (
+                <div style={{ width: '220px', background: '#111827', color: '#fff', flexShrink: 0, display: 'flex', flexDirection: 'column' }}>
+                    <div style={{ padding: '1.25rem 1rem', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <div style={{ background: '#047857', width: '28px', height: '28px', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.9rem' }}>📦</div>
+                            <span style={{ fontWeight: 700, fontSize: '0.9rem' }}>WAREHOUSE/OS</span>
+                        </div>
+                    </div>
+                    <div style={{ padding: '1rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                        {PAGES.map(p => <div key={p.k} onClick={() => setPage(p.k)} style={{ padding: '10px 12px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', background: page === p.k ? 'rgba(52,211,153,0.15)' : 'transparent', color: page === p.k ? '#34d399' : '#9ca3af', fontSize: '0.85rem', fontWeight: page === p.k ? 600 : 400, transition: 'all 0.15s' }}>{p.i} {p.l}</div>)}
+                    </div>
+                    <div style={{ padding: '1rem', borderTop: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        <img src={getOptimizedImg("https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d", { w: 100, h: 100 })} style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover' }} alt="user" />
+                        <div><div style={{ fontSize: '0.8rem', fontWeight: 700 }}>Warehouse Admin</div><div style={{ fontSize: '0.7rem', color: '#9ca3af' }}>Shift A</div></div>
                     </div>
                 </div>
-                <div style={{ padding: '1rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                    {PAGES.map(p => <div key={p.k} onClick={() => setPage(p.k)} style={{ padding: '10px 12px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', background: page === p.k ? 'rgba(52,211,153,0.15)' : 'transparent', color: page === p.k ? '#34d399' : '#9ca3af', fontSize: '0.85rem', fontWeight: page === p.k ? 600 : 400, transition: 'all 0.15s' }}>{p.i} {p.l}</div>)}
+            ) : (
+                <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, background: '#111827', display: 'flex', justifyContent: 'space-around', padding: '10px 5px', zIndex: 100, borderTop: '1px solid #374151' }}>
+                    {PAGES.map(p => (
+                        <div key={p.k} onClick={() => setPage(p.k)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer', color: page === p.k ? '#34d399' : '#9ca3af', fontSize: '0.65rem', fontWeight: page === p.k ? 700 : 500, padding: '5px' }}>
+                            <span style={{ fontSize: '1.2rem', marginBottom: '4px' }}>{p.i}</span>
+                            <span>{p.l}</span>
+                        </div>
+                    ))}
                 </div>
-                <div style={{ padding: '1rem', borderTop: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <img src={getOptimizedImg("https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d", { w: 100, h: 100 })} style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover' }} alt="user" />
-                    <div><div style={{ fontSize: '0.8rem', fontWeight: 700 }}>Warehouse Admin</div><div style={{ fontSize: '0.7rem', color: '#9ca3af' }}>Shift A</div></div>
-                </div>
-            </div>
+            )}
             {/* Content */}
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', paddingBottom: isMobile ? '65px' : '0' }}>
                 {/* Topbar */}
                 <div style={{ padding: '1rem 2rem', background: '#fff', borderBottom: '1px solid #e5e7eb', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <h1 style={{ fontSize: '1.25rem', fontWeight: 800, margin: 0, color: '#111827' }}>{PAGES.find(p => p.k === page)?.l}</h1>
@@ -77,7 +90,7 @@ export default function WarehouseApp() {
                 </div>
                 {/* Dashboard */}
                 {page === 'dashboard' && (
-                    <div style={{ flex: 1, overflowY: 'auto', padding: '2rem', background: '#f3f4f6', display: 'grid', gridTemplateColumns: '1fr 350px', gap: '2rem' }}>
+                    <div style={{ flex: 1, overflowY: 'auto', padding: isMobile ? '1rem' : '2rem', background: '#f3f4f6', display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 350px', gap: '2rem' }}>
                         <div>
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
                                 {[{ l: 'Total Pallets', v: '1,284', t: '+12 today', c: '#1e3a8a' }, { l: 'Capacity Used', v: '84%', t: 'Zone C full', c: '#78350f' }, { l: 'Pending Putaway', v: `${42 + scans.filter(s => s.type === 'in').length}`, t: 'Needs action', c: '#7f1d1d' }, { l: 'Orders to Pick', v: `${156 - scans.filter(s => s.type === 'out').length}`, t: 'Cutoff 14:00', c: '#064e3b' }].map(m => (
@@ -135,12 +148,12 @@ export default function WarehouseApp() {
                 {/* Inventory Table */}
                 {page === 'inventory' && (
                     <div style={{ flex: 1, overflowY: 'auto', padding: '2rem', background: '#f3f4f6' }}>
-                        <div style={{ background: '#fff', borderRadius: '16px', border: '1px solid #e5e7eb', overflow: 'hidden' }}>
-                            <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 2fr 1fr 1fr 1fr', padding: '1rem 1.5rem', background: '#f9fafb', fontSize: '0.8rem', fontWeight: 600, color: '#4b5563', borderBottom: '1px solid #e5e7eb' }}>
+                        <div style={{ background: '#fff', borderRadius: '16px', border: '1px solid #e5e7eb', overflowX: 'auto' }}>
+                            <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 2fr 1fr 1fr 1fr', minWidth: '700px', padding: '1rem 1.5rem', background: '#f9fafb', fontSize: '0.8rem', fontWeight: 600, color: '#4b5563', borderBottom: '1px solid #e5e7eb' }}>
                                 {['SKU', 'Category', 'Item Name', 'Qty', 'Location', 'Last Updated'].map(h => <div key={h}>{h}</div>)}
                             </div>
                             {ITEMS.map((item, i) => (
-                                <div key={item.sku} style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 2fr 1fr 1fr 1fr', padding: '1rem 1.5rem', borderTop: i > 0 ? '1px solid #f3f4f6' : 'none', alignItems: 'center' }}>
+                                <div key={item.sku} style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 2fr 1fr 1fr 1fr', minWidth: '700px', padding: '1rem 1.5rem', borderTop: i > 0 ? '1px solid #f3f4f6' : 'none', alignItems: 'center' }}>
                                     <div style={{ fontFamily: 'monospace', fontWeight: 700, color: '#047857', fontSize: '0.8rem' }}>{item.sku}</div>
                                     <div style={{ fontSize: '0.8rem', color: '#4b5563' }}>{item.cat}</div>
                                     <div style={{ fontWeight: 600, color: '#111827', fontSize: '0.9rem' }}>{item.name}</div>
