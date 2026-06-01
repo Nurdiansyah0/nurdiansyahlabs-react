@@ -8,5 +8,8 @@
     },
     "require-dev": {
         "composer/semver": "^3.4"
+    },
+    "config": {
+        "platform-check": false
     }
 }
