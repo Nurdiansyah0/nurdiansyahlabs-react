@@ -134,7 +134,7 @@ export default function Navbar() {
                     </div>
 
                     {/* Mobile hamburger */}
-                    <button aria-label="Action button"
+                    <button
                         onClick={() => setMobileOpen(!mobileOpen)}
                         className="hamburger-btn"
                         aria-label={mobileOpen ? "Close menu" : "Open menu"}
