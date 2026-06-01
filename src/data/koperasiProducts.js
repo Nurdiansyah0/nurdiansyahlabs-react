@@ -29,7 +29,7 @@ export const PRODUCTS = [
         "price": 26000,
         "stock": 148,
         "cat": "Minuman",
-        "img": "https://images.unsplash.com/photo-1548839140-29a749e1bc4e?auto=format&fit=crop&w=300&q=80"
+        "img": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=300&q=80"
     },
     {
         "id": 5,
@@ -37,7 +37,7 @@ export const PRODUCTS = [
         "price": 32500,
         "stock": 164,
         "cat": "Minuman",
-        "img": "https://images.unsplash.com/photo-1548839140-29a749e1bc4e?auto=format&fit=crop&w=300&q=80"
+        "img": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=300&q=80"
     },
     {
         "id": 6,
