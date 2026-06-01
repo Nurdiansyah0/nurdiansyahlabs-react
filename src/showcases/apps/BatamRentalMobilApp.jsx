@@ -348,9 +348,7 @@ export default function BatamRentalMobilApp() {
                         </div>
                     </div>
                     <div className="hidden md:flex items-center gap-8">
-                        {['Services', 'Fleet', 'Contact'].map(item => (
-                            <a key={item} href={`#${item.toLowerCase()}`} className="text-sm font-bold text-gray-500 hover:text-blue-900 transition-colors uppercase tracking-widest">{item}</a>
-                        ))}
+                        {/* CRO Optimization: Removed internal navigation from header to focus visitor on the main CTA */}
                         <LanguageSwitcher />
                         <button aria-label="Action button"
                             onClick={() => openWhatsApp(i18n.language)}
@@ -459,6 +457,28 @@ export default function BatamRentalMobilApp() {
                             <div className="bg-white rounded-[2rem] p-4 shadow-2xl overflow-hidden h-96 border-4" style={{ borderColor: BRAND.primary }}>
                                 <iframe title="Map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.0773457625937!2d103.94955377627753!3d1.1041678623135676!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d98b56fbc5ff73%3A0xf0ab4bfc58d201ec!2sRumjis!5e0!3m2!1sen!2sid!4v1772357246236!5m2!1sen!2sid" width="100%" height="100%" style={{ border: 0 }}></iframe>
                             </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Lead Capture Form Section */}
+                <section className="py-24 bg-white border-t border-gray-100">
+                    <div className="max-w-4xl mx-auto px-4 text-center">
+                        <div className="bg-blue-50 rounded-[3rem] p-12 border border-blue-100 shadow-xl">
+                            <h2 className="text-3xl font-black text-gray-900 mb-4">Dapatkan Diskon 10% Sewa Pertama</h2>
+                            <p className="text-gray-600 mb-8 max-w-xl mx-auto text-lg">Daftarkan email Anda untuk menerima kode promo eksklusif dan penawaran rental mobil bulanan terbaik dari kami.</p>
+                            <form onSubmit={e => { e.preventDefault(); alert("Terima kasih! Kode promo Anda telah dikirim ke email."); }} className="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
+                                <input 
+                                    type="email" 
+                                    placeholder="Alamat Email Anda" 
+                                    required
+                                    className="flex-1 h-14 px-6 rounded-2xl border-2 border-transparent focus:border-blue-500 bg-white outline-none transition-all text-gray-900 shadow-sm"
+                                />
+                                <button type="submit" className="h-14 px-8 rounded-2xl font-black text-white shadow-lg hover:brightness-110 transition-all uppercase whitespace-nowrap" style={{ backgroundColor: BRAND.primary }}>
+                                    Kirim Promo
+                                </button>
+                            </form>
+                            <p className="text-xs text-gray-400 mt-4">*Kami berjanji tidak akan mengirimkan spam ke email Anda.</p>
                         </div>
                     </div>
                 </section>

@@ -47,13 +47,7 @@ export default function WarungMakanApp() {
                     <img src={getOptimizedImg("/assets/Logo_alyuna.jpeg", { w: 100, h: 100 })} alt="Alyuna Siomay" style={{ width: '45px', height: '45px', borderRadius: '50%', objectFit: 'cover', border: '2px solid #111' }} />
                     <div style={{ fontWeight: 900, fontSize: '1.4rem', letterSpacing: '0.05em' }}>ALYUNA SIOMAY</div>
                 </div>
-                <div style={{ display: 'flex', gap: '2rem', fontSize: '0.9rem', fontWeight: 600 }}>
-                    {CATS.filter(c => c !== 'Semua').map(c => (
-                        <span key={c} onClick={() => { setCat(c); document.getElementById('menu').scrollIntoView({ behavior: 'smooth' }) }} style={{ cursor: 'pointer', opacity: cat === c ? 1 : 0.8, borderBottom: cat === c ? '2px solid #111' : 'none', paddingBottom: '2px' }}>
-                            {c}
-                        </span>
-                    ))}
-                </div>
+                {/* CRO Optimization: Removed internal navigation from header to focus visitor on the main CTA */}
             </div>
             {/* Hero */}
             <div style={{ background: '#1c2125', minHeight: '60vh', display: 'flex', position: 'relative', overflow: 'hidden' }}>
@@ -141,6 +135,26 @@ export default function WarungMakanApp() {
                     ></iframe>
                 </div>
             </div>
+            
+            {/* Lead Capture Form Section */}
+            <div style={{ background: BRAND.primary, padding: '4rem 2rem', textAlign: 'center' }}>
+                <div style={{ maxWidth: '600px', margin: '0 auto', background: '#fff', padding: '3rem 2rem', borderRadius: '24px', boxShadow: '0 15px 40px rgba(0,0,0,0.15)' }}>
+                    <h2 style={{ fontSize: '2rem', fontWeight: 900, color: '#1c2125', marginBottom: '1rem' }}>Daftar VIP Alyuna Siomay</h2>
+                    <p style={{ color: '#555', fontSize: '1.1rem', marginBottom: '2rem' }}>Dapatkan promo gratis ongkir dan tester siomay untuk acara Anda dengan mendaftarkan email Anda.</p>
+                    <form onSubmit={e => { e.preventDefault(); alert("Terima kasih! Email Anda telah terdaftar."); }} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                        <input 
+                            type="email" 
+                            placeholder="Masukkan email Anda" 
+                            required 
+                            style={{ padding: '16px', borderRadius: '12px', border: '1px solid #ddd', fontSize: '1rem', width: '100%', outline: 'none' }}
+                        />
+                        <button type="submit" style={{ background: '#1c2125', color: '#fff', border: 'none', padding: '16px', borderRadius: '12px', fontWeight: 800, fontSize: '1.1rem', cursor: 'pointer', textTransform: 'uppercase' }}>
+                            Kirim Promo
+                        </button>
+                    </form>
+                </div>
+            </div>
+
             {/* Footer */}
             <div style={{ background: '#1c2125', color: '#888', textAlign: 'center', padding: '3rem 2rem', fontSize: '0.9rem' }}>
                 <img src={getOptimizedImg("/assets/Logo_alyuna.jpeg", { w: 100, h: 100 })} alt="Alyuna" style={{ width: '40px', height: '40px', borderRadius: '50%', opacity: 0.5, marginBottom: '1rem', objectFit: 'cover' }} />
