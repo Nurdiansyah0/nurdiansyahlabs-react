@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import { ChevronDown, MapPin, Package } from 'lucide-react'
 const REGIONS = ['Jawa Tengah', 'Jawa Timur', 'Sulawesi Selatan', 'Sumatera Utara', 'Kalimantan Timur']
 const CROPS = ['Padi', 'Jagung', 'Kedelai', 'Singkong', 'Tebu']
 const DATA = {
@@ -15,6 +16,59 @@ const RECS = {
     'Singkong': 'Tanah ringan dengan pH 5.5-7.0. Rekomendasi: Varietas Adira-4. Jarak tanam 1x1m.',
     'Tebu': 'Butuh sinar penuh dan air cukup. Rekomendasi: varietas PS 881 untuk rendemen tinggi.',
 }
+
+function CustomDropdown({ value, options, onChange, icon: Icon, label, theme = 'green' }) {
+    const [isOpen, setIsOpen] = useState(false);
+    const ref = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (ref.current && !ref.current.contains(event.target)) setIsOpen(false);
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
+    const themeColors = {
+        green: { bg: 'bg-green-900/40', hover: 'hover:bg-green-900/60', border: 'border-green-500/30', text: 'text-green-100', icon: 'text-green-400' },
+        slate: { bg: 'bg-slate-800', hover: 'hover:bg-slate-700', border: 'border-slate-600', text: 'text-slate-200', icon: 'text-slate-400' },
+        light: { bg: 'bg-white', hover: 'hover:bg-slate-50', border: 'border-slate-200', text: 'text-slate-700', icon: 'text-slate-400', valText: 'text-slate-900' }
+    }[theme];
+
+    return (
+        <div className="relative w-full sm:w-auto min-w-[160px]" ref={ref} style={{zIndex: 50}}>
+            <button 
+                type="button"
+                onClick={() => setIsOpen(!isOpen)}
+                className={`w-full flex items-center justify-between gap-3 ${themeColors.bg} ${themeColors.hover} ${themeColors.border} px-4 py-2.5 rounded-xl text-sm font-medium transition-all focus:ring-2 focus:ring-green-400 outline-none backdrop-blur-sm border`}
+            >
+                <div className="flex items-center gap-2">
+                    {Icon && <Icon className={`w-4 h-4 ${themeColors.icon}`} />}
+                    <span className={`${themeColors.text} hidden sm:inline`}>{label}:</span>
+                    <span className={`font-bold ${themeColors.valText || 'text-white'} tracking-wide`}>{value}</span>
+                </div>
+                <ChevronDown className={`w-4 h-4 ${themeColors.icon} transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+            </button>
+            
+            {isOpen && (
+                <div className="absolute top-full left-0 right-0 mt-2 w-full bg-white rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.3)] border border-slate-200 py-2 z-50 max-h-[300px] overflow-y-auto">
+                    {options.map(opt => (
+                        <button
+                            key={opt}
+                            onClick={() => { onChange(opt); setIsOpen(false); }}
+                            className={`w-full text-left px-4 py-2.5 text-sm transition-colors ${
+                                value === opt ? 'bg-green-50 text-green-700 font-bold border-l-2 border-green-600' : 'text-slate-600 font-medium hover:bg-slate-50 border-l-2 border-transparent hover:text-slate-900'
+                            }`}
+                        >
+                            {opt}
+                        </button>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+}
+
 export default function CropYieldApp() {
     const [crop, setCrop] = useState('Padi')
     const [region, setRegion] = useState('Semua')
@@ -30,14 +84,23 @@ export default function CropYieldApp() {
                     <div style={{ fontSize: '0.7rem', color: '#86efac', letterSpacing: '0.15em', marginBottom: '4px' }}>CROP YIELD ANALYTICS</div>
                     <h1 style={{ fontSize: '1.5rem', fontWeight: 800, margin: 0 }}>Analisis Hasil Panen</h1>
                 </div>
-                <div style={{ display: 'flex', gap: '1rem' }}>
-                    <select aria-label="Select option" value={crop} onChange={e => setCrop(e.target.value)} style={{ background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.3)', color: '#fff', padding: '8px 14px', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', cursor: 'pointer' }}>
-                        {CROPS.map(c => <option key={c} value={c} style={{ color: '#000' }}>{c}</option>)}
-                    </select>
-                    <select aria-label="Select option" value={region} onChange={e => setRegion(e.target.value)} style={{ background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.3)', color: '#fff', padding: '8px 14px', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', cursor: 'pointer' }}>
-                        <option value="Semua" style={{ color: '#000' }}>Semua Wilayah</option>
-                        {REGIONS.map(r => <option key={r} value={r} style={{ color: '#000' }}>{r}</option>)}
-                    </select>
+                <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', width: '100%' }} className="md:w-auto">
+                    <CustomDropdown 
+                        label="Komoditas" 
+                        icon={Package} 
+                        value={crop} 
+                        options={CROPS} 
+                        onChange={setCrop} 
+                        theme="green"
+                    />
+                    <CustomDropdown 
+                        label="Wilayah" 
+                        icon={MapPin} 
+                        value={region} 
+                        options={['Semua', ...REGIONS]} 
+                        onChange={setRegion} 
+                        theme="green"
+                    />
                 </div>
             </div>
             <div style={{ padding: '2rem', maxWidth: '1100px', margin: '0 auto' }}>

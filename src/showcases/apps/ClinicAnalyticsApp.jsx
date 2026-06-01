@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import { ChevronDown, Calendar, Building } from 'lucide-react'
 const DEPTS = ['Semua', 'IGD', 'Rawat Inap', 'Poliklinik', 'Radiologi', 'Laboratorium']
 const MONTHLY_PATIENTS = {
     'Januari': { igd: 234, rawat: 87, poli: 412, radio: 98, lab: 201 },
@@ -13,6 +14,58 @@ const CONDITIONS = [
     { name: 'Jantung', patients: 167, pct: 9, color: '#6d28d9' },
     { name: 'Lainnya', patients: 831, pct: 48, color: '#e2e8f0' },
 ]
+
+function CustomDropdown({ value, options, onChange, icon: Icon, label, theme = 'blue' }) {
+    const [isOpen, setIsOpen] = useState(false);
+    const ref = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (ref.current && !ref.current.contains(event.target)) setIsOpen(false);
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
+    const themeColors = {
+        blue: { bg: 'bg-blue-900/40', hover: 'hover:bg-blue-900/60', border: 'border-blue-500/30', text: 'text-blue-100', icon: 'text-blue-400' },
+        light: { bg: 'bg-white', hover: 'hover:bg-slate-50', border: 'border-blue-200', text: 'text-slate-500', icon: 'text-blue-500', valText: 'text-blue-900' }
+    }[theme];
+
+    return (
+        <div className="relative w-full sm:w-auto min-w-[160px]" ref={ref} style={{zIndex: 50}}>
+            <button 
+                type="button"
+                onClick={() => setIsOpen(!isOpen)}
+                className={`w-full flex items-center justify-between gap-3 ${themeColors.bg} ${themeColors.hover} ${themeColors.border} px-4 py-2.5 rounded-xl text-sm font-medium transition-all focus:ring-2 focus:ring-blue-400 outline-none backdrop-blur-sm border`}
+            >
+                <div className="flex items-center gap-2">
+                    {Icon && <Icon className={`w-4 h-4 ${themeColors.icon}`} />}
+                    <span className={`${themeColors.text} hidden sm:inline`}>{label}:</span>
+                    <span className={`font-bold ${themeColors.valText || 'text-white'} tracking-wide`}>{value}</span>
+                </div>
+                <ChevronDown className={`w-4 h-4 ${themeColors.icon} transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+            </button>
+            
+            {isOpen && (
+                <div className="absolute top-full left-0 right-0 mt-2 w-full bg-white rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.3)] border border-slate-200 py-2 z-50 max-h-[300px] overflow-y-auto">
+                    {options.map(opt => (
+                        <button
+                            key={opt}
+                            onClick={() => { onChange(opt); setIsOpen(false); }}
+                            className={`w-full text-left px-4 py-2.5 text-sm transition-colors ${
+                                value === opt ? 'bg-blue-50 text-blue-700 font-bold border-l-2 border-blue-600' : 'text-slate-600 font-medium hover:bg-slate-50 border-l-2 border-transparent hover:text-slate-900'
+                            }`}
+                        >
+                            {opt}
+                        </button>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+}
+
 export default function ClinicAnalyticsApp() {
     const [dept, setDept] = useState('Semua')
     const [month, setMonth] = useState('Maret')
@@ -27,10 +80,15 @@ export default function ClinicAnalyticsApp() {
                     <div style={{ fontSize: '0.7rem', color: '#93c5fd', letterSpacing: '0.15em', marginBottom: '4px' }}>CLINIC HEALTH ANALYTICS</div>
                     <h1 style={{ fontSize: '1.5rem', fontWeight: 800, margin: 0 }}>Dashboard Analitik RS Sejahtera</h1>
                 </div>
-                <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                    <select aria-label="Select option" value={month} onChange={e => setMonth(e.target.value)} style={{ background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.3)', color: '#fff', padding: '8px 14px', borderRadius: '8px', fontSize: '0.85rem', outline: 'none', cursor: 'pointer' }}>
-                        {Object.keys(MONTHLY_PATIENTS).map(m => <option key={m} value={m} style={{ color: '#000' }}>{m}</option>)}
-                    </select>
+                <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', width: '100%' }} className="md:w-auto">
+                    <CustomDropdown 
+                        label="Bulan" 
+                        icon={Calendar} 
+                        value={month} 
+                        options={Object.keys(MONTHLY_PATIENTS)} 
+                        onChange={setMonth} 
+                        theme="blue"
+                    />
                 </div>
             </div>
             <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
@@ -47,11 +105,16 @@ export default function ClinicAnalyticsApp() {
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
                     {/* Bar chart per dept */}
                     <div style={{ background: '#fff', borderRadius: '16px', padding: '1.5rem', border: '1px solid #bfdbfe' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
                             <h2 style={{ fontSize: '1rem', fontWeight: 700, color: '#1e3a8a', margin: 0 }}>Kunjungan per Departemen — {month}</h2>
-                            <select aria-label="Select option" value={dept} onChange={e => setDept(e.target.value)} style={{ padding: '6px 12px', border: '1px solid #bfdbfe', borderRadius: '6px', fontSize: '0.8rem', outline: 'none', cursor: 'pointer' }}>
-                                {DEPTS.map(d => <option key={d}>{d}</option>)}
-                            </select>
+                            <CustomDropdown 
+                                label="Dept" 
+                                icon={Building} 
+                                value={dept} 
+                                options={DEPTS} 
+                                onChange={setDept} 
+                                theme="light"
+                            />
                         </div>
                         {[['IGD', d.igd, '#b91c1c'], ['Rawat Inap', d.rawat, '#6d28d9'], ['Poliklinik', d.poli, '#1e40af'], ['Radiologi', d.radio, '#b45309'], ['Laboratorium', d.lab, '#166534']].map(([name, val, color]) => (
                             <div key={name} style={{ marginBottom: '1rem', opacity: dept === 'Semua' || dept === name ? 1 : 0.3 }}>
