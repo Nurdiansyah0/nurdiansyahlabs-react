@@ -84,18 +84,7 @@ export default function TokoLaptopBatamApp() {
                         <div className="text-[10px] font-bold text-slate-600 tracking-widest uppercase mt-0.5">Premium Pre-loved Specialist</div>
                     </div>
                 </motion.div>
-
-                <div className="hidden lg:flex items-center gap-8 text-sm font-bold text-slate-500">
-                    {CATEGORIES.filter(c => c.id !== 'all').map(cat => (
-                        <button aria-label="Action button"
-                            key={cat.id}
-                            onClick={() => { setActiveTab(cat.id); document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' }) }}
-                            className="hover:text-blue-600 transition-colors uppercase"
-                        >
-                            {cat.label}
-                        </button>
-                    ))}
-                </div>
+                {/* Landing page best practice: Removed distracting top navigation to keep visitors focused on the primary conversion goal */}
             </nav>
 
             {/* Hero Section */}
@@ -243,6 +232,29 @@ export default function TokoLaptopBatamApp() {
                         </AnimatePresence>
                     </div>
                 )}
+            </section>
+
+            {/* Lead Capture / Squeeze Section (CRO Best Practice) */}
+            <section className="py-20 px-5 md:px-8 bg-blue-600 text-white relative overflow-hidden">
+                <div className="absolute inset-0 opacity-10 mix-blend-overlay" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '24px 24px' }}></div>
+                <div className="max-w-4xl mx-auto text-center relative z-10">
+                    <h2 className="text-3xl md:text-5xl font-black mb-6 uppercase tracking-tight">Dapatkan Akses VIP & Diskon Khusus</h2>
+                    <p className="text-blue-100 text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
+                        Bergabunglah dengan lebih dari 5.000 pelanggan kami. Jadilah yang pertama tahu saat stok gadget langka dengan kondisi Like New mendarat di Batam!
+                    </p>
+                    <form onSubmit={e => { e.preventDefault(); alert("Terima kasih! Email Anda telah terdaftar sebagai VIP Member kami."); }} className="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto">
+                        <input 
+                            type="email" 
+                            required 
+                            placeholder="Masukkan alamat email Anda..." 
+                            className="flex-1 h-14 px-6 rounded-2xl text-slate-900 outline-none focus:ring-4 focus:ring-blue-400/50 transition-shadow text-sm font-medium"
+                        />
+                        <button type="submit" className="h-14 px-8 bg-slate-900 text-white rounded-2xl font-black uppercase text-sm shadow-xl shadow-slate-900/20 hover:bg-slate-800 transition-colors whitespace-nowrap">
+                            Kirim Akses VIP
+                        </button>
+                    </form>
+                    <p className="text-xs text-blue-200 mt-4 opacity-80">*Kami menjaga privasi Anda dan tidak akan mengirim spam.</p>
+                </div>
             </section>
 
             {/* Footer */}
