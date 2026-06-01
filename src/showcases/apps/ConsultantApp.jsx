@@ -64,19 +64,8 @@ export default function ConsultantApp() {
                     </div>
                 </div>
 
+                {/* CRO Optimization: Removed distracting navigation links from header to isolate visitor focus (Squeeze Page principle) */}
                 <div className="hidden md:flex items-center gap-8">
-                    {['Home', 'Produk', 'Keunggulan', 'Lokasi'].map(item => (
-                        <button aria-label="Action button"
-                            key={item}
-                            onClick={() => {
-                                const id = item.toLowerCase()
-                                document.getElementById(id === 'home' ? 'hero' : id)?.scrollIntoView({ behavior: 'smooth' })
-                            }}
-                            className="text-sm font-bold text-slate-500 hover:text-emerald-700 transition-colors uppercase tracking-widest"
-                        >
-                            {item}
-                        </button>
-                    ))}
                     <button aria-label="Action button"
                         onClick={orderCustom}
                         className="bg-emerald-700 text-white px-6 py-3 rounded-2xl font-black text-sm uppercase tracking-wider shadow-lg shadow-emerald-200 hover:bg-emerald-700 transition-all"
@@ -84,10 +73,6 @@ export default function ConsultantApp() {
                         Order Partai Besar
                     </button>
                 </div>
-
-                <button aria-label="Action button" className="md:hidden text-slate-900" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-                    {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-                </button>
             </nav>
 
             {/* Mobile Menu Overlay */}
@@ -319,12 +304,26 @@ export default function ConsultantApp() {
                     <div className="absolute bottom-0 left-0 w-64 h-64 bg-emerald-900/10 rounded-full blur-3xl -ml-32 -mb-32" />
 
                     <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-8 relative z-10 leading-tight">Suplai Restoran <br />Partai Besar?</h2>
-                    <p className="text-emerald-50 mb-12 text-lg md:text-xl font-medium relative z-10 opacity-90">Dapatkan katalog harga grosir khusus B2B untuk menekan budget operasional Anda.</p>
+                    <p className="text-emerald-50 mb-12 text-lg md:text-xl font-medium relative z-10 opacity-90">Dapatkan katalog harga grosir khusus B2B dan prioritas pengiriman. Daftarkan email bisnis Anda sekarang.</p>
+                    
+                    {/* Lead Capture Form */}
+                    <form onSubmit={e => { e.preventDefault(); alert("Terima kasih! Tim B2B kami akan segera menghubungi Anda."); }} className="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto relative z-10 mb-8">
+                        <input 
+                            type="email" 
+                            required 
+                            placeholder="Email bisnis/restoran Anda..." 
+                            className="flex-1 h-14 px-6 rounded-2xl text-slate-900 outline-none focus:ring-4 focus:ring-emerald-400/50 transition-shadow text-sm font-medium"
+                        />
+                        <button type="submit" className="h-14 px-8 bg-slate-900 text-white rounded-2xl font-black uppercase text-sm shadow-xl hover:bg-slate-800 transition-colors whitespace-nowrap">
+                            Kirim Katalog Grosir
+                        </button>
+                    </form>
+
                     <button aria-label="Action button"
                         onClick={orderCustom}
-                        className="bg-white text-emerald-900 px-12 py-5 rounded-2xl font-black text-lg md:text-xl uppercase shadow-2xl hover:scale-105 active:scale-95 transition-all relative z-10"
+                        className="bg-transparent border-2 border-white/30 text-white px-12 py-4 rounded-2xl font-black text-sm uppercase hover:bg-white/10 transition-all relative z-10"
                     >
-                        Hubungi Supplier Utama
+                        Atau Hubungi WhatsApp B2B
                     </button>
                 </div>
             </section>
