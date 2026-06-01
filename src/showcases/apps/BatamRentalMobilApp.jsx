@@ -375,6 +375,7 @@ export default function BatamRentalMobilApp() {
                                 style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
                                 src="https://www.youtube.com/embed/w4goi8YBrfg?autoplay=1&mute=1&loop=1&playlist=w4goi8YBrfg&controls=0&showinfo=0&rel=0"
                                 allow="autoplay"
+                                loading="lazy"
                             />
                         </div>
                         <div className="absolute inset-0 z-10" style={{ background: `linear-gradient(to right, ${BRAND.primary}cc, transparent)` }}></div>
@@ -455,7 +456,7 @@ export default function BatamRentalMobilApp() {
                                 </div>
                             </div>
                             <div className="bg-white rounded-[2rem] p-4 shadow-2xl overflow-hidden h-96 border-4" style={{ borderColor: BRAND.primary }}>
-                                <iframe title="Map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.0773457625937!2d103.94955377627753!3d1.1041678623135676!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d98b56fbc5ff73%3A0xf0ab4bfc58d201ec!2sRumjis!5e0!3m2!1sen!2sid!4v1772357246236!5m2!1sen!2sid" width="100%" height="100%" style={{ border: 0 }}></iframe>
+                                <iframe title="Map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.0773457625937!2d103.94955377627753!3d1.1041678623135676!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d98b56fbc5ff73%3A0xf0ab4bfc58d201ec!2sRumjis!5e0!3m2!1sen!2sid!4v1772357246236!5m2!1sen!2sid" width="100%" height="100%" style={{ border: 0 }} loading="lazy"></iframe>
                             </div>
                         </div>
                     </div>
