@@ -38,7 +38,14 @@
             "title": "Koperasi POS System",
             "description": "Software kasir & akuntansi digital untuk efisiensi transaksi dan operasional koperasi modern.",
             "category": "Fullstack",
-            "accentColor": "#4338ca"
+            "accentColor": "#4338ca",
+            "techStack": {
+                "name": "MERN Stack",
+                "frontend": "React.js, Tailwind CSS",
+                "backend": "Node.js, Express.js",
+                "database": "MongoDB (NoSQL)",
+                "infrastructure": "Linux (Ubuntu), Docker, AWS EC2"
+            }
         },
         {
             "slug": "warehouse-wms",
@@ -46,7 +53,14 @@
             "title": "LogiStack – Warehouse WMS",
             "description": "Enterprise Resource Planning untuk manajemen gudang, stok real-time, dan logistik ekspor-impor.",
             "category": "Fullstack",
-            "accentColor": "#10b981"
+            "accentColor": "#10b981",
+            "techStack": {
+                "name": "Java-Spring Stack",
+                "frontend": "React.js, Bootstrap",
+                "backend": "Java Spring Boot, Hibernate ORM",
+                "database": "PostgreSQL",
+                "infrastructure": "Apache Tomcat, AWS S3, Linux"
+            }
         },
         {
             "slug": "vehicle-inspection",
@@ -54,7 +68,14 @@
             "title": "Inspect Pro – Batam Car Check",
             "description": "Platform digital jasa inspeksi mobil bekas (second) profesional untuk transparansi kondisi unit.",
             "category": "Fullstack",
-            "accentColor": "#f59e0b"
+            "accentColor": "#f59e0b",
+            "techStack": {
+                "name": "Python-Django Stack",
+                "frontend": "React.js, Material UI",
+                "backend": "Python, Django REST Framework",
+                "database": "PostgreSQL",
+                "infrastructure": "Nginx, Gunicorn, Heroku"
+            }
         },
         {
             "slug": "attendance",
@@ -62,7 +83,14 @@
             "title": "E-HRMS Attendance Portal",
             "description": "Aplikasi absensi karyawan berbasis GPS & Biometrik dengan integrasi penggajian otomatis.",
             "category": "Fullstack",
-            "accentColor": "#8b5cf6"
+            "accentColor": "#8b5cf6",
+            "techStack": {
+                "name": "LAMP Stack",
+                "frontend": "Vue.js, Tailwind CSS",
+                "backend": "PHP 8, Laravel Framework",
+                "database": "MySQL / MariaDB",
+                "infrastructure": "Linux, Apache, Redis (Cache)"
+            }
         },
         {
             "slug": "retail-sales",
