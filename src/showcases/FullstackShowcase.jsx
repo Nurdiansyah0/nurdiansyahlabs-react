@@ -48,6 +48,7 @@ export default function FullstackShowcase() {
                 accentColor={project.accentColor || "#4338ca"}
                 githubUrl="https://github.com/Nurdiansyah0"
                 isResponsive={true}
+                techStack={project.techStack}
             >
                 {appMapping[project.slug]}
             </ShowcaseLayout>
