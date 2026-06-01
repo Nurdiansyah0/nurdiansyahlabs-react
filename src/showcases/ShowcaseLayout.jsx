@@ -35,7 +35,7 @@ export default function ShowcaseLayout({ children }) {
                 rel="noopener noreferrer dofollow"
                 style={{
                     position: 'fixed',
-                    bottom: isMobile ? '1rem' : '2rem',
+                    bottom: isMobile ? '5rem' : '2rem',
                     right: isMobile ? '1rem' : '2rem',
                     zIndex: 99999, // Ensure it's above everything
                     background: 'rgba(15, 23, 42, 0.85)',
