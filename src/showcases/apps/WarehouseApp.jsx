@@ -85,6 +85,20 @@ const volumeData = [
     { time: '18:00', in: 90, out: 110 },
 ]
 
+const inboundData = [
+    { id: 'RCV-2023-881', vendor: 'Global Steel Co.', expected: 'Today, 14:00', items: 450, status: 'Arriving', dock: 'Dock 4' },
+    { id: 'RCV-2023-882', vendor: 'ChemTech Industries', expected: 'Today, 15:30', items: 120, status: 'In Transit', dock: 'Dock 2' },
+    { id: 'RCV-2023-879', vendor: 'Fasteners Direct', expected: 'Today, 09:15', items: 5000, status: 'Unloading', dock: 'Dock 1' },
+    { id: 'RCV-2023-878', vendor: 'Electro Components', expected: 'Yesterday', items: 340, status: 'Completed', dock: 'Dock 3' },
+];
+
+const outboundData = [
+    { id: 'SHP-10294', client: 'BuildPro Construction', scheduled: 'Today, 16:00', items: 1200, status: 'Picking', carrier: 'FedEx Freight' },
+    { id: 'SHP-10295', client: 'City Maintenance Dept', scheduled: 'Today, 17:30', items: 45, status: 'Pending', carrier: 'Local Courier' },
+    { id: 'SHP-10291', client: 'TechInstall Partners', scheduled: 'Today, 11:00', items: 230, status: 'Loaded', carrier: 'UPS Logistics' },
+    { id: 'SHP-10290', client: 'Marine Services LLC', scheduled: 'Yesterday', items: 890, status: 'Dispatched', carrier: 'Ocean Freight' },
+];
+
 // --- Components ---
 
 const StatCard = ({ title, value, trend, trendUp, icon: Icon, colorClass }) => (
@@ -184,7 +198,7 @@ export default function WarehouseApp() {
                                             key={item.k}
                                             onClick={() => { setPage(item.k); if(isMobile) setSidebarOpen(false); }}
                                             className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
-                                                active ? 'bg-blue-600/15 text-blue-400' : 'hover:bg-slate-800/50 hover:text-white'
+                                                active ? 'bg-blue-600/15 text-blue-400' : 'text-slate-400 hover:bg-slate-800/50 hover:text-white'
                                             }`}
                                         >
                                             <item.i className={`w-4 h-4 ${active ? 'text-blue-400' : 'text-slate-400'}`} />
@@ -563,16 +577,136 @@ export default function WarehouseApp() {
                                 </div>
                             )}
 
-                            {/* Generic Placeholder for other pages */}
-                            {(page !== 'dashboard' && page !== 'inventory') && (
+                            {/* Inbound Flow Page */}
+                            {page === 'inbound' && (
+                                <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-5 min-h-[calc(100vh-120px)]">
+                                    <h1 className="text-xl font-bold text-slate-900 mb-6">Inbound Shipments</h1>
+                                    <div className="overflow-x-auto">
+                                        <table className="w-full text-left border-collapse min-w-[700px]">
+                                            <thead className="bg-slate-50 border-y border-slate-200">
+                                                <tr>
+                                                    <th className="py-3 px-4 font-semibold text-xs text-slate-500 uppercase">Receiving ID</th>
+                                                    <th className="py-3 px-4 font-semibold text-xs text-slate-500 uppercase">Vendor</th>
+                                                    <th className="py-3 px-4 font-semibold text-xs text-slate-500 uppercase">Expected</th>
+                                                    <th className="py-3 px-4 font-semibold text-xs text-slate-500 uppercase">Est. Items</th>
+                                                    <th className="py-3 px-4 font-semibold text-xs text-slate-500 uppercase">Dock</th>
+                                                    <th className="py-3 px-4 font-semibold text-xs text-slate-500 uppercase">Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="divide-y divide-slate-100">
+                                                {inboundData.map((row) => (
+                                                    <tr key={row.id} className="hover:bg-slate-50">
+                                                        <td className="py-3 px-4 font-mono text-sm text-blue-600 font-medium">{row.id}</td>
+                                                        <td className="py-3 px-4 font-medium text-slate-800 text-sm">{row.vendor}</td>
+                                                        <td className="py-3 px-4 text-sm text-slate-500">{row.expected}</td>
+                                                        <td className="py-3 px-4 text-sm text-slate-600">{row.items.toLocaleString()}</td>
+                                                        <td className="py-3 px-4 font-mono text-sm text-slate-500">{row.dock}</td>
+                                                        <td className="py-3 px-4">
+                                                            <span className={`px-2 py-1 rounded text-xs font-semibold ${
+                                                                row.status === 'Completed' ? 'bg-emerald-100 text-emerald-700' :
+                                                                row.status === 'Unloading' ? 'bg-amber-100 text-amber-700' :
+                                                                'bg-blue-100 text-blue-700'
+                                                            }`}>{row.status}</span>
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Outbound Flow Page */}
+                            {page === 'outbound' && (
+                                <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-5 min-h-[calc(100vh-120px)]">
+                                    <h1 className="text-xl font-bold text-slate-900 mb-6">Outbound Orders</h1>
+                                    <div className="overflow-x-auto">
+                                        <table className="w-full text-left border-collapse min-w-[700px]">
+                                            <thead className="bg-slate-50 border-y border-slate-200">
+                                                <tr>
+                                                    <th className="py-3 px-4 font-semibold text-xs text-slate-500 uppercase">Shipment ID</th>
+                                                    <th className="py-3 px-4 font-semibold text-xs text-slate-500 uppercase">Client</th>
+                                                    <th className="py-3 px-4 font-semibold text-xs text-slate-500 uppercase">Scheduled</th>
+                                                    <th className="py-3 px-4 font-semibold text-xs text-slate-500 uppercase">Items</th>
+                                                    <th className="py-3 px-4 font-semibold text-xs text-slate-500 uppercase">Carrier</th>
+                                                    <th className="py-3 px-4 font-semibold text-xs text-slate-500 uppercase">Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="divide-y divide-slate-100">
+                                                {outboundData.map((row) => (
+                                                    <tr key={row.id} className="hover:bg-slate-50">
+                                                        <td className="py-3 px-4 font-mono text-sm text-blue-600 font-medium">{row.id}</td>
+                                                        <td className="py-3 px-4 font-medium text-slate-800 text-sm">{row.client}</td>
+                                                        <td className="py-3 px-4 text-sm text-slate-500">{row.scheduled}</td>
+                                                        <td className="py-3 px-4 text-sm text-slate-600">{row.items.toLocaleString()}</td>
+                                                        <td className="py-3 px-4 text-sm text-slate-600">{row.carrier}</td>
+                                                        <td className="py-3 px-4">
+                                                            <span className={`px-2 py-1 rounded text-xs font-semibold ${
+                                                                row.status === 'Dispatched' ? 'bg-emerald-100 text-emerald-700' :
+                                                                row.status === 'Loaded' ? 'bg-amber-100 text-amber-700' :
+                                                                'bg-blue-100 text-blue-700'
+                                                            }`}>{row.status}</span>
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Activity Page */}
+                            {page === 'activity' && (
+                                <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-5 min-h-[calc(100vh-120px)]">
+                                    <h1 className="text-xl font-bold text-slate-900 mb-6">Full Audit Logs</h1>
+                                    <div className="space-y-4">
+                                        {scans.map((scan) => (
+                                            <div key={scan.id} className="flex items-center justify-between p-4 border border-slate-100 rounded-lg bg-slate-50/50">
+                                                <div className="flex items-center gap-4">
+                                                    <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                                                        scan.type === 'in' ? 'bg-blue-100 text-blue-600' :
+                                                        scan.type === 'out' ? 'bg-emerald-100 text-emerald-600' :
+                                                        scan.type === 'move' ? 'bg-amber-100 text-amber-600' : 'bg-purple-100 text-purple-600'
+                                                    }`}>
+                                                        {scan.type === 'in' ? <ArrowDownToLine className="w-5 h-5" /> :
+                                                         scan.type === 'out' ? <ArrowUpFromLine className="w-5 h-5" /> :
+                                                         scan.type === 'move' ? <ArrowRightLeft className="w-5 h-5" /> : <CheckCircle2 className="w-5 h-5" />}
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-sm font-semibold text-slate-900">{scan.action} Operation</p>
+                                                        <p className="text-xs text-slate-500">Transaction <span className="font-mono">{scan.id}</span> • Operator <span className="font-semibold text-slate-700">{scan.user}</span></p>
+                                                    </div>
+                                                </div>
+                                                <div className="text-right">
+                                                    <p className="text-sm font-mono text-slate-800">{scan.sku}</p>
+                                                    <p className="text-xs text-slate-500">Location {scan.loc}</p>
+                                                </div>
+                                                <div className="text-right w-24">
+                                                    <span className={`text-xs font-semibold px-2 py-1 rounded-full ${
+                                                        scan.status === 'Completed' ? 'bg-emerald-100 text-emerald-700' :
+                                                        scan.status === 'In Progress' ? 'bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-700'
+                                                    }`}>{scan.status}</span>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Generic Placeholder for other pages (Map, Reports) */}
+                            {(page === 'map' || page === 'reports') && (
                                 <div className="h-[calc(100vh-120px)] flex flex-col items-center justify-center bg-white border border-slate-200 border-dashed rounded-2xl text-center p-8">
                                     <div className="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center mb-4 text-slate-400">
-                                        <FileText className="w-8 h-8" />
+                                        {page === 'map' ? <Map className="w-8 h-8 text-blue-500" /> : <BarChart3 className="w-8 h-8 text-emerald-500" />}
                                     </div>
-                                    <h2 className="text-xl font-bold text-slate-900 capitalize">{page} Module</h2>
-                                    <p className="text-slate-500 mt-2 max-w-sm">This module is part of the Enterprise WMS suite. Data connection is currently established and pending synchronization.</p>
-                                    <button onClick={() => setPage('dashboard')} className="mt-6 px-6 py-2 bg-slate-900 text-white rounded-lg text-sm font-medium hover:bg-slate-800 transition-colors shadow-sm">
-                                        Return to Dashboard
+                                    <h2 className="text-2xl font-bold text-slate-900 capitalize mb-2">{page === 'map' ? 'Live Interactive Map' : 'Advanced Analytics & Reporting'}</h2>
+                                    <p className="text-slate-500 max-w-md mx-auto">
+                                        {page === 'map' 
+                                            ? "The full interactive 3D map is initializing. Please check the Mini Map Preview on the Dashboard for immediate facility heatmaps."
+                                            : "Reporting module is gathering the latest operational data. Custom dashboards and historical export will be available shortly."}
+                                    </p>
+                                    <button onClick={() => setPage('dashboard')} className="mt-8 px-6 py-2.5 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors shadow-sm flex items-center gap-2">
+                                        <ArrowRightLeft className="w-4 h-4" /> Return to Dashboard
                                     </button>
                                 </div>
                             )}
