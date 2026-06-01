@@ -228,7 +228,7 @@ function route_to_fastapi(string $action, array $payload, string $method): strin
     curl_setopt_array($ch, $opts);
     $body = curl_exec($ch);
     $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
+    
 
     http_response_code($code ?: 200);
     return $body ?: json_encode(['error' => 'FastAPI returned empty response']);

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useResponsive } from '../../hooks/useResponsive'
 const PRODUCTS = [
     { id: 1, name: 'Beras Premium 5kg', price: 75000, stock: 24, cat: 'Sembako', img: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=300&fit=crop' },
     { id: 2, name: 'Minyak Goreng 2L', price: 34500, stock: 12, cat: 'Sembako', img: 'https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?w=300&fit=crop' },
@@ -14,6 +15,7 @@ const PRODUCTS = [
 const MEMBERS = [{ id: 1, no: 'KOP-001', name: 'Budi Santoso', saldo: 'Rp 1.25Jt' }, { id: 2, no: 'KOP-002', name: 'Siti Rahayu', saldo: 'Rp 890rb' }, { id: 3, no: 'KOP-003', name: 'Ahmad Hidayat', saldo: 'Rp 2.1Jt' }, { id: 4, no: 'KOP-004', name: 'Dewi Lestari', saldo: 'Rp 450rb' }]
 const fmt = n => n.toLocaleString('id-ID')
 export default function KoperasiPOSApp() {
+    const { isMobile } = useResponsive()
     const [page, setPage] = useState('pos')
     const [cat, setCat] = useState('Semua')
     const [search, setSearch] = useState('')
@@ -36,34 +38,46 @@ export default function KoperasiPOSApp() {
     const pageIdx = page === 'dashboard' ? 0 : page === 'pos' ? 1 : page === 'members' ? 2 : page === 'inventory' ? 3 : 1
     return (
         <div style={{ display: 'flex', height: '100vh', fontFamily: '"Inter",sans-serif', overflow: 'hidden' }}>
-            {/* Sidebar */}
-            <div style={{ width: '220px', background: '#312e81', color: '#fff', display: 'flex', flexDirection: 'column', flexShrink: 0 }}>
-                <div style={{ padding: '1.5rem 1rem', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <div style={{ width: '28px', height: '28px', background: '#3730a3', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.9rem' }}>⚡</div>
-                        <span style={{ fontWeight: 700, fontSize: '0.95rem' }}>Koperasi ARFF</span>
+            {/* Sidebar / Bottom Nav */}
+            {!isMobile ? (
+                <div style={{ width: '220px', background: '#312e81', color: '#fff', display: 'flex', flexDirection: 'column', flexShrink: 0 }}>
+                    <div style={{ padding: '1.5rem 1rem', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <div style={{ width: '28px', height: '28px', background: '#3730a3', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.9rem' }}>⚡</div>
+                            <span style={{ fontWeight: 700, fontSize: '0.95rem' }}>Koperasi ARFF</span>
+                        </div>
+                    </div>
+                    <div style={{ padding: '1rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                        {SIDES.map((s, i) => (
+                            <div key={s.label} onClick={() => { if (i === 0) setPage('dashboard'); else if (i === 1) setPage('pos'); else if (i === 2) setPage('members'); else if (i === 3) setPage('inventory') }} style={{ padding: '10px 12px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '10px', cursor: i <= 3 ? 'pointer' : 'default', background: pageIdx === i ? '#3730a3' : 'transparent', color: pageIdx === i ? '#fff' : '#c7d2fe', fontSize: '0.85rem', fontWeight: pageIdx === i ? 600 : 400, opacity: i > 3 ? 0.4 : 1, transition: 'all 0.15s' }}>
+                                <span>{s.icon}</span><span>{s.label}</span>
+                            </div>
+                        ))}
+                    </div>
+                    <div style={{ padding: '1rem', borderTop: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        <svg width="32" height="32" viewBox="0 0 32 32" style={{ borderRadius: '50%', flexShrink: 0 }} fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="16" cy="16" r="16" fill="#3730a3" />
+                            <circle cx="16" cy="13" r="5" fill="#c7d2fe" />
+                            <ellipse cx="16" cy="26" rx="9" ry="5.5" fill="#c7d2fe" />
+                        </svg>
+                        <div><div style={{ fontSize: '0.8rem', fontWeight: 700 }}>Admin Kasir</div><div style={{ fontSize: '0.7rem', color: '#c7d2fe' }}>Shift Pagi</div></div>
                     </div>
                 </div>
-                <div style={{ padding: '1rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                    {SIDES.map((s, i) => (
-                        <div key={s.label} onClick={() => { if (i === 0) setPage('dashboard'); else if (i === 1) setPage('pos'); else if (i === 2) setPage('members'); else if (i === 3) setPage('inventory') }} style={{ padding: '10px 12px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '10px', cursor: i <= 3 ? 'pointer' : 'default', background: pageIdx === i ? '#3730a3' : 'transparent', color: pageIdx === i ? '#fff' : '#c7d2fe', fontSize: '0.85rem', fontWeight: pageIdx === i ? 600 : 400, opacity: i > 3 ? 0.4 : 1, transition: 'all 0.15s' }}>
-                            <span>{s.icon}</span><span>{s.label}</span>
+            ) : (
+                <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, background: '#312e81', display: 'flex', justifyContent: 'space-around', padding: '10px 5px', zIndex: 100, borderTop: '1px solid #1e1b4b' }}>
+                    {SIDES.slice(0, 4).map((s, i) => (
+                        <div key={s.label} onClick={() => { if (i === 0) setPage('dashboard'); else if (i === 1) setPage('pos'); else if (i === 2) setPage('members'); else if (i === 3) setPage('inventory') }} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer', color: pageIdx === i ? '#fff' : '#c7d2fe', fontSize: '0.65rem', fontWeight: pageIdx === i ? 700 : 500, padding: '5px' }}>
+                            <span style={{ fontSize: '1.2rem', marginBottom: '4px' }}>{s.icon}</span>
+                            <span style={{ textAlign: 'center', whiteSpace: 'nowrap' }}>{s.label.split(' ')[0]}</span>
                         </div>
                     ))}
                 </div>
-                <div style={{ padding: '1rem', borderTop: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    {/* SVG avatar — no external image dependency */}
-                    <svg width="32" height="32" viewBox="0 0 32 32" style={{ borderRadius: '50%', flexShrink: 0 }} fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="16" cy="16" r="16" fill="#3730a3" />
-                        <circle cx="16" cy="13" r="5" fill="#c7d2fe" />
-                        <ellipse cx="16" cy="26" rx="9" ry="5.5" fill="#c7d2fe" />
-                    </svg>
-                    <div><div style={{ fontSize: '0.8rem', fontWeight: 700 }}>Admin Kasir</div><div style={{ fontSize: '0.7rem', color: '#c7d2fe' }}>Shift Pagi</div></div>
-                </div>
-            </div>
+            )}
+            {/* Pages Wrapper */}
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', paddingBottom: isMobile ? '65px' : '0' }}>
             {/* Dashboard */}
             {page === 'dashboard' && (
-                <div style={{ flex: 1, background: '#eef2ff', padding: '2rem', overflowY: 'auto' }}>
+                <div style={{ flex: 1, background: '#eef2ff', padding: isMobile ? '1rem' : '2rem', overflowY: 'auto' }}>
                     <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#1e1b4b', marginBottom: '2rem' }}>Dashboard Koperasi</h1>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
                         {[{ l: 'Total Anggota', v: '248', c: '#3730a3', i: '👥' }, { l: 'Transaksi Hari Ini', v: '34', c: '#047857', i: '🛒' }, { l: 'Pendapatan', v: 'Rp 4.2Jt', c: '#b45309', i: '💰' }, { l: 'Stok Rendah', v: '7', c: '#b91c1c', i: '⚠️' }].map(m => (
@@ -93,11 +107,11 @@ export default function KoperasiPOSApp() {
                 <div style={{ flex: 1, background: '#eef2ff', padding: '2rem', overflowY: 'auto' }}>
                     <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#1e1b4b', marginBottom: '2rem' }}>Data Anggota Koperasi</h1>
                     <div style={{ background: '#fff', borderRadius: '16px', border: '1px solid #e0e7ff', overflow: 'hidden' }}>
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr 2fr 1fr 1fr', padding: '1rem 1.5rem', background: '#f8fafc', fontSize: '0.8rem', fontWeight: 600, color: '#1e293b' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr 2fr 1fr 1fr', minWidth: '600px', padding: '1rem 1.5rem', background: '#f8fafc', fontSize: '0.8rem', fontWeight: 600, color: '#1e293b' }}>
                             {['No.', 'No. Anggota', 'Nama', 'Saldo SHU', 'Status'].map(h => <div key={h}>{h}</div>)}
                         </div>
                         {MEMBERS.map((m, i) => (
-                            <div key={m.id} style={{ display: 'grid', gridTemplateColumns: '1fr 2fr 2fr 1fr 1fr', padding: '1rem 1.5rem', borderTop: '1px solid #f1f5f9', alignItems: 'center' }}>
+                            <div key={m.id} style={{ display: 'grid', gridTemplateColumns: '1fr 2fr 2fr 1fr 1fr', minWidth: '600px', padding: '1rem 1.5rem', borderTop: '1px solid #f1f5f9', alignItems: 'center' }}>
                                 <div style={{ fontSize: '0.85rem', color: '#1e293b' }}>{i + 1}</div>
                                 <div style={{ fontFamily: 'monospace', color: '#3730a3', fontWeight: 700, fontSize: '0.85rem' }}>{m.no}</div>
                                 <div style={{ fontWeight: 600, color: '#1e1b4b', fontSize: '0.9rem' }}>{m.name}</div>
@@ -113,11 +127,11 @@ export default function KoperasiPOSApp() {
                 <div style={{ flex: 1, background: '#eef2ff', padding: '2rem', overflowY: 'auto' }}>
                     <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#1e1b4b', marginBottom: '2rem' }}>Inventori Barang</h1>
                     <div style={{ background: '#fff', borderRadius: '16px', border: '1px solid #e0e7ff', overflow: 'hidden' }}>
-                        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', padding: '1rem 1.5rem', background: '#f8fafc', fontSize: '0.8rem', fontWeight: 600, color: '#1e293b' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', minWidth: '500px', padding: '1rem 1.5rem', background: '#f8fafc', fontSize: '0.8rem', fontWeight: 600, color: '#1e293b' }}>
                             {['Produk', 'Kategori', 'Stok', 'Harga'].map(h => <div key={h}>{h}</div>)}
                         </div>
                         {PRODUCTS.map(p => (
-                            <div key={p.id} style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', padding: '1rem 1.5rem', borderTop: '1px solid #f1f5f9', alignItems: 'center' }}>
+                            <div key={p.id} style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', minWidth: '500px', padding: '1rem 1.5rem', borderTop: '1px solid #f1f5f9', alignItems: 'center' }}>
                                 <div style={{ fontWeight: 600, color: '#1e1b4b', fontSize: '0.9rem' }}>{p.name}</div>
                                 <div style={{ fontSize: '0.8rem', color: '#1e293b' }}>{p.cat}</div>
                                 <div><span style={{ background: p.stock < 10 ? '#fee2e2' : '#d1fae5', color: p.stock < 10 ? '#991b1b' : '#065f46', fontSize: '0.75rem', fontWeight: 700, padding: '2px 8px', borderRadius: '4px' }}>{p.stock} unit</span></div>
@@ -129,7 +143,7 @@ export default function KoperasiPOSApp() {
             )}
             {/* POS */}
             {page === 'pos' && (
-                <div style={{ flex: 1, display: 'flex', gap: '0', overflow: 'hidden' }}>
+                <div style={{ flex: 1, display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: '0', overflow: 'hidden' }}>
                     {/* Products */}
                     <div style={{ flex: 1, background: '#eef2ff', padding: '1.5rem', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
                         <div style={{ display: 'flex', gap: '10px', marginBottom: '1rem', flexWrap: 'wrap' }}>
@@ -157,7 +171,7 @@ export default function KoperasiPOSApp() {
                         </div>
                     </div>
                     {/* Cart */}
-                    <div style={{ width: '360px', background: '#fff', display: 'flex', flexDirection: 'column', borderLeft: '1px solid #e0e7ff', flexShrink: 0 }}>
+                    <div style={{ width: isMobile ? '100%' : '360px', height: isMobile ? '50%' : 'auto', background: '#fff', display: 'flex', flexDirection: 'column', borderLeft: isMobile ? 'none' : '1px solid #e0e7ff', borderTop: isMobile ? '1px solid #e0e7ff' : 'none', flexShrink: 0 }}>
                         <div style={{ padding: '1.25rem', borderBottom: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <div><div style={{ fontWeight: 800, fontSize: '1.1rem', color: '#1e1b4b' }}>Pesanan Baru</div><div style={{ fontSize: '0.75rem', color: '#1e293b' }}>{invNum}</div></div>
                             <button aria-label="Action button" onClick={() => setCart([])} style={{ background: '#fee2e2', color: '#b91c1c', border: 'none', borderRadius: '6px', padding: '6px', cursor: 'pointer', fontSize: '0.8rem' }}>🗑</button>
@@ -217,6 +231,7 @@ export default function KoperasiPOSApp() {
                     </div>
                 </div>
             )}
+            </div>
         </div>
     )
 }

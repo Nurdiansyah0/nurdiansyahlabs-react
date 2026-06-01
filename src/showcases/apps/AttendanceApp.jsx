@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useResponsive } from '../../hooks/useResponsive'
 import { useNavigate } from 'react-router-dom'
 import { getOptimizedImg } from '../../utils/imgHelper'
 const EMPLOYEES = [
@@ -21,6 +22,7 @@ function Clock() {
     return <>{time.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}</>
 }
 export default function AttendanceApp() {
+    const { isMobile } = useResponsive()
     const navigate = useNavigate()
     const [page, setPage] = useState('attendance')
     const [employees, setEmployees] = useState(EMPLOYEES)
@@ -40,23 +42,34 @@ export default function AttendanceApp() {
     const PAGES = [{ k: 'attendance', l: 'Absensi', i: '📋' }, { k: 'employees', l: 'Karyawan', i: '👥' }, { k: 'leave', l: 'Cuti', i: '📅' }, { k: 'reports', l: 'Laporan', i: '📊' }]
     return (
         <div style={{ display: 'flex', height: '100vh', fontFamily: '"Inter",sans-serif', overflow: 'hidden' }}>
-            {/* Sidebar */}
-            <div style={{ width: '220px', background: '#0f172a', color: '#fff', flexShrink: 0, display: 'flex', flexDirection: 'column' }}>
-                <div style={{ padding: '1.25rem 1rem', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <div style={{ background: '#4338ca', width: '28px', height: '28px', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.9rem' }}>⏰</div>
-                        <span style={{ fontWeight: 700 }}>AttendanceOS</span>
+            {/* Sidebar / Bottom Nav */}
+            {!isMobile ? (
+                <div style={{ width: '220px', background: '#0f172a', color: '#fff', flexShrink: 0, display: 'flex', flexDirection: 'column' }}>
+                    <div style={{ padding: '1.25rem 1rem', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <div style={{ background: '#4338ca', width: '28px', height: '28px', borderRadius: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.9rem' }}>⏰</div>
+                            <span style={{ fontWeight: 700 }}>AttendanceOS</span>
+                        </div>
+                    </div>
+                    <div style={{ flex: 1, padding: '1rem', display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                        {PAGES.map(p => <div key={p.k} onClick={() => setPage(p.k)} style={{ padding: '10px 12px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', background: page === p.k ? 'rgba(99,102,241,0.2)' : 'transparent', color: page === p.k ? '#818cf8' : '#1e293b', fontSize: '0.85rem', fontWeight: page === p.k ? 700 : 400 }}>{p.i} {p.l}</div>)}
+                    </div>
+                    <div style={{ padding: '1rem', borderTop: '1px solid rgba(255,255,255,0.05)', fontSize: '1.2rem', fontWeight: 700, color: '#4338ca', textAlign: 'center', fontVariantNumeric: 'tabular-nums' }}>
+                        <Clock />
                     </div>
                 </div>
-                <div style={{ flex: 1, padding: '1rem', display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                    {PAGES.map(p => <div key={p.k} onClick={() => setPage(p.k)} style={{ padding: '10px 12px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', background: page === p.k ? 'rgba(99,102,241,0.2)' : 'transparent', color: page === p.k ? '#818cf8' : '#1e293b', fontSize: '0.85rem', fontWeight: page === p.k ? 700 : 400 }}>{p.i} {p.l}</div>)}
+            ) : (
+                <div style={{ position: 'fixed', bottom: 0, left: 0, right: 0, background: '#0f172a', display: 'flex', justifyContent: 'space-around', padding: '10px 5px', zIndex: 100, borderTop: '1px solid #1e293b' }}>
+                    {PAGES.map(p => (
+                        <div key={p.k} onClick={() => setPage(p.k)} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer', color: page === p.k ? '#818cf8' : '#cbd5e1', fontSize: '0.65rem', fontWeight: page === p.k ? 700 : 500, padding: '5px' }}>
+                            <span style={{ fontSize: '1.2rem', marginBottom: '4px' }}>{p.i}</span>
+                            <span>{p.l}</span>
+                        </div>
+                    ))}
                 </div>
-                <div style={{ padding: '1rem', borderTop: '1px solid rgba(255,255,255,0.05)', fontSize: '1.2rem', fontWeight: 700, color: '#4338ca', textAlign: 'center', fontVariantNumeric: 'tabular-nums' }}>
-                    <Clock />
-                </div>
-            </div>
+            )}
             {/* Content */}
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', background: '#f8fafc' }}>
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', background: '#f8fafc', paddingBottom: isMobile ? '65px' : '0' }}>
                 {/* Topbar */}
                 <div style={{ padding: '1rem 2rem', background: '#fff', borderBottom: '1px solid #e2e8f0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div>
@@ -72,7 +85,7 @@ export default function AttendanceApp() {
                 {page === 'attendance' && (
                     <div style={{ flex: 1, overflowY: 'auto', padding: '2rem' }}>
                         {/* Stats */}
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '1rem', marginBottom: '2rem' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
                             {[{ l: 'Hadir', v: stats.present, c: '#047857', bg: '#d1fae5' }, { l: 'Terlambat', v: stats.late, c: '#b45309', bg: '#fef3c7' }, { l: 'Tidak Hadir', v: stats.absent, c: '#b91c1c', bg: '#fee2e2' }, { l: 'Cuti', v: stats.leave, c: '#1d4ed8', bg: '#dbeafe' }].map(m => (
                                 <div key={m.l} style={{ background: '#fff', borderRadius: '14px', padding: '1.5rem', border: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                     <div style={{ width: '44px', height: '44px', borderRadius: '10px', background: m.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', fontWeight: 800, color: m.c }}>{m.v}</div>
@@ -88,12 +101,12 @@ export default function AttendanceApp() {
                             </div>
                         </div>
                         {/* Table */}
-                        <div style={{ background: '#fff', borderRadius: '16px', border: '1px solid #e2e8f0', overflow: 'hidden' }}>
-                            <div style={{ display: 'grid', gridTemplateColumns: '2.5fr 1.5fr 1.5fr 1fr 1.5fr', padding: '12px 1.5rem', background: '#f8fafc', fontSize: '0.8rem', fontWeight: 600, color: '#1e293b', borderBottom: '1px solid #e2e8f0' }}>
+                        <div style={{ background: '#fff', borderRadius: '16px', border: '1px solid #e2e8f0', overflowX: 'auto' }}>
+                            <div style={{ display: 'grid', gridTemplateColumns: '2.5fr 1.5fr 1.5fr 1fr 1.5fr', minWidth: '600px', padding: '12px 1.5rem', background: '#f8fafc', fontSize: '0.8rem', fontWeight: 600, color: '#1e293b', borderBottom: '1px solid #e2e8f0' }}>
                                 {['Karyawan', 'Departemen', 'Jabatan', 'Status', 'Waktu Masuk'].map(h => <div key={h}>{h}</div>)}
                             </div>
                             {filtered.map((e, i) => (
-                                <div key={e.id} style={{ display: 'grid', gridTemplateColumns: '2.5fr 1.5fr 1.5fr 1fr 1.5fr', padding: '12px 1.5rem', borderTop: i > 0 ? '1px solid #f1f5f9' : 'none', alignItems: 'center' }}>
+                                <div key={e.id} style={{ display: 'grid', gridTemplateColumns: '2.5fr 1.5fr 1.5fr 1fr 1.5fr', minWidth: '600px', padding: '12px 1.5rem', borderTop: i > 0 ? '1px solid #f1f5f9' : 'none', alignItems: 'center' }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                                         <img src={getOptimizedImg(e.img, { w: 100, h: 100 })} style={{ width: '36px', height: '36px', borderRadius: '50%', objectFit: 'cover' }} alt={e.name} />
                                         <div style={{ fontWeight: 600, color: '#0f172a', fontSize: '0.9rem' }}>{e.name}</div>

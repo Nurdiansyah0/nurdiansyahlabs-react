@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useResponsive } from '../../hooks/useResponsive'
 import { useNavigate } from 'react-router-dom'
 const VEHICLES = [
     { id: 'VH-001', plate: 'B 1234 AB', type: 'Toyota Avanza', owner: 'PT. Maju Jaya', color: 'Silver' },
@@ -14,6 +15,7 @@ const CHECKS = {
 }
 const OPT = ['Baik', 'Cacat', 'Tidak Ada']
 export default function VehicleInspectionApp() {
+    const { isMobile } = useResponsive()
     const navigate = useNavigate()
     const [activeTab, setActiveTab] = useState(0)
     const [selectedVeh, setSelectedVeh] = useState(null)
@@ -39,7 +41,7 @@ export default function VehicleInspectionApp() {
                         <div style={{ color: '#4b5563', fontSize: '0.9rem' }}>Kendaraan: {selectedVeh?.plate} · {selectedVeh?.type}</div>
                     </div>
                 </div>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1rem', marginBottom: '2rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(3,1fr)', gap: '1rem', marginBottom: '2rem' }}>
                     {[['Total Item', String(done), '#1d4ed8'], ['Baik', String(Object.values(checks).filter(v => v === 'Baik').length), '#047857'], ['Masalah', String(issues), '#b91c1c']].map(([l, v, c]) => (
                         <div key={l} style={{ background: '#f8fafc', borderRadius: '10px', padding: '1rem', textAlign: 'center' }}>
                             <div style={{ fontSize: '1.8rem', fontWeight: 800, color: c }}>{v}</div>
@@ -68,7 +70,7 @@ export default function VehicleInspectionApp() {
     return (
         <div style={{ minHeight: '100vh', background: '#f1f5f9', fontFamily: '"Inter",sans-serif' }}>
             
-            <div style={{ background: '#1e293b', padding: '1.5rem 3rem', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ background: '#1e293b', padding: isMobile ? '1rem' : '1.5rem 3rem', color: '#fff', display: 'flex', flexDirection: isMobile ? 'column' : 'row', justifyContent: 'space-between', alignItems: isMobile ? 'flex-start' : 'center', gap: isMobile ? '1rem' : '0' }}>
                 <div>
                     <div style={{ fontSize: '0.7rem', letterSpacing: '0.15em', color: '#1e293b', marginBottom: '4px' }}>VEHICLE INSPECTION</div>
                     <div style={{ fontSize: '1.3rem', fontWeight: 800 }}>Form Inspeksi Kendaraan</div>
@@ -119,7 +121,7 @@ export default function VehicleInspectionApp() {
                         <button aria-label="Action button" onClick={() => setSelectedVeh(null)} style={{ background: 'none', border: '1px solid #e2e8f0', color: '#1e293b', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', fontSize: '0.8rem' }}>Ganti Kendaraan</button>
                     </div>
                     {/* Tab nav */}
-                    <div style={{ display: 'flex', background: '#fff', borderRadius: '12px', padding: '6px', marginBottom: '1.5rem', gap: '6px', border: '1px solid #e2e8f0' }}>
+                    <div style={{ display: 'flex', background: '#fff', borderRadius: '12px', padding: '6px', marginBottom: '1.5rem', gap: '6px', border: '1px solid #e2e8f0', overflowX: 'auto' }}>
                         {TABS.map((t, i) => (
                             <button aria-label="Action button" key={t} onClick={() => setActiveTab(i)} style={{ flex: 1, padding: '10px', border: 'none', borderRadius: '8px', background: activeTab === i ? '#1e293b' : 'transparent', color: activeTab === i ? '#fff' : '#1e293b', fontWeight: activeTab === i ? 700 : 500, cursor: 'pointer', fontSize: '0.85rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
                                 {i < 4 ? ['🔍', '🪑', '⚙️', '📋'][i] : ''} {t}
@@ -137,7 +139,7 @@ export default function VehicleInspectionApp() {
                                     const key = `${section}:${item}`
                                     const val = checks[key]
                                     return (
-                                        <div key={item} style={{ padding: '1rem 1.5rem', borderBottom: '1px solid #f1f5f9', display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '1rem', alignItems: 'center' }}>
+                                        <div key={item} style={{ padding: '1rem 1.5rem', borderBottom: '1px solid #f1f5f9', display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '2fr 1fr 1fr 1fr', gap: '1rem', alignItems: 'center' }}>
                                             <div style={{ fontWeight: 500, color: '#374151', fontSize: '0.9rem' }}>{item}</div>
                                             {OPT.map(o => (
                                                 <button aria-label="Action button" key={o} onClick={() => setCheck(section, item, o)} style={{ padding: '7px', borderRadius: '7px', border: '1px solid', borderColor: val === o ? (o === 'Baik' ? '#047857' : o === 'Cacat' ? '#b91c1c' : '#b45309') : '#e2e8f0', background: val === o ? (o === 'Baik' ? '#d1fae5' : o === 'Cacat' ? '#fee2e2' : '#fef3c7') : '#fff', color: val === o ? (o === 'Baik' ? '#065f46' : o === 'Cacat' ? '#991b1b' : '#92400e') : '#1e293b', fontWeight: val === o ? 700 : 400, cursor: 'pointer', fontSize: '0.8rem' }}>
@@ -156,9 +158,9 @@ export default function VehicleInspectionApp() {
                     })()}
                     {/* Summary tab */}
                     {activeTab === 4 && (
-                        <div style={{ background: '#fff', borderRadius: '16px', border: '1px solid #e2e8f0', padding: '2rem' }}>
+                        <div style={{ background: '#fff', borderRadius: '16px', border: '1px solid #e2e8f0', padding: isMobile ? '1rem' : '2rem' }}>
                             <h2 style={{ fontSize: '1.25rem', fontWeight: 700, color: '#1e293b', marginBottom: '1.5rem' }}>Ringkasan Inspeksi</h2>
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '1rem', marginBottom: '2rem' }}>
+                            <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(4,1fr)', gap: '1rem', marginBottom: '2rem' }}>
                                 {[['Total Diperiksa', String(done), '#1d4ed8'], ['Baik', String(Object.values(checks).filter(v => v === 'Baik').length), '#047857'], ['Cacat', String(Object.values(checks).filter(v => v === 'Cacat').length), '#b91c1c'], ['Tidak Ada', String(Object.values(checks).filter(v => v === 'Tidak Ada').length), '#b45309']].map(([l, v, c]) => (
                                     <div key={l} style={{ background: '#f8fafc', borderRadius: '10px', padding: '1rem', textAlign: 'center' }}>
                                         <div style={{ fontSize: '1.8rem', fontWeight: 800, color: c }}>{v}</div>

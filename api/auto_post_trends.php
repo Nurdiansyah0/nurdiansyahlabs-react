@@ -32,7 +32,7 @@ try {
 $ch = curl_init('https://nurdiansyahlabs.com/api/trends.php');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $trendsData = curl_exec($ch);
-curl_close($ch);
+
 
 $trends = json_decode($trendsData, true);
 
@@ -73,7 +73,7 @@ $ch = curl_init($aiUrl);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_USERAGENT, 'NurdiansyahLabs-SEO-Bot/1.0');
 $content = curl_exec($ch);
-curl_close($ch);
+
 
 if (empty($content) || strlen($content) < 500) {
     die("Failed to generate sufficient content from Pollinations AI\n");
