@@ -129,6 +129,44 @@ try {
     $stmtPrimatera->execute(['ardiansyah', $primateraHash, 'Mitra Ardiansyah', 'mitra']);
     echo "✅ Table `primatera_users` created and 5 ERP users initialized (password123).\n";
 
+    // 8. Create Primatera ERP Tables (Records, Transactions, Inventory)
+    $pdo->exec("
+        CREATE TABLE IF NOT EXISTS `primatera_records` (
+            `id` VARCHAR(50) PRIMARY KEY,
+            `date` BIGINT NOT NULL,
+            `dateString` VARCHAR(20),
+            `flockId` VARCHAR(50),
+            `feedConsumedKg` DECIMAL(10,2),
+            `medicineUsedPcs` INT DEFAULT 0,
+            `mortalityCount` INT,
+            `bodyWeightGrams` INT,
+            `notes` TEXT,
+            `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+        CREATE TABLE IF NOT EXISTS `primatera_transactions` (
+            `id` VARCHAR(50) PRIMARY KEY,
+            `date` BIGINT NOT NULL,
+            `dateString` VARCHAR(20),
+            `type` VARCHAR(20),
+            `category` VARCHAR(50),
+            `amount` DECIMAL(15,2),
+            `quantity` DECIMAL(10,2),
+            `harvestCount` INT DEFAULT 0,
+            `notes` TEXT,
+            `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+        CREATE TABLE IF NOT EXISTS `primatera_inventory` (
+            `id` INT PRIMARY KEY DEFAULT 1,
+            `feed` DECIMAL(10,2) DEFAULT 0,
+            `medicine` INT DEFAULT 0
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    ");
+
+    $pdo->exec("INSERT IGNORE INTO `primatera_inventory` (`id`, `feed`, `medicine`) VALUES (1, 0, 0)");
+    echo "✅ Tables `primatera_records`, `primatera_transactions`, `primatera_inventory` created.\n";
+
     echo "\n🎉 All database schemas have been fully synchronized to match your application's structure!\n";
 
 } catch (PDOException $e) {
