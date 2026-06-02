@@ -93,6 +93,21 @@
             }
         },
         {
+            "slug": "primatera-poultry",
+            "categorySlug": "fullstack",
+            "title": "Primatera Poultry",
+            "description": "End-to-end digital ERP system for Joper/KUB poultry business, focusing on paperless operations.",
+            "category": "Fullstack",
+            "accentColor": "#f59e0b",
+            "techStack": {
+                "name": "MERN Stack",
+                "frontend": "React.js, Tailwind CSS",
+                "backend": "Node.js, Express.js",
+                "database": "MongoDB",
+                "infrastructure": "Linux, Docker"
+            }
+        },
+        {
             "slug": "retail-sales",
             "categorySlug": "data-analyst",
             "title": "Retail Sales Monitor",

@@ -31,6 +31,7 @@ const portfolioData = {
             { image: '/assets/projects/img_warehouse_sys.png', tag: 'Inventory', tagBg: '#f0fdf4', tagColor: '#166534', title: 'Warehouse Management System', desc: 'Real-time stock tracking, purchase orders, barcode scanning & alerts.', route: '/showcase/fullstack/warehouse-wms' },
             { image: '/assets/projects/img_vehicle_inspect.png', tag: 'Inspection', tagBg: '#fffbeb', tagColor: '#92400e', title: 'Vehicle Inspection Platform', desc: 'Digital inspection with photo uploads, findings log & inspector assignment.', route: '/showcase/fullstack/vehicle-inspection' },
             { image: '/assets/projects/img_hr_attendance.png', tag: 'HR System', tagBg: '#faf5ff', tagColor: '#6b21a8', title: 'Employee Attendance Portal', desc: 'GPS check-in, leave management, payroll automation & reporting.', route: '/showcase/fullstack/attendance' },
+            { image: '/assets/projects/img_primatera.png', tag: 'ERP System', tagBg: '#fef3c7', tagColor: '#92400e', title: 'Primatera Poultry', desc: 'End-to-end digital ERP system for Joper/KUB poultry business.', route: '/showcase/fullstack/primatera-poultry' },
         ]
     },
     C: {

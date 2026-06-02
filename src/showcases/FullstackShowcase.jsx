@@ -9,12 +9,14 @@ import KoperasiPOSApp from './apps/KoperasiPOSApp'
 import WarehouseApp from './apps/WarehouseApp'
 import VehicleInspectionApp from './apps/VehicleInspectionApp'
 import AttendanceApp from './apps/AttendanceApp'
+import PrimateraPoultryApp from './apps/PrimateraPoultryApp'
 
 const appMapping = {
     'koperasi-pos': <KoperasiPOSApp />,
     'warehouse-wms': <WarehouseApp />,
     'vehicle-inspection': <VehicleInspectionApp />,
-    'attendance': <AttendanceApp />
+    'attendance': <AttendanceApp />,
+    'primatera-poultry': <PrimateraPoultryApp />
 }
 
 export default function FullstackShowcase() {
