@@ -31,3 +31,6 @@ diagnose_env.php
 truncate_db.php
 diagnose_db.php
 .unlighthouse
+
+# Unit tests
+/tests/
