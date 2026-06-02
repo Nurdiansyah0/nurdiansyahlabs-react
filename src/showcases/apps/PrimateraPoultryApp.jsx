@@ -32,27 +32,43 @@ export default function PrimateraPoultryApp() {
 
     const fileInputRef = useRef(null);
 
-    // Load Existing Data
+    // Load Existing Data from Backend
     useEffect(() => {
-        const savedRec = localStorage.getItem('primatera_records');
-        const savedTx = localStorage.getItem('primatera_tx');
-        const savedInv = localStorage.getItem('primatera_inventory');
+        const loadData = async () => {
+            try {
+                const res = await fetch('/api/primatera_api.php');
+                const data = await res.json();
+                if (data.success) {
+                    setRecords(data.records || []);
+                    setTransactions(data.transactions || []);
+                    setInventory(data.inventory || { feed: 0, medicine: 0 });
+                }
+            } catch (err) {
+                console.error('Failed to fetch data from backend:', err);
+            }
+        };
         const savedUser = localStorage.getItem('primatera_user');
-
-        if (savedRec) setRecords(JSON.parse(savedRec));
-        if (savedTx) setTransactions(JSON.parse(savedTx));
-        if (savedInv) setInventory(JSON.parse(savedInv));
         if (savedUser) setCurrentUser(JSON.parse(savedUser));
+        loadData();
     }, []);
 
-    // Save to local storage
-    useEffect(() => { localStorage.setItem('primatera_records', JSON.stringify(records)); }, [records]);
-    useEffect(() => { localStorage.setItem('primatera_tx', JSON.stringify(transactions)); }, [transactions]);
-    useEffect(() => { localStorage.setItem('primatera_inventory', JSON.stringify(inventory)); }, [inventory]);
+    // Save User Session
     useEffect(() => {
         if (currentUser) localStorage.setItem('primatera_user', JSON.stringify(currentUser));
         else localStorage.removeItem('primatera_user');
     }, [currentUser]);
+
+    const syncToBackend = async (resource, payload, method = 'POST') => {
+        try {
+            await fetch(`/api/primatera_api.php?resource=${resource}`, {
+                method,
+                headers: { 'Content-Type': 'application/json' },
+                body: payload ? JSON.stringify(payload) : null
+            });
+        } catch (err) {
+            console.error(`Failed to sync ${resource}:`, err);
+        }
+    };
 
     const doLogin = async (e) => {
         e.preventDefault();
@@ -123,9 +139,12 @@ export default function PrimateraPoultryApp() {
         };
 
         setRecords([newRecord, ...records]);
-        setInventory(prev => ({ ...prev, feed: prev.feed - feedUsed, medicine: prev.medicine - medUsed }));
+        const newInv = { feed: inventory.feed - feedUsed, medicine: inventory.medicine - medUsed };
+        setInventory(newInv);
         setProdData(p => ({ ...p, feedConsumedKg: '', medicineUsedPcs: '', mortalityCount: '', bodyWeightGrams: '', notes: '' }));
         setShowProdForm(false);
+        syncToBackend('records', newRecord);
+        syncToBackend('inventory', newInv);
         alert('Data Produksi tersimpan & Stok Gudang diperbarui!');
     };
 
@@ -134,17 +153,22 @@ export default function PrimateraPoultryApp() {
         const amountNum = parseFloat(finData.amount) || 0;
         const qtyNum = parseFloat(finData.quantity) || 0;
 
+        let newInv = { ...inventory };
         if (finData.type === 'EXPENSE' && finData.category === 'PAKAN_KG') {
             if (qtyNum <= 0) { alert('Harap isi jumlah kuantitas barang masuk gudang!'); return; }
-            setInventory(prev => ({ ...prev, feed: prev.feed + qtyNum }));
+            newInv.feed += qtyNum;
+            setInventory(newInv);
+            syncToBackend('inventory', newInv);
         }
         if (finData.type === 'EXPENSE' && finData.category === 'OBAT_PCS') {
             if (qtyNum <= 0) { alert('Harap isi jumlah kuantitas barang masuk gudang!'); return; }
-            setInventory(prev => ({ ...prev, medicine: prev.medicine + qtyNum }));
+            newInv.medicine += qtyNum;
+            setInventory(newInv);
+            syncToBackend('inventory', newInv);
         }
 
         const newTx = {
-            id: Date.now(),
+            id: crypto.randomUUID ? crypto.randomUUID() : Date.now(),
             date: new Date(finData.date).getTime(),
             dateString: finData.date,
             type: finData.type,
@@ -155,6 +179,7 @@ export default function PrimateraPoultryApp() {
         };
 
         setTransactions([newTx, ...transactions]);
+        syncToBackend('transactions', newTx);
         setFinData(p => ({ ...p, amount: '', quantity: '', notes: '' }));
         setShowFinForm(false);
         alert('Transaksi tersimpan & Gudang diperbarui!');
@@ -199,14 +224,25 @@ export default function PrimateraPoultryApp() {
                 notes: `Panen ${totalBirds} Ekor. ABW: ${avgWeight} Kg. Rp${pricePerKg}/Kg`
             };
             setTransactions([newTx, ...transactions]);
+            syncToBackend('transactions', newTx);
             setHarvestRecords([]);
             setShowHarvestForm(false);
             alert(`Panen selesai! Nota penjualan sebesar Rp${income.toLocaleString('id-ID')} masuk ke Keuangan.`);
         }
     };
 
-    const delRec = (id) => { if (window.confirm('Hapus record produksi ini?')) setRecords(records.filter(r => r.id !== id)); }
-    const delTx = (id) => { if (window.confirm('Hapus transaksi ini?')) setTransactions(transactions.filter(t => t.id !== id)); }
+    const delRec = (id) => { 
+        if (window.confirm('Hapus record produksi ini?')) {
+            setRecords(records.filter(r => r.id !== id));
+            syncToBackend('records&id=' + id, null, 'DELETE');
+        } 
+    }
+    const delTx = (id) => { 
+        if (window.confirm('Hapus transaksi ini?')) {
+            setTransactions(transactions.filter(t => t.id !== id));
+            syncToBackend('transactions&id=' + id, null, 'DELETE');
+        } 
+    }
     const delBasket = (id) => setHarvestRecords(harvestRecords.filter(b => b.id !== id));
 
     const exportData = () => {
