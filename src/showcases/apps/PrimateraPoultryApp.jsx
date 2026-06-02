@@ -2,25 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useResponsive } from '../../hooks/useResponsive';
 import { ClipboardList, LayoutDashboard, Wallet, TrendingUp, TrendingDown, FileText, Scale, AlertTriangle, DollarSign, Plus, X, Package, Truck, Printer, Settings, Download, Upload, Trash2, Users, LogOut, Shield, Lock, User } from 'lucide-react';
 
-const SEED_USERS = [
-    { username: 'userdemo', role: 'viewer', name: 'Demo User' },
-    { username: 'nardi', role: 'mitra', name: 'Mitra Nardi' },
-    { username: 'ardiansyah', role: 'mitra', name: 'Mitra Ardiansyah' },
-];
 
-const SEED_RECORDS = [
-    { id: 1, date: new Date().getTime() - 86400000 * 2, dateString: new Date(Date.now() - 86400000 * 2).toISOString().split('T')[0], flockId: 'KUB-A', feedConsumedKg: 20, mortalityCount: 0, bodyWeightGrams: 0, notes: 'DOC baru masuk' },
-    { id: 2, date: new Date().getTime() - 86400000, dateString: new Date(Date.now() - 86400000).toISOString().split('T')[0], flockId: 'KUB-A', feedConsumedKg: 22.5, mortalityCount: 1, bodyWeightGrams: 0, notes: 'Aman' },
-    { id: 3, date: new Date().getTime(), dateString: new Date().toISOString().split('T')[0], flockId: 'KUB-A', feedConsumedKg: 25, mortalityCount: 0, bodyWeightGrams: 150, notes: 'Sampling minggu 1' }
-];
-
-const SEED_TRANSACTIONS = [
-    { id: 1, date: new Date().getTime() - 86400000 * 3, dateString: new Date(Date.now() - 86400000 * 3).toISOString().split('T')[0], type: 'EXPENSE', category: 'PAKAN_KG', amount: 850000, quantity: 100, notes: 'Beli Pakan Starter 2 Sak' },
-    { id: 2, date: new Date().getTime() - 86400000 * 3, dateString: new Date(Date.now() - 86400000 * 3).toISOString().split('T')[0], type: 'EXPENSE', category: 'OBAT_PCS', amount: 150000, quantity: 5, notes: 'Vitamin & Vaksin ND' },
-    { id: 3, date: new Date().getTime() - 86400000 * 3, dateString: new Date(Date.now() - 86400000 * 3).toISOString().split('T')[0], type: 'EXPENSE', category: 'DOC', amount: 2500000, quantity: 500, notes: 'Beli 500 ekor DOC KUB' }
-];
-
-const SEED_INVENTORY = { feed: 32.5, medicine: 5 }; // 100kg - 20 - 22.5 - 25
 
 export default function PrimateraPoultryApp() {
     const { isMobile } = useResponsive();
@@ -44,34 +26,23 @@ export default function PrimateraPoultryApp() {
     const [showHarvestForm, setShowHarvestForm] = useState(false);
 
     // Form States
-    const [prodData, setProdData] = useState({ date: new Date().toISOString().split('T')[0], flockId: 'KUB-A', feedConsumedKg: '', mortalityCount: '', bodyWeightGrams: '', notes: '' });
+    const [prodData, setProdData] = useState({ date: new Date().toISOString().split('T')[0], flockId: 'KUB-A', feedConsumedKg: '', medicineUsedPcs: '', mortalityCount: '', bodyWeightGrams: '', notes: '' });
     const [finData, setFinData] = useState({ date: new Date().toISOString().split('T')[0], type: 'EXPENSE', category: 'PAKAN_KG', amount: '', quantity: '', notes: '' });
     const [basketData, setBasketData] = useState({ count: '', weightKg: '' });
 
     const fileInputRef = useRef(null);
 
-    // Initialization & Seeding
+    // Load Existing Data
     useEffect(() => {
-        const checkAndSeed = () => {
-            const hasInitialized = localStorage.getItem('primatera_initialized');
-            if (!hasInitialized) {
-                localStorage.setItem('primatera_records', JSON.stringify(SEED_RECORDS));
-                localStorage.setItem('primatera_tx', JSON.stringify(SEED_TRANSACTIONS));
-                localStorage.setItem('primatera_inventory', JSON.stringify(SEED_INVENTORY));
-                localStorage.setItem('primatera_initialized', 'true');
-            }
+        const savedRec = localStorage.getItem('primatera_records');
+        const savedTx = localStorage.getItem('primatera_tx');
+        const savedInv = localStorage.getItem('primatera_inventory');
+        const savedUser = localStorage.getItem('primatera_user');
 
-            const savedRec = localStorage.getItem('primatera_records');
-            const savedTx = localStorage.getItem('primatera_tx');
-            const savedInv = localStorage.getItem('primatera_inventory');
-            const savedUser = localStorage.getItem('primatera_user');
-
-            if (savedRec) setRecords(JSON.parse(savedRec));
-            if (savedTx) setTransactions(JSON.parse(savedTx));
-            if (savedInv) setInventory(JSON.parse(savedInv));
-            if (savedUser) setCurrentUser(JSON.parse(savedUser));
-        };
-        checkAndSeed();
+        if (savedRec) setRecords(JSON.parse(savedRec));
+        if (savedTx) setTransactions(JSON.parse(savedTx));
+        if (savedInv) setInventory(JSON.parse(savedInv));
+        if (savedUser) setCurrentUser(JSON.parse(savedUser));
     }, []);
 
     // Save to local storage
@@ -112,7 +83,7 @@ export default function PrimateraPoultryApp() {
             }
         } catch (err) {
             console.error('Login API error:', err);
-            setLoginError('Koneksi ke server terputus. Pastikan backend berjalan.');
+            setLoginError('Koneksi ke server terputus. Pastikan backend berjalan dan URL benar.');
         }
     };
 
@@ -134,24 +105,26 @@ export default function PrimateraPoultryApp() {
     const handleProdSubmit = (e) => {
         e.preventDefault();
         const feedUsed = parseFloat(prodData.feedConsumedKg) || 0;
+        const medUsed = parseInt(prodData.medicineUsedPcs) || 0;
         if (inventory.feed < feedUsed) {
             if (!window.confirm(`Stok pakan di gudang (${inventory.feed} Kg) tidak cukup untuk konsumsi ini (${feedUsed} Kg). Tetap simpan dan buat stok minus?`)) return;
         }
 
         const newRecord = {
-            id: Date.now(),
+            id: crypto.randomUUID ? crypto.randomUUID() : Date.now(),
             date: new Date(prodData.date).getTime(),
             dateString: prodData.date,
             flockId: prodData.flockId,
             feedConsumedKg: feedUsed,
+            medicineUsedPcs: medUsed,
             mortalityCount: parseInt(prodData.mortalityCount) || 0,
             bodyWeightGrams: parseInt(prodData.bodyWeightGrams) || 0,
             notes: prodData.notes
         };
 
         setRecords([newRecord, ...records]);
-        setInventory(prev => ({ ...prev, feed: prev.feed - feedUsed }));
-        setProdData(p => ({ ...p, feedConsumedKg: '', mortalityCount: '', bodyWeightGrams: '', notes: '' }));
+        setInventory(prev => ({ ...prev, feed: prev.feed - feedUsed, medicine: prev.medicine - medUsed }));
+        setProdData(p => ({ ...p, feedConsumedKg: '', medicineUsedPcs: '', mortalityCount: '', bodyWeightGrams: '', notes: '' }));
         setShowProdForm(false);
         alert('Data Produksi tersimpan & Stok Gudang diperbarui!');
     };
@@ -200,17 +173,29 @@ export default function PrimateraPoultryApp() {
         const totalWeight = harvestRecords.reduce((s, b) => s + b.weightKg, 0);
         const avgWeight = (totalWeight / totalBirds).toFixed(2);
 
+        const docTransaction = transactions.find(t => t.category === 'DOC');
+        const initialPopulation = docTransaction ? parseInt(docTransaction.quantity || 0) : 0;
+        const totalMortality = records.reduce((s, r) => s + parseInt(r.mortalityCount || 0), 0);
+        const harvestCountSoFar = transactions.filter(t => t.category === 'PANEN_AYAM').reduce((s, t) => s + (t.harvestCount !== undefined ? parseInt(t.harvestCount) : (t.notes?.match(/Panen (\d+) Ekor/) ? parseInt(t.notes.match(/Panen (\d+) Ekor/)[1]) : 0)), 0);
+        const remainingBirds = initialPopulation - totalMortality - harvestCountSoFar;
+
+        if (totalBirds > remainingBirds) {
+            alert(`Stok ayam hidup hanya ${remainingBirds} ekor. Tidak bisa memanen ${totalBirds} ekor.`);
+            return;
+        }
+
         const pricePerKg = prompt(`Total Panen: ${totalBirds} ekor (${totalWeight} Kg).\nMasukkan harga kesepakatan per Kg (Rp):`);
         if (pricePerKg) {
             const income = totalWeight * parseFloat(pricePerKg.replace(/\D/g, ''));
             const newTx = {
-                id: Date.now(),
+                id: crypto.randomUUID ? crypto.randomUUID() : Date.now(),
                 date: new Date().getTime(),
                 dateString: new Date().toISOString().split('T')[0],
                 type: 'INCOME',
                 category: 'PANEN_AYAM',
                 amount: income,
                 quantity: totalWeight,
+                harvestCount: totalBirds,
                 notes: `Panen ${totalBirds} Ekor. ABW: ${avgWeight} Kg. Rp${pricePerKg}/Kg`
             };
             setTransactions([newTx, ...transactions]);
@@ -252,14 +237,7 @@ export default function PrimateraPoultryApp() {
         reader.readAsText(file);
     };
 
-    const resetData = () => {
-        if (window.confirm('PERINGATAN! Semua data Produksi, Keuangan, dan Gudang akan dihapus. Anda yakin ingin mereset siklus ini? Pastikan Anda sudah mem-backup data!')) {
-            setRecords([]);
-            setTransactions([]);
-            setInventory({ feed: 0, medicine: 0 });
-            alert('Sistem berhasil di-reset. Siklus baru siap dimulai.');
-        }
-    }
+
 
     const totalFeed = records.reduce((s, r) => s + (parseFloat(r.feedConsumedKg) || 0), 0);
     const totalMortality = records.reduce((s, r) => s + parseInt(r.mortalityCount || 0), 0);
@@ -307,7 +285,7 @@ export default function PrimateraPoultryApp() {
                         <img
                             src="/Logo_Primatera.png"
                             alt="Primatera Logo"
-                            style={{ width: '100%', maxWidth: '390px', height: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.05))', mixBlendMode: 'multiply' }}
+                            style={{ width: '100%', maxWidth: '200px', height: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.05))', mixBlendMode: 'multiply' }}
                             onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'inline-block'; }}
                         />
                         <div style={{ display: 'none', fontSize: '4rem', backgroundColor: '#fef3c7', padding: '20px', borderRadius: '50%', marginBottom: '1rem' }}>🐣</div>
@@ -596,6 +574,10 @@ export default function PrimateraPoultryApp() {
                                             <input type="number" name="mortalityCount" value={prodData.mortalityCount} onChange={handleProdChange} placeholder="2" required style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '0.95rem', outline: 'none', boxSizing: 'border-box' }} />
                                         </div>
                                         <div style={{ flex: '1 1 150px' }}>
+                                            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', fontWeight: '600', color: '#475569' }}>Obat/Vaksin (Pcs)</label>
+                                            <input type="number" name="medicineUsedPcs" value={prodData.medicineUsedPcs} onChange={handleProdChange} placeholder="0" style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '0.95rem', outline: 'none', boxSizing: 'border-box' }} />
+                                        </div>
+                                        <div style={{ flex: '1 1 150px' }}>
                                             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', fontWeight: '600', color: '#2563eb' }}>Sampling BW (Gram) - <i>Opsional</i></label>
                                             <input type="number" name="bodyWeightGrams" value={prodData.bodyWeightGrams} onChange={handleProdChange} placeholder="Misal: 450" style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #93c5fd', backgroundColor: '#eff6ff', fontSize: '0.95rem', outline: 'none', boxSizing: 'border-box' }} />
                                         </div>
@@ -624,6 +606,7 @@ export default function PrimateraPoultryApp() {
                                                 <th style={{ padding: '16px', fontWeight: '600', color: '#475569', fontSize: '0.9rem' }}>Kandang</th>
                                                 <th style={{ padding: '16px', fontWeight: '600', color: '#475569', fontSize: '0.9rem' }}>Pakan</th>
                                                 <th style={{ padding: '16px', fontWeight: '600', color: '#475569', fontSize: '0.9rem' }}>Kematian</th>
+                                                <th style={{ padding: '16px', fontWeight: '600', color: '#475569', fontSize: '0.9rem' }}>Obat</th>
                                                 <th style={{ padding: '16px', fontWeight: '600', color: '#2563eb', fontSize: '0.9rem' }}>ABW</th>
                                                 {!isViewer && <th style={{ padding: '16px', fontWeight: '600', color: '#475569', fontSize: '0.9rem' }}>Aksi</th>}
                                             </tr>
@@ -635,6 +618,7 @@ export default function PrimateraPoultryApp() {
                                                     <td style={{ padding: '16px' }}><span style={{ backgroundColor: '#fef3c7', color: '#b45309', padding: '4px 8px', borderRadius: '6px', fontSize: '0.8rem', fontWeight: '700' }}>{rec.flockId}</span></td>
                                                     <td style={{ padding: '16px', fontSize: '0.9rem', color: '#334155', fontWeight: '600' }}>{rec.feedConsumedKg} Kg</td>
                                                     <td style={{ padding: '16px', fontSize: '0.9rem', color: rec.mortalityCount > 0 ? '#dc2626' : '#059669', fontWeight: '600' }}>{rec.mortalityCount}</td>
+                                                    <td style={{ padding: '16px', fontSize: '0.9rem', color: '#334155' }}>{rec.medicineUsedPcs ? `${rec.medicineUsedPcs} Pcs` : '-'}</td>
                                                     <td style={{ padding: '16px', fontSize: '0.9rem', color: '#2563eb', fontWeight: '700' }}>{rec.bodyWeightGrams ? `${rec.bodyWeightGrams}g` : '-'}</td>
                                                     {!isViewer && (
                                                         <td style={{ padding: '16px' }}>
@@ -821,15 +805,7 @@ export default function PrimateraPoultryApp() {
                             </div>
                         </div>
 
-                        {!isViewer && (
-                            <div style={{ backgroundColor: '#fef2f2', padding: '2rem', borderRadius: '16px', border: '1px solid #fecaca' }}>
-                                <h3 style={{ margin: '0 0 0.5rem 0', color: '#991b1b', display: 'flex', alignItems: 'center', gap: '8px' }}><AlertTriangle size={20} /> Danger Zone (Tutup Siklus)</h3>
-                                <p style={{ margin: '0 0 1.5rem 0', fontSize: '0.9rem', color: '#b91c1c' }}>Hapus semua data secara permanen untuk memulai siklus baru.</p>
-                                <button onClick={resetData} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '12px 20px', backgroundColor: '#dc2626', color: '#fff', border: 'none', borderRadius: '8px', fontWeight: '700', cursor: 'pointer' }}>
-                                    <Trash2 size={18} /> Reset & Mulai Siklus Baru
-                                </button>
-                            </div>
-                        )}
+
                     </div>
                 )}
             </div>

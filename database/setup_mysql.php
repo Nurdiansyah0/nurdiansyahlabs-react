@@ -110,6 +110,25 @@ try {
     $stmt->execute(['Admin', $hashed, 'nudiansyahdian28.adv@gmail.com']);
     echo "✅ Table `admin_users` created and default user initialized (Admin / Nurdiansyah@024).\n";
 
+    // 7. Create Primatera Users Table
+    $pdo->exec("
+        CREATE TABLE IF NOT EXISTS `primatera_users` (
+            `id` INT AUTO_INCREMENT PRIMARY KEY,
+            `username` VARCHAR(50) NOT NULL UNIQUE,
+            `password_hash` VARCHAR(255) NOT NULL,
+            `name` VARCHAR(100) NOT NULL,
+            `role` ENUM('viewer', 'mitra') DEFAULT 'viewer',
+            `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    ");
+
+    $stmtPrimatera = $pdo->prepare("INSERT IGNORE INTO `primatera_users` (`username`, `password_hash`, `name`, `role`) VALUES (?, ?, ?, ?)");
+    $primateraHash = '$2y$10$VQa19beqbfDTiHVCBf7HmOW9Ph3E7vfHuVejJgWy4M0nuUU7GWe36'; // 'password123'
+    $stmtPrimatera->execute(['userdemo1', $primateraHash, 'Demo User 1', 'viewer']);
+    $stmtPrimatera->execute(['nardi', $primateraHash, 'Mitra Nardi', 'mitra']);
+    $stmtPrimatera->execute(['ardiansyah', $primateraHash, 'Mitra Ardiansyah', 'mitra']);
+    echo "✅ Table `primatera_users` created and 5 ERP users initialized (password123).\n";
+
     echo "\n🎉 All database schemas have been fully synchronized to match your application's structure!\n";
 
 } catch (PDOException $e) {
