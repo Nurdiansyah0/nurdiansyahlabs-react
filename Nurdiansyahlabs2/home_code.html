@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#481965",
+                    "inverse-on-surface": "#2b2d53",
+                    "surface-container": "#1a1b41",
+                    "primary-container": "#7b2cbf",
+                    "background": "#0e0e35",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-lowest": "#08082f",
+                    "error-container": "#93000a",
+                    "outline-variant": "#4c4353",
+                    "on-surface-variant": "#cfc2d5",
+                    "tertiary": "#e5b5ff",
+                    "surface-tint": "#deb7ff",
+                    "primary-fixed-dim": "#deb7ff",
+                    "inverse-surface": "#e1e0ff",
+                    "on-tertiary-fixed": "#30004b",
+                    "tertiary-fixed-dim": "#e5b5ff",
+                    "secondary-container": "#5b308c",
+                    "error": "#ffb4ab",
+                    "on-background": "#e1e0ff",
+                    "secondary-fixed-dim": "#dbb8ff",
+                    "inverse-primary": "#8234c6",
+                    "on-primary-fixed": "#2d0050",
+                    "tertiary-fixed": "#f4d9ff",
+                    "tertiary-container": "#734490",
+                    "surface-variant": "#303158",
+                    "on-secondary-fixed": "#2b0053",
+                    "on-tertiary-fixed-variant": "#60327d",
+                    "surface-container-highest": "#303158",
+                    "on-secondary-fixed-variant": "#5b308c",
+                    "outline": "#988d9e",
+                    "on-secondary": "#441573",
+                    "surface-bright": "#34355d",
+                    "primary": "#deb7ff",
+                    "surface": "#0e0e35",
+                    "surface-container-low": "#16173d",
+                    "on-primary-container": "#e4c2ff",
+                    "on-secondary-container": "#cea2ff",
+                    "primary-fixed": "#f1dbff",
+                    "on-primary-fixed-variant": "#680eac",
+                    "on-error": "#690005",
+                    "secondary": "#dbb8ff",
+                    "secondary-fixed": "#efdbff",
+                    "on-tertiary-container": "#e9c0ff",
+                    "on-primary": "#4a007f",
+                    "surface-container-high": "#25264c",
+                    "surface-dim": "#0e0e35",
+                    "on-surface": "#e1e0ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "2xl": "1rem",
+                    "3xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      body {
+        background-color: #0e0e35;
+        color: #e1e0ff;
+        font-family: 'Inter', sans-serif;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-card {
+        background: rgba(48, 49, 88, 0.4);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(152, 141, 158, 0.15);
+      }
+      .glow-shadow {
+        box-shadow: 0 0 40px 0 rgba(123, 44, 191, 0.15);
+      }
+      .floating {
+        animation: floating 6s ease-in-out infinite;
+      }
+      @keyframes floating {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+      }
+    </style>
+</head>
+<body class="bg-background selection:bg-primary-container selection:text-on-primary-container overflow-x-hidden">
+<!-- TopNavBar Shell -->
+<nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-3 bg-indigo-950/40 backdrop-blur-xl rounded-full mt-6 mx-auto w-[90%] max-w-7xl border border-white/10 shadow-[0_0_40px_0_rgba(123,44,191,0.1)] font-['Plus_Jakarta_Sans'] tracking-tight">
+<div class="flex items-center gap-2">
+<span class="text-2xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-purple-200 to-purple-500">Celestial Digital</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-purple-200 font-semibold border-b-2 border-purple-400/50 pb-1 hover:scale-105 transition-transform duration-300" href="#">Home</a>
+<a class="text-indigo-200/70 hover:text-white hover:scale-105 transition-all duration-300" href="#">Services</a>
+<a class="text-indigo-200/70 hover:text-white hover:scale-105 transition-all duration-300" href="#">Data Solutions</a>
+<a class="text-indigo-200/70 hover:text-white hover:scale-105 transition-all duration-300" href="#">Portfolio</a>
+<a class="text-indigo-200/70 hover:text-white hover:scale-105 transition-all duration-300" href="#">Contact</a>
+</div>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2.5 rounded-full font-semibold hover:scale-105 active:scale-95 transition-all duration-300">
+            Get Started
+        </button>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="relative min-h-screen flex items-center pt-24 overflow-hidden">
+<!-- Background Elements -->
+<div class="absolute top-0 left-0 w-full h-full -z-10 bg-surface">
+<div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/10 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-tertiary/10 rounded-full blur-[100px]"></div>
+</div>
+<div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7 space-y-8">
+<div class="inline-flex items-center px-4 py-2 rounded-full glass-card text-primary text-sm font-medium tracking-wide">
+<span class="w-2 h-2 rounded-full bg-primary mr-3 shadow-[0_0_8px_#deb7ff]"></span>
+                        ARCHITECTING THE FUTURE
+                    </div>
+<h1 class="text-6xl md:text-8xl font-extrabold font-headline leading-none tracking-tighter text-on-surface">
+                        Ethereal <br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-tertiary to-primary-container">Digital Precision.</span>
+</h1>
+<p class="text-xl md:text-2xl text-on-surface-variant font-body font-light leading-relaxed max-w-2xl">
+                        We transcend traditional digital boundaries to create weightless experiences that resonate with intellectual sophistication and cosmic scale.
+                    </p>
+<div class="flex flex-wrap gap-6 pt-4">
+<button class="px-8 py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary rounded-3xl font-bold text-lg hover:scale-105 active:scale-95 transition-all duration-300 shadow-2xl shadow-primary/20">
+                            Explore Universe
+                        </button>
+<button class="px-8 py-4 bg-surface-container-highest/30 backdrop-blur-md border border-outline-variant/30 text-on-surface rounded-3xl font-bold text-lg hover:bg-surface-container-highest transition-all duration-300">
+                            Our Portfolio
+                        </button>
+</div>
+</div>
+<div class="lg:col-span-5 relative flex justify-center items-center">
+<!-- Floating 3D Object Representation -->
+<div class="relative w-full aspect-square max-w-[500px]">
+<div class="absolute inset-0 bg-gradient-to-tr from-primary/30 to-transparent rounded-full blur-3xl animate-pulse"></div>
+<div class="floating relative z-10 w-full h-full rounded-[4rem] glass-card overflow-hidden flex items-center justify-center p-8">
+<img class="w-full h-full object-cover rounded-3xl opacity-80" data-alt="abstract iridescent 3D geometric shape floating in a dark cosmic void with glowing purple and blue highlights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaOtdh4HLts1w5gkDt03gc7K9EIC2w25ZfCrVIHh3_CH8lWmQs4mMM3kn1o1tvdzQiLH2rLpkdUFKslHDqdp6xNNRMV_oDy44NgQDNp1Q6l2oQJS9keLgJtxOSALceP2ogOM5KtwC0G1L65tPjDsM9ZkDkPDrDGz98bb43f2jN3Je98c-Ouzz12OYYWj3S1Fn7012-DAobFRJyT6xVxJS6G_K8hvpIFV5dNi26dKt8cQ2XjNynUKxESwWClHyFgwc7MTBk2RFb_LI"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container/80 to-transparent"></div>
+<div class="absolute bottom-8 left-8">
+<p class="text-label text-xs uppercase tracking-widest text-primary mb-1">Current State</p>
+<p class="text-headline text-2xl font-bold">Orbit v4.2.0</p>
+</div>
+</div>
+<!-- Orbital Accent -->
+<div class="absolute -top-10 -right-10 w-32 h-32 rounded-full glass-card border border-primary/20 flex items-center justify-center animate-spin [animation-duration:15s]">
+<span class="material-symbols-outlined text-primary text-4xl">rocket_launch</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Core Services Section -->
+<section class="py-32 relative bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-8">
+<div class="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
+<div class="max-w-2xl">
+<label class="text-label text-sm uppercase tracking-[0.2em] text-primary mb-4 block">Ecosystem</label>
+<h2 class="text-4xl md:text-6xl font-headline font-bold text-on-surface">Precision Crafted <span class="text-outline">Solutions.</span></h2>
+</div>
+<div class="md:w-1/3 text-on-surface-variant font-light">
+                        Leveraging astronomical data sets and celestial aesthetics to build high-performance digital environments.
+                    </div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[600px]">
+<div class="md:col-span-8 group relative overflow-hidden rounded-3xl glass-card p-12 flex flex-col justify-between hover:border-primary/40 transition-all duration-500">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full -mr-20 -mt-20 group-hover:bg-primary/10 transition-colors duration-500"></div>
+<div>
+<span class="material-symbols-outlined text-primary text-5xl mb-6">desktop_cloud</span>
+<h3 class="text-3xl font-headline font-bold text-on-surface mb-4">Web Architecture</h3>
+<p class="text-on-surface-variant max-w-md text-lg leading-relaxed">We don't just build sites; we craft performant digital cathedrals using next-gen frameworks and fluid, weightless UI principles.</p>
+</div>
+<div class="flex items-center gap-4 text-primary font-bold tracking-wide">
+                            LEARN MORE <span class="material-symbols-outlined">arrow_right_alt</span>
+</div>
+</div>
+<div class="md:col-span-4 group relative overflow-hidden rounded-3xl bg-surface-container-highest p-10 flex flex-col justify-end hover:bg-surface-variant transition-all duration-500 border border-white/5">
+<div class="absolute top-10 left-10 text-on-surface-variant/20">
+<span class="material-symbols-outlined text-9xl">insights</span>
+</div>
+<div class="relative z-10">
+<h3 class="text-2xl font-headline font-bold text-on-surface mb-3">SEO Intelligence</h3>
+<p class="text-on-surface-variant text-sm mb-6">Algorithmic dominance through deep metadata optimization and semantic structure mapping.</p>
+<span class="material-symbols-outlined text-primary">analytics</span>
+</div>
+</div>
+<div class="md:col-span-4 group relative overflow-hidden rounded-3xl bg-primary-container p-10 flex flex-col justify-between hover:brightness-110 transition-all duration-500 shadow-xl shadow-primary-container/20">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-white text-4xl">database</span>
+<span class="text-white/50 text-xs font-bold uppercase tracking-widest">Real-time</span>
+</div>
+<div>
+<h3 class="text-2xl font-headline font-bold text-white mb-2">Data Solutions</h3>
+<p class="text-white/80 text-sm">Visualizing complex data constellations into actionable business insights.</p>
+</div>
+</div>
+<div class="md:col-span-8 group relative overflow-hidden rounded-3xl glass-card p-10 flex items-center justify-between border border-outline-variant/20">
+<div class="max-w-sm">
+<h3 class="text-2xl font-headline font-bold text-on-surface mb-3">Product Strategy</h3>
+<p class="text-on-surface-variant text-sm">Defining the roadmap for digital products that aim for escape velocity and market leadership.</p>
+</div>
+<div class="hidden sm:block">
+<div class="flex -space-x-4">
+<div class="w-12 h-12 rounded-full border-2 border-surface bg-surface-container flex items-center justify-center"><span class="material-symbols-outlined text-xs">auto_awesome</span></div>
+<div class="w-12 h-12 rounded-full border-2 border-surface bg-surface-container flex items-center justify-center"><span class="material-symbols-outlined text-xs">star</span></div>
+<div class="w-12 h-12 rounded-full border-2 border-surface bg-surface-container flex items-center justify-center"><span class="material-symbols-outlined text-xs">all_inclusive</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials Section -->
+<section class="py-32 relative bg-surface">
+<div class="max-w-7xl mx-auto px-8">
+<div class="text-center mb-24">
+<label class="text-label text-sm uppercase tracking-[0.2em] text-tertiary mb-4 block">Feedback</label>
+<h2 class="text-4xl md:text-6xl font-headline font-bold text-on-surface">Celestial <span class="text-primary">Accolades.</span></h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Testimonial Card 1 -->
+<div class="glass-card p-8 rounded-3xl flex flex-col gap-8 border border-white/5 shadow-2xl relative">
+<div class="absolute -top-6 -left-2 text-primary/10 select-none">
+<span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">format_quote</span>
+</div>
+<p class="text-on-surface font-light leading-relaxed text-lg relative z-10 italic">
+                            "The transition to Celestial Digital was like moving from a grounded station to a warp-capable ship. Our conversion rates reached escape velocity within weeks."
+                        </p>
+<div class="flex items-center gap-4 mt-auto">
+<div class="w-12 h-12 rounded-full bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="portrait of a confident tech executive in a modern office with soft blue lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-wbSO7ha7NT-HkUTdFXtnQQIbBxmvpo5fXo-Y3coQ2QALb0sJgqSnytM963xRYVc0Arn7EU6pTQ-2S-pS9WxcmLUB9G1-pY_ROdX0L_UymSl0cDfHDQKnDqYOBxCCGWCcFM1FMUJf1dLD3MA4JyTvUpF_be1e_HF9dvtlXwNidY6GeCpsdotZxCnGTEDxgKm9Kori5_G5kX8I0dkVso4WER4mZOy4pZIkYxVdJ6JMRCLovKftn5TfMPSRpTSOkLIW0COvnn8Q5mw"/>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Aris Thorne</h4>
+<p class="text-xs text-on-surface-variant uppercase tracking-widest">CTO, Nebula Systems</p>
+</div>
+</div>
+</div>
+<!-- Testimonial Card 2 (Offset for floating effect) -->
+<div class="glass-card p-8 rounded-3xl flex flex-col gap-8 border border-white/5 shadow-2xl relative md:-translate-y-12">
+<div class="absolute -top-6 -left-2 text-tertiary/10 select-none">
+<span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">format_quote</span>
+</div>
+<p class="text-on-surface font-light leading-relaxed text-lg relative z-10 italic">
+                            "Weightless UI isn't just a gimmick—it's a philosophy that has transformed how our users interact with complex data dashboards."
+                        </p>
+<div class="flex items-center gap-4 mt-auto">
+<div class="w-12 h-12 rounded-full bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="close-up portrait of a female entrepreneur with a gentle smile and professional attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADFxNWcmwIAYOGhhewDQ8e-OUKdbzJGyeEWHrdS692WXhJZvlIIgydo0sPFPlwCxNZQtp1_5JLO8bciTnAJqn4rsWDrubCjTWUyjLLU1FioBz4clA4yP8j4SxnG3UKSyGRYSVCxeVJlTN_TKR_dQqzzvxBxgNJpRSbVclyVpoEtKf03Xtb44xg4tlavMeKTizuvnIv8YewpZ6YTZAhDk2FsZYyu2hsr2zELLmT7VyxDNMegnUKLGWEwtd9LdWesbACEQMIDvsNUSc"/>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Lyra Vance</h4>
+<p class="text-xs text-on-surface-variant uppercase tracking-widest">Founder, Astra Flow</p>
+</div>
+</div>
+</div>
+<!-- Testimonial Card 3 -->
+<div class="glass-card p-8 rounded-3xl flex flex-col gap-8 border border-white/5 shadow-2xl relative">
+<div class="absolute -top-6 -left-2 text-primary/10 select-none">
+<span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">format_quote</span>
+</div>
+<p class="text-on-surface font-light leading-relaxed text-lg relative z-10 italic">
+                            "Their eye for ethereal precision is unmatched. They turned our outdated platform into a bespoke editorial experience that breathes luxury."
+                        </p>
+<div class="flex items-center gap-4 mt-auto">
+<div class="w-12 h-12 rounded-full bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="headshot of a creative director with glasses, modern haircut, and stylish dark clothing" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCregM77vT8RXl3wv6YDjFmoDk8OulDb-qFGWLNLThCn64DpbQk0b_fcLTD6ihhJSrgtSm5g4pL879Fg5zNgJh7SiXS3dm5z4G9sroJub7UglqcHishmjyg0Hvd3rp6wXWZDfCX7K7bwugMHgid1vLToOpk18Ls9TgfWgHwtvrrx3Krxso2WVVQHTTDf5FhI4W_d6RzoLKuWiAtAXxVB_PhPJ67z_4ZUJceTQReaY2_b28oH5u-9bt3bPv0M0FJvCoC10QqqTdXohs"/>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Marcus Sol</h4>
+<p class="text-xs text-on-surface-variant uppercase tracking-widest">Creative Director, Nova</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-40 relative overflow-hidden">
+<div class="absolute inset-0 -z-10 bg-gradient-to-b from-surface to-background"></div>
+<div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[150%] h-[300px] bg-primary/10 rounded-[100%] blur-[120px]"></div>
+<div class="max-w-5xl mx-auto px-8 glass-card rounded-[3rem] p-16 text-center relative border border-primary/20 glow-shadow">
+<div class="inline-flex p-4 rounded-full bg-primary/10 text-primary mb-8 animate-bounce">
+<span class="material-symbols-outlined text-4xl">rocket</span>
+</div>
+<h2 class="text-5xl md:text-7xl font-headline font-extrabold text-on-surface mb-8 tracking-tighter">Ready to Launch?</h2>
+<p class="text-xl md:text-2xl text-on-surface-variant font-light mb-12 max-w-2xl mx-auto">
+                    The next evolution of your digital presence begins here. Join the celestial orbit of industry leaders.
+                </p>
+<div class="flex flex-col sm:flex-row justify-center items-center gap-6">
+<button class="w-full sm:w-auto px-12 py-5 bg-gradient-to-r from-primary to-primary-container text-on-primary rounded-full font-bold text-xl hover:scale-105 active:scale-95 transition-all shadow-xl shadow-primary/30">
+                        Initiate Project
+                    </button>
+<button class="w-full sm:w-auto px-12 py-5 bg-white/5 backdrop-blur-xl border border-white/10 text-on-surface rounded-full font-bold text-xl hover:bg-white/10 transition-all">
+                        Schedule a Sync
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Shell -->
+<footer class="bg-indigo-950 full-width pt-20 pb-10 tonal-shift-from-surface-to-surface-container-low font-['Inter'] text-sm tracking-wide">
+<div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex flex-col items-center md:items-start gap-4">
+<span class="text-lg font-bold text-purple-200">Celestial Digital Architect</span>
+<p class="text-indigo-300/50 text-center md:text-left max-w-xs">Crafting weightless digital experiences with ethereal precision and cosmic scale.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8 text-purple-300">
+<a class="text-indigo-300/50 hover:text-purple-200 transition-colors" href="#">Privacy Policy</a>
+<a class="text-indigo-300/50 hover:text-purple-200 transition-colors" href="#">Terms of Service</a>
+<a class="text-indigo-300/50 hover:text-purple-200 transition-colors" href="#">LinkedIn</a>
+<a class="text-indigo-300/50 hover:text-purple-200 transition-colors" href="#">GitHub</a>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-8 mt-16 pt-8 border-t border-white/5 text-center text-indigo-300/30">
+<p>© 2024 Celestial Digital Architect. All rights reserved.</p>
+</div>
+</footer>
+</body></html>
