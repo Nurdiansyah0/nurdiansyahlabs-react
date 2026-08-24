@@ -41,6 +41,11 @@ export default function LandingPageShowcase() {
                 title={project.title}
                 description={project.description}
                 canonical={`/showcase/landing-page/${project.slug}`}
+                breadcrumbs={[
+                    { name: 'Home', url: '/' },
+                    { name: 'Showcases', url: '/#services' },
+                    { name: 'Landing Pages', url: `/showcase/landing-page/${project.slug}` }
+                ]}
             />
             <ShowcaseLayout
                 title={project.title}
