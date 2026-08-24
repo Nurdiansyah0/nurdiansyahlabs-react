@@ -21,6 +21,7 @@ const BlogListing = lazy(() => import('./pages/BlogListing'))
 const BlogPage = lazy(() => import('./pages/BlogPage'))
 const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'))
 const ServicePage = lazy(() => import('./pages/ServicePage'))
+const IndustryServicePage = lazy(() => import('./pages/IndustryServicePage'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 const loadFeatures = () => import('framer-motion').then(res => res.domAnimation)
@@ -46,6 +47,8 @@ export default function App() {
                         <Route path="/blog" element={<BlogListing />} />
                         <Route path="/blog/:geo/:langSlug" element={<BlogPage />} />
                         <Route path="/blog/:slug" element={<BlogPage />} />
+                        {/* Programmatic SEO Routes */}
+                        <Route path="/layanan/industri/:industrySlug" element={<IndustryServicePage />} />
                         <Route path="/admin" element={
                             <ProtectedRoute>
                                 <AdminDashboard />
