@@ -19,7 +19,7 @@ const DataScienceShowcase = lazy(() => import('./showcases/DataScienceShowcase')
 const TrendsDashboard = lazy(() => import('./pages/TrendsDashboard'))
 const BlogListing = lazy(() => import('./pages/BlogListing'))
 const BlogPage = lazy(() => import('./pages/BlogPage'))
-const AdminDashboard = lazy(() => import('./pages/AdminDashboard'))
+const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'))
 const ServicePage = lazy(() => import('./pages/ServicePage'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
