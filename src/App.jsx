@@ -4,6 +4,7 @@ import { LanguageProvider } from './i18n/LanguageContext'
 import { LazyMotion } from 'framer-motion'
 import PageTracker from './components/PageTracker'
 import ErrorBoundary from './components/ErrorBoundary'
+import ProtectedRoute from './components/ProtectedRoute'
 import { getOptimizedImg } from './utils/imgHelper'
 
 // Eagerly load the Home page because it's required for the initial render
@@ -45,7 +46,11 @@ export default function App() {
                         <Route path="/blog" element={<BlogListing />} />
                         <Route path="/blog/:geo/:langSlug" element={<BlogPage />} />
                         <Route path="/blog/:slug" element={<BlogPage />} />
-                        <Route path="/admin" element={<AdminDashboard />} />
+                        <Route path="/admin" element={
+                            <ProtectedRoute>
+                                <AdminDashboard />
+                            </ProtectedRoute>
+                        } />
                         <Route path="/services/:slug" element={<ServicePage />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>
