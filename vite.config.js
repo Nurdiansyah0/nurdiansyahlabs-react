@@ -3,9 +3,13 @@ import react from '@vitejs/plugin-react'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import prerender from '@prerenderer/rollup-plugin'
+import programmaticData from './src/data/programmatic-seo.json' assert { type: 'json' }
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
+
+// Generate dynamic routes
+const programmaticRoutes = programmaticData.industries.map(ind => `/layanan/industri/${ind.slug}`)
 
 export default defineConfig({
     plugins: [
@@ -19,7 +23,8 @@ export default defineConfig({
                 '/showcase/landing-page/toko-laptop-batam',
                 '/showcase/landing-page/batam-chicken-supplier',
                 '/showcase/landing-page/warung-makan',
-                '/showcase/landing-page/batam-rental-mobil'
+                '/showcase/landing-page/batam-rental-mobil',
+                ...programmaticRoutes
             ],
             renderer: '@prerenderer/renderer-puppeteer',
             rendererOptions: {

@@ -1,0 +1,46 @@
+{
+  "industries": [
+    {
+      "slug": "klinik-kesehatan",
+      "name": "Klinik & Layanan Kesehatan",
+      "heroTitle": "Jasa Pembuatan Website & Analisis Data untuk Klinik Kesehatan",
+      "heroDesc": "Tingkatkan kepercayaan pasien dengan website profesional dan optimalkan operasional klinik Anda melalui dashboard data analitik.",
+      "painPoint": "Banyak pasien potensial mencari klinik di Google, namun website yang lambat atau tidak ada sistem reservasi online membuat mereka beralih ke kompetitor.",
+      "solution": "Kami membangun website super cepat dengan integrasi WhatsApp/reservasi, serta dashboard rekam medis untuk memprediksi tren kunjungan pasien.",
+      "serviceHighlight": "Fullstack Web App & Data Analytics",
+      "benefits": [
+        "Sistem Reservasi Online 24/7",
+        "Dashboard Tren Kunjungan Pasien",
+        "Tampilan Mobile-Friendly & SEO Optimal"
+      ]
+    },
+    {
+      "slug": "toko-online-retail",
+      "name": "Toko Online & Retail (E-commerce)",
+      "heroTitle": "Tingkatkan Penjualan Retail dengan Web E-commerce & Prediksi AI",
+      "heroDesc": "Jangan biarkan inventaris menumpuk. Kami membangun sistem toko online kustom dan algoritma AI untuk memprediksi tren penjualan Anda.",
+      "painPoint": "Biaya platform marketplace semakin tinggi dan perang harga membuat margin tipis. Anda butuh platform mandiri dan strategi berbasis data.",
+      "solution": "Kami mendevelop e-commerce mandiri (tanpa potongan komisi) dan sistem rekomendasi Machine Learning untuk meningkatkan cross-selling.",
+      "serviceHighlight": "E-Commerce Custom & Machine Learning",
+      "benefits": [
+        "Sistem Toko Online Mandiri (Bebas Komisi)",
+        "Algoritma Rekomendasi Produk (AI)",
+        "Analisis Keranjang Belanja (Market Basket Analysis)"
+      ]
+    },
+    {
+      "slug": "bisnis-fb-kuliner",
+      "name": "Bisnis F&B dan Kuliner",
+      "heroTitle": "Landing Page Menarik & Analisis Menu untuk Bisnis Kuliner",
+      "heroDesc": "Buat pelanggan lapar sejak pandangan pertama. Kami mendesain landing page kuliner konversi tinggi dan menganalisis performa menu Anda.",
+      "painPoint": "Sulit menonjol di antara ribuan restoran di aplikasi ojek online. Anda butuh branding digital sendiri untuk layanan katering atau reservasi.",
+      "solution": "Landing page elegan yang menonjolkan visual menu Anda, terintegrasi langsung ke WhatsApp untuk pesanan katering atau reservasi meja tanpa pihak ketiga.",
+      "serviceHighlight": "Landing Page & Business Intelligence",
+      "benefits": [
+        "Galeri Menu Visual Resolusi Tinggi",
+        "Integrasi Tombol Pesan WhatsApp",
+        "Analisis Laporan Penjualan (Menu Terlaris)"
+      ]
+    }
+  ]
+}
