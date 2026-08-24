@@ -1,0 +1,20 @@
+# NurdiansyahLabs
+
+> NurdiansyahLabs is a professional portfolio and service platform showcasing expertise in Fullstack Web Development, Data Science, and Data Analytics.
+
+## About
+NurdiansyahLabs offers cutting-edge tech solutions, specializing in creating high-performance landing pages, robust fullstack applications, and deriving insights through data analysis and data science methodologies.
+
+## Services & Showcases
+- **Fullstack Development**: End-to-end web applications using React, Node.js, PHP, and MySQL.
+- **Data Analytics**: Dashboard creation, business intelligence, and trends analysis.
+- **Data Science**: Machine learning models and predictive analytics.
+- **Landing Pages**: Optimized, high-conversion landing pages for businesses.
+
+## Content & Resources
+- [Blog](/blog): Technical articles, tutorials, and insights on web development and data science.
+- [Trends Dashboard](/trends): Real-time analytics and data visualizations.
+- [Services](/service): Detailed breakdown of available consulting and development services.
+
+## Contact
+For inquiries or collaborations, please visit the contact section on the main website.
