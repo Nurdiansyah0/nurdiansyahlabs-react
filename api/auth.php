@@ -11,10 +11,48 @@ use PHPMailer\PHPMailer\Exception;
 
 header('Content-Type: application/json');
 require_once __DIR__ . '/cors.php';
-setCorsHeaders(['POST', 'OPTIONS']);
+setCorsHeaders(['GET', 'POST', 'OPTIONS']);
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
+    exit;
+}
+
+$action = $_GET['action'] ?? '';
+
+// ── Verify Token (GET) ───────────────────────────────────────────────────────
+// Used by the React ProtectedRoute component to validate a stored session token.
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && $action === 'verify') {
+    require_once __DIR__ . '/../database/db.php';
+    $pdo = getDB();
+
+    if (!$pdo) {
+        http_response_code(500);
+        echo json_encode(['error' => 'Database connection failed']);
+        exit;
+    }
+
+    $providedToken = $_SERVER['HTTP_X_ADMIN_TOKEN'] ?? '';
+    if (empty($providedToken) && function_exists('apache_request_headers')) {
+        $headers = apache_request_headers();
+        $providedToken = $headers['X-Admin-Token'] ?? $headers['x-admin-token'] ?? '';
+    }
+
+    if (empty($providedToken)) {
+        http_response_code(401);
+        echo json_encode(['error' => 'No token provided']);
+        exit;
+    }
+
+    $stmt = $pdo->prepare("SELECT id FROM admin_users WHERE token = :token");
+    $stmt->execute(['token' => $providedToken]);
+    if ($stmt->fetch()) {
+        http_response_code(200);
+        echo json_encode(['status' => 'valid']);
+    } else {
+        http_response_code(401);
+        echo json_encode(['error' => 'Invalid or expired token']);
+    }
     exit;
 }
 
@@ -33,7 +71,6 @@ if (!$pdo) {
     exit;
 }
 
-$action = $_GET['action'] ?? '';
 $inputJSON = file_get_contents('php://input');
 $input = json_decode($inputJSON, true) ?? [];
 
