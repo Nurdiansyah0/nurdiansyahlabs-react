@@ -7,7 +7,7 @@ export const en = {
     'hero.h1.1': 'Production-Grade ', 'hero.h1.2': 'Web Applications ', 'hero.h1.3': '& Modern Digital Systems.',
     'hero.desc': 'We engineer high-performance web applications, operational ERPs, and data dashboards with clean modular architectures (React, Python Flask, PostgreSQL) built for measurable business growth.',
     'hero.cta1': 'Explore Live Demos', 'hero.cta2': 'Start Project Consultation',
-    'hero.stat1': 'Clients Served', 'hero.stat2': 'Service Pillars', 'hero.stat3': 'Experience',
+    'hero.stat1': 'Verified Systems', 'hero.stat2': 'Service Pillars', 'hero.stat3': 'Experience',
     // Services
     'svc.title': 'Services & Pricing', 'svc.subtitle': 'Choose the right pillar for your business growth.',
     'svc.hint': 'Click any card to see live example projects',
@@ -74,7 +74,7 @@ export const id = {
     'hero.h1.1': 'Aplikasi Web Skala Produksi ', 'hero.h1.2': '& Sistem Digital Modern ', 'hero.h1.3': 'Untuk Pertumbuhan Bisnis.',
     'hero.desc': 'Kami membangun aplikasi web berkinerja tinggi, sistem ERP operasional, dan dashboard analitik dengan arsitektur modular bersih (React, Python Flask, PostgreSQL) yang siap pakai untuk akselerasi bisnis Anda.',
     'hero.cta1': 'Lihat Demo Langsung', 'hero.cta2': 'Mulai Konsultasi Proyek',
-    'hero.stat1': 'Klien Dilayani', 'hero.stat2': 'Pilar Layanan', 'hero.stat3': 'Pengalaman',
+    'hero.stat1': 'Sistem Terverifikasi', 'hero.stat2': 'Pilar Layanan', 'hero.stat3': 'Pengalaman',
     'svc.title': 'Layanan & Harga', 'svc.subtitle': 'Pilih pilar yang tepat untuk pertumbuhan bisnis Anda.',
     'svc.hint': 'Klik kartu untuk melihat contoh proyek',
     'svc.startingFrom': 'Mulai dari', 'svc.idealFor': 'Ideal untuk', 'svc.viewExamples': 'Lihat Contoh Proyek', 'svc.perMonth': '/bulan',

@@ -2,9 +2,12 @@ import { useState, useRef, useEffect } from 'react'
 import { m, AnimatePresence } from 'framer-motion'
 import { Loader2, CheckCircle, AlertCircle, ChevronDown } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
+import { useTracker } from '../hooks/useTracker'
 
 export default function ContactForm() {
     const { t } = useLanguage()
+    const { trackEvent } = useTracker()
+    const [hasStartedForm, setHasStartedForm] = useState(false)
     const [formData, setFormData] = useState({
         name: '',
         contact: '',
@@ -29,10 +32,18 @@ export default function ContactForm() {
     }, [])
 
     const handleChange = (e) => {
+        if (!hasStartedForm) {
+            setHasStartedForm(true)
+            trackEvent('lead_form_start', { field: e.target.name })
+        }
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
     const handleServiceSelect = (value) => {
+        if (!hasStartedForm) {
+            setHasStartedForm(true)
+            trackEvent('lead_form_start', { field: 'service' })
+        }
         setFormData({ ...formData, service: value })
         setIsDropdownOpen(false)
     }
@@ -41,6 +52,7 @@ export default function ContactForm() {
         e.preventDefault()
         setStatus('submitting')
         setErrorMsg('')
+        trackEvent('lead_form_submit', { service: formData.service || 'General' })
 
         try {
             const res = await fetch('/api/v1/leads', {
@@ -53,11 +65,14 @@ export default function ContactForm() {
 
             if (res.ok) {
                 setStatus('success')
+                trackEvent('lead_form_success', { service: formData.service || 'General', lead_id: data.data?.id })
                 setFormData({ name: '', contact: '', service: '', message: '' })
+                setHasStartedForm(false)
                 // Reset to idle after 5 seconds
                 setTimeout(() => setStatus('idle'), 5000)
             } else {
-                throw new Error(data.error || 'Terjadi kesalahan saat mengirim pesan.')
+                trackEvent('lead_form_error', { code: data.error?.code || 'VALIDATION_ERROR' })
+                throw new Error(data.error?.message || data.error || 'Terjadi kesalahan saat mengirim pesan.')
             }
         } catch (err) {
             setStatus('error')
