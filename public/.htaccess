@@ -50,7 +50,7 @@ ServerSignature Off
     RewriteRule ^$ /index_b.html [L]
 
     # ── Sitemap Routing ────────────────────────────────────────────
-    RewriteRule ^sitemap\.xml$ /api/sitemap.php [L]
+    # RewriteRule ^sitemap\.xml$ /api/sitemap.php [L] (served as static file directly)
 
     # ── React Router: SPA Fallback ─────────────────────────────────────────
     # Must come AFTER A/B rules

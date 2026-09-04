@@ -34,9 +34,10 @@ export default function ShowcaseLayout({ children, techStack }) {
                     href="https://nurdiansyahlabs.com" 
                     target="_blank" 
                     rel="noopener noreferrer dofollow"
+                    aria-label="View main NurdiansyahLabs platform"
                     style={{
                         position: 'fixed',
-                        bottom: isMobile ? '5rem' : '2rem',
+                        bottom: isMobile ? 'clamp(4rem, 8vh, 5rem)' : '2rem',
                         right: isMobile ? '1rem' : '2rem',
                         zIndex: 99999, // Allow modals (100001) to appear above this
                         background: 'rgba(15, 23, 42, 0.85)',
@@ -100,9 +101,10 @@ export default function ShowcaseLayout({ children, techStack }) {
                     <>
                         <button 
                             onClick={() => setShowStack(true)}
+                            aria-label="View Software Stack"
                             style={{
                                 position: 'fixed',
-                                bottom: isMobile ? '5rem' : '2rem',
+                                bottom: isMobile ? 'clamp(4rem, 8vh, 5rem)' : '2rem',
                                 left: isMobile ? '1rem' : '2rem',
                                 zIndex: 99999,
                                 background: 'rgba(255, 255, 255, 0.9)',

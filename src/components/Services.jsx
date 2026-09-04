@@ -35,6 +35,7 @@ const services = [
 
 function ServiceCard({ service, onClick, index, t, formatCurrency, isMobile }) {
     const [hovered, setHovered] = useState(false)
+    const [focused, setFocused] = useState(false)
     return (
         <m.div
             onClick={onClick}
@@ -44,14 +45,19 @@ function ServiceCard({ service, onClick, index, t, formatCurrency, isMobile }) {
             transition={{ duration: 0.5, delay: index * 0.1 }}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
+            onFocus={() => setFocused(true)}
+            onBlur={() => setFocused(false)}
             role="button" tabIndex={0}
+            aria-label={`${t(service.tTitle)} - ${t('svc.viewExamples')}`}
             onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && onClick()}
             style={{
                 background: '#fff', borderRadius: '20px',
                 padding: 'var(--card-padding)',
-                border: `1.5px solid ${hovered ? service.accentColor + '40' : '#e5e7eb'}`,
-                boxShadow: hovered ? `0 20px 40px -10px ${service.accentColor}22` : '0 2px 12px rgba(0,0,0,0.04)',
-                transform: hovered ? 'translateY(-6px)' : 'translateY(0)',
+                border: `1.5px solid ${focused ? service.accentColor : (hovered ? service.accentColor + '40' : '#e5e7eb')}`,
+                outline: focused ? `2px solid ${service.accentColor}` : 'none',
+                outlineOffset: '2px',
+                boxShadow: (hovered || focused) ? `0 20px 40px -10px ${service.accentColor}22` : '0 2px 12px rgba(0,0,0,0.04)',
+                transform: (hovered || focused) ? 'translateY(-6px)' : 'translateY(0)',
                 transition: 'all 0.25s ease', cursor: 'pointer',
                 display: 'flex', flexDirection: 'column', height: '100%',
             }}>

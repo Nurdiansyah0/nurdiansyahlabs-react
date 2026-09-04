@@ -151,8 +151,9 @@ export default function ContactForm() {
                         )}
 
                         <div>
-                            <label style={labelStyle}>{t('contact.nameLabel')}</label>
-                            <input aria-label="Form input"
+                            <label htmlFor="contact-name" style={labelStyle}>{t('contact.nameLabel')}</label>
+                            <input
+                                id="contact-name"
                                 type="text" name="name" required value={formData.name} onChange={handleChange}
                                 placeholder={t('contact.namePlaceholder')} style={inputStyle}
                                 disabled={status === 'submitting'}
@@ -162,8 +163,9 @@ export default function ContactForm() {
                         </div>
 
                         <div>
-                            <label style={labelStyle}>{t('contact.emailLabel')}</label>
-                            <input aria-label="Form input"
+                            <label htmlFor="contact-channel" style={labelStyle}>{t('contact.emailLabel')}</label>
+                            <input
+                                id="contact-channel"
                                 type="text" name="contact" required value={formData.contact} onChange={handleChange}
                                 placeholder={t('contact.emailPlaceholder')} style={inputStyle}
                                 disabled={status === 'submitting'}
@@ -173,30 +175,46 @@ export default function ContactForm() {
                         </div>
 
                         <div ref={dropdownRef} style={{ position: 'relative' }}>
-                            <label style={labelStyle}>{t('contact.serviceLabel')}</label>
+                            <label id="service-select-label" style={labelStyle}>{t('contact.serviceLabel')}</label>
                             
-                            {/* Hidden input to fulfill required attribute logic if needed, though we can just check before submit */}
+                            {/* Hidden input to fulfill required attribute logic if needed */}
                             <input type="hidden" name="service" value={formData.service} required />
                             
-                            <div 
+                            <button
+                                type="button"
+                                id="service-select-button"
+                                aria-haspopup="listbox"
+                                aria-expanded={isDropdownOpen}
+                                aria-labelledby="service-select-label service-select-button"
                                 onClick={() => !status.includes('submitting') && setIsDropdownOpen(!isDropdownOpen)}
+                                onKeyDown={e => {
+                                    if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+                                        e.preventDefault()
+                                        setIsDropdownOpen(true)
+                                    } else if (e.key === 'Escape') {
+                                        setIsDropdownOpen(false)
+                                    }
+                                }}
                                 style={{ 
                                     ...inputStyle, 
                                     cursor: status === 'submitting' ? 'not-allowed' : 'pointer',
                                     display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                                     borderColor: isDropdownOpen ? '#3730a3' : '#e2e8f0',
-                                    color: formData.service ? '#0f172a' : '#94a3b8'
+                                    color: formData.service ? '#0f172a' : '#94a3b8',
+                                    textAlign: 'left'
                                 }}
                             >
                                 <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                                     {selectedServiceLabel}
                                 </span>
                                 <ChevronDown size={18} style={{ transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s', flexShrink: 0, color: '#64748b' }} />
-                            </div>
+                            </button>
 
                             <AnimatePresence>
                                 {isDropdownOpen && (
                                     <m.div
+                                        role="listbox"
+                                        aria-labelledby="service-select-label"
                                         initial={{ opacity: 0, y: -10 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         exit={{ opacity: 0, y: -10 }}
@@ -209,7 +227,11 @@ export default function ContactForm() {
                                         }}
                                     >
                                         <div 
+                                            role="option"
+                                            aria-selected={formData.service === ''}
+                                            tabIndex={0}
                                             onClick={() => handleServiceSelect('')}
+                                            onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && handleServiceSelect('')}
                                             style={{
                                                 padding: '10px 14px', borderRadius: '8px', cursor: 'pointer',
                                                 fontSize: '0.9rem', transition: 'background 0.2s', color: '#64748b',
@@ -224,7 +246,11 @@ export default function ContactForm() {
                                         {serviceOptions.map((opt) => (
                                             <div
                                                 key={opt.value}
+                                                role="option"
+                                                aria-selected={formData.service === opt.value}
+                                                tabIndex={0}
                                                 onClick={() => handleServiceSelect(opt.value)}
+                                                onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && handleServiceSelect(opt.value)}
                                                 style={{
                                                     padding: '10px 14px', borderRadius: '8px', cursor: 'pointer',
                                                     fontSize: '0.9rem', transition: 'background 0.2s', color: '#0f172a',
@@ -248,8 +274,9 @@ export default function ContactForm() {
                         </div>
 
                         <div>
-                            <label style={labelStyle}>{t('contact.msgLabel')}</label>
-                            <textarea aria-label="Text input"
+                            <label htmlFor="contact-message" style={labelStyle}>{t('contact.msgLabel')}</label>
+                            <textarea
+                                id="contact-message"
                                 name="message" required value={formData.message} onChange={handleChange}
                                 placeholder={t('contact.msgPlaceholder')}
                                 style={{ ...inputStyle, minHeight: '120px', resize: 'vertical' }}
@@ -259,7 +286,8 @@ export default function ContactForm() {
                             />
                         </div>
 
-                        <button aria-label="Action button"
+                        <button
+                            aria-label={status === 'submitting' ? 'Sending proposal inquiry...' : t('contact.btnSubmit')}
                             type="submit"
                             disabled={status === 'submitting'}
                             style={{
