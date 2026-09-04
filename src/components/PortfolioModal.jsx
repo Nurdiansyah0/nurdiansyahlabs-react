@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { X, Lightbulb, MessageCircle, PlayCircle, ArrowRight } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
@@ -114,6 +114,8 @@ export default function PortfolioModal({ serviceKey, onClose }) {
     const { isMobile, isSm } = useResponsive()
     const { trackEvent } = useTracker()
     const data = portfolioData[serviceKey]
+    const modalRef = useRef(null)
+    const previousActiveElement = useRef(null)
 
     // Track modal open
     useEffect(() => {
@@ -122,14 +124,63 @@ export default function PortfolioModal({ serviceKey, onClose }) {
         }
     }, [data, trackEvent])
 
-    // Lock body scroll & ESC key
+    // Lock body scroll, manage focus trap, and handle ESC key
     useEffect(() => {
+        previousActiveElement.current = document.activeElement
         document.body.style.overflow = 'hidden'
-        const esc = (e) => e.key === 'Escape' && onClose()
-        document.addEventListener('keydown', esc)
+
+        // Focus the first interactive element inside the modal
+        const focusTimer = setTimeout(() => {
+            if (modalRef.current) {
+                const focusableElements = modalRef.current.querySelectorAll(
+                    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+                )
+                if (focusableElements.length > 0) {
+                    focusableElements[0].focus()
+                }
+            }
+        }, 50)
+
+        const handleKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                e.preventDefault()
+                onClose()
+                return
+            }
+
+            if (e.key === 'Tab' && modalRef.current) {
+                const focusables = Array.from(modalRef.current.querySelectorAll(
+                    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+                )).filter(el => !el.hasAttribute('disabled') && el.offsetParent !== null)
+
+                if (focusables.length === 0) return
+
+                const firstElement = focusables[0]
+                const lastElement = focusables[focusables.length - 1]
+
+                if (e.shiftKey) {
+                    if (document.activeElement === firstElement) {
+                        e.preventDefault()
+                        lastElement.focus()
+                    }
+                } else {
+                    if (document.activeElement === lastElement) {
+                        e.preventDefault()
+                        firstElement.focus()
+                    }
+                }
+            }
+        }
+
+        document.addEventListener('keydown', handleKeyDown)
+
         return () => {
+            clearTimeout(focusTimer)
             document.body.style.overflow = ''
-            document.removeEventListener('keydown', esc)
+            document.removeEventListener('keydown', handleKeyDown)
+            if (previousActiveElement.current && typeof previousActiveElement.current.focus === 'function') {
+                previousActiveElement.current.focus()
+            }
         }
     }, [onClose])
 
@@ -138,8 +189,12 @@ export default function PortfolioModal({ serviceKey, onClose }) {
     return (
         <div
             onClick={e => e.target === e.currentTarget && onClose()}
-            className="modal-overlay">
-            <div className="modal-inner animate-slideUp">
+            className="modal-overlay"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="portfolio-modal-title"
+        >
+            <div ref={modalRef} className="modal-inner animate-slideUp">
                 {/* Header */}
                 <div className="modal-header" style={{ background: data.headerBg }}>
                     <div style={{ flex: 1, minWidth: 0 }}>
@@ -151,7 +206,7 @@ export default function PortfolioModal({ serviceKey, onClose }) {
                         }}>
                             {data.badgeLabel}
                         </span>
-                        <h2 style={{
+                        <h2 id="portfolio-modal-title" style={{
                             fontSize: isSm ? '1.15rem' : '1.6rem',
                             fontWeight: 800, color: '#111827', margin: '0 0 5px', letterSpacing: '-0.02em',
                             wordBreak: 'break-word',

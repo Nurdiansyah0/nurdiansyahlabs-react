@@ -30,10 +30,39 @@
   --gray-800: #1f2937;
   --gray-900: #111827;
 
+  /* UI/UX Pro Max Semantic Design Tokens */
+  --color-bg-canvas: #090818;
+  --color-bg-surface: #ffffff;
+  --color-bg-subtle: #f8fafc;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #334155;
+  --color-text-muted: #64748b;
+  --color-brand-primary: #312e81;
+  --color-brand-accent: #4338ca;
+  --color-cta-green: #166534;
+  --color-cta-green-hover: #16a34a;
+  --color-border-subtle: #e2e8f0;
+  --color-border-active: #cbd5e1;
+  --color-status-success: #15803d;
+  --color-status-error: #b91c1c;
+  --color-status-warning: #b45309;
+
   /* Responsive spacing tokens */
   --section-py: clamp(3rem, 8vw, 5rem);
   --card-padding: clamp(1rem, 4vw, 1.5rem);
   --gap-cards: clamp(1rem, 3vw, 1.5rem);
+}
+
+/* Accessibility: Respect user vestibular motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 html {

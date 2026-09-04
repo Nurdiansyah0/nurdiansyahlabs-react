@@ -86,26 +86,41 @@ export default function Navbar() {
 
                         {/* Language selector */}
                         <div style={{ position: 'relative' }}>
-                            <button aria-label="Action button" onClick={() => setLangOpen(!langOpen)} style={{
-                                display: 'flex', alignItems: 'center', gap: '6px',
-                                padding: '6px 12px', borderRadius: '8px',
-                                border: '1px solid #e5e7eb', background: '#f9fafb',
-                                color: '#374151', fontSize: '0.82rem', fontWeight: 600, cursor: 'pointer',
-                                minHeight: '36px',
-                            }}>
+                            <button
+                                aria-label="Select language"
+                                aria-haspopup="true"
+                                aria-expanded={langOpen}
+                                onClick={() => setLangOpen(!langOpen)}
+                                onKeyDown={e => {
+                                    if (e.key === 'Escape') setLangOpen(false)
+                                }}
+                                style={{
+                                    display: 'flex', alignItems: 'center', gap: '6px',
+                                    padding: '6px 12px', borderRadius: '8px',
+                                    border: '1px solid #e5e7eb', background: '#f9fafb',
+                                    color: '#374151', fontSize: '0.82rem', fontWeight: 600, cursor: 'pointer',
+                                    minHeight: '36px',
+                                }}>
                                 <Globe size={14} color="#3730a3" />
                                 {lang.toUpperCase()}
                                 <ChevronDown size={12} />
                             </button>
                             {langOpen && (
-                                <div style={{
-                                    position: 'absolute', top: '100%', right: 0, marginTop: '6px',
-                                    background: '#fff', border: '1px solid #e5e7eb', borderRadius: '12px',
-                                    boxShadow: '0 12px 40px rgba(0,0,0,0.12)', padding: '6px',
-                                    width: '200px', maxHeight: '320px', overflowY: 'auto', zIndex: 999,
-                                }}>
+                                <div
+                                    role="menu"
+                                    aria-label="Language choices"
+                                    style={{
+                                        position: 'absolute', top: '100%', right: 0, marginTop: '6px',
+                                        background: '#fff', border: '1px solid #e5e7eb', borderRadius: '12px',
+                                        boxShadow: '0 12px 40px rgba(0,0,0,0.12)', padding: '6px',
+                                        width: '200px', maxHeight: '320px', overflowY: 'auto', zIndex: 999,
+                                    }}>
                                     {supportedLangs.map(code => (
-                                        <button aria-label="Action button" key={code} onClick={() => { setLang(code); setLangOpen(false) }}
+                                        <button
+                                            role="menuitem"
+                                            aria-label={`Switch to ${langNames[code]}`}
+                                            key={code}
+                                            onClick={() => { setLang(code); setLangOpen(false) }}
                                             style={{
                                                 display: 'block', width: '100%', textAlign: 'left',
                                                 padding: '8px 12px', borderRadius: '8px', border: 'none',
