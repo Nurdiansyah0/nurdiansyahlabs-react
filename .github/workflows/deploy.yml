@@ -33,6 +33,20 @@ jobs:
         env:
           NODE_ENV: production
 
+      # ─── 4.5. SEO Drift Validation ────────────────────────────────
+      - name: 🔍 SEO Drift Validation
+        run: |
+          # Start a local static server to serve the build output
+          npx serve -s dist -l 3000 &
+          SERVE_PID=$!
+          # Wait for server to start
+          sleep 3
+          # Run the drift script against the local build
+          export SEO_TARGET_URL="http://127.0.0.1:3000"
+          python3 scripts/seo_drift.py
+          # Kill the server
+          kill $SERVE_PID
+
       # ─── 5. Prepare Full Deployment Package ───────────────────────
       - name: 🗂️ Prepare Deployment Package
         run: |

@@ -28,4 +28,4 @@ if ('serviceWorker' in navigator) {
 }
 
 // Dispatch event for vite-plugin-prerender
-document.dispatchEvent(new Event('render-event'))
+setTimeout(() => document.dispatchEvent(new Event('render-event')), 2000)

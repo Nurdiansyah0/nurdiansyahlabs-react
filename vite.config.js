@@ -35,7 +35,7 @@ export default defineConfig({
             ],
             renderer: '@prerenderer/renderer-puppeteer',
             rendererOptions: {
-                renderAfterTime: 2000 // wait 2 seconds for react-helmet to inject
+                renderAfterTime: 5000 // wait 2 seconds for react-helmet to inject
             },
             server: {
                 port: 3000,
