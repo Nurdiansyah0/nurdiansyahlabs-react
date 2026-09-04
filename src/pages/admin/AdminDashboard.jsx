@@ -50,7 +50,7 @@ export default function AdminDashboard() {
     const handleLogin = async (e) => {
         e.preventDefault(); setAuthError(''); setAuthMessage('')
         try {
-            const res = await fetch('/api/auth.php?action=login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username: usernameInput, password: passwordInput }) })
+            const res = await fetch('/api/v1/auth/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username: usernameInput, password: passwordInput }) })
             const data = await res.json()
             if (res.ok && data.status === 'success') { setToken(data.token); sessionStorage.setItem('adminToken', data.token); setIsAuthed(true) }
             else setAuthError(data.error || 'Invalid credentials')
@@ -60,7 +60,7 @@ export default function AdminDashboard() {
     const handleForgotPassword = async (e) => {
         e.preventDefault(); setAuthError(''); setAuthMessage('')
         try {
-            const res = await fetch('/api/auth.php?action=forgot_password', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ identifier: usernameInput }) })
+            const res = await fetch('/api/v1/auth/forgot_password', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ identifier: usernameInput }) })
             const data = await res.json()
             if (res.ok) setAuthMessage(data.message || 'Check your email for reset instructions.')
             else setAuthError(data.error || 'Failed to process request')
@@ -70,7 +70,7 @@ export default function AdminDashboard() {
     const handleResetPassword = async (e) => {
         e.preventDefault(); setAuthError(''); setAuthMessage('')
         try {
-            const res = await fetch('/api/auth.php?action=reset_password', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token: resetTokenParam, password: passwordInput }) })
+            const res = await fetch('/api/v1/auth/reset_password', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token: resetTokenParam, password: passwordInput }) })
             const data = await res.json()
             if (res.ok) { setAuthMessage('Password reset successfully! You can now log in.'); setTimeout(() => { window.location.href = '/admin' }, 2000) }
             else setAuthError(data.error || 'Failed to reset password')
@@ -90,10 +90,10 @@ export default function AdminDashboard() {
         const load = async () => {
             setLoading(true)
             try {
-                if (activeTab === 'posts') { const r = await authFetch('/api/admin.php?action=posts'); if (r.ok) setPosts((await r.json()).posts || []) }
-                else if (activeTab === 'leads') { const r = await authFetch('/api/admin.php?action=leads'); if (r.ok) setLeads((await r.json()).leads || []) }
-                else if (activeTab === 'analytics') { const r = await authFetch('/api/analytics.php'); if (r.ok) setAnalyticsData(await r.json()) }
-                else if (activeTab === 'products') { const r = await authFetch(`/api/products.php?app=${productApp}`); if (r.ok) setProducts((await r.json()).data || []) }
+                if (activeTab === 'posts') { const r = await authFetch('/api/v1/admin?action=posts'); if (r.ok) setPosts((await r.json()).posts || []) }
+                else if (activeTab === 'leads') { const r = await authFetch('/api/v1/admin?action=leads'); if (r.ok) setLeads((await r.json()).leads || []) }
+                else if (activeTab === 'analytics') { const r = await authFetch('/api/v1/analytics'); if (r.ok) setAnalyticsData(await r.json()) }
+                else if (activeTab === 'products') { const r = await authFetch(`/api/v1/products?app=${productApp}`); if (r.ok) setProducts((await r.json()).data || []) }
             } catch (err) { console.error('Failed to load data', err) }
             finally { setLoading(false) }
         }
@@ -103,20 +103,20 @@ export default function AdminDashboard() {
     // ── CRUD Handlers ──────────────────────────────────────────────────────────
     const handleDeletePost = async (slug) => {
         if (!window.confirm('Are you sure you want to delete this post?')) return
-        try { const r = await authFetch(`/api/admin.php?action=posts&slug=${slug}`, { method: 'DELETE' }); if (r.ok) setPosts(posts.filter(p => p.slug !== slug)) }
+        try { const r = await authFetch(`/api/v1/admin?action=posts&slug=${slug}`, { method: 'DELETE' }); if (r.ok) setPosts(posts.filter(p => p.slug !== slug)) }
         catch { alert('Failed to delete post.') }
     }
 
     const handleDeleteProduct = async (id) => {
         if (!window.confirm('Are you sure you want to delete this product?')) return
-        try { const r = await authFetch(`/api/products.php?id=${id}`, { method: 'DELETE' }); if (r.ok) setProducts(products.filter(p => p.id !== id)) }
+        try { const r = await authFetch(`/api/v1/products?id=${id}`, { method: 'DELETE' }); if (r.ok) setProducts(products.filter(p => p.id !== id)) }
         catch { alert('Failed to delete product.') }
     }
 
     const handleDeleteLead = async (id) => {
         if (!window.confirm('Are you sure you want to delete this lead message?')) return
         try {
-            const r = await authFetch(`/api/admin.php?action=leads&id=${id}`, { method: 'DELETE' })
+            const r = await authFetch(`/api/v1/admin?action=leads&id=${id}`, { method: 'DELETE' })
             if (r.ok) setLeads(leads.filter(l => l.id !== id))
             else alert('Failed to delete lead on server.')
         } catch { alert('Failed to connect to server to delete lead.') }
@@ -134,7 +134,7 @@ export default function AdminDashboard() {
                 else if (Array.isArray(dataToSave.extras.colors)) dataToSave.extras.colors = dataToSave.extras.colors.map(c => c.trim()).filter(Boolean)
             }
             if (dataToSave.price && typeof dataToSave.price === 'string') dataToSave.price = dataToSave.price.replace(/\./g, '')
-            const endpoint = activeTab === 'products' ? '/api/products.php' : '/api/admin.php?action=posts'
+            const endpoint = activeTab === 'products' ? '/api/v1/products' : '/api/v1/admin?action=posts'
             const r = await authFetch(endpoint, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(dataToSave) })
             if (r.ok) {
                 if (activeTab === 'products') {
@@ -157,7 +157,7 @@ export default function AdminDashboard() {
             if (r.ok) {
                 if (d.status === 'success') {
                     alert(`Success: Generated article for keyword '${d.keyword_found}'`)
-                    const postsRes = await authFetch('/api/admin.php?action=posts')
+                    const postsRes = await authFetch('/api/v1/admin?action=posts')
                     if (postsRes.ok) setPosts((await postsRes.json()).posts || [])
                 } else if (d.status === 'skipped') alert(d.message)
             } else alert(d.error || 'Failed to generate trend post.')
@@ -170,7 +170,7 @@ export default function AdminDashboard() {
         setUploadingImage(true)
         const formData = new FormData(); formData.append('image', file)
         try {
-            const r = await fetch('/api/upload_image.php', { method: 'POST', headers: { 'X-Admin-Token': token }, body: formData })
+            const r = await fetch('/api/v1/media/upload', { method: 'POST', headers: { 'X-Admin-Token': token }, body: formData })
             const d = await r.json()
             if (r.ok && d.status === 'success') {
                 const imgData = d.image_data || { url: d.url, alt: 'Uploaded Image', is_primary: true }

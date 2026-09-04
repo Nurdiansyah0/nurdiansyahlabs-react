@@ -34,3 +34,13 @@ diagnose_db.php
 
 # Unit tests
 /tests/
+
+# Sensitive Keys & Environment Files
+connection
+connection.pub
+postgre-env
+*.db
+*.sqlite
+__pycache__/
+*.pyc
+.pytest_cache/

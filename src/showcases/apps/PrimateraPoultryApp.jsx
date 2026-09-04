@@ -36,7 +36,7 @@ export default function PrimateraPoultryApp() {
     useEffect(() => {
         const loadData = async () => {
             try {
-                const res = await fetch('/api/primatera_api.php');
+                const res = await fetch('/api/v1/primatera/records');
                 const data = await res.json();
                 if (data.success) {
                     setRecords(data.records || []);
@@ -80,7 +80,7 @@ export default function PrimateraPoultryApp() {
         }
 
         try {
-            const res = await fetch('/api/primatera_auth.php', {
+            const res = await fetch('/api/v1/primatera/auth', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

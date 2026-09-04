@@ -19,7 +19,7 @@ export default function ConsultantApp() {
 
     useEffect(() => {
         setLoading(true)
-        fetch('/api/products.php?app=batam-chicken-supplier')
+        fetch('/api/v1/products?app=batam-chicken-supplier')
             .then(res => res.json())
             .then(data => {
                 if (data.status === 'success' && data.data && data.data.length > 0) {

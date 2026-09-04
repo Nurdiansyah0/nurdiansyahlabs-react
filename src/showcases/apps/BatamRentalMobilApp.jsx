@@ -182,7 +182,7 @@ function Fleet() {
     const currentLang = i18n.language || 'id';
     const { rate, symbol, locale } = exchangeRates[currentLang] || exchangeRates['id'];
     useEffect(() => {
-        fetch('/api/products.php?app=batam-rental-mobil')
+        fetch('/api/v1/products?app=batam-rental-mobil')
             .then(r => r.json())
             .then(d => {
                 if (d.status === 'success') {

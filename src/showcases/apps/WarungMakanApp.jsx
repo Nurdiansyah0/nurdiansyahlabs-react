@@ -14,7 +14,7 @@ export default function WarungMakanApp() {
     const [menu, setMenu] = useState([])
     const [loading, setLoading] = useState(true)
     useEffect(() => {
-        fetch('/api/products.php?app=warung-makan')
+        fetch('/api/v1/products?app=warung-makan')
             .then(res => res.json())
             .then(data => {
                 if (data.status === 'success' && data.data && data.data.length > 0) {

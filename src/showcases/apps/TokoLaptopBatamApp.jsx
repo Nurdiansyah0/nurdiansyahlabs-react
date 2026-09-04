@@ -40,7 +40,7 @@ export default function TokoLaptopBatamApp() {
 
     useEffect(() => {
         setLoading(true)
-        fetch('/api/products.php?app=toko-laptop-batam')
+        fetch('/api/v1/products?app=toko-laptop-batam')
             .then(res => res.json())
             .then(res => {
                 if (res.status === 'success' && res.data?.length > 0) {
