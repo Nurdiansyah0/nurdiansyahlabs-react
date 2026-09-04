@@ -60,7 +60,7 @@ export default function PrimateraPoultryApp() {
 
     const syncToBackend = async (resource, payload, method = 'POST') => {
         try {
-            await fetch(`/api/primatera_api.php?resource=${resource}`, {
+            await fetch(`/api/v1/primatera/${resource}`, {
                 method,
                 headers: { 'Content-Type': 'application/json' },
                 body: payload ? JSON.stringify(payload) : null

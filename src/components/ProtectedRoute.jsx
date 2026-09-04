@@ -9,7 +9,7 @@ import { useState, useEffect } from 'react'
  *    show the login form. The guard's job is to prevent a *stale/forged*
  *    token from bypassing the UI and accessing dashboard data.
  *
- *  - Token found → verify it server-side (GET /api/auth.php?action=verify).
+ *  - Token found → verify it server-side (GET /api/v1/auth/verify).
  *      · Valid   → render children normally.
  *      · Invalid → clear the bad token + render children (AdminDashboard
  *                  sees no token and shows the login form).
