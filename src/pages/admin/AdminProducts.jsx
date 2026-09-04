@@ -67,7 +67,7 @@ export default function AdminProducts({
         onSetUploadingImage(true)
         const formData = new FormData()
         formData.append('image', file)
-        fetch('/api/upload_image.php', { method: 'POST', headers: { 'X-Admin-Token': token }, body: formData })
+        fetch('/api/v1/media/upload', { method: 'POST', headers: { 'X-Admin-Token': token }, body: formData })
             .then(r => r.json())
             .then(d => {
                 if (d.status === 'success') setEditingPost(p => ({ ...p, image_url: d.url }))

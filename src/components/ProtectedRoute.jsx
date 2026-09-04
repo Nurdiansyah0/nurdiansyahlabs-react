@@ -28,7 +28,7 @@ export default function ProtectedRoute({ children }) {
         const token = sessionStorage.getItem('adminToken')
         if (!token) return // nothing to verify
 
-        fetch('/api/auth.php?action=verify', {
+        fetch('/api/v1/auth/verify', {
             method: 'GET',
             headers: { 'X-Admin-Token': token },
         })

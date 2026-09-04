@@ -108,7 +108,7 @@ export default function TrendsDashboard() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await fetch('/api/trends.php')
+                const res = await fetch('/api/v1/trends')
                 if (res.status === 202) {
                     setError('loading')
                     setLoading(false)

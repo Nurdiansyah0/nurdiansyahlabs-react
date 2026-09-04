@@ -29,7 +29,7 @@ export default function BlogListing() {
 
         const fetchPosts = async () => {
             try {
-                const res = await fetch('/api/posts.php')
+                const res = await fetch('/api/v1/posts')
                 const data = await res.json()
                 if (data.posts) {
                     setArticles(data.posts)
