@@ -2,11 +2,13 @@ import { m } from 'framer-motion'
 import { MessageCircle } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useResponsive } from '../hooks/useResponsive'
+import { useTracker } from '../hooks/useTracker'
 import TechStack3D from './TechStack3D'
 
 export default function Hero() {
     const { t } = useLanguage()
     const { isMobile, isSm } = useResponsive()
+    const { trackEvent } = useTracker()
 
     return (
         <section style={{
@@ -69,6 +71,7 @@ export default function Hero() {
                     className="hero-btns">
                     <a
                         href="#services"
+                        onClick={() => trackEvent('hero_secondary_cta', { target: '#services', text: t('hero.cta1') })}
                         style={{
                             background: '#fff', color: '#312e81',
                             padding: isSm ? '11px 22px' : '14px 32px',
@@ -85,6 +88,10 @@ export default function Hero() {
                     <a
                         href="https://wa.me/6282176012461"
                         target="_blank" rel="noreferrer"
+                        onClick={() => {
+                            trackEvent('hero_primary_cta', { target: 'whatsapp', text: t('hero.cta2') });
+                            trackEvent('whatsapp_click', { location: 'hero' });
+                        }}
                         style={{
                             background: '#166534', color: '#fff',
                             padding: isSm ? '11px 22px' : '14px 32px',
@@ -105,7 +112,7 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.5 }}
                     className="hero-stats">
-                    {[['50+', t('hero.stat1')], ['4', t('hero.stat2')], ['3yrs+', t('hero.stat3')]].map(([num, label]) => (
+                    {[['18+', t('hero.stat1')], ['4', t('hero.stat2')], ['3yrs+', t('hero.stat3')]].map(([num, label]) => (
                         <div key={label} style={{ textAlign: 'center' }}>
                             <div style={{ fontSize: isSm ? '1.4rem' : '1.75rem', fontWeight: 800, color: '#a5b4fc' }}>{num}</div>
                             <div style={{ fontSize: isSm ? '0.75rem' : '0.85rem', color: '#a5b4fc', marginTop: '2px' }}>{label}</div>

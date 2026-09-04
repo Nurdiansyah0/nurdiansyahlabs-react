@@ -2,11 +2,13 @@ import { m } from 'framer-motion'
 import { MessageCircle, Mail } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useResponsive } from '../hooks/useResponsive'
+import { useTracker } from '../hooks/useTracker'
 import ContactForm from './ContactForm'
 
 export default function CTA() {
     const { t } = useLanguage()
     const { isMobile, isSm } = useResponsive()
+    const { trackEvent } = useTracker()
 
     return (
         <section id="contact" style={{
@@ -36,6 +38,7 @@ export default function CTA() {
                             <a
                                 href="https://wa.me/6282176012461"
                                 target="_blank" rel="noreferrer"
+                                onClick={() => trackEvent('whatsapp_click', { location: 'footer_cta' })}
                                 style={{
                                     display: 'inline-flex', alignItems: 'center', gap: '10px',
                                     background: '#166534', color: '#fff',
@@ -50,6 +53,7 @@ export default function CTA() {
                             </a>
                             <a
                                 href="mailto:admin@nurdiansyahlabs.com"
+                                onClick={() => trackEvent('email_click', { location: 'footer_cta' })}
                                 style={{
                                     display: 'inline-flex', alignItems: 'center', gap: '10px',
                                     background: 'rgba(255,255,255,0.1)', color: '#fff',
