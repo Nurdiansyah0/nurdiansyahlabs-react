@@ -3,10 +3,10 @@ export const en = {
     // Navbar
     'nav.services': 'Services', 'nav.whyUs': 'Why Us', 'nav.contact': 'Contact',
     // Hero
-    'hero.badge': 'TRUSTED BY 50+ CLIENTS ACROSS INDONESIA',
-    'hero.h1.1': 'Scale Your Business With ', 'hero.h1.2': 'High-Converting Websites ', 'hero.h1.3': '& Data-Driven Insights.',
-    'hero.desc': 'Stop losing customers to slow websites and guesswork. We build professional web apps, landing pages, and dashboards that drive real growth for your business.',
-    'hero.cta1': 'Explore Services', 'hero.cta2': 'Get Free Consultation',
+    'hero.badge': 'FULLSTACK SOFTWARE ENGINEERING & DATA INTELLIGENCE',
+    'hero.h1.1': 'Production-Grade ', 'hero.h1.2': 'Web Applications ', 'hero.h1.3': '& Modern Digital Systems.',
+    'hero.desc': 'We engineer high-performance web applications, operational ERPs, and data dashboards with clean modular architectures (React, Python Flask, PostgreSQL) built for measurable business growth.',
+    'hero.cta1': 'Explore Live Demos', 'hero.cta2': 'Start Project Consultation',
     'hero.stat1': 'Clients Served', 'hero.stat2': 'Service Pillars', 'hero.stat3': 'Experience',
     // Services
     'svc.title': 'Services & Pricing', 'svc.subtitle': 'Choose the right pillar for your business growth.',
@@ -69,10 +69,11 @@ export const en = {
 
 export const id = {
     'nav.services': 'Layanan', 'nav.whyUs': 'Mengapa Kami', 'nav.contact': 'Kontak',
-    'hero.badge': 'DIPERCAYA 50+ KLIEN DI SELURUH INDONESIA',
-    'hero.h1.1': 'Tingkatkan Skala Bisnis Dengan ', 'hero.h1.2': 'Website Cepat & ', 'hero.h1.3': 'Analisis Data Akurat.',
-    'hero.desc': 'Jangan biarkan pelanggan pergi karena website yang lambat atau keputusan tanpa data. Kami membangun aplikasi web dan dashboard yang mendorong pertumbuhan nyata untuk bisnis Anda.',
-    'hero.cta1': 'Jelajahi Layanan', 'hero.cta2': 'Konsultasi Gratis',
+    // Hero
+    'hero.badge': 'REKAYASA PERANGKAT LUNAK FULLSTACK & DATA BISNIS',
+    'hero.h1.1': 'Aplikasi Web Skala Produksi ', 'hero.h1.2': '& Sistem Digital Modern ', 'hero.h1.3': 'Untuk Pertumbuhan Bisnis.',
+    'hero.desc': 'Kami membangun aplikasi web berkinerja tinggi, sistem ERP operasional, dan dashboard analitik dengan arsitektur modular bersih (React, Python Flask, PostgreSQL) yang siap pakai untuk akselerasi bisnis Anda.',
+    'hero.cta1': 'Lihat Demo Langsung', 'hero.cta2': 'Mulai Konsultasi Proyek',
     'hero.stat1': 'Klien Dilayani', 'hero.stat2': 'Pilar Layanan', 'hero.stat3': 'Pengalaman',
     'svc.title': 'Layanan & Harga', 'svc.subtitle': 'Pilih pilar yang tepat untuk pertumbuhan bisnis Anda.',
     'svc.hint': 'Klik kartu untuk melihat contoh proyek',

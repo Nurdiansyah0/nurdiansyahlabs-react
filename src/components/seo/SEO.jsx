@@ -8,23 +8,49 @@ const SEO = ({ title, description, keywords, canonical, image, type = 'website',
     const fullCanonical = canonical ? `${siteUrl}${canonical}` : siteUrl;
     const defaultDesc = "Jasa pembuatan landing page, web developer fullstack, analisis data bisnis, dan data science terpercaya di Indonesia.";
 
-    // Base Organization/Service schema
-    const orgSchema = {
+    // Enhanced Connected Schema Graph (Person + WebSite + ProfessionalService)
+    const schemaGraph = {
         "@context": "https://schema.org",
-        "@type": "ProfessionalService",
-        "name": "NurdiansyahLabs",
-        "image": `${siteUrl}/assets/Logo.png`,
-        "url": siteUrl,
-        "telephone": "+6282176012461",
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Indonesia",
-            "addressCountry": "ID"
-        },
-        "description": "Enterprise-grade web development, SEO, and Data Analytics.",
-        "sameAs": [
-            "https://github.com/Nurdiansyah0",
-            "https://www.linkedin.com/in/nurdiansyah-ds"
+        "@graph": [
+            {
+                "@type": "Person",
+                "@id": `${siteUrl}/#person`,
+                "name": "Nurdiansyah",
+                "url": siteUrl,
+                "jobTitle": "Fullstack Software Engineer & Architect",
+                "sameAs": [
+                    "https://github.com/Nurdiansyah0",
+                    "https://www.linkedin.com/in/nurdiansyah-ds"
+                ]
+            },
+            {
+                "@type": "WebSite",
+                "@id": `${siteUrl}/#website`,
+                "url": siteUrl,
+                "name": "NurdiansyahLabs",
+                "publisher": { "@id": `${siteUrl}/#person` },
+                "inLanguage": ["id-ID", "en-US"]
+            },
+            {
+                "@type": "ProfessionalService",
+                "@id": `${siteUrl}/#service`,
+                "name": "NurdiansyahLabs",
+                "image": `${siteUrl}/assets/Logo.png`,
+                "url": siteUrl,
+                "founder": { "@id": `${siteUrl}/#person` },
+                "telephone": "+6282176012461",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Batam",
+                    "addressRegion": "Kepulauan Riau",
+                    "addressCountry": "ID"
+                },
+                "description": "Fullstack web applications, business dashboards, and custom operational ERP systems.",
+                "sameAs": [
+                    "https://github.com/Nurdiansyah0",
+                    "https://www.linkedin.com/in/nurdiansyah-ds"
+                ]
+            }
         ]
     };
 
@@ -64,9 +90,9 @@ const SEO = ({ title, description, keywords, canonical, image, type = 'website',
             <meta name="twitter:description" content={description || defaultDesc} />
             {image && <meta name="twitter:image" content={`${siteUrl}${image}`} />}
 
-            {/* Schema.org JSON-LD */}
+            {/* Schema.org JSON-LD Graph */}
             <script type="application/ld+json">
-                {JSON.stringify(orgSchema)}
+                {JSON.stringify(schemaGraph)}
             </script>
             {breadcrumbSchema && (
                 <script type="application/ld+json">
