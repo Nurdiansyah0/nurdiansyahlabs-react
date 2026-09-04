@@ -152,15 +152,15 @@ export default function AdminDashboard() {
     const handleGenerateTrendPost = async (geo = 'ID') => {
         setLoading(true)
         try {
-            const r = await fetch(`/api/auto_post_trends.php?key=nurdiansyah-cron-2026&geo=${geo}`)
+            const r = await fetch(`/api/v1/trends/auto_post?key=nurdiansyah-cron-2026&geo=${geo}`)
             const d = await r.json()
             if (r.ok) {
-                if (d.status === 'success') {
-                    alert(`Success: Generated article for keyword '${d.keyword_found}'`)
+                if (d.success || d.status === 'success') {
+                    alert(`Success: ${d.message || 'Generated article'}`)
                     const postsRes = await authFetch('/api/v1/admin?action=posts')
                     if (postsRes.ok) setPosts((await postsRes.json()).posts || [])
                 } else if (d.status === 'skipped') alert(d.message)
-            } else alert(d.error || 'Failed to generate trend post.')
+            } else alert(d.error?.message || d.error || 'Failed to generate trend post.')
         } catch { alert('Error connecting to server.') }
         finally { setLoading(false) }
     }

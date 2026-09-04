@@ -94,40 +94,78 @@ def test_posts_lifecycle(client):
         "content": "<p>Konten lengkap artikel pengujian.</p>",
         "faqs": [{"q": "Pertanyaan 1?", "a": "Jawaban 1."}]
     }
-    # Unauthenticated create should fail
     unauth_res = client.post("/api/v1/posts", json=post_payload)
     assert unauth_res.status_code == 401
 
-    # Authenticated create
     create_res = client.post("/api/v1/posts", json=post_payload, headers={"X-Admin-Token": token})
     assert create_res.status_code == 201
 
-    # Duplicate slug should fail (409)
     dup_res = client.post("/api/v1/posts", json=post_payload, headers={"X-Admin-Token": token})
     assert dup_res.status_code == 409
 
-    # Read post by slug
     read_res = client.get("/api/v1/posts/uji-coba-post-python")
     assert read_res.status_code == 200
     assert read_res.get_json()["title"] == "Uji Coba Post Python"
 
-    # Read all posts
     all_res = client.get("/api/v1/posts")
     assert all_res.status_code == 200
     assert len(all_res.get_json()) == 1
 
-    # Update post
     update_res = client.put("/api/v1/posts/uji-coba-post-python", json={"title": "Uji Coba Updated"}, headers={"X-Admin-Token": token})
     assert update_res.status_code == 200
     assert update_res.get_json()["data"]["title"] == "Uji Coba Updated"
 
-    # Delete post
     del_res = client.delete("/api/v1/posts/uji-coba-post-python", headers={"X-Admin-Token": token})
     assert del_res.status_code == 200
 
-    # Read post after deletion should 404
     after_res = client.get("/api/v1/posts/uji-coba-post-python")
     assert after_res.status_code == 404
+
+# --- Projects Module ---
+def test_projects_lifecycle(client):
+    login_res = client.post("/api/v1/auth/login", json={"username": "testadmin", "password": "adminpass123"})
+    token = login_res.get_json()["token"]
+
+    project_payload = {
+        "title": "LogiStack WMS",
+        "slug": "logistack-wms",
+        "description": "Enterprise Resource Planning untuk manajemen gudang",
+        "category": "Fullstack",
+        "categorySlug": "fullstack",
+        "techStack": {"backend": "Python, Flask", "frontend": "React"},
+        "isFeatured": True
+    }
+    # Unauth create
+    assert client.post("/api/v1/projects", json=project_payload).status_code == 401
+
+    # Auth create
+    create_res = client.post("/api/v1/projects", json=project_payload, headers={"X-Admin-Token": token})
+    assert create_res.status_code == 201
+    p_data = create_res.get_json()["data"]
+    assert p_data["slug"] == "logistack-wms"
+    p_id = p_data["id"]
+
+    # Conflict on duplicate slug
+    assert client.post("/api/v1/projects", json=project_payload, headers={"X-Admin-Token": token}).status_code == 409
+
+    # Read project
+    read_res = client.get("/api/v1/projects/logistack-wms")
+    assert read_res.status_code == 200
+    assert read_res.get_json()["data"]["title"] == "LogiStack WMS"
+
+    # List projects
+    list_res = client.get("/api/v1/projects")
+    assert list_res.status_code == 200
+    assert len(list_res.get_json()["data"]) == 1
+
+    # Update project
+    update_res = client.patch(f"/api/v1/projects/{p_id}", json={"title": "LogiStack WMS Pro"}, headers={"X-Admin-Token": token})
+    assert update_res.status_code == 200
+    assert update_res.get_json()["data"]["title"] == "LogiStack WMS Pro"
+
+    # Delete project
+    del_res = client.delete(f"/api/v1/projects/{p_id}", headers={"X-Admin-Token": token})
+    assert del_res.status_code == 200
 
 # --- Leads Module ---
 def test_leads_submission_and_management(client):
@@ -144,18 +182,15 @@ def test_leads_submission_and_management(client):
     assert res.status_code == 201
     assert res.get_json()["success"] is True
 
-    # Leads validation failure
     invalid_lead = client.post("/api/v1/leads", json={"name": ""})
     assert invalid_lead.status_code == 400
 
-    # Get leads as admin
     leads_res = client.get("/api/v1/leads", headers={"X-Admin-Token": token})
     assert leads_res.status_code == 200
     leads = leads_res.get_json()["leads"]
     assert len(leads) == 1
     assert leads[0]["name"] == "Budi Santoso"
 
-    # Delete lead
     lead_id = leads[0]["id"]
     del_lead = client.delete(f"/api/v1/leads/{lead_id}", headers={"X-Admin-Token": token})
     assert del_lead.status_code == 200
@@ -180,7 +215,6 @@ def test_products_endpoint(client):
     assert len(data) == 1
     assert data[0]["name"] == "Toyota Fortuner"
 
-    # Filter for non-existent app should return empty array
     empty_res = client.get("/api/v1/products?app=non-existent-app")
     assert empty_res.status_code == 200
     assert len(empty_res.get_json()["data"]) == 0
@@ -210,19 +244,29 @@ def test_media_upload_validation(client):
     assert res.status_code == 400
     assert res.get_json()["error"]["code"] == "INVALID_FILE_TYPE"
 
+    # SVG with dangerous script should be rejected
+    bad_svg = b'<svg><script>alert(1)</script></svg>'
+    svg_data = {'file': (io.BytesIO(bad_svg), 'vector.svg')}
+    res = client.post("/api/v1/media/upload", headers={"X-Admin-Token": token}, data=svg_data, content_type='multipart/form-data')
+    assert res.status_code == 400
+    assert res.get_json()["error"]["code"] == "MALICIOUS_FILE_CONTENT"
+
+    # Clean PNG with valid header
+    png_data = b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR' + b'\x00' * 50
+    valid_png = {'file': (io.BytesIO(png_data), 'valid.png')}
+    res = client.post("/api/v1/media/upload", headers={"X-Admin-Token": token}, data=valid_png, content_type='multipart/form-data')
+    assert res.status_code == 201
+
 # --- Trends Module ---
 def test_trends_endpoints(client):
-    # Public GET
     res = client.get("/api/v1/trends")
     assert res.status_code == 200
 
-    # Auto-post unauthorized
     res = client.get("/api/v1/trends/auto_post?key=wrongkey")
     assert res.status_code == 401
 
 # --- Primatera ERP Module ---
 def test_primatera_auth_and_records(client):
-    # Valid login
     res = client.post("/api/v1/primatera/auth", json={
         "username": "userdemo1",
         "password": "password123"
@@ -230,14 +274,12 @@ def test_primatera_auth_and_records(client):
     assert res.status_code == 200
     assert res.get_json()["success"] is True
 
-    # Invalid login
     bad_res = client.post("/api/v1/primatera/auth", json={
         "username": "userdemo1",
         "password": "wrong"
     })
     assert bad_res.status_code == 401
 
-    # Add record
     rec_res = client.post("/api/v1/primatera/records", json={
         "date": "2026-09-05",
         "flock_id": "Flock-A1",
@@ -247,7 +289,6 @@ def test_primatera_auth_and_records(client):
     })
     assert rec_res.status_code == 201
 
-    # Get records
     list_res = client.get("/api/v1/primatera/records")
     assert list_res.status_code == 200
     records = list_res.get_json()["records"]

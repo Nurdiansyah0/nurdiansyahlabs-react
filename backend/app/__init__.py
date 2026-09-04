@@ -18,6 +18,7 @@ def create_app(config_class=Config):
 
     from app.modules.auth.routes import auth_bp
     from app.modules.posts.routes import posts_bp
+    from app.modules.projects.routes import projects_bp
     from app.modules.products.routes import products_bp
     from app.modules.leads.routes import leads_bp
     from app.modules.analytics.routes import analytics_bp
@@ -28,6 +29,7 @@ def create_app(config_class=Config):
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(posts_bp)
+    app.register_blueprint(projects_bp)
     app.register_blueprint(products_bp)
     app.register_blueprint(leads_bp)
     app.register_blueprint(analytics_bp)
