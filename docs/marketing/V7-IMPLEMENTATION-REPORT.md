@@ -115,3 +115,40 @@ curl -skS https://nurdiansyahlabs.com/api/
 
 1. **Monitor New Telemetry Events:** Review PostgreSQL `analytics` table after 14 days to observe the actual ratio between `pageview` $\rightarrow$ `hero_primary_cta` $\rightarrow$ `whatsapp_click` $\rightarrow$ `lead_form_success`.
 2. **Execute EXP-003 (Case Study Depth):** Write 2 technical architecture teardowns on `/blog/` to capture organic technical traffic from developers and engineering recruiters searching for modular monolith case studies.
+
+---
+
+## 9. V7.1 Production Verification
+
+**Audit Date:** September 5, 2026  
+**Status:** ALL PRODUCTION CHECKS PASS — MARKETING EXPERIMENTS FROZEN
+
+### 1. Verification Checklist & Results
+
+| Check Item | Target | Production Result | Status |
+| :--- | :--- | :--- | :--- |
+| **Homepage Endpoint** | `https://nurdiansyahlabs.com/` | HTTP 200 OK | PASS |
+| **Backend Health Endpoint** | `https://nurdiansyahlabs.com/api/v1/health` | HTTP 200 OK (`{"status":"ok","database":"ok"}`) | PASS |
+| **AI Manifest Endpoint** | `https://nurdiansyahlabs.com/llms.txt` | HTTP 200 OK (Clean markdown index) | PASS |
+| **Robots Exclusion Standard** | `https://nurdiansyahlabs.com/robots.txt` | HTTP 200 OK (Directs to sitemap.xml) | PASS |
+| **XML Sitemap Endpoint** | `https://nurdiansyahlabs.com/sitemap.xml` | HTTP 200 OK (Static XML served directly via Apache) | PASS |
+| **Legacy PHP Retirement** | `https://nurdiansyahlabs.com/api/` | HTTP 410 Gone (PHP tombstone verified) | PASS |
+| **Frontend Build** | `npm run build` | Built 2,870 modules in 13.87s with 0 errors | PASS |
+| **Backend Test Suite** | Remote Pytest (Python 3.13.15) | 13 of 13 tests passed | PASS |
+| **Hero Proof Number** | `src/components/Hero.jsx` | Aligned to `18+ Verified Systems` (EN) / `18+ Sistem Terverifikasi` (ID) | PASS |
+| **Analytics Event Instrumentation** | `Hero.jsx`, `CTA.jsx`, `ContactForm.jsx` | 7 distinct events active: `hero_primary_cta`, `hero_secondary_cta`, `whatsapp_click`, `lead_form_start`, `lead_form_submit`, `lead_form_success`, `lead_form_error` | PASS |
+| **Lead Submission Flow** | `/api/v1/leads/` | Lead insertion + DB persistence + telemetry verified | PASS |
+| **Schema & SEO Graph** | `SEO.jsx` | Connected graph: `Person` + `WebSite` + `ProfessionalService` | PASS |
+
+### 2. Infrastructure Incident Fix (Sitemap 404 Resolution)
+
+During initial V7.1 probing, `https://nurdiansyahlabs.com/sitemap.xml` returned HTTP 404.  
+**Root Cause:** A legacy Apache rewrite rule in `/home/uygpuazs/public_html/.htaccess` (`RewriteRule ^sitemap\.xml$ /api/sitemap.php [L]`) attempted to route sitemap requests through the retired PHP endpoint `/api/sitemap.php`.  
+**Remediation:** Commented out the legacy rewrite rule. The static file `/home/uygpuazs/public_html/sitemap.xml` is now served directly by LiteSpeed/Apache with HTTP 200 OK.
+
+### 3. Marketing Freeze & Observation Protocol
+
+- **Status:** **FROZEN**. No new redesigns, copy adjustments, or feature migrations will be introduced.
+- **V8 Status:** **DEFERRED**.
+- **Observation Period:** 14–30 days of passive data accumulation to gather unpolluted baseline telemetry across conversion funnel events (`hero_primary_cta`, `whatsapp_click`, `lead_form_start`, `lead_form_success`).
+
