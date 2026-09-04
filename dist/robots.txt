@@ -1,5 +1,26 @@
+# Allow search engines and user-driven AI bots (AI SEO)
 User-agent: *
 Allow: /
+
+# Specifically Allow AI Search Engines and Agents
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: Bingbot
+Allow: /
+
+# Block mass scrapers/training-only bots if desired (Optional, but good practice)
+User-agent: CCBot
+Disallow: /
 
 # Point crawlers to the sitemap
 Sitemap: https://nurdiansyahlabs.com/sitemap.xml

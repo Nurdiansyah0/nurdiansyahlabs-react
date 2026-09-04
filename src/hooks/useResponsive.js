@@ -130,13 +130,3 @@ export function useResponsive() {
     }, [dimensions, matches])
 }
 
-/**
- * Responsive Value Helper (rv)
- */
-export function rv(resp, vals) {
-    if (resp.isXs && vals.xs !== undefined) return vals.xs
-    if (resp.isSm && vals.sm !== undefined) return vals.sm
-    if (resp.isMd && vals.md !== undefined) return vals.md
-    if (resp.isLg && vals.lg !== undefined) return vals.lg
-    return vals.default ?? vals.lg ?? vals.md ?? vals.sm ?? vals.xs
-}

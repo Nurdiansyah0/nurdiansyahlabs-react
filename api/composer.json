@@ -1,10 +1,6 @@
 {
     "require": {
-        "phpmailer/phpmailer": "^7.0",
-        "league/oauth2-google": "^4.2",
-        "hayageek/oauth2-yahoo": "^2.0",
-        "stevenmaguire/oauth2-microsoft": "^2.2",
-        "greew/oauth2-azure-provider": "^2.0"
+        "phpmailer/phpmailer": "^7.0"
     },
     "require-dev": {
         "composer/semver": "^3.4"
