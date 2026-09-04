@@ -58,7 +58,3 @@ export const getOptimizedImg = (src, options = {}) => {
     return `${CDN_BASE}${encodeURIComponent(fullUrl)}&${params.toString()}`;
 };
 
-/**
- * Simple wrapper for raw URLs (no CDN) with fallback
- */
-export const getRawImg = (src) => src || '/assets/logo.svg';

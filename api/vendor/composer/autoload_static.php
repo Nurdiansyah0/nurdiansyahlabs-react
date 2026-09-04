@@ -6,37 +6,10 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit46788e793f917d6f19c6369a9128423f
 {
-    public static $files = array (
-        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
-        '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
-        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
-    );
-
     public static $prefixLengthsPsr4 = array (
-        'S' =>
-        array (
-            'Stevenmaguire\\OAuth2\\Client\\' => 28,
-        ),
         'P' =>
         array (
-            'Psr\\Http\\Message\\' => 17,
-            'Psr\\Http\\Client\\' => 16,
             'PHPMailer\\PHPMailer\\' => 20,
-        ),
-        'L' =>
-        array (
-            'League\\OAuth2\\Client\\' => 21,
-        ),
-        'H' =>
-        array (
-            'Hayageek\\OAuth2\\Client\\' => 23,
-        ),
-        'G' =>
-        array (
-            'GuzzleHttp\\Psr7\\' => 16,
-            'GuzzleHttp\\Promise\\' => 19,
-            'GuzzleHttp\\' => 11,
-            'Greew\\OAuth2\\Client\\Provider\\' => 29,
         ),
         'C' =>
         array (
@@ -45,47 +18,9 @@ class ComposerStaticInit46788e793f917d6f19c6369a9128423f
     );
 
     public static $prefixDirsPsr4 = array (
-        'Stevenmaguire\\OAuth2\\Client\\' =>
-        array (
-            0 => __DIR__ . '/..' . '/stevenmaguire/oauth2-microsoft/src',
-        ),
-        'Psr\\Http\\Message\\' =>
-        array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
-        ),
-        'Psr\\Http\\Client\\' =>
-        array (
-            0 => __DIR__ . '/..' . '/psr/http-client/src',
-        ),
         'PHPMailer\\PHPMailer\\' =>
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
-        ),
-        'League\\OAuth2\\Client\\' =>
-        array (
-            0 => __DIR__ . '/..' . '/league/oauth2-google/src',
-            1 => __DIR__ . '/..' . '/league/oauth2-client/src',
-        ),
-        'Hayageek\\OAuth2\\Client\\' =>
-        array (
-            0 => __DIR__ . '/..' . '/hayageek/oauth2-yahoo/src',
-        ),
-        'GuzzleHttp\\Psr7\\' =>
-        array (
-            0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
-        ),
-        'GuzzleHttp\\Promise\\' =>
-        array (
-            0 => __DIR__ . '/..' . '/guzzlehttp/promises/src',
-        ),
-        'GuzzleHttp\\' =>
-        array (
-            0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
-        ),
-        'Greew\\OAuth2\\Client\\Provider\\' =>
-        array (
-            0 => __DIR__ . '/..' . '/greew/oauth2-azure-provider/src/Provider',
         ),
         'Composer\\Semver\\' =>
         array (
