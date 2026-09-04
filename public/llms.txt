@@ -1,20 +1,34 @@
 # NurdiansyahLabs
 
-> NurdiansyahLabs is a professional portfolio and service platform showcasing expertise in Fullstack Web Development, Data Science, and Data Analytics.
+> NurdiansyahLabs is the software engineering platform, portfolio, and digital studio operated by Nurdiansyah. It delivers fullstack web applications, business dashboards, and custom operational ERP systems.
 
-## About
-NurdiansyahLabs offers cutting-edge tech solutions, specializing in creating high-performance landing pages, robust fullstack applications, and deriving insights through data analysis and data science methodologies.
+## Primary Entities
+- Name: Nurdiansyah
+- Brand: NurdiansyahLabs
+- Website: https://nurdiansyahlabs.com
+- GitHub: https://github.com/Nurdiansyah0
+- LinkedIn: https://www.linkedin.com/in/nurdiansyah-ds
 
-## Services & Showcases
-- **Fullstack Development**: End-to-end web applications using React, Node.js, PHP, and MySQL.
-- **Data Analytics**: Dashboard creation, business intelligence, and trends analysis.
-- **Data Science**: Machine learning models and predictive analytics.
-- **Landing Pages**: Optimized, high-conversion landing pages for businesses.
+## Technology Stack
+- Frontend: React 18, Vite, Progressive Web Apps (PWA), Tailwind CSS, Framer Motion
+- Backend: Python 3.13, Flask 3.1.3 (Modular Monolith architecture), Native WSGI
+- Database: PostgreSQL 13, SQLAlchemy 2.0 ORM, Alembic Migrations
+- Deployment: CloudLinux, LiteSpeed Web Server, Phusion Passenger WSGI
 
-## Content & Resources
-- [Blog](/blog): Technical articles, tutorials, and insights on web development and data science.
-- [Trends Dashboard](/trends): Real-time analytics and data visualizations.
-- [Services](/service): Detailed breakdown of available consulting and development services.
+## Key Showcase Projects & Systems
+- Primatera Poultry ERP: End-to-end digital farm management system tracking flock feed, mortality, body weight, cashflow, and warehouse inventory.
+- LogiStack WMS: Enterprise Resource Planning for warehouse logistics, stock tracking, and import-export operations.
+- Batam Rental Mobil: Online fleet reservation and booking management system with mobile-first responsiveness.
+- Koperasi POS System: Point of sale, inventory, and accounting software for cooperatives and retail operations.
+- Alyuna Siomay: Direct-to-consumer e-commerce ordering system with automated WhatsApp checkout integration.
 
-## Contact
-For inquiries or collaborations, please visit the contact section on the main website.
+## Key Services
+- Fullstack Web Application Development: Custom dashboards, RESTful APIs, database schema design, and secure authentication.
+- High-Converting Landing Page Development: Fast, mobile-first responsive web pages with SEO and WhatsApp lead capture.
+- Business Intelligence & Data Analytics: Interactive analytics dashboards (Tableau, Power BI) and sales performance tracking.
+- Machine Learning & Data Science: Predictive demand forecasting, customer clustering, and automated recommendation engines.
+
+## Contact & Inquiry
+- Website: https://nurdiansyahlabs.com
+- Direct Consultation: https://nurdiansyahlabs.com/#contact
+- WhatsApp: +62 821-7601-2461
