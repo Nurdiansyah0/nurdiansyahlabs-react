@@ -40,6 +40,22 @@ export default function DataAnalystShowcase() {
                 title={project.title}
                 description={project.description}
                 canonical={`/showcase/data-analyst/${project.slug}`}
+                breadcrumbs={[
+                    { name: 'Home', url: '/' },
+                    { name: 'Data Analytics & Dashboards', url: '/services/data-analyst' },
+                    { name: project.title, url: `/showcase/data-analyst/${project.slug}` }
+                ]}
+                additionalSchemas={[
+                    {
+                        "@type": "SoftwareApplication",
+                        "@id": `https://nurdiansyahlabs.com/showcase/data-analyst/${project.slug}#app`,
+                        "name": project.title,
+                        "description": project.description,
+                        "applicationCategory": "BusinessIntelligenceApplication",
+                        "operatingSystem": "Web, Cloud, Interactive Dashboard",
+                        "author": { "@id": "https://nurdiansyahlabs.com/#person" }
+                    }
+                ]}
             />
             <ShowcaseLayout
                 title={project.title}

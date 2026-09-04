@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { m, AnimatePresence } from 'framer-motion'
 import { useLanguage } from '../i18n/LanguageContext'
+import SEO from '../components/seo/SEO'
 
 const SERVICE_LABELS = {
     landing_page: { label: 'Landing Page', color: '#172554', bg: '#dbeafe', icon: 'fa-layer-group' },
@@ -137,6 +138,15 @@ export default function TrendsDashboard() {
 
     return (
         <main style={{ minHeight: '100vh', background: '#f8fafc', fontFamily: "'Inter', sans-serif" }}>
+            <SEO
+                title="Google Trends Monitor Indonesia"
+                description="Live Google Trends analytics and real-time market search intelligence dashboard for digital services and engineering in Indonesia."
+                canonical="/trends"
+                breadcrumbs={[
+                    { name: 'Home', url: '/' },
+                    { name: 'Trends Monitor', url: '/trends' }
+                ]}
+            />
             {/* Header */}
             <div style={{
                 background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%)',
@@ -202,7 +212,7 @@ export default function TrendsDashboard() {
                         <i className="fas fa-server" style={{ fontSize: '2rem', marginBottom: '1rem', opacity: 0.4 }} />
                         <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '0.5rem' }}>Backend not running</div>
                         <div style={{ fontSize: '0.85rem' }}>
-                            Start it with: <code style={{ background: '#f1f5f9', padding: '2px 8px', borderRadius: '4px' }}>php -S localhost:8000 -t backend-php</code>
+                            Start it with: <code style={{ background: '#f1f5f9', padding: '2px 8px', borderRadius: '4px' }}>python wsgi.py</code>
                         </div>
                     </div>
                 )}

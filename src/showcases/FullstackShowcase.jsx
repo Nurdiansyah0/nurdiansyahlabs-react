@@ -11,6 +11,8 @@ import VehicleInspectionApp from './apps/VehicleInspectionApp'
 import AttendanceApp from './apps/AttendanceApp'
 import PrimateraPoultryApp from './apps/PrimateraPoultryApp'
 
+import ExecutiveSummary from '../components/ExecutiveSummary'
+
 const appMapping = {
     'koperasi-pos': <KoperasiPOSApp />,
     'warehouse-wms': <WarehouseApp />,
@@ -42,6 +44,28 @@ export default function FullstackShowcase() {
                 title={project.title}
                 description={project.description}
                 canonical={`/showcase/fullstack/${project.slug}`}
+                breadcrumbs={[
+                    { name: 'Home', url: '/' },
+                    { name: 'Fullstack Systems', url: '/services/web-development' },
+                    { name: project.title, url: `/showcase/fullstack/${project.slug}` }
+                ]}
+                additionalSchemas={[
+                    {
+                        "@type": "SoftwareApplication",
+                        "@id": `https://nurdiansyahlabs.com/showcase/fullstack/${project.slug}#app`,
+                        "name": project.title,
+                        "description": project.description,
+                        "applicationCategory": "BusinessApplication",
+                        "operatingSystem": "Web, Linux, Cloud",
+                        "author": { "@id": "https://nurdiansyahlabs.com/#person" },
+                        "offers": {
+                            "@type": "Offer",
+                            "price": "0",
+                            "priceCurrency": "USD",
+                            "description": "Interactive Live Case Study & Demo"
+                        }
+                    }
+                ]}
             />
             <ShowcaseLayout
                 title={project.title}
@@ -52,6 +76,15 @@ export default function FullstackShowcase() {
                 isResponsive={true}
                 techStack={project.techStack}
             >
+                {project.executiveSummary && (
+                    <ExecutiveSummary
+                        title={project.title}
+                        category={project.category}
+                        summary={project.executiveSummary}
+                        metrics={project.metrics || []}
+                        stack={project.stack || []}
+                    />
+                )}
                 {appMapping[project.slug]}
             </ShowcaseLayout>
         </>

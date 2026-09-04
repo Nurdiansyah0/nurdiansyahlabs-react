@@ -1,29 +1,34 @@
 # Allow search engines and user-driven AI bots (AI SEO)
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /admin
 
-# Specifically Allow AI Search Engines and Agents
+# Specifically Allow AI Search Engines and Retrieval Agents
 User-agent: GPTBot
 Allow: /
+
 User-agent: ChatGPT-User
 Allow: /
+
 User-agent: PerplexityBot
 Allow: /
+
 User-agent: ClaudeBot
 Allow: /
+
 User-agent: anthropic-ai
 Allow: /
+
 User-agent: Google-Extended
 Allow: /
+
 User-agent: Bingbot
 Allow: /
 
-# Block mass scrapers/training-only bots if desired (Optional, but good practice)
+# Block mass scrapers/training-only bots without search attribution
 User-agent: CCBot
 Disallow: /
 
-# Point crawlers to the sitemap
+# Canonical Sitemap
 Sitemap: https://nurdiansyahlabs.com/sitemap.xml
-
-# Don't crawl dev/API paths if any
-Disallow: /api/

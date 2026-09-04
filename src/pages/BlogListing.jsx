@@ -5,6 +5,8 @@ import { ArrowRight, BookOpen, Loader2 } from 'lucide-react'
 import { getOptimizedImg } from '../utils/imgHelper'
 
 
+import SEO from '../components/seo/SEO'
+
     // Function to ensure any badge background provides AAA contrast (7:1) with white text (#fff)
     const getSafeAccent = (hex) => {
         if (!hex) return '#1e293b';
@@ -23,15 +25,13 @@ export default function BlogListing() {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        document.title = 'Blog & Insights | NurdiansyahLabs'
-        const metaDesc = document.querySelector('meta[name="description"]')
-        if (metaDesc) metaDesc.setAttribute('content', 'Temukan artikel menarik seputar web development, data analyst, dan tips bisnis dari NurdiansyahLabs.')
-
         const fetchPosts = async () => {
             try {
                 const res = await fetch('/api/v1/posts')
                 const data = await res.json()
-                if (data.posts) {
+                if (Array.isArray(data)) {
+                    setArticles(data)
+                } else if (data && data.posts) {
                     setArticles(data.posts)
                 }
             } catch (err) {
@@ -42,15 +42,19 @@ export default function BlogListing() {
         }
 
         fetchPosts()
-
-        return () => {
-            document.title = 'NurdiansyahLabs | Jasa Landing Page & Web Developer Profesional Indonesia'
-            if (metaDesc) metaDesc.setAttribute('content', 'Jasa pembuatan landing page, web developer fullstack, analisis data bisnis, dan data science terpercaya di Indonesia. Mulai Rp 1.750.000. Konsultasi gratis via WhatsApp!')
-        }
     }, [])
 
     return (
         <main style={{ minHeight: '100vh', background: '#f8fafc', padding: '6rem 1.5rem 4rem' }}>
+            <SEO
+                title="Blog & Technical Insights"
+                description="Temukan artikel mendalam seputar fullstack web development, arsitektur software modular, data analyst, dan machine learning dari NurdiansyahLabs."
+                canonical="/blog"
+                breadcrumbs={[
+                    { name: 'Home', url: '/' },
+                    { name: 'Blog', url: '/blog' }
+                ]}
+            />
             <div className="container" style={{ maxWidth: '1200px', margin: '0 auto' }}>
                 <m.div
                     initial={{ opacity: 0, y: 20 }}
