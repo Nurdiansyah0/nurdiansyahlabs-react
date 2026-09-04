@@ -18,6 +18,29 @@ export default function ServicePage() {
                 title={service.title}
                 description={service.description}
                 canonical={`/services/${service.slug}`}
+                breadcrumbs={[
+                    { name: 'Home', url: '/' },
+                    { name: 'Layanan', url: '/services/web-development' },
+                    { name: service.title, url: `/services/${service.slug}` }
+                ]}
+                additionalSchemas={[
+                    {
+                        "@type": "Service",
+                        "@id": `https://nurdiansyahlabs.com/services/${service.slug}#service`,
+                        "name": service.title,
+                        "description": service.description,
+                        "provider": { "@id": "https://nurdiansyahlabs.com/#service" },
+                        "areaServed": { "@type": "Country", "name": "Indonesia" },
+                        "offers": {
+                            "@type": "Offer",
+                            "priceSpecification": {
+                                "@type": "PriceSpecification",
+                                "priceCurrency": "IDR",
+                                "description": service.price
+                            }
+                        }
+                    }
+                ]}
             />
 
             <header className="bg-indigo-900 text-white py-20 px-6">

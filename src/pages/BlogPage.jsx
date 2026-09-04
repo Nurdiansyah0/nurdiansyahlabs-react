@@ -97,21 +97,35 @@ export default function BlogPage() {
             document.head.appendChild(hreflang)
         }
 
-        // JSON-LD for this article
+        // JSON-LD for this article (TechArticle with E-E-A-T entity linkage)
         const script = document.createElement('script')
         script.type = 'application/ld+json'
         script.id = 'blog-ld'
         script.textContent = JSON.stringify({
             '@context': 'https://schema.org',
-            '@type': 'Article',
+            '@type': 'TechArticle',
             mainEntityOfPage: { '@type': 'WebPage', '@id': pageUrl },
             headline: post.title,
             description: post.description,
             url: pageUrl,
-            author: { '@type': 'Person', name: 'Nurdiansyah', url: 'https://nurdiansyahlabs.com' },
-            publisher: { '@type': 'Organization', name: 'NurdiansyahLabs', logo: { '@type': 'ImageObject', url: 'https://nurdiansyahlabs.com/assets/logo.svg' } },
+            inLanguage: post.lang || 'id-ID',
+            author: { 
+                '@type': 'Person', 
+                '@id': 'https://nurdiansyahlabs.com/#person',
+                name: 'Nurdiansyah', 
+                url: 'https://nurdiansyahlabs.com',
+                jobTitle: 'Fullstack Software Engineer & Architect'
+            },
+            publisher: { 
+                '@type': 'ProfessionalService', 
+                '@id': 'https://nurdiansyahlabs.com/#service',
+                name: 'NurdiansyahLabs', 
+                logo: { '@type': 'ImageObject', url: 'https://nurdiansyahlabs.com/assets/logo.svg' } 
+            },
             datePublished: post.created_at ? post.created_at.split(' ')[0] : '2026-02-21',
             dateModified: new Date().toISOString().split('T')[0],
+            dependencies: 'React, Python, PostgreSQL, REST API',
+            proficiencyLevel: 'Expert'
         })
         document.head.appendChild(script)
 
@@ -253,28 +267,61 @@ export default function BlogPage() {
                         {renderContent(post.content)}
                     </div>
 
-                    {/* FAQ Section */}
-                    {post.faqs.length > 0 && (
-                        <div style={{ marginTop: '2rem' }}>
-                            <h2 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#0f172a', marginBottom: '1rem' }}>
-                                Pertanyaan Umum (FAQ)
-                            </h2>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                                {post.faqs.map((faq, i) => (
-                                    <m.div
-                                        key={i}
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: i * 0.1 }}
-                                        style={{ background: '#fff', borderRadius: '12px', padding: '1rem 1.25rem', border: '1px solid #e2e8f0' }}
-                                    >
-                                        <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '6px' }}>❓ {faq.q}</div>
-                                        <div style={{ color: '#1e293b', fontSize: '0.9rem', lineHeight: 1.6 }}>{faq.a}</div>
-                                    </m.div>
-                                ))}
+                    {/* Author & E-E-A-T Engineering Attribution */}
+                    <div style={{
+                        marginTop: '2rem',
+                        background: '#ffffff',
+                        borderRadius: '16px',
+                        padding: '1.5rem',
+                        border: '1px solid #e2e8f0',
+                        display: 'flex',
+                        gap: '1rem',
+                        alignItems: 'center'
+                    }}>
+                        <img 
+                            src={getOptimizedImg("/assets/logo.svg", { w: 100 })} 
+                            alt="Nurdiansyah" 
+                            style={{ width: '48px', height: '48px', borderRadius: '50%', background: '#1e1b4b', padding: '8px' }} 
+                        />
+                        <div>
+                            <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                                Ditulis & Ditinjau Oleh
                             </div>
+                            <div style={{ fontSize: '1rem', fontWeight: 800, color: '#0f172a' }}>
+                                Nurdiansyah
+                            </div>
+                            <p style={{ margin: '4px 0 0', fontSize: '0.85rem', color: '#475569', lineHeight: 1.5 }}>
+                                Fullstack Software Engineer & Architect di NurdiansyahLabs. Berpengalaman membangun aplikasi web React/Python, sistem ERP operasional, dan analitik data terintegrasi.
+                            </p>
                         </div>
-                    )}
+                    </div>
+
+                    {/* Contextual Internal Link Hub */}
+                    <div style={{
+                        marginTop: '2rem',
+                        background: '#f8fafc',
+                        borderRadius: '16px',
+                        padding: '1.5rem',
+                        border: '1px solid #e2e8f0'
+                    }}>
+                        <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#0f172a', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '12px' }}>
+                            Sistem Terkait di Portfolio Kami
+                        </div>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '10px' }}>
+                            <Link to="/showcase/fullstack/primatera-poultry" style={{ background: '#fff', padding: '10px 14px', borderRadius: '10px', border: '1px solid #e2e8f0', textDecoration: 'none', color: '#0f172a', fontSize: '0.85rem', fontWeight: 600, display: 'block' }}>
+                                🐔 Primatera Poultry ERP →
+                            </Link>
+                            <Link to="/showcase/fullstack/warehouse-wms" style={{ background: '#fff', padding: '10px 14px', borderRadius: '10px', border: '1px solid #e2e8f0', textDecoration: 'none', color: '#0f172a', fontSize: '0.85rem', fontWeight: 600, display: 'block' }}>
+                                📦 LogiStack Warehouse WMS →
+                            </Link>
+                            <Link to="/showcase/data-science/smart-vision" style={{ background: '#fff', padding: '10px 14px', borderRadius: '10px', border: '1px solid #e2e8f0', textDecoration: 'none', color: '#0f172a', fontSize: '0.85rem', fontWeight: 600, display: 'block' }}>
+                                👁️ Smart Vision AI →
+                            </Link>
+                            <Link to="/services/web-development" style={{ background: '#fff', padding: '10px 14px', borderRadius: '10px', border: '1px solid #e2e8f0', textDecoration: 'none', color: '#0f172a', fontSize: '0.85rem', fontWeight: 600, display: 'block' }}>
+                                💻 Layanan Fullstack Web →
+                            </Link>
+                        </div>
+                    </div>
 
                     {/* CTA Card */}
                     <m.div
@@ -302,21 +349,6 @@ export default function BlogPage() {
                             </Link>
                         </div>
                     </m.div>
-
-                    {/* Schema.org FAQ hidden markup for SEO */}
-                    {post.faqs.length > 0 && (
-                        <script type="application/ld+json" dangerouslySetInnerHTML={{
-                            __html: JSON.stringify({
-                                '@context': 'https://schema.org',
-                                '@type': 'FAQPage',
-                                mainEntity: post.faqs.map(f => ({
-                                    '@type': 'Question',
-                                    name: f.q,
-                                    acceptedAnswer: { '@type': 'Answer', text: f.a },
-                                }))
-                            })
-                        }} />
-                    )}
                 </div>
             </div>
         )

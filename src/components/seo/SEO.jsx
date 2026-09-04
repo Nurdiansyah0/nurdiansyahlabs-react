@@ -1,57 +1,116 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
-const SEO = ({ title, description, keywords, canonical, image, type = 'website', breadcrumbs }) => {
+const SEO = ({ title, description, keywords, canonical, image, type = 'website', breadcrumbs, additionalSchemas }) => {
     const siteTitle = "NurdiansyahLabs";
     const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
     const siteUrl = "https://nurdiansyahlabs.com";
     const fullCanonical = canonical ? `${siteUrl}${canonical}` : siteUrl;
     const defaultDesc = "Jasa pembuatan landing page, web developer fullstack, analisis data bisnis, dan data science terpercaya di Indonesia.";
 
-    // Enhanced Connected Schema Graph (Person + WebSite + ProfessionalService)
-    const schemaGraph = {
-        "@context": "https://schema.org",
-        "@graph": [
-            {
-                "@type": "Person",
-                "@id": `${siteUrl}/#person`,
-                "name": "Nurdiansyah",
-                "url": siteUrl,
-                "jobTitle": "Fullstack Software Engineer & Architect",
-                "sameAs": [
-                    "https://github.com/Nurdiansyah0",
-                    "https://www.linkedin.com/in/nurdiansyah-ds"
-                ]
+    // Enhanced Connected Schema Graph (Person + WebSite + ProfessionalService + ProfilePage + OfferCatalog)
+    const baseGraph = [
+        {
+            "@type": "Person",
+            "@id": `${siteUrl}/#person`,
+            "name": "Nurdiansyah",
+            "url": siteUrl,
+            "jobTitle": "Fullstack Software Engineer & Architect",
+            "alumniOf": "Universitas Terbuka",
+            "knowsAbout": [
+                "React",
+                "Python",
+                "Flask",
+                "PostgreSQL",
+                "Enterprise Resource Planning",
+                "Machine Learning",
+                "Data Analytics"
+            ],
+            "sameAs": [
+                "https://github.com/Nurdiansyah0",
+                "https://www.linkedin.com/in/nurdiansyah-ds"
+            ]
+        },
+        {
+            "@type": "WebSite",
+            "@id": `${siteUrl}/#website`,
+            "url": siteUrl,
+            "name": "NurdiansyahLabs",
+            "publisher": { "@id": `${siteUrl}/#person` },
+            "inLanguage": ["id-ID", "en-US"]
+        },
+        {
+            "@type": "ProfilePage",
+            "@id": `${siteUrl}/#profile`,
+            "url": siteUrl,
+            "name": "Nurdiansyah – Software Engineering Portfolio & Studio",
+            "mainEntity": { "@id": `${siteUrl}/#person` },
+            "isPartOf": { "@id": `${siteUrl}/#website` }
+        },
+        {
+            "@type": "ProfessionalService",
+            "@id": `${siteUrl}/#service`,
+            "name": "NurdiansyahLabs",
+            "image": `${siteUrl}/assets/Logo.png`,
+            "url": siteUrl,
+            "founder": { "@id": `${siteUrl}/#person` },
+            "telephone": "+6282176012461",
+            "priceRange": "Rp 1.750.000 – Rp 5.000.000",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Batam",
+                "addressRegion": "Kepulauan Riau",
+                "addressCountry": "ID"
             },
-            {
-                "@type": "WebSite",
-                "@id": `${siteUrl}/#website`,
-                "url": siteUrl,
-                "name": "NurdiansyahLabs",
-                "publisher": { "@id": `${siteUrl}/#person` },
-                "inLanguage": ["id-ID", "en-US"]
-            },
-            {
-                "@type": "ProfessionalService",
-                "@id": `${siteUrl}/#service`,
-                "name": "NurdiansyahLabs",
-                "image": `${siteUrl}/assets/Logo.png`,
-                "url": siteUrl,
-                "founder": { "@id": `${siteUrl}/#person` },
-                "telephone": "+6282176012461",
-                "address": {
-                    "@type": "PostalAddress",
-                    "addressLocality": "Batam",
-                    "addressRegion": "Kepulauan Riau",
-                    "addressCountry": "ID"
-                },
-                "description": "Fullstack web applications, business dashboards, and custom operational ERP systems.",
-                "sameAs": [
-                    "https://github.com/Nurdiansyah0",
-                    "https://www.linkedin.com/in/nurdiansyah-ds"
+            "description": "Fullstack web applications, business dashboards, and custom operational ERP systems.",
+            "sameAs": [
+                "https://github.com/Nurdiansyah0",
+                "https://www.linkedin.com/in/nurdiansyah-ds"
+            ],
+            "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "Layanan Digital & Software Engineering",
+                "itemListElement": [
+                    {
+                        "@type": "Offer",
+                        "name": "Jasa Landing Page Profesional Indonesia",
+                        "price": "1750000",
+                        "priceCurrency": "IDR",
+                        "url": `${siteUrl}/services/landing-page`
+                    },
+                    {
+                        "@type": "Offer",
+                        "name": "Jasa Web Developer Fullstack Indonesia",
+                        "price": "5000000",
+                        "priceCurrency": "IDR",
+                        "url": `${siteUrl}/services/web-development`
+                    },
+                    {
+                        "@type": "Offer",
+                        "name": "Jasa Analisis Data Bisnis & Dashboard",
+                        "price": "3000000",
+                        "priceCurrency": "IDR",
+                        "url": `${siteUrl}/services/data-analyst`
+                    },
+                    {
+                        "@type": "Offer",
+                        "name": "Jasa Data Science & Machine Learning",
+                        "price": "4500000",
+                        "priceCurrency": "IDR",
+                        "url": `${siteUrl}/services/machine-learning`
+                    }
                 ]
             }
-        ]
+        }
+    ];
+
+    if (additionalSchemas && Array.isArray(additionalSchemas)) {
+        baseGraph.push(...additionalSchemas);
+    }
+
+    const schemaGraph = {
+        "@context": "https://schema.org",
+        "@graph": baseGraph
     };
 
     // Breadcrumb schema
@@ -64,7 +123,7 @@ const SEO = ({ title, description, keywords, canonical, image, type = 'website',
                 "@type": "ListItem",
                 "position": index + 1,
                 "name": crumb.name,
-                "item": `${siteUrl}${crumb.url}`
+                "item": crumb.url.startsWith('http') ? crumb.url : `${siteUrl}${crumb.url}`
             }))
         };
     }

@@ -10,6 +10,8 @@ import ConsultantApp from './apps/ConsultantApp'
 import WarungMakanApp from './apps/WarungMakanApp'
 import BatamRentalMobilApp from './apps/BatamRentalMobilApp'
 
+import ExecutiveSummary from '../components/ExecutiveSummary'
+
 const appMapping = {
     'toko-laptop-batam': <TokoLaptopBatamApp />,
     'batam-chicken-supplier': <ConsultantApp />,
@@ -44,7 +46,16 @@ export default function LandingPageShowcase() {
                 breadcrumbs={[
                     { name: 'Home', url: '/' },
                     { name: 'Showcases', url: '/#services' },
-                    { name: 'Landing Pages', url: `/showcase/landing-page/${project.slug}` }
+                    { name: project.title, url: `/showcase/landing-page/${project.slug}` }
+                ]}
+                additionalSchemas={[
+                    {
+                        "@type": "WebSite",
+                        "@id": `https://nurdiansyahlabs.com/showcase/landing-page/${project.slug}#showcase`,
+                        "name": project.title,
+                        "description": project.description,
+                        "author": { "@id": "https://nurdiansyahlabs.com/#person" }
+                    }
                 ]}
             />
             <ShowcaseLayout
@@ -55,6 +66,15 @@ export default function LandingPageShowcase() {
                 githubUrl="https://github.com/Nurdiansyah0"
                 isResponsive={true}
             >
+                {project.executiveSummary && (
+                    <ExecutiveSummary
+                        title={project.title}
+                        category={project.category}
+                        summary={project.executiveSummary}
+                        metrics={project.metrics || []}
+                        stack={project.stack || []}
+                    />
+                )}
                 {appMapping[project.slug]}
             </ShowcaseLayout>
         </>

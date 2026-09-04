@@ -30,7 +30,20 @@
             "title": "Batam Rental Mobil",
             "description": "Solusi sewa mobil harian & bulanan murah di Batam dengan armada unit terbaru.",
             "category": "Landing Page",
-            "accentColor": "#1d4ed8"
+            "accentColor": "#1d4ed8",
+            "executiveSummary": "Batam Rental Mobil is a high-converting digital vehicle reservation, fleet management, and transport dispatch platform engineered by NurdiansyahLabs to serve corporate and tourist transit across the Batam Free Trade Zone. Developed with mobile-first React 18 and Tailwind CSS, the platform delivers instantaneous fleet availability schedules, transparent pricing calculations, and automated direct WhatsApp booking integrations. Operational workflows include dynamic vehicle allocation, seasonal rate adjustments, chauffeur service add-ons, and customer identity verification pipelines. The responsive Progressive Web App architecture guarantees sub-second initial load speeds on mobile cellular networks, maximizing reservation conversion rates for inbound business travelers arriving at airport and ferry terminals. The system provides local car rental operators with unified digital scheduling, eliminating booking overlap, streamlining vehicle maintenance schedules, and significantly reducing manual dispatch coordination overhead.",
+            "metrics": [
+                "Automated WhatsApp lead dispatch",
+                "Instant dynamic pricing calculator",
+                "Sub-second mobile PWA loading"
+            ],
+            "stack": [
+                "React 18",
+                "Vite PWA",
+                "Tailwind CSS",
+                "Modular Flask API",
+                "PostgreSQL"
+            ]
         },
         {
             "slug": "koperasi-pos",
@@ -45,12 +58,26 @@
                 "backend": "Node.js, Express.js",
                 "database": "MongoDB (NoSQL)",
                 "infrastructure": "Linux (Ubuntu), Docker, AWS EC2"
-            }
+            },
+            "executiveSummary": "Koperasi POS System is a fullstack digital point-of-sale, retail management, and cooperative financial accounting software engineered by NurdiansyahLabs to modernize retail and savings-and-loan cooperative operations in Indonesia. The system unifies retail point-of-sale cash registers, multi-tiered member credit tracking, inventory barcode scanning, and automated cooperative financial ledger generation. Built on React 18 and Node.js with MongoDB and PostgreSQL databases, the platform supports real-time synchronization between checkout counters and backend accounting modules. Core operational features include automated Sisa Hasil Usaha (SHU) calculation, member savings balance management, digital receipt generation, and periodic audit trail export. By digitizing manual paper ledger books into an integrated, role-based cloud system, Koperasi POS System prevents cash register leakage, simplifies statutory compliance audits, and elevates cooperative operational transparency for community-based financial organizations.",
+            "metrics": [
+                "Automated SHU calculation",
+                "Member credit & savings ledger",
+                "Sub-second POS transaction speed"
+            ],
+            "stack": [
+                "React 18",
+                "Tailwind CSS",
+                "Node.js",
+                "Express.js",
+                "MongoDB",
+                "Docker"
+            ]
         },
         {
             "slug": "warehouse-wms",
             "categorySlug": "fullstack",
-            "title": "LogiStack – Warehouse WMS",
+            "title": "LogiStack \u2013 Warehouse WMS",
             "description": "Enterprise Resource Planning untuk manajemen gudang, stok real-time, dan logistik ekspor-impor.",
             "category": "Fullstack",
             "accentColor": "#10b981",
@@ -60,12 +87,26 @@
                 "backend": "Java Spring Boot, Hibernate ORM",
                 "database": "PostgreSQL",
                 "infrastructure": "Apache Tomcat, AWS S3, Linux"
-            }
+            },
+            "executiveSummary": "LogiStack Warehouse Management System (WMS) is an enterprise-grade resource planning platform engineered by NurdiansyahLabs for real-time inventory control, bin-level tracking, and cross-border import-export logistics. The architecture utilizes a Java Spring Boot backend paired with Hibernate ORM and a normalized PostgreSQL database to manage high-concurrency bin allocation, barcode scanning, and multi-warehouse stock replenishment workflows. The frontend is built on responsive React 18, providing warehouse supervisors with live inventory heatmaps, stock-in and stock-out logging, and automated reorder point notifications. LogiStack integrates customs documentation workflows, multi-currency inventory valuation using FIFO and LIFO methodologies, and immutable audit trails to ensure compliance with international maritime logistics regulations. Designed specifically for high throughput and low-latency data access, the platform eliminates inventory discrepancies, accelerates picking cycles, and provides logistics operators with verified real-time visibility across complex supply chain networks throughout the Southeast Asian shipping corridor.",
+            "metrics": [
+                "Real-time bin-level stock tracking",
+                "Automated FIFO/LIFO valuation",
+                "Multi-warehouse compliance logs"
+            ],
+            "stack": [
+                "React 18",
+                "Java Spring Boot",
+                "Hibernate ORM",
+                "PostgreSQL",
+                "AWS S3",
+                "Linux"
+            ]
         },
         {
             "slug": "vehicle-inspection",
             "categorySlug": "fullstack",
-            "title": "Inspect Pro – Batam Car Check",
+            "title": "Inspect Pro \u2013 Batam Car Check",
             "description": "Platform digital jasa inspeksi mobil bekas (second) profesional untuk transparansi kondisi unit.",
             "category": "Fullstack",
             "accentColor": "#f59e0b",
@@ -105,7 +146,21 @@
                 "backend": "Node.js, Express.js",
                 "database": "MongoDB",
                 "infrastructure": "Linux, Docker"
-            }
+            },
+            "executiveSummary": "Primatera Poultry ERP is a specialized end-to-end digital farm management and poultry resource planning platform engineered by NurdiansyahLabs to streamline modern commercial Joper and KUB poultry operations. The enterprise platform systematically transitions traditional analog farm logs into automated paperless workflows, tracking daily flock feed consumption, real-time mortality rates, weekly body weight gain distributions, and multi-tier warehouse inventory across distributed coops. Built on a resilient fullstack architecture with a React 18 frontend and Node.js backend, the system enforces transactional consistency across PostgreSQL and MongoDB data layers. Operational capabilities include automated Feed Conversion Ratio (FCR) calculations, cashflow projection modules, medication scheduling protocols, and automated supplier replenishment alerts. By eliminating manual transcription errors and consolidating pen telemetry, Primatera Poultry delivers complete operational cost transparency, optimizes flock yield predictability, and provides poultry enterprise owners with instantaneous visibility into margin economics under volatile agricultural market conditions across Indonesia.",
+            "metrics": [
+                "Paperless daily flock records",
+                "Automated Feed Conversion Ratio (FCR)",
+                "Real-time mortality tracking"
+            ],
+            "stack": [
+                "React 18",
+                "Node.js",
+                "Express.js",
+                "MongoDB",
+                "Docker",
+                "Linux"
+            ]
         },
         {
             "slug": "retail-sales",
@@ -126,7 +181,7 @@
         {
             "slug": "clinic-analytics",
             "categorySlug": "data-analyst",
-            "title": "HealthMetric – Clinic Analytics",
+            "title": "HealthMetric \u2013 Clinic Analytics",
             "description": "Analisis manajemen layanan kesehatan untuk optimalisasi kunjungan pasien dan efisiensi staf.",
             "category": "Data Analyst",
             "accentColor": "#0ea5e9"
@@ -158,7 +213,7 @@
         {
             "slug": "churn-prediction",
             "categorySlug": "data-science",
-            "title": "Retention Pro – Churn Radar",
+            "title": "Retention Pro \u2013 Churn Radar",
             "description": "Sistem deteksi dini retensi pelanggan untuk mencegah kehilangan pengguna layanan aktif.",
             "category": "Data Science",
             "accentColor": "#ef4444"
@@ -166,10 +221,24 @@
         {
             "slug": "smart-vision",
             "categorySlug": "data-science",
-            "title": "Smart Vision AI – Object Detection",
+            "title": "Smart Vision AI \u2013 Object Detection",
             "description": "Real-time computer vision application using TensorFlow.js and COCO-SSD to detect objects directly in the browser via WebRTC.",
             "category": "Data Science",
-            "accentColor": "#00ffcc"
+            "accentColor": "#00ffcc",
+            "executiveSummary": "Smart Vision AI is an in-browser computer vision, edge machine learning, and real-time object detection application developed by NurdiansyahLabs utilizing TensorFlow.js and the COCO-SSD neural network architecture. The application performs real-time multi-class object inference directly on client hardware via WebRTC camera streams, eliminating cloud API latency and preserving complete user video privacy without transmitting raw frames over the internet. The React 18 interface provides live visual bounding box overlays, confidence threshold filtering, frame rate (FPS) performance monitors, and hardware acceleration toggles using WebGL and WebGPU pipelines. Engineered as a progressive web application, Smart Vision AI demonstrates high-performance edge artificial intelligence execution without requiring server-side GPU infrastructure, making it ideal for low-bandwidth industrial inspection, security monitoring, and interactive smart retail deployments in challenging network environments.",
+            "metrics": [
+                "Zero server latency (edge inference)",
+                "60+ FPS hardware acceleration",
+                "100% on-device data privacy"
+            ],
+            "stack": [
+                "React 18",
+                "TensorFlow.js",
+                "COCO-SSD",
+                "WebRTC",
+                "WebGL",
+                "Tailwind CSS"
+            ]
         },
         {
             "slug": "recommendation",

@@ -11,6 +11,8 @@ import ChurnPredictionApp from './apps/ChurnPredictionApp'
 import RecommendationApp from './apps/RecommendationApp'
 import RecommendationPlaceholderApp from './apps/RecommendationPlaceholderApp'
 
+import ExecutiveSummary from '../components/ExecutiveSummary'
+
 const appMapping = {
     'sales-forecasting': <SalesForecastingApp />,
     'customer-clustering': <CustomerClusteringApp />,
@@ -42,6 +44,28 @@ export default function DataScienceShowcase() {
                 title={project.title}
                 description={project.description}
                 canonical={`/showcase/data-science/${project.slug}`}
+                breadcrumbs={[
+                    { name: 'Home', url: '/' },
+                    { name: 'Data Science & AI', url: '/services/machine-learning' },
+                    { name: project.title, url: `/showcase/data-science/${project.slug}` }
+                ]}
+                additionalSchemas={[
+                    {
+                        "@type": "SoftwareApplication",
+                        "@id": `https://nurdiansyahlabs.com/showcase/data-science/${project.slug}#app`,
+                        "name": project.title,
+                        "description": project.description,
+                        "applicationCategory": "AIApplication",
+                        "operatingSystem": "Web, Edge Browser, WebAssembly",
+                        "author": { "@id": "https://nurdiansyahlabs.com/#person" },
+                        "offers": {
+                            "@type": "Offer",
+                            "price": "0",
+                            "priceCurrency": "USD",
+                            "description": "Interactive Live AI Demo"
+                        }
+                    }
+                ]}
             />
             <ShowcaseLayout
                 title={project.title}
@@ -51,6 +75,15 @@ export default function DataScienceShowcase() {
                 githubUrl="https://github.com/Nurdiansyah0"
                 isResponsive={true}
             >
+                {project.executiveSummary && (
+                    <ExecutiveSummary
+                        title={project.title}
+                        category={project.category}
+                        summary={project.executiveSummary}
+                        metrics={project.metrics || []}
+                        stack={project.stack || []}
+                    />
+                )}
                 {appMapping[project.slug]}
             </ShowcaseLayout>
         </>
