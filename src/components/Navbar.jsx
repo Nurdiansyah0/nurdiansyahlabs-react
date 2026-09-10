@@ -46,21 +46,21 @@ export default function Navbar() {
                 <div style={{
                     display: 'flex', alignItems: 'center',
                     justifyContent: 'space-between',
-                    height: isSm ? '56px' : '64px',
+                    height: (isMobile || isSm) ? '56px' : '64px',
                 }}>
                     {/* Logo */}
                     <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none', minHeight: 0 }}>
                         <img
                             src={getOptimizedImg("/assets/logo.svg", { w: 100 })}
                             alt="NurdiansyahLabs Logo"
-                            style={{ width: isSm ? '28px' : '36px', height: isSm ? '28px' : '36px' }}
+                            style={{ width: (isMobile || isSm) ? '28px' : '36px', height: (isMobile || isSm) ? '28px' : '36px' }}
                         />
                         <span style={{
-                            fontSize: isSm ? '1.05rem' : '1.4rem',
+                            fontSize: (isMobile || isSm) ? '1.1rem' : '1.35rem',
                             fontWeight: 800, color: '#312e81', letterSpacing: '-0.02em',
                             whiteSpace: 'nowrap',
                         }}>
-                            Nurdiansyah<span style={{ color: '#3730a3' }}>Labs</span>
+                            Nurdiansyah<span style={{ color: '#4338ca' }}>Labs</span>
                         </span>
                     </Link>
 

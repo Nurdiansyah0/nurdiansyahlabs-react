@@ -55,7 +55,7 @@ const SEO = ({ title, description, keywords, canonical, image, type = 'website',
             "url": siteUrl,
             "founder": { "@id": `${siteUrl}/#person` },
             "telephone": "+6282176012461",
-            "priceRange": "Rp 1.750.000 – Rp 5.000.000",
+            "priceRange": "Rp 500.000 – Rp 5.000.000+",
             "address": {
                 "@type": "PostalAddress",
                 "addressLocality": "Batam",
@@ -73,31 +73,32 @@ const SEO = ({ title, description, keywords, canonical, image, type = 'website',
                 "itemListElement": [
                     {
                         "@type": "Offer",
-                        "name": "Jasa Landing Page Profesional Indonesia",
-                        "price": "1750000",
+                        "name": "Paket 1: Starter Web & Landing Page",
+                        "price": "500000",
                         "priceCurrency": "IDR",
                         "url": `${siteUrl}/services/landing-page`
                     },
                     {
                         "@type": "Offer",
-                        "name": "Jasa Web Developer Fullstack Indonesia",
-                        "price": "5000000",
+                        "name": "Paket 2: Custom Web Application & Operational ERP",
+                        "price": "2500000",
                         "priceCurrency": "IDR",
                         "url": `${siteUrl}/services/web-development`
                     },
                     {
                         "@type": "Offer",
-                        "name": "Jasa Analisis Data Bisnis & Dashboard",
-                        "price": "3000000",
+                        "name": "Paket 3: Technical Architecture Advisory & Enterprise Consultation",
+                        "price": "0",
                         "priceCurrency": "IDR",
-                        "url": `${siteUrl}/services/data-analyst`
+                        "description": "Gratis 30-Menit Discovery Consultation",
+                        "url": `${siteUrl}/#services`
                     },
                     {
                         "@type": "Offer",
-                        "name": "Jasa Data Science & Machine Learning",
-                        "price": "4500000",
+                        "name": "Business Intelligence & Data Analytics Dashboard",
+                        "price": "2500000",
                         "priceCurrency": "IDR",
-                        "url": `${siteUrl}/services/machine-learning`
+                        "url": `${siteUrl}/services/data-analyst`
                     }
                 ]
             }

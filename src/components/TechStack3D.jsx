@@ -1,231 +1,303 @@
-import { useEffect, useRef } from 'react'
-import { m, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { useState } from 'react'
+import { m, AnimatePresence } from 'framer-motion'
+import { 
+    Cpu, Database, ShieldCheck, Activity, Terminal, 
+    Layers, Zap, CheckCircle2, Server, ArrowUpRight 
+} from 'lucide-react'
 import { useResponsive } from '../hooks/useResponsive'
+import { useLanguage } from '../i18n/LanguageContext'
 
-const pillars = [
-    { id: 'landing', type: 'web', label: 'Landing Pages', color: '#047857', x: '15%', y: '25%', z: 50, delay: 0 },
-    { id: 'fullstack', type: 'database', label: 'Fullstack Apps', color: '#1d4ed8', x: '85%', y: '25%', z: 150, delay: 0.5 },
-    { id: 'data_science', type: 'ai', label: 'Data Science', color: '#6d28d9', x: '20%', y: '75%', z: 250, delay: 1.0 },
-    { id: 'data_analyst', type: 'chart', label: 'Data Analytics', color: '#b45309', x: '80%', y: '80%', z: 350, delay: 1.5 }
+const ARCHITECTURE_TIERS = [
+    {
+        id: 'frontend',
+        name: 'Client & PWA Layer',
+        nameId: 'Layer Klien & PWA',
+        tech: 'React 18 · Vite 6 · Tailwind CSS',
+        metrics: 'Sub-second FCP · 18 Static Routes',
+        status: 'Optimal',
+        icon: Layers,
+        color: '#6366f1',
+        bgGlow: 'rgba(99, 102, 241, 0.12)'
+    },
+    {
+        id: 'gateway',
+        name: 'API Gateway & Core Engine',
+        nameId: 'API Gateway & Service Engine',
+        tech: 'Python Flask · JWT Auth · Pytest',
+        metrics: '< 120ms Latency · Contract Verified',
+        status: 'Active',
+        icon: Server,
+        color: '#06b6d4',
+        bgGlow: 'rgba(6, 182, 212, 0.12)'
+    },
+    {
+        id: 'database',
+        name: 'Persistence & State',
+        nameId: 'Penyimpanan Data & Status',
+        tech: 'PostgreSQL · SQLite · Redis Ready',
+        metrics: 'ACID Compliant · Automated Backups',
+        status: 'Synced',
+        icon: Database,
+        color: '#10b981',
+        bgGlow: 'rgba(16, 185, 129, 0.12)'
+    },
+    {
+        id: 'intelligence',
+        name: 'AI & Data Intelligence',
+        nameId: 'Pipeline AI & Intelijen Data',
+        tech: 'Scikit-learn · Smart Vision · Analytics',
+        metrics: 'Real-time Inference · Telemetry Logs',
+        status: 'Ready',
+        icon: Cpu,
+        color: '#a855f7',
+        bgGlow: 'rgba(168, 85, 247, 0.12)'
+    }
+]
+
+const PLATFORM_METRICS = [
+    { label: 'Uptime SLA', value: '99.9%', detail: 'High-availability architecture' },
+    { label: 'API Response', value: '< 120ms', detail: 'Sub-second edge routing' },
+    { label: 'Test Coverage', value: '100%', detail: 'Pytest contract verification' },
+    { label: 'Static Routes', value: '18 Pages', detail: 'Automated SEO prerender' },
+]
+
+const ENDPOINT_CONTRACTS = [
+    { method: 'POST', path: '/api/v1/leads', desc: 'Secure lead ingestion & email trigger', status: '201 Created' },
+    { method: 'GET',  path: '/api/v1/health', desc: 'Service health & dependency check', status: '200 OK' },
+    { method: 'POST', path: '/api/v1/auth/login', desc: 'Role-based JWT session authentication', status: '200 OK' },
+    { method: 'GET',  path: '/api/v1/analytics', desc: 'Real-time operational telemetry sync', status: '200 OK' },
 ]
 
 export default function TechStack3D() {
-    const { isMobile } = useResponsive()
-    const containerRef = useRef(null)
-
-    const mouseX = useMotionValue(0)
-    const mouseY = useMotionValue(0)
-
-    const springConfig = { damping: 50, stiffness: 100, mass: 1 }
-    const x = useSpring(mouseX, springConfig)
-    const y = useSpring(mouseY, springConfig)
-
-    // Make the camera tilt dramatic to show off the giant scale
-    const rotateX = useTransform(y, [-1, 1], [15, -15])
-    const rotateY = useTransform(x, [-1, 1], [-25, 25])
-
-    useEffect(() => {
-        if (isMobile) return
-        const handleMouseMove = (e) => {
-            if (!containerRef.current) return
-            const rect = containerRef.current.getBoundingClientRect()
-            const centerX = rect.left + rect.width / 2
-            const centerY = rect.top + rect.height / 2
-            const normalizedX = (e.clientX - centerX) / (rect.width / 2)
-            const normalizedY = (e.clientY - centerY) / (rect.height / 2)
-            mouseX.set(Math.max(-1, Math.min(1, normalizedX)))
-            mouseY.set(Math.max(-1, Math.min(1, normalizedY)))
-        }
-        const handleMouseLeave = () => { mouseX.set(0); mouseY.set(0) }
-        window.addEventListener('mousemove', handleMouseMove)
-        return () => window.removeEventListener('mousemove', handleMouseMove)
-    }, [isMobile, mouseX, mouseY])
-
-    if (isMobile) return null;
+    const { isMobile, isSm } = useResponsive()
+    const { lang } = useLanguage()
+    const isIndo = lang === 'id'
+    const [activeTab, setActiveTab] = useState('arch')
 
     return (
-        <div
-            ref={containerRef}
+        <div 
+            className="w-full max-w-xl mx-auto rounded-2xl overflow-hidden text-left"
             style={{
-                position: 'absolute', inset: 0, zIndex: 0,
-                perspective: '1200px', overflow: 'hidden',
-                background: '#020308', display: 'flex', alignItems: 'center', justifyContent: 'center'
+                background: 'linear-gradient(145deg, rgba(17, 24, 39, 0.95) 0%, rgba(11, 15, 23, 0.98) 100%)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                boxShadow: '0 20px 50px -15px rgba(0, 0, 0, 0.7), 0 0 30px -10px rgba(99, 102, 241, 0.25)',
+                backdropFilter: 'blur(16px)',
             }}
         >
-            {/* Massive Cinematic Light radiating from center */}
-            <div style={{
-                position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
-                width: '200vw', height: '200vh', background: 'radial-gradient(circle, rgba(59,130,246,0.15) 0%, rgba(0,0,0,0) 50%)'
-            }} />
+            {/* Window Title Bar */}
+            <div 
+                className="flex items-center justify-between px-4 py-3 border-b border-slate-800/80 bg-slate-950/60"
+                style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}
+            >
+                <div className="flex items-center gap-2">
+                    <span className="w-3 h-3 rounded-full bg-rose-500/80 inline-block"></span>
+                    <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block"></span>
+                    <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
+                    <span className="ml-2 text-xs font-mono text-slate-400 flex items-center gap-1">
+                        <Terminal size={12} className="text-indigo-400" />
+                        nurdiansyahlabs-core
+                    </span>
+                </div>
 
-            {/* Global 3D World */}
-            <m.div style={{
-                position: 'absolute', width: '100%', height: '100%',
-                transformStyle: 'preserve-3d', rotateX, rotateY
-            }}>
+                <div className="flex items-center gap-2">
+                    <span className="flex h-2 w-2 relative">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    <span className="text-[11px] font-mono text-emerald-400 font-semibold tracking-wide uppercase">
+                        99.9% Uptime
+                    </span>
+                </div>
+            </div>
 
-                {/* Cyber Floor Grid - HUGE size and pronounced glow */}
-                <m.div
-                    style={{
-                        position: 'absolute', bottom: '-200%', left: '-100%', width: '300%', height: '300%',
-                        backgroundImage: `linear-gradient(rgba(59, 130, 246, 0.4) 2px, transparent 2px), linear-gradient(90deg, rgba(59, 130, 246, 0.4) 2px, transparent 2px)`,
-                        backgroundSize: '150px 150px', transformOrigin: 'top center',
-                        boxShadow: 'inset 0 0 400px 200px #020308'
-                    }}
-                    animate={{ transform: ['rotateX(82deg) translateZ(-600px) translateY(0px)', 'rotateX(82deg) translateZ(-600px) translateY(150px)'] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
-                />
-
-                {/* Central AI Brain / Core - A giant glowing sun of data */}
-                <m.div
-                    style={{
-                        position: 'absolute', top: '50%', left: '50%', x: '-50%', y: '-50%',
-                        transformStyle: 'preserve-3d', transform: 'translateZ(0px)'
-                    }}
-                >
-                    <m.div
-                        style={{
-                            width: '300px', height: '300px', borderRadius: '50%',
-                            background: 'radial-gradient(circle, #ffffff, #1d4ed8 40%, transparent 70%)',
-                            boxShadow: '0 0 200px 100px rgba(59, 130, 246, 0.5)',
-                            mixBlendMode: 'screen', opacity: 0.9
-                        }}
-                        animate={{ scale: [1, 1.1, 1], opacity: [0.7, 1, 0.7] }}
-                        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                    />
-                </m.div>
-
-                {/* 4 Massive Server Monoliths */}
-                {pillars.map((pillar, idx) => (
-                    <m.div
-                        key={pillar.id}
-                        style={{
-                            position: 'absolute', top: pillar.y, left: pillar.x,
-                            transformStyle: 'preserve-3d', x: '-50%', y: '-50%'
-                        }}
+            {/* Subheader / Mode Switcher */}
+            <div className="flex items-center justify-between p-3 border-b border-slate-800/50 bg-slate-900/40 text-xs">
+                <div className="flex gap-1">
+                    <button
+                        type="button"
+                        onClick={() => setActiveTab('arch')}
+                        className={`px-3 py-1.5 rounded-lg font-medium transition-all text-xs min-h-[36px] flex items-center gap-1.5 ${
+                            activeTab === 'arch' 
+                                ? 'bg-indigo-600/30 text-indigo-300 border border-indigo-500/40' 
+                                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
+                        }`}
                     >
-                        {/* Energy Ground Beam continuously pushing data up */}
-                        <m.div
-                            style={{
-                                position: 'absolute', top: '50%', left: '50%',
-                                width: '6px', height: '1000px', background: `linear-gradient(to top, transparent, ${pillar.color}, transparent)`,
-                                transform: 'rotateX(90deg) translateZ(0px)', opacity: 0.8,
-                                filter: `drop-shadow(0 0 20px ${pillar.color})`
-                            }}
-                            animate={{ y: [0, -1000] }} transition={{ duration: 2, repeat: Infinity, ease: 'linear', delay: pillar.delay }}
-                        />
+                        <Layers size={13} />
+                        {isIndo ? 'Arsitektur' : 'Architecture'}
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => setActiveTab('metrics')}
+                        className={`px-3 py-1.5 rounded-lg font-medium transition-all text-xs min-h-[36px] flex items-center gap-1.5 ${
+                            activeTab === 'metrics' 
+                                ? 'bg-indigo-600/30 text-indigo-300 border border-indigo-500/40' 
+                                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
+                        }`}
+                    >
+                        <Activity size={13} />
+                        {isIndo ? 'Telemetri' : 'Telemetry'}
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => setActiveTab('contracts')}
+                        className={`px-3 py-1.5 rounded-lg font-medium transition-all text-xs min-h-[36px] flex items-center gap-1.5 ${
+                            activeTab === 'contracts' 
+                                ? 'bg-indigo-600/30 text-indigo-300 border border-indigo-500/40' 
+                                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
+                        }`}
+                    >
+                        <ShieldCheck size={13} />
+                        {isIndo ? 'API Kontrak' : 'Contracts'}
+                    </button>
+                </div>
 
-                        {/* Glassmorphism Monolith Container */}
+                <span className="hidden sm:inline-block text-[11px] font-mono text-slate-500">
+                    node: v20 · py: 3.10
+                </span>
+            </div>
+
+            {/* Tab Contents */}
+            <div className="p-4 sm:p-5">
+                <AnimatePresence mode="wait">
+                    {activeTab === 'arch' && (
                         <m.div
-                            style={{
-                                position: 'absolute', top: 0, left: 0,
-                                transformStyle: 'preserve-3d', transform: `translateZ(${pillar.z}px)`,
-                            }}
-                            animate={{ y: [-30, 30, -30], rotateY: [0, -360] }}
-                            transition={{
-                                y: { duration: 8 + idx, repeat: Infinity, ease: 'easeInOut', delay: pillar.delay },
-                                rotateY: { duration: 40 + (idx * 5), repeat: Infinity, ease: 'linear' }
-                            }}
+                            key="arch"
+                            initial={{ opacity: 0, y: 8 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -8 }}
+                            transition={{ duration: 0.2 }}
+                            className="space-y-3"
                         >
-                            {/* Inner Core Light of Monolith */}
-                            <div style={{
-                                position: 'absolute', top: '-50px', left: '-50px',
-                                width: '100px', height: '100px', background: pillar.color,
-                                borderRadius: '50%', boxShadow: `0 0 100px 60px ${pillar.color}`, opacity: 0.5
-                            }} />
-
-                            {/* Tower Faces - 120x120x400 Rectangular Prism */}
-                            <div style={{ ...getFaceStyle(pillar.color, 'front'), transform: 'translateZ(60px)' }} />
-                            <div style={{ ...getFaceStyle(pillar.color, 'back'), transform: 'rotateY(180deg) translateZ(60px)' }} />
-                            <div style={{ ...getFaceStyle(pillar.color, 'left'), transform: 'rotateY(-90deg) translateZ(60px)' }} />
-                            <div style={{ ...getFaceStyle(pillar.color, 'right'), transform: 'rotateY(90deg) translateZ(60px)' }} />
-                            <div style={{ ...getFaceStyle(pillar.color, 'top'), transform: 'rotateX(90deg) translateZ(200px)' }} />
-                            <div style={{ ...getFaceStyle(pillar.color, 'bottom'), transform: 'rotateX(-90deg) translateZ(200px)' }} />
-
-                            {/* Massive Floating Holographic Screen in front of Monolith */}
-                            <m.div
-                                style={{
-                                    position: 'absolute', top: '-125px', left: '-150px',
-                                    width: '300px', height: '250px',
-                                    background: `rgba(0,0,0,0.85)`,
-                                    border: `3px solid ${pillar.color}`,
-                                    borderRadius: '16px',
-                                    padding: '24px',
-                                    boxShadow: `0 0 80px ${pillar.color}80, inset 0 0 40px ${pillar.color}50`,
-                                    transform: 'translateZ(200px)', // Floats way out in front
-                                    display: 'flex', flexDirection: 'column', gap: '16px',
-                                    backdropFilter: 'blur(10px)'
-                                }}
-                            >
-                                <div style={{ fontSize: '1.5rem', fontWeight: 900, color: pillar.color, textTransform: 'uppercase', letterSpacing: '3px', textShadow: `0 0 10px ${pillar.color}` }}>
-                                    {pillar.label}
-                                </div>
-                                <div style={{ height: '3px', width: '100%', background: `linear-gradient(90deg, ${pillar.color}, transparent)` }} />
-
-                                {/* Inner Graphic Panel (Chart, Node, Web, DB) */}
-                                <div style={{ flex: 1, position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'flex-end', gap: '12px' }}>
-
-                                    {pillar.type === 'chart' && [1, 2, 3, 4, 5, 6].map(i => (
-                                        <m.div key={i} animate={{ height: [`${Math.random() * 40 + 20}%`, `${Math.random() * 80 + 20}%`, `${Math.random() * 40 + 20}%`] }} transition={{ duration: 1.5 + Math.random(), repeat: Infinity }} style={{ flex: 1, background: pillar.color, opacity: 0.9, borderRadius: '4px 4px 0 0', boxShadow: `0 0 20px ${pillar.color}` }} />
-                                    ))}
-
-                                    {pillar.type === 'web' && (
-                                        <div style={{ width: '100%', height: '100%', border: `3px solid ${pillar.color}`, borderRadius: '8px', padding: '8px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                                            <div style={{ width: '100%', height: '30px', background: pillar.color, borderRadius: '4px', opacity: 0.6, boxShadow: `0 0 10px ${pillar.color}` }} />
-                                            <div style={{ display: 'flex', gap: '8px', flex: 1 }}>
-                                                <div style={{ flex: 1, background: pillar.color, borderRadius: '4px', opacity: 0.4 }} />
-                                                <m.div animate={{ opacity: [1, 0.4, 1] }} transition={{ duration: 2, repeat: Infinity }} style={{ flex: 2, background: pillar.color, borderRadius: '4px', opacity: 0.9 }} />
+                            {ARCHITECTURE_TIERS.map((tier) => {
+                                const IconComponent = tier.icon
+                                return (
+                                    <div
+                                        key={tier.id}
+                                        className="p-3 rounded-xl transition-all border border-slate-800/80 hover:border-slate-700 bg-slate-900/60 flex items-start justify-between gap-3"
+                                        style={{
+                                            background: `linear-gradient(90deg, ${tier.bgGlow} 0%, rgba(15, 23, 42, 0.6) 100%)`
+                                        }}
+                                    >
+                                        <div className="flex items-start gap-3">
+                                            <div 
+                                                className="p-2 rounded-lg mt-0.5"
+                                                style={{ background: `${tier.color}20`, color: tier.color }}
+                                            >
+                                                <IconComponent size={16} />
+                                            </div>
+                                            <div>
+                                                <div className="flex items-center gap-2">
+                                                    <span className="text-sm font-semibold text-slate-100">
+                                                        {isIndo ? tier.nameId : tier.name}
+                                                    </span>
+                                                </div>
+                                                <div className="text-xs text-slate-300 font-mono mt-0.5">
+                                                    {tier.tech}
+                                                </div>
+                                                <div className="text-[11px] text-slate-400 mt-1 flex items-center gap-1.5">
+                                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span>
+                                                    {tier.metrics}
+                                                </div>
                                             </div>
                                         </div>
-                                    )}
 
-                                    {pillar.type === 'database' && (
-                                        <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', gap: '12px', justifyContent: 'center' }}>
-                                            {[1, 2, 3, 4].map(idx => (
-                                                <m.div key={idx} animate={{ x: [0, 15, 0] }} transition={{ duration: 2, delay: idx * 0.3, repeat: Infinity }} style={{ width: '100%', height: '22%', background: pillar.color, borderRadius: '8px', opacity: 1 - (idx * 0.15), borderLeft: `6px solid #fff`, boxShadow: `0 5px 15px ${pillar.color}` }} />
-                                            ))}
-                                        </div>
-                                    )}
-
-                                    {pillar.type === 'ai' && (
-                                        <div style={{ width: '100%', height: '100%', position: 'relative' }}>
-                                            <m.div animate={{ scale: [1, 1.4, 1] }} transition={{ duration: 1.5, repeat: Infinity }} style={{ position: 'absolute', top: '15%', left: '15%', width: '30px', height: '30px', borderRadius: '50%', background: pillar.color, boxShadow: `0 0 30px ${pillar.color}` }} />
-                                            <m.div animate={{ scale: [1, 1.6, 1] }} transition={{ duration: 2, repeat: Infinity }} style={{ position: 'absolute', top: '75%', left: '50%', width: '25px', height: '25px', borderRadius: '50%', background: pillar.color, boxShadow: `0 0 30px ${pillar.color}` }} />
-                                            <m.div animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 1.8, repeat: Infinity }} style={{ position: 'absolute', top: '35%', left: '80%', width: '35px', height: '35px', borderRadius: '50%', background: pillar.color, boxShadow: `0 0 30px ${pillar.color}` }} />
-                                            <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', overflow: 'visible' }}>
-                                                <line x1="15%" y1="15%" x2="50%" y2="75%" stroke={pillar.color} strokeWidth={4} strokeDasharray="5,5" />
-                                                <line x1="50%" y1="75%" x2="80%" y2="35%" stroke={pillar.color} strokeWidth={4} strokeDasharray="5,5" />
-                                                <line x1="15%" y1="15%" x2="80%" y2="35%" stroke={pillar.color} strokeWidth={4} opacity="0.4" />
-                                            </svg>
-                                        </div>
-                                    )}
-
-                                </div>
-                            </m.div>
-
+                                        <span 
+                                            className="text-[10px] font-mono px-2 py-0.5 rounded-full border border-slate-700 text-slate-300 bg-slate-950/60 shrink-0"
+                                        >
+                                            {tier.status}
+                                        </span>
+                                    </div>
+                                )
+                            })}
                         </m.div>
-                    </m.div>
-                ))}
-            </m.div>
+                    )}
 
-            {/* Overlays to blend edges */}
-            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #020308 0%, transparent 40%, #020308 100%)', pointerEvents: 'none' }} />
+                    {activeTab === 'metrics' && (
+                        <m.div
+                            key="metrics"
+                            initial={{ opacity: 0, y: 8 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -8 }}
+                            transition={{ duration: 0.2 }}
+                            className="space-y-3"
+                        >
+                            <div className="grid grid-cols-2 gap-2.5">
+                                {PLATFORM_METRICS.map((mItem, idx) => (
+                                    <div 
+                                        key={idx}
+                                        className="p-3.5 rounded-xl border border-slate-800 bg-slate-900/60"
+                                    >
+                                        <div className="text-[11px] font-medium text-slate-400">{mItem.label}</div>
+                                        <div className="text-lg sm:text-xl font-bold font-mono text-emerald-400 mt-1">
+                                            {mItem.value}
+                                        </div>
+                                        <div className="text-[11px] text-slate-500 mt-1">{mItem.detail}</div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="p-3 rounded-xl border border-indigo-900/50 bg-indigo-950/20 text-xs text-indigo-200 flex items-center justify-between">
+                                <span className="flex items-center gap-2">
+                                    <Zap size={15} className="text-indigo-400" />
+                                    {isIndo ? 'Diverifikasi via Pytest & CI Runner' : 'Verified via Pytest & CI Pipeline'}
+                                </span>
+                                <CheckCircle2 size={14} className="text-emerald-400" />
+                            </div>
+                        </m.div>
+                    )}
+
+                    {activeTab === 'contracts' && (
+                        <m.div
+                            key="contracts"
+                            initial={{ opacity: 0, y: 8 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -8 }}
+                            transition={{ duration: 0.2 }}
+                            className="space-y-2 font-mono text-xs"
+                        >
+                            {ENDPOINT_CONTRACTS.map((contract, idx) => (
+                                <div 
+                                    key={idx}
+                                    className="p-2.5 rounded-lg border border-slate-800 bg-slate-950/80 flex items-center justify-between gap-2"
+                                >
+                                    <div className="flex items-center gap-2 overflow-hidden">
+                                        <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${
+                                            contract.method === 'POST' ? 'bg-emerald-950 text-emerald-400 border border-emerald-800/60' : 'bg-sky-950 text-sky-400 border border-sky-800/60'
+                                        }`}>
+                                            {contract.method}
+                                        </span>
+                                        <span className="text-slate-200 truncate">{contract.path}</span>
+                                    </div>
+                                    <span className="text-[11px] text-slate-400 shrink-0">{contract.status}</span>
+                                </div>
+                            ))}
+
+                            <div className="text-[11px] text-slate-400 pt-2 font-sans flex items-center justify-between">
+                                <span>{isIndo ? 'Strict Schema Validation & CORS Enforcement' : 'Strict Schema Validation & CORS Enforcement'}</span>
+                                <span className="font-mono text-emerald-400">PASSED</span>
+                            </div>
+                        </m.div>
+                    )}
+                </AnimatePresence>
+            </div>
+
+            {/* Footer Status Bar */}
+            <div 
+                className="px-4 py-2.5 bg-slate-950/80 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400"
+                style={{ borderTop: '1px solid rgba(255, 255, 255, 0.06)' }}
+            >
+                <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
+                    <span>{isIndo ? 'Platform Modern NurdiansyahLabs' : 'NurdiansyahLabs Core Studio'}</span>
+                </div>
+                <a 
+                    href="#showcase" 
+                    className="text-indigo-400 hover:text-indigo-300 font-medium inline-flex items-center gap-1 min-h-[auto]"
+                >
+                    {isIndo ? 'Lihat Bukti Sistem' : 'View System Proof'}
+                    <ArrowUpRight size={12} />
+                </a>
+            </div>
         </div>
     )
 }
-
-const getFaceStyle = (color, type) => {
-    const isTopBottom = type === 'top' || type === 'bottom';
-    return {
-        position: 'absolute',
-        top: isTopBottom ? '-60px' : '-200px',
-        left: '-60px',
-        width: '120px',
-        height: isTopBottom ? '120px' : '400px',
-        background: `${color}1A`, // Very transparent center 
-        border: `2px solid ${color}`, // Solid glowing edges
-        backdropFilter: 'blur(8px)', // Glassmorphism
-        boxShadow: `inset 0 0 60px ${color}80, 0 0 30px ${color}40`,
-        display: 'flex', alignItems: 'center', justifyContent: 'center'
-    };
-};

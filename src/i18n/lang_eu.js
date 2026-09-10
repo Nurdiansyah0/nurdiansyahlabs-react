@@ -1,11 +1,11 @@
 // European languages: French, German, Spanish, Portuguese, Italian
 export const fr = {
     'nav.services': 'Services', 'nav.whyUs': 'Pourquoi Nous', 'nav.contact': 'Contact',
-    'hero.badge': 'APPROUVÉ PAR PLUS DE 50 CLIENTS EN INDONÉSIE',
+    'hero.badge': '18+ MODULES SYSTÈMES VÉRIFIÉS',
     'hero.h1.1': 'Solutions Numériques Intégrées :', 'hero.h1.2': 'Des Sites Web à la Précision', 'hero.h1.3': "de l'Analyse de Données.",
     'hero.desc': "Accélérez la croissance de votre entreprise avec des Landing Pages professionnelles, des systèmes Fullstack sur mesure et des stratégies basées sur les données. Propulsé par NurdiansyahLabs.",
     'hero.cta1': 'Explorer les Services', 'hero.cta2': 'Consulter Maintenant',
-    'hero.stat1': 'Clients Servis', 'hero.stat2': 'Piliers de Service', 'hero.stat3': 'Expérience',
+    'hero.stat1': 'Systèmes Vérifiés', 'hero.stat2': 'Piliers de Service', 'hero.stat3': 'Expérience',
     'svc.title': 'Services & Tarifs', 'svc.subtitle': 'Choisissez le bon pilier pour la croissance de votre entreprise.',
     'svc.hint': 'Cliquez sur une carte pour voir des exemples de projets',
     'svc.startingFrom': 'À partir de', 'svc.idealFor': 'Idéal pour', 'svc.viewExamples': 'Voir les Projets', 'svc.perMonth': '/mois',
@@ -40,11 +40,11 @@ export const fr = {
 
 export const de = {
     'nav.services': 'Leistungen', 'nav.whyUs': 'Warum Wir', 'nav.contact': 'Kontakt',
-    'hero.badge': 'VERTRAUT VON 50+ KUNDEN IN INDONESIEN',
+    'hero.badge': '18+ SYSTEM-MODULE VERIFIZIERT',
     'hero.h1.1': 'Integrierte Digitale Lösungen:', 'hero.h1.2': 'Von Websites bis Präzision', 'hero.h1.3': 'Datenanalyse.',
     'hero.desc': 'Beschleunigen Sie Ihr Geschäftswachstum mit professionellen Landing Pages, maßgeschneiderten Fullstack-Systemen und datengesteuerten Strategien.',
     'hero.cta1': 'Leistungen Entdecken', 'hero.cta2': 'Jetzt Beraten',
-    'hero.stat1': 'Kunden Betreut', 'hero.stat2': 'Service-Säulen', 'hero.stat3': 'Erfahrung',
+    'hero.stat1': 'Verifizierte Systeme', 'hero.stat2': 'Service-Säulen', 'hero.stat3': 'Erfahrung',
     'svc.title': 'Leistungen & Preise', 'svc.subtitle': 'Wählen Sie die richtige Säule für Ihr Wachstum.',
     'svc.hint': 'Klicken Sie auf eine Karte für Projektbeispiele', 'svc.startingFrom': 'Ab', 'svc.idealFor': 'Ideal für', 'svc.viewExamples': 'Beispielprojekte', 'svc.perMonth': '/Monat',
     'svc.a.title': 'A. Landing Page Erstellung', 'svc.a.tagline': '"Professionelle Online-Präsenz sofort"',
@@ -75,11 +75,11 @@ export const de = {
 
 export const es = {
     'nav.services': 'Servicios', 'nav.whyUs': 'Por Qué Nosotros', 'nav.contact': 'Contacto',
-    'hero.badge': 'CONFIANZA DE 50+ CLIENTES EN INDONESIA',
+    'hero.badge': '18+ MÓDULOS DE SISTEMA VERIFICADOS',
     'hero.h1.1': 'Soluciones Digitales Integradas:', 'hero.h1.2': 'De Sitios Web a Precisión', 'hero.h1.3': 'Análisis de Datos.',
     'hero.desc': 'Acelere el crecimiento de su negocio con Landing Pages profesionales, sistemas Fullstack personalizados y estrategias basadas en datos.',
     'hero.cta1': 'Explorar Servicios', 'hero.cta2': 'Consultar Ahora',
-    'hero.stat1': 'Clientes Atendidos', 'hero.stat2': 'Pilares de Servicio', 'hero.stat3': 'Experiencia',
+    'hero.stat1': 'Sistemas Verificados', 'hero.stat2': 'Pilares de Servicio', 'hero.stat3': 'Experiencia',
     'svc.title': 'Servicios y Precios', 'svc.subtitle': 'Elija el pilar adecuado para su crecimiento.',
     'svc.hint': 'Haga clic en una tarjeta para ver proyectos de ejemplo', 'svc.startingFrom': 'Desde', 'svc.idealFor': 'Ideal para', 'svc.viewExamples': 'Ver Proyectos', 'svc.perMonth': '/mes',
     'svc.a.title': 'A. Desarrollo de Landing Page', 'svc.a.tagline': '"Presencia Online Profesional al Instante"',
@@ -108,11 +108,11 @@ export const es = {
 
 export const pt = {
     'nav.services': 'Serviços', 'nav.whyUs': 'Por Que Nós', 'nav.contact': 'Contato',
-    'hero.badge': 'CONFIANÇA DE 50+ CLIENTES NA INDONÉSIA',
+    'hero.badge': '18+ MÓDULOS DE SISTEMA VERIFICADOS',
     'hero.h1.1': 'Soluções Digitais Integradas:', 'hero.h1.2': 'De Sites à Precisão', 'hero.h1.3': 'Análise de Dados.',
     'hero.desc': 'Acelere o crescimento com Landing Pages profissionais, sistemas Fullstack e estratégias baseadas em dados.',
     'hero.cta1': 'Explorar Serviços', 'hero.cta2': 'Consultar Agora',
-    'hero.stat1': 'Clientes Atendidos', 'hero.stat2': 'Pilares de Serviço', 'hero.stat3': 'Experiência',
+    'hero.stat1': 'Sistemas Verificados', 'hero.stat2': 'Pilares de Serviço', 'hero.stat3': 'Experiência',
     'svc.title': 'Serviços & Preços', 'svc.subtitle': 'Escolha o pilar certo para seu crescimento.',
     'svc.hint': 'Clique num cartão para ver exemplos', 'svc.startingFrom': 'A partir de', 'svc.idealFor': 'Ideal para', 'svc.viewExamples': 'Ver Projetos', 'svc.perMonth': '/mês',
     'svc.a.title': 'A. Criação de Landing Page', 'svc.a.tagline': '"Presença Online Profissional"',
@@ -141,11 +141,11 @@ export const pt = {
 
 export const it = {
     'nav.services': 'Servizi', 'nav.whyUs': 'Perché Noi', 'nav.contact': 'Contatto',
-    'hero.badge': 'FIDUCIA DI 50+ CLIENTI IN INDONESIA',
+    'hero.badge': '18+ MODULI DI SISTEMA VERIFICATI',
     'hero.h1.1': 'Soluzioni Digitali Integrate:', 'hero.h1.2': 'Dai Siti Web alla Precisione', 'hero.h1.3': "dell'Analisi dei Dati.",
     'hero.desc': 'Accelera la crescita del tuo business con Landing Page professionali, sistemi Fullstack su misura e strategie basate sui dati.',
     'hero.cta1': 'Esplora i Servizi', 'hero.cta2': 'Consulta Ora',
-    'hero.stat1': 'Clienti Serviti', 'hero.stat2': 'Pilastri di Servizio', 'hero.stat3': 'Esperienza',
+    'hero.stat1': 'Sistemi Verificati', 'hero.stat2': 'Pilastri di Servizio', 'hero.stat3': 'Esperienza',
     'svc.title': 'Servizi e Prezzi', 'svc.subtitle': 'Scegli il pilastro giusto per la tua crescita.',
     'svc.hint': 'Clicca su una scheda per vedere i progetti', 'svc.startingFrom': 'Da', 'svc.idealFor': 'Ideale per', 'svc.viewExamples': 'Vedi Progetti', 'svc.perMonth': '/mese',
     'svc.a.title': 'A. Creazione Landing Page', 'svc.a.tagline': '"Presenza Online Professionale"',
