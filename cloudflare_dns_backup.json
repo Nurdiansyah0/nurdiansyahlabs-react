@@ -1,0 +1,13 @@
+[
+  {"name":"cpcontacts.nurdiansyahlabs.com","type":"A","content":"163.223.227.44","proxied":true},
+  {"name":"ftp.nurdiansyahlabs.com","type":"A","content":"163.223.227.44","proxied":false},
+  {"name":"mail.nurdiansyahlabs.com","type":"A","content":"163.223.227.44","proxied":false},
+  {"name":"nurdiansyahlabs.com","type":"A","content":"163.223.227.44","proxied":true},
+  {"name":"webdisk.nurdiansyahlabs.com","type":"A","content":"163.223.227.44","proxied":false},
+  {"name":"webmail.nurdiansyahlabs.com","type":"A","content":"163.223.227.44","proxied":false},
+  {"name":"whm.nurdiansyahlabs.com","type":"A","content":"163.223.227.44","proxied":false},
+  {"name":"api.nurdiansyahlabs.com","type":"CNAME","content":"be261daf-e97b-4c98-b276-4acae414bab6.cfargotunnel.com","proxied":true},
+  {"name":"www.nurdiansyahlabs.com","type":"CNAME","content":"nurdiansyahlabs.com","proxied":true},
+  {"name":"nurdiansyahlabs.com","type":"MX","content":"mail.nurdiansyahlabs.com","priority":0},
+  {"name":"nurdiansyahlabs.com","type":"TXT","content":"\"v=spf1 +a +mx +ip4:163.223.227.43 include:relay.mailbaby.net ~all\""}
+]

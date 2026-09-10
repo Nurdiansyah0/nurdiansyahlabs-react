@@ -19,7 +19,7 @@ export default function IndustryServicePage() {
                 <Navbar />
                 <div style={{ padding: '8rem 2rem', textAlign: 'center', minHeight: '60vh' }}>
                     <h1>Industri tidak ditemukan.</h1>
-                    <Link to="/service" style={{ color: '#312e81', textDecoration: 'underline' }}>Kembali ke Layanan</Link>
+                    <Link to="/#services" style={{ color: '#312e81', textDecoration: 'underline' }}>Kembali ke Layanan</Link>
                 </div>
                 <Footer />
             </>
@@ -34,7 +34,7 @@ export default function IndustryServicePage() {
                 canonical={`/layanan/industri/${industrySlug}`}
                 breadcrumbs={[
                     { name: 'Home', url: '/' },
-                    { name: 'Layanan', url: '/service' },
+                    { name: 'Layanan', url: '/#services' },
                     { name: industryData.name, url: `/layanan/industri/${industrySlug}` }
                 ]}
             />
@@ -109,7 +109,7 @@ export default function IndustryServicePage() {
                 <section style={{ padding: '5rem 2rem', textAlign: 'center' }}>
                     <p style={{ color: '#64748b', marginBottom: '1rem' }}>Fokus Teknologi Utama:</p>
                     <h3 style={{ fontSize: '1.5rem', color: '#312e81', marginBottom: '2rem' }}>{industryData.serviceHighlight}</h3>
-                    <Link to="/service" style={{ color: '#2563eb', fontWeight: 600, textDecoration: 'none', borderBottom: '2px solid #2563eb', paddingBottom: '2px' }}>
+                    <Link to="/#services" style={{ color: '#2563eb', fontWeight: 600, textDecoration: 'none', borderBottom: '2px solid #2563eb', paddingBottom: '2px' }}>
                         Lihat Daftar Lengkap Layanan & Harga Kami &rarr;
                     </Link>
                 </section>

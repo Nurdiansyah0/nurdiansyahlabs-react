@@ -28,7 +28,7 @@
             "slug": "batam-rental-mobil",
             "categorySlug": "landing-page",
             "title": "Batam Rental Mobil",
-            "description": "Solusi sewa mobil harian & bulanan murah di Batam dengan armada unit terbaru.",
+            "description": "Solusi reservasi kendaraan & armada PWA responsif dengan kalkulator tarif dinamis, load speed sub-second, dan integrasi WhatsApp otomatis.",
             "category": "Landing Page",
             "accentColor": "#1d4ed8",
             "executiveSummary": "Batam Rental Mobil is a high-converting digital vehicle reservation, fleet management, and transport dispatch platform engineered by NurdiansyahLabs to serve corporate and tourist transit across the Batam Free Trade Zone. Developed with mobile-first React 18 and Tailwind CSS, the platform delivers instantaneous fleet availability schedules, transparent pricing calculations, and automated direct WhatsApp booking integrations. Operational workflows include dynamic vehicle allocation, seasonal rate adjustments, chauffeur service add-ons, and customer identity verification pipelines. The responsive Progressive Web App architecture guarantees sub-second initial load speeds on mobile cellular networks, maximizing reservation conversion rates for inbound business travelers arriving at airport and ferry terminals. The system provides local car rental operators with unified digital scheduling, eliminating booking overlap, streamlining vehicle maintenance schedules, and significantly reducing manual dispatch coordination overhead.",
@@ -49,7 +49,7 @@
             "slug": "koperasi-pos",
             "categorySlug": "fullstack",
             "title": "Koperasi POS System",
-            "description": "Software kasir & akuntansi digital untuk efisiensi transaksi dan operasional koperasi modern.",
+            "description": "Software kasir & akuntansi digital dengan kecepatan transaksi sub-second, buku besar simpan-pinjam anggota, dan kalkulasi SHU otomatis.",
             "category": "Fullstack",
             "accentColor": "#4338ca",
             "techStack": {
@@ -78,7 +78,7 @@
             "slug": "warehouse-wms",
             "categorySlug": "fullstack",
             "title": "LogiStack \u2013 Warehouse WMS",
-            "description": "Enterprise Resource Planning untuk manajemen gudang, stok real-time, dan logistik ekspor-impor.",
+            "description": "Enterprise WMS untuk alokasi stok bin-level real-time, respon query sub-second, dan valuasi inventaris FIFO/LIFO otomatis.",
             "category": "Fullstack",
             "accentColor": "#10b981",
             "techStack": {
@@ -137,7 +137,7 @@
             "slug": "primatera-poultry",
             "categorySlug": "fullstack",
             "title": "Primatera Poultry",
-            "description": "End-to-end digital ERP system for Joper/KUB poultry business, focusing on paperless operations.",
+            "description": "ERP peternakan ayam modern dengan pencatatan kandang paperless, kalkulasi Feed Conversion Ratio (FCR) otomatis, dan telemetri mortalitas real-time.",
             "category": "Fullstack",
             "accentColor": "#f59e0b",
             "techStack": {
@@ -221,8 +221,8 @@
         {
             "slug": "smart-vision",
             "categorySlug": "data-science",
-            "title": "Smart Vision AI \u2013 Object Detection",
-            "description": "Real-time computer vision application using TensorFlow.js and COCO-SSD to detect objects directly in the browser via WebRTC.",
+            "title": "Smart Vision AI – Object Detection",
+            "description": "Edge computer vision real-time menggunakan TensorFlow.js & COCO-SSD untuk deteksi objek langsung di browser via WebRTC dengan 60+ FPS.",
             "category": "Data Science",
             "accentColor": "#00ffcc",
             "executiveSummary": "Smart Vision AI is an in-browser computer vision, edge machine learning, and real-time object detection application developed by NurdiansyahLabs utilizing TensorFlow.js and the COCO-SSD neural network architecture. The application performs real-time multi-class object inference directly on client hardware via WebRTC camera streams, eliminating cloud API latency and preserving complete user video privacy without transmitting raw frames over the internet. The React 18 interface provides live visual bounding box overlays, confidence threshold filtering, frame rate (FPS) performance monitors, and hardware acceleration toggles using WebGL and WebGPU pipelines. Engineered as a progressive web application, Smart Vision AI demonstrates high-performance edge artificial intelligence execution without requiring server-side GPU infrastructure, making it ideal for low-bandwidth industrial inspection, security monitoring, and interactive smart retail deployments in challenging network environments.",
@@ -244,9 +244,21 @@
             "slug": "recommendation",
             "categorySlug": "data-science",
             "title": "Product Recommendation Engine",
-            "description": "Sistem rekomendasi AI cerdas berbasis Collaborative Filtering (Under Construction).",
+            "description": "Sistem rekomendasi AI cerdas berbasis Collaborative Filtering dengan kalkulasi matriks cosine similarity dan prediksi Top-N interaktif di browser.",
             "category": "Data Science",
-            "accentColor": "#f43f5e"
+            "accentColor": "#6366f1",
+            "executiveSummary": "Product Recommendation Engine is an interactive in-browser machine learning application engineered by NurdiansyahLabs demonstrating Item-Based and User-Based Collaborative Filtering. The engine computes real-time Cosine Similarity across sparse user-item utility matrices, executing vector dot products, normalization, and k-nearest neighbors scoring entirely client-side. The interface provides interactive rating controls, mathematical step-by-step formula explanations, and real-time top-N recommendation generation with confidence rankings. Designed to illustrate practical recommendation architectures for e-commerce and digital catalogs, the demonstration highlights how mathematical vector operations provide personalized product discovery without requiring costly server-side batch recalculations.",
+            "metrics": [
+                "Real-time in-browser cosine similarity computation",
+                "User-based & item-based vector scoring",
+                "Instant Top-N ranking updates"
+            ],
+            "stack": [
+                "React 18",
+                "JavaScript Vector Math",
+                "Collaborative Filtering",
+                "Tailwind CSS"
+            ]
         }
     ]
 }

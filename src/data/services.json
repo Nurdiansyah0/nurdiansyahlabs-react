@@ -1,32 +1,188 @@
 {
-    "services": [
+    "packages": [
         {
-            "slug": "web-development",
-            "title": "Jasa Web Developer Fullstack Indonesia",
-            "description": "Pembuatan sistem web fullstack modern (React, Node.js, PHP) untuk solusi bisnis komprehensif.",
-            "category": "Service",
-            "price": "Mulai Rp 5.000.000"
+            "id": "starter",
+            "packageNumber": 1,
+            "name": "Paket 1: Starter Web & Landing Page",
+            "title": "Starter Web & Landing Page",
+            "price": "Mulai Rp 500.000",
+            "startingPriceIDR": 500000,
+            "badge": "Paling Populer UMKM",
+            "target": "UMKM, personal branding, early startup",
+            "timeline": "3–7 hari kerja",
+            "revisions": "2x revisi minor",
+            "deliverables": [
+                "Desain responsif mobile-first (< 1s load time)",
+                "Integrasi WhatsApp direct CTA dengan pesan dinamis",
+                "Lead capture inquiry form terhubung email",
+                "Pondasi basic technical SEO & Google Analytics 4",
+                "Deployment ke hosting & setup sertifikat SSL HTTPS",
+                "2x minor revision selama proses pengerjaan"
+            ],
+            "limitations": [
+                "Biaya domain & hosting recurring ditanggung klien",
+                "Tidak mencakup custom database atau auth login user"
+            ],
+            "ctaText": "Pilih Paket Starter",
+            "serviceOptionValue": "Paket 1: Starter Web & Landing Page",
+            "whatsappText": "Halo NurdiansyahLabs, saya tertarik dengan Paket 1: Starter Web & Landing Page (Mulai Rp 500.000). Bisa bantu jelaskan prosesnya?",
+            "draftMessage": "Halo NurdiansyahLabs, saya tertarik dengan Paket 1: Starter Web & Landing Page (Mulai Rp 500.000). Saya ingin mendiskusikan kebutuhan landing page untuk bisnis/startup saya.",
+            "slug": "landing-page"
         },
         {
+            "id": "custom-erp",
+            "packageNumber": 2,
+            "name": "Paket 2: Custom Web Application & Operational ERP",
+            "title": "Custom Web Application & Operational ERP",
+            "price": "Sesuai Cakupan Proyek (Mulai Rp 2.500.000)",
+            "startingPriceIDR": 2500000,
+            "badge": "Solusi Operasional Lengkap",
+            "target": "Growing business, multi-branch, agriculture/retail/logistics",
+            "timeline": "3–8 minggu (sprint mingguan)",
+            "revisions": "Sesuai milestone & kesepakatan scope",
+            "deliverables": [
+                "Arsitektur modular scalable (React 18 + Python Flask + PostgreSQL)",
+                "Role-Based Access Control multi-level (Admin, Manajer, Kasir)",
+                "Dashboard operasional real-time & KPI bisnis terintegrasi",
+                "Database relasional teroptimasi dengan automated backup",
+                "Fitur export PDF faktur, rekap Excel/CSV, & integrasi WhatsApp",
+                "Garansi 30 hari bug-fix & SLA support purna jual"
+            ],
+            "limitations": [
+                "Biaya server VPS/cloud hosting & API pihak ketiga ditanggung klien",
+                "Fitur tambahan di luar scope disepakati per change order"
+            ],
+            "ctaText": "Minta Penawaran ERP",
+            "serviceOptionValue": "Paket 2: Custom Web Application & Operational ERP",
+            "whatsappText": "Halo NurdiansyahLabs, saya ingin konsultasi pembuatan Paket 2: Custom Web Application & Operational ERP (Mulai Rp 2.500.000) untuk operasional bisnis saya.",
+            "draftMessage": "Halo NurdiansyahLabs, saya ingin meminta penawaran untuk Paket 2: Custom Web Application & Operational ERP (Mulai Rp 2.500.000). Bisnis kami membutuhkan sistem kustom untuk pengelolaan operasional dan database.",
+            "slug": "web-development"
+        },
+        {
+            "id": "advisory",
+            "packageNumber": 3,
+            "name": "Paket 3: Technical Architecture Advisory & Enterprise Consultation",
+            "title": "Technical Architecture Advisory & Enterprise Consultation",
+            "price": "Konsultasi & Penawaran Khusus (Gratis 30-Menit Discovery)",
+            "startingPriceIDR": 0,
+            "badge": "Discovery 1-on-1 Gratis",
+            "target": "CTOs, product managers, tech leaders",
+            "timeline": "Sesi 30 menit; Audit 3–5 hari kerja",
+            "revisions": "Sesuai scope perjanjian SOW",
+            "deliverables": [
+                "1-on-1 sesi discovery teknis 30 menit (Google Meet / Zoom)",
+                "Audit arsitektur sistem, analisis query bottleneck, & SQL security",
+                "Roadmap modernisasi teknologi & strategi pipeline data/AI",
+                "Rekomendasi optimasi performa backend & mitigasi technical debt",
+                "Penyusunan penawaran custom SOW terstruktur sesuai kebutuhan"
+            ],
+            "limitations": [
+                "Sesi gratis difokuskan pada scoping asesmen & directional advisory",
+                "Implementasi hands-on engineering/coding diatur dalam SOW terpisah"
+            ],
+            "ctaText": "Jadwalkan Konsultasi Gratis",
+            "serviceOptionValue": "Paket 3: Technical Architecture Advisory & Enterprise Consultation",
+            "whatsappText": "Halo NurdiansyahLabs, saya ingin menjadwalkan Paket 3: Technical Architecture Advisory (Gratis 30-Menit Discovery) untuk arsitektur proyek saya.",
+            "draftMessage": "Halo NurdiansyahLabs, saya ingin menjadwalkan sesi Paket 3: Technical Architecture Advisory & Enterprise Consultation (Gratis 30-Menit Discovery) untuk mendiskusikan arsitektur sistem dan strategi teknologi kami.",
+            "slug": "machine-learning"
+        }
+    ],
+    "services": [
+        {
             "slug": "landing-page",
-            "title": "Jasa Landing Page Profesional Indonesia",
-            "description": "Landing page responsif, cepat, dan dioptimalkan untuk konversi tinggi UMKM & Startup.",
-            "category": "Service",
-            "price": "Mulai Rp 1.750.000"
+            "title": "Starter Web & Landing Page",
+            "tagline": "Kehadiran Online Cepat, Responsif, dan Siap Konversi",
+            "description": "Solusi landing page kustom performa tinggi untuk UMKM, personal branding, dan early startup. Dilengkapi integrasi WhatsApp instan dan lead capture form.",
+            "category": "Paket Layanan 1",
+            "price": "Mulai Rp 500.000",
+            "startingPriceIDR": 500000,
+            "idealFor": "UMKM, Personal Branding, Early Startup",
+            "estimation": "3–7 hari kerja",
+            "revisions": "2x revisi minor",
+            "inclusions": [
+                "Desain responsif mobile-first (< 1s load time)",
+                "Integrasi WhatsApp direct CTA dengan pesan dinamis",
+                "Lead capture form terhubung ke notifikasi email",
+                "Pondasi SEO teknis, meta tags, & schema markup",
+                "Setup Google Analytics 4 (GA4) event tracking",
+                "Hosting & SSL HTTPS deployment support",
+                "2x revisi minor selama proses pengembangan",
+                "Penyerahan source code tanpa vendor lock-in"
+            ],
+            "limitations": [
+                "Biaya langganan domain & hosting recurring ditanggung klien",
+                "Tidak mencakup custom database, login user, atau payment gateway"
+            ]
+        },
+        {
+            "slug": "web-development",
+            "title": "Custom Web Application & Operational ERP",
+            "tagline": "Sistem Operasional Terintegrasi untuk Bisnis Berkembang",
+            "description": "Aplikasi web skala produksi dan ERP kustom untuk bisnis berkembang, multi-cabang, agrikultur, ritel, dan logistik. Menghilangkan ketergantungan spreadsheet dan kertas.",
+            "category": "Paket Layanan 2",
+            "price": "Sesuai Cakupan Proyek (Mulai Rp 2.500.000)",
+            "startingPriceIDR": 2500000,
+            "idealFor": "Growing Business, Multi-branch Retail, Agriculture & Peternakan, Logistik & Pergudangan",
+            "estimation": "3–8 minggu (sprint mingguan)",
+            "revisions": "Sesuai milestone & kesepakatan cakupan",
+            "inclusions": [
+                "Arsitektur modern modular (React 18, Flask/Python, PostgreSQL)",
+                "Role-Based Access Control (RBAC: Admin, Manajer, Operator, Kasir)",
+                "Dashboard operasional real-time & KPI bisnis (FCR, Stok, Keuangan)",
+                "Database relasional aman dengan audit trail & backup otomatis",
+                "Fitur export laporan otomatis (PDF faktur, rekap Excel/CSV)",
+                "Deployment Docker container / VPS Linux dengan monitoring",
+                "Garansi 30 hari bug-fix & SLA support purna jual",
+                "Dokumentasi sistem & video panduan operasional"
+            ],
+            "limitations": [
+                "Biaya infrastruktur cloud (VPS/DB) dan API pihak ketiga ditanggung klien",
+                "Fitur baru di luar cakupan awal ditangani via change order terstruktur"
+            ]
         },
         {
             "slug": "data-analyst",
-            "title": "Jasa Analisis Data Bisnis & Dashboard Power BI",
-            "description": "Ubah data menjadi insight bisnis akurat melalui dashboard interaktif Power BI & laporan mendalam.",
-            "category": "Service",
-            "price": "Mulai Rp 3.000.000"
+            "title": "Business Intelligence Dashboard & Data Analytics",
+            "tagline": "Ubah Data Mentah Menjadi Keputusan Bisnis yang Akurat",
+            "description": "Dashboard interaktif Power BI, Tableau, dan React Charts untuk monitoring penjualan, inventory, dan metrik bisnis secara visual dan real-time.",
+            "category": "Layanan Analitik",
+            "price": "Mulai Rp 2.500.000",
+            "startingPriceIDR": 2500000,
+            "idealFor": "Manajer Operasional, Pemilik Bisnis Ritel, Tim Keuangan",
+            "estimation": "1–3 minggu",
+            "revisions": "2x revisi dashboard",
+            "inclusions": [
+                "Data cleaning & pemodelan data dari berbagai sumber (Excel, SQL, CSV)",
+                "Dashboard visual interaktif (Power BI / Tableau / React)",
+                "Automasi pembaruan data berkala",
+                "Pelatihan interpretasi metrik untuk tim operasional"
+            ],
+            "limitations": [
+                "Lisensi Power BI Pro / Tableau (jika cloud) disediakan oleh klien"
+            ]
         },
         {
             "slug": "machine-learning",
-            "title": "Jasa Data Science & Machine Learning Indonesia",
-            "description": "Solusi AI cerdas otomatis untuk prediksi penjualan, segmentasi pelanggan, dan deteksi anomali.",
-            "category": "Service",
-            "price": "Mulai Rp 4.500.000"
+            "title": "Technical Architecture Advisory & Enterprise Consultation",
+            "tagline": "Strategi Rekayasa Software, Audit Arsitektur, dan Machine Learning",
+            "description": "Konsultasi arsitektur perangkat lunak, optimasi database, audit technical debt, dan pipeline AI/ML untuk CTOs, engineering leads, dan tech founders.",
+            "category": "Paket Layanan 3",
+            "price": "Konsultasi & Penawaran Khusus (Gratis 30-Menit Discovery)",
+            "startingPriceIDR": 0,
+            "idealFor": "CTOs, Product Managers, Engineering Leads, Tech Founders",
+            "estimation": "Sesi 30 menit; Audit 3–5 hari kerja",
+            "revisions": "Sesuai perjanjian SOW",
+            "inclusions": [
+                "1-on-1 sesi discovery teknis gratis (30 menit via Google Meet/Zoom)",
+                "Audit arsitektur sistem, bottleneck performa, & keamanan SQL",
+                "Roadmap modernisasi teknologi & mitigasi technical debt",
+                "Strategi pipeline machine learning & computer vision edge inference",
+                "Penyusunan Scope of Work (SOW) & estimasi milestone transparan"
+            ],
+            "limitations": [
+                "Sesi gratis difokuskan pada asesmen & directional strategy",
+                "Eksekusi hands-on engineering dan coding diatur dalam kontrak SOW terpisah"
+            ]
         }
     ]
 }

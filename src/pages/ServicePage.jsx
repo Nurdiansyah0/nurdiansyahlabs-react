@@ -47,7 +47,10 @@ export default function ServicePage() {
                 <div className="max-w-4xl mx-auto">
                     <span className="text-indigo-300 font-bold uppercase tracking-wider text-sm">{service.category}</span>
                     <h1 className="text-4xl md:text-5xl font-black mt-2 mb-4 leading-tight">{service.title}</h1>
-                    <p className="text-xl text-indigo-100 max-w-2xl">{service.description}</p>
+                    {service.tagline && (
+                        <p className="text-xl text-indigo-200 font-medium italic mb-3">"{service.tagline}"</p>
+                    )}
+                    <p className="text-lg text-indigo-100 max-w-2xl">{service.description}</p>
                     <div className="mt-8 flex gap-4">
                         <a href="https://wa.me/6282176012461" className="bg-green-500 hover:bg-green-700 text-white px-8 py-3 rounded-xl font-bold transition-all transform hover:scale-105">
                             Konsultasi Sekarang
@@ -73,13 +76,50 @@ export default function ServicePage() {
                         </div>
                     </div>
 
+                    {service.inclusions && service.inclusions.length > 0 && (
+                        <div className="mt-10 pt-8 border-t border-slate-100">
+                            <h3 className="text-xl font-bold text-slate-900 mb-4">Fitur & Layanan Termasuk:</h3>
+                            <div className="grid sm:grid-cols-2 gap-3">
+                                {service.inclusions.map((item, idx) => (
+                                    <div key={idx} className="flex items-start gap-2 text-slate-700 text-sm">
+                                        <span className="text-emerald-600 font-bold">✓</span>
+                                        <span>{item}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {(service.idealFor || service.estimation || service.revisions) && (
+                        <div className="mt-8 pt-6 border-t border-slate-100 grid sm:grid-cols-3 gap-4">
+                            {service.idealFor && (
+                                <div className="bg-slate-50 p-4 rounded-xl">
+                                    <div className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Ideal Untuk</div>
+                                    <div className="text-sm font-semibold text-slate-800">{service.idealFor}</div>
+                                </div>
+                            )}
+                            {service.estimation && (
+                                <div className="bg-slate-50 p-4 rounded-xl">
+                                    <div className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Estimasi Pengerjaan</div>
+                                    <div className="text-sm font-semibold text-indigo-900">{service.estimation}</div>
+                                </div>
+                            )}
+                            {service.revisions && (
+                                <div className="bg-slate-50 p-4 rounded-xl">
+                                    <div className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Kebijakan Revisi</div>
+                                    <div className="text-sm font-semibold text-slate-800">{service.revisions}</div>
+                                </div>
+                            )}
+                        </div>
+                    )}
+
                     <div className="mt-12 pt-8 border-t border-slate-100">
                         <div className="flex justify-between items-center bg-indigo-50 p-6 rounded-2xl">
                             <div>
                                 <span className="text-slate-500 text-sm">Investasi</span>
                                 <div className="text-2xl font-black text-indigo-950">{service.price}</div>
                             </div>
-                            <Link to="/contact" className="text-indigo-600 font-bold hover:underline">Detail Biaya →</Link>
+                            <Link to="/#contact" className="text-indigo-600 font-bold hover:underline">Mulai Konsultasi →</Link>
                         </div>
                     </div>
                 </div>

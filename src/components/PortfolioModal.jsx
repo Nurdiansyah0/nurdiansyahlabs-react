@@ -8,7 +8,7 @@ import { getOptimizedImg } from '../utils/imgHelper'
 
 const portfolioData = {
     A: {
-        title: 'A. Landing Page Development',
+        title: 'A. Business Landing Page',
         subtitle: "Professional landing pages built for real clients",
         badgeLabel: 'SERVICE A',
         badgeBg: '#eff6ff', badgeColor: '#1e3a8a',
@@ -57,7 +57,7 @@ const portfolioData = {
             { image: '/assets/projects/img_sales_forecast.png', tag: 'Forecasting', tagBg: '#f5f3ff', tagColor: '#5b21b6', title: 'Sales Forecasting Model (LSTM)', desc: 'Time-series LSTM predicting next 30/60/90-day revenue with 92% accuracy.', route: '/showcase/data-science/sales-forecasting' },
             { image: '/assets/projects/img_customer_cluster.png', tag: 'Segmentation', tagBg: '#fdf4ff', tagColor: '#a21caf', title: 'Customer Clustering (RFM)', desc: 'K-Means segments into Champion, At-Risk, and Lost groups for targeted campaigns.', route: '/showcase/data-science/customer-clustering' },
             { image: '/assets/projects/img_churn_model.png', tag: 'Churn Prediction', tagBg: '#fef2f2', tagColor: '#b91c1c', title: 'Subscriber Churn Detector', desc: 'XGBoost model predicting churn for 10k+ subscribers with SHAP explainability.', route: '/showcase/data-science/churn-prediction' },
-            { image: '/assets/projects/img_recommend_engine.png', tag: 'Recommendation', tagBg: '#eff6ff', tagColor: '#1e3a8a', title: 'Product Recommendation Engine', desc: 'Collaborative filtering system boosting cross-sell by 23%.', route: '/showcase/data-science/recommendation' },
+            { image: '/assets/projects/img_recommend_engine.png', tag: 'Recommendation', tagBg: '#eff6ff', tagColor: '#1e3a8a', title: 'Product Recommendation Engine', desc: 'Interactive collaborative filtering matrix computing real-time cosine similarity and ranking predictions.', route: '/showcase/data-science/recommendation' },
         ]
     }
 }

@@ -1,5 +1,6 @@
 import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
+import FlagshipShowcase from '../components/FlagshipShowcase'
 import Services from '../components/Services'
 import WhyUs from '../components/WhyUs'
 import CTA from '../components/CTA'
@@ -15,12 +16,13 @@ export default function Home() {
                 canonical="/"
             />
             <Navbar />
-            <main>
-            <Hero />
-            <Services />
-            <WhyUs />
-            <CTA />
-            </main>
+            <div className="homepage-wrapper">
+                <Hero />
+                <FlagshipShowcase />
+                <Services />
+                <WhyUs />
+                <CTA />
+            </div>
             <Footer />
         </>
     )

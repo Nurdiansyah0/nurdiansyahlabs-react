@@ -105,9 +105,11 @@ export function useResponsive() {
             // Raw values
             ...dimensions,
 
-            // Breakpoint flags (Tailwind standard)
-            isXs: dimensions.width < 480, // Restoring legacy 'tiny phone' detection
-            isSm: matches.sm,
+            // Breakpoint flags
+            isXs: dimensions.width < 480, // Tiny phone detection (< 480px)
+            isSm: !matches.sm, // Fixed inverted logic: true when screen is small (< 640px), false on desktop
+            minSm: matches.sm, // Standard min-width match (>= 640px)
+            isSmallScreen: !matches.sm, // Semantic alias for small viewport
             isMd: matches.md,
             isLg: matches.lg,
             isXl: matches.xl,

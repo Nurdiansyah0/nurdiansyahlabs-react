@@ -1,11 +1,11 @@
 // Asian & other languages: Japanese, Korean, Chinese, Hindi, Arabic, Russian, Turkish
 export const ja = {
     'nav.services': 'サービス', 'nav.whyUs': '選ばれる理由', 'nav.contact': 'お問い合わせ',
-    'hero.badge': 'インドネシア全土で50以上のクライアントに信頼されています',
+    'hero.badge': '18+ 認証済みシステムモジュール',
     'hero.h1.1': '統合デジタルソリューション：', 'hero.h1.2': 'ウェブサイトから精密な', 'hero.h1.3': 'データ分析まで。',
     'hero.desc': 'プロのランディングページ、カスタムフルスタックシステム、データ駆動戦略でビジネスの成長を加速します。',
     'hero.cta1': 'サービスを見る', 'hero.cta2': '今すぐ相談',
-    'hero.stat1': '顧客数', 'hero.stat2': 'サービス柱', 'hero.stat3': '経験',
+    'hero.stat1': '検証済みシステム', 'hero.stat2': 'サービス柱', 'hero.stat3': '経験',
     'svc.title': 'サービスと料金', 'svc.subtitle': 'ビジネスの成長に最適な柱を選びましょう。',
     'svc.hint': 'カードをクリックしてプロジェクト例を見る', 'svc.startingFrom': '料金', 'svc.idealFor': '最適', 'svc.viewExamples': 'プロジェクト例', 'svc.perMonth': '/月',
     'svc.a.title': 'A. ランディングページ制作', 'svc.a.tagline': '「即座にプロのオンラインプレゼンスを」',
@@ -34,11 +34,11 @@ export const ja = {
 
 export const ko = {
     'nav.services': '서비스', 'nav.whyUs': '왜 우리인가', 'nav.contact': '문의',
-    'hero.badge': '인도네시아 전역 50+ 고객의 신뢰',
+    'hero.badge': '18+ 검증된 시스템 모듈',
     'hero.h1.1': '통합 디지털 솔루션:', 'hero.h1.2': '웹사이트에서 정밀한', 'hero.h1.3': '데이터 분석까지.',
     'hero.desc': '전문 랜딩 페이지, 맞춤형 풀스택 시스템, 데이터 기반 전략으로 비즈니스 성장을 가속화하세요.',
     'hero.cta1': '서비스 보기', 'hero.cta2': '지금 상담',
-    'hero.stat1': '고객 수', 'hero.stat2': '서비스 축', 'hero.stat3': '경험',
+    'hero.stat1': '검증된 시스템', 'hero.stat2': '서비스 축', 'hero.stat3': '경험',
     'svc.title': '서비스 & 가격', 'svc.subtitle': '비즈니스 성장에 적합한 서비스를 선택하세요.',
     'svc.hint': '카드를 클릭하여 프로젝트 예시 보기', 'svc.startingFrom': '시작가', 'svc.idealFor': '적합 대상', 'svc.viewExamples': '프로젝트 보기', 'svc.perMonth': '/월',
     'svc.a.title': 'A. 랜딩 페이지 제작', 'svc.a.tagline': '"즉시 전문 온라인 존재감을"',
@@ -67,11 +67,11 @@ export const ko = {
 
 export const zh = {
     'nav.services': '服务', 'nav.whyUs': '为什么选我们', 'nav.contact': '联系',
-    'hero.badge': '受到印尼50多位客户的信赖',
+    'hero.badge': '18+ 验证系统模块',
     'hero.h1.1': '集成数字解决方案：', 'hero.h1.2': '从网站到精准', 'hero.h1.3': '数据分析。',
     'hero.desc': '通过专业着陆页、定制全栈系统和数据驱动策略加速您的业务增长。',
     'hero.cta1': '探索服务', 'hero.cta2': '立即咨询',
-    'hero.stat1': '服务客户', 'hero.stat2': '服务支柱', 'hero.stat3': '经验',
+    'hero.stat1': '验证系统', 'hero.stat2': '服务支柱', 'hero.stat3': '经验',
     'svc.title': '服务与价格', 'svc.subtitle': '选择适合您业务增长的服务支柱。',
     'svc.hint': '点击卡片查看项目示例', 'svc.startingFrom': '起步价', 'svc.idealFor': '适合', 'svc.viewExamples': '查看项目', 'svc.perMonth': '/月',
     'svc.a.title': 'A. 着陆页制作', 'svc.a.tagline': '"即刻建立专业在线形象"',
@@ -100,11 +100,11 @@ export const zh = {
 
 export const hi = {
     'nav.services': 'सेवाएं', 'nav.whyUs': 'हम क्यों', 'nav.contact': 'संपर्क',
-    'hero.badge': 'इंडोनेशिया भर में 50+ ग्राहकों द्वारा विश्वसनीय',
+    'hero.badge': '18+ सत्यापित सिस्टम मॉड्यूल',
     'hero.h1.1': 'एकीकृत डिजिटल समाधान:', 'hero.h1.2': 'वेबसाइट से सटीक', 'hero.h1.3': 'डेटा विश्लेषण तक।',
     'hero.desc': 'पेशेवर लैंडिंग पेज, कस्टम फुलस्टैक सिस्टम और डेटा-संचालित रणनीतियों के साथ अपने व्यवसाय की वृद्धि तेज़ करें।',
     'hero.cta1': 'सेवाएं देखें', 'hero.cta2': 'अभी परामर्श करें',
-    'hero.stat1': 'ग्राहक सेवित', 'hero.stat2': 'सेवा स्तंभ', 'hero.stat3': 'अनुभव',
+    'hero.stat1': 'सत्यापित सिस्टम', 'hero.stat2': 'सेवा स्तंभ', 'hero.stat3': 'अनुभव',
     'svc.title': 'सेवाएं और मूल्य', 'svc.subtitle': 'अपने व्यवसाय की वृद्धि के लिए सही स्तंभ चुनें।',
     'svc.hint': 'उदाहरण देखने के लिए कार्ड पर क्लिक करें', 'svc.startingFrom': 'शुरुआत', 'svc.idealFor': 'आदर्श', 'svc.viewExamples': 'प्रोजेक्ट देखें', 'svc.perMonth': '/माह',
     'svc.a.title': 'A. लैंडिंग पेज निर्माण', 'svc.a.tagline': '"तुरंत पेशेवर ऑनलाइन उपस्थिति"',
@@ -133,11 +133,11 @@ export const hi = {
 
 export const ar = {
     'nav.services': 'الخدمات', 'nav.whyUs': 'لماذا نحن', 'nav.contact': 'اتصل',
-    'hero.badge': 'موثوق من قبل أكثر من 50 عميلاً في إندونيسيا',
+    'hero.badge': '+18 وحدة نظام تم التحقق منها',
     'hero.h1.1': 'حلول رقمية متكاملة:', 'hero.h1.2': 'من المواقع إلى دقة', 'hero.h1.3': 'تحليل البيانات.',
     'hero.desc': 'سرّع نمو أعمالك بصفحات هبوط احترافية وأنظمة فول ستاك مخصصة واستراتيجيات مبنية على البيانات.',
     'hero.cta1': 'استكشف الخدمات', 'hero.cta2': 'استشر الآن',
-    'hero.stat1': 'عملاء خُدموا', 'hero.stat2': 'ركائز الخدمة', 'hero.stat3': 'خبرة',
+    'hero.stat1': 'أنظمة تم التحقق منها', 'hero.stat2': 'ركائز الخدمة', 'hero.stat3': 'خبرة',
     'svc.title': 'الخدمات والأسعار', 'svc.subtitle': 'اختر الركيزة المناسبة لنمو أعمالك.',
     'svc.hint': 'انقر على بطاقة لعرض أمثلة', 'svc.startingFrom': 'ابتداءً من', 'svc.idealFor': 'مثالي لـ', 'svc.viewExamples': 'عرض المشاريع', 'svc.perMonth': '/شهر',
     'svc.a.title': 'A. إنشاء صفحة هبوط', 'svc.a.tagline': '"حضور مهني فوري على الإنترنت"',
@@ -166,11 +166,11 @@ export const ar = {
 
 export const ru = {
     'nav.services': 'Услуги', 'nav.whyUs': 'Почему мы', 'nav.contact': 'Контакт',
-    'hero.badge': 'ДОВЕРЯЮТ 50+ КЛИЕНТОВ В ИНДОНЕЗИИ',
+    'hero.badge': '18+ ПРОВЕРЕННЫХ МОДУЛЕЙ СИСТЕМЫ',
     'hero.h1.1': 'Интегрированные цифровые решения:', 'hero.h1.2': 'От сайтов до точной', 'hero.h1.3': 'аналитики данных.',
     'hero.desc': 'Ускорьте рост вашего бизнеса с профессиональными лендингами, кастомными fullstack-системами и data-driven стратегиями.',
     'hero.cta1': 'Просмотреть услуги', 'hero.cta2': 'Консультация',
-    'hero.stat1': 'Клиентов', 'hero.stat2': 'Направлений', 'hero.stat3': 'Опыт',
+    'hero.stat1': 'Проверенных систем', 'hero.stat2': 'Направлений', 'hero.stat3': 'Опыт',
     'svc.title': 'Услуги и цены', 'svc.subtitle': 'Выберите направление для роста вашего бизнеса.',
     'svc.hint': 'Кликните на карточку для примеров', 'svc.startingFrom': 'От', 'svc.idealFor': 'Идеально для', 'svc.viewExamples': 'Примеры проектов', 'svc.perMonth': '/мес',
     'svc.a.title': 'A. Создание лендинга', 'svc.a.tagline': '"Профессиональное онлайн представительство"',
@@ -199,11 +199,11 @@ export const ru = {
 
 export const tr = {
     'nav.services': 'Hizmetler', 'nav.whyUs': 'Neden Biz', 'nav.contact': 'İletişim',
-    'hero.badge': 'ENDONEZYA GENELİNDE 50+ MÜŞTERİ GÜVENİ',
+    'hero.badge': '18+ DOĞRULANMIŞ SİSTEM MODÜLÜ',
     'hero.h1.1': 'Entegre Dijital Çözümler:', 'hero.h1.2': 'Web Sitelerinden Hassas', 'hero.h1.3': 'Veri Analizine.',
     'hero.desc': 'Profesyonel açılış sayfaları, özel fullstack sistemler ve veri odaklı stratejilerle işletmenizin büyümesini hızlandırın.',
     'hero.cta1': 'Hizmetleri Keşfet', 'hero.cta2': 'Şimdi Danışın',
-    'hero.stat1': 'Müşteri', 'hero.stat2': 'Hizmet Sütunu', 'hero.stat3': 'Deneyim',
+    'hero.stat1': 'Doğrulanmış Sistem', 'hero.stat2': 'Hizmet Sütunu', 'hero.stat3': 'Deneyim',
     'svc.title': 'Hizmetler & Fiyatlar', 'svc.subtitle': 'İşletmenizin büyümesi için doğru sütunu seçin.',
     'svc.hint': 'Örnek projeleri görmek için karta tıklayın', 'svc.startingFrom': 'Başlangıç', 'svc.idealFor': 'İdeal', 'svc.viewExamples': 'Projeleri Gör', 'svc.perMonth': '/ay',
     'svc.a.title': 'A. Açılış Sayfası Oluşturma', 'svc.a.tagline': '"Anında Profesyonel Çevrimiçi Varlık"',

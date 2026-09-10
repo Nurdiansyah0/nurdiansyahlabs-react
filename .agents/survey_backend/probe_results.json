@@ -1,0 +1,631 @@
+[
+  {
+    "name": "Login with username",
+    "method": "POST",
+    "path": "/api/v1/auth/login",
+    "status_code": 200,
+    "response": {
+      "success": true,
+      "token": "d3585faced7423b0664d1bcbd326d9bd9f68301fd5a329642a89820861257470",
+      "user": {
+        "created_at": "2026-09-08T11:31:11.575638",
+        "email": "admin@example.com",
+        "id": 1,
+        "username": "testadmin"
+      }
+    }
+  },
+  {
+    "name": "Login with email",
+    "method": "POST",
+    "path": "/api/v1/auth/login",
+    "status_code": 200,
+    "response": {
+      "success": true,
+      "token": "fe41500533ce81115338181324fbfe299f5511180305405d2f3be2e5d38ac281",
+      "user": {
+        "created_at": "2026-09-08T11:31:11.575638",
+        "email": "admin@example.com",
+        "id": 1,
+        "username": "testadmin"
+      }
+    }
+  },
+  {
+    "name": "Login empty payload",
+    "method": "POST",
+    "path": "/api/v1/auth/login",
+    "status_code": 400,
+    "response": {
+      "error": {
+        "code": "VALIDATION_ERROR",
+        "message": "Username and password required"
+      },
+      "success": false
+    }
+  },
+  {
+    "name": "Verify with Authorization Bearer",
+    "method": "GET",
+    "path": "/api/v1/auth/verify",
+    "status_code": 401,
+    "response": {
+      "error": {
+        "code": "UNAUTHORIZED",
+        "message": "Invalid or expired admin token"
+      },
+      "success": false
+    }
+  },
+  {
+    "name": "Forgot password existing user",
+    "method": "POST",
+    "path": "/api/v1/auth/forgot_password",
+    "status_code": 200,
+    "response": {
+      "message": "If the account exists, password reset instructions have been generated.",
+      "success": true
+    }
+  },
+  {
+    "name": "Forgot password non-existent user",
+    "method": "POST",
+    "path": "/api/v1/auth/forgot_password",
+    "status_code": 200,
+    "response": {
+      "message": "If the account exists, password reset instructions have been generated.",
+      "success": true
+    }
+  },
+  {
+    "name": "Reset password invalid token",
+    "method": "POST",
+    "path": "/api/v1/auth/reset_password",
+    "status_code": 400,
+    "response": {
+      "error": {
+        "code": "INVALID_TOKEN",
+        "message": "Invalid or expired reset token"
+      },
+      "success": false
+    }
+  },
+  {
+    "name": "Reset password valid token",
+    "method": "POST",
+    "path": "/api/v1/auth/reset_password",
+    "status_code": 200,
+    "response": {
+      "message": "Password reset successfully",
+      "success": true
+    }
+  },
+  {
+    "name": "Verify session invalidation after reset",
+    "method": "GET",
+    "path": "/api/v1/auth/verify",
+    "status_code": 401,
+    "response": {
+      "error": {
+        "code": "UNAUTHORIZED",
+        "message": "Invalid or expired admin token"
+      },
+      "success": false
+    }
+  },
+  {
+    "name": "Login with new password",
+    "method": "POST",
+    "path": "/api/v1/auth/login",
+    "status_code": 200,
+    "response": {
+      "success": true,
+      "token": "e7a679fdffda381f09491e6342ff3f9574fbe486bd4b3728fb0035daf119b3cd",
+      "user": {
+        "created_at": "2026-09-08T11:31:11.575638",
+        "email": "admin@example.com",
+        "id": 1,
+        "username": "testadmin"
+      }
+    }
+  },
+  {
+    "name": "Logout with X-Admin-Token",
+    "method": "POST",
+    "path": "/api/v1/auth/logout",
+    "status_code": 200,
+    "response": {
+      "message": "Logged out successfully",
+      "success": true
+    }
+  },
+  {
+    "name": "Verify after logout",
+    "method": "GET",
+    "path": "/api/v1/auth/verify",
+    "status_code": 401,
+    "response": {
+      "error": {
+        "code": "UNAUTHORIZED",
+        "message": "Invalid or expired admin token"
+      },
+      "success": false
+    }
+  },
+  {
+    "name": "Login re-auth",
+    "method": "POST",
+    "path": "/api/v1/auth/login",
+    "status_code": 200,
+    "response": {
+      "success": true,
+      "token": "37121ffffd51cd998d906dd28bcb45a115972af07a37a5da1d5ead3c45a8f805",
+      "user": {
+        "created_at": "2026-09-08T11:31:11.575638",
+        "email": "admin@example.com",
+        "id": 1,
+        "username": "testadmin"
+      }
+    }
+  },
+  {
+    "name": "Legacy auth login",
+    "method": "POST",
+    "path": "/api/v1/auth/legacy?action=login",
+    "status_code": 200,
+    "response": {
+      "success": true,
+      "token": "3b29578a4a1a5393ef6925e128fc7795a2cea4fcfe5a323b71c0c5cd7301cb15",
+      "user": {
+        "created_at": "2026-09-08T11:31:11.575638",
+        "email": "admin@example.com",
+        "id": 1,
+        "username": "testadmin"
+      }
+    }
+  },
+  {
+    "name": "Legacy auth unknown",
+    "method": "GET",
+    "path": "/api/v1/auth/legacy?action=invalid",
+    "status_code": 400,
+    "response": {
+      "error": "Unknown action"
+    }
+  },
+  {
+    "name": "Create Product",
+    "method": "POST",
+    "path": "/api/v1/products",
+    "status_code": 201,
+    "response": {
+      "data": {
+        "appId": "pos-resto",
+        "app_id": "pos-resto",
+        "category": "SaaS",
+        "createdAt": "2026-09-08T11:31:11.908611",
+        "ctaText": "Order Now",
+        "description": null,
+        "externalUrl": null,
+        "extras": null,
+        "features": [],
+        "icon": null,
+        "id": 1,
+        "imageUrl": null,
+        "image_url": null,
+        "name": "Point of Sale",
+        "price": 1500000.0,
+        "screenshots": [],
+        "slug": null,
+        "status": "active",
+        "updatedAt": "2026-09-08T11:31:11.908614"
+      },
+      "success": true
+    }
+  },
+  {
+    "name": "Get Product Detail",
+    "method": "GET",
+    "path": "/api/v1/products/1",
+    "status_code": 200,
+    "response": {
+      "data": {
+        "appId": "pos-resto",
+        "app_id": "pos-resto",
+        "category": "SaaS",
+        "createdAt": "2026-09-08T11:31:11.908611",
+        "ctaText": "Order Now",
+        "description": null,
+        "externalUrl": null,
+        "extras": null,
+        "features": [],
+        "icon": null,
+        "id": 1,
+        "imageUrl": null,
+        "image_url": null,
+        "name": "Point of Sale",
+        "price": 1500000.0,
+        "screenshots": [],
+        "slug": null,
+        "status": "active",
+        "updatedAt": "2026-09-08T11:31:11.908614"
+      },
+      "success": true
+    }
+  },
+  {
+    "name": "Update Product",
+    "method": "PATCH",
+    "path": "/api/v1/products/1",
+    "status_code": 200,
+    "response": {
+      "data": {
+        "appId": "pos-resto",
+        "app_id": "pos-resto",
+        "category": "SaaS",
+        "createdAt": "2026-09-08T11:31:11.908611",
+        "ctaText": "Order Now",
+        "description": null,
+        "externalUrl": null,
+        "extras": null,
+        "features": [],
+        "icon": null,
+        "id": 1,
+        "imageUrl": null,
+        "image_url": null,
+        "name": "POS Resto Pro",
+        "price": 1500000.0,
+        "screenshots": [],
+        "slug": null,
+        "status": "active",
+        "updatedAt": "2026-09-08T11:31:11.914289"
+      },
+      "success": true
+    }
+  },
+  {
+    "name": "Delete Product",
+    "method": "DELETE",
+    "path": "/api/v1/products/1",
+    "status_code": 200,
+    "response": {
+      "message": "Product deleted successfully",
+      "success": true
+    }
+  },
+  {
+    "name": "Get Deleted Product 404",
+    "method": "GET",
+    "path": "/api/v1/products/1",
+    "status_code": 404,
+    "response": {
+      "error": {
+        "code": "NOT_FOUND",
+        "message": "Product not found"
+      },
+      "success": false
+    }
+  },
+  {
+    "name": "Create Project",
+    "method": "POST",
+    "path": "/api/v1/projects",
+    "status_code": 201,
+    "response": {
+      "data": {
+        "accentColor": "#1d4ed8",
+        "category": "Fullstack",
+        "categorySlug": "fullstack",
+        "createdAt": "2026-09-08T11:31:11.918962",
+        "demoUrl": null,
+        "description": "A sample project",
+        "id": 1,
+        "isFeatured": false,
+        "repositoryUrl": null,
+        "screenshots": [],
+        "slug": "sample-project",
+        "status": "published",
+        "techStack": null,
+        "technologies": null,
+        "title": "Sample Project",
+        "updatedAt": "2026-09-08T11:31:11.918967"
+      },
+      "success": true
+    }
+  },
+  {
+    "name": "Filter Projects category match",
+    "method": "GET",
+    "path": "/api/v1/projects?category=fullstack",
+    "status_code": 200,
+    "response": {
+      "data": [
+        {
+          "accentColor": "#1d4ed8",
+          "category": "Fullstack",
+          "categorySlug": "fullstack",
+          "createdAt": "2026-09-08T11:31:11.918962",
+          "demoUrl": null,
+          "description": "A sample project",
+          "id": 1,
+          "isFeatured": false,
+          "repositoryUrl": null,
+          "screenshots": [],
+          "slug": "sample-project",
+          "status": "published",
+          "techStack": null,
+          "technologies": null,
+          "title": "Sample Project",
+          "updatedAt": "2026-09-08T11:31:11.918967"
+        }
+      ],
+      "success": true
+    }
+  },
+  {
+    "name": "Filter Projects category mismatch",
+    "method": "GET",
+    "path": "/api/v1/projects?category=mobile",
+    "status_code": 200,
+    "response": {
+      "data": [],
+      "success": true
+    }
+  },
+  {
+    "name": "Filter Projects status",
+    "method": "GET",
+    "path": "/api/v1/projects?status=archived",
+    "status_code": 200,
+    "response": {
+      "data": [],
+      "success": true
+    }
+  },
+  {
+    "name": "Get Analytics summary unauth 401",
+    "method": "GET",
+    "path": "/api/v1/analytics",
+    "status_code": 401,
+    "response": {
+      "error": {
+        "code": "UNAUTHORIZED",
+        "message": "Admin token is missing"
+      },
+      "success": false
+    }
+  },
+  {
+    "name": "Get Analytics summary auth 200",
+    "method": "GET",
+    "path": "/api/v1/analytics",
+    "status_code": 200,
+    "response": {
+      "metrics": {
+        "top_paths": [],
+        "total_events": 0,
+        "unique_visitors": 0
+      },
+      "recent_events": [],
+      "success": true
+    }
+  },
+  {
+    "name": "Media upload auth",
+    "method": "POST",
+    "path": "/api/v1/media/upload",
+    "status_code": 201,
+    "response": {
+      "data": {
+        "filename": "95d7813e61df_test_probe.png",
+        "imageUrl": "/upload_articles/95d7813e61df_test_probe.png",
+        "url": "/upload_articles/95d7813e61df_test_probe.png"
+      },
+      "success": true
+    }
+  },
+  {
+    "name": "Trends auto_post header",
+    "method": "POST",
+    "path": "/api/v1/trends/auto_post",
+    "status_code": 200,
+    "response": {
+      "message": "Trend automated generation queued for geo=ID",
+      "status": "queued",
+      "success": true
+    }
+  },
+  {
+    "name": "Trends auto_post query key",
+    "method": "GET",
+    "path": "/api/v1/trends/auto_post?key=nurdiansyah-cron-2026&geo=US",
+    "status_code": 200,
+    "response": {
+      "message": "Trend automated generation queued for geo=US",
+      "status": "queued",
+      "success": true
+    }
+  },
+  {
+    "name": "Primatera Transaction POST",
+    "method": "POST",
+    "path": "/api/v1/primatera/transactions",
+    "status_code": 201,
+    "response": {
+      "data": {
+        "amount": 25000000.0,
+        "category": "Harvest",
+        "date": "2026-09-08",
+        "id": 1,
+        "notes": "Penjualan ayam broiler",
+        "quantity": 1000.0,
+        "type": "INCOME"
+      },
+      "success": true
+    }
+  },
+  {
+    "name": "Primatera Transactions GET",
+    "method": "GET",
+    "path": "/api/v1/primatera/transactions",
+    "status_code": 200,
+    "response": {
+      "success": true,
+      "transactions": [
+        {
+          "amount": 25000000.0,
+          "category": "Harvest",
+          "date": "2026-09-08",
+          "id": 1,
+          "notes": "Penjualan ayam broiler",
+          "quantity": 1000.0,
+          "type": "INCOME"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Primatera Inventory POST create",
+    "method": "POST",
+    "path": "/api/v1/primatera/inventory",
+    "status_code": 200,
+    "response": {
+      "data": {
+        "id": 1,
+        "item_type": "FEED",
+        "stock": 500.5,
+        "updated_at": "2026-09-08T11:31:11.937698"
+      },
+      "success": true
+    }
+  },
+  {
+    "name": "Primatera Inventory POST update",
+    "method": "POST",
+    "path": "/api/v1/primatera/inventory",
+    "status_code": 200,
+    "response": {
+      "data": {
+        "id": 1,
+        "item_type": "FEED",
+        "stock": 750.0,
+        "updated_at": "2026-09-08T11:31:11.939464"
+      },
+      "success": true
+    }
+  },
+  {
+    "name": "Primatera Inventory GET",
+    "method": "GET",
+    "path": "/api/v1/primatera/inventory",
+    "status_code": 200,
+    "response": {
+      "inventory": [
+        {
+          "id": 1,
+          "item_type": "FEED",
+          "stock": 750.0,
+          "updated_at": "2026-09-08T11:31:11.939464"
+        }
+      ],
+      "success": true
+    }
+  },
+  {
+    "name": "Admin router unauth 401",
+    "method": "GET",
+    "path": "/api/v1/admin?action=posts",
+    "status_code": 401,
+    "response": {
+      "error": {
+        "code": "UNAUTHORIZED",
+        "message": "Admin token is missing"
+      },
+      "success": false
+    }
+  },
+  {
+    "name": "Admin router invalid action 400",
+    "method": "GET",
+    "path": "/api/v1/admin?action=unknown",
+    "status_code": 400,
+    "response": {
+      "error": "Invalid action"
+    }
+  },
+  {
+    "name": "Admin router posts GET",
+    "method": "GET",
+    "path": "/api/v1/admin?action=posts",
+    "status_code": 200,
+    "response": {
+      "posts": []
+    }
+  },
+  {
+    "name": "Admin router posts POST",
+    "method": "POST",
+    "path": "/api/v1/admin?action=posts",
+    "status_code": 201,
+    "response": {
+      "post": {
+        "accent": null,
+        "accentLight": null,
+        "content": null,
+        "created_at": "2026-09-08T11:31:11.943955",
+        "description": null,
+        "faqs": null,
+        "id": 1,
+        "img": null,
+        "service": null,
+        "serviceLabel": null,
+        "slug": "admin-post-1",
+        "title": "Admin Created Post",
+        "updated_at": "2026-09-08T11:31:11.943958"
+      },
+      "success": true
+    }
+  },
+  {
+    "name": "Admin router posts PUT",
+    "method": "PUT",
+    "path": "/api/v1/admin?action=posts",
+    "status_code": 200,
+    "response": {
+      "post": {
+        "accent": null,
+        "accentLight": null,
+        "content": null,
+        "created_at": "2026-09-08T11:31:11.943955",
+        "description": null,
+        "faqs": null,
+        "id": 1,
+        "img": null,
+        "service": null,
+        "serviceLabel": null,
+        "slug": "admin-post-1",
+        "title": "Admin Post Updated",
+        "updated_at": "2026-09-08T11:31:11.946384"
+      },
+      "success": true
+    }
+  },
+  {
+    "name": "Admin router posts DELETE",
+    "method": "DELETE",
+    "path": "/api/v1/admin?action=posts&slug=admin-post-1",
+    "status_code": 200,
+    "response": {
+      "success": true
+    }
+  },
+  {
+    "name": "Admin router leads GET",
+    "method": "GET",
+    "path": "/api/v1/admin?action=leads",
+    "status_code": 200,
+    "response": {
+      "leads": []
+    }
+  }
+]
