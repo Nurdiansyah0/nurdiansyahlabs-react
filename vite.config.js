@@ -50,7 +50,11 @@ export default defineConfig({
 
             renderer: '@prerenderer/renderer-puppeteer',
             rendererOptions: {
-                renderAfterTime: 5000 // wait 2 seconds for react-helmet to inject
+                maxConcurrentRoutes: 4,
+                renderAfterTime: 3000,
+                launchOptions: {
+                    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
+                }
             },
             server: {
                 port: 3000,

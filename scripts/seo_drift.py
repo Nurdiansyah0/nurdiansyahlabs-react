@@ -141,9 +141,13 @@ def snapshot_route(route):
         }
 
 def run_drift_check():
-    os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
-    conn = sqlite3.connect(DB_PATH)
-    init_db(conn)
+    conn = None
+    try:
+        os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
+        conn = sqlite3.connect(DB_PATH)
+        init_db(conn)
+    except Exception as e:
+        print(f"  [NOTE] Historical DB logging disabled ({e})")
 
     now = datetime.datetime.now(datetime.timezone.utc).isoformat()
     print(f"=== Running SEO Drift Check against {BASE_URL} at {now} ===")
@@ -164,11 +168,15 @@ def run_drift_check():
         else:
             success_count += 1
 
-        with conn:
-            conn.execute("""
-                INSERT INTO seo_snapshots (timestamp, route, status_code, title, description, canonical, has_json_ld)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
-            """, (now, snap["route"], snap["status_code"], snap["title"], snap["description"], snap["canonical"], snap["has_json_ld"]))
+        if conn:
+            try:
+                with conn:
+                    conn.execute("""
+                        INSERT INTO seo_snapshots (timestamp, route, status_code, title, description, canonical, has_json_ld)
+                        VALUES (?, ?, ?, ?, ?, ?, ?)
+                    """, (now, snap["route"], snap["status_code"], snap["title"], snap["description"], snap["canonical"], snap["has_json_ld"]))
+            except Exception:
+                pass
 
         status_str = "OK" if snap["status_code"] == 200 else f"ERR {snap['status_code']}"
         print(f"  [{status_str}] {route:<45} | Title: {snap['title'][:30]:<30} | JSON-LD: {snap['has_json_ld']}")
