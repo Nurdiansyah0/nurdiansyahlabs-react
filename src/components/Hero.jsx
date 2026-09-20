@@ -58,50 +58,64 @@ export default function Hero() {
                             </span>
                             <span>
                                 {isIndo 
-                                    ? 'Studio Rekayasa Perangkat Lunak & AI' 
-                                    : 'Software Engineering Studio & AI'}
+                                    ? 'Digital Solutions for Modern Business' 
+                                    : 'Digital Solutions for Modern Business'}
                             </span>
                         </m.div>
 
-                        {/* Core Headline (H1) */}
+                        {/* Core Headline (H1): Pain-Point Driven Hook */}
                         <m.h1
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.1 }}
-                            className="font-extrabold tracking-tight text-slate-50 leading-[1.12] mb-4 text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem]"
+                            className="font-extrabold tracking-tight text-slate-50 leading-[1.14] mb-4 text-3xl sm:text-4xl md:text-5xl lg:text-[3.15rem]"
                         >
                             {isIndo ? (
                                 <>
-                                    Aplikasi Web Skala Produksi,{' '}
-                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-sky-300 to-indigo-200">
-                                        Sistem ERP
+                                    Masih Mengandalkan Excel, Proses Manual, atau{' '}
+                                    <span style={{ color: '#818cf8' }}>
+                                        Sistem yang Tidak Terhubung?
                                     </span>
-                                    , & Solusi AI Terintegrasi.
                                 </>
                             ) : (
                                 <>
-                                    Production-Grade{' '}
-                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-sky-300 to-indigo-200">
-                                        Web Applications
+                                    Still Relying on Spreadsheets, Manual Work, or{' '}
+                                    <span style={{ color: '#818cf8' }}>
+                                        Disconnected Systems?
                                     </span>
-                                    , ERP Systems & AI Solutions.
                                 </>
                             )}
                         </m.h1>
 
-                        {/* Value Proposition Description */}
+                        {/* Transformation & Solution Paragraph */}
                         <m.p
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.2 }}
-                            className="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mb-8"
+                            className="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mb-6"
                         >
                             {isIndo ? (
-                                'NurdiansyahLabs adalah studio rekayasa teknologi dan mitra pengembangan sistem digital untuk bisnis modern. Kami merancang aplikasi web berkinerja tinggi, sistem ERP operasional, dan arsitektur otomasi data yang teruji siap produksi untuk pertumbuhan bisnis Anda.'
+                                'Saat bisnis bertumbuh, proses yang awalnya sederhana bisa menjadi lambat, sulit dipantau, dan rawan kesalahan. Kami membantu mengubah proses tersebut menjadi sistem digital yang terintegrasi, otomatis, dan siap berkembang bersama bisnis Anda.'
                             ) : (
-                                'NurdiansyahLabs is a professional software engineering studio and technology partner. We build production-grade web applications, operational ERP systems, and AI-driven data intelligence platforms designed for reliable business growth.'
+                                'As your business grows, manual processes become slow, fragmented, and prone to costly errors. We help transform them into integrated, automated digital systems engineered to scale reliably with your business.'
                             )}
                         </m.p>
+
+                        {/* Service Pillars Tagline Chips */}
+                        <m.div
+                            initial={{ opacity: 0, y: 15 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.25 }}
+                            className="flex flex-wrap items-center gap-2 mb-8 text-xs font-semibold text-indigo-200"
+                        >
+                            <span className="px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/20">Web Apps</span>
+                            <span className="text-slate-500">•</span>
+                            <span className="px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/20">Sistem ERP</span>
+                            <span className="text-slate-500">•</span>
+                            <span className="px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/20">{isIndo ? 'Otomasi Workflow' : 'Workflow Automation'}</span>
+                            <span className="text-slate-500">•</span>
+                            <span className="px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/20">{isIndo ? 'Solusi AI' : 'AI Solutions'}</span>
+                        </m.div>
 
                         {/* Dual Action CTAs */}
                         <m.div
@@ -113,23 +127,23 @@ export default function Hero() {
                             {/* Primary CTA: Smooth scroll to #contact */}
                             <a
                                 href="#contact"
-                                onClick={() => trackEvent('hero_primary_cta', { target: '#contact', text: isIndo ? 'Konsultasi Proyek Gratis' : 'Start Free Consultation' })}
+                                onClick={() => trackEvent('hero_primary_cta', { target: '#contact', text: isIndo ? 'Konsultasikan Proyek Anda' : 'Consult Your Project' })}
                                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 transition-all shadow-lg shadow-emerald-950/40 min-h-[48px] text-sm sm:text-base cursor-pointer"
                                 style={{
                                     boxShadow: '0 8px 24px -4px rgba(16, 185, 129, 0.35)',
                                 }}
                             >
-                                <span>{isIndo ? 'Konsultasi Proyek Gratis' : 'Start Free Consultation'}</span>
+                                <span>{isIndo ? 'Konsultasikan Proyek Anda' : 'Consult Your Project'}</span>
                                 <ArrowRight size={18} />
                             </a>
 
                             {/* Secondary CTA: Scroll to #services */}
                             <a
                                 href="#services"
-                                onClick={() => trackEvent('hero_secondary_cta', { target: '#services', text: isIndo ? 'Lihat Solusi & Paket' : 'View Solutions & Packages' })}
+                                onClick={() => trackEvent('hero_secondary_cta', { target: '#services', text: isIndo ? 'Lihat Solusi Kami' : 'View Our Solutions' })}
                                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-slate-200 hover:text-white bg-slate-900/80 hover:bg-slate-800 border border-slate-700/80 hover:border-slate-600 transition-all min-h-[48px] text-sm sm:text-base cursor-pointer"
                             >
-                                <span>{isIndo ? 'Lihat Solusi & Paket' : 'View Solutions & Packages'}</span>
+                                <span>{isIndo ? 'Lihat Solusi Kami' : 'View Our Solutions'}</span>
                             </a>
 
                             {/* Direct WhatsApp Quick-action */}
@@ -141,10 +155,10 @@ export default function Hero() {
                                     trackEvent('hero_whatsapp_click', { location: 'hero' })
                                 }}
                                 className="inline-flex items-center gap-2 px-4 py-3.5 rounded-xl text-slate-300 hover:text-emerald-400 hover:bg-slate-800/40 transition-all min-h-[48px] text-xs sm:text-sm font-medium"
-                                title={isIndo ? 'Respon Cepat via WhatsApp' : 'Fast Response via WhatsApp'}
+                                title={isIndo ? 'WhatsApp — Respons Cepat' : 'Fast Response via WhatsApp'}
                             >
                                 <MessageCircle size={17} className="text-emerald-400" />
-                                <span>WhatsApp (Respon Cepat)</span>
+                                <span>WhatsApp — Respons Cepat</span>
                             </a>
                         </m.div>
 

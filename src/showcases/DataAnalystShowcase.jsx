@@ -10,6 +10,8 @@ import EcommerceAnalyticsApp from './apps/EcommerceAnalyticsApp'
 import ClinicAnalyticsApp from './apps/ClinicAnalyticsApp'
 import CropYieldApp from './apps/CropYieldApp'
 
+import ExecutiveSummary from '../components/ExecutiveSummary'
+
 const appMapping = {
     'retail-sales': <RetailSalesApp />,
     'ecommerce-analytics': <EcommerceAnalyticsApp />,
@@ -65,6 +67,63 @@ export default function DataAnalystShowcase() {
                 githubUrl="https://github.com/Nurdiansyah0"
                 isResponsive={true}
             >
+                {project.executiveSummary && (
+                    <ExecutiveSummary
+                        title={project.title}
+                        category={project.category}
+                        summary={project.executiveSummary}
+                        metrics={project.metrics || []}
+                        stack={project.stack || []}
+                        subdomain={project.subdomain}
+                        subdomainHost={project.subdomainHost}
+                    />
+                )}
+                {project.subdomain && !project.executiveSummary && (
+                    <div style={{ maxWidth: '1200px', margin: '1rem auto 0', padding: '0 1rem' }}>
+                        <div style={{
+                            padding: '0.75rem 1.25rem',
+                            background: '#f0fdf4',
+                            borderRadius: '12px',
+                            border: '1.5px solid #bbf7d0',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            flexWrap: 'wrap',
+                            gap: '0.75rem'
+                        }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                <span style={{ fontSize: '1.2rem' }}>🌐</span>
+                                <div>
+                                    <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#166534', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                                        Live Subdomain Deployment
+                                    </div>
+                                    <div style={{ fontSize: '0.88rem', fontWeight: 700, color: '#14532d' }}>
+                                        {project.subdomainHost}
+                                    </div>
+                                </div>
+                            </div>
+                            <a
+                                href={project.subdomain}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: '6px',
+                                    background: '#166534',
+                                    color: '#ffffff',
+                                    fontSize: '0.8rem',
+                                    fontWeight: 700,
+                                    padding: '0.5rem 1rem',
+                                    borderRadius: '8px',
+                                    textDecoration: 'none'
+                                }}
+                            >
+                                <span>Buka Subdomain Penuh ↗</span>
+                            </a>
+                        </div>
+                    </div>
+                )}
                 {appMapping[project.slug]}
             </ShowcaseLayout>
         </>

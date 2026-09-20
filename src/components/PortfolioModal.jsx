@@ -16,8 +16,8 @@ const portfolioData = {
         projects: [
             { image: '/assets/projects/screenshots/ss_laptop.png', tag: 'E-Commerce', tagBg: '#eff6ff', tagColor: '#1e3a8a', title: 'Batam Laptop Center', desc: 'Tech product catalog, variants, dynamic cart & checkout flow.', route: '/showcase/landing-page/toko-laptop-batam' },
             { image: '/assets/projects/screenshots/ss_chicken.png', tag: 'Agrobisnis', tagBg: '#f0fdf4', tagColor: '#16a34a', title: 'Batam Chicken Center', desc: 'B2B Supplier Ayam Kampung dengan WhatsApp Order Management.', route: '/showcase/landing-page/batam-chicken-supplier' },
-            { image: '/assets/projects/screenshots/ss_siomay.png', tag: 'F&B', tagBg: '#fefce8', tagColor: '#a16207', title: 'Alyuna Siomay', desc: 'Digital menu, online ordering funnel, promo section.', route: '/showcase/landing-page/warung-makan' },
-            { image: '/assets/projects/screenshots/ss_rental.png', tag: 'Automotive', tagBg: '#fef2f2', tagColor: '#b91c1c', title: 'Batam Rental Mobil', desc: 'Car rental with Python-based real-time market price scraping.', route: '/showcase/landing-page/batam-rental-mobil' },
+            { image: '/assets/projects/screenshots/ss_siomay.png', tag: 'F&B', tagBg: '#fefce8', tagColor: '#a16207', title: 'Alyuna Siomay', desc: 'Digital menu, online ordering funnel, promo section.', route: '/showcase/landing-page/warung-makan', subdomain: 'https://warung.nurdiansyahlabs.com' },
+            { image: '/assets/projects/screenshots/ss_rental.png', tag: 'Automotive', tagBg: '#fef2f2', tagColor: '#b91c1c', title: 'Batam Rental Mobil', desc: 'Car rental with Python-based real-time market price scraping.', route: '/showcase/landing-page/batam-rental-mobil', subdomain: 'https://rental.nurdiansyahlabs.com' },
         ]
     },
     B: {
@@ -27,10 +27,10 @@ const portfolioData = {
         badgeBg: '#eef2ff', badgeColor: '#4338ca',
         headerBg: 'linear-gradient(135deg, #eef2ff 0%, #fff 100%)',
         projects: [
-            { image: '/assets/projects/img_pos_system.png', tag: 'POS System', tagBg: '#eef2ff', tagColor: '#4338ca', title: 'Koperasi ARFF POS & Member', desc: 'Full cooperative management: POS cashier, member accounts, admin dashboard.', route: '/showcase/fullstack/koperasi-pos' },
+            { image: '/assets/projects/img_pos_system.png', tag: 'POS System', tagBg: '#eef2ff', tagColor: '#4338ca', title: 'Koperasi ARFF POS & Member', desc: 'Full cooperative management: POS cashier, member accounts, admin dashboard.', route: '/showcase/fullstack/koperasi-pos', subdomain: 'https://pos.nurdiansyahlabs.com' },
             { image: '/assets/projects/img_warehouse_sys.png', tag: 'Inventory', tagBg: '#f0fdf4', tagColor: '#166534', title: 'Warehouse Management System', desc: 'Real-time stock tracking, purchase orders, barcode scanning & alerts.', route: '/showcase/fullstack/warehouse-wms' },
             { image: '/assets/projects/img_vehicle_inspect.png', tag: 'Inspection', tagBg: '#fffbeb', tagColor: '#92400e', title: 'Vehicle Inspection Platform', desc: 'Digital inspection with photo uploads, findings log & inspector assignment.', route: '/showcase/fullstack/vehicle-inspection' },
-            { image: '/assets/projects/img_hr_attendance.png', tag: 'HR System', tagBg: '#faf5ff', tagColor: '#6b21a8', title: 'Employee Attendance Portal', desc: 'GPS check-in, leave management, payroll automation & reporting.', route: '/showcase/fullstack/attendance' },
+            { image: '/assets/projects/img_hr_attendance.png', tag: 'HR System', tagBg: '#faf5ff', tagColor: '#6b21a8', title: 'Employee Attendance Portal', desc: 'GPS check-in, leave management, payroll automation & reporting.', route: '/showcase/fullstack/attendance', subdomain: 'https://hr.nurdiansyahlabs.com' },
             { image: '/assets/projects/img_primatera.png', tag: 'ERP System', tagBg: '#fef3c7', tagColor: '#92400e', title: 'Primatera Poultry', desc: 'End-to-end digital ERP system for Joper/KUB poultry business.', route: '/showcase/fullstack/primatera-poultry' },
         ]
     },
@@ -43,7 +43,7 @@ const portfolioData = {
         projects: [
             { image: '/assets/projects/img_dashboard_sales.png', tag: 'Sales Dashboard', tagBg: '#ecfdf5', tagColor: '#065f46', title: 'Retail Sales Monitor', desc: 'Power BI tracking daily sales, best-selling SKUs, revenue by branch for 12 outlets.', route: '/showcase/data-analyst/retail-sales' },
             { image: '/assets/projects/img_ecommerce_analytics.png', tag: 'E-Commerce', tagBg: '#f0fdfa', tagColor: '#0d9488', title: 'Tokopedia Seller Analytics', desc: 'Monthly reports on conversion rate, cart abandonment & top product performance.', route: '/showcase/data-analyst/ecommerce-analytics' },
-            { image: '/assets/projects/img_clinic_data.png', tag: 'Healthcare', tagBg: '#f0fdf4', tagColor: '#166534', title: 'Clinic Patient Flow Analysis', desc: 'Tableau dashboard on patient visits, wait times & doctor utilization.', route: '/showcase/data-analyst/clinic-analytics' },
+            { image: '/assets/projects/img_clinic_data.png', tag: 'Healthcare', tagBg: '#f0fdf4', tagColor: '#166534', title: 'Clinic Patient Flow Analysis', desc: 'Tableau dashboard on patient visits, wait times & doctor utilization.', route: '/showcase/data-analyst/clinic-analytics', subdomain: 'https://clinic.nurdiansyahlabs.com' },
             { image: '/assets/projects/img_agri_dashboard.png', tag: 'Agriculture', tagBg: '#fefce8', tagColor: '#a16207', title: 'Crop Yield Trend Report', desc: 'Seasonal yield comparison, cost vs revenue, regional performance heatmaps.', route: '/showcase/data-analyst/crop-yield' },
         ]
     },
@@ -89,19 +89,34 @@ function ProjectCard({ project, onNavigate, t }) {
                 />
             </div>
             <div style={{ padding: '0.85rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                <span style={{
-                    display: 'inline-block', alignSelf: 'flex-start',
-                    fontSize: '0.62rem', fontWeight: 700, textTransform: 'uppercase',
-                    letterSpacing: '0.06em', padding: '3px 8px', borderRadius: '9999px',
-                    background: project.tagBg, color: project.tagColor, marginBottom: '6px'
-                }}>
-                    {project.tag}
-                </span>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '6px', marginBottom: '6px', flexWrap: 'wrap' }}>
+                    <span style={{
+                        display: 'inline-block',
+                        fontSize: '0.62rem', fontWeight: 700, textTransform: 'uppercase',
+                        letterSpacing: '0.06em', padding: '3px 8px', borderRadius: '9999px',
+                        background: project.tagBg, color: project.tagColor
+                    }}>
+                        {project.tag}
+                    </span>
+                    {project.subdomain && (
+                        <span style={{
+                            display: 'inline-flex', alignItems: 'center', gap: '4px',
+                            fontSize: '0.62rem', fontWeight: 800,
+                            padding: '2px 7px', borderRadius: '6px',
+                            background: '#dcfce7', color: '#15803d',
+                            border: '1px solid #bbf7d0'
+                        }}>
+                            🌐 Subdomain Live
+                        </span>
+                    )}
+                </div>
                 <div style={{ fontWeight: 800, fontSize: '0.9rem', color: '#111827', marginBottom: '5px', lineHeight: 1.3 }}>{project.title}</div>
                 <div style={{ fontSize: '0.78rem', color: '#6b7280', lineHeight: 1.5, marginBottom: '10px', flexGrow: 1 }}>{project.desc}</div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#3730a3', fontSize: '0.78rem', fontWeight: 700 }}>
-                    <PlayCircle size={15} style={{ fontSize: '0.9rem' }} /> {t('modal.viewDemo')}
-                    <ArrowRight size={12} style={{ fontSize: '0.65rem', marginLeft: '4px', transform: hovered ? 'translateX(3px)' : 'none', transition: 'transform 0.2s' }} />
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '4px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#3730a3', fontSize: '0.78rem', fontWeight: 700 }}>
+                        <PlayCircle size={15} style={{ fontSize: '0.9rem' }} /> {t('modal.viewDemo')}
+                        <ArrowRight size={12} style={{ fontSize: '0.65rem', marginLeft: '4px', transform: hovered ? 'translateX(3px)' : 'none', transition: 'transform 0.2s' }} />
+                    </div>
                 </div>
             </div>
         </div>

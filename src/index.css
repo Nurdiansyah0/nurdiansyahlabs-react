@@ -11,6 +11,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Robust Highlight Text Classes (Guaranteed 100% visible across all devices) */
+.text-gradient-indigo {
+  color: #818cf8;
+}
+
+.text-gradient-emerald {
+  color: #34d399;
+}
+
 
 :root {
   --indigo-50: #eef2ff;

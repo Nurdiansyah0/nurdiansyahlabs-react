@@ -161,7 +161,7 @@ export default function Services() {
                         {isIndo ? (
                             <>
                                 Pilihan Paket Transparan Sesuai{' '}
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-indigo-300 to-emerald-400">
+                                <span className="text-gradient-indigo">
                                     Kebutuhan Nyata
                                 </span>{' '}
                                 Bisnis Anda
@@ -169,7 +169,7 @@ export default function Services() {
                         ) : (
                             <>
                                 Transparent Packages Tailored to Your{' '}
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-indigo-300 to-emerald-400">
+                                <span className="text-gradient-indigo">
                                     Real Needs
                                 </span>
                             </>
