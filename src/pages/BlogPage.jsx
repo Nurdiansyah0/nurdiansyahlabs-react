@@ -1,6 +1,8 @@
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { m } from 'framer-motion'
+
 import { MessageCircle, Loader2 } from 'lucide-react'
 import { useTracker } from '../hooks/useTracker'
 import { getOptimizedImg } from '../utils/imgHelper'
@@ -59,91 +61,8 @@ export default function BlogPage() {
             }
         }
         fetchPost()
-    }, [slug])
+    }, [actualSlug])
 
-    // Update SEO meta tags dynamically
-    useEffect(() => {
-        if (!post) return;
-
-        const originalTitle = document.title
-        const metaDesc = document.querySelector('meta[name="description"]')
-        const originalDesc = metaDesc ? metaDesc.getAttribute('content') : ''
-
-        document.title = `${post.title} | NurdiansyahLabs`
-        if (metaDesc) metaDesc.setAttribute('content', post.description)
-
-        // Canonical URL
-        let canonical = document.querySelector('link[rel="canonical"]')
-        let originalCanonical = ''
-        if (canonical) {
-            originalCanonical = canonical.getAttribute('href')
-        } else {
-            canonical = document.createElement('link')
-            canonical.setAttribute('rel', 'canonical')
-            document.head.appendChild(canonical)
-        }
-        const pageUrl = `https://nurdiansyahlabs.com/blog/${actualSlug}`
-        canonical.setAttribute('href', pageUrl)
-        canonical.id = 'blog-canonical'
-
-        // ── Hreflang Tag Injection for Global SEO ──
-        let hreflang = document.querySelector('link[hreflang]')
-        if (!hreflang && post.lang) {
-            hreflang = document.createElement('link')
-            hreflang.setAttribute('rel', 'alternate')
-            hreflang.setAttribute('hreflang', post.lang)
-            hreflang.setAttribute('href', pageUrl)
-            hreflang.id = 'blog-hreflang'
-            document.head.appendChild(hreflang)
-        }
-
-        // JSON-LD for this article (TechArticle with E-E-A-T entity linkage)
-        const script = document.createElement('script')
-        script.type = 'application/ld+json'
-        script.id = 'blog-ld'
-        script.textContent = JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'TechArticle',
-            mainEntityOfPage: { '@type': 'WebPage', '@id': pageUrl },
-            headline: post.title,
-            description: post.description,
-            url: pageUrl,
-            inLanguage: post.lang || 'id-ID',
-            author: { 
-                '@type': 'Person', 
-                '@id': 'https://nurdiansyahlabs.com/#person',
-                name: 'Nurdiansyah', 
-                url: 'https://nurdiansyahlabs.com',
-                jobTitle: 'Fullstack Software Engineer & Architect'
-            },
-            publisher: { 
-                '@type': 'ProfessionalService', 
-                '@id': 'https://nurdiansyahlabs.com/#service',
-                name: 'NurdiansyahLabs', 
-                logo: { '@type': 'ImageObject', url: 'https://nurdiansyahlabs.com/assets/logo.svg' } 
-            },
-            datePublished: post.created_at ? post.created_at.split(' ')[0] : '2026-02-21',
-            dateModified: new Date().toISOString().split('T')[0],
-            dependencies: 'React, Python, PostgreSQL, REST API',
-            proficiencyLevel: 'Expert'
-        })
-        document.head.appendChild(script)
-
-        return () => {
-            document.title = originalTitle
-            if (metaDesc && originalDesc) metaDesc.setAttribute('content', originalDesc)
-
-            if (originalCanonical) {
-                canonical.setAttribute('href', originalCanonical)
-                canonical.removeAttribute('id')
-            } else {
-                canonical.remove()
-            }
-
-            document.getElementById('blog-ld')?.remove()
-            document.getElementById('blog-hreflang')?.remove()
-        }
-    }, [actualSlug, post])
 
     // Track read event (dwell time)
     useEffect(() => {
@@ -190,6 +109,10 @@ export default function BlogPage() {
     if (loading) {
         return (
             <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f8fafc' }}>
+                <Helmet>
+                    <title>Blog | NurdiansyahLabs</title>
+                    <link rel="canonical" href={`https://nurdiansyahlabs.com/blog/${actualSlug}`} />
+                </Helmet>
                 <m.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}>
                     <Loader2 size={40} color="#3730a3" />
                 </m.div>
@@ -206,9 +129,55 @@ export default function BlogPage() {
     return renderPage(post)
 
     function renderPage(post) {
+        const pageUrl = `https://nurdiansyahlabs.com/blog/${actualSlug}`
+        const postTitle = `${post.title} | NurdiansyahLabs`
+        const postDesc = post.description || ''
+
         return (
             <div style={{ minHeight: '100vh', background: '#f8fafc', fontFamily: "'Inter', sans-serif" }}>
+                <Helmet>
+                    <title>{postTitle}</title>
+                    <meta name="description" content={postDesc} />
+                    <link rel="canonical" href={pageUrl} />
+                    <meta property="og:type" content="article" />
+                    <meta property="og:title" content={postTitle} />
+                    <meta property="og:description" content={postDesc} />
+                    <meta property="og:url" content={pageUrl} />
+                    <meta name="twitter:card" content="summary_large_image" />
+                    <meta name="twitter:title" content={postTitle} />
+                    <meta name="twitter:description" content={postDesc} />
+                    {post.lang && <link rel="alternate" hreflang={post.lang} href={pageUrl} />}
+                    <script type="application/ld+json">
+                        {JSON.stringify({
+                            '@context': 'https://schema.org',
+                            '@type': 'TechArticle',
+                            mainEntityOfPage: { '@type': 'WebPage', '@id': pageUrl },
+                            headline: post.title,
+                            description: post.description,
+                            url: pageUrl,
+                            inLanguage: post.lang || 'id-ID',
+                            author: { 
+                                '@type': 'Person', 
+                                '@id': 'https://nurdiansyahlabs.com/#person',
+                                name: 'Nurdiansyah', 
+                                url: 'https://nurdiansyahlabs.com',
+                                jobTitle: 'Fullstack Software Engineer & Architect'
+                            },
+                            publisher: { 
+                                '@type': 'ProfessionalService', 
+                                '@id': 'https://nurdiansyahlabs.com/#service',
+                                name: 'NurdiansyahLabs', 
+                                logo: { '@type': 'ImageObject', url: 'https://nurdiansyahlabs.com/assets/logo.svg' } 
+                            },
+                            datePublished: post.created_at ? post.created_at.split(' ')[0] : '2026-02-21',
+                            dateModified: new Date().toISOString().split('T')[0],
+                            dependencies: 'React, Python, PostgreSQL, REST API',
+                            proficiencyLevel: 'Expert'
+                        })}
+                    </script>
+                </Helmet>
                 {/* Top bar */}
+
                 <div style={{ background: '#fff', borderBottom: '1px solid #e2e8f0', padding: '0.75rem 1.5rem', display: 'flex', alignItems: 'center', gap: '12px' }}>
                     <Link to="/" style={{ color: '#3730a3', fontWeight: 700, fontSize: '0.85rem', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}>
                         <img src={getOptimizedImg("/assets/logo.svg", { w: 50 })} alt="NurdiansyahLabs" style={{ width: '20px', height: '20px' }} />
