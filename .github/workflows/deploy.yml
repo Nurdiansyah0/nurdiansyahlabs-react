@@ -36,8 +36,8 @@ jobs:
       # ─── 4.5. SEO Drift Validation ────────────────────────────────
       - name: 🔍 SEO Drift Validation
         run: |
-          # Start a local static server to serve the build output
-          npx serve -s dist -l 3000 &
+          # Start a local static server to serve the prerendered build output
+          npx serve dist -l 3000 &
           SERVE_PID=$!
           # Wait for server to start
           sleep 3
