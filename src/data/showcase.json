@@ -22,7 +22,9 @@
             "title": "Alyuna Siomay",
             "description": "Siomay Bandung autentik & Frozen Food premium dengan layanan pesan antar area Batam.",
             "category": "Landing Page",
-            "accentColor": "#1d4ed8"
+            "accentColor": "#1d4ed8",
+            "subdomain": "https://warung.nurdiansyahlabs.com",
+            "subdomainHost": "warung.nurdiansyahlabs.com"
         },
         {
             "slug": "batam-rental-mobil",
@@ -31,6 +33,8 @@
             "description": "Solusi reservasi kendaraan & armada PWA responsif dengan kalkulator tarif dinamis, load speed sub-second, dan integrasi WhatsApp otomatis.",
             "category": "Landing Page",
             "accentColor": "#1d4ed8",
+            "subdomain": "https://rental.nurdiansyahlabs.com",
+            "subdomainHost": "rental.nurdiansyahlabs.com",
             "executiveSummary": "Batam Rental Mobil is a high-converting digital vehicle reservation, fleet management, and transport dispatch platform engineered by NurdiansyahLabs to serve corporate and tourist transit across the Batam Free Trade Zone. Developed with mobile-first React 18 and Tailwind CSS, the platform delivers instantaneous fleet availability schedules, transparent pricing calculations, and automated direct WhatsApp booking integrations. Operational workflows include dynamic vehicle allocation, seasonal rate adjustments, chauffeur service add-ons, and customer identity verification pipelines. The responsive Progressive Web App architecture guarantees sub-second initial load speeds on mobile cellular networks, maximizing reservation conversion rates for inbound business travelers arriving at airport and ferry terminals. The system provides local car rental operators with unified digital scheduling, eliminating booking overlap, streamlining vehicle maintenance schedules, and significantly reducing manual dispatch coordination overhead.",
             "metrics": [
                 "Automated WhatsApp lead dispatch",
@@ -52,6 +56,8 @@
             "description": "Software kasir & akuntansi digital dengan kecepatan transaksi sub-second, buku besar simpan-pinjam anggota, dan kalkulasi SHU otomatis.",
             "category": "Fullstack",
             "accentColor": "#4338ca",
+            "subdomain": "https://pos.nurdiansyahlabs.com",
+            "subdomainHost": "pos.nurdiansyahlabs.com",
             "techStack": {
                 "name": "MERN Stack",
                 "frontend": "React.js, Tailwind CSS",
@@ -125,6 +131,8 @@
             "description": "Aplikasi absensi karyawan berbasis GPS & Biometrik dengan integrasi penggajian otomatis.",
             "category": "Fullstack",
             "accentColor": "#8b5cf6",
+            "subdomain": "https://hr.nurdiansyahlabs.com",
+            "subdomainHost": "hr.nurdiansyahlabs.com",
             "techStack": {
                 "name": "LAMP Stack",
                 "frontend": "Vue.js, Tailwind CSS",
@@ -181,10 +189,12 @@
         {
             "slug": "clinic-analytics",
             "categorySlug": "data-analyst",
-            "title": "HealthMetric \u2013 Clinic Analytics",
+            "title": "HealthMetric – Clinic Analytics",
             "description": "Analisis manajemen layanan kesehatan untuk optimalisasi kunjungan pasien dan efisiensi staf.",
             "category": "Data Analyst",
-            "accentColor": "#0ea5e9"
+            "accentColor": "#0ea5e9",
+            "subdomain": "https://clinic.nurdiansyahlabs.com",
+            "subdomainHost": "clinic.nurdiansyahlabs.com"
         },
         {
             "slug": "crop-yield",

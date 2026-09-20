@@ -448,3 +448,95 @@ Preserve platform stability:
 - [ ] Existing Flask backend, auth logic, and API endpoints remain 100% functional.
 - [ ] Zero unmasked credentials, API keys, or private keys introduced.
 
+## 2026-09-11T09:57:51Z
+
+Investigate and diagnose a production deployment synchronization issue where GitHub/build/FTP report success, but the production website serves an outdated version. The team must conduct an evidence-based audit tracing the full pipeline (Local Repo → GitHub → Build → Artifact → FTP → Production Filesystem → Web Server/Runtime → Cache/CDN → Browser) to pinpoint the exact divergence point and propose a safe remediation plan.
+
+Working directory: /home/nurdiansyah/dev/Personal_project
+Integrity mode: development
+
+## Requirements
+
+### R1. Read-Only Investigation
+The investigation must be strictly read-only unless explicit approval is given for remediation. Do not deploy, overwrite, delete, restart services, purge production data, or modify production configuration during diagnosis. Preserve existing project architecture and configuration.
+
+### R2. Deployment Pipeline Audit
+- Verify the current Git commit hash and the GitHub repository/branch used for deployment.
+- Inspect CI/CD workflow configuration, deployment logs, and verify build artifacts to confirm whether expected changes exist in the build output.
+- Verify FTP deployment target configuration, credentials mapping, and remote directory path.
+- Do not assume successful build or FTP transfer implies successful production update.
+
+### R3. Production Filesystem & Serving Path Verification
+- Identify the actual production document root and compare it against the FTP target path.
+- Compare timestamps, file sizes, checksums, and contents between production files and build artifacts.
+- Check for duplicate, stale, or alternative deployment directories, symlinks, or releases.
+- Determine exactly which directory and application instance the production domain is serving.
+
+### R4. Cache & Runtime Layer Diagnosis
+- Inspect LiteSpeed/LSCache, PHP OPcache, Cloudflare/CDN caching, and browser/service-worker (PWA) caches where applicable.
+- Determine whether files are updated on disk but served stale due to runtime or edge caching.
+
+### R5. Evidence-Based Root Cause & Safe Remediation Plan
+- Correlate the production version with a specific Git commit or build identifier with objective evidence (hashes, checksums, logs, headers, file contents).
+- Classify findings: CONFIRMED ROOT CAUSE, PROBABLE CAUSE, POSSIBLE CAUSE, RULED OUT.
+- If access to any component is unavailable, explicitly state what could not be verified and why.
+- Provide a minimal-risk remediation plan detailing changes and post-fix verification steps (do not execute automatically).
+- Clearly answer: "Why did GitHub/build/FTP report success while production did not change?"
+
+## Acceptance Criteria
+
+### Verification & Diagnosis
+- [ ] Current expected Git commit identified.
+- [ ] GitHub deployment branch/workflow verified.
+- [ ] Successful build artifact verified and expected changes confirmed inside it.
+- [ ] FTP deployment configuration and target directory verified.
+- [ ] Actual production directory receiving FTP uploads identified.
+- [ ] Production files compared against expected build artifacts (timestamps, sizes, checksums).
+- [ ] Actual web-server document root / serving path identified.
+- [ ] Duplicate or stale deployment paths ruled out or identified.
+- [ ] LiteSpeed / OPcache / application caches investigated where applicable.
+- [ ] Cloudflare / CDN cache investigated where applicable.
+- [ ] Browser / service-worker cache investigated where applicable.
+- [ ] Exact point of divergence in the deployment chain identified with supporting evidence.
+- [ ] Findings classified (CONFIRMED ROOT CAUSE, PROBABLE CAUSE, POSSIBLE CAUSE, RULED OUT).
+- [ ] Minimum-risk, safe remediation plan produced with step-by-step verification instructions.
+- [ ] No production modification or destructive action performed during diagnosis.
+
+## 2026-09-11T10:42:10Z
+
+This is a single self-contained fix; keep it small and focused. Remediate the production deployment synchronization issue by updating deploy.yml, safely removing the orphaned nested directory, pushing the fix to main, triggering CI/CD, and rigorously verifying that production serves the latest release.
+
+Working directory: /home/nurdiansyah/dev/Personal_project
+Integrity mode: development
+
+## Requirements
+
+### R1. Deploy Workflow Correction
+Update `.github/workflows/deploy.yml` line 115 from `server-dir: public_html/` to `server-dir: ./`. Preserve all existing deployment configurations and exclusions, ensuring exclusions (such as runtime cache/upload directories) prevent any recurrence of the FTP 553 permission error.
+
+### R2. Safely Remove Orphaned Nested Directory
+Safely clean up or remove the orphaned nested `/home/uygpuazs/public_html/public_html/` deployment folder on the production server (utilizing existing SSH scripts, cPanel tools, or automated deployment cleanup). If any destructive operation requires user credentials or manual confirmation, request explicit guidance.
+
+### R3. Commit, Push & CI/CD Execution
+Commit the workflow fix with a clear, standard commit message, push to `origin/main`, and trigger or monitor the GitHub Actions deployment workflow run until completion.
+
+### R4. End-to-End Live Verification
+Perform live empirical verification:
+1. Confirm production web server document root receives the updated build directly.
+2. Confirm `https://nurdiansyahlabs.com/` serves the latest commit SHA in `deploy_manifest.txt` and loads the new Vite bundle (`index-DYPwEsWH.js`).
+3. Confirm `https://nurdiansyahlabs.com/public_html/` no longer serves the nested deployment (returns 404 or clean state).
+
+### R5. Scope Integrity
+Do not make unrelated changes, refactorings, or modifications to application code.
+
+## Acceptance Criteria
+
+### Execution & Verification
+- [ ] `.github/workflows/deploy.yml` updated with `server-dir: ./`.
+- [ ] Orphaned nested directory `public_html/public_html/` removed safely from production.
+- [ ] Fix committed and pushed to `main`.
+- [ ] GitHub Actions deployment run completed with status `SUCCESS`.
+- [ ] Production root (`https://nurdiansyahlabs.com/`) verified serving the latest commit manifest.
+- [ ] Production root verified serving latest Vite JS/CSS bundles.
+- [ ] Nested path (`https://nurdiansyahlabs.com/public_html/`) confirmed inactive / cleaned up.
+- [ ] Final report delivered with exact Git commit hash, GitHub Actions run ID, deployed paths, and live verification output.

@@ -101,7 +101,7 @@ export default function TokoLaptopBatamApp() {
                         </div>
                         <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[1.05] mb-6 md:mb-8 uppercase">
                             Gadget Mewah, <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Harga Ramah</span>
+                            <span className="text-indigo-600">Harga Ramah</span>
                         </h1>
                         <p className="text-lg md:text-xl text-slate-500 mb-8 md:mb-10 leading-relaxed max-w-xl">
                             Elektronik pre-loved kualitas grade A+. Lulus QC 21 poin, garansi toko, dan harga Batam yang tak tertandingi.

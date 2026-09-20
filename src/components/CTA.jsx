@@ -59,7 +59,7 @@ export default function CTA() {
                             {isIndo ? (
                                 <>
                                     Siap Membangun Sistem Digital{' '}
-                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-indigo-300">
+                                    <span className="text-gradient-emerald">
                                         Skala Produksi
                                     </span>{' '}
                                     untuk Bisnis Anda?
@@ -67,7 +67,7 @@ export default function CTA() {
                             ) : (
                                 <>
                                     Ready to Build{' '}
-                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-indigo-300">
+                                    <span className="text-gradient-emerald">
                                         Production-Grade
                                     </span>{' '}
                                     Digital Systems for Your Business?

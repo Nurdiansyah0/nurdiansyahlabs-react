@@ -24,10 +24,40 @@ const ServicePage = lazy(() => import('./pages/ServicePage'))
 const IndustryServicePage = lazy(() => import('./pages/IndustryServicePage'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
+// Subdomain Apps
+const BatamRentalMobilApp = lazy(() => import('./showcases/apps/BatamRentalMobilApp'))
+const KoperasiPOSApp = lazy(() => import('./showcases/apps/KoperasiPOSApp'))
+const ClinicAnalyticsApp = lazy(() => import('./showcases/apps/ClinicAnalyticsApp'))
+const TokoLaptopBatamApp = lazy(() => import('./showcases/apps/TokoLaptopBatamApp'))
+const WarungMakanApp = lazy(() => import('./showcases/apps/WarungMakanApp'))
+const AttendanceApp = lazy(() => import('./showcases/apps/AttendanceApp'))
+import SubdomainAppWrapper, { detectSubdomainApp } from './components/SubdomainAppWrapper'
+
 const loadFeatures = () => import('framer-motion').then(res => res.domAnimation)
 
 
 export default function App() {
+    const subdomainApp = detectSubdomainApp()
+
+    // ── Dedicated Subdomain View (rental.*, pos.*, clinic.*, laptop.*, warung.*, hr.*) ──
+    if (subdomainApp) {
+        return (
+            <ErrorBoundary>
+                <Suspense fallback={<div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><img src={getOptimizedImg("/assets/logo.svg", { w: 100 })} width="50" alt="Loading..." style={{ animation: 'pulse 1.5s infinite' }} /></div>}>
+                    <SubdomainAppWrapper app={subdomainApp}>
+                        {subdomainApp.id === 'rental' && <BatamRentalMobilApp />}
+                        {subdomainApp.id === 'pos' && <KoperasiPOSApp />}
+                        {subdomainApp.id === 'clinic' && <ClinicAnalyticsApp />}
+                        {subdomainApp.id === 'laptop' && <TokoLaptopBatamApp />}
+                        {subdomainApp.id === 'warung' && <WarungMakanApp />}
+                        {subdomainApp.id === 'hr' && <AttendanceApp />}
+                    </SubdomainAppWrapper>
+                </Suspense>
+            </ErrorBoundary>
+        )
+    }
+
+    // ── Main Website View (nurdiansyahlabs.com) ──
     return (
         <LanguageProvider>
             <ErrorBoundary>

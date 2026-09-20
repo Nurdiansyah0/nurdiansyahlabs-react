@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FileText, ChevronDown, ChevronUp, Layers, CheckCircle } from 'lucide-react'
+import { FileText, ChevronDown, ChevronUp, Layers, CheckCircle, ExternalLink, Globe } from 'lucide-react'
 
 /**
  * ExecutiveTechnicalSummary Component
@@ -8,7 +8,15 @@ import { FileText, ChevronDown, ChevronUp, Layers, CheckCircle } from 'lucide-re
  * adhering to Princeton GEO and Claude SEO research criteria for maximum
  * AI search citability, entity clarity, and human SXO transparency.
  */
-export default function ExecutiveSummary({ title, category, summary, metrics = [], stack = [] }) {
+export default function ExecutiveSummary({ 
+    title, 
+    category, 
+    summary, 
+    metrics = [], 
+    stack = [],
+    subdomain = null,
+    subdomainHost = null
+}) {
     const [isExpanded, setIsExpanded] = useState(true)
 
     if (!summary) return null
@@ -80,6 +88,64 @@ export default function ExecutiveSummary({ title, category, summary, metrics = [
 
                 {isExpanded && (
                     <div style={{ padding: '1.5rem' }}>
+                        {subdomain && (
+                            <div style={{
+                                marginBottom: '1.25rem',
+                                padding: '0.75rem 1.25rem',
+                                background: '#f0fdf4',
+                                borderRadius: '12px',
+                                border: '1.5px solid #bbf7d0',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'space-between',
+                                flexWrap: 'wrap',
+                                gap: '0.75rem'
+                            }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                    <div style={{
+                                        width: '32px',
+                                        height: '32px',
+                                        borderRadius: '8px',
+                                        background: '#dcfce7',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    }}>
+                                        <Globe size={18} color="#16a34a" />
+                                    </div>
+                                    <div>
+                                        <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#166534', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                                            Live Subdomain Deployment
+                                        </div>
+                                        <div style={{ fontSize: '0.88rem', fontWeight: 700, color: '#14532d' }}>
+                                            {subdomainHost || subdomain.replace('https://', '')}
+                                        </div>
+                                    </div>
+                                </div>
+                                <a
+                                    href={subdomain}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    style={{
+                                        display: 'inline-flex',
+                                        alignItems: 'center',
+                                        gap: '6px',
+                                        background: '#166534',
+                                        color: '#ffffff',
+                                        fontSize: '0.8rem',
+                                        fontWeight: 700,
+                                        padding: '0.5rem 1rem',
+                                        borderRadius: '8px',
+                                        textDecoration: 'none',
+                                        boxShadow: '0 2px 8px rgba(22, 101, 52, 0.25)',
+                                        transition: 'background 0.2s'
+                                    }}
+                                >
+                                    <span>Buka Subdomain Penuh</span>
+                                    <ExternalLink size={14} />
+                                </a>
+                            </div>
+                        )}
                         <p style={{
                             fontSize: '0.95rem',
                             lineHeight: 1.7,

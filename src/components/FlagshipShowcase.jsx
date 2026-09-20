@@ -47,6 +47,8 @@ const FLAGSHIP_PROJECTS = [
         id: 'batam-rental',
         slug: 'batam-rental-mobil',
         route: '/showcase/landing-page/batam-rental-mobil',
+        subdomain: 'https://rental.nurdiansyahlabs.com',
+        subdomainHost: 'rental.nurdiansyahlabs.com',
         title: 'Batam Rental Mobil PWA',
         badge: 'Transport Dispatch & Fleet PWA',
         badgeId: 'Aplikasi Web Rental & Dispatch Armada',
@@ -160,14 +162,14 @@ export default function FlagshipShowcase() {
                         {isIndo ? (
                             <>
                                 Sistem Nyata yang Menggerakkan{' '}
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-sky-300 to-indigo-200">
+                                <span className="text-gradient-indigo">
                                     Operasional Klien
                                 </span>
                             </>
                         ) : (
                             <>
                                 Real Production Systems Powering{' '}
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 via-sky-300 to-indigo-200">
+                                <span className="text-gradient-indigo">
                                     Client Operations
                                 </span>
                             </>
@@ -316,6 +318,22 @@ export default function FlagshipShowcase() {
 
                                 {/* Action Buttons */}
                                 <div className="pt-2 flex flex-wrap items-center gap-3">
+                                    {selectedProject.subdomain && (
+                                        <a
+                                            href={selectedProject.subdomain}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-white transition-all shadow-md min-h-[44px] text-sm cursor-pointer"
+                                            style={{
+                                                background: '#16a34a',
+                                                boxShadow: '0 6px 20px -4px rgba(22, 163, 74, 0.4)'
+                                            }}
+                                        >
+                                            <span>{isIndo ? `🌐 Buka ${selectedProject.subdomainHost}` : `🌐 Launch ${selectedProject.subdomainHost}`}</span>
+                                            <ExternalLink size={16} />
+                                        </a>
+                                    )}
+
                                     <Link
                                         to={selectedProject.route}
                                         onClick={() => trackEvent('showcase_demo_click', { project: selectedProject.slug })}
@@ -325,15 +343,15 @@ export default function FlagshipShowcase() {
                                             boxShadow: `0 6px 20px -4px ${selectedProject.accentGlow}`
                                         }}
                                     >
-                                        <span>{isIndo ? 'Buka Live Demo Sistem' : 'Launch Interactive Demo'}</span>
-                                        <ExternalLink size={16} />
+                                        <span>{isIndo ? 'Arsitektur & Case Study' : 'Architecture & Case Study'}</span>
+                                        <ArrowRight size={16} />
                                     </Link>
 
                                     <a
                                         href="#contact"
                                         className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-semibold text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-800 border border-slate-700 transition-all min-h-[44px] text-sm cursor-pointer"
                                     >
-                                        <span>{isIndo ? 'Konsultasikan Proyek Serupa' : 'Discuss Similar System'}</span>
+                                        <span>{isIndo ? 'Konsultasikan Proyek' : 'Discuss Project'}</span>
                                         <ArrowRight size={16} />
                                     </a>
                                 </div>

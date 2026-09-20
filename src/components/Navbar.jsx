@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Menu, X, MessageCircle, Globe, ChevronDown } from 'lucide-react'
-import { useLanguage, langNames } from '../i18n/LanguageContext'
+import { Menu, X, MessageCircle } from 'lucide-react'
+import { useLanguage } from '../i18n/LanguageContext'
 import { useResponsive } from '../hooks/useResponsive'
 import { getOptimizedImg } from '../utils/imgHelper'
 
 export default function Navbar() {
     const [mobileOpen, setMobileOpen] = useState(false)
     const [scrolled, setScrolled] = useState(false)
-    const [langOpen, setLangOpen] = useState(false)
-    const { t, lang, setLang, supportedLangs } = useLanguage()
+    const { t, lang, setLang } = useLanguage()
     const { isMobile, isSm } = useResponsive()
 
     useEffect(() => {
@@ -84,56 +83,64 @@ export default function Navbar() {
                             )
                         ))}
 
-                        {/* Language selector */}
-                        <div style={{ position: 'relative' }}>
+                        {/* Language Selector: Instant ID / EN Toggle */}
+                        <div
+                            role="group"
+                            aria-label="Pilihan Bahasa"
+                            style={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                padding: '3px',
+                                borderRadius: '9999px',
+                                border: '1px solid #e2e8f0',
+                                background: '#f8fafc',
+                                gap: '2px',
+                            }}
+                        >
                             <button
-                                aria-label="Select language"
-                                aria-haspopup="true"
-                                aria-expanded={langOpen}
-                                onClick={() => setLangOpen(!langOpen)}
-                                onKeyDown={e => {
-                                    if (e.key === 'Escape') setLangOpen(false)
-                                }}
+                                type="button"
+                                aria-label="Bahasa Indonesia"
+                                onClick={() => setLang('id')}
                                 style={{
-                                    display: 'flex', alignItems: 'center', gap: '6px',
-                                    padding: '6px 12px', borderRadius: '8px',
-                                    border: '1px solid #e5e7eb', background: '#f9fafb',
-                                    color: '#374151', fontSize: '0.82rem', fontWeight: 600, cursor: 'pointer',
-                                    minHeight: '36px',
-                                }}>
-                                <Globe size={14} color="#3730a3" />
-                                {lang.toUpperCase()}
-                                <ChevronDown size={12} />
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: '4px',
+                                    padding: '5px 10px',
+                                    borderRadius: '9999px',
+                                    border: 'none',
+                                    fontSize: '0.78rem',
+                                    fontWeight: 700,
+                                    background: lang === 'id' ? '#312e81' : 'transparent',
+                                    color: lang === 'id' ? '#ffffff' : '#64748b',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.15s ease',
+                                    lineHeight: 1,
+                                }}
+                            >
+                                <span>🇮🇩</span> ID
                             </button>
-                            {langOpen && (
-                                <div
-                                    role="menu"
-                                    aria-label="Language choices"
-                                    style={{
-                                        position: 'absolute', top: '100%', right: 0, marginTop: '6px',
-                                        background: '#fff', border: '1px solid #e5e7eb', borderRadius: '12px',
-                                        boxShadow: '0 12px 40px rgba(0,0,0,0.12)', padding: '6px',
-                                        width: '200px', maxHeight: '320px', overflowY: 'auto', zIndex: 999,
-                                    }}>
-                                    {supportedLangs.map(code => (
-                                        <button
-                                            role="menuitem"
-                                            aria-label={`Switch to ${langNames[code]}`}
-                                            key={code}
-                                            onClick={() => { setLang(code); setLangOpen(false) }}
-                                            style={{
-                                                display: 'block', width: '100%', textAlign: 'left',
-                                                padding: '8px 12px', borderRadius: '8px', border: 'none',
-                                                cursor: 'pointer', fontSize: '0.85rem', minHeight: '36px',
-                                                fontWeight: lang === code ? 700 : 400,
-                                                background: lang === code ? '#eef2ff' : 'transparent',
-                                                color: lang === code ? '#4338ca' : '#374151',
-                                            }}>
-                                            {langNames[code]}
-                                        </button>
-                                    ))}
-                                </div>
-                            )}
+                            <button
+                                type="button"
+                                aria-label="English"
+                                onClick={() => setLang('en')}
+                                style={{
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: '4px',
+                                    padding: '5px 10px',
+                                    borderRadius: '9999px',
+                                    border: 'none',
+                                    fontSize: '0.78rem',
+                                    fontWeight: 700,
+                                    background: lang === 'en' ? '#312e81' : 'transparent',
+                                    color: lang === 'en' ? '#ffffff' : '#64748b',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.15s ease',
+                                    lineHeight: 1,
+                                }}
+                            >
+                                <span>🇬🇧</span> EN
+                            </button>
                         </div>
 
                         <a href="https://wa.me/6282176012461" target="_blank" rel="noreferrer" style={{
@@ -209,20 +216,63 @@ export default function Navbar() {
                         )
                     ))}
 
-                    {/* Mobile language selector */}
-                    <select aria-label="Select Language"
-                        value={lang}
-                        onChange={e => setLang(e.target.value)}
+                    {/* Mobile Language Selector: Segmented ID / EN */}
+                    <div
+                        role="group"
+                        aria-label="Pilihan Bahasa Mobile"
                         style={{
-                            padding: '10px 12px', borderRadius: '8px',
-                            border: '1px solid #e5e7eb', fontSize: '0.9rem',
-                            fontWeight: 500, color: '#374151', background: '#f9fafb',
-                            minHeight: '44px', width: '100%',
-                        }}>
-                        {supportedLangs.map(code => (
-                            <option key={code} value={code}>{langNames[code]}</option>
-                        ))}
-                    </select>
+                            display: 'grid',
+                            gridTemplateColumns: '1fr 1fr',
+                            gap: '8px',
+                            padding: '4px',
+                            borderRadius: '12px',
+                            border: '1px solid #e2e8f0',
+                            background: '#f8fafc',
+                        }}
+                    >
+                        <button
+                            type="button"
+                            onClick={() => setLang('id')}
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                gap: '6px',
+                                padding: '10px',
+                                borderRadius: '8px',
+                                border: 'none',
+                                fontSize: '0.88rem',
+                                fontWeight: lang === 'id' ? 700 : 500,
+                                background: lang === 'id' ? '#312e81' : 'transparent',
+                                color: lang === 'id' ? '#ffffff' : '#475569',
+                                cursor: 'pointer',
+                                minHeight: '40px',
+                            }}
+                        >
+                            <span>🇮🇩</span> Indonesia (ID)
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => setLang('en')}
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                gap: '6px',
+                                padding: '10px',
+                                borderRadius: '8px',
+                                border: 'none',
+                                fontSize: '0.88rem',
+                                fontWeight: lang === 'en' ? 700 : 500,
+                                background: lang === 'en' ? '#312e81' : 'transparent',
+                                color: lang === 'en' ? '#ffffff' : '#475569',
+                                cursor: 'pointer',
+                                minHeight: '40px',
+                            }}
+                        >
+                            <span>🇬🇧</span> English (EN)
+                        </button>
+                    </div>
 
                     <a
                         href="https://wa.me/6282176012461"
