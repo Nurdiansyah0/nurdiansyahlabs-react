@@ -8,61 +8,76 @@ import { getOptimizedImg } from '../utils/imgHelper'
 
 const portfolioData = {
     A: {
-        title: 'A. Business Landing Page',
-        subtitle: "Professional landing pages built for real clients",
+        title: {
+            id: 'A. Business Landing Page',
+            en: 'A. Business Landing Page'
+        },
+        subtitle: {
+            id: 'Landing page profesional yang dibangun untuk klien nyata',
+            en: 'Professional landing pages built for real clients'
+        },
         badgeLabel: 'SERVICE A',
         badgeBg: '#eff6ff', badgeColor: '#1e3a8a',
         headerBg: 'linear-gradient(135deg, #eff6ff 0%, #fff 100%)',
         projects: [
-            { image: '/assets/projects/screenshots/ss_laptop.png', tag: 'E-Commerce', tagBg: '#eff6ff', tagColor: '#1e3a8a', title: 'Batam Laptop Center', desc: 'Tech product catalog, variants, dynamic cart & checkout flow.', route: '/showcase/landing-page/toko-laptop-batam' },
-            { image: '/assets/projects/screenshots/ss_chicken.png', tag: 'Agrobisnis', tagBg: '#f0fdf4', tagColor: '#16a34a', title: 'Batam Chicken Center', desc: 'B2B Supplier Ayam Kampung dengan WhatsApp Order Management.', route: '/showcase/landing-page/batam-chicken-supplier' },
-            { image: '/assets/projects/screenshots/ss_siomay.png', tag: 'F&B', tagBg: '#fefce8', tagColor: '#a16207', title: 'Alyuna Siomay', desc: 'Digital menu, online ordering funnel, promo section.', route: '/showcase/landing-page/warung-makan', subdomain: 'https://warung.nurdiansyahlabs.com' },
-            { image: '/assets/projects/screenshots/ss_rental.png', tag: 'Automotive', tagBg: '#fef2f2', tagColor: '#b91c1c', title: 'Batam Rental Mobil', desc: 'Car rental with Python-based real-time market price scraping.', route: '/showcase/landing-page/batam-rental-mobil', subdomain: 'https://rental.nurdiansyahlabs.com' },
+            { image: '/assets/projects/screenshots/ss_laptop.png', tag: 'E-Commerce', tagBg: '#eff6ff', tagColor: '#1e3a8a', title: 'Batam Laptop Center', desc: { id: 'Katalog produk teknologi, varian produk, keranjang dinamis & alur checkout.', en: 'Tech product catalog, variants, dynamic cart & checkout flow.' }, route: '/showcase/landing-page/toko-laptop-batam' },
+            { image: '/assets/projects/screenshots/ss_chicken.png', tag: 'Agrobisnis', tagBg: '#f0fdf4', tagColor: '#16a34a', title: 'Batam Chicken Center', desc: { id: 'Supplier Ayam Kampung B2B dengan manajemen pesanan WhatsApp.', en: 'B2B Kampung Chicken supplier with WhatsApp order management.' }, route: '/showcase/landing-page/batam-chicken-supplier' },
+            { image: '/assets/projects/screenshots/ss_siomay.png', tag: 'F&B', tagBg: '#fefce8', tagColor: '#a16207', title: 'Alyuna Siomay', desc: { id: 'Menu digital, funnel pemesanan online, bagian promo.', en: 'Digital menu, online ordering funnel, promo section.' }, route: '/showcase/landing-page/warung-makan', subdomain: 'https://warung.nurdiansyahlabs.com' },
+            { image: '/assets/projects/screenshots/ss_rental.png', tag: 'Automotive', tagBg: '#fef2f2', tagColor: '#b91c1c', title: 'Batam Rental Mobil', desc: { id: 'Rental mobil dengan scraping harga pasar berbasis Python secara real-time.', en: 'Car rental with Python-based real-time market price scraping.' }, route: '/showcase/landing-page/batam-rental-mobil', subdomain: 'https://rental.nurdiansyahlabs.com' },
         ]
     },
     B: {
-        title: 'B. Fullstack Developer',
-        subtitle: 'Custom web systems built end-to-end — from database to UI',
+        title: { id: 'B. Fullstack Developer', en: 'B. Fullstack Developer' },
+        subtitle: {
+            id: 'Sistem web kustom yang dibangun end-to-end — dari database hingga UI',
+            en: 'Custom web systems built end-to-end — from database to UI'
+        },
         badgeLabel: 'SERVICE B',
         badgeBg: '#eef2ff', badgeColor: '#4338ca',
         headerBg: 'linear-gradient(135deg, #eef2ff 0%, #fff 100%)',
         projects: [
-            { image: '/assets/projects/img_pos_system.png', tag: 'POS System', tagBg: '#eef2ff', tagColor: '#4338ca', title: 'Koperasi ARFF POS & Member', desc: 'Full cooperative management: POS cashier, member accounts, admin dashboard.', route: '/showcase/fullstack/koperasi-pos', subdomain: 'https://pos.nurdiansyahlabs.com' },
-            { image: '/assets/projects/img_warehouse_sys.png', tag: 'Inventory', tagBg: '#f0fdf4', tagColor: '#166534', title: 'Warehouse Management System', desc: 'Real-time stock tracking, purchase orders, barcode scanning & alerts.', route: '/showcase/fullstack/warehouse-wms' },
-            { image: '/assets/projects/img_vehicle_inspect.png', tag: 'Inspection', tagBg: '#fffbeb', tagColor: '#92400e', title: 'Vehicle Inspection Platform', desc: 'Digital inspection with photo uploads, findings log & inspector assignment.', route: '/showcase/fullstack/vehicle-inspection' },
-            { image: '/assets/projects/img_hr_attendance.png', tag: 'HR System', tagBg: '#faf5ff', tagColor: '#6b21a8', title: 'Employee Attendance Portal', desc: 'GPS check-in, leave management, payroll automation & reporting.', route: '/showcase/fullstack/attendance', subdomain: 'https://hr.nurdiansyahlabs.com' },
-            { image: '/assets/projects/img_primatera.png', tag: 'ERP System', tagBg: '#fef3c7', tagColor: '#92400e', title: 'Primatera Poultry', desc: 'End-to-end digital ERP system for Joper/KUB poultry business.', route: '/showcase/fullstack/primatera-poultry' },
+            { image: '/assets/projects/img_pos_system.png', tag: 'POS System', tagBg: '#eef2ff', tagColor: '#4338ca', title: 'Koperasi ARFF POS & Member', desc: { id: 'Manajemen koperasi lengkap: kasir POS, akun anggota, dashboard admin.', en: 'Full cooperative management: POS cashier, member accounts, admin dashboard.' }, route: '/showcase/fullstack/koperasi-pos', subdomain: 'https://pos.nurdiansyahlabs.com' },
+            { image: '/assets/projects/img_warehouse_sys.png', tag: 'Inventory', tagBg: '#f0fdf4', tagColor: '#166534', title: 'Warehouse Management System', desc: { id: 'Pelacakan stok real-time, purchase order, pemindai barcode & notifikasi.', en: 'Real-time stock tracking, purchase orders, barcode scanning & alerts.' }, route: '/showcase/fullstack/warehouse-wms' },
+            { image: '/assets/projects/img_vehicle_inspect.png', tag: 'Inspection', tagBg: '#fffbeb', tagColor: '#92400e', title: 'Vehicle Inspection Platform', desc: { id: 'Inspeksi digital dengan upload foto, log temuan & penugasan inspektor.', en: 'Digital inspection with photo uploads, findings log & inspector assignment.' }, route: '/showcase/fullstack/vehicle-inspection' },
+            { image: '/assets/projects/img_hr_attendance.png', tag: 'HR System', tagBg: '#faf5ff', tagColor: '#6b21a8', title: 'Employee Attendance Portal', desc: { id: 'Check-in GPS, manajemen cuti, otomatisasi penggajian & pelaporan.', en: 'GPS check-in, leave management, payroll automation & reporting.' }, route: '/showcase/fullstack/attendance', subdomain: 'https://hr.nurdiansyahlabs.com' },
+            { image: '/assets/projects/img_primatera.png', tag: 'ERP System', tagBg: '#fef3c7', tagColor: '#92400e', title: 'Primatera Poultry', desc: { id: 'Sistem ERP digital end-to-end untuk bisnis unggas Joper/KUB.', en: 'End-to-end digital ERP system for Joper/KUB poultry business.' }, route: '/showcase/fullstack/primatera-poultry' },
         ]
     },
     C: {
-        title: 'C. Data Analyst',
-        subtitle: 'Interactive dashboards & business insight reports delivered',
+        title: { id: 'C. Analis Data', en: 'C. Data Analyst' },
+        subtitle: {
+            id: 'Dashboard interaktif & laporan insight bisnis yang tersampaikan',
+            en: 'Interactive dashboards & business insight reports delivered'
+        },
         badgeLabel: 'SERVICE C',
         badgeBg: '#ecfdf5', badgeColor: '#065f46',
         headerBg: 'linear-gradient(135deg, #ecfdf5 0%, #fff 100%)',
         projects: [
-            { image: '/assets/projects/img_dashboard_sales.png', tag: 'Sales Dashboard', tagBg: '#ecfdf5', tagColor: '#065f46', title: 'Retail Sales Monitor', desc: 'Power BI tracking daily sales, best-selling SKUs, revenue by branch for 12 outlets.', route: '/showcase/data-analyst/retail-sales' },
-            { image: '/assets/projects/img_ecommerce_analytics.png', tag: 'E-Commerce', tagBg: '#f0fdfa', tagColor: '#0d9488', title: 'Tokopedia Seller Analytics', desc: 'Monthly reports on conversion rate, cart abandonment & top product performance.', route: '/showcase/data-analyst/ecommerce-analytics' },
-            { image: '/assets/projects/img_clinic_data.png', tag: 'Healthcare', tagBg: '#f0fdf4', tagColor: '#166534', title: 'Clinic Patient Flow Analysis', desc: 'Tableau dashboard on patient visits, wait times & doctor utilization.', route: '/showcase/data-analyst/clinic-analytics', subdomain: 'https://clinic.nurdiansyahlabs.com' },
-            { image: '/assets/projects/img_agri_dashboard.png', tag: 'Agriculture', tagBg: '#fefce8', tagColor: '#a16207', title: 'Crop Yield Trend Report', desc: 'Seasonal yield comparison, cost vs revenue, regional performance heatmaps.', route: '/showcase/data-analyst/crop-yield' },
+            { image: '/assets/projects/img_dashboard_sales.png', tag: 'Sales Dashboard', tagBg: '#ecfdf5', tagColor: '#065f46', title: 'Retail Sales Monitor', desc: { id: 'Power BI melacak penjualan harian, SKU terlaris, pendapatan per cabang untuk 12 gerai.', en: 'Power BI tracking daily sales, best-selling SKUs, revenue by branch for 12 outlets.' }, route: '/showcase/data-analyst/retail-sales' },
+            { image: '/assets/projects/img_ecommerce_analytics.png', tag: 'E-Commerce', tagBg: '#f0fdfa', tagColor: '#0d9488', title: 'Tokopedia Seller Analytics', desc: { id: 'Laporan bulanan tentang tingkat konversi, cart abandonment & performa produk terlaris.', en: 'Monthly reports on conversion rate, cart abandonment & top product performance.' }, route: '/showcase/data-analyst/ecommerce-analytics' },
+            { image: '/assets/projects/img_clinic_data.png', tag: 'Healthcare', tagBg: '#f0fdf4', tagColor: '#166534', title: 'Clinic Patient Flow Analysis', desc: { id: 'Dashboard Tableau untuk kunjungan pasien, waktu tunggu & utilisasi dokter.', en: 'Tableau dashboard on patient visits, wait times & doctor utilization.' }, route: '/showcase/data-analyst/clinic-analytics', subdomain: 'https://clinic.nurdiansyahlabs.com' },
+            { image: '/assets/projects/img_agri_dashboard.png', tag: 'Agriculture', tagBg: '#fefce8', tagColor: '#a16207', title: 'Crop Yield Trend Report', desc: { id: 'Perbandingan hasil panen musiman, biaya vs pendapatan, peta panas kinerja regional.', en: 'Seasonal yield comparison, cost vs revenue, regional performance heatmaps.' }, route: '/showcase/data-analyst/crop-yield' },
         ]
     },
     D: {
-        title: 'D. Data Scientist',
-        subtitle: 'Machine learning and AI solutions that drive smart decisions',
+        title: { id: 'D. Data Scientist', en: 'D. Data Scientist' },
+        subtitle: {
+            id: 'Solusi machine learning dan AI yang mendorong keputusan lebih cerdas',
+            en: 'Machine learning and AI solutions that drive smart decisions'
+        },
         badgeLabel: 'SERVICE D',
         badgeBg: '#f5f3ff', badgeColor: '#5b21b6',
         headerBg: 'linear-gradient(135deg, #f5f3ff 0%, #fff 100%)',
         projects: [
-            { image: '/assets/projects/img_sales_forecast.png', tag: 'Forecasting', tagBg: '#f5f3ff', tagColor: '#5b21b6', title: 'Sales Forecasting Model (LSTM)', desc: 'Time-series LSTM predicting next 30/60/90-day revenue with 92% accuracy.', route: '/showcase/data-science/sales-forecasting' },
-            { image: '/assets/projects/img_customer_cluster.png', tag: 'Segmentation', tagBg: '#fdf4ff', tagColor: '#a21caf', title: 'Customer Clustering (RFM)', desc: 'K-Means segments into Champion, At-Risk, and Lost groups for targeted campaigns.', route: '/showcase/data-science/customer-clustering' },
-            { image: '/assets/projects/img_churn_model.png', tag: 'Churn Prediction', tagBg: '#fef2f2', tagColor: '#b91c1c', title: 'Subscriber Churn Detector', desc: 'XGBoost model predicting churn for 10k+ subscribers with SHAP explainability.', route: '/showcase/data-science/churn-prediction' },
-            { image: '/assets/projects/img_recommend_engine.png', tag: 'Recommendation', tagBg: '#eff6ff', tagColor: '#1e3a8a', title: 'Product Recommendation Engine', desc: 'Interactive collaborative filtering matrix computing real-time cosine similarity and ranking predictions.', route: '/showcase/data-science/recommendation' },
+            { image: '/assets/projects/img_sales_forecast.png', tag: 'Forecasting', tagBg: '#f5f3ff', tagColor: '#5b21b6', title: 'Sales Forecasting Model (LSTM)', desc: { id: 'LSTM time-series memprediksi pendapatan 30/60/90 hari ke depan dengan akurasi 92%.', en: 'Time-series LSTM predicting next 30/60/90-day revenue with 92% accuracy.' }, route: '/showcase/data-science/sales-forecasting' },
+            { image: '/assets/projects/img_customer_cluster.png', tag: 'Segmentation', tagBg: '#fdf4ff', tagColor: '#a21caf', title: 'Customer Clustering (RFM)', desc: { id: 'Segmentasi K-Means ke Champion, Berisiko, dan Hilang untuk kampanye tertarget.', en: 'K-Means segments into Champion, At-Risk, and Lost groups for targeted campaigns.' }, route: '/showcase/data-science/customer-clustering' },
+            { image: '/assets/projects/img_churn_model.png', tag: 'Churn Prediction', tagBg: '#fef2f2', tagColor: '#b91c1c', title: 'Subscriber Churn Detector', desc: { id: 'Model XGBoost memprediksi churn untuk 10k+ pelanggan dengan SHAP explainability.', en: 'XGBoost model predicting churn for 10k+ subscribers with SHAP explainability.' }, route: '/showcase/data-science/churn-prediction' },
+            { image: '/assets/projects/img_recommend_engine.png', tag: 'Recommendation', tagBg: '#eff6ff', tagColor: '#1e3a8a', title: 'Product Recommendation Engine', desc: { id: 'Collaborative filtering interaktif yang menghitung cosine similarity dan peringkat prediksi secara real-time.', en: 'Interactive collaborative filtering matrix computing real-time cosine similarity and ranking predictions.' }, route: '/showcase/data-science/recommendation' },
         ]
     }
 }
 
-function ProjectCard({ project, onNavigate, t }) {
+function ProjectCard({ project, onNavigate, t, isIndo }) {
     const [hovered, setHovered] = useState(false)
     return (
         <div
@@ -106,12 +121,14 @@ function ProjectCard({ project, onNavigate, t }) {
                             background: '#dcfce7', color: '#15803d',
                             border: '1px solid #bbf7d0'
                         }}>
-                            🌐 Subdomain Live
+                            🌐 {isIndo ? 'Subdomain Aktif' : 'Subdomain Live'}
                         </span>
                     )}
                 </div>
                 <div style={{ fontWeight: 800, fontSize: '0.9rem', color: '#111827', marginBottom: '5px', lineHeight: 1.3 }}>{project.title}</div>
-                <div style={{ fontSize: '0.78rem', color: '#6b7280', lineHeight: 1.5, marginBottom: '10px', flexGrow: 1 }}>{project.desc}</div>
+                <div style={{ fontSize: '0.78rem', color: '#6b7280', lineHeight: 1.5, marginBottom: '10px', flexGrow: 1 }}>
+                    {typeof project.desc === 'object' ? (isIndo ? project.desc.id : project.desc.en) : project.desc}
+                </div>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '4px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#3730a3', fontSize: '0.78rem', fontWeight: 700 }}>
                         <PlayCircle size={15} style={{ fontSize: '0.9rem' }} /> {t('modal.viewDemo')}
@@ -125,7 +142,7 @@ function ProjectCard({ project, onNavigate, t }) {
 
 export default function PortfolioModal({ serviceKey, onClose }) {
     const navigate = useNavigate()
-    const { t } = useLanguage()
+    const { t, isIndo } = useLanguage()
     const { isMobile, isSm } = useResponsive()
     const { trackEvent } = useTracker()
     const data = portfolioData[serviceKey]
@@ -135,7 +152,8 @@ export default function PortfolioModal({ serviceKey, onClose }) {
     // Track modal open
     useEffect(() => {
         if (data) {
-            trackEvent('view_showcase_modal', { service: data.badgeLabel, title: data.title })
+            const titleStr = typeof data.title === 'object' ? data.title.en : data.title
+            trackEvent('view_showcase_modal', { service: data.badgeLabel, title: titleStr })
         }
     }, [data, trackEvent])
 
@@ -226,10 +244,10 @@ export default function PortfolioModal({ serviceKey, onClose }) {
                             fontWeight: 800, color: '#111827', margin: '0 0 5px', letterSpacing: '-0.02em',
                             wordBreak: 'break-word',
                         }}>
-                            {data.title}
+                            {typeof data.title === 'object' ? (isIndo ? data.title.id : data.title.en) : data.title}
                         </h2>
                         <p style={{ color: '#6b7280', fontSize: isSm ? '0.8rem' : '0.95rem', margin: 0 }}>
-                            {data.subtitle} —&nbsp;
+                            {typeof data.subtitle === 'object' ? (isIndo ? data.subtitle.id : data.subtitle.en) : data.subtitle} —&nbsp;
                             <strong style={{ color: data.badgeColor }}>{data.projects.length} {t('modal.exampleProjects')}</strong>
                         </p>
                     </div>
@@ -256,7 +274,7 @@ export default function PortfolioModal({ serviceKey, onClose }) {
                         <ProjectCard key={p.title} project={p} onNavigate={(route) => {
                             trackEvent('click_project', { title: p.title, route })
                             navigate(route)
-                        }} t={t} />
+                        }} t={t} isIndo={isIndo} />
                     ))}
                 </div>
 

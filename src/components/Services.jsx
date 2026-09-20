@@ -201,7 +201,7 @@ export default function Services() {
                                 {/* Featured Ribbon for Paket 2 */}
                                 {accent.highlight && (
                                     <div className="absolute -top-3.5 left-1/2 transform -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-indigo-600 to-sky-600 text-white text-xs font-extrabold tracking-wider uppercase shadow-md shadow-indigo-900/50 flex items-center gap-1.5">
-                                        <Sparkles size={12} /> {pkg.badge || 'Pilihan Operasional Utama'}
+                                        <Sparkles size={12} /> {isIndo ? (pkg.badge?.id || 'Pilihan Operasional Utama') : (pkg.badge?.en || 'Top Operational Choice')}
                                     </div>
                                 )}
 
@@ -213,19 +213,19 @@ export default function Services() {
                                         </div>
                                         {!accent.highlight && pkg.badge && (
                                             <span className={`text-xs font-semibold px-3 py-1 rounded-full border ${accent.badgeBg}`}>
-                                                {pkg.badge}
+                                                {isIndo ? pkg.badge.id : pkg.badge.en}
                                             </span>
                                         )}
                                     </div>
 
                                     {/* Package Title & Target */}
                                     <h3 className="text-xl sm:text-2xl font-black text-slate-50 mb-2 leading-snug">
-                                        {pkg.name}
+                                        {isIndo ? pkg.name.id : pkg.name.en}
                                     </h3>
                                     
                                     <p className="text-xs text-slate-400 mb-6 font-medium">
                                         <span className="text-slate-500 font-bold uppercase tracking-wider">{isIndo ? 'Target' : 'Ideal For'}: </span>
-                                        {pkg.target}
+                                        {isIndo ? pkg.target.id : pkg.target.en}
                                     </p>
 
                                     {/* Price Container */}
@@ -238,7 +238,7 @@ export default function Services() {
                                                     : (isIndo ? 'Mulai dari' : 'Starting From'))}
                                         </div>
                                         <div className="text-2xl sm:text-3xl font-black text-slate-50 tracking-tight">
-                                            {pkg.price}
+                                            {isIndo ? pkg.price.id : pkg.price.en}
                                         </div>
                                         <div className="text-xs text-slate-500 mt-1">
                                             {pkg.id === 'starter' 
@@ -253,11 +253,11 @@ export default function Services() {
                                     <div className="grid grid-cols-2 gap-2 mb-6 py-3 px-3.5 rounded-xl bg-slate-800/40 border border-slate-800 text-xs">
                                         <div className="flex items-center gap-1.5 text-slate-300">
                                             <Clock size={14} className="text-sky-400 shrink-0" />
-                                            <span className="truncate">{pkg.timeline}</span>
+                                            <span className="truncate">{isIndo ? pkg.timeline.id : pkg.timeline.en}</span>
                                         </div>
                                         <div className="flex items-center gap-1.5 text-slate-300">
                                             <RotateCcw size={14} className="text-indigo-400 shrink-0" />
-                                            <span className="truncate">{pkg.revisions}</span>
+                                            <span className="truncate">{isIndo ? pkg.revisions.id : pkg.revisions.en}</span>
                                         </div>
                                     </div>
 
@@ -270,7 +270,7 @@ export default function Services() {
                                             {pkg.deliverables.map((item, dIdx) => (
                                                 <li key={dIdx} className="flex items-start gap-2.5 leading-relaxed">
                                                     <CheckCircle2 size={16} className="text-emerald-400 mt-0.5 shrink-0" />
-                                                    <span>{item}</span>
+                                                    <span>{isIndo ? item.id : item.en}</span>
                                                 </li>
                                             ))}
                                         </ul>
@@ -287,7 +287,7 @@ export default function Services() {
                                                 {pkg.limitations.map((limit, lIdx) => (
                                                     <li key={lIdx} className="flex items-start gap-2 leading-normal">
                                                         <span className="text-slate-600 font-bold">•</span>
-                                                        <span>{limit}</span>
+                                                        <span>{isIndo ? limit.id : limit.en}</span>
                                                     </li>
                                                 ))}
                                             </ul>
@@ -302,19 +302,19 @@ export default function Services() {
                                         type="button"
                                         onClick={() => handleSelectPackage(pkg)}
                                         className={`w-full py-3.5 px-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all duration-200 transform active:scale-98 shadow-md ${accent.button}`}
-                                        aria-label={`${pkg.ctaText} - Scroll ke form konsultasi`}
+                                        aria-label={`${isIndo ? pkg.ctaText.id : pkg.ctaText.en} - Scroll ke form konsultasi`}
                                     >
-                                        <span>{pkg.ctaText}</span>
+                                        <span>{isIndo ? pkg.ctaText.id : pkg.ctaText.en}</span>
                                         <ArrowRight size={16} />
                                     </button>
 
                                     {/* Contextual WhatsApp Deep-link */}
                                     <a
-                                        href={`https://wa.me/6282176012461?text=${encodeURIComponent(pkg.whatsappText)}`}
+                                        href={`https://wa.me/6282176012461?text=${encodeURIComponent(isIndo ? pkg.whatsappText : (pkg.whatsappTextEn || pkg.whatsappText))}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="w-full py-2.5 px-4 rounded-xl border border-emerald-500/30 bg-emerald-950/30 hover:bg-emerald-900/40 text-emerald-400 font-semibold text-xs flex items-center justify-center gap-2 transition-all"
-                                        aria-label={`Chat WhatsApp untuk ${pkg.name}`}
+                                        aria-label={`Chat WhatsApp untuk ${isIndo ? pkg.name.id : pkg.name.en}`}
                                     >
                                         <MessageCircle size={15} />
                                         <span>{isIndo ? 'Tanya Langsung via WhatsApp' : 'Direct WhatsApp Inquiry'}</span>

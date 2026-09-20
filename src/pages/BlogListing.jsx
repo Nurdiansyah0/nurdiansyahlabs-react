@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { m } from 'framer-motion'
 import { ArrowRight, BookOpen, Loader2 } from 'lucide-react'
 import { getOptimizedImg } from '../utils/imgHelper'
-
+import { useLanguage } from '../i18n/LanguageContext'
 
 import SEO from '../components/seo/SEO'
 
@@ -23,6 +23,7 @@ import SEO from '../components/seo/SEO'
 export default function BlogListing() {
     const [articles, setArticles] = useState([])
     const [loading, setLoading] = useState(true)
+    const { isIndo } = useLanguage()
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -47,8 +48,10 @@ export default function BlogListing() {
     return (
         <main style={{ minHeight: '100vh', background: '#f8fafc', padding: '6rem 1.5rem 4rem' }}>
             <SEO
-                title="Blog & Technical Insights"
-                description="Temukan artikel mendalam seputar fullstack web development, arsitektur software modular, data analyst, dan machine learning dari NurdiansyahLabs."
+                title={isIndo ? 'Blog & Wawasan Teknis' : 'Blog & Technical Insights'}
+                description={isIndo
+                    ? 'Temukan artikel mendalam seputar fullstack web development, arsitektur software modular, data analyst, dan machine learning dari NurdiansyahLabs.'
+                    : 'Deep dives on fullstack web development, modular software architecture, data analytics, and machine learning from NurdiansyahLabs.'}
                 canonical="/blog"
                 breadcrumbs={[
                     { name: 'Home', url: '/' },
@@ -62,13 +65,17 @@ export default function BlogListing() {
                     style={{ textAlign: 'center', marginBottom: '4rem' }}
                 >
                     <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#eef2ff', color: '#3730a3', padding: '8px 16px', borderRadius: '20px', fontWeight: 700, fontSize: '0.9rem', marginBottom: '1rem' }}>
-                        <BookOpen size={18} /> Our Blog
+                        <BookOpen size={18} /> {isIndo ? 'Blog Kami' : 'Our Blog'}
                     </div>
                     <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 900, color: '#0f172a', marginBottom: '1rem', letterSpacing: '-0.03em' }}>
-                        Insights & <span style={{ color: '#3730a3' }}>News</span>
+                        {isIndo
+                            ? <>Wawasan & <span style={{ color: '#3730a3' }}>Berita</span></>
+                            : <>Insights & <span style={{ color: '#3730a3' }}>News</span></>}
                     </h1>
                     <p style={{ fontSize: '1.1rem', color: '#1e293b', maxWidth: '600px', margin: '0 auto', lineHeight: 1.6 }}>
-                        Pelajari tips terbaru seputar web development, analisis data, bisnis digital, dan teknologi machine learning.
+                        {isIndo
+                            ? 'Pelajari tips terbaru seputar web development, analisis data, bisnis digital, dan teknologi machine learning.'
+                            : 'Stay current on web development, data analytics, digital business, and machine learning technology.'}
                     </p>
                 </m.div>
 
@@ -137,7 +144,7 @@ export default function BlogListing() {
                                             {article.description}
                                         </p>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: article.accent, fontWeight: 700, fontSize: '0.9rem' }}>
-                                            Baca Artikel <ArrowRight size={16} />
+                                            {isIndo ? 'Baca Artikel' : 'Read Article'} <ArrowRight size={16} />
                                         </div>
                                     </div>
                                 </Link>

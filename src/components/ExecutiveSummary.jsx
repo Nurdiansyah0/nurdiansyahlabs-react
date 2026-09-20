@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { FileText, ChevronDown, ChevronUp, Layers, CheckCircle, ExternalLink, Globe } from 'lucide-react'
+import { useLanguage } from '../i18n/LanguageContext'
 
 /**
  * ExecutiveTechnicalSummary Component
@@ -18,6 +19,7 @@ export default function ExecutiveSummary({
     subdomainHost = null
 }) {
     const [isExpanded, setIsExpanded] = useState(true)
+    const { isIndo } = useLanguage()
 
     if (!summary) return null
 
@@ -63,16 +65,18 @@ export default function ExecutiveSummary({
                         </div>
                         <div>
                             <div style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#94a3b8', fontWeight: 700 }}>
-                                Architecture & Engineering Brief
+                                {isIndo ? 'Arsitektur & Brief Rekayasa' : 'Architecture & Engineering Brief'}
                             </div>
                             <h2 style={{ margin: 0, fontSize: '1rem', fontWeight: 800, color: '#f8fafc' }}>
-                                Executive Technical Summary: {title}
+                                {isIndo ? `Ringkasan Teknis Eksekutif: ${title}` : `Executive Technical Summary: ${title}`}
                             </h2>
                         </div>
                     </div>
                     <button 
                         type="button"
-                        aria-label={isExpanded ? "Collapse executive summary" : "Expand executive summary"}
+                        aria-label={isExpanded
+                            ? (isIndo ? 'Perkecil ringkasan eksekutif' : 'Collapse executive summary')
+                            : (isIndo ? 'Perbesar ringkasan eksekutif' : 'Expand executive summary')}
                         style={{
                             background: 'transparent',
                             border: 'none',
@@ -115,7 +119,7 @@ export default function ExecutiveSummary({
                                     </div>
                                     <div>
                                         <div style={{ fontSize: '0.7rem', fontWeight: 800, color: '#166534', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                                            Live Subdomain Deployment
+                                            {isIndo ? 'Subdomain Langsung' : 'Live Subdomain Deployment'}
                                         </div>
                                         <div style={{ fontSize: '0.88rem', fontWeight: 700, color: '#14532d' }}>
                                             {subdomainHost || subdomain.replace('https://', '')}
@@ -141,7 +145,7 @@ export default function ExecutiveSummary({
                                         transition: 'background 0.2s'
                                     }}
                                 >
-                                    <span>Buka Subdomain Penuh</span>
+                                    <span>{isIndo ? 'Buka Subdomain Penuh' : 'Launch Full Subdomain'}</span>
                                     <ExternalLink size={14} />
                                 </a>
                             </div>
@@ -167,7 +171,7 @@ export default function ExecutiveSummary({
                                 {metrics.length > 0 && (
                                     <div>
                                         <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', marginBottom: '8px', letterSpacing: '0.05em' }}>
-                                            Key Technical Benchmarks
+                                            {isIndo ? 'Tolok Ukur Teknis Utama' : 'Key Technical Benchmarks'}
                                         </div>
                                         <ul style={{ margin: 0, paddingLeft: '1.25rem', color: '#1e293b', fontSize: '0.88rem', lineHeight: 1.6 }}>
                                             {metrics.map((m, idx) => (
@@ -180,7 +184,7 @@ export default function ExecutiveSummary({
                                 {stack.length > 0 && (
                                     <div>
                                         <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', marginBottom: '8px', letterSpacing: '0.05em' }}>
-                                            Verified Production Stack
+                                            {isIndo ? 'Stack Produksi Terverifikasi' : 'Verified Production Stack'}
                                         </div>
                                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                                             {stack.map((item, idx) => (
