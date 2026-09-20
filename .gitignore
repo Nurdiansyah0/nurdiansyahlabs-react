@@ -44,3 +44,16 @@ postgre-env
 __pycache__/
 *.pyc
 .pytest_cache/
+*credentials*.json
+*service_account*.json
+gsc-*.json
+
+# Temporary Agent Scratch Folders
+.agents/auditor_*
+.agents/explorer_*
+.agents/reviewer_*
+.agents/swe_*
+.agents/implementer_*
+.agents/orchestrator_*
+
+

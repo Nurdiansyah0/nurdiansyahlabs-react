@@ -44,9 +44,15 @@ const SEO = ({ title, description, keywords, canonical, image, type = 'website',
             "@id": `${siteUrl}/#profile`,
             "url": siteUrl,
             "name": "Nurdiansyah – Software Engineering Portfolio & Studio",
-            "mainEntity": { "@id": `${siteUrl}/#person` },
+            "mainEntity": {
+                "@type": "Person",
+                "@id": `${siteUrl}/#person`,
+                "name": "Nurdiansyah",
+                "url": siteUrl
+            },
             "isPartOf": { "@id": `${siteUrl}/#website` }
         },
+
         {
             "@type": "ProfessionalService",
             "@id": `${siteUrl}/#service`,

@@ -3,13 +3,26 @@ import react from '@vitejs/plugin-react'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import prerender from '@prerenderer/rollup-plugin'
-import programmaticData from './src/data/programmatic-seo.json' assert { type: 'json' }
+import programmaticData from './src/data/programmatic-seo.json' with { type: 'json' }
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 // Generate dynamic routes
 const programmaticRoutes = programmaticData.industries.map(ind => `/layanan/industri/${ind.slug}`)
+const blogRoutes = [
+    '/blog/jasa-landing-page-murah-indonesia',
+    '/blog/jasa-fullstack-developer-indonesia',
+    '/blog/jasa-analisis-data-bisnis-indonesia',
+    '/blog/jasa-machine-learning-data-science',
+    '/blog/buat-dashboard-bisnis-power-bi-tableau',
+    '/blog/berapa-harga-jasa-landing-page-profesional',
+    '/blog/cara-memilih-jasa-web-developer-terpercaya',
+    '/blog/kapan-bisnis-butuh-data-analyst',
+    '/blog/jasa-website-umkm-integrasi-whatsapp',
+    '/blog/manfaat-machine-learning-untuk-bisnis-kecil',
+    '/blog/programmer-freelance-indonesia'
+]
 
 export default defineConfig({
     plugins: [
@@ -31,8 +44,10 @@ export default defineConfig({
                 '/showcase/fullstack/warehouse-wms',
                 '/showcase/fullstack/primatera-poultry',
                 '/showcase/data-science/smart-vision',
-                ...programmaticRoutes
+                ...programmaticRoutes,
+                ...blogRoutes
             ],
+
             renderer: '@prerenderer/renderer-puppeteer',
             rendererOptions: {
                 renderAfterTime: 5000 // wait 2 seconds for react-helmet to inject
