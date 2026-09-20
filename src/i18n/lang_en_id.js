@@ -2,6 +2,7 @@
 export const en = {
     // Navbar
     'nav.services': 'Services', 'nav.whyUs': 'Why Us', 'nav.contact': 'Contact',
+    'nav.blog': 'Insights & Whitepapers',
     // Hero
     'hero.badge': 'FULLSTACK SOFTWARE ENGINEERING & DATA INTELLIGENCE',
     'hero.h1.1': 'Production-Grade ', 'hero.h1.2': 'Web Applications ', 'hero.h1.3': '& Modern Digital Systems.',
@@ -77,10 +78,45 @@ export const en = {
     'modal.exampleProjects': 'projects',
     // Showcase
     'show.back': 'Back', 'show.liveDemo': 'LIVE DEMO', 'show.source': 'Source', 'show.hireMe': 'Contact Developer', 'show.service': 'Service',
+
+    // Common Actions & Buttons
+    'common.launchSubdomain': 'Launch Full Subdomain',
+    'common.readArticle': 'Read Article',
+    'common.viewPortfolio': 'View Portfolio',
+    'common.consultNow': 'Consult Now',
+    'common.freeConsultation': 'Free Consultation',
+    'common.close': 'Close',
+    'common.back': 'Back',
+    'common.retry': 'Retry',
+    'common.all': 'All',
+    'common.loading': 'Loading...',
+
+    // Common Accessibility (aria-labels)
+    'aria.langSelect': 'Select Language',
+    'aria.langSelectMobile': 'Select Language (Mobile)',
+    'aria.openMenu': 'Open menu',
+    'aria.closeMenu': 'Close menu',
+    'aria.closeModal': 'Close modal',
+    'aria.newInquiry': 'Submit new inquiry',
+    'aria.submittingInquiry': 'Sending project inquiry...',
+    'aria.chatWhatsApp': 'Chat via WhatsApp for ',
+    'aria.scrollToContact': ' - Scroll to consultation form',
+    'aria.expandBanner': 'Expand banner',
+    'aria.collapseBanner': 'Collapse banner',
+    'aria.expandSummary': 'Expand executive summary',
+    'aria.collapseSummary': 'Collapse executive summary',
+
+    // Error Fallbacks
+    'error.sendFailed': 'An error occurred while sending the message. Please try again.',
+    'error.serverConnection': 'Failed to connect to server. Please check your connection and try again.',
+    'error.pageNotFound': 'Page Not Found',
+    'error.genericTitle': 'Something went wrong',
+    'error.genericDesc': 'An unexpected error occurred. Please refresh or return home.',
 }
 
 export const id = {
     'nav.services': 'Layanan', 'nav.whyUs': 'Mengapa Kami', 'nav.contact': 'Kontak',
+    'nav.blog': 'Wawasan & Panduan',
     // Hero
     'hero.badge': 'REKAYASA PERANGKAT LUNAK FULLSTACK & DATA BISNIS',
     'hero.h1.1': 'Aplikasi Web Skala Produksi ', 'hero.h1.2': '& Sistem Digital Modern ', 'hero.h1.3': 'Untuk Pertumbuhan Bisnis.',
@@ -150,4 +186,37 @@ export const id = {
     'contact.btnSubmitting': 'Mengirim Pesan...',
     'contact.privacyText': 'Data Anda aman dan tidak akan dibagikan ke pihak ketiga.',
 
+    // Common Actions & Buttons
+    'common.launchSubdomain': 'Buka Subdomain Penuh',
+    'common.readArticle': 'Baca Artikel',
+    'common.viewPortfolio': 'Lihat Portofolio',
+    'common.consultNow': 'Konsultasi Sekarang',
+    'common.freeConsultation': 'Konsultasi Gratis',
+    'common.close': 'Tutup',
+    'common.back': 'Kembali',
+    'common.retry': 'Coba Lagi',
+    'common.all': 'Semua',
+    'common.loading': 'Memuat...',
+
+    // Common Accessibility (aria-labels)
+    'aria.langSelect': 'Pilihan Bahasa',
+    'aria.langSelectMobile': 'Pilihan Bahasa Mobile',
+    'aria.openMenu': 'Buka menu',
+    'aria.closeMenu': 'Tutup menu',
+    'aria.closeModal': 'Tutup modal',
+    'aria.newInquiry': 'Kirim Permintaan Baru',
+    'aria.submittingInquiry': 'Mengirim pesan penawaran...',
+    'aria.chatWhatsApp': 'Chat WhatsApp untuk ',
+    'aria.scrollToContact': ' - Scroll ke form konsultasi',
+    'aria.expandBanner': 'Perbesar Banner',
+    'aria.collapseBanner': 'Perkecil Banner',
+    'aria.expandSummary': 'Perbesar ringkasan eksekutif',
+    'aria.collapseSummary': 'Perkecil ringkasan eksekutif',
+
+    // Error Fallbacks
+    'error.sendFailed': 'Terjadi kesalahan saat mengirim pesan. Silakan coba lagi.',
+    'error.serverConnection': 'Gagal terhubung ke server. Silakan periksa koneksi Anda dan coba lagi.',
+    'error.pageNotFound': 'Halaman Tidak Ditemukan',
+    'error.genericTitle': 'Terjadi kesalahan',
+    'error.genericDesc': 'Terjadi kesalahan tak terduga. Silakan muat ulang atau kembali ke beranda.',
 }

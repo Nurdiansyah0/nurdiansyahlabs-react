@@ -8,7 +8,7 @@ import { getOptimizedImg } from '../utils/imgHelper'
 export default function Navbar() {
     const [mobileOpen, setMobileOpen] = useState(false)
     const [scrolled, setScrolled] = useState(false)
-    const { t, lang, setLang } = useLanguage()
+    const { t, lang, setLang, isIndo } = useLanguage()
     const { isMobile, isSm } = useResponsive()
 
     useEffect(() => {
@@ -28,7 +28,7 @@ export default function Navbar() {
     const links = [
         { href: '/#services', label: t('nav.services') },
         { href: '/#why-us', label: t('nav.whyUs') },
-        { href: '/blog', label: 'Insights & Tips' },
+        { href: '/blog', label: isIndo ? 'Wawasan & Tips' : 'Insights & Tips' },
         { href: '/#contact', label: t('nav.contact') },
     ]
 

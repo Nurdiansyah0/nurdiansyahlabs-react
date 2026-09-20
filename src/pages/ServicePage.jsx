@@ -2,15 +2,21 @@ import React from 'react'
 import { useParams, Link } from 'react-router-dom'
 import SEO from '../components/seo/SEO'
 import servicesData from '../data/services.json'
+import { useLanguage } from '../i18n/LanguageContext'
 
 // Shared UI components (Simplified for this task)
 const Layout = ({ children }) => <div className="min-h-screen bg-slate-50">{children}</div>
 
 export default function ServicePage() {
     const { slug } = useParams()
+    const { isIndo } = useLanguage()
     const service = servicesData.services.find(s => s.slug === slug)
 
-    if (!service) return <div>Service not found</div>
+    if (!service) return (
+        <div style={{ padding: '8rem 2rem', textAlign: 'center' }}>
+            {isIndo ? 'Layanan tidak ditemukan.' : 'Service not found.'}
+        </div>
+    )
 
     return (
         <Layout>
@@ -20,7 +26,7 @@ export default function ServicePage() {
                 canonical={`/services/${service.slug}`}
                 breadcrumbs={[
                     { name: 'Home', url: '/' },
-                    { name: 'Layanan', url: '/services/web-development' },
+                    { name: isIndo ? 'Layanan' : 'Services', url: '/services/web-development' },
                     { name: service.title, url: `/services/${service.slug}` }
                 ]}
                 additionalSchemas={[
@@ -53,10 +59,10 @@ export default function ServicePage() {
                     <p className="text-lg text-indigo-100 max-w-2xl">{service.description}</p>
                     <div className="mt-8 flex gap-4">
                         <a href="https://wa.me/6282176012461" className="bg-green-500 hover:bg-green-700 text-white px-8 py-3 rounded-xl font-bold transition-all transform hover:scale-105">
-                            Konsultasi Sekarang
+                            {isIndo ? 'Konsultasi Sekarang' : 'Start Your Project'}
                         </a>
                         <Link to="/" className="bg-white/10 hover:bg-white/20 text-white px-8 py-3 rounded-xl font-bold backdrop-blur-sm transition-all">
-                            Lihat Portofolio
+                            {isIndo ? 'Lihat Portofolio' : 'View Our Work'}
                         </Link>
                     </div>
                 </div>
@@ -64,21 +70,37 @@ export default function ServicePage() {
 
             <main className="max-w-4xl mx-auto py-16 px-6">
                 <div className="bg-white rounded-3xl p-8 md:p-12 shadow-xl shadow-indigo-100/50">
-                    <h2 className="text-2xl font-bold mb-6 text-slate-900">Mengapa Memilih Layanan Kami?</h2>
+                    <h2 className="text-2xl font-bold mb-6 text-slate-900">
+                        {isIndo ? 'Mengapa Memilih Layanan Kami?' : 'Why Choose Our Service?'}
+                    </h2>
                     <div className="grid md:grid-cols-2 gap-8">
                         <div className="space-y-4">
-                            <h3 className="font-bold text-indigo-600">✓ Berorientasi Hasil</h3>
-                            <p className="text-slate-600">Kami fokus membangun solusi digital yang mengonversi trafik menjadi pelanggan.</p>
+                            <h3 className="font-bold text-indigo-600">
+                                {isIndo ? '✓ Berorientasi Hasil' : '✓ Results-Driven'}
+                            </h3>
+                            <p className="text-slate-600">
+                                {isIndo
+                                    ? 'Kami fokus membangun solusi digital yang mengonversi trafik menjadi pelanggan.'
+                                    : 'We build digital solutions engineered to convert traffic into paying customers.'}
+                            </p>
                         </div>
                         <div className="space-y-4">
-                            <h3 className="font-bold text-indigo-600">✓ Teknologi Modern</h3>
-                            <p className="text-slate-600">Menggunakan tech-stack terbaru untuk performa maksimal dan keamanan tinggi.</p>
+                            <h3 className="font-bold text-indigo-600">
+                                {isIndo ? '✓ Teknologi Modern' : '✓ Modern Tech Stack'}
+                            </h3>
+                            <p className="text-slate-600">
+                                {isIndo
+                                    ? 'Menggunakan tech-stack terbaru untuk performa maksimal dan keamanan tinggi.'
+                                    : 'We use production-grade stacks for maximum performance and enterprise-level security.'}
+                            </p>
                         </div>
                     </div>
 
                     {service.inclusions && service.inclusions.length > 0 && (
                         <div className="mt-10 pt-8 border-t border-slate-100">
-                            <h3 className="text-xl font-bold text-slate-900 mb-4">Fitur & Layanan Termasuk:</h3>
+                            <h3 className="text-xl font-bold text-slate-900 mb-4">
+                                {isIndo ? 'Fitur & Layanan Termasuk:' : 'Features & Inclusions:'}
+                            </h3>
                             <div className="grid sm:grid-cols-2 gap-3">
                                 {service.inclusions.map((item, idx) => (
                                     <div key={idx} className="flex items-start gap-2 text-slate-700 text-sm">
@@ -94,19 +116,25 @@ export default function ServicePage() {
                         <div className="mt-8 pt-6 border-t border-slate-100 grid sm:grid-cols-3 gap-4">
                             {service.idealFor && (
                                 <div className="bg-slate-50 p-4 rounded-xl">
-                                    <div className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Ideal Untuk</div>
+                                    <div className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">
+                                        {isIndo ? 'Ideal Untuk' : 'Ideal For'}
+                                    </div>
                                     <div className="text-sm font-semibold text-slate-800">{service.idealFor}</div>
                                 </div>
                             )}
                             {service.estimation && (
                                 <div className="bg-slate-50 p-4 rounded-xl">
-                                    <div className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Estimasi Pengerjaan</div>
+                                    <div className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">
+                                        {isIndo ? 'Estimasi Pengerjaan' : 'Estimated Timeline'}
+                                    </div>
                                     <div className="text-sm font-semibold text-indigo-900">{service.estimation}</div>
                                 </div>
                             )}
                             {service.revisions && (
                                 <div className="bg-slate-50 p-4 rounded-xl">
-                                    <div className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Kebijakan Revisi</div>
+                                    <div className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">
+                                        {isIndo ? 'Kebijakan Revisi' : 'Revision Policy'}
+                                    </div>
                                     <div className="text-sm font-semibold text-slate-800">{service.revisions}</div>
                                 </div>
                             )}
@@ -116,16 +144,22 @@ export default function ServicePage() {
                     <div className="mt-12 pt-8 border-t border-slate-100">
                         <div className="flex justify-between items-center bg-indigo-50 p-6 rounded-2xl">
                             <div>
-                                <span className="text-slate-500 text-sm">Investasi</span>
+                                <span className="text-slate-500 text-sm">
+                                    {isIndo ? 'Investasi' : 'Investment'}
+                                </span>
                                 <div className="text-2xl font-black text-indigo-950">{service.price}</div>
                             </div>
-                            <Link to="/#contact" className="text-indigo-600 font-bold hover:underline">Mulai Konsultasi →</Link>
+                            <Link to="/#contact" className="text-indigo-600 font-bold hover:underline">
+                                {isIndo ? 'Mulai Konsultasi →' : 'Start a Consultation →'}
+                            </Link>
                         </div>
                     </div>
                 </div>
 
                 <div className="mt-16">
-                    <h2 className="text-2xl font-bold mb-8 text-slate-900 px-6">Layanan Lainnya</h2>
+                    <h2 className="text-2xl font-bold mb-8 text-slate-900 px-6">
+                        {isIndo ? 'Layanan Lainnya' : 'Other Services'}
+                    </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 px-6 text-indigo-900">
                         {servicesData.services.filter(s => s.slug !== slug).map(rel => (
                             <Link key={rel.slug} to={`/services/${rel.slug}`} className="bg-white p-6 rounded-2xl border border-slate-100 hover:border-indigo-200 hover:shadow-lg transition-all no-underline">

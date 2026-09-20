@@ -3,87 +3,234 @@
         {
             "id": "starter",
             "packageNumber": 1,
-            "name": "Paket 1: Starter Web & Landing Page",
-            "title": "Starter Web & Landing Page",
-            "price": "Mulai Rp 500.000",
+            "name": {
+                "id": "Paket 1: Starter Web & Landing Page",
+                "en": "Package 1: Starter Web & Landing Page"
+            },
+            "title": {
+                "id": "Starter Web & Landing Page",
+                "en": "Starter Web & Landing Page"
+            },
+            "price": {
+                "id": "Mulai Rp 500.000",
+                "en": "Starting from $35"
+            },
             "startingPriceIDR": 500000,
-            "badge": "Paling Populer UMKM",
-            "target": "UMKM, personal branding, early startup",
-            "timeline": "3–7 hari kerja",
-            "revisions": "2x revisi minor",
+            "badge": {
+                "id": "Paling Populer UMKM",
+                "en": "Most Popular for SMEs"
+            },
+            "target": {
+                "id": "UMKM, personal branding, early startup",
+                "en": "SMEs, personal branding, early startups"
+            },
+            "timeline": {
+                "id": "3–7 hari kerja",
+                "en": "3–7 working days"
+            },
+            "revisions": {
+                "id": "2x revisi minor",
+                "en": "2x minor revisions"
+            },
             "deliverables": [
-                "Desain responsif mobile-first (< 1s load time)",
-                "Integrasi WhatsApp direct CTA dengan pesan dinamis",
-                "Lead capture inquiry form terhubung email",
-                "Pondasi basic technical SEO & Google Analytics 4",
-                "Deployment ke hosting & setup sertifikat SSL HTTPS",
-                "2x minor revision selama proses pengerjaan"
+                {
+                    "id": "Desain responsif mobile-first (< 1s load time)",
+                    "en": "Mobile-first responsive design (< 1s load time)"
+                },
+                {
+                    "id": "Integrasi WhatsApp direct CTA dengan pesan dinamis",
+                    "en": "WhatsApp direct CTA integration with dynamic message"
+                },
+                {
+                    "id": "Lead capture inquiry form terhubung email",
+                    "en": "Lead capture inquiry form connected to email"
+                },
+                {
+                    "id": "Pondasi basic technical SEO & Google Analytics 4",
+                    "en": "Basic technical SEO foundation & Google Analytics 4"
+                },
+                {
+                    "id": "Deployment ke hosting & setup sertifikat SSL HTTPS",
+                    "en": "Deployment to hosting & SSL HTTPS certificate setup"
+                },
+                {
+                    "id": "2x revisi minor selama proses pengerjaan",
+                    "en": "2x minor revisions during development process"
+                }
             ],
             "limitations": [
-                "Biaya domain & hosting recurring ditanggung klien",
-                "Tidak mencakup custom database atau auth login user"
+                {
+                    "id": "Biaya domain & hosting recurring ditanggung klien",
+                    "en": "Domain & recurring hosting costs borne by client"
+                },
+                {
+                    "id": "Tidak mencakup custom database atau auth login user",
+                    "en": "Does not include custom database or user login auth"
+                }
             ],
-            "ctaText": "Pilih Paket Starter",
+            "ctaText": {
+                "id": "Pilih Paket Starter",
+                "en": "Choose Starter Package"
+            },
             "serviceOptionValue": "Paket 1: Starter Web & Landing Page",
             "whatsappText": "Halo NurdiansyahLabs, saya tertarik dengan Paket 1: Starter Web & Landing Page (Mulai Rp 500.000). Bisa bantu jelaskan prosesnya?",
+            "whatsappTextEn": "Hi NurdiansyahLabs, I'm interested in Package 1: Starter Web & Landing Page ($35). Could you explain the development process?",
             "draftMessage": "Halo NurdiansyahLabs, saya tertarik dengan Paket 1: Starter Web & Landing Page (Mulai Rp 500.000). Saya ingin mendiskusikan kebutuhan landing page untuk bisnis/startup saya.",
+            "draftMessageEn": "Hi NurdiansyahLabs, I am interested in Package 1: Starter Web & Landing Page ($35). I would like to discuss building a high-converting web application for our business.",
             "slug": "landing-page"
         },
         {
             "id": "custom-erp",
             "packageNumber": 2,
-            "name": "Paket 2: Custom Web Application & Operational ERP",
-            "title": "Custom Web Application & Operational ERP",
-            "price": "Sesuai Cakupan Proyek (Mulai Rp 2.500.000)",
+            "name": {
+                "id": "Paket 2: Custom Web Application & Sistem ERP Operasional",
+                "en": "Package 2: Custom Web Application & Operational ERP System"
+            },
+            "title": {
+                "id": "Custom Web Application & Sistem ERP",
+                "en": "Custom Web Application & Operational ERP"
+            },
+            "price": {
+                "id": "Sesuai Cakupan Proyek (Mulai Rp 2.500.000)",
+                "en": "Project-Scoped (Starting from $160)"
+            },
             "startingPriceIDR": 2500000,
-            "badge": "Solusi Operasional Lengkap",
-            "target": "Growing business, multi-branch, agriculture/retail/logistics",
-            "timeline": "3–8 minggu (sprint mingguan)",
-            "revisions": "Sesuai milestone & kesepakatan scope",
+            "badge": {
+                "id": "Solusi Operasional Lengkap",
+                "en": "Complete Operational Solution"
+            },
+            "target": {
+                "id": "Bisnis berkembang, multi-cabang, pertanian/retail/logistik",
+                "en": "Growing business, multi-branch, agriculture/retail/logistics"
+            },
+            "timeline": {
+                "id": "3–8 minggu (sprint mingguan)",
+                "en": "3–8 weeks (weekly sprints)"
+            },
+            "revisions": {
+                "id": "Sesuai milestone & kesepakatan scope",
+                "en": "Per milestone & agreed scope"
+            },
             "deliverables": [
-                "Arsitektur modular scalable (React 18 + Python Flask + PostgreSQL)",
-                "Role-Based Access Control multi-level (Admin, Manajer, Kasir)",
-                "Dashboard operasional real-time & KPI bisnis terintegrasi",
-                "Database relasional teroptimasi dengan automated backup",
-                "Fitur export PDF faktur, rekap Excel/CSV, & integrasi WhatsApp",
-                "Garansi 30 hari bug-fix & SLA support purna jual"
+                {
+                    "id": "Arsitektur modular scalable (React 18 + Python Flask + PostgreSQL)",
+                    "en": "Modular scalable architecture (React 18 + Python Flask + PostgreSQL)"
+                },
+                {
+                    "id": "Role-Based Access Control multi-level (Admin, Manajer, Kasir)",
+                    "en": "Multi-level Role-Based Access Control (Admin, Manager, Cashier)"
+                },
+                {
+                    "id": "Dashboard operasional real-time & KPI bisnis terintegrasi",
+                    "en": "Real-time operational dashboard & integrated business KPI"
+                },
+                {
+                    "id": "Database relasional teroptimasi dengan automated backup",
+                    "en": "Optimized relational database with automated backup"
+                },
+                {
+                    "id": "Fitur export PDF faktur, rekap Excel/CSV, & integrasi WhatsApp",
+                    "en": "PDF invoice export, Excel/CSV recap, & WhatsApp integration"
+                },
+                {
+                    "id": "Garansi 30 hari bug-fix & SLA support purna jual",
+                    "en": "30-day bug-fix warranty & post-sale SLA support"
+                }
             ],
             "limitations": [
-                "Biaya server VPS/cloud hosting & API pihak ketiga ditanggung klien",
-                "Fitur tambahan di luar scope disepakati per change order"
+                {
+                    "id": "Biaya server VPS/cloud hosting & API pihak ketiga ditanggung klien",
+                    "en": "VPS/cloud server & third-party API costs borne by client"
+                },
+                {
+                    "id": "Fitur tambahan di luar scope disepakati per change order",
+                    "en": "Features beyond agreed scope handled via change order"
+                }
             ],
-            "ctaText": "Minta Penawaran ERP",
+            "ctaText": {
+                "id": "Minta Penawaran ERP",
+                "en": "Request ERP Proposal"
+            },
             "serviceOptionValue": "Paket 2: Custom Web Application & Operational ERP",
             "whatsappText": "Halo NurdiansyahLabs, saya ingin konsultasi pembuatan Paket 2: Custom Web Application & Operational ERP (Mulai Rp 2.500.000) untuk operasional bisnis saya.",
+            "whatsappTextEn": "Hi NurdiansyahLabs, I'd like to request a consultation for Package 2: Custom Web Application & Operational ERP (Starting from $160). We need a tailored system for our operations.",
             "draftMessage": "Halo NurdiansyahLabs, saya ingin meminta penawaran untuk Paket 2: Custom Web Application & Operational ERP (Mulai Rp 2.500.000). Bisnis kami membutuhkan sistem kustom untuk pengelolaan operasional dan database.",
+            "draftMessageEn": "Hi NurdiansyahLabs, I would like to request a proposal for Package 2: Custom Web Application & Operational ERP (Starting from $160). We need a tailored system for operations and database workflows.",
             "slug": "web-development"
         },
         {
             "id": "advisory",
             "packageNumber": 3,
-            "name": "Paket 3: Technical Architecture Advisory & Enterprise Consultation",
-            "title": "Technical Architecture Advisory & Enterprise Consultation",
-            "price": "Konsultasi & Penawaran Khusus (Gratis 30-Menit Discovery)",
+            "name": {
+                "id": "Paket 3: Konsultasi Arsitektur Teknis & Enterprise Advisory",
+                "en": "Package 3: Technical Architecture Advisory & Enterprise Consultation"
+            },
+            "title": {
+                "id": "Konsultasi Arsitektur & Enterprise Advisory",
+                "en": "Technical Architecture Advisory & Enterprise Consultation"
+            },
+            "price": {
+                "id": "Konsultasi & Penawaran Khusus (Gratis Sesi Discovery 30 Menit)",
+                "en": "Enterprise Consultation (Complimentary 30-Min Discovery)"
+            },
             "startingPriceIDR": 0,
-            "badge": "Discovery 1-on-1 Gratis",
-            "target": "CTOs, product managers, tech leaders",
-            "timeline": "Sesi 30 menit; Audit 3–5 hari kerja",
-            "revisions": "Sesuai scope perjanjian SOW",
+            "badge": {
+                "id": "Discovery 1-on-1 Gratis",
+                "en": "Free 1-on-1 Discovery"
+            },
+            "target": {
+                "id": "CTO, product manager, tech leader",
+                "en": "CTOs, product managers, tech leaders"
+            },
+            "timeline": {
+                "id": "Sesi 30 menit; Audit 3–5 hari kerja",
+                "en": "30-min session; Audit 3–5 working days"
+            },
+            "revisions": {
+                "id": "Sesuai scope perjanjian SOW",
+                "en": "Per agreed SOW scope"
+            },
             "deliverables": [
-                "1-on-1 sesi discovery teknis 30 menit (Google Meet / Zoom)",
-                "Audit arsitektur sistem, analisis query bottleneck, & SQL security",
-                "Roadmap modernisasi teknologi & strategi pipeline data/AI",
-                "Rekomendasi optimasi performa backend & mitigasi technical debt",
-                "Penyusunan penawaran custom SOW terstruktur sesuai kebutuhan"
+                {
+                    "id": "Sesi discovery teknis 1-on-1 selama 30 menit (Google Meet / Zoom)",
+                    "en": "30-minute 1-on-1 technical discovery session (Google Meet / Zoom)"
+                },
+                {
+                    "id": "Audit arsitektur sistem, analisis query bottleneck, & SQL security",
+                    "en": "System architecture audit, query bottleneck analysis, & SQL security"
+                },
+                {
+                    "id": "Roadmap modernisasi teknologi & strategi pipeline data/AI",
+                    "en": "Technology modernization roadmap & data/AI pipeline strategy"
+                },
+                {
+                    "id": "Rekomendasi optimasi performa backend & mitigasi technical debt",
+                    "en": "Backend performance optimization recommendations & technical debt mitigation"
+                },
+                {
+                    "id": "Penyusunan penawaran custom SOW terstruktur sesuai kebutuhan",
+                    "en": "Structured custom SOW proposal tailored to your requirements"
+                }
             ],
             "limitations": [
-                "Sesi gratis difokuskan pada scoping asesmen & directional advisory",
-                "Implementasi hands-on engineering/coding diatur dalam SOW terpisah"
+                {
+                    "id": "Sesi gratis difokuskan pada scoping asesmen & directional advisory",
+                    "en": "Free session focused on scoping assessment & directional advisory"
+                },
+                {
+                    "id": "Implementasi hands-on engineering/coding diatur dalam SOW terpisah",
+                    "en": "Hands-on engineering/coding implementation governed by separate SOW"
+                }
             ],
-            "ctaText": "Jadwalkan Konsultasi Gratis",
+            "ctaText": {
+                "id": "Jadwalkan Konsultasi Gratis",
+                "en": "Schedule Free Consultation"
+            },
             "serviceOptionValue": "Paket 3: Technical Architecture Advisory & Enterprise Consultation",
             "whatsappText": "Halo NurdiansyahLabs, saya ingin menjadwalkan Paket 3: Technical Architecture Advisory (Gratis 30-Menit Discovery) untuk arsitektur proyek saya.",
+            "whatsappTextEn": "Hi NurdiansyahLabs, I would like to schedule a 30-minute Technical Architecture Advisory session.",
             "draftMessage": "Halo NurdiansyahLabs, saya ingin menjadwalkan sesi Paket 3: Technical Architecture Advisory & Enterprise Consultation (Gratis 30-Menit Discovery) untuk mendiskusikan arsitektur sistem dan strategi teknologi kami.",
+            "draftMessageEn": "Hi NurdiansyahLabs, I would like to book a Complimentary 30-Minute Technical Architecture Discovery session to discuss our system scalability and technology stack.",
             "slug": "machine-learning"
         }
     ],

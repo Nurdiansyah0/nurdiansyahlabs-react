@@ -6,6 +6,7 @@ import { m } from 'framer-motion'
 import { MessageCircle, Loader2 } from 'lucide-react'
 import { useTracker } from '../hooks/useTracker'
 import { getOptimizedImg } from '../utils/imgHelper'
+import { useLanguage } from '../i18n/LanguageContext'
 
 // Generate structured data for any other slugs not in predefined list
 function generateGenericData(slug) {
@@ -39,6 +40,7 @@ export default function BlogPage() {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
     const { trackEvent } = useTracker()
+    const { isIndo } = useLanguage()
 
     const actualSlug = langSlug && geo ? `${geo}/${langSlug}` : slug;
 
@@ -221,11 +223,11 @@ export default function BlogPage() {
                             target="_blank" rel="noreferrer"
                             style={{
                                 display: 'inline-flex', alignItems: 'center', gap: '8px',
-                                background: '#166534', color: '#fff', padding: '0.7rem 1.5rem',
+                                background: '#166634', color: '#fff', padding: '0.7rem 1.5rem',
                                 borderRadius: '10px', fontWeight: 700, fontSize: '0.9rem', textDecoration: 'none'
                             }}
                         >
-                            <MessageCircle size={18} /> Konsultasi Gratis via WhatsApp
+                            <MessageCircle size={18} /> {isIndo ? 'Konsultasi Gratis via WhatsApp' : 'Free Consultation via WhatsApp'}
                         </a>
                     </div>
                 </div>
@@ -254,13 +256,15 @@ export default function BlogPage() {
                         />
                         <div>
                             <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                                Ditulis & Ditinjau Oleh
+                                {isIndo ? 'Ditulis & Ditinjau Oleh' : 'Written & Reviewed By'}
                             </div>
                             <div style={{ fontSize: '1rem', fontWeight: 800, color: '#0f172a' }}>
                                 Nurdiansyah
                             </div>
                             <p style={{ margin: '4px 0 0', fontSize: '0.85rem', color: '#475569', lineHeight: 1.5 }}>
-                                Fullstack Software Engineer & Architect di NurdiansyahLabs. Berpengalaman membangun aplikasi web React/Python, sistem ERP operasional, dan analitik data terintegrasi.
+                                {isIndo
+                                    ? 'Fullstack Software Engineer & Architect di NurdiansyahLabs. Berpengalaman membangun aplikasi web React/Python, sistem ERP operasional, dan analitik data terintegrasi.'
+                                    : 'Fullstack Software Engineer & Architect at NurdiansyahLabs. Specialises in production React/Python apps, operational ERPs, and integrated data analytics.'}
                             </p>
                         </div>
                     </div>
@@ -274,7 +278,7 @@ export default function BlogPage() {
                         border: '1px solid #e2e8f0'
                     }}>
                         <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#0f172a', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '12px' }}>
-                            Sistem Terkait di Portfolio Kami
+                            {isIndo ? 'Sistem Terkait di Portfolio Kami' : 'Related Systems in Our Portfolio'}
                         </div>
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '10px' }}>
                             <Link to="/showcase/fullstack/primatera-poultry" style={{ background: '#fff', padding: '10px 14px', borderRadius: '10px', border: '1px solid #e2e8f0', textDecoration: 'none', color: '#0f172a', fontSize: '0.85rem', fontWeight: 600, display: 'block' }}>
@@ -287,7 +291,7 @@ export default function BlogPage() {
                                 👁️ Smart Vision AI →
                             </Link>
                             <Link to="/services/web-development" style={{ background: '#fff', padding: '10px 14px', borderRadius: '10px', border: '1px solid #e2e8f0', textDecoration: 'none', color: '#0f172a', fontSize: '0.85rem', fontWeight: 600, display: 'block' }}>
-                                💻 Layanan Fullstack Web →
+                                💻 {isIndo ? 'Layanan Fullstack Web →' : 'Fullstack Web Services →'}
                             </Link>
                         </div>
                     </div>
@@ -303,10 +307,12 @@ export default function BlogPage() {
                         }}
                     >
                         <div style={{ fontWeight: 800, fontSize: '1.2rem', marginBottom: '0.5rem' }}>
-                            Siap Mulai Proyek Anda?
+                            {isIndo ? 'Siap Mulai Proyek Anda?' : 'Ready to Start Your Project?'}
                         </div>
                         <div style={{ fontSize: '0.9rem', opacity: 0.85, marginBottom: '1.25rem' }}>
-                            Konsultasi gratis, tanpa komitmen. Respon cepat Senin–Sabtu 09:00–18:00 WIB.
+                            {isIndo
+                                ? 'Konsultasi gratis, tanpa komitmen. Respon cepat Senin–Sabtu 09:00–18:00 WIB.'
+                                : 'Free consultation, zero commitment. Fast response Mon–Sat 09:00–18:00 WIB.'}
                         </div>
                         <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
                             <a href="https://wa.me/6282176012461" target="_blank" rel="noreferrer"
@@ -314,7 +320,7 @@ export default function BlogPage() {
                                 <MessageCircle size={18} /> WhatsApp
                             </a>
                             <Link to="/" style={{ background: 'rgba(255,255,255,0.15)', color: '#fff', padding: '0.65rem 1.4rem', borderRadius: '10px', fontWeight: 700, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.3)' }}>
-                                Lihat Portofolio
+                                {isIndo ? 'Lihat Portofolio' : 'View Our Work'}
                             </Link>
                         </div>
                     </m.div>

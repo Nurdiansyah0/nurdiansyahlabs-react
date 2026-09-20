@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { MessageCircle, ExternalLink, ChevronDown, ChevronUp, Sparkles } from 'lucide-react'
+import { useLanguage } from '../i18n/LanguageContext'
 
 // Subdomain configurations for each application
 export const SUBDOMAIN_APPS = {
@@ -98,6 +99,7 @@ export function detectSubdomainApp() {
 
 export default function SubdomainAppWrapper({ app, children }) {
     const [isCollapsed, setIsCollapsed] = useState(false)
+    const { isIndo } = useLanguage()
     const waLink = `https://wa.me/6282176012461?text=${encodeURIComponent(app.waMessage)}`
 
     return (
@@ -151,7 +153,7 @@ export default function SubdomainAppWrapper({ app, children }) {
                             letterSpacing: '0.05em',
                             textTransform: 'uppercase'
                         }}>
-                            <Sparkles size={12} /> Live Prototype
+                            <Sparkles size={12} /> {isIndo ? 'Prototipe Langsung' : 'Live Prototype'}
                         </span>
                         <span style={{ fontSize: '0.85rem', fontWeight: 600, color: '#f1f5f9' }}>
                             {app.tag}
@@ -167,7 +169,11 @@ export default function SubdomainAppWrapper({ app, children }) {
                             alignItems: 'center',
                             gap: '6px'
                         }}>
-                            <span>Ingin membuat sistem kustom seperti ini untuk bisnis Anda?</span>
+                            <span>
+                                {isIndo
+                                    ? 'Ingin membuat sistem kustom seperti ini untuk bisnis Anda?'
+                                    : 'Want a custom system like this built for your business?'}
+                            </span>
                         </div>
                     )}
 
@@ -193,14 +199,14 @@ export default function SubdomainAppWrapper({ app, children }) {
                             }}
                         >
                             <MessageCircle size={15} />
-                            <span>Pesan via WhatsApp</span>
+                            <span>{isIndo ? 'Pesan via WhatsApp' : 'Order via WhatsApp'}</span>
                         </a>
 
                         <a
                             href="https://nurdiansyahlabs.com"
                             target="_blank"
                             rel="noopener noreferrer"
-                            title="Buka Website Utama NurdiansyahLabs"
+                            title={isIndo ? 'Buka Website Utama NurdiansyahLabs' : 'Open NurdiansyahLabs Main Website'}
                             style={{
                                 display: 'inline-flex',
                                 alignItems: 'center',
@@ -222,8 +228,12 @@ export default function SubdomainAppWrapper({ app, children }) {
                         <button
                             type="button"
                             onClick={() => setIsCollapsed(!isCollapsed)}
-                            aria-label={isCollapsed ? 'Perbesar Banner' : 'Perkecil Banner'}
-                            title={isCollapsed ? 'Perbesar Banner' : 'Perkecil Banner'}
+                            aria-label={isCollapsed
+                                ? (isIndo ? 'Perbesar Banner' : 'Expand Banner')
+                                : (isIndo ? 'Perkecil Banner' : 'Collapse Banner')}
+                            title={isCollapsed
+                                ? (isIndo ? 'Perbesar Banner' : 'Expand Banner')
+                                : (isIndo ? 'Perkecil Banner' : 'Collapse Banner')}
                             style={{
                                 background: 'transparent',
                                 border: 'none',

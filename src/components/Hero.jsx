@@ -110,7 +110,7 @@ export default function Hero() {
                         >
                             <span className="px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/20">Web Apps</span>
                             <span className="text-slate-500">•</span>
-                            <span className="px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/20">Sistem ERP</span>
+                            <span className="px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/20">{isIndo ? 'Sistem ERP' : 'ERP System'}</span>
                             <span className="text-slate-500">•</span>
                             <span className="px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/20">{isIndo ? 'Otomasi Workflow' : 'Workflow Automation'}</span>
                             <span className="text-slate-500">•</span>
@@ -158,7 +158,7 @@ export default function Hero() {
                                 title={isIndo ? 'WhatsApp — Respons Cepat' : 'Fast Response via WhatsApp'}
                             >
                                 <MessageCircle size={17} className="text-emerald-400" />
-                                <span>WhatsApp — Respons Cepat</span>
+                                <span>{isIndo ? 'WhatsApp — Respons Cepat' : 'WhatsApp — Quick Response'}</span>
                             </a>
                         </m.div>
 
@@ -170,11 +170,11 @@ export default function Hero() {
                             className="pt-6 border-t border-slate-800/80 grid grid-cols-2 sm:grid-cols-4 gap-4"
                         >
                             <div>
-                                <div className="text-xl sm:text-2xl font-extrabold font-mono text-slate-50">3+ Tahun</div>
+                                <div className="text-xl sm:text-2xl font-extrabold font-mono text-slate-50">{isIndo ? '3+ Tahun' : '3+ Years'}</div>
                                 <div className="text-xs text-slate-400 mt-0.5">{isIndo ? 'Pengalaman Rekayasa' : 'Engineering Exp.'}</div>
                             </div>
                             <div>
-                                <div className="text-xl sm:text-2xl font-extrabold font-mono text-indigo-400">18+ Modul</div>
+                                <div className="text-xl sm:text-2xl font-extrabold font-mono text-indigo-400">{isIndo ? '18+ Modul' : '18+ Modules'}</div>
                                 <div className="text-xs text-slate-400 mt-0.5">{isIndo ? 'Sistem Terverifikasi' : 'Verified Modules'}</div>
                             </div>
                             <div>

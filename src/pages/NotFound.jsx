@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
+import { useLanguage } from '../i18n/LanguageContext'
 
 export default function NotFound() {
+    const { isIndo } = useLanguage()
     return (
         <div style={{
             minHeight: '100vh', display: 'flex', flexDirection: 'column',
@@ -14,10 +16,12 @@ export default function NotFound() {
                 404
             </div>
             <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#111827', marginBottom: '0.5rem' }}>
-                Page Not Found
+                {isIndo ? 'Halaman Tidak Ditemukan' : 'Page Not Found'}
             </h1>
             <p style={{ color: '#6b7280', marginBottom: '2rem', maxWidth: '400px', lineHeight: 1.6 }}>
-                The page you're looking for doesn't exist or has been moved.
+                {isIndo
+                    ? 'Halaman yang Anda cari tidak ada atau telah dipindahkan.'
+                    : "The page you're looking for doesn't exist or has been moved."}
             </p>
             <Link
                 to="/"
@@ -28,7 +32,7 @@ export default function NotFound() {
                     display: 'inline-flex', alignItems: 'center',
                 }}
             >
-                ← Back to Home
+                {isIndo ? '← Kembali ke Beranda' : '← Back to Home'}
             </Link>
         </div>
     )

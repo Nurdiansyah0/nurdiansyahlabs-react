@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import SEO from '../components/seo/SEO'
 import programmaticData from '../data/programmatic-seo.json'
+import { useLanguage } from '../i18n/LanguageContext'
 
 export default function IndustryServicePage() {
     const { industrySlug } = useParams()
