@@ -71,6 +71,7 @@ const loadFeatures = () => import('framer-motion').then(res => res.domAnimation)
 
 export default function App() {
     const subdomainApp = detectSubdomainApp()
+    const isMaintenanceMode = import.meta.env.VITE_MAINTENANCE_MODE === 'true'
 
     return (
         <LanguageProvider>
@@ -97,26 +98,41 @@ export default function App() {
                         <Suspense fallback={<div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><img src={getOptimizedImg("/assets/logo.svg", { w: 100 })} width="50" alt="Loading..." style={{ animation: 'pulse 1.5s infinite' }} /></div>}>
                             <main id="main-content">
                                 <Routes>
-                                    <Route path="/" element={<Home />} />
-                                    <Route path="/showcase/landing-page/:projectId" element={<LandingPageShowcase />} />
-                                    <Route path="/showcase/fullstack/:projectId" element={<FullstackShowcase />} />
-                                    <Route path="/showcase/data-analyst/:projectId" element={<DataAnalystShowcase />} />
-                                    <Route path="/showcase/data-science/:projectId" element={<DataScienceShowcase />} />
-                                    {/* SEO & Trends routes */}
-                                    <Route path="/trends" element={<TrendsDashboard />} />
-                                    <Route path="/blog" element={<BlogListing />} />
-                                    <Route path="/blog/:geo/:langSlug" element={<BlogPage />} />
-                                    <Route path="/blog/:slug" element={<BlogPage />} />
-                                    {/* Programmatic SEO Routes */}
-                                    <Route path="/layanan/industri/:industrySlug" element={<IndustryServicePage />} />
-                                    <Route path="/admin" element={
-                                        <ProtectedRoute>
-                                            <AdminDashboard />
-                                        </ProtectedRoute>
-                                    } />
-                                    <Route path="/services/:slug" element={<ServicePage />} />
-                                    <Route path="/maintenance" element={<Maintenance />} />
-                                    <Route path="*" element={<NotFound />} />
+                                    {isMaintenanceMode ? (
+                                        <>
+                                            <Route path="/" element={<Maintenance />} />
+                                            <Route path="/maintenance" element={<Maintenance />} />
+                                            <Route path="/admin" element={
+                                                <ProtectedRoute>
+                                                    <AdminDashboard />
+                                                </ProtectedRoute>
+                                            } />
+                                            <Route path="*" element={<Maintenance />} />
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Route path="/" element={<Home />} />
+                                            <Route path="/showcase/landing-page/:projectId" element={<LandingPageShowcase />} />
+                                            <Route path="/showcase/fullstack/:projectId" element={<FullstackShowcase />} />
+                                            <Route path="/showcase/data-analyst/:projectId" element={<DataAnalystShowcase />} />
+                                            <Route path="/showcase/data-science/:projectId" element={<DataScienceShowcase />} />
+                                            {/* SEO & Trends routes */}
+                                            <Route path="/trends" element={<TrendsDashboard />} />
+                                            <Route path="/blog" element={<BlogListing />} />
+                                            <Route path="/blog/:geo/:langSlug" element={<BlogPage />} />
+                                            <Route path="/blog/:slug" element={<BlogPage />} />
+                                            {/* Programmatic SEO Routes */}
+                                            <Route path="/layanan/industri/:industrySlug" element={<IndustryServicePage />} />
+                                            <Route path="/admin" element={
+                                                <ProtectedRoute>
+                                                    <AdminDashboard />
+                                                </ProtectedRoute>
+                                            } />
+                                            <Route path="/services/:slug" element={<ServicePage />} />
+                                            <Route path="/maintenance" element={<Maintenance />} />
+                                            <Route path="*" element={<NotFound />} />
+                                        </>
+                                    )}
                                 </Routes>
                             </main>
                         </Suspense>
