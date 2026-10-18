@@ -39,6 +39,12 @@ ServerSignature Off
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
+    # ── Maintenance Mode (Uncomment below 4 lines to redirect all visitors to maintenance.html) ──
+    # RewriteCond %{REQUEST_URI} !/maintenance\.html$ [NC]
+    # RewriteCond %{REQUEST_URI} !\.(jpe?g?|png|gif|svg|css|js|ico|woff2?)$ [NC]
+    # RewriteCond %{REMOTE_ADDR} !^127\.0\.0\.1$
+    # RewriteRule ^.*$ /maintenance.html [R=503,L]
+
     # Assign A/B group via cookie if not yet set
     # Group B = last digit of microsecond is 0-4 (≈50%)
     RewriteCond %{HTTP_COOKIE} !NL_AB_TEST

@@ -22,6 +22,7 @@ const BlogPage = lazy(() => import('./pages/BlogPage'))
 const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'))
 const ServicePage = lazy(() => import('./pages/ServicePage'))
 const IndustryServicePage = lazy(() => import('./pages/IndustryServicePage'))
+const Maintenance = lazy(() => import('./pages/Maintenance'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 // Subdomain Apps
@@ -114,6 +115,7 @@ export default function App() {
                                         </ProtectedRoute>
                                     } />
                                     <Route path="/services/:slug" element={<ServicePage />} />
+                                    <Route path="/maintenance" element={<Maintenance />} />
                                     <Route path="*" element={<NotFound />} />
                                 </Routes>
                             </main>
