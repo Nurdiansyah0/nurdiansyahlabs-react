@@ -9,12 +9,20 @@ venv/
 *.log
 
 # Databases & Sensitive Data
-/database/*.json
-/database/*.sql
+*.sql
 !/database/schema.sql
+!init.sql
+/database/*.json
+cloudflare_dns_backup*.json
 .env
 .env.*
 env.local.php
+.user.ini
+id_rsa
+id_rsa*
+*.pem
+*.key
+*.id_rsa
 
 # OS files
 .DS_Store

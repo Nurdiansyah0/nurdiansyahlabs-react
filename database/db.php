@@ -32,9 +32,9 @@ function getDB()
     }
 
     $host = getenv('DB_HOST') ?: (defined('DB_HOST') ? DB_HOST : 'localhost');
-    $username = getenv('DB_USER') ?: (defined('DB_USER') ? DB_USER : 'uygpuazs_root');
-    $password = getenv('DB_PASS') !== false ? getenv('DB_PASS') : (defined('DB_PASS') ? DB_PASS : 'Nurdiansyah@024');
-    $dbname = getenv('DB_NAME') ?: (defined('DB_NAME') ? DB_NAME : 'uygpuazs_nurdiansyahlabs_db');
+    $username = getenv('DB_USER') ?: (defined('DB_USER') ? DB_USER : '');
+    $password = getenv('DB_PASS') !== false ? getenv('DB_PASS') : (defined('DB_PASS') ? DB_PASS : '');
+    $dbname = getenv('DB_NAME') ?: (defined('DB_NAME') ? DB_NAME : '');
 
     try {
         // Biarkan PHP yang menentukan socket default dari php.ini (hapus unix_socket statis)
