@@ -8,7 +8,21 @@ export default function PageTracker() {
 
     useEffect(() => {
         if (location.pathname.startsWith('/admin')) return
-        trackEvent('pageview', { path: location.pathname + location.search })
+        const path = location.pathname + location.search
+        trackEvent('pageview', { path })
+
+        // Forward SPA route transitions to Google Analytics 4 (GA4)
+        if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+            try {
+                window.gtag('event', 'page_view', {
+                    page_path: path,
+                    page_title: document.title,
+                    page_location: window.location.href,
+                })
+            } catch {
+                // Ignore silently
+            }
+        }
     }, [location, trackEvent])
 
     return null

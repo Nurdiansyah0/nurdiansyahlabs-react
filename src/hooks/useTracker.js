@@ -2,7 +2,16 @@ import { useCallback } from 'react'
 
 export function useTracker() {
     const trackEvent = useCallback(async (type, payload = {}) => {
-        // Silently fail if fetch fails, so we don't block the UI
+        // 1. Silently forward to Google Analytics 4 (GA4) if initialized
+        if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+            try {
+                window.gtag('event', type, payload)
+            } catch {
+                // Silently ignore GA error
+            }
+        }
+
+        // 2. Persist to in-house analytics database
         try {
             await fetch('/api/v1/analytics/track', {
                 method: 'POST',
@@ -15,7 +24,7 @@ export function useTracker() {
                 keepalive: true
             })
         } catch (error) {
-            console.error('Analytics tracking failed:', error)
+            console.error('In-house analytics tracking failed:', error)
         }
     }, [])
 
