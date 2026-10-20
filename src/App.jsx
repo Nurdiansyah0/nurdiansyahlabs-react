@@ -10,6 +10,7 @@ import { getOptimizedImg } from './utils/imgHelper'
 // Eagerly load the Home page because it's required for the initial render
 import Home from './pages/Home'
 import TerminalEasterEgg from './components/TerminalEasterEgg'
+import FloatingWhatsApp from './components/FloatingWhatsApp'
 
 // Lazy load all other routes to reduce First Load JS payload
 const LandingPageShowcase = lazy(() => import('./showcases/LandingPageShowcase'))
@@ -95,6 +96,7 @@ export default function App() {
                     <LazyMotion features={loadFeatures}>
                         <PageTracker />
                         <TerminalEasterEgg />
+                        <FloatingWhatsApp />
                         <Suspense fallback={<div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><img src={getOptimizedImg("/assets/logo.svg", { w: 100 })} width="50" alt="Loading..." style={{ animation: 'pulse 1.5s infinite' }} /></div>}>
                             <main id="main-content">
                                 <Routes>

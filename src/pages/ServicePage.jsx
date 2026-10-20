@@ -65,11 +65,16 @@ export default function ServicePage() {
                         <p className="text-xl text-indigo-200 font-medium italic mb-3">"{service.tagline}"</p>
                     )}
                     <p className="text-lg text-indigo-100 max-w-2xl">{service.description}</p>
-                    <div className="mt-8 flex gap-4">
-                        <a href="https://wa.me/6282176012461" className="bg-green-500 hover:bg-green-700 text-white px-8 py-3 rounded-xl font-bold transition-all transform hover:scale-105">
-                            {isIndo ? 'Konsultasi Sekarang' : 'Start Your Project'}
+                    <div className="mt-8 flex flex-wrap gap-4">
+                        <a 
+                            href={`https://wa.me/6282176012461?text=${encodeURIComponent(`Halo NurdiansyahLabs, saya tertarik konsultasi mengenai layanan ${service.title}.`)}`}
+                            target="_blank" 
+                            rel="noreferrer"
+                            className="bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-3.5 rounded-xl font-bold transition-all transform hover:scale-105 shadow-lg shadow-emerald-950/40 no-underline inline-flex items-center gap-2"
+                        >
+                            <span>{isIndo ? 'Konsultasi Sekarang (WhatsApp)' : 'Start Project on WhatsApp'}</span>
                         </a>
-                        <Link to="/" className="bg-white/10 hover:bg-white/20 text-white px-8 py-3 rounded-xl font-bold backdrop-blur-sm transition-all">
+                        <Link to="/" className="bg-white/10 hover:bg-white/20 text-white px-8 py-3.5 rounded-xl font-bold backdrop-blur-sm transition-all no-underline">
                             {isIndo ? 'Lihat Portofolio' : 'View Our Work'}
                         </Link>
                     </div>
