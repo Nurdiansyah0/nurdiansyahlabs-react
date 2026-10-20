@@ -110,7 +110,7 @@ export default function Hero() {
                         >
                             <span className="px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/20">{isIndo ? 'Konsultan Website & Software' : 'Website & Software Consultant'}</span>
                             <span className="text-slate-500">•</span>
-                            <span className="px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/20">{isIndo ? 'Jasa Data Scientist & AI' : 'Data Science & AI'}</span>
+                            <span className="px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/20">{isIndo ? 'Jasa Machine Learning & Data Science' : 'Machine Learning & Data Science'}</span>
                             <span className="text-slate-500">•</span>
                             <span className="px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/20">{isIndo ? 'Full SDLC Engineering' : 'Full SDLC Engineering'}</span>
                             <span className="text-slate-500">•</span>
