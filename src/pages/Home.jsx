@@ -12,8 +12,8 @@ export default function Home() {
     return (
         <>
             <SEO
-                title="Jasa Pengembangan Software Enterprise & Full SDLC Software Engineer"
-                description="Jasa rekayasa software enterprise, custom ERP, dan arsitektur aplikasi web skala produksi di Indonesia. Solusi end-to-end full SDLC dari analisis arsitektur hingga deployment."
+                title="Konsultan Website & Jasa Software Enterprise | NurdiansyahLabs"
+                description="Konsultan website dan jasa rekayasa software enterprise di Indonesia. Solusi end-to-end full SDLC dari arsitektur aplikasi web, custom ERP, hingga deployment produksi."
                 canonical="/"
             />
             <Navbar />

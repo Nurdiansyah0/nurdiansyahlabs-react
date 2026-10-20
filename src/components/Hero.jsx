@@ -108,11 +108,11 @@ export default function Hero() {
                             transition={{ duration: 0.6, delay: 0.25 }}
                             className="flex flex-wrap items-center gap-2 mb-8 text-xs font-semibold text-indigo-200"
                         >
+                            <span className="px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/20">{isIndo ? 'Konsultan Website & Software' : 'Website & Software Consultant'}</span>
+                            <span className="text-slate-500">•</span>
                             <span className="px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/20">{isIndo ? 'Full SDLC Engineering' : 'Full SDLC Engineering'}</span>
                             <span className="text-slate-500">•</span>
                             <span className="px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/20">{isIndo ? 'Sistem ERP Enterprise' : 'Enterprise ERP'}</span>
-                            <span className="text-slate-500">•</span>
-                            <span className="px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/20">{isIndo ? 'Custom Web Apps' : 'Custom Web Apps'}</span>
                             <span className="text-slate-500">•</span>
                             <span className="px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/20">{isIndo ? 'Arsitektur Sistem & Cloud' : 'Cloud Architecture'}</span>
                         </m.div>
