@@ -66,7 +66,9 @@ echo "✅ Build successful → $BUILD_DIR/"
 
 # Step 3: Copy .htaccess into dist/
 echo "📄 Adding .htaccess for React Router..."
-if [ -f "$API_SRC/.htaccess" ]; then
+if [ -f "public/.htaccess" ]; then
+    cp "public/.htaccess" "$BUILD_DIR/.htaccess"
+elif [ -f "$API_SRC/.htaccess" ]; then
     cp "$API_SRC/.htaccess" "$BUILD_DIR/.htaccess"
 fi
 
