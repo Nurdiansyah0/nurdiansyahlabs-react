@@ -57,6 +57,7 @@ __pycache__/
 gsc-*.json
 
 # Temporary Agent Scratch Folders
+.agents/
 .agents/auditor_*
 .agents/explorer_*
 .agents/reviewer_*

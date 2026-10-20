@@ -1,158 +1,294 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { m } from 'framer-motion'
-import { ArrowRight, BookOpen, Loader2 } from 'lucide-react'
+import { ArrowRight, BookOpen, Clock, Search, Terminal, Sparkles, Filter } from 'lucide-react'
 import { getOptimizedImg } from '../utils/imgHelper'
 import { useLanguage } from '../i18n/LanguageContext'
-
+import { INITIAL_BLOG_POSTS } from '../data/blogData'
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 import SEO from '../components/seo/SEO'
 
-    // Function to ensure any badge background provides AAA contrast (7:1) with white text (#fff)
-    const getSafeAccent = (hex) => {
-        if (!hex) return '#1e293b';
-        const lower = hex.toLowerCase();
-        if (lower.includes('059669') || lower.includes('10b981')) return '#022c22'; // Emerald -> super dark green
-        if (lower.includes('22c55e') || lower.includes('16a34a')) return '#14532d'; // Green -> super dark green
-        if (lower.includes('f59e0b') || lower.includes('d97706')) return '#78350f'; // Amber -> super dark amber
-        if (lower.includes('3b82f6') || lower.includes('2563eb')) return '#1e3a8a'; // Blue -> super dark blue
-        if (lower.includes('8b5cf6') || lower.includes('a855f7')) return '#2e1065'; // Violet -> super dark violet
-        if (lower.includes('6366f1') || lower.includes('4f46e5')) return '#1e1b4b'; // Indigo -> super dark indigo
-        return lower; // Assume others are safe (like original '#3730a3' or already dark)
-    };
+const CATEGORIES = [
+    'Semua',
+    'Arsitektur Sistem',
+    'Full SDLC',
+    'Sistem ERP',
+    'Database & Cloud',
+    'Studi Kasus'
+]
 
 export default function BlogListing() {
-    const [articles, setArticles] = useState([])
-    const [loading, setLoading] = useState(true)
+    const [articles, setArticles] = useState(INITIAL_BLOG_POSTS)
+    const [selectedCategory, setSelectedCategory] = useState('Semua')
+    const [searchQuery, setSearchQuery] = useState('')
     const { isIndo } = useLanguage()
 
+    // Background revalidation with live API if available
     useEffect(() => {
         const fetchPosts = async () => {
             try {
                 const res = await fetch('/api/v1/posts')
+                if (!res.ok) return
                 const data = await res.json()
-                if (Array.isArray(data)) {
-                    setArticles(data)
-                } else if (data && data.posts) {
-                    setArticles(data.posts)
+                const remotePosts = Array.isArray(data) ? data : data?.posts
+                if (remotePosts && remotePosts.length > 0) {
+                    // Merge remote posts with initial curated posts by slug
+                    setArticles(prev => {
+                        const existingSlugs = new Set(remotePosts.map(p => p.slug))
+                        const nonOverlapping = prev.filter(p => !existingSlugs.has(p.slug))
+                        return [...remotePosts, ...nonOverlapping]
+                    })
                 }
             } catch (err) {
-                console.error("Failed to fetch posts:", err)
-            } finally {
-                setLoading(false)
+                // Keep INITIAL_BLOG_POSTS gracefully on API error
             }
         }
 
         fetchPosts()
     }, [])
 
+    const filteredArticles = useMemo(() => {
+        return articles.filter(article => {
+            const matchesCategory = selectedCategory === 'Semua' || 
+                article.category?.toLowerCase() === selectedCategory.toLowerCase() ||
+                article.serviceLabel?.toLowerCase().includes(selectedCategory.toLowerCase())
+
+            const q = searchQuery.toLowerCase().trim()
+            const matchesSearch = !q || 
+                article.title?.toLowerCase().includes(q) || 
+                article.description?.toLowerCase().includes(q) ||
+                article.category?.toLowerCase().includes(q)
+
+            return matchesCategory && matchesSearch
+        })
+    }, [articles, selectedCategory, searchQuery])
+
     return (
-        <main style={{ minHeight: '100vh', background: '#f8fafc', padding: '6rem 1.5rem 4rem' }}>
+        <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: '#070A0F', color: '#F8FAFC' }}>
             <SEO
-                title={isIndo ? 'Blog & Wawasan Teknis' : 'Blog & Technical Insights'}
+                title={isIndo 
+                    ? 'Wawasan Rekayasa Software Enterprise & Arsitektur Sistem' 
+                    : 'Enterprise Software Engineering & Systems Architecture Insights'}
                 description={isIndo
-                    ? 'Temukan artikel mendalam seputar fullstack web development, arsitektur software modular, data analyst, dan machine learning dari NurdiansyahLabs.'
-                    : 'Deep dives on fullstack web development, modular software architecture, data analytics, and machine learning from NurdiansyahLabs.'}
+                    ? 'Artikel mendalam seputar arsitektur modular monolith vs microservices, metodologi full SDLC, custom ERP, dan optimasi database skala enterprise.'
+                    : 'Deep architectural insights on modular monoliths, distributed microservices, full SDLC engineering, custom ERP systems, and high-concurrency databases.'}
                 canonical="/blog"
                 breadcrumbs={[
                     { name: 'Home', url: '/' },
                     { name: 'Blog', url: '/blog' }
                 ]}
             />
-            <div className="container" style={{ maxWidth: '1200px', margin: '0 auto' }}>
-                <m.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    style={{ textAlign: 'center', marginBottom: '4rem' }}
-                >
-                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#eef2ff', color: '#3730a3', padding: '8px 16px', borderRadius: '20px', fontWeight: 700, fontSize: '0.9rem', marginBottom: '1rem' }}>
-                        <BookOpen size={18} /> {isIndo ? 'Blog Kami' : 'Our Blog'}
-                    </div>
-                    <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 900, color: '#0f172a', marginBottom: '1rem', letterSpacing: '-0.03em' }}>
-                        {isIndo
-                            ? <>Wawasan & <span style={{ color: '#3730a3' }}>Berita</span></>
-                            : <>Insights & <span style={{ color: '#3730a3' }}>News</span></>}
-                    </h1>
-                    <p style={{ fontSize: '1.1rem', color: '#1e293b', maxWidth: '600px', margin: '0 auto', lineHeight: 1.6 }}>
-                        {isIndo
-                            ? 'Pelajari tips terbaru seputar web development, analisis data, bisnis digital, dan teknologi machine learning.'
-                            : 'Stay current on web development, data analytics, digital business, and machine learning technology.'}
-                    </p>
-                </m.div>
+            
+            <Navbar />
 
-                {loading ? (
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '2rem' }}>
-                        {[1, 2, 3, 4, 5, 6].map(i => (
-                            <div key={i} style={{ background: '#fff', borderRadius: '16px', overflow: 'hidden', border: '1px solid #e2e8f0', display: 'flex', flexDirection: 'column', height: '400px' }}>
-                                <div style={{ height: '200px', background: '#f1f5f9' }} />
-                                <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                    <div style={{ height: '24px', background: '#e2e8f0', borderRadius: '4px', width: '80%' }} />
-                                    <div style={{ height: '16px', background: '#f1f5f9', borderRadius: '4px', width: '100%' }} />
-                                    <div style={{ height: '16px', background: '#f1f5f9', borderRadius: '4px', width: '90%' }} />
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                ) : (
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '2rem' }}>
-                        {articles.map((article, i) => (
-                            <m.div
-                                key={article.slug}
-                                initial={{ opacity: 0, y: 30 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: i * 0.1 }}
+            <main style={{ flex: 1, padding: '4rem 1.5rem 6rem', position: 'relative', overflow: 'hidden' }}>
+                {/* Background ambient lighting */}
+                <div 
+                    aria-hidden="true" 
+                    style={{
+                        position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)',
+                        width: '100%', maxWidth: '1200px', height: '400px', pointerEvents: 'none', zIndex: 0,
+                        background: 'radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.15) 0%, transparent 70%)'
+                    }} 
+                />
+
+                <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+                    {/* Header Banner */}
+                    <m.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                        style={{ textAlign: 'center', marginBottom: '3.5rem', maxWidth: '820px', margin: '0 auto 3.5rem' }}
+                    >
+                        <div style={{
+                            display: 'inline-flex', alignItems: 'center', gap: '8px',
+                            background: 'rgba(99, 102, 241, 0.1)', border: '1px solid rgba(99, 102, 241, 0.3)',
+                            color: '#A5B4FC', padding: '6px 16px', borderRadius: '9999px',
+                            fontWeight: 700, fontSize: '0.82rem', letterSpacing: '0.04em', textTransform: 'uppercase', marginBottom: '1.25rem'
+                        }}>
+                            <Terminal size={15} /> {isIndo ? 'Engineering & Systems Blog' : 'Engineering & Systems Blog'}
+                        </div>
+                        
+                        <h1 style={{ fontSize: 'clamp(2.2rem, 5vw, 3.4rem)', fontWeight: 900, color: '#F8FAFC', marginBottom: '1.2rem', letterSpacing: '-0.03em', lineHeight: 1.15 }}>
+                            {isIndo ? (
+                                <>Wawasan Teknis &amp; <span style={{ color: '#818CF8' }}>Arsitektur Software</span></>
+                            ) : (
+                                <>Technical Insights &amp; <span style={{ color: '#818CF8' }}>Systems Architecture</span></>
+                            )}
+                        </h1>
+                        
+                        <p style={{ fontSize: '1.1rem', color: '#94A3B8', lineHeight: 1.6, margin: '0 auto', maxWidth: '640px' }}>
+                            {isIndo
+                                ? 'Panduan teknis mendalam tentang rekayasa software skala besar, metodologi full SDLC, custom ERP terintegrasi, dan optimasi performa backend.'
+                                : 'Authoritative engineering write-ups on production software architecture, full SDLC rigor, custom ERP systems, and high-throughput databases.'}
+                        </p>
+                    </m.div>
+
+                    {/* Filter and Search Bar */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '3rem' }}>
+                        {/* Search Input */}
+                        <div style={{ position: 'relative', maxWidth: '520px', margin: '0 auto', width: '100%' }}>
+                            <Search size={18} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: '#64748B' }} />
+                            <input
+                                type="text"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                placeholder={isIndo ? 'Cari topik, keyword, atau arsitektur...' : 'Search topics, architecture, or keywords...'}
                                 style={{
-                                    background: '#fff', borderRadius: '16px', overflow: 'hidden',
-                                    border: '1px solid #e2e8f0', display: 'flex', flexDirection: 'column',
-                                    transition: 'transform 0.3s, box-shadow 0.3s',
-                                    cursor: 'pointer'
+                                    width: '100%', padding: '12px 16px 12px 46px',
+                                    background: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255, 255, 255, 0.12)',
+                                    borderRadius: '12px', color: '#F8FAFC', fontSize: '0.95rem',
+                                    outline: 'none', transition: 'border-color 0.2s, box-shadow 0.2s'
                                 }}
-                                onMouseEnter={e => {
-                                    e.currentTarget.style.transform = 'translateY(-5px)'
-                                    e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.08)'
+                                onFocus={(e) => {
+                                    e.target.style.borderColor = '#6366F1'
+                                    e.target.style.boxShadow = '0 0 0 3px rgba(99, 102, 241, 0.2)'
                                 }}
-                                onMouseLeave={e => {
-                                    e.currentTarget.style.transform = 'none'
-                                    e.currentTarget.style.boxShadow = 'none'
+                                onBlur={(e) => {
+                                    e.target.style.borderColor = 'rgba(255, 255, 255, 0.12)'
+                                    e.target.style.boxShadow = 'none'
                                 }}
-                            >
-                                <Link to={`/blog/${article.slug}`} style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', height: '100%' }}>
-                                    <div style={{ height: '200px', background: article.accentLight, position: 'relative', overflow: 'hidden' }}>
-                                        {article.img ? (
-                                            <img src={getOptimizedImg(article.img, { w: 600, h: 400 })} alt={article.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                                        ) : (
-                                            <div style={{ width: '100%', height: '100%', background: `linear-gradient(135deg, ${article.accent}, #0f172a)`, opacity: 0.1 }} />
-                                        )}
-                                        <span style={{
-                                            position: 'absolute', top: '16px', left: '16px',
-                                            background: getSafeAccent(article.accent), color: '#fff', padding: '6px 12px',
-                                            borderRadius: '8px', fontSize: '0.75rem', fontWeight: 700
-                                        }}>
-                                            {article.serviceLabel}
-                                        </span>
-                                    </div>
-                                    <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                                        <h2 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.75rem', lineHeight: 1.4 }}>
-                                            {article.title}
-                                        </h2>
-                                        <p style={{
-                                            fontSize: '0.9rem', color: '#1e293b', lineHeight: 1.6, marginBottom: '1.5rem', flex: 1,
-                                            display: '-webkit-box',
-                                            WebkitLineClamp: 3,
-                                            WebkitBoxOrient: 'vertical',
-                                            overflow: 'hidden'
-                                        }}>
-                                            {article.description}
-                                        </p>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: article.accent, fontWeight: 700, fontSize: '0.9rem' }}>
-                                            {isIndo ? 'Baca Artikel' : 'Read Article'} <ArrowRight size={16} />
-                                        </div>
-                                    </div>
-                                </Link>
-                            </m.div>
-                        ))}
+                            />
+                        </div>
+
+                        {/* Category Pills */}
+                        <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap' }}>
+                            {CATEGORIES.map(category => {
+                                const active = selectedCategory === category
+                                return (
+                                    <button
+                                        key={category}
+                                        onClick={() => setSelectedCategory(category)}
+                                        style={{
+                                            padding: '8px 16px', borderRadius: '10px', fontSize: '0.85rem', fontWeight: 600,
+                                            cursor: 'pointer', transition: 'all 0.2s',
+                                            background: active ? '#4F46E5' : 'rgba(15, 23, 42, 0.6)',
+                                            color: active ? '#FFFFFF' : '#94A3B8',
+                                            border: active ? '1px solid #6366F1' : '1px solid rgba(255, 255, 255, 0.08)'
+                                        }}
+                                        onMouseEnter={(e) => {
+                                            if (!active) e.currentTarget.style.borderColor = 'rgba(99, 102, 241, 0.4)'
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            if (!active) e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)'
+                                        }}
+                                    >
+                                        {category}
+                                    </button>
+                                )
+                            })}
+                        </div>
                     </div>
-                )}
-            </div>
-        </main>
+
+                    {/* Articles Grid */}
+                    {filteredArticles.length === 0 ? (
+                        <div style={{ textAlign: 'center', padding: '4rem 1rem', background: 'rgba(15, 23, 42, 0.5)', borderRadius: '16px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
+                            <p style={{ color: '#94A3B8', fontSize: '1.05rem', margin: 0 }}>
+                                {isIndo ? 'Tidak ada artikel yang sesuai dengan pencarian Anda.' : 'No articles matched your criteria.'}
+                            </p>
+                        </div>
+                    ) : (
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '2rem' }}>
+                            {filteredArticles.map((article, i) => (
+                                <m.article
+                                    key={article.slug}
+                                    initial={{ opacity: 0, y: 25 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.4, delay: i * 0.08 }}
+                                    style={{
+                                        background: 'rgba(15, 23, 42, 0.75)',
+                                        borderRadius: '16px', overflow: 'hidden',
+                                        border: '1px solid rgba(255, 255, 255, 0.08)',
+                                        display: 'flex', flexDirection: 'column',
+                                        transition: 'transform 0.25s, border-color 0.25s, box-shadow 0.25s'
+                                    }}
+                                    onMouseEnter={e => {
+                                        e.currentTarget.style.transform = 'translateY(-6px)'
+                                        e.currentTarget.style.borderColor = 'rgba(99, 102, 241, 0.4)'
+                                        e.currentTarget.style.boxShadow = '0 20px 35px -10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(99, 102, 241, 0.15)'
+                                    }}
+                                    onMouseLeave={e => {
+                                        e.currentTarget.style.transform = 'none'
+                                        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)'
+                                        e.currentTarget.style.boxShadow = 'none'
+                                    }}
+                                >
+                                    <Link to={`/blog/${article.slug}`} style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', height: '100%', color: 'inherit' }}>
+                                        {/* Thumbnail Container */}
+                                        <div style={{ height: '210px', position: 'relative', overflow: 'hidden', background: '#0F172A' }}>
+                                            {article.img ? (
+                                                <img 
+                                                    src={getOptimizedImg(article.img, { w: 640, h: 420 })} 
+                                                    alt={article.title} 
+                                                    style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }} 
+                                                    onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
+                                                    onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+                                                />
+                                            ) : (
+                                                <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #1E1B4B 0%, #0F172A 100%)' }} />
+                                            )}
+                                            
+                                            {/* Category Tag Badge */}
+                                            <span style={{
+                                                position: 'absolute', top: '16px', left: '16px',
+                                                background: 'rgba(15, 23, 42, 0.85)', backdropFilter: 'blur(8px)',
+                                                border: '1px solid rgba(255, 255, 255, 0.15)', color: '#A5B4FC',
+                                                padding: '4px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 700
+                                            }}>
+                                                {article.category || article.serviceLabel}
+                                            </span>
+
+                                            {article.readTime && (
+                                                <span style={{
+                                                    position: 'absolute', bottom: '12px', right: '12px',
+                                                    background: 'rgba(0, 0, 0, 0.75)', backdropFilter: 'blur(6px)',
+                                                    color: '#CBD5E1', padding: '3px 8px', borderRadius: '6px',
+                                                    fontSize: '0.72rem', display: 'flex', alignItems: 'center', gap: '4px'
+                                                }}>
+                                                    <Clock size={12} /> {article.readTime}
+                                                </span>
+                                            )}
+                                        </div>
+
+                                        {/* Card Body */}
+                                        <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                                            <h2 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#F8FAFC', marginBottom: '0.75rem', lineHeight: 1.4 }}>
+                                                {article.title}
+                                            </h2>
+                                            
+                                            <p style={{
+                                                fontSize: '0.9rem', color: '#94A3B8', lineHeight: 1.6, marginBottom: '1.5rem', flex: 1,
+                                                display: '-webkit-box',
+                                                WebkitLineClamp: 3,
+                                                WebkitBoxOrient: 'vertical',
+                                                overflow: 'hidden'
+                                            }}>
+                                                {article.description}
+                                            </p>
+
+                                            <div style={{
+                                                display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                                                paddingTop: '1rem', borderTop: '1px solid rgba(255, 255, 255, 0.06)'
+                                            }}>
+                                                <span style={{ fontSize: '0.8rem', color: '#64748B' }}>
+                                                    {article.author || 'Nurdiansyah'}
+                                                </span>
+                                                
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#818CF8', fontWeight: 700, fontSize: '0.85rem' }}>
+                                                    {isIndo ? 'Baca Analisis' : 'Read Analysis'} <ArrowRight size={14} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </m.article>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            </main>
+
+            <Footer />
+        </div>
     )
 }

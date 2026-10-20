@@ -1,11 +1,19 @@
 import React from 'react'
 import { useParams, Link } from 'react-router-dom'
 import SEO from '../components/seo/SEO'
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 import servicesData from '../data/services.json'
 import { useLanguage } from '../i18n/LanguageContext'
 
 // Shared UI components (Simplified for this task)
-const Layout = ({ children }) => <div className="min-h-screen bg-slate-50">{children}</div>
+const Layout = ({ children }) => (
+    <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
+        <Navbar />
+        <div className="flex-1">{children}</div>
+        <Footer />
+    </div>
+)
 
 export default function ServicePage() {
     const { slug } = useParams()

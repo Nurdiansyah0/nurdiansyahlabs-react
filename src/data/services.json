@@ -4,137 +4,137 @@
             "id": "starter",
             "packageNumber": 1,
             "name": {
-                "id": "Paket 1: Starter Web & Landing Page",
-                "en": "Package 1: Starter Web & Landing Page"
+                "id": "Paket 1: Enterprise Web Portal & Modular Frontend",
+                "en": "Package 1: Enterprise Web Portal & Modular Frontend"
             },
             "title": {
-                "id": "Starter Web & Landing Page",
-                "en": "Starter Web & Landing Page"
+                "id": "Enterprise Web Portal & Modular Frontend",
+                "en": "Enterprise Web Portal & Modular Frontend"
             },
             "price": {
-                "id": "Mulai Rp 500.000",
-                "en": "Starting from $35"
+                "id": "Mulai Rp 2.500.000",
+                "en": "Starting from $160"
             },
-            "startingPriceIDR": 500000,
+            "startingPriceIDR": 2500000,
             "badge": {
-                "id": "Paling Populer UMKM",
-                "en": "Most Popular for SMEs"
+                "id": "Performa Tinggi & Core Web Vitals",
+                "en": "High Performance & Core Web Vitals"
             },
             "target": {
-                "id": "UMKM, personal branding, early startup",
-                "en": "SMEs, personal branding, early startups"
+                "id": "Korporasi, perusahaan B2B, startup skala menengah",
+                "en": "Corporations, B2B companies, mid-market startups"
             },
             "timeline": {
-                "id": "3–7 hari kerja",
-                "en": "3–7 working days"
+                "id": "1–3 minggu",
+                "en": "1–3 weeks"
             },
             "revisions": {
-                "id": "2x revisi minor",
-                "en": "2x minor revisions"
+                "id": "Sesuai milestone & scope",
+                "en": "Per milestone & scope"
             },
             "deliverables": [
                 {
-                    "id": "Desain responsif mobile-first (< 1s load time)",
-                    "en": "Mobile-first responsive design (< 1s load time)"
+                    "id": "Arsitektur frontend modular React 18 / Vite / Tailwind CSS (< 800ms FCP)",
+                    "en": "Modular frontend architecture with React 18 / Vite / Tailwind CSS (< 800ms FCP)"
                 },
                 {
-                    "id": "Integrasi WhatsApp direct CTA dengan pesan dinamis",
-                    "en": "WhatsApp direct CTA integration with dynamic message"
+                    "id": "Desain responsif mobile-first dengan Core Web Vitals skor 95+",
+                    "en": "Mobile-first responsive design with 95+ Core Web Vitals score"
                 },
                 {
-                    "id": "Lead capture inquiry form terhubung email",
-                    "en": "Lead capture inquiry form connected to email"
+                    "id": "Integrasi REST API, manajemen state global, dan security sanitization",
+                    "en": "REST API integration, global state management, and security sanitization"
                 },
                 {
-                    "id": "Pondasi basic technical SEO & Google Analytics 4",
-                    "en": "Basic technical SEO foundation & Google Analytics 4"
+                    "id": "Pondasi Technical SEO lengkap, OpenGraph, JSON-LD Schema.org terstruktur",
+                    "en": "Comprehensive Technical SEO foundation, OpenGraph, structured JSON-LD Schema.org"
                 },
                 {
-                    "id": "Deployment ke hosting & setup sertifikat SSL HTTPS",
-                    "en": "Deployment to hosting & SSL HTTPS certificate setup"
+                    "id": "Setup CI/CD deployment pipeline, SSL HTTPS, dan caching headers",
+                    "en": "CI/CD deployment pipeline setup, SSL HTTPS, and caching headers"
                 },
                 {
-                    "id": "2x revisi minor selama proses pengerjaan",
-                    "en": "2x minor revisions during development process"
+                    "id": "Garansi 30 hari bug-fix & transfer source code lengkap tanpa vendor lock-in",
+                    "en": "30-day bug-fix warranty & 100% full source code ownership without vendor lock-in"
                 }
             ],
             "limitations": [
                 {
-                    "id": "Biaya domain & hosting recurring ditanggung klien",
-                    "en": "Domain & recurring hosting costs borne by client"
+                    "id": "Biaya domain & infrastruktur hosting recurring ditanggung klien",
+                    "en": "Domain & recurring hosting infrastructure costs borne by client"
                 },
                 {
-                    "id": "Tidak mencakup custom database atau auth login user",
-                    "en": "Does not include custom database or user login auth"
+                    "id": "Fitur di luar cakupan SOW awal ditangani via change order terstruktur",
+                    "en": "Features beyond agreed initial SOW handled via structured change orders"
                 }
             ],
             "ctaText": {
-                "id": "Pilih Paket Starter",
-                "en": "Choose Starter Package"
+                "id": "Konsultasi Web Portal",
+                "en": "Consult Web Portal"
             },
-            "serviceOptionValue": "Paket 1: Starter Web & Landing Page",
-            "whatsappText": "Halo NurdiansyahLabs, saya tertarik dengan Paket 1: Starter Web & Landing Page (Mulai Rp 500.000). Bisa bantu jelaskan prosesnya?",
-            "whatsappTextEn": "Hi NurdiansyahLabs, I'm interested in Package 1: Starter Web & Landing Page ($35). Could you explain the development process?",
-            "draftMessage": "Halo NurdiansyahLabs, saya tertarik dengan Paket 1: Starter Web & Landing Page (Mulai Rp 500.000). Saya ingin mendiskusikan kebutuhan landing page untuk bisnis/startup saya.",
-            "draftMessageEn": "Hi NurdiansyahLabs, I am interested in Package 1: Starter Web & Landing Page ($35). I would like to discuss building a high-converting web application for our business.",
+            "serviceOptionValue": "Paket 1: Enterprise Web Portal & Modular Frontend",
+            "whatsappText": "Halo NurdiansyahLabs, saya tertarik dengan Paket 1: Enterprise Web Portal & Modular Frontend. Bisa bantu jadwalkan diskusi teknis?",
+            "whatsappTextEn": "Hi NurdiansyahLabs, I'm interested in Package 1: Enterprise Web Portal & Modular Frontend. Could we schedule a technical discussion?",
+            "draftMessage": "Halo NurdiansyahLabs, saya tertarik dengan Paket 1: Enterprise Web Portal & Modular Frontend. Saya ingin mendiskusikan kebutuhan arsitektur web untuk perusahaan kami.",
+            "draftMessageEn": "Hi NurdiansyahLabs, I am interested in Package 1: Enterprise Web Portal & Modular Frontend. I would like to discuss building a high-performance web portal for our enterprise.",
             "slug": "landing-page"
         },
         {
             "id": "custom-erp",
             "packageNumber": 2,
             "name": {
-                "id": "Paket 2: Custom Web Application & Sistem ERP Operasional",
-                "en": "Package 2: Custom Web Application & Operational ERP System"
+                "id": "Paket 2: Custom Enterprise ERP & Sistem Operasional Terdistribusi",
+                "en": "Package 2: Custom Enterprise ERP & Distributed Operational Systems"
             },
             "title": {
-                "id": "Custom Web Application & Sistem ERP",
-                "en": "Custom Web Application & Operational ERP"
+                "id": "Custom Enterprise ERP & Sistem Operasional",
+                "en": "Custom Enterprise ERP & Operational Systems"
             },
             "price": {
-                "id": "Sesuai Cakupan Proyek (Mulai Rp 2.500.000)",
-                "en": "Project-Scoped (Starting from $160)"
+                "id": "Sesuai Cakupan Proyek (Mulai Rp 5.000.000)",
+                "en": "Project-Scoped (Starting from $350)"
             },
-            "startingPriceIDR": 2500000,
+            "startingPriceIDR": 5000000,
             "badge": {
-                "id": "Solusi Operasional Lengkap",
-                "en": "Complete Operational Solution"
+                "id": "Full SDLC & Arsitektur Database",
+                "en": "Full SDLC & Database Architecture"
             },
             "target": {
-                "id": "Bisnis berkembang, multi-cabang, pertanian/retail/logistik",
-                "en": "Growing business, multi-branch, agriculture/retail/logistics"
+                "id": "Perusahaan multi-cabang, manufaktur, logistik, agribisnis & ritel skala besar",
+                "en": "Multi-branch companies, manufacturing, logistics, agribusiness & large-scale retail"
             },
             "timeline": {
-                "id": "3–8 minggu (sprint mingguan)",
-                "en": "3–8 weeks (weekly sprints)"
+                "id": "4–12 minggu (sprint mingguan)",
+                "en": "4–12 weeks (weekly agile sprints)"
             },
             "revisions": {
-                "id": "Sesuai milestone & kesepakatan scope",
-                "en": "Per milestone & agreed scope"
+                "id": "Sesuai milestone & kesepakatan scope SOW",
+                "en": "Per milestone & agreed SOW scope"
             },
             "deliverables": [
                 {
-                    "id": "Arsitektur modular scalable (React 18 + Python Flask + PostgreSQL)",
-                    "en": "Modular scalable architecture (React 18 + Python Flask + PostgreSQL)"
+                    "id": "Arsitektur modular scalable (React 18 + Python Flask / Node.js + PostgreSQL)",
+                    "en": "Modular scalable architecture (React 18 + Python Flask / Node.js + PostgreSQL)"
                 },
                 {
-                    "id": "Role-Based Access Control multi-level (Admin, Manajer, Kasir)",
-                    "en": "Multi-level Role-Based Access Control (Admin, Manager, Cashier)"
+                    "id": "Role-Based Access Control (RBAC) multi-level berstandar enterprise",
+                    "en": "Enterprise-grade multi-level Role-Based Access Control (RBAC)"
                 },
                 {
-                    "id": "Dashboard operasional real-time & KPI bisnis terintegrasi",
-                    "en": "Real-time operational dashboard & integrated business KPI"
+                    "id": "Database relasional ACID compliant dengan index tuning & automated backup",
+                    "en": "ACID-compliant relational database with index tuning & automated backups"
                 },
                 {
-                    "id": "Database relasional teroptimasi dengan automated backup",
-                    "en": "Optimized relational database with automated backup"
+                    "id": "Dashboard operasional real-time & KPI bisnis terintegrasi (Stok, Mutasi, Margin)",
+                    "en": "Real-time operational dashboard & integrated business KPIs (Inventory, Audits, Margin)"
                 },
                 {
-                    "id": "Fitur export PDF faktur, rekap Excel/CSV, & integrasi WhatsApp",
-                    "en": "PDF invoice export, Excel/CSV recap, & WhatsApp integration"
+                    "id": "Fitur export PDF faktur, sinkronisasi POS/WMS, & integrasi WhatsApp gateway",
+                    "en": "PDF invoice export, POS/WMS synchronization, & WhatsApp gateway integration"
                 },
                 {
-                    "id": "Garansi 30 hari bug-fix & SLA support purna jual",
-                    "en": "30-day bug-fix warranty & post-sale SLA support"
+                    "id": "Garansi 60 hari bug-fix, deployment Docker Linux, & SLA support purna jual",
+                    "en": "60-day bug-fix warranty, Docker Linux deployment, & post-sale SLA support"
                 }
             ],
             "limitations": [
@@ -151,23 +151,23 @@
                 "id": "Minta Penawaran ERP",
                 "en": "Request ERP Proposal"
             },
-            "serviceOptionValue": "Paket 2: Custom Web Application & Operational ERP",
-            "whatsappText": "Halo NurdiansyahLabs, saya ingin konsultasi pembuatan Paket 2: Custom Web Application & Operational ERP (Mulai Rp 2.500.000) untuk operasional bisnis saya.",
-            "whatsappTextEn": "Hi NurdiansyahLabs, I'd like to request a consultation for Package 2: Custom Web Application & Operational ERP (Starting from $160). We need a tailored system for our operations.",
-            "draftMessage": "Halo NurdiansyahLabs, saya ingin meminta penawaran untuk Paket 2: Custom Web Application & Operational ERP (Mulai Rp 2.500.000). Bisnis kami membutuhkan sistem kustom untuk pengelolaan operasional dan database.",
-            "draftMessageEn": "Hi NurdiansyahLabs, I would like to request a proposal for Package 2: Custom Web Application & Operational ERP (Starting from $160). We need a tailored system for operations and database workflows.",
+            "serviceOptionValue": "Paket 2: Custom Enterprise ERP & Sistem Operasional Terdistribusi",
+            "whatsappText": "Halo NurdiansyahLabs, saya ingin konsultasi pembuatan Paket 2: Custom Enterprise ERP & Sistem Operasional untuk operasional perusahaan kami.",
+            "whatsappTextEn": "Hi NurdiansyahLabs, I'd like to request a consultation for Package 2: Custom Enterprise ERP & Distributed Operational Systems.",
+            "draftMessage": "Halo NurdiansyahLabs, saya ingin meminta penawaran untuk Paket 2: Custom Enterprise ERP & Sistem Operasional. Bisnis kami membutuhkan sistem kustom untuk pengelolaan operasional, inventaris, dan database skala besar.",
+            "draftMessageEn": "Hi NurdiansyahLabs, I would like to request a proposal for Package 2: Custom Enterprise ERP & Operational Systems. We need a tailored system for high-volume operations and database workflows.",
             "slug": "web-development"
         },
         {
             "id": "advisory",
             "packageNumber": 3,
             "name": {
-                "id": "Paket 3: Konsultasi Arsitektur Teknis & Enterprise Advisory",
-                "en": "Package 3: Technical Architecture Advisory & Enterprise Consultation"
+                "id": "Paket 3: Konsultasi Arsitektur Teknis, Full SDLC & Enterprise Advisory",
+                "en": "Package 3: Technical Architecture Advisory, Full SDLC & Enterprise Advisory"
             },
             "title": {
-                "id": "Konsultasi Arsitektur & Enterprise Advisory",
-                "en": "Technical Architecture Advisory & Enterprise Consultation"
+                "id": "Konsultasi Arsitektur & Full SDLC Advisory",
+                "en": "Technical Architecture Advisory & Full SDLC Advisory"
             },
             "price": {
                 "id": "Konsultasi & Penawaran Khusus (Gratis Sesi Discovery 30 Menit)",
@@ -179,8 +179,8 @@
                 "en": "Free 1-on-1 Discovery"
             },
             "target": {
-                "id": "CTO, product manager, tech leader",
-                "en": "CTOs, product managers, tech leaders"
+                "id": "CTO, VP Engineering, Product Manager, Tech Leader",
+                "en": "CTOs, VPs of Engineering, Product Managers, Tech Leaders"
             },
             "timeline": {
                 "id": "Sesi 30 menit; Audit 3–5 hari kerja",
@@ -196,37 +196,33 @@
                     "en": "30-minute 1-on-1 technical discovery session (Google Meet / Zoom)"
                 },
                 {
-                    "id": "Audit arsitektur sistem, analisis query bottleneck, & SQL security",
-                    "en": "System architecture audit, query bottleneck analysis, & SQL security"
+                    "id": "Audit arsitektur sistem (Monolith vs Microservices), analisis bottleneck query SQL",
+                    "en": "System architecture audit (Monolith vs Microservices), SQL query bottleneck analysis"
                 },
                 {
-                    "id": "Roadmap modernisasi teknologi & strategi pipeline data/AI",
-                    "en": "Technology modernization roadmap & data/AI pipeline strategy"
+                    "id": "Review pipeline CI/CD, metodologi Full SDLC, dan strategi mitigasi technical debt",
+                    "en": "CI/CD pipeline review, Full SDLC methodology, and technical debt mitigation roadmap"
                 },
                 {
-                    "id": "Rekomendasi optimasi performa backend & mitigasi technical debt",
-                    "en": "Backend performance optimization recommendations & technical debt mitigation"
-                },
-                {
-                    "id": "Penyusunan penawaran custom SOW terstruktur sesuai kebutuhan",
-                    "en": "Structured custom SOW proposal tailored to your requirements"
+                    "id": "Dokumen rekomendasi arsitektur resmi & estimasi milestone pengerjaan",
+                    "en": "Formal architecture recommendation document & milestone engineering estimates"
                 }
             ],
             "limitations": [
                 {
-                    "id": "Sesi gratis difokuskan pada scoping asesmen & directional advisory",
-                    "en": "Free session focused on scoping assessment & directional advisory"
+                    "id": "Sesi konsultasi gratis difokuskan pada asesmen dan arah strategis arsitektur",
+                    "en": "Complimentary session focuses on assessment and architectural strategic direction"
                 },
                 {
-                    "id": "Implementasi hands-on engineering/coding diatur dalam SOW terpisah",
-                    "en": "Hands-on engineering/coding implementation governed by separate SOW"
+                    "id": "Implementasi hands-on rekayasa kode diatur dalam kontrak SOW terpisah",
+                    "en": "Hands-on engineering implementation is governed under a separate SOW contract"
                 }
             ],
             "ctaText": {
-                "id": "Jadwalkan Konsultasi Gratis",
-                "en": "Schedule Free Consultation"
+                "id": "Jadwalkan Discovery",
+                "en": "Schedule Discovery"
             },
-            "serviceOptionValue": "Paket 3: Technical Architecture Advisory & Enterprise Consultation",
+            "serviceOptionValue": "Paket 3: Konsultasi Arsitektur Teknis, Full SDLC & Enterprise Advisory",
             "whatsappText": "Halo NurdiansyahLabs, saya ingin menjadwalkan Paket 3: Technical Architecture Advisory (Gratis 30-Menit Discovery) untuk arsitektur proyek saya.",
             "whatsappTextEn": "Hi NurdiansyahLabs, I would like to schedule a 30-minute Technical Architecture Advisory session.",
             "draftMessage": "Halo NurdiansyahLabs, saya ingin menjadwalkan sesi Paket 3: Technical Architecture Advisory & Enterprise Consultation (Gratis 30-Menit Discovery) untuk mendiskusikan arsitektur sistem dan strategi teknologi kami.",
@@ -237,41 +233,39 @@
     "services": [
         {
             "slug": "landing-page",
-            "title": "Starter Web & Landing Page",
-            "tagline": "Kehadiran Online Cepat, Responsif, dan Siap Konversi",
-            "description": "Solusi landing page kustom performa tinggi untuk UMKM, personal branding, dan early startup. Dilengkapi integrasi WhatsApp instan dan lead capture form.",
+            "title": "Enterprise Web Portal & Modular Frontend",
+            "tagline": "Frontend Modern Performa Tinggi, PWA, dan Enterprise Web Portal",
+            "description": "Solusi web application frontend performa tinggi, client portal, dan web application enterprise dengan arsitektur modern (React 18, Vite, Tailwind CSS). Memenuhi standar Core Web Vitals (< 800ms load time), Technical SEO tingkat lanjut, dan integrasi API terproteksi.",
             "category": "Paket Layanan 1",
-            "price": "Mulai Rp 500.000",
-            "startingPriceIDR": 500000,
-            "idealFor": "UMKM, Personal Branding, Early Startup",
-            "estimation": "3–7 hari kerja",
-            "revisions": "2x revisi minor",
+            "price": "Mulai Rp 2.500.000",
+            "startingPriceIDR": 2500000,
+            "idealFor": "Korporasi, Perusahaan B2B, Startup Skala Menengah",
+            "estimation": "1–3 minggu",
+            "revisions": "Sesuai milestone & kesepakatan scope",
             "inclusions": [
-                "Desain responsif mobile-first (< 1s load time)",
-                "Integrasi WhatsApp direct CTA dengan pesan dinamis",
-                "Lead capture form terhubung ke notifikasi email",
-                "Pondasi SEO teknis, meta tags, & schema markup",
-                "Setup Google Analytics 4 (GA4) event tracking",
-                "Hosting & SSL HTTPS deployment support",
-                "2x revisi minor selama proses pengembangan",
-                "Penyerahan source code tanpa vendor lock-in"
+                "Arsitektur frontend modular React 18 / Vite / Tailwind CSS (< 800ms FCP)",
+                "Desain responsif mobile-first dengan Core Web Vitals skor 95+",
+                "Integrasi REST API, manajemen state global, dan data sanitization",
+                "Pondasi Technical SEO lengkap, OpenGraph, JSON-LD Schema.org terstruktur",
+                "Setup CI/CD deployment pipeline, SSL HTTPS, dan caching headers",
+                "Garansi 30 hari bug-fix & transfer source code lengkap tanpa vendor lock-in"
             ],
             "limitations": [
-                "Biaya langganan domain & hosting recurring ditanggung klien",
-                "Tidak mencakup custom database, login user, atau payment gateway"
+                "Biaya domain & infrastruktur hosting recurring ditanggung klien",
+                "Fitur di luar cakupan SOW awal ditangani via change order terstruktur"
             ]
         },
         {
             "slug": "web-development",
-            "title": "Custom Web Application & Operational ERP",
-            "tagline": "Sistem Operasional Terintegrasi untuk Bisnis Berkembang",
-            "description": "Aplikasi web skala produksi dan ERP kustom untuk bisnis berkembang, multi-cabang, agrikultur, ritel, dan logistik. Menghilangkan ketergantungan spreadsheet dan kertas.",
+            "title": "Custom Enterprise ERP & Sistem Operasional Terdistribusi",
+            "tagline": "Rekayasa Sistem ERP Kustom & Database Skala Produksi (Full SDLC)",
+            "description": "Aplikasi web skala enterprise dan ERP operasional kustom untuk korporasi, multi-cabang, manufaktur, agribisnis, ritel, dan logistik. Menghilangkan bottleneck spreadsheet dan sistem warisan usang dengan metodologi Full SDLC.",
             "category": "Paket Layanan 2",
-            "price": "Sesuai Cakupan Proyek (Mulai Rp 2.500.000)",
-            "startingPriceIDR": 2500000,
-            "idealFor": "Growing Business, Multi-branch Retail, Agriculture & Peternakan, Logistik & Pergudangan",
-            "estimation": "3–8 minggu (sprint mingguan)",
-            "revisions": "Sesuai milestone & kesepakatan cakupan",
+            "price": "Sesuai Cakupan Proyek (Mulai Rp 5.000.000)",
+            "startingPriceIDR": 5000000,
+            "idealFor": "Perusahaan Multi-Cabang, Manufaktur, Logistik, Agribisnis & Ritel Skala Besar",
+            "estimation": "4–12 minggu (sprint mingguan)",
+            "revisions": "Sesuai milestone & kesepakatan scope SOW",
             "inclusions": [
                 "Arsitektur modern modular (React 18, Flask/Python, PostgreSQL)",
                 "Role-Based Access Control (RBAC: Admin, Manajer, Operator, Kasir)",

@@ -3,6 +3,7 @@ import Hero from '../components/Hero'
 import FlagshipShowcase from '../components/FlagshipShowcase'
 import Services from '../components/Services'
 import WhyUs from '../components/WhyUs'
+import LatestBlogs from '../components/LatestBlogs'
 import CTA from '../components/CTA'
 import Footer from '../components/Footer'
 import SEO from '../components/seo/SEO'
@@ -11,8 +12,8 @@ export default function Home() {
     return (
         <>
             <SEO
-                title="Jasa Landing Page & Web Developer Profesional Indonesia"
-                description="Jasa pembuatan landing page, web developer fullstack, analisis data bisnis, dan data science terpercaya di Indonesia. Solusi digital terintegrasi untuk UMKM dan startup."
+                title="Jasa Pengembangan Software Enterprise & Full SDLC Software Engineer"
+                description="Jasa rekayasa software enterprise, custom ERP, dan arsitektur aplikasi web skala produksi di Indonesia. Solusi end-to-end full SDLC dari analisis arsitektur hingga deployment."
                 canonical="/"
             />
             <Navbar />
@@ -21,6 +22,7 @@ export default function Home() {
                 <FlagshipShowcase />
                 <Services />
                 <WhyUs />
+                <LatestBlogs />
                 <CTA />
             </div>
             <Footer />

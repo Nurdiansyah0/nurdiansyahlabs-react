@@ -58,46 +58,46 @@ export default function Services() {
         "name": "NurdiansyahLabs",
         "url": "https://nurdiansyahlabs.com",
         "image": "https://nurdiansyahlabs.com/assets/android-chrome-512x512.png",
-        "description": "Jasa Pembuatan Landing Page Cepat, Web Developer Fullstack ERP, dan Konsultasi Arsitektur Perangkat Lunak di Indonesia.",
+        "description": "Jasa Software Enterprise, Full SDLC Software Engineer, Custom ERP & Arsitektur Database Terdistribusi di Indonesia.",
         "address": {
             "@type": "PostalAddress",
             "addressLocality": "Batam",
             "addressRegion": "Kepulauan Riau",
             "addressCountry": "ID"
         },
-        "priceRange": "Rp 500.000 – Rp 5.000.000+",
+        "priceRange": "$$$",
         "hasOfferCatalog": {
             "@type": "OfferCatalog",
-            "name": "Paket Komersial & Layanan Digital NurdiansyahLabs",
+            "name": "Paket Komersial & Layanan Enterprise NurdiansyahLabs",
             "itemListElement": [
                 {
                     "@type": "Offer",
                     "itemOffered": {
                         "@type": "Service",
-                        "name": "Paket 1: Starter Web & Landing Page",
-                        "description": "Landing page responsif performa tinggi untuk UMKM dan startup."
+                        "name": "Paket 1: Enterprise Web Portal & Modular Frontend",
+                        "description": "Arsitektur frontend modular React 18, performa tinggi (< 800ms FCP), Core Web Vitals 95+, dan integrasi API terproteksi."
                     },
                     "priceCurrency": "IDR",
-                    "price": "500000",
+                    "price": "2500000",
                     "url": "https://nurdiansyahlabs.com/services/landing-page"
                 },
                 {
                     "@type": "Offer",
                     "itemOffered": {
                         "@type": "Service",
-                        "name": "Paket 2: Custom Web Application & Operational ERP",
-                        "description": "Aplikasi web fullstack dan sistem ERP kustom terintegrasi."
+                        "name": "Paket 2: Custom Enterprise ERP & Sistem Operasional Terdistribusi",
+                        "description": "Aplikasi web skala enterprise dan sistem ERP kustom terintegrasi dengan metodologi Full SDLC dan database high-concurrency."
                     },
                     "priceCurrency": "IDR",
-                    "price": "2500000",
+                    "price": "5000000",
                     "url": "https://nurdiansyahlabs.com/services/web-development"
                 },
                 {
                     "@type": "Offer",
                     "itemOffered": {
                         "@type": "Service",
-                        "name": "Paket 3: Technical Architecture Advisory & Enterprise Consultation",
-                        "description": "Konsultasi arsitektur sistem, strategi data/AI, dan discovery gratis 30 menit."
+                        "name": "Paket 3: Konsultasi Arsitektur Teknis, Full SDLC & Enterprise Advisory",
+                        "description": "Konsultasi arsitektur sistem, audit query SQL PostgreSQL, mitigasi technical debt, dan sesi discovery gratis 30 menit."
                     },
                     "priceCurrency": "IDR",
                     "price": "0",

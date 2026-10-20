@@ -39,12 +39,17 @@ ServerSignature Off
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # ── Maintenance Mode (ACTIVE) ──
-    ErrorDocument 503 /maintenance.html
-    RewriteCond %{REQUEST_URI} !/maintenance\.html$ [NC]
-    RewriteCond %{REQUEST_URI} !\.(jpe?g?|png|gif|svg|css|js|ico|woff2?)$ [NC]
-    RewriteCond %{REQUEST_URI} !^/api/ [NC]
-    RewriteRule ^.*$ /maintenance.html [L]
+    # ── Canonical 301 Redirects: Force HTTPS & non-WWW ────────────────────────
+    RewriteCond %{HTTPS} off [OR]
+    RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+    RewriteRule ^ https://nurdiansyahlabs.com%{REQUEST_URI} [R=301,L]
+
+    # ── Maintenance Mode (COMMENTED OUT - Live for Googlebot Indexing) ──
+    # ErrorDocument 503 /maintenance.html
+    # RewriteCond %{REQUEST_URI} !/maintenance\.html$ [NC]
+    # RewriteCond %{REQUEST_URI} !\.(jpe?g?|png|gif|svg|css|js|ico|woff2?)$ [NC]
+    # RewriteCond %{REQUEST_URI} !^/api/ [NC]
+    # RewriteRule ^.*$ /maintenance.html [L]
 
     # Assign A/B group via cookie if not yet set
     # Group B = last digit of microsecond is 0-4 (≈50%)

@@ -1,13 +1,19 @@
 import { useState, useEffect } from 'react'
 import { m, AnimatePresence } from 'framer-motion'
+import { 
+    TrendingUp, Layers, Code2, PieChart, Brain, 
+    Server, Flame, Sparkles, Clock, AlertCircle 
+} from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 import SEO from '../components/seo/SEO'
 
 const SERVICE_LABELS = {
-    landing_page: { label: 'Landing Page', color: '#172554', bg: '#dbeafe', icon: 'fa-layer-group' },
-    fullstack: { label: 'Fullstack Dev', color: '#1e1b4b', bg: '#e0e7ff', icon: 'fa-code' },
-    data_analyst: { label: 'Data Analyst', color: '#022c22', bg: '#d1fae5', icon: 'fa-chart-pie' },
-    data_science: { label: 'Data Scientist', color: '#2e1065', bg: '#ede9fe', icon: 'fa-brain' },
+    landing_page: { label: 'Web & Landing Page', color: '#172554', bg: '#dbeafe', icon: Layers },
+    fullstack: { label: 'Fullstack Dev & ERP', color: '#1e1b4b', bg: '#e0e7ff', icon: Code2 },
+    data_analyst: { label: 'Data Analyst & BI', color: '#022c22', bg: '#d1fae5', icon: PieChart },
+    data_science: { label: 'Data Science & AI', color: '#2e1065', bg: '#ede9fe', icon: Brain },
 }
 
 function ScoreBar({ score }) {
@@ -26,6 +32,7 @@ function ScoreBar({ score }) {
 
 function KeywordCard({ item, index }) {
     const svc = SERVICE_LABELS[item.service] || {}
+    const Icon = svc.icon || TrendingUp
     const scoreColor = item.score >= 70 ? '#166534' : item.score >= 40 ? '#b45309' : '#1e293b'
     const trendArrow = item.trend > 5 ? '↑' : item.trend < -5 ? '↓' : '→'
     const trendColor = item.trend > 5 ? '#166534' : item.trend < -5 ? '#b91c1c' : '#1e293b'
@@ -44,22 +51,23 @@ function KeywordCard({ item, index }) {
             {/* Header */}
             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '0.5rem' }}>
                 <div style={{ flex: 1 }}>
-                    <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#0f172a', marginBottom: '4px' }}>
+                    <div style={{ fontSize: '0.95rem', fontWeight: 700, color: '#0f172a', marginBottom: '6px' }}>
                         {item.keyword}
                     </div>
                     <span style={{
-                        fontSize: '0.7rem', fontWeight: 700, padding: '2px 10px', borderRadius: '9999px',
-                        background: svc.bg, color: svc.color,
+                        fontSize: '0.72rem', fontWeight: 700, padding: '3px 10px', borderRadius: '9999px',
+                        background: svc.bg || '#f1f5f9', color: svc.color || '#334155',
+                        display: 'inline-flex', alignItems: 'center', gap: '5px'
                     }}>
-                        <i className={`fas ${svc.icon}`} style={{ marginRight: '4px', fontSize: '0.65rem' }} />
-                        {svc.label}
+                        <Icon size={12} />
+                        {svc.label || item.service}
                     </span>
                 </div>
                 <div style={{ textAlign: 'right', flexShrink: 0 }}>
                     <div style={{ fontSize: '1.6rem', fontWeight: 900, color: scoreColor, lineHeight: 1 }}>
                         {item.score}
                     </div>
-                    <div style={{ fontSize: '0.65rem', color: '#1e293b', fontWeight: 600 }}>SCORE</div>
+                    <div style={{ fontSize: '0.65rem', color: '#64748B', fontWeight: 700, marginTop: '2px' }}>SKOR</div>
                 </div>
             </div>
 
@@ -67,19 +75,20 @@ function KeywordCard({ item, index }) {
             <ScoreBar score={item.score} />
 
             {/* Stats */}
-            <div style={{ display: 'flex', gap: '1rem', fontSize: '0.75rem', color: '#1e293b' }}>
-                <div><strong style={{ color: '#1e293b' }}>{item.latest}</strong> current</div>
-                <div><strong style={{ color: '#1e293b' }}>{item.avg}</strong> avg (90d)</div>
-                <div style={{ color: trendColor, fontWeight: 700 }}>{trendArrow} {Math.abs(item.trend)} trend</div>
+            <div style={{ display: 'flex', gap: '1rem', fontSize: '0.78rem', color: '#64748B' }}>
+                <div><strong style={{ color: '#0F172A' }}>{item.latest}</strong> tren saat ini</div>
+                <div><strong style={{ color: '#0F172A' }}>{item.avg}</strong> rata-rata (90h)</div>
+                <div style={{ color: trendColor, fontWeight: 700 }}>{trendArrow} {Math.abs(item.trend)} momentum</div>
             </div>
 
             {/* CTA */}
             {item.score >= 50 && (
                 <div style={{
                     background: 'linear-gradient(135deg, #f0fdf4, #ecfdf5)', border: '1px solid #bbf7d0',
-                    borderRadius: '8px', padding: '6px 12px', fontSize: '0.72rem', color: '#166534', fontWeight: 600
+                    borderRadius: '8px', padding: '6px 12px', fontSize: '0.75rem', color: '#166534', fontWeight: 600,
+                    display: 'flex', alignItems: 'center', gap: '6px'
                 }}>
-                    🔥 High opportunity — consider creating content for this keyword
+                    <Flame size={14} color="#166534" /> Peluang tinggi — permintaan pencarian sedang meningkat
                 </div>
             )}
         </m.div>
@@ -104,7 +113,7 @@ export default function TrendsDashboard() {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
     const [activeFilter, setActiveFilter] = useState('all')
-    const { t } = useLanguage()
+    const { isIndo } = useLanguage()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -137,154 +146,165 @@ export default function TrendsDashboard() {
     })()
 
     return (
-        <main style={{ minHeight: '100vh', background: '#f8fafc', fontFamily: "'Inter', sans-serif" }}>
+        <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: '#F8FAFC' }}>
             <SEO
-                title="Google Trends Monitor Indonesia"
-                description="Live Google Trends analytics and real-time market search intelligence dashboard for digital services and engineering in Indonesia."
+                title="Google Trends Monitor Indonesia | NurdiansyahLabs"
+                description="Live Google Trends analytics and real-time market search intelligence dashboard for digital services and software engineering in Indonesia."
                 canonical="/trends"
                 breadcrumbs={[
                     { name: 'Home', url: '/' },
                     { name: 'Trends Monitor', url: '/trends' }
                 ]}
             />
-            {/* Header */}
-            <div style={{
-                background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%)',
-                padding: '3rem 1.5rem 2.5rem', color: '#fff'
-            }}>
-                <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '0.75rem' }}>
-                        <div style={{
-                            width: '44px', height: '44px', borderRadius: '12px',
-                            background: 'linear-gradient(135deg, #4338ca, #6d28d9)',
-                            display: 'flex', alignItems: 'center', justifyContent: 'center'
-                        }}>
-                            <i className="fas fa-chart-line" style={{ fontSize: '1.2rem', color: '#fff' }} />
+
+            <Navbar />
+
+            <main style={{ flex: 1 }}>
+                {/* Header */}
+                <div style={{
+                    background: 'linear-gradient(135deg, #070A0F 0%, #0F172A 50%, #1E1B4B 100%)',
+                    padding: '3.5rem 1.5rem 2.75rem', color: '#fff', borderBottom: '1px solid rgba(255, 255, 255, 0.08)'
+                }}>
+                    <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '0.85rem' }}>
+                            <div style={{
+                                width: '48px', height: '48px', borderRadius: '12px',
+                                background: 'linear-gradient(135deg, #4F46E5, #6366F1)',
+                                display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 12px rgba(79, 70, 229, 0.4)'
+                            }}>
+                                <TrendingUp size={24} color="#fff" />
+                            </div>
+                            <div>
+                                <h1 style={{ margin: 0, fontSize: '1.75rem', fontWeight: 900, letterSpacing: '-0.02em', color: '#F8FAFC' }}>
+                                    Google Trends Monitor
+                                </h1>
+                                <p style={{ margin: 0, fontSize: '0.88rem', color: '#A5B4FC' }}>
+                                    NurdiansyahLabs · Pembaruan Otomatis Setiap 6 Jam · Wilayah Indonesia (ID)
+                                </p>
+                            </div>
                         </div>
-                        <div>
-                            <h1 style={{ margin: 0, fontSize: '1.6rem', fontWeight: 800 }}>
-                                Google Trends Monitor
-                            </h1>
-                            <p style={{ margin: 0, fontSize: '0.85rem', color: '#a5b4fc' }}>
-                                NurdiansyahLabs · Auto-updated every 6 hours · Indonesia (ID)
-                            </p>
-                        </div>
+                        {data?.lastUpdated && (
+                            <div style={{ fontSize: '0.78rem', color: '#CBD5E1', marginTop: '0.6rem', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                                <Clock size={13} /> Terakhir diperbarui: {new Date(data.lastUpdated).toLocaleString('id-ID')}
+                            </div>
+                        )}
                     </div>
-                    {data?.lastUpdated && (
-                        <div style={{ fontSize: '0.75rem', color: '#1e293b', marginTop: '0.5rem' }}>
-                            Last updated: {new Date(data.lastUpdated).toLocaleString('id-ID')}
+                </div>
+
+                {/* Filter Tabs */}
+                <div style={{ background: '#fff', borderBottom: '1px solid #e2e8f0', padding: '0 1.5rem', position: 'sticky', top: '64px', zIndex: 10 }}>
+                    <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', gap: '6px', overflowX: 'auto' }}>
+                        {[
+                            ['all', Flame, '🔥 Peluang Teratas'],
+                            ...Object.entries(SERVICE_LABELS).map(([k, v]) => [k, v.icon, v.label])
+                        ].map(([key, Icon, label]) => (
+                            <button
+                                key={key}
+                                onClick={() => setActiveFilter(key)}
+                                style={{
+                                    padding: '0.9rem 1.1rem', fontWeight: 700, fontSize: '0.82rem', border: 'none',
+                                    cursor: 'pointer', whiteSpace: 'nowrap', background: 'transparent',
+                                    color: activeFilter === key ? '#4F46E5' : '#64748B',
+                                    borderBottom: activeFilter === key ? '2.5px solid #4F46E5' : '2.5px solid transparent',
+                                    transition: 'all 0.2s', display: 'inline-flex', alignItems: 'center', gap: '6px'
+                                }}
+                            >
+                                <Icon size={14} />
+                                <span>{label}</span>
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Content */}
+                <div style={{ maxWidth: '1100px', margin: '2rem auto', padding: '0 1.5rem 4rem' }}>
+                    {/* Status banners */}
+                    {loading && (
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
+                            {Array(6).fill(0).map((_, i) => <LoadingCard key={i} />)}
                         </div>
                     )}
-                </div>
-            </div>
+                    {error === 'offline' && (
+                        <div style={{ textAlign: 'center', padding: '4rem 1rem', background: '#fff', borderRadius: '16px', border: '1px solid #e2e8f0' }}>
+                            <Server size={36} style={{ margin: '0 auto 1rem', color: '#94A3B8' }} />
+                            <div style={{ fontWeight: 800, color: '#0F172A', marginBottom: '0.5rem', fontSize: '1.1rem' }}>Backend Analytics Istirahat</div>
+                            <div style={{ fontSize: '0.9rem', color: '#64748B' }}>
+                                Data tren di-cache dan akan otomatis diperbarui saat background worker aktif.
+                            </div>
+                        </div>
+                    )}
+                    {error === 'loading' && (
+                        <div style={{ textAlign: 'center', padding: '4rem 1rem', background: '#fff', borderRadius: '16px', border: '1px solid #e2e8f0' }}>
+                            <div style={{ fontSize: '2rem', marginBottom: '1rem' }}>⏳</div>
+                            <div style={{ fontWeight: 800, color: '#0F172A', marginBottom: '0.5rem' }}>Mengambil Data Google Trends Terbaru…</div>
+                            <div style={{ fontSize: '0.88rem', color: '#64748B' }}>Proses ini membutuhkan ~2 menit pada sinkronisasi pertama. Halaman akan me-refresh otomatis.</div>
+                        </div>
+                    )}
 
-            {/* Filter Tabs */}
-            <div style={{ background: '#fff', borderBottom: '1px solid #e2e8f0', padding: '0 1.5rem' }}>
-                <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', gap: '4px', overflowX: 'auto' }}>
-                    {[['all', 'fa-fire', '🔥 Top Opportunities'], ...Object.entries(SERVICE_LABELS).map(([k, v]) => [k, v.icon, v.label])].map(([key, icon, label]) => (
-                        <button aria-label="Action button"
-                            key={key}
-                            onClick={() => setActiveFilter(key)}
+                    {/* Keyword cards */}
+                    {!loading && !error && (
+                        <>
+                            <div style={{ marginBottom: '1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px' }}>
+                                <div style={{ fontWeight: 800, color: '#0F172A' }}>
+                                    Ditemukan {displayed.length} Kata Kunci Potensial
+                                </div>
+                                <div style={{ fontSize: '0.78rem', color: '#64748B' }}>
+                                    Skor = Minat Pencarian × Laju Momentum (0–100)
+                                </div>
+                            </div>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.25rem' }}>
+                                <AnimatePresence>
+                                    {displayed.map((item, i) => (
+                                        <KeywordCard key={`${item.service}-${item.keyword}`} item={item} index={i} />
+                                    ))}
+                                </AnimatePresence>
+                            </div>
+                        </>
+                    )}
+
+                    {/* SEO Action Panel */}
+                    {!loading && !error && data?.opportunities?.length > 0 && (
+                        <m.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.5 }}
                             style={{
-                                padding: '0.85rem 1.1rem', fontWeight: 700, fontSize: '0.8rem', border: 'none',
-                                cursor: 'pointer', whiteSpace: 'nowrap', background: 'transparent',
-                                color: activeFilter === key ? '#3730a3' : '#1e293b',
-                                borderBottom: activeFilter === key ? '2.5px solid #3730a3' : '2.5px solid transparent',
-                                transition: 'all 0.2s'
+                                marginTop: '2.5rem', background: 'linear-gradient(135deg, #070A0F 0%, #1E1B4B 100%)',
+                                borderRadius: '20px', padding: '2rem', color: '#fff', border: '1px solid rgba(255, 255, 255, 0.1)'
                             }}
                         >
-                            <i className={`fas ${icon}`} style={{ marginRight: '6px' }} />{label}
-                        </button>
-                    ))}
+                            <div style={{ fontWeight: 800, fontSize: '1.15rem', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                <Sparkles size={18} color="#818CF8" /> Halaman SEO Berkinerja Tinggi
+                            </div>
+                            <div style={{ fontSize: '0.88rem', color: '#CBD5E1', marginBottom: '1.25rem' }}>
+                                Halaman blog berikut ditargetkan secara khusus untuk menangkap tren pencarian pasar Indonesia:
+                            </div>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                                {data.opportunities.slice(0, 5).map(o => {
+                                    const slug = o.keyword.toLowerCase().replace(/\s+/g, '-')
+                                    return (
+                                        <a
+                                            key={slug}
+                                            href={`/blog/${slug}`}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            style={{
+                                                background: 'rgba(255,255,255,0.08)', color: '#E0E7FF',
+                                                padding: '6px 14px', borderRadius: '9999px', fontSize: '0.8rem', fontWeight: 600,
+                                                textDecoration: 'none', border: '1px solid rgba(255,255,255,0.18)',
+                                            }}
+                                        >
+                                            /blog/{slug}
+                                        </a>
+                                    )
+                                })}
+                            </div>
+                        </m.div>
+                    )}
                 </div>
-            </div>
+            </main>
 
-            {/* Content */}
-            <div style={{ maxWidth: '1100px', margin: '2rem auto', padding: '0 1.5rem' }}>
-                {/* Status banners */}
-                {loading && (
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
-                        {Array(6).fill(0).map((_, i) => <LoadingCard key={i} />)}
-                    </div>
-                )}
-                {error === 'offline' && (
-                    <div style={{ textAlign: 'center', padding: '4rem', color: '#1e293b' }}>
-                        <i className="fas fa-server" style={{ fontSize: '2rem', marginBottom: '1rem', opacity: 0.4 }} />
-                        <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '0.5rem' }}>Backend not running</div>
-                        <div style={{ fontSize: '0.85rem' }}>
-                            Start it with: <code style={{ background: '#f1f5f9', padding: '2px 8px', borderRadius: '4px' }}>python wsgi.py</code>
-                        </div>
-                    </div>
-                )}
-                {error === 'loading' && (
-                    <div style={{ textAlign: 'center', padding: '4rem', color: '#1e293b' }}>
-                        <div style={{ fontSize: '2rem', marginBottom: '1rem' }}>⏳</div>
-                        <div style={{ fontWeight: 700, color: '#0f172a', marginBottom: '0.5rem' }}>Fetching Google Trends data…</div>
-                        <div style={{ fontSize: '0.85rem' }}>This takes ~2 minutes on first load. Page auto-refreshes.</div>
-                    </div>
-                )}
-
-                {/* Keyword cards */}
-                {!loading && !error && (
-                    <>
-                        <div style={{ marginBottom: '1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <div style={{ fontWeight: 700, color: '#0f172a' }}>
-                                {displayed.length} keyword{displayed.length !== 1 ? 's' : ''} found
-                            </div>
-                            <div style={{ fontSize: '0.75rem', color: '#1e293b' }}>
-                                Score = search interest × momentum (0–100)
-                            </div>
-                        </div>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1rem' }}>
-                            <AnimatePresence>
-                                {displayed.map((item, i) => (
-                                    <KeywordCard key={`${item.service}-${item.keyword}`} item={item} index={i} />
-                                ))}
-                            </AnimatePresence>
-                        </div>
-                    </>
-                )}
-
-                {/* SEO Action Panel */}
-                {!loading && !error && data?.opportunities?.length > 0 && (
-                    <m.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.5 }}
-                        style={{
-                            marginTop: '2.5rem', background: 'linear-gradient(135deg, #1e1b4b, #312e81)',
-                            borderRadius: '20px', padding: '2rem', color: '#fff'
-                        }}
-                    >
-                        <div style={{ fontWeight: 800, fontSize: '1.1rem', marginBottom: '0.5rem' }}>
-                            🎯 Auto-Generated SEO Pages
-                        </div>
-                        <div style={{ fontSize: '0.85rem', color: '#a5b4fc', marginBottom: '1.25rem' }}>
-                            These blog pages are auto-generated from trending keywords to help Google discover your site.
-                        </div>
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                            {data.opportunities.slice(0, 5).map(o => {
-                                const slug = o.keyword.toLowerCase().replace(/\s+/g, '-')
-                                return (
-                                    <a
-                                        key={slug}
-                                        href={`/blog/${slug}`}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        style={{
-                                            background: 'rgba(255,255,255,0.12)', color: '#e0e7ff',
-                                            padding: '5px 14px', borderRadius: '9999px', fontSize: '0.78rem', fontWeight: 600,
-                                            textDecoration: 'none', border: '1px solid rgba(255,255,255,0.2)',
-                                        }}
-                                    >
-                                        /blog/{slug}
-                                    </a>
-                                )
-                            })}
-                        </div>
-                    </m.div>
-                )}
-            </div>
-        </main>
+            <Footer />
+        </div>
     )
 }

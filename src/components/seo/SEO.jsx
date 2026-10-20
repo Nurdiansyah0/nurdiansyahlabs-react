@@ -6,7 +6,7 @@ const SEO = ({ title, description, keywords, canonical, image, type = 'website',
     const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
     const siteUrl = "https://nurdiansyahlabs.com";
     const fullCanonical = canonical ? `${siteUrl}${canonical}` : siteUrl;
-    const defaultDesc = "Jasa pembuatan landing page, web developer fullstack, analisis data bisnis, dan data science terpercaya di Indonesia.";
+    const defaultDesc = "Jasa rekayasa software enterprise, custom ERP, dan arsitektur aplikasi web skala produksi di Indonesia. Solusi end-to-end full SDLC software engineer terpercaya.";
 
     // Enhanced Connected Schema Graph (Person + WebSite + ProfessionalService + ProfilePage + OfferCatalog)
     const baseGraph = [

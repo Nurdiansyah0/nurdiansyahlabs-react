@@ -178,69 +178,33 @@
 
   <!-- Verified Technical Articles -->
   <url>
-    <loc>https://nurdiansyahlabs.com/blog/jasa-landing-page-murah-indonesia</loc>
-    <lastmod>2026-09-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://nurdiansyahlabs.com/blog/jasa-fullstack-developer-indonesia</loc>
-    <lastmod>2026-09-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://nurdiansyahlabs.com/blog/jasa-analisis-data-bisnis-indonesia</loc>
-    <lastmod>2026-09-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://nurdiansyahlabs.com/blog/jasa-machine-learning-data-science</loc>
-    <lastmod>2026-09-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://nurdiansyahlabs.com/blog/buat-dashboard-bisnis-power-bi-tableau</loc>
-    <lastmod>2026-09-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://nurdiansyahlabs.com/blog/berapa-harga-jasa-landing-page-profesional</loc>
-    <lastmod>2026-09-05</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://nurdiansyahlabs.com/blog/arsitektur-software-enterprise-monolith-vs-microservices</loc>
+    <lastmod>2026-10-20</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://nurdiansyahlabs.com/blog/cara-memilih-jasa-web-developer-terpercaya</loc>
-    <lastmod>2026-09-05</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://nurdiansyahlabs.com/blog/panduan-full-sdlc-software-engineer-enterprise</loc>
+    <lastmod>2026-10-20</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://nurdiansyahlabs.com/blog/kapan-bisnis-butuh-data-analyst</loc>
-    <lastmod>2026-09-05</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://nurdiansyahlabs.com/blog/migrasi-excel-ke-custom-erp-operasional</loc>
+    <lastmod>2026-10-20</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://nurdiansyahlabs.com/blog/jasa-website-umkm-integrasi-whatsapp</loc>
-    <lastmod>2026-09-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
+    <loc>https://nurdiansyahlabs.com/blog/optimasi-database-postgresql-high-concurrency-transaksi</loc>
+    <lastmod>2026-10-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://nurdiansyahlabs.com/blog/manfaat-machine-learning-untuk-bisnis-kecil</loc>
-    <lastmod>2026-09-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>https://nurdiansyahlabs.com/blog/programmer-freelance-indonesia</loc>
-    <lastmod>2026-09-05</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://nurdiansyahlabs.com/blog/studi-kasus-arsitektur-wms-pos-terdistribusi</loc>
+    <lastmod>2026-10-20</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 </urlset>

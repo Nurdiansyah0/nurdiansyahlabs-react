@@ -107,8 +107,10 @@ export default function SubdomainAppWrapper({ app, children }) {
             <Helmet>
                 <title>{app.title}</title>
                 <meta name="description" content={app.description} />
+                <link rel="canonical" href={`https://${app.id}.nurdiansyahlabs.com/`} />
                 <meta property="og:title" content={app.title} />
                 <meta property="og:description" content={app.description} />
+                <meta property="og:url" content={`https://${app.id}.nurdiansyahlabs.com/`} />
                 <meta property="og:type" content="website" />
             </Helmet>
 

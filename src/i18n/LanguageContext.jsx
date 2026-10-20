@@ -12,13 +12,8 @@ function detectLang() {
         // Fallback safely if localStorage is restricted (e.g. strict sandbox / iframe SecurityError)
     }
 
-    try {
-        const browserLang = typeof navigator !== 'undefined' ? (navigator.language || navigator.userLanguage || 'id') : 'id'
-        const primary = browserLang.split('-')[0].toLowerCase()
-        if (SUPPORTED_LANGS.includes(primary)) return primary
-    } catch {
-        // Fallback safely if navigator is undefined
-    }
+    // Default strictly to 'id' (Indonesian) for search engine crawlers (Googlebot) and first-time visitors
+    // This ensures Googlebot coming from US data centers indexes the Indonesian enterprise keywords
     return 'id'
 }
 

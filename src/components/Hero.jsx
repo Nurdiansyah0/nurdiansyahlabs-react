@@ -58,12 +58,12 @@ export default function Hero() {
                             </span>
                             <span>
                                 {isIndo 
-                                    ? 'Digital Solutions for Modern Business' 
-                                    : 'Digital Solutions for Modern Business'}
+                                    ? 'Enterprise Software Engineering & Architecture' 
+                                    : 'Enterprise Software Engineering & Architecture'}
                             </span>
                         </m.div>
 
-                        {/* Core Headline (H1): Pain-Point Driven Hook */}
+                        {/* Core Headline (H1): Enterprise & Full SDLC Keyword Anchored */}
                         <m.h1
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -72,16 +72,16 @@ export default function Hero() {
                         >
                             {isIndo ? (
                                 <>
-                                    Masih Mengandalkan Excel, Proses Manual, atau{' '}
+                                    Jasa Software Enterprise &{' '}
                                     <span style={{ color: '#818cf8' }}>
-                                        Sistem yang Tidak Terhubung?
+                                        Full SDLC Software Engineer
                                     </span>
                                 </>
                             ) : (
                                 <>
-                                    Still Relying on Spreadsheets, Manual Work, or{' '}
+                                    Enterprise Software Engineering &{' '}
                                     <span style={{ color: '#818cf8' }}>
-                                        Disconnected Systems?
+                                        Full SDLC Systems Architecture
                                     </span>
                                 </>
                             )}
@@ -95,9 +95,9 @@ export default function Hero() {
                             className="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mb-6"
                         >
                             {isIndo ? (
-                                'Saat bisnis bertumbuh, proses yang awalnya sederhana bisa menjadi lambat, sulit dipantau, dan rawan kesalahan. Kami membantu mengubah proses tersebut menjadi sistem digital yang terintegrasi, otomatis, dan siap berkembang bersama bisnis Anda.'
+                                'Bukan sekadar website biasa. Kami merancang arsitektur sistem, custom ERP, dan software enterprise terintegrasi dengan metodologi Full SDLC—dari analisis kebutuhan, backend terdistribusi, database performa tinggi, hingga deployment produksi yang aman dan terukur.'
                             ) : (
-                                'As your business grows, manual processes become slow, fragmented, and prone to costly errors. We help transform them into integrated, automated digital systems engineered to scale reliably with your business.'
+                                'Beyond basic web pages. We architect, engineer, and deploy production-grade enterprise software, custom ERPs, and resilient distributed systems with end-to-end Full SDLC engineering rigor.'
                             )}
                         </m.p>
 
@@ -108,13 +108,13 @@ export default function Hero() {
                             transition={{ duration: 0.6, delay: 0.25 }}
                             className="flex flex-wrap items-center gap-2 mb-8 text-xs font-semibold text-indigo-200"
                         >
-                            <span className="px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/20">Web Apps</span>
+                            <span className="px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/20">{isIndo ? 'Full SDLC Engineering' : 'Full SDLC Engineering'}</span>
                             <span className="text-slate-500">•</span>
-                            <span className="px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/20">{isIndo ? 'Sistem ERP' : 'ERP System'}</span>
+                            <span className="px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/20">{isIndo ? 'Sistem ERP Enterprise' : 'Enterprise ERP'}</span>
                             <span className="text-slate-500">•</span>
-                            <span className="px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/20">{isIndo ? 'Otomasi Workflow' : 'Workflow Automation'}</span>
+                            <span className="px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/20">{isIndo ? 'Custom Web Apps' : 'Custom Web Apps'}</span>
                             <span className="text-slate-500">•</span>
-                            <span className="px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/20">{isIndo ? 'Solusi AI' : 'AI Solutions'}</span>
+                            <span className="px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/20">{isIndo ? 'Arsitektur Sistem & Cloud' : 'Cloud Architecture'}</span>
                         </m.div>
 
                         {/* Dual Action CTAs */}
@@ -148,7 +148,7 @@ export default function Hero() {
 
                             {/* Direct WhatsApp Quick-action */}
                             <a
-                                href="https://wa.me/6282176012461"
+                                href={`https://wa.me/6282176012461?text=${encodeURIComponent(isIndo ? 'Halo NurdiansyahLabs, saya ingin konsultasi mengenai arsitektur software dan kebutuhan enterprise engineering.' : 'Hello NurdiansyahLabs, I would like to consult regarding enterprise software engineering and system architecture.')}`}
                                 target="_blank"
                                 rel="noreferrer"
                                 onClick={() => {

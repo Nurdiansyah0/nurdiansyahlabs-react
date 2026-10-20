@@ -1,13 +1,12 @@
 import { m } from 'framer-motion'
-import { MessageCircle } from 'lucide-react'
+import { Layers, Database, ShieldCheck } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useResponsive } from '../hooks/useResponsive'
-import { Clock, Wallet, Package } from 'lucide-react'
 
 const beliefs = [
-    { icon: Clock, tTitle: 'why.1.title', tDesc: 'why.1.desc' },
-    { icon: Wallet, tTitle: 'why.2.title', tDesc: 'why.2.desc' },
-    { icon: Package, tTitle: 'why.3.title', tDesc: 'why.3.desc' },
+    { icon: Layers, tTitle: 'why.1.title', tDesc: 'why.1.desc' },
+    { icon: Database, tTitle: 'why.2.title', tDesc: 'why.2.desc' },
+    { icon: ShieldCheck, tTitle: 'why.3.title', tDesc: 'why.3.desc' },
 ]
 
 export default function WhyUs() {
