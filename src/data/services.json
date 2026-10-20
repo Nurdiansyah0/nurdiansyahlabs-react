@@ -4,12 +4,12 @@
             "id": "starter",
             "packageNumber": 1,
             "name": {
-                "id": "Paket 1: Enterprise Web Portal & Modular Frontend",
-                "en": "Package 1: Enterprise Web Portal & Modular Frontend"
+                "id": "Paket 1: Konsultan Website & Frontend Engineering Enterprise",
+                "en": "Package 1: Website Consultant & Enterprise Frontend Engineering"
             },
             "title": {
-                "id": "Enterprise Web Portal & Modular Frontend",
-                "en": "Enterprise Web Portal & Modular Frontend"
+                "id": "Konsultan Website & Enterprise Web Portal",
+                "en": "Website Consultant & Enterprise Web Portal"
             },
             "price": {
                 "id": "Mulai Rp 2.500.000",
@@ -233,9 +233,9 @@
     "services": [
         {
             "slug": "landing-page",
-            "title": "Enterprise Web Portal & Modular Frontend",
-            "tagline": "Frontend Modern Performa Tinggi, PWA, dan Enterprise Web Portal",
-            "description": "Solusi web application frontend performa tinggi, client portal, dan web application enterprise dengan arsitektur modern (React 18, Vite, Tailwind CSS). Memenuhi standar Core Web Vitals (< 800ms load time), Technical SEO tingkat lanjut, dan integrasi API terproteksi.",
+            "title": "Konsultan Website & Frontend Engineering Enterprise",
+            "tagline": "Website Consultant Profesional, Jasa Pembuatan Website Performa Tinggi & Modern Web Apps",
+            "description": "Layanan konsultan website profesional (website consultant) dan rekayasa frontend enterprise di Indonesia. Solusi web application modern, portal korporat, dan company profile dengan performa tinggi (< 800ms FCP), Core Web Vitals 95+, Technical SEO lengkap, dan arsitektur tanpa celah keamanan.",
             "category": "Paket Layanan 1",
             "price": "Mulai Rp 2.500.000",
             "startingPriceIDR": 2500000,
