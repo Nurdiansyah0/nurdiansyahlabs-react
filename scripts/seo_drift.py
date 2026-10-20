@@ -124,7 +124,8 @@ def snapshot_route(route):
                 "title": parser.title.strip(),
                 "description": parser.description.strip(),
                 "canonical": parser.canonical.strip(),
-                "has_json_ld": 1 if parser.has_json_ld else 0
+                "has_json_ld": 1 if parser.has_json_ld else 0,
+                "has_error_boundary": 1 if "Something went wrong" in content else 0
             }
     except urllib.error.HTTPError as e:
         return {
@@ -166,6 +167,8 @@ def run_drift_check():
         # Invariants Check
         if snap["status_code"] != 200:
             anomalies.append(f"[FAIL HTTP] {route}: Returned {snap['status_code']} (Expected 200)")
+        elif snap.get("has_error_boundary"):
+            anomalies.append(f"[FAIL ERROR_BOUNDARY] {route}: Rendered ErrorBoundary ('Something went wrong')")
         elif not route.endswith(('.txt', '.xml')) and not snap["title"]:
             anomalies.append(f"[WARN TITLE] {route}: Title tag is empty")
         elif not route.endswith(('.txt', '.xml')) and not snap["canonical"]:

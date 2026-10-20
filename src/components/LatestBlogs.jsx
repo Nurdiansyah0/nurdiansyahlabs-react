@@ -59,7 +59,7 @@ export default function LatestBlogs() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-10">
                     {featuredArticles.map((article, idx) => (
                         <m.article
-                            key={article.id}
+                            key={article.slug || idx}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
@@ -84,18 +84,14 @@ export default function LatestBlogs() {
                                 </h3>
 
                                 <p className="text-xs sm:text-sm text-slate-300 line-clamp-3 leading-relaxed mb-4">
-                                    {article.excerpt}
+                                    {article.description}
                                 </p>
                             </div>
 
                             <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between">
-                                <div className="flex flex-wrap gap-1.5">
-                                    {article.tags.slice(0, 2).map((tag, tIdx) => (
-                                        <span key={tIdx} className="text-[10px] font-mono text-slate-400">
-                                            #{tag}
-                                        </span>
-                                    ))}
-                                </div>
+                                <span className="text-[11px] font-mono text-indigo-400">
+                                    {article.serviceLabel || 'Software Enterprise'}
+                                </span>
                                 <Link 
                                     to={`/blog/${article.slug}`}
                                     className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-400 hover:text-indigo-300 transition-colors no-underline group-hover:translate-x-0.5"

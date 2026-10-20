@@ -6,11 +6,14 @@
 
 export const INITIAL_BLOG_POSTS = [
     {
+        id: 'post-1',
         slug: 'arsitektur-software-enterprise-monolith-vs-microservices',
         title: 'Arsitektur Software Enterprise: Memilih Modular Monolith vs Microservices di 2026',
         description: 'Panduan teknis mendalam untuk CTO dan software architect dalam memilih pola arsitektur yang tepat untuk aplikasi bisnis skala besar.',
+        excerpt: 'Panduan teknis mendalam untuk CTO dan software architect dalam memilih pola arsitektur yang tepat untuk aplikasi bisnis skala besar.',
         category: 'Arsitektur Sistem',
         serviceLabel: 'Enterprise Architecture',
+        tags: ['Architecture', 'Monolith', 'Microservices', 'Enterprise'],
         accent: '#4f46e5',
         accentLight: '#eef2ff',
         author: 'Nurdiansyah',
@@ -80,11 +83,14 @@ Sebelum memutuskan migrasi atau membangun sistem baru, pertimbangkan matriks ber
 Jika perusahaan Anda sedang merancang ulang sistem atau menghadapi kendala performa sistem lama, diskusikan arsitektur sistem bersama kami melalui [Konsultasi Arsitektur Software](/services/web-development).`
     },
     {
+        id: 'post-2',
         slug: 'panduan-full-sdlc-software-engineer-enterprise',
         title: 'Panduan Full SDLC: Metodologi Rekayasa Software Enterprise dari Analisis hingga Deployment',
         description: 'Langkah demi langkah menerapkan siklus hidup pengembangan perangkat lunak (SDLC) yang ketat untuk menjamin stabilitas dan keamanan produksi.',
+        excerpt: 'Langkah demi langkah menerapkan siklus hidup pengembangan perangkat lunak (SDLC) yang ketat untuk menjamin stabilitas dan keamanan produksi.',
         category: 'Full SDLC',
         serviceLabel: 'Full SDLC Engineering',
+        tags: ['SDLC', 'SoftwareEngineering', 'DevOps', 'CI/CD'],
         accent: '#0284c7',
         accentLight: '#e0f2fe',
         author: 'Nurdiansyah',
@@ -144,11 +150,14 @@ Deploy manual via FTP sudah usang dan berisiko tinggi. Kami mengotomatisasi:
 Jika Anda membutuhkan partner engineering untuk memimpin proyek software enterprise Anda dari nol, pelajari alur kerja kami di [Layanan Rekayasa Sistem](/services/web-development).`
     },
     {
+        id: 'post-3',
         slug: 'migrasi-excel-ke-custom-erp-operasional',
         title: 'Kapan Perusahaan Harus Migrasi dari Spreadsheet & Excel ke Custom ERP Terintegrasi?',
         description: 'Tanda-tanda kritis saat spreadsheet mulai menghambat pertumbuhan bisnis, dan cara merancang custom ERP yang tepat sasaran.',
+        excerpt: 'Tanda-tanda kritis saat spreadsheet mulai menghambat pertumbuhan bisnis, dan cara merancang custom ERP yang tepat sasaran.',
         category: 'Sistem ERP',
         serviceLabel: 'Enterprise ERP',
+        tags: ['ERP', 'Automation', 'CustomSoftware', 'Operations'],
         accent: '#059669',
         accentLight: '#d1fae5',
         author: 'Nurdiansyah',
@@ -192,11 +201,14 @@ Di NurdiansyahLabs, kami merancang **Custom ERP Modular**:
 Lihat implementasi sistem nyata kami pada [Studi Kasus Primatera Poultry ERP](/showcase/fullstack/primatera-poultry) dan [LogiStack Warehouse WMS](/showcase/fullstack/warehouse-wms).`
     },
     {
+        id: 'post-4',
         slug: 'optimasi-database-postgresql-high-concurrency-transaksi',
         title: 'Optimasi Database PostgreSQL untuk Sistem Transaksi High-Concurrency',
         description: 'Teknik engineering untuk mencegah deadlocks, table bloat, dan bottleneck performa pada database aplikasi enterprise.',
+        excerpt: 'Teknik engineering untuk mencegah deadlocks, table bloat, dan bottleneck performa pada database aplikasi enterprise.',
         category: 'Database & Cloud',
         serviceLabel: 'Database Architecture',
+        tags: ['PostgreSQL', 'HighConcurrency', 'DatabaseOptimization', 'Indexing'],
         accent: '#0891b2',
         accentLight: '#cffafe',
         author: 'Nurdiansyah',
@@ -237,11 +249,14 @@ Gunakan teknik optimasi baris:
 Pelajari bagaimana kami mengintegrasikan arsitektur database berkinerja tinggi dalam layanan kami di [Arsitektur & Konsultasi Teknis](/services/web-development).`
     },
     {
+        id: 'post-5',
         slug: 'studi-kasus-arsitektur-wms-pos-terdistribusi',
         title: 'Studi Kasus: Arsitektur WMS & POS Terdistribusi untuk Bisnis Multi-Cabang',
         description: 'Bedah arsitektur nyata sistem inventori dan kasir terintegrasi yang mampu beroperasi offline-first dan sinkronisasi real-time.',
+        excerpt: 'Bedah arsitektur nyata sistem inventori dan kasir terintegrasi yang mampu beroperasi offline-first dan sinkronisasi real-time.',
         category: 'Studi Kasus',
         serviceLabel: 'Case Study',
+        tags: ['CaseStudy', 'WMS', 'POS', 'DistributedSystems'],
         accent: '#d97706',
         accentLight: '#fef3c7',
         author: 'Nurdiansyah',
