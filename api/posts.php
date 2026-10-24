@@ -99,10 +99,10 @@ try {
 }
 
 try {
-    // Attempt to fetch with `images` column
-    $stmt = $pdo->query("SELECT slug, title, description, service, serviceLabel, accent, accentLight, images FROM posts ORDER BY created_at DESC");
+    // Attempt to fetch with both `img` and `images` columns
+    $stmt = $pdo->query("SELECT slug, title, description, service, serviceLabel, accent, accentLight, img, images FROM posts ORDER BY created_at DESC");
 } catch (PDOException $e) {
-    // If it STILL fails (ALTER didn't work), fallback to fetching all and mapping `img`
+    // If it STILL fails (ALTER didn't work), fallback to fetching all
     $stmt = $pdo->query("SELECT * FROM posts ORDER BY created_at DESC");
 }
 
@@ -110,18 +110,21 @@ $posts = $stmt->fetchAll();
 
 foreach ($posts as &$post) {
     $imgData = $post['images'] ?? $post['img'] ?? null;
+    $primaryUrl = null;
     if (!empty($imgData)) {
         $decoded = json_decode($imgData, true);
         if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
             $post['images'] = $decoded;
+            $primaryUrl = $decoded[0]['url'] ?? null;
         } else {
             $post['images'] = [['url' => $imgData, 'is_primary' => true]];
+            $primaryUrl = $imgData;
         }
     } else {
         $post['images'] = [];
     }
+    $post['img'] = $primaryUrl ?: ($post['img'] ?? null);
     unset($post['content']); // Remove large content to save bandwidth
-    unset($post['img']); // Remove raw img
 }
 
 $response = ['total' => count($posts), 'posts' => $posts];

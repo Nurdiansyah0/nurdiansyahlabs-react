@@ -18,6 +18,28 @@ const CATEGORIES = [
     'Studi Kasus'
 ]
 
+export const resolveArticleImg = (article) => {
+    if (article?.img && !article.img.startsWith('/assets/showcase')) return article.img;
+    if (Array.isArray(article?.images) && article.images.length > 0) {
+        return article.images[0]?.url || article.images[0];
+    }
+    if (typeof article?.images === 'string') {
+        try {
+            const parsed = JSON.parse(article.images);
+            if (Array.isArray(parsed) && parsed.length > 0) {
+                return parsed[0]?.url || parsed[0];
+            }
+        } catch (e) {}
+    }
+    const svc = article?.service || '';
+    const cat = (article?.category || article?.serviceLabel || '').toLowerCase();
+    if (svc === 'A' || cat.includes('landing')) return 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=80';
+    if (svc === 'B' || cat.includes('fullstack') || cat.includes('developer') || cat.includes('arsitektur')) return 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&auto=format&fit=crop&q=80';
+    if (svc === 'C' || cat.includes('data') || cat.includes('dashboard') || cat.includes('erp')) return 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80';
+    if (svc === 'D' || cat.includes('machine') || cat.includes('ai') || cat.includes('science')) return 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&auto=format&fit=crop&q=80';
+    return 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&auto=format&fit=crop&q=80';
+};
+
 export default function BlogListing() {
     const [articles, setArticles] = useState(INITIAL_BLOG_POSTS)
     const [selectedCategory, setSelectedCategory] = useState('Semua')
@@ -217,17 +239,25 @@ export default function BlogListing() {
                                     <Link to={`/blog/${article.slug}`} style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column', height: '100%', color: 'inherit' }}>
                                         {/* Thumbnail Container */}
                                         <div style={{ height: '210px', position: 'relative', overflow: 'hidden', background: '#0F172A' }}>
-                                            {article.img ? (
-                                                <img 
-                                                    src={getOptimizedImg(article.img, { w: 640, h: 420 })} 
-                                                    alt={article.title} 
-                                                    style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }} 
-                                                    onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
-                                                    onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-                                                />
-                                            ) : (
-                                                <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #1E1B4B 0%, #0F172A 100%)' }} />
-                                            )}
+                                            {(() => {
+                                                const thumb = resolveArticleImg(article);
+                                                return thumb ? (
+                                                    <img 
+                                                        src={getOptimizedImg(thumb, { w: 640, h: 420 })} 
+                                                        alt={article.title} 
+                                                        loading="lazy"
+                                                        style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }} 
+                                                        onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
+                                                        onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+                                                        onError={e => {
+                                                            e.currentTarget.onerror = null;
+                                                            e.currentTarget.src = 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&auto=format&fit=crop&q=80';
+                                                        }}
+                                                    />
+                                                ) : (
+                                                    <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #1E1B4B 0%, #0F172A 100%)' }} />
+                                                );
+                                            })()}
                                             
                                             {/* Category Tag Badge */}
                                             <span style={{

@@ -8,8 +8,8 @@
     "serviceLabel": "Fullstack Dev",
     "accent": "#92400e",
     "accentLight": "#fef3c7",
-    "img": null,
-    "images": "[{\"url\":\"https:\\/\\/images.unsplash.com\\/photo-1555066931-4365d14bab8c?w=800&q=80\",\"is_primary\":true}]",
+    "img": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&auto=format&fit=crop&q=80",
+    "images": "[{\"url\": \"https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&auto=format&fit=crop&q=80\", \"is_primary\": true}]",
     "faqs": [
       {
         "question": "Apa itu programmer freelance indonesia?",
@@ -46,7 +46,9 @@
         "a": "Ya, kami menyediakan akses CMS sederhana sehingga Anda bisa memperbarui konten tanpa harus mengerti coding."
       }
     ],
-    "content": "\nMemiliki **landing page profesional** adalah langkah pertama yang krusial untuk mengembangkan bisnis online Anda di era digital ini.\nDi NurdiansyahLabs, kami menyediakan jasa pembuatan landing page yang tidak hanya cantik secara visual, tetapi juga dioptimalkan untuk konversi dan pencarian Google.\n\n## Mengapa Landing Page Penting?\n\nLanding page yang baik dapat meningkatkan konversi hingga **300%** dibandingkan mengarahkan pengunjung ke halaman utama website biasa.\nDengan desain yang fokus dan call-to-action yang jelas, landing page membantu mengubah pengunjung menjadi pelanggan potensial.\n\n## Layanan Kami\n\n- \u2705 Desain responsif (mobile, tablet, desktop)\n- \u2705 Optimasi SEO on-page\n- \u2705 Integrasi WhatsApp & formulir kontak\n- \u2705 Gratis hosting & domain tahun pertama\n- \u2705 Akses ke 50+ katalog desain premium\n- \u2705 Loading speed < 3 detik\n    "
+    "content": "\nMemiliki **landing page profesional** adalah langkah pertama yang krusial untuk mengembangkan bisnis online Anda di era digital ini.\nDi NurdiansyahLabs, kami menyediakan jasa pembuatan landing page yang tidak hanya cantik secara visual, tetapi juga dioptimalkan untuk konversi dan pencarian Google.\n\n## Mengapa Landing Page Penting?\n\nLanding page yang baik dapat meningkatkan konversi hingga **300%** dibandingkan mengarahkan pengunjung ke halaman utama website biasa.\nDengan desain yang fokus dan call-to-action yang jelas, landing page membantu mengubah pengunjung menjadi pelanggan potensial.\n\n## Layanan Kami\n\n- \u2705 Desain responsif (mobile, tablet, desktop)\n- \u2705 Optimasi SEO on-page\n- \u2705 Integrasi WhatsApp & formulir kontak\n- \u2705 Gratis hosting & domain tahun pertama\n- \u2705 Akses ke 50+ katalog desain premium\n- \u2705 Loading speed < 3 detik\n    ",
+    "img": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&auto=format&fit=crop&q=80",
+    "images": "[{\"url\": \"https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&auto=format&fit=crop&q=80\", \"is_primary\": true}]"
   },
   {
     "slug": "jasa-fullstack-developer-indonesia",
@@ -70,7 +72,9 @@
         "a": "Ya, kami memberikan garansi maintenance 30 hari dan dukungan teknis setelah delivery."
       }
     ],
-    "content": "\nSetiap bisnis memiliki kebutuhan unik yang tidak bisa dipenuhi oleh solusi off-the-shelf.\n**Jasa Fullstack Developer** NurdiansyahLabs membantu Anda membangun sistem web yang benar-benar sesuai dengan alur kerja bisnis Anda.\n\n## Apa yang Kami Bangun?\n\nDari sistem kasir dan inventori, hingga platform e-commerce dan aplikasi HR\u2014kami menangani seluruh stack teknologi dari database hingga tampilan antarmuka.\n\n## Stack Teknologi\n\n- **Frontend**: React.js, Vue.js, Next.js\n- **Backend**: Node.js/Express, Laravel, Django\n- **Database**: MySQL, PostgreSQL, MongoDB\n- **Deployment**: cPanel, VPS, Vercel, Railway\n    "
+    "content": "\nSetiap bisnis memiliki kebutuhan unik yang tidak bisa dipenuhi oleh solusi off-the-shelf.\n**Jasa Fullstack Developer** NurdiansyahLabs membantu Anda membangun sistem web yang benar-benar sesuai dengan alur kerja bisnis Anda.\n\n## Apa yang Kami Bangun?\n\nDari sistem kasir dan inventori, hingga platform e-commerce dan aplikasi HR\u2014kami menangani seluruh stack teknologi dari database hingga tampilan antarmuka.\n\n## Stack Teknologi\n\n- **Frontend**: React.js, Vue.js, Next.js\n- **Backend**: Node.js/Express, Laravel, Django\n- **Database**: MySQL, PostgreSQL, MongoDB\n- **Deployment**: cPanel, VPS, Vercel, Railway\n    ",
+    "img": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&auto=format&fit=crop&q=80",
+    "images": "[{\"url\": \"https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&auto=format&fit=crop&q=80\", \"is_primary\": true}]"
   },
   {
     "slug": "jasa-analisis-data-bisnis-indonesia",
@@ -94,7 +98,9 @@
         "a": "Ya, kami dapat terkoneksi ke database existing, spreadsheet, atau API pihak ketiga."
       }
     ],
-    "content": "\nData adalah aset terbesar bisnis modern\u2014tetapi hanya bernilai jika Anda bisa membacanya.\n**Jasa Data Analyst** NurdiansyahLabs mengubah tumpukan data mentah menjadi dashboard yang mudah dibaca dan laporan yang actionable.\n\n## Layanan Analisis Data\n\nKami membantu bisnis dari berbagai industri\u2014retail, F&B, kesehatan, hingga agrikultur\u2014untuk memahami pola, tren, dan peluang yang tersembunyi dalam data mereka.\n\n## Deliverables\n\n- \ud83d\udcca Dashboard interaktif real-time\n- \ud83d\udcc8 Laporan insight mingguan/bulanan\n- \ud83c\udfaf Analisis segmentasi pelanggan\n- \ud83d\udcc9 Monitoring KPI bisnis\n    "
+    "content": "\nData adalah aset terbesar bisnis modern\u2014tetapi hanya bernilai jika Anda bisa membacanya.\n**Jasa Data Analyst** NurdiansyahLabs mengubah tumpukan data mentah menjadi dashboard yang mudah dibaca dan laporan yang actionable.\n\n## Layanan Analisis Data\n\nKami membantu bisnis dari berbagai industri\u2014retail, F&B, kesehatan, hingga agrikultur\u2014untuk memahami pola, tren, dan peluang yang tersembunyi dalam data mereka.\n\n## Deliverables\n\n- \ud83d\udcca Dashboard interaktif real-time\n- \ud83d\udcc8 Laporan insight mingguan/bulanan\n- \ud83c\udfaf Analisis segmentasi pelanggan\n- \ud83d\udcc9 Monitoring KPI bisnis\n    ",
+    "img": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&auto=format&fit=crop&q=80",
+    "images": "[{\"url\": \"https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&auto=format&fit=crop&q=80\", \"is_primary\": true}]"
   },
   {
     "slug": "jasa-machine-learning-data-science",
@@ -118,7 +124,9 @@
         "a": "Ya, model dapat di-deploy sebagai API yang terkoneksi ke sistem bisnis atau dashboard Anda."
       }
     ],
-    "content": "\nDengan **Machine Learning**, bisnis Anda tidak hanya reaktif terhadap tren\u2014Anda memprediksinya sebelum terjadi.\nNurdiansyahLabs membangun model AI yang dipersonalisasi untuk kebutuhan spesifik bisnis Anda.\n\n## Solusi Data Science\n\nDari prediksi churn pelanggan hingga sistem rekomendasi produk, kami menerapkan teknik ML terkini dengan pendekatan yang pragmatis dan berorientasi hasil bisnis.\n\n## Use Cases\n\n- \ud83d\udd2e Forecasting penjualan & demand\n- \ud83c\udfaf Segmentasi & personalisasi pelanggan\n- \u26a0\ufe0f Deteksi anomali & prediksi churn\n- \ud83d\uded2 Sistem rekomendasi produk\n    "
+    "content": "\nDengan **Machine Learning**, bisnis Anda tidak hanya reaktif terhadap tren\u2014Anda memprediksinya sebelum terjadi.\nNurdiansyahLabs membangun model AI yang dipersonalisasi untuk kebutuhan spesifik bisnis Anda.\n\n## Solusi Data Science\n\nDari prediksi churn pelanggan hingga sistem rekomendasi produk, kami menerapkan teknik ML terkini dengan pendekatan yang pragmatis dan berorientasi hasil bisnis.\n\n## Use Cases\n\n- \ud83d\udd2e Forecasting penjualan & demand\n- \ud83c\udfaf Segmentasi & personalisasi pelanggan\n- \u26a0\ufe0f Deteksi anomali & prediksi churn\n- \ud83d\uded2 Sistem rekomendasi produk\n    ",
+    "img": "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=1200&auto=format&fit=crop&q=80",
+    "images": "[{\"url\": \"https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=1200&auto=format&fit=crop&q=80\", \"is_primary\": true}]"
   },
   {
     "slug": "buat-dashboard-bisnis-power-bi-tableau",
@@ -138,7 +146,9 @@
         "a": "Ya, Power BI dan Tableau memiliki aplikasi mobile yang memungkinkan akses dari smartphone."
       }
     ],
-    "content": "\n**Dashboard bisnis** yang baik memberikan visibilitas penuh terhadap performa perusahaan Anda dalam satu tampilan yang intuitif.\nKami membantu memilih tools yang tepat dan membangun dashboard yang benar-benar sesuai kebutuhan tim Anda.\n\n## Tools yang Kami Kuasai\n\n- **Power BI** \u2014 Integrasi Microsoft 365, terjangkau\n- **Tableau** \u2014 Visualisasi advanced, enterprise-grade\n- **Looker Studio** \u2014 Free, integrasi Google ecosystem\n- **Custom Dashboard** \u2014 React + Recharts/D3.js\n\n## Manfaat Dashboard Bisnis\n\nPengambilan keputusan berbasis data terbukti meningkatkan efisiensi operasional hingga **40%** dan mengurangi biaya operasional yang tidak perlu.\n    "
+    "content": "\n**Dashboard bisnis** yang baik memberikan visibilitas penuh terhadap performa perusahaan Anda dalam satu tampilan yang intuitif.\nKami membantu memilih tools yang tepat dan membangun dashboard yang benar-benar sesuai kebutuhan tim Anda.\n\n## Tools yang Kami Kuasai\n\n- **Power BI** \u2014 Integrasi Microsoft 365, terjangkau\n- **Tableau** \u2014 Visualisasi advanced, enterprise-grade\n- **Looker Studio** \u2014 Free, integrasi Google ecosystem\n- **Custom Dashboard** \u2014 React + Recharts/D3.js\n\n## Manfaat Dashboard Bisnis\n\nPengambilan keputusan berbasis data terbukti meningkatkan efisiensi operasional hingga **40%** dan mengurangi biaya operasional yang tidak perlu.\n    ",
+    "img": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1200&auto=format&fit=crop&q=80",
+    "images": "[{\"url\": \"https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1200&auto=format&fit=crop&q=80\", \"is_primary\": true}]"
   },
   {
     "slug": "berapa-harga-jasa-landing-page-profesional",
@@ -148,7 +158,7 @@
     "serviceLabel": "Landing Page",
     "accent": "#1d4ed8",
     "accentLight": "#dbeafe",
-    "img": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&fit=crop",
+    "img": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=1200&auto=format&fit=crop&q=80",
     "faqs": [
       {
         "q": "Berapa harga landing page untuk UMKM?",
@@ -167,7 +177,8 @@
         "a": "Biasanya ada biaya hosting & domain sekitar Rp 300.000\u2013600.000/tahun setelah tahun pertama (gratis di NurdiansyahLabs)."
       }
     ],
-    "content": "\nPertanyaan paling sering dari klien kami: **\"Berapa harga jasa landing page yang wajar?\"**\nArtikel ini memberikan gambaran transparan tentang kisaran harga di pasar Indonesia dan apa yang seharusnya Anda dapatkan.\n\n## Kisaran Harga Landing Page di Indonesia 2026\n\nBerdasarkan riset pasar, berikut kisaran harga yang umum:\n\n- **Rp 300.000 \u2013 800.000** \u2014 Template jadi, tanpa kustomisasi, kualitas rendah\n- **Rp 1.000.000 \u2013 2.500.000** \u2014 Semi-custom, desain profesional, cocok untuk UMKM \u2705\n- **Rp 3.000.000 \u2013 8.000.000** \u2014 Full custom, animasi premium, integrasi API\n- **Rp 10.000.000+** \u2014 Agency besar, campaign besar, fitur enterprise\n\n## Apa yang Harus Masuk dalam Paket?\n\nJangan bayar jika tidak mendapat ini:\n\n- \u2705 Desain mobile-first (responsif semua perangkat)\n- \u2705 Koneksi WhatsApp atau formulir lead generation\n- \u2705 Loading speed < 3 detik (Google PageSpeed > 80)\n- \u2705 SEO on-page dasar (meta title, description, heading structure)\n- \u2705 Minimal 2x revisi desain\n\n## Tips Pilih Jasa Landing Page\n\nSelalu minta **portofolio** dan **link live demo** sebelum bayar. Developer yang baik pasti punya showcase yang bisa Anda lihat dan coba langsung.\n    "
+    "content": "\nPertanyaan paling sering dari klien kami: **\"Berapa harga jasa landing page yang wajar?\"**\nArtikel ini memberikan gambaran transparan tentang kisaran harga di pasar Indonesia dan apa yang seharusnya Anda dapatkan.\n\n## Kisaran Harga Landing Page di Indonesia 2026\n\nBerdasarkan riset pasar, berikut kisaran harga yang umum:\n\n- **Rp 300.000 \u2013 800.000** \u2014 Template jadi, tanpa kustomisasi, kualitas rendah\n- **Rp 1.000.000 \u2013 2.500.000** \u2014 Semi-custom, desain profesional, cocok untuk UMKM \u2705\n- **Rp 3.000.000 \u2013 8.000.000** \u2014 Full custom, animasi premium, integrasi API\n- **Rp 10.000.000+** \u2014 Agency besar, campaign besar, fitur enterprise\n\n## Apa yang Harus Masuk dalam Paket?\n\nJangan bayar jika tidak mendapat ini:\n\n- \u2705 Desain mobile-first (responsif semua perangkat)\n- \u2705 Koneksi WhatsApp atau formulir lead generation\n- \u2705 Loading speed < 3 detik (Google PageSpeed > 80)\n- \u2705 SEO on-page dasar (meta title, description, heading structure)\n- \u2705 Minimal 2x revisi desain\n\n## Tips Pilih Jasa Landing Page\n\nSelalu minta **portofolio** dan **link live demo** sebelum bayar. Developer yang baik pasti punya showcase yang bisa Anda lihat dan coba langsung.\n    ",
+    "images": "[{\"url\": \"https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=1200&auto=format&fit=crop&q=80\", \"is_primary\": true}]"
   },
   {
     "slug": "cara-memilih-jasa-web-developer-terpercaya",
@@ -177,7 +188,7 @@
     "serviceLabel": "Fullstack Developer",
     "accent": "#4338ca",
     "accentLight": "#e0e7ff",
-    "img": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&fit=crop",
+    "img": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&auto=format&fit=crop&q=80",
     "faqs": [
       {
         "q": "Bagaimana cara tahu developer itu terpercaya?",
@@ -192,7 +203,8 @@
         "a": "Standar industri adalah DP 30-50% di awal, sisanya setelah delivery. Hindari developer yang minta 100% di muka tanpa kontrak."
       }
     ],
-    "content": "\nMemilih **jasa web developer** yang tepat bisa jadi perbedaan antara proyek sukses dan buang uang percuma.\nBerikut 5 tips yang wajib Anda ikuti sebelum menyewa developer:\n\n## 1. Lihat Portofolio Nyata (Bukan Hanya Gambar)\n\nMinta link website yang sudah pernah dibuat. Buka di browser, coba klik-klik, dan rasakan kualitasnya langsung. Banyak developer yang memajang mockup Figma saja \u2014 itu bukan portofolio nyata.\n\n## 2. Cek Ulasan dan Testimoni\n\nLinkedIn recommendations, Google Reviews, atau testimoni dari klien nyata sangat penting. Tanya langsung ke klien sebelumnya jika perlu.\n\n## 3. Pastikan Ada Kontrak Tertulis\n\nKontrak harus mencantumkan: scope pekerjaan, deadline, jumlah revisi, skema pembayaran, dan hak kepemilikan kode/domain.\n\n## 4. Tanya Proses Komunikasi\n\nDeveloper yang baik akan update progress secara rutin. Tanya: \"Bagaimana cara Anda melaporkan progress proyek?\" \u2014 ini sangat penting.\n\n## 5. Jangan Hanya Kejar yang Murah\n\nHarga paling murah sering berakhir dengan hasil buruk dan revisi tanpa batas. Cari **value for money**, bukan sekedar harga terendah.\n    "
+    "content": "\nMemilih **jasa web developer** yang tepat bisa jadi perbedaan antara proyek sukses dan buang uang percuma.\nBerikut 5 tips yang wajib Anda ikuti sebelum menyewa developer:\n\n## 1. Lihat Portofolio Nyata (Bukan Hanya Gambar)\n\nMinta link website yang sudah pernah dibuat. Buka di browser, coba klik-klik, dan rasakan kualitasnya langsung. Banyak developer yang memajang mockup Figma saja \u2014 itu bukan portofolio nyata.\n\n## 2. Cek Ulasan dan Testimoni\n\nLinkedIn recommendations, Google Reviews, atau testimoni dari klien nyata sangat penting. Tanya langsung ke klien sebelumnya jika perlu.\n\n## 3. Pastikan Ada Kontrak Tertulis\n\nKontrak harus mencantumkan: scope pekerjaan, deadline, jumlah revisi, skema pembayaran, dan hak kepemilikan kode/domain.\n\n## 4. Tanya Proses Komunikasi\n\nDeveloper yang baik akan update progress secara rutin. Tanya: \"Bagaimana cara Anda melaporkan progress proyek?\" \u2014 ini sangat penting.\n\n## 5. Jangan Hanya Kejar yang Murah\n\nHarga paling murah sering berakhir dengan hasil buruk dan revisi tanpa batas. Cari **value for money**, bukan sekedar harga terendah.\n    ",
+    "images": "[{\"url\": \"https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&auto=format&fit=crop&q=80\", \"is_primary\": true}]"
   },
   {
     "slug": "kapan-bisnis-butuh-data-analyst",
@@ -202,7 +214,7 @@
     "serviceLabel": "Data Analyst",
     "accent": "#059669",
     "accentLight": "#d1fae5",
-    "img": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&fit=crop",
+    "img": "https://images.unsplash.com/photo-1543286386-713bdd548da4?w=1200&auto=format&fit=crop&q=80",
     "faqs": [
       {
         "q": "Apakah bisnis kecil butuh data analyst?",
@@ -217,7 +229,8 @@
         "a": "Tidak. NurdiansyahLabs menangani semua hal teknis. Anda hanya perlu menyediakan data (bisa dari spreadsheet Excel sekalipun)."
       }
     ],
-    "content": "\nBanyak pemilik bisnis menunda menyewa **data analyst** karena merasa \"data mereka terlalu sedikit\" atau \"belum waktunya.\"\nPadahal, semakin cepat Anda mulai menganalisis data, semakin cepat bisnis tumbuh. Berikut 7 tanda sudah waktunya:\n\n## Tanda 1: Anda Tidak Tahu Produk Mana yang Paling Menguntungkan\n\nOmzet tinggi tapi tidak tahu dari mana? Analisis data profitabilitas produk bisa menjawab ini dalam hitungan jam.\n\n## Tanda 2: Keputusan Bisnis Masih Berdasarkan \"Perasaan\"\n\n\"Kayaknya bulan ini bagus deh\u2026\" \u2014 ini bukan cara berbisnis yang scalable. Data analyst mengubah feeling menjadi fakta.\n\n## Tanda 3: Stok Sering Habis atau Menumpuk\n\nAnalisis pola permintaan bisa membantu Anda memprediksi kebutuhan stok dengan akurasi > 90%.\n\n## Tanda 4: Tingkat Churn Pelanggan Tinggi\n\nJika pelanggan lama jarang balik, data analyst bisa mengidentifikasi kapan dan mengapa mereka pergi \u2014 lalu menyusun strategi retensi.\n\n## Tanda 5: Tim Marketing Tidak Tahu Campaign Mana yang Efektif\n\nTanpa analisis data, budget marketing dibuang ke semua channel secara merata. Dengan data, fokus ke channel yang benar-benar menghasilkan.\n\n## Tanda 6: Laporan Bulanan Dibuat Manual di Excel Selama Berjam-jam\n\nIni bisa diotomatisasi. Dashboard real-time menggantikan laporan manual \u2014 hemat waktu tim Anda.\n\n## Tanda 7: Kompetitor Anda Sudah Lebih Data-Driven\n\nJika pesaing tumbuh lebih cepat, kemungkinan besar mereka sudah menggunakan data dengan lebih baik. Ini saatnya catch up.\n    "
+    "content": "\nBanyak pemilik bisnis menunda menyewa **data analyst** karena merasa \"data mereka terlalu sedikit\" atau \"belum waktunya.\"\nPadahal, semakin cepat Anda mulai menganalisis data, semakin cepat bisnis tumbuh. Berikut 7 tanda sudah waktunya:\n\n## Tanda 1: Anda Tidak Tahu Produk Mana yang Paling Menguntungkan\n\nOmzet tinggi tapi tidak tahu dari mana? Analisis data profitabilitas produk bisa menjawab ini dalam hitungan jam.\n\n## Tanda 2: Keputusan Bisnis Masih Berdasarkan \"Perasaan\"\n\n\"Kayaknya bulan ini bagus deh\u2026\" \u2014 ini bukan cara berbisnis yang scalable. Data analyst mengubah feeling menjadi fakta.\n\n## Tanda 3: Stok Sering Habis atau Menumpuk\n\nAnalisis pola permintaan bisa membantu Anda memprediksi kebutuhan stok dengan akurasi > 90%.\n\n## Tanda 4: Tingkat Churn Pelanggan Tinggi\n\nJika pelanggan lama jarang balik, data analyst bisa mengidentifikasi kapan dan mengapa mereka pergi \u2014 lalu menyusun strategi retensi.\n\n## Tanda 5: Tim Marketing Tidak Tahu Campaign Mana yang Efektif\n\nTanpa analisis data, budget marketing dibuang ke semua channel secara merata. Dengan data, fokus ke channel yang benar-benar menghasilkan.\n\n## Tanda 6: Laporan Bulanan Dibuat Manual di Excel Selama Berjam-jam\n\nIni bisa diotomatisasi. Dashboard real-time menggantikan laporan manual \u2014 hemat waktu tim Anda.\n\n## Tanda 7: Kompetitor Anda Sudah Lebih Data-Driven\n\nJika pesaing tumbuh lebih cepat, kemungkinan besar mereka sudah menggunakan data dengan lebih baik. Ini saatnya catch up.\n    ",
+    "images": "[{\"url\": \"https://images.unsplash.com/photo-1543286386-713bdd548da4?w=1200&auto=format&fit=crop&q=80\", \"is_primary\": true}]"
   },
   {
     "slug": "jasa-website-umkm-integrasi-whatsapp",
@@ -227,7 +240,7 @@
     "serviceLabel": "Landing Page",
     "accent": "#1d4ed8",
     "accentLight": "#dbeafe",
-    "img": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&fit=crop",
+    "img": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=1200&auto=format&fit=crop&q=80",
     "faqs": [
       {
         "q": "Apa keuntungan integrasikan WhatsApp di website?",
@@ -242,7 +255,8 @@
         "a": "Bisa, menggunakan WhatsApp Business API atau rotasi nomor. Ideal untuk tim sales dengan banyak agen."
       }
     ],
-    "content": "\nDi Indonesia, **WhatsApp adalah raja komunikasi bisnis**. Lebih dari 90% transaksi B2C di Indonesia diawali atau ditutup via WhatsApp.\nWebsite tanpa tombol WhatsApp sama saja kehilangan setengah potensi penjualan Anda.\n\n## Bagaimana Integrasi WhatsApp Bekerja?\n\nTombol WhatsApp di website secara teknis menggunakan link wa.me yang langsung membuka chat ke nomor bisnis Anda.\nIni bisa dikombinasikan dengan:\n\n- \ud83d\udcac **Pesan otomatis** tersedia di link (misalnya: \"Halo, saya dari website Anda, ingin tanya produk X\")\n- \u26a1 **Floating button** yang selalu tampil saat scroll\n- \ud83d\udccb **Form + WhatsApp hybrid**: isi form \u2192 langsung redirect ke WhatsApp dengan data terisi otomatis\n\n## Kenapa UMKM Harus Punya Website + WhatsApp?\n\n- **Kredibilitas**: Bisnis dengan website terlihat lebih profesional dan terpercaya\n- **24/7 Marketing**: Website bekerja bahkan saat Anda tidur\n- **SEO**: Google akan menampilkan bisnis Anda saat orang cari produk/jasa Anda\n\n## Berapa Biayanya?\n\nPaket website UMKM + WhatsApp integration di NurdiansyahLabs mulai **Rp 1.750.000**, sudah termasuk hosting gratis tahun pertama.\n    "
+    "content": "\nDi Indonesia, **WhatsApp adalah raja komunikasi bisnis**. Lebih dari 90% transaksi B2C di Indonesia diawali atau ditutup via WhatsApp.\nWebsite tanpa tombol WhatsApp sama saja kehilangan setengah potensi penjualan Anda.\n\n## Bagaimana Integrasi WhatsApp Bekerja?\n\nTombol WhatsApp di website secara teknis menggunakan link wa.me yang langsung membuka chat ke nomor bisnis Anda.\nIni bisa dikombinasikan dengan:\n\n- \ud83d\udcac **Pesan otomatis** tersedia di link (misalnya: \"Halo, saya dari website Anda, ingin tanya produk X\")\n- \u26a1 **Floating button** yang selalu tampil saat scroll\n- \ud83d\udccb **Form + WhatsApp hybrid**: isi form \u2192 langsung redirect ke WhatsApp dengan data terisi otomatis\n\n## Kenapa UMKM Harus Punya Website + WhatsApp?\n\n- **Kredibilitas**: Bisnis dengan website terlihat lebih profesional dan terpercaya\n- **24/7 Marketing**: Website bekerja bahkan saat Anda tidur\n- **SEO**: Google akan menampilkan bisnis Anda saat orang cari produk/jasa Anda\n\n## Berapa Biayanya?\n\nPaket website UMKM + WhatsApp integration di NurdiansyahLabs mulai **Rp 1.750.000**, sudah termasuk hosting gratis tahun pertama.\n    ",
+    "images": "[{\"url\": \"https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=1200&auto=format&fit=crop&q=80\", \"is_primary\": true}]"
   },
   {
     "slug": "manfaat-machine-learning-untuk-bisnis-kecil",
@@ -252,7 +266,7 @@
     "serviceLabel": "Data Science",
     "accent": "#7c3aed",
     "accentLight": "#ede9fe",
-    "img": "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=600&fit=crop",
+    "img": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&auto=format&fit=crop&q=80",
     "faqs": [
       {
         "q": "Apakah machine learning butuh data yang sangat banyak?",
@@ -267,6 +281,7 @@
         "a": "Sama sekali tidak. Tim NurdiansyahLabs menangani seluruh proses teknis. Anda hanya perlu memahami hasil laporannya."
       }
     ],
-    "content": "\nDulu, **Machine Learning** hanya bisa diakses perusahaan dengan budget ratusan juta. Kini, UMKM pun bisa merasakan manfaatnya dengan biaya yang sangat terjangkau.\n\n## 5 Cara Machine Learning Membantu Bisnis Kecil\n\n## 1. Prediksi Kebutuhan Stok\n\nModel forecasting dapat memprediksi berapa banyak stok yang dibutuhkan minggu depan berdasarkan histori penjualan, hari dalam seminggu, cuaca, dan event lokal. Hasilnya: **stok tidak berlebihan, tidak kekurangan**.\n\n## 2. Segmentasi Pelanggan Otomatis\n\nML dapat mengelompokkan pelanggan berdasarkan perilaku belanja \u2014 mana yang loyal, mana yang price-sensitive, mana yang butuh didekati kembali. Ini membantu personalisasi promo.\n\n## 3. Deteksi Pengeluaran Anomali\n\nSistem ML dapat mendeteksi jika ada pengeluaran atau transaksi yang tidak wajar \u2014 berguna untuk mencegah kecurangan internal atau kesalahan input.\n\n## 4. Prediksi Churn Pelanggan\n\nTahu siapa pelanggan yang dalam 30 hari ke depan kemungkinan tidak akan balik lagi \u2014 sebelum mereka pergi. Aktif follow-up sebelum terlambat.\n\n## 5. Rekomendasi Produk\n\nSeperti \"Orang yang beli ini juga baca ini\" di Tokopedia \u2014 model rekomendasi bisa diterapkan di toko online Anda sendiri untuk meningkatkan average order value.\n    "
+    "content": "\nDulu, **Machine Learning** hanya bisa diakses perusahaan dengan budget ratusan juta. Kini, UMKM pun bisa merasakan manfaatnya dengan biaya yang sangat terjangkau.\n\n## 5 Cara Machine Learning Membantu Bisnis Kecil\n\n## 1. Prediksi Kebutuhan Stok\n\nModel forecasting dapat memprediksi berapa banyak stok yang dibutuhkan minggu depan berdasarkan histori penjualan, hari dalam seminggu, cuaca, dan event lokal. Hasilnya: **stok tidak berlebihan, tidak kekurangan**.\n\n## 2. Segmentasi Pelanggan Otomatis\n\nML dapat mengelompokkan pelanggan berdasarkan perilaku belanja \u2014 mana yang loyal, mana yang price-sensitive, mana yang butuh didekati kembali. Ini membantu personalisasi promo.\n\n## 3. Deteksi Pengeluaran Anomali\n\nSistem ML dapat mendeteksi jika ada pengeluaran atau transaksi yang tidak wajar \u2014 berguna untuk mencegah kecurangan internal atau kesalahan input.\n\n## 4. Prediksi Churn Pelanggan\n\nTahu siapa pelanggan yang dalam 30 hari ke depan kemungkinan tidak akan balik lagi \u2014 sebelum mereka pergi. Aktif follow-up sebelum terlambat.\n\n## 5. Rekomendasi Produk\n\nSeperti \"Orang yang beli ini juga baca ini\" di Tokopedia \u2014 model rekomendasi bisa diterapkan di toko online Anda sendiri untuk meningkatkan average order value.\n    ",
+    "images": "[{\"url\": \"https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&auto=format&fit=crop&q=80\", \"is_primary\": true}]"
   }
 ]

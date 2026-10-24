@@ -10,6 +10,7 @@ import { useTracker } from '../hooks/useTracker'
 import { getOptimizedImg } from '../utils/imgHelper'
 import { useLanguage } from '../i18n/LanguageContext'
 import { getFallbackPost, INITIAL_BLOG_POSTS } from '../data/blogData'
+import { resolveArticleImg } from './BlogListing'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import SEO from '../components/seo/SEO'
@@ -303,6 +304,7 @@ export default function BlogPage() {
     }
 
     const pageUrl = `https://nurdiansyahlabs.com/blog/${actualSlug}`
+    const featuredImg = resolveArticleImg(activePost)
 
     return (
         <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: '#070A0F', color: '#F8FAFC' }}>
@@ -311,7 +313,7 @@ export default function BlogPage() {
                 description={activePost.description}
                 canonical={`/blog/${actualSlug}`}
                 type="article"
-                image={activePost.img}
+                image={featuredImg}
                 breadcrumbs={[
                     { name: 'Home', url: '/' },
                     { name: 'Blog', url: '/blog' },
@@ -436,6 +438,31 @@ export default function BlogPage() {
                             )}
                         </div>
                     </header>
+
+                    {/* Featured Article Banner */}
+                    {featuredImg && (
+                        <div style={{
+                            width: '100%',
+                            height: 'clamp(220px, 36vw, 420px)',
+                            borderRadius: '16px',
+                            overflow: 'hidden',
+                            marginBottom: '2.5rem',
+                            border: '1px solid rgba(255, 255, 255, 0.1)',
+                            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.4)',
+                            background: '#0B0F17'
+                        }}>
+                            <img 
+                                src={getOptimizedImg(featuredImg, { w: 1200, h: 630 })}
+                                alt={activePost.title}
+                                loading="eager"
+                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                onError={e => {
+                                    e.currentTarget.onerror = null;
+                                    e.currentTarget.src = 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&auto=format&fit=crop&q=80';
+                                }}
+                            />
+                        </div>
+                    )}
 
                     {/* Article Body Card */}
                     <article style={{

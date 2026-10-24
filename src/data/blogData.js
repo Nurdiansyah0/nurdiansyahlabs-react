@@ -20,7 +20,7 @@ export const INITIAL_BLOG_POSTS = [
         authorRole: 'Enterprise Software Engineer & Systems Architect',
         publishedAt: '2026-03-15',
         readTime: '7 min baca',
-        img: '/assets/showcase2.webp',
+        img: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&auto=format&fit=crop&q=80',
         faqs: [
             {
                 q: 'Kapan perusahaan harus memilih Modular Monolith dibanding Microservices?',
@@ -97,7 +97,7 @@ Jika perusahaan Anda sedang merancang ulang sistem atau menghadapi kendala perfo
         authorRole: 'Enterprise Software Engineer & Systems Architect',
         publishedAt: '2026-03-20',
         readTime: '9 min baca',
-        img: '/assets/showcase1.webp',
+        img: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&auto=format&fit=crop&q=80',
         faqs: [
             {
                 q: 'Apa perbedaan web developer biasa dengan Full SDLC Software Engineer?',
@@ -164,7 +164,7 @@ Jika Anda membutuhkan partner engineering untuk memimpin proyek software enterpr
         authorRole: 'Enterprise Software Engineer & Systems Architect',
         publishedAt: '2026-03-25',
         readTime: '6 min baca',
-        img: '/assets/showcase3.webp',
+        img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&auto=format&fit=crop&q=80',
         faqs: [
             {
                 q: 'Berapa lama proses pembuatan custom ERP?',
@@ -215,7 +215,7 @@ Lihat implementasi sistem nyata kami pada [Studi Kasus Primatera Poultry ERP](/s
         authorRole: 'Enterprise Software Engineer & Systems Architect',
         publishedAt: '2026-04-01',
         readTime: '8 min baca',
-        img: '/assets/showcase1.webp',
+        img: 'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=1200&auto=format&fit=crop&q=80',
         faqs: [],
         content: `## Mengapa Query Cepat di Local Menjadi Lambat di Produksi?
 
@@ -263,7 +263,7 @@ Pelajari bagaimana kami mengintegrasikan arsitektur database berkinerja tinggi d
         authorRole: 'Enterprise Software Engineer & Systems Architect',
         publishedAt: '2026-04-05',
         readTime: '10 min baca',
-        img: '/assets/showcase2.webp',
+        img: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&auto=format&fit=crop&q=80',
         faqs: [],
         content: `## Tantangan Lapangan: Internet Cabang yang Fluktuatif
 
