@@ -40,13 +40,15 @@ ServerSignature Off
     RewriteEngine On
 
     # ── Canonical 301 Redirects: Force HTTPS & non-WWW (Cloudflare Aware) ────
+    # 1. Strip www prefix (e.g. www.nurdiansyahlabs.com -> nurdiansyahlabs.com)
+    RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+    RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+
+    # 2. Force HTTPS preserving the exact host (main domain or active subdomain)
     RewriteCond %{HTTP:CF-Visitor} !'"scheme":"https"' [NC]
     RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
     RewriteCond %{HTTPS} off
-    RewriteRule ^ https://nurdiansyahlabs.com%{REQUEST_URI} [R=301,L]
-
-    RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-    RewriteRule ^ https://nurdiansyahlabs.com%{REQUEST_URI} [R=301,L]
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
     # ── Maintenance Mode (COMMENTED OUT - Live for Googlebot Indexing) ──
     # ErrorDocument 503 /maintenance.html
