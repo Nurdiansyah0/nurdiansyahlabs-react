@@ -4,7 +4,7 @@
  * Run on cPanel terminal or local: php seed_blogs.php
  */
 
-require_once __DIR__ . '/database/db.php';
+require_once __DIR__ . '/../db.php';
 $pdo = getDB();
 
 if (!$pdo) {

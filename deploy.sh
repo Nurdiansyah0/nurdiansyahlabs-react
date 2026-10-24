@@ -9,6 +9,9 @@
 set -e
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 ZIP_NAME="deploy_${TIMESTAMP}.zip"
+ZIP_DIR="backups/builds"
+mkdir -p "$ZIP_DIR"
+ZIP_PATH="$ZIP_DIR/$ZIP_NAME"
 BUILD_DIR="dist"
 API_SRC="api"
 GIT_HASH=$(git rev-parse --short HEAD 2>/dev/null || echo "no-git")
@@ -133,8 +136,8 @@ echo "🗺️  sitemap.xml and robots.txt are included from public/..."
 
 # Step 8: Zip everything (exclude source control, OS junk, dev files)
 echo ""
-echo "🗜️  Creating deployment zip: $ZIP_NAME"
-cd "$BUILD_DIR" && zip -r "../$ZIP_NAME" . \
+echo "🗜️  Creating deployment zip: $ZIP_PATH"
+cd "$BUILD_DIR" && zip -r "../$ZIP_PATH" . \
     -x "*.git*" \
     -x "*.github*" \
     -x "*.DS_Store" \
@@ -147,8 +150,8 @@ echo "╔═══════════════════════�
 echo "║  ✅ DEPLOY PACKAGE READY                   ║"
 echo "╚════════════════════════════════════════════╝"
 echo ""
-echo "  File   : $ZIP_NAME"
-echo "  Size   : $(du -sh $ZIP_NAME | cut -f1)"
+echo "  File   : $ZIP_PATH"
+echo "  Size   : $(du -sh $ZIP_PATH | cut -f1)"
 echo "  Commit : $GIT_HASH"
 echo ""
 echo "  UPLOAD STEPS:"
