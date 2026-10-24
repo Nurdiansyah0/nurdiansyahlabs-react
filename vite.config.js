@@ -38,7 +38,8 @@ export default defineConfig({
             prerender({
                 routes: [
                     '/', 
-                    '/blog', 
+                    '/blog',
+                    '/trends', 
                     '/services/web-development',
                     '/services/landing-page',
                     '/services/data-analyst',

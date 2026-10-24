@@ -18,6 +18,7 @@ const showcases = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../src/dat
 const routes = [
     '/',
     '/blog',
+    '/trends',
     ...services.map(s => `/services/${s.slug}`),
     ...showcases.map(s => `/showcase/${s.categorySlug}/${s.slug}`),
 ];
