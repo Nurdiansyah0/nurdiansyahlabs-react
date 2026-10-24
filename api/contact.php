@@ -8,14 +8,13 @@
  */
 
 require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/cors.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 header('Content-Type: application/json; charset=utf-8');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type');
+setCorsHeaders(['POST', 'OPTIONS']);
 header('X-Content-Type-Options: nosniff');
 header('X-Frame-Options: DENY');
 header('Referrer-Policy: strict-origin-when-cross-origin');
@@ -28,28 +27,62 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
-    echo json_encode(['error' => 'Method not allowed']);
+    echo json_encode(['error' => 'Method not allowed. Only POST is accepted.']);
     exit;
 }
 
-require_once __DIR__ . '/../database/db.php';
-$pdo = getDB();
+// ── Rate Limiting (5 requests per 10 minutes per IP) ─────────────────────────
+$rawIp = $_SERVER['HTTP_CF_CONNECTING_IP'] ?? $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1';
+if (strpos($rawIp, ',') !== false) {
+    $rawIp = trim(explode(',', $rawIp)[0]);
+}
+$clientIp = preg_replace('/[^0-9a-fA-F:\.]/', '', $rawIp) ?: '127.0.0.1';
 
-if (!$pdo) {
-    http_response_code(500);
-    echo json_encode(['status' => 'error', 'message' => 'Database connection failed']);
+$cacheDir = __DIR__ . '/../cache/';
+if (!is_dir($cacheDir)) {
+    @mkdir($cacheDir, 0755, true);
+}
+$rateLimitFile = $cacheDir . 'rl_' . md5($clientIp) . '.json';
+$maxAttempts = 5;
+$decaySeconds = 600; // 10 minutes window
+
+$rateData = ['count' => 0, 'first_request' => time()];
+if (file_exists($rateLimitFile)) {
+    $parsed = json_decode(@file_get_contents($rateLimitFile), true);
+    if (is_array($parsed) && isset($parsed['count'], $parsed['first_request'])) {
+        if (time() - $parsed['first_request'] < $decaySeconds) {
+            $rateData = $parsed;
+        }
+    }
+}
+
+if ($rateData['count'] >= $maxAttempts) {
+    $retryAfter = $decaySeconds - (time() - $rateData['first_request']);
+    http_response_code(429);
+    header('Retry-After: ' . max(1, $retryAfter));
+    echo json_encode([
+        'error' => 'Too many requests. Please wait a few minutes before submitting again.'
+    ]);
     exit;
 }
 
-define('ADMIN_EMAIL', 'Nudiansyahdian28.adv@gmail.com');
+$rateData['count']++;
+@file_put_contents($rateLimitFile, json_encode($rateData));
 
 // ── Read JSON payload ────────────────────────────────────────────────────────
 $inputJSON = file_get_contents('php://input');
 $input = json_decode($inputJSON, true);
 
-if (!$input) {
+if (!$input || !is_array($input)) {
     http_response_code(400);
     echo json_encode(['error' => 'Invalid JSON payload']);
+    exit;
+}
+
+// ── Bot Honeypot Protection ──────────────────────────────────────────────────
+if (!empty($input['website_hp']) || !empty($input['_hp'])) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Spam detected']);
     exit;
 }
 
@@ -71,6 +104,17 @@ if (!filter_var($contact, FILTER_VALIDATE_EMAIL) && !preg_match('/^[0-9\+\-\s]{6
     echo json_encode(['error' => 'Please provide a valid email address or phone number.']);
     exit;
 }
+
+require_once __DIR__ . '/../database/db.php';
+$pdo = getDB();
+
+if (!$pdo) {
+    http_response_code(500);
+    echo json_encode(['error' => 'Database connection failed']);
+    exit;
+}
+
+define('ADMIN_EMAIL', 'Nudiansyahdian28.adv@gmail.com');
 
 // ── Insert Lead to MySQL ─────────────────────────────────────────────────────
 $timestamp = date('Y-m-d H:i:s');

@@ -118,10 +118,9 @@ export default function App() {
                                             <Route path="/showcase/fullstack/:projectId" element={<FullstackShowcase />} />
                                             <Route path="/showcase/data-analyst/:projectId" element={<DataAnalystShowcase />} />
                                             <Route path="/showcase/data-science/:projectId" element={<DataScienceShowcase />} />
-                                            {/* SEO & Trends routes */}
+                                            {/* SEO & Blog routes */}
                                             <Route path="/trends" element={<TrendsDashboard />} />
                                             <Route path="/blog" element={<BlogListing />} />
-                                            <Route path="/blog/:geo/:langSlug" element={<BlogPage />} />
                                             <Route path="/blog/:slug" element={<BlogPage />} />
                                             {/* Programmatic SEO Routes */}
                                             <Route path="/layanan/industri/:industrySlug" element={<IndustryServicePage />} />

@@ -11,6 +11,17 @@ const __dirname = path.dirname(__filename)
 // Generate dynamic routes
 const programmaticRoutes = programmaticData.industries.map(ind => `/layanan/industri/${ind.slug}`)
 const blogRoutes = [
+    '/blog/programmer-freelance-indonesia',
+    '/blog/jasa-landing-page-murah-indonesia',
+    '/blog/jasa-fullstack-developer-indonesia',
+    '/blog/jasa-analisis-data-bisnis-indonesia',
+    '/blog/jasa-machine-learning-data-science',
+    '/blog/buat-dashboard-bisnis-power-bi-tableau',
+    '/blog/berapa-harga-jasa-landing-page-profesional',
+    '/blog/cara-memilih-jasa-web-developer-terpercaya',
+    '/blog/kapan-bisnis-butuh-data-analyst',
+    '/blog/jasa-website-umkm-integrasi-whatsapp',
+    '/blog/manfaat-machine-learning-untuk-bisnis-kecil',
     '/blog/arsitektur-software-enterprise-monolith-vs-microservices',
     '/blog/panduan-full-sdlc-software-engineer-enterprise',
     '/blog/migrasi-excel-ke-custom-erp-operasional',
@@ -28,7 +39,6 @@ export default defineConfig({
                 routes: [
                     '/', 
                     '/blog', 
-                    '/trends', 
                     '/services/web-development',
                     '/services/landing-page',
                     '/services/data-analyst',

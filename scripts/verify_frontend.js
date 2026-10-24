@@ -50,7 +50,7 @@ function loadDeclaredRoutes() {
     }
 
     // Static routes always expected
-    routes.push('/trends', '/blog');
+    routes.push('/blog');
 
     return [...new Set(routes)];
 }

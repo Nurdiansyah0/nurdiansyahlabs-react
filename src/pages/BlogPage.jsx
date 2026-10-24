@@ -14,6 +14,7 @@ import { resolveArticleImg } from './BlogListing'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import SEO from '../components/seo/SEO'
+import NotFound from './NotFound'
 
 // Enhanced Markdown to JSX Parser supporting code blocks, links, tables, lists, and headings
 function parseMarkdownToElements(text) {
@@ -250,11 +251,11 @@ function CodeBlock({ language, code }) {
 }
 
 export default function BlogPage() {
-    const { geo, langSlug, slug } = useParams()
+    const { slug } = useParams()
     const { trackEvent } = useTracker()
     const { isIndo } = useLanguage()
 
-    const actualSlug = langSlug && geo ? `${geo}/${langSlug}` : slug
+    const actualSlug = slug
     const fallback = useMemo(() => getFallbackPost(actualSlug), [actualSlug])
 
     const [post, setPost] = useState(fallback)
@@ -263,6 +264,10 @@ export default function BlogPage() {
     // Background fetch to sync with remote API if article exists in DB
     useEffect(() => {
         let isMounted = true
+        const currentFallback = getFallbackPost(actualSlug)
+        setPost(currentFallback)
+        setLoading(!currentFallback)
+
         const fetchPost = async () => {
             try {
                 const res = await fetch(`/api/v1/posts?slug=${actualSlug}`)
@@ -283,24 +288,44 @@ export default function BlogPage() {
         return () => { isMounted = false }
     }, [actualSlug])
 
+    const activePost = post || fallback
+
     // Dwell Time Tracking for SEO signals
     useEffect(() => {
-        if (!post) return
+        if (!activePost) return
         const timer = setTimeout(() => {
-            trackEvent('read_article', { slug: actualSlug, title: post.title, duration: 15 })
+            trackEvent('read_article', { slug: actualSlug, title: activePost.title, duration: 15 })
         }, 15000)
         return () => clearTimeout(timer)
-    }, [actualSlug, post, trackEvent])
+    }, [actualSlug, activePost, trackEvent])
 
-    // Current page data
-    const activePost = post || {
-        slug: actualSlug,
-        title: `${actualSlug.replace(/-/g, ' ').toUpperCase()} | NurdiansyahLabs`,
-        description: 'Artikel rekayasa software enterprise dan sistem arsitektur oleh NurdiansyahLabs.',
-        content: `Informasi teknis untuk **${actualSlug.replace(/-/g, ' ')}** sedang disinkronkan dari repositori sistem. Silakan hubungi kami untuk konsultasi arsitektur langsung.`,
-        category: 'Enterprise Engineering',
-        author: 'Nurdiansyah',
-        publishedAt: '2026-04-01'
+    // While loading, render a clean loading spinner/skeleton
+    if (loading) {
+        return (
+            <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: '#070A0F', color: '#F8FAFC' }}>
+                <Navbar />
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '6rem 1.5rem' }}>
+                    <div style={{
+                        width: '44px',
+                        height: '44px',
+                        border: '3px solid rgba(99, 102, 241, 0.2)',
+                        borderTop: '3px solid #6366F1',
+                        borderRadius: '50%',
+                        animation: 'spin 1s linear infinite'
+                    }} />
+                    <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
+                    <p style={{ marginTop: '1.25rem', fontSize: '0.9rem', color: '#94A3B8', fontFamily: 'monospace' }}>
+                        {isIndo ? 'Memuat artikel teknis...' : 'Loading technical article...'}
+                    </p>
+                </div>
+                <Footer />
+            </div>
+        )
+    }
+
+    // If not loading and no post / fallback found, immediately render NotFound (404)
+    if (!activePost) {
+        return <NotFound />
     }
 
     const pageUrl = `https://nurdiansyahlabs.com/blog/${actualSlug}`

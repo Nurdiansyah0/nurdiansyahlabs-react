@@ -10,9 +10,22 @@
  * during heavy concurrent traffic (like Lighthouse audits).
  */
 
-header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET');
+header('Content-Type: application/json; charset=utf-8');
+require_once __DIR__ . '/cors.php';
+setCorsHeaders(['GET', 'OPTIONS'], true);
+header('X-Content-Type-Options: nosniff');
+
+// Handle preflight OPTIONS request
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    http_response_code(405);
+    echo json_encode(['error' => 'Method not allowed. Only GET is accepted.']);
+    exit;
+}
 
 define('CACHE_DIR', __DIR__ . '/../cache/');
 define('CACHE_TTL', 300); // 5 minutes cache
@@ -22,17 +35,25 @@ function readCache(string $key): ?array {
     if (!file_exists($file)) return null;
     if (time() - filemtime($file) > CACHE_TTL) return null;
     $data = json_decode(file_get_contents($file), true);
-    return $data ?: null;
+    return is_array($data) ? $data : null;
 }
 
 function writeCache(string $key, array $data): void {
-    if (!is_dir(CACHE_DIR)) mkdir(CACHE_DIR, 0755, true);
-    file_put_contents(CACHE_DIR . md5($key) . '.json', json_encode($data));
+    if (!is_dir(CACHE_DIR)) {
+        @mkdir(CACHE_DIR, 0755, true);
+    }
+    @file_put_contents(CACHE_DIR . md5($key) . '.json', json_encode($data));
 }
 
 // ── GET Single Post ──────────────────────────────────────────────────────────
 if (isset($_GET['slug'])) {
     $slug = trim($_GET['slug']);
+    if ($slug === '') {
+        http_response_code(400);
+        echo json_encode(['error' => 'Slug parameter cannot be empty']);
+        exit;
+    }
+
     $cacheKey = 'post_' . $slug;
     
     $cached = readCache($cacheKey);
@@ -47,7 +68,7 @@ if (isset($_GET['slug'])) {
 
     if (!$pdo) {
         http_response_code(500);
-        echo json_encode(['status' => 'error', 'message' => 'Database connection failed']);
+        echo json_encode(['error' => 'Database connection failed']);
         exit;
     }
 
@@ -81,7 +102,7 @@ $pdo = getDB();
 
 if (!$pdo) {
     http_response_code(500);
-    echo json_encode(['status' => 'error', 'message' => 'Database connection failed']);
+    echo json_encode(['error' => 'Database connection failed']);
     exit;
 }
 

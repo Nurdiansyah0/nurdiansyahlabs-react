@@ -1,3 +1,5 @@
+import corePosts from '../../database/posts.json'
+
 /**
  * NurdiansyahLabs – Curated Technical Articles & Fallback Blog Data
  * Ensures instant SSR, zero-blank state, and rich search engine indexability
@@ -282,10 +284,36 @@ Pelajari demo interaktif dari sistem ini di [Showcase Koperasi POS](/showcase/fu
     }
 ];
 
+const normalizedCorePosts = (corePosts || []).map(p => ({
+    id: p.id || `post-${p.slug}`,
+    slug: p.slug,
+    title: p.title,
+    description: p.description,
+    excerpt: p.description,
+    category: p.category || p.serviceLabel || 'Engineering',
+    serviceLabel: p.serviceLabel || 'Web Development',
+    tags: p.tags || ['Engineering', 'Software', 'Digital Solutions'],
+    accent: p.accent || '#4f46e5',
+    accentLight: p.accentLight || '#eef2ff',
+    author: p.author || 'Nurdiansyah',
+    authorRole: p.authorRole || 'Enterprise Software Engineer & Systems Architect',
+    publishedAt: p.publishedAt || (p.created_at ? p.created_at.split('T')[0] : '2026-03-20'),
+    readTime: p.readTime || '8 min baca',
+    img: p.img || (p.images && p.images[0] ? p.images[0].url : 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&auto=format&fit=crop&q=80'),
+    faqs: p.faqs || [],
+    content: p.content
+}));
+
+// Merge core posts while preventing duplicates
+const existingSlugs = new Set(INITIAL_BLOG_POSTS.map(p => p.slug));
+const nonOverlappingCore = normalizedCorePosts.filter(p => !existingSlugs.has(p.slug));
+
+export const ALL_BLOG_POSTS = [...INITIAL_BLOG_POSTS, ...nonOverlappingCore];
+
 export function getFallbackPost(slug) {
     if (!slug) return null;
     const cleanSlug = slug.replace(/^.*\//, ''); // handle nested geo or prefix
-    return INITIAL_BLOG_POSTS.find(p => p.slug === cleanSlug || p.slug === slug) || null;
+    return ALL_BLOG_POSTS.find(p => p.slug === cleanSlug || p.slug === slug) || null;
 }
 
-export const BLOG_POSTS = INITIAL_BLOG_POSTS;
+export const BLOG_POSTS = ALL_BLOG_POSTS;

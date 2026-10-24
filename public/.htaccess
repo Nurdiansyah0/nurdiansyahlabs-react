@@ -7,10 +7,10 @@ ServerSignature Off
 
 # ── Security Headers ──────────────────────────────────────────────────────────
 <IfModule mod_headers.c>
-    Header set X-Content-Type-Options "nosniff"
-    Header set X-Frame-Options "SAMEORIGIN"
-    Header set X-XSS-Protection "1; mode=block"
-    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
     Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(self)"
 </IfModule>
 
@@ -38,6 +38,10 @@ ServerSignature Off
 # Variant B loads index_b.html if it exists, otherwise falls back to index.html.
 <IfModule mod_rewrite.c>
     RewriteEngine On
+
+    # ── Permanently drop legacy viral trends scraper paths (HTTP 410 Gone) ──
+    RewriteRule ^blog/(jp|us|id)/ - [R=410,L]
+    RewriteRule ^trends/?.*$ /blog [R=301,L,NC]
 
     # ── Canonical 301 Redirects: Force HTTPS & non-WWW (Cloudflare Aware) ────
     # 1. Strip www prefix (e.g. www.nurdiansyahlabs.com -> nurdiansyahlabs.com)

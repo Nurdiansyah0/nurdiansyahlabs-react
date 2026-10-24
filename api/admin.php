@@ -11,7 +11,7 @@ require_once __DIR__ . '/cors.php';
 setCorsHeaders(['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']);
 
 // Handle preflight OPTIONS request
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'OPTIONS') {
     http_response_code(200);
     exit;
 }
@@ -31,6 +31,200 @@ verifyAdminToken($pdo);
 
 $method = $_SERVER['REQUEST_METHOD'];
 $action = $_GET['action'] ?? '';
+
+/**
+ * Purge all .json cache files from cache directories
+ * 
+ * @return array{purged_files: string[], errors: string[]}
+ */
+function purgeCacheFiles(): array {
+    $cacheDirs = [
+        __DIR__ . '/../cache/',
+        __DIR__ . '/cache/'
+    ];
+    $purged = [];
+    $errors = [];
+
+    foreach ($cacheDirs as $dir) {
+        if (!is_dir($dir)) {
+            continue;
+        }
+        $files = glob($dir . '*.json');
+        if ($files === false) {
+            continue;
+        }
+        foreach ($files as $file) {
+            if (is_file($file)) {
+                if (@unlink($file)) {
+                    $purged[] = basename($file);
+                } else {
+                    $errors[] = basename($file);
+                }
+            }
+        }
+    }
+
+    return [
+        'purged_files' => array_values(array_unique($purged)),
+        'errors' => $errors
+    ];
+}
+
+/**
+ * Safely clean up old test artifacts and orphaned directories
+ * 
+ * @return array{deleted_files: string[], removed_dirs: string[], errors: string[]}
+ */
+function cleanupOrphans(): array {
+    $deletedFiles = [];
+    $removedDirs = [];
+    $errors = [];
+
+    // 1. Clean test files matching *_valid.png or test_* in upload_articles/
+    $uploadDirs = [
+        __DIR__ . '/../upload_articles/',
+        __DIR__ . '/../public/upload_articles/',
+        __DIR__ . '/upload_articles/'
+    ];
+
+    foreach ($uploadDirs as $dir) {
+        if (!is_dir($dir)) {
+            continue;
+        }
+        $patterns = [
+            $dir . '*_valid.png',
+            $dir . 'test_*.png',
+            $dir . 'test_*.jpg',
+            $dir . 'test_*.webp'
+        ];
+        foreach ($patterns as $pattern) {
+            $files = glob($pattern);
+            if ($files === false) {
+                continue;
+            }
+            foreach ($files as $file) {
+                if (is_file($file)) {
+                    if (@unlink($file)) {
+                        $deletedFiles[] = basename($file);
+                    } else {
+                        $errors[] = 'Failed to delete ' . basename($file);
+                    }
+                }
+            }
+        }
+    }
+
+    // 2. Safely remove orphaned blog/jp, blog/us, blog/id directories
+    $orphanDirCandidates = [
+        __DIR__ . '/../blog/jp',
+        __DIR__ . '/../blog/us',
+        __DIR__ . '/../blog/id',
+        __DIR__ . '/../public/blog/jp',
+        __DIR__ . '/../public/blog/us',
+        __DIR__ . '/../public/blog/id'
+    ];
+
+    $deleteDirRecursive = function (string $dir) use (&$deleteDirRecursive, &$deletedFiles, &$errors): bool {
+        if (!is_dir($dir)) return false;
+        $items = scandir($dir);
+        if ($items === false) return false;
+        foreach ($items as $item) {
+            if ($item === '.' || $item === '..') continue;
+            $path = $dir . DIRECTORY_SEPARATOR . $item;
+            if (is_dir($path)) {
+                $deleteDirRecursive($path);
+            } else {
+                if (@unlink($path)) {
+                    $deletedFiles[] = $path;
+                } else {
+                    $errors[] = 'Failed to delete ' . $path;
+                }
+            }
+        }
+        return @rmdir($dir);
+    };
+
+    foreach ($orphanDirCandidates as $cand) {
+        $real = realpath($cand);
+        if ($real && is_dir($real)) {
+            // Strict regex verification to prevent accidental path traversal
+            if (preg_match('#/blog/(jp|us|id)$#', $real)) {
+                if ($deleteDirRecursive($real)) {
+                    $removedDirs[] = basename(dirname($real)) . '/' . basename($real);
+                } else {
+                    $errors[] = 'Failed to remove directory: ' . $real;
+                }
+            }
+        }
+    }
+
+    return [
+        'deleted_files' => array_values(array_unique($deletedFiles)),
+        'removed_dirs' => array_values(array_unique($removedDirs)),
+        'errors' => $errors
+    ];
+}
+
+// ── PURGE CACHE Action ───────────────────────────────────────────────────────
+if (($method === 'POST' || $method === 'GET') && $action === 'purge_cache') {
+    $result = purgeCacheFiles();
+    http_response_code(200);
+    echo json_encode([
+        'status' => 'success',
+        'action' => 'purge_cache',
+        'purged_count' => count($result['purged_files']),
+        'purged_files' => $result['purged_files'],
+        'errors' => $result['errors'],
+        'timestamp' => date('c'),
+        'message' => count($result['purged_files']) . ' cache file(s) safely wiped.'
+    ]);
+    exit;
+}
+
+// ── CLEANUP ORPHANS Action ───────────────────────────────────────────────────
+if (($method === 'POST' || $method === 'GET') && $action === 'cleanup_orphans') {
+    $result = cleanupOrphans();
+    http_response_code(200);
+    echo json_encode([
+        'status' => 'success',
+        'action' => 'cleanup_orphans',
+        'deleted_files_count' => count($result['deleted_files']),
+        'deleted_files' => $result['deleted_files'],
+        'removed_dirs_count' => count($result['removed_dirs']),
+        'removed_dirs' => $result['removed_dirs'],
+        'errors' => $result['errors'],
+        'timestamp' => date('c'),
+        'message' => 'Orphaned files and test directories cleaned successfully.'
+    ]);
+    exit;
+}
+
+// ── CACHE STATUS Action ──────────────────────────────────────────────────────
+if ($method === 'GET' && $action === 'cache_status') {
+    $cacheDir = __DIR__ . '/../cache/';
+    $files = [];
+    if (is_dir($cacheDir)) {
+        $matches = glob($cacheDir . '*.json');
+        if ($matches !== false) {
+            foreach ($matches as $m) {
+                $files[] = [
+                    'filename' => basename($m),
+                    'size' => filesize($m),
+                    'mtime' => date('c', filemtime($m)),
+                    'age_seconds' => time() - filemtime($m)
+                ];
+            }
+        }
+    }
+    http_response_code(200);
+    echo json_encode([
+        'status' => 'success',
+        'action' => 'cache_status',
+        'count' => count($files),
+        'files' => $files
+    ]);
+    exit;
+}
 
 // ── GET Leads ────────────────────────────────────────────────────────────────
 if ($method === 'GET' && $action === 'leads') {
@@ -160,6 +354,9 @@ if ($method === 'POST' && $action === 'posts') {
             }
         }
 
+        // Invalidate frontend cache immediately
+        purgeCacheFiles();
+
         http_response_code(201);
         echo json_encode(['status' => 'success', 'post' => $returnPost]);
     } else {
@@ -215,6 +412,9 @@ if ($method === 'PUT' && $action === 'posts') {
     $stmt = $pdo->prepare($sql);
 
     if ($stmt->execute($updateData)) {
+        // Invalidate frontend cache immediately
+        purgeCacheFiles();
+
         http_response_code(200);
         echo json_encode(['status' => 'success']);
     } else {
@@ -267,6 +467,9 @@ if ($method === 'DELETE' && $action === 'posts') {
             }
         }
     }
+
+    // Invalidate frontend cache immediately
+    purgeCacheFiles();
 
     http_response_code(200);
     echo json_encode(['status' => 'success']);
