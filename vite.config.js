@@ -4,12 +4,14 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import prerender from '@prerenderer/rollup-plugin'
 import programmaticData from './src/data/programmatic-seo.json' with { type: 'json' }
+import showcaseData from './src/data/showcase.json' with { type: 'json' }
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 // Generate dynamic routes
 const programmaticRoutes = programmaticData.industries.map(ind => `/layanan/industri/${ind.slug}`)
+const showcaseRoutes = showcaseData.showcases.map(s => `/showcase/${s.categorySlug}/${s.slug}`)
 const blogRoutes = [
     '/blog/programmer-freelance-indonesia',
     '/blog/jasa-landing-page-murah-indonesia',
@@ -39,19 +41,12 @@ export default defineConfig({
                 routes: [
                     '/', 
                     '/blog',
-                    '/trends', 
+                    '/trends',
                     '/services/web-development',
                     '/services/landing-page',
                     '/services/data-analyst',
                     '/services/machine-learning',
-                    '/showcase/landing-page/toko-laptop-batam',
-                    '/showcase/landing-page/batam-chicken-supplier',
-                    '/showcase/landing-page/warung-makan',
-                    '/showcase/landing-page/batam-rental-mobil',
-                    '/showcase/fullstack/koperasi-pos',
-                    '/showcase/fullstack/warehouse-wms',
-                    '/showcase/fullstack/primatera-poultry',
-                    '/showcase/data-science/smart-vision',
+                    ...showcaseRoutes,
                     ...programmaticRoutes,
                     ...blogRoutes
                 ],
