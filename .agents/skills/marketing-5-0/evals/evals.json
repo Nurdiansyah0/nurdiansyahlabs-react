@@ -1,0 +1,41 @@
+{
+  "skill_name": "marketing-5-0",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "How can I apply Marketing 5.0 to my B2B tech consulting firm? We want to leverage AI without losing personal customer touch.",
+      "expected_output": "Should check for product-marketing.md context. Should frame the solution around Kotler's core principle 'Machines are cool, but humans are warm'. Should explain the 5 pillars (Data-Driven, Agile, Predictive, Contextual, Augmented). Should recommend an Augmented Marketing (Bionic Frontline) model where AI qualifies leads and provides context while human consultants deliver high-empathy closing and strategy.",
+      "assertions": [
+        "Checks for product-marketing context",
+        "References Kotler's human-centric philosophy",
+        "Breaks down the 5 pillars of Marketing 5.0",
+        "Provides actionable recommendations for the Augmented Marketing pillar",
+        "Balances automation with human empathy"
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "We sell to both 55-year-old directors and 24-year-old startup founders. How does Marketing 5.0 solve generational gaps in messaging?",
+      "expected_output": "Should identify the generational divide challenge in Marketing 5.0 (Baby Boomers/Gen X vs Gen Z/Millennials). Should provide distinct tactical playbooks for each: ROI and stability/phone for older executives vs speed, authenticity, and WhatsApp/short-form content for Gen Z. Should emphasize avoiding the digital divide with human fallback options.",
+      "assertions": [
+        "Identifies generational matrix across Gen X/Boomers vs Gen Z",
+        "Outlines distinct trust anchors and channels for each group",
+        "Advises on contextual adaptation of headlines and CTA",
+        "Highlights human fallback to bridge the digital divide"
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Explain the difference between Marketing 3.0, 4.0, and 5.0 and give examples of the 2 organizational enablers.",
+      "expected_output": "Should detail the historical evolution (1.0 product, 2.0 customer, 3.0 human-values, 4.0 digital omnichannel, 5.0 technology for humanity). Should identify the two organizational enablers: Data-Driven Marketing (continuous data foundation/CDP) and Agile Marketing (cross-functional growth pods, sprint testing).",
+      "assertions": [
+        "Explains the progression from 1.0 through 5.0",
+        "Explicitly identifies Data-Driven and Agile Marketing as organizational disciplines",
+        "Describes the relationship between organizational enablers and customer-facing next tech"
+      ],
+      "files": []
+    }
+  ]
+}
