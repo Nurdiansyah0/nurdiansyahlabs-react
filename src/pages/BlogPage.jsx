@@ -27,6 +27,8 @@ function parseMarkdownToElements(text) {
     let inList = false
     let listType = 'ul'
     let listBuffer = []
+    let inTable = false
+    let tableRows = []
 
     const flushList = () => {
         if (!inList || listBuffer.length === 0) return
@@ -68,6 +70,106 @@ function parseMarkdownToElements(text) {
         inCodeBlock = false
     }
 
+    const flushTable = () => {
+        if (!inTable || tableRows.length === 0) return
+        const validRows = tableRows.filter(r => !r.isDivider)
+        if (validRows.length > 0) {
+            const headerRow = validRows[0]
+            const bodyRows = validRows.slice(1)
+
+            elements.push(
+                <div
+                    key={`table-wrap-${elements.length}`}
+                    style={{
+                        width: '100%',
+                        maxWidth: '100%',
+                        margin: '1.75rem 0',
+                        borderRadius: '12px',
+                        border: '1px solid rgba(255, 255, 255, 0.12)',
+                        background: '#0B0F17',
+                        overflow: 'hidden'
+                    }}
+                >
+                    {/* Responsive Swipe Helper Badge for Mobile */}
+                    <div style={{
+                        padding: '8px 14px',
+                        background: 'rgba(255, 255, 255, 0.03)',
+                        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        fontSize: '0.75rem',
+                        color: '#94A3B8'
+                    }}>
+                        <span style={{ fontWeight: 600, color: '#E2E8F0' }}>Tabel Perbandingan &amp; Data</span>
+                        <span style={{ color: '#818CF8', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                            Geser horizontal &rarr;
+                        </span>
+                    </div>
+
+                    {/* Touch-Scrollable Table Viewport */}
+                    <div style={{
+                        width: '100%',
+                        maxWidth: '100%',
+                        overflowX: 'auto',
+                        WebkitOverflowScrolling: 'touch'
+                    }}>
+                        <table style={{
+                            width: '100%',
+                            minWidth: '540px',
+                            borderCollapse: 'collapse',
+                            textAlign: 'left',
+                            fontSize: '0.88rem'
+                        }}>
+                            <thead>
+                                <tr style={{ background: 'rgba(99, 102, 241, 0.12)', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
+                                    {headerRow.cells.map((cell, cIdx) => (
+                                        <th
+                                            key={cIdx}
+                                            style={{
+                                                padding: '12px 14px',
+                                                fontWeight: 700,
+                                                color: '#F8FAFC',
+                                                whiteSpace: 'nowrap'
+                                            }}
+                                            dangerouslySetInnerHTML={{ __html: formatInline(cell.trim()) }}
+                                        />
+                                    ))}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {bodyRows.map((row, rIdx) => (
+                                    <tr
+                                        key={rIdx}
+                                        style={{
+                                            background: rIdx % 2 === 0 ? 'rgba(255, 255, 255, 0.02)' : 'transparent',
+                                            borderBottom: '1px solid rgba(255, 255, 255, 0.06)'
+                                        }}
+                                    >
+                                        {row.cells.map((cell, cIdx) => (
+                                            <td
+                                                key={cIdx}
+                                                style={{
+                                                    padding: '12px 14px',
+                                                    color: '#CBD5E1',
+                                                    lineHeight: 1.5,
+                                                    verticalAlign: 'top'
+                                                }}
+                                                dangerouslySetInnerHTML={{ __html: formatInline(cell.trim()) }}
+                                            />
+                                        ))}
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            )
+        }
+        tableRows = []
+        inTable = false
+    }
+
     // Helper to format inline markdown (bold, italic, inline code, links)
     const formatInline = (str) => {
         return str
@@ -80,7 +182,7 @@ function parseMarkdownToElements(text) {
             // Markdown Links [text](url)
             .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, anchor, url) => {
                 const isExternal = url.startsWith('http')
-                return `<a href="${url}" ${isExternal ? 'target="_blank" rel="noopener noreferrer"' : ''} style="color: #818CF8; text-decoration: underline; text-underline-offset: 3px; font-weight: 600;">${anchor}</a>`
+                return `<a href="${url}" ${isExternal ? 'target="_blank" rel="noopener noreferrer"' : ''} style="color: #818CF8; text-decoration: underline; text-underline-offset: 3px; font-weight: 600; display: inline; word-break: break-word;">${anchor}</a>`
             })
     }
 
@@ -90,10 +192,11 @@ function parseMarkdownToElements(text) {
 
         // Code block toggle ```lang
         if (trimmed.startsWith('```')) {
+            flushList()
+            flushTable()
             if (inCodeBlock) {
                 flushCodeBlock()
             } else {
-                flushList()
                 inCodeBlock = true
                 codeLanguage = trimmed.slice(3).trim() || 'bash'
             }
@@ -104,6 +207,19 @@ function parseMarkdownToElements(text) {
             codeBuffer.push(rawLine)
             continue
         }
+
+        // Table Row (| col1 | col2 |)
+        if (trimmed.startsWith('|') && trimmed.endsWith('|')) {
+            flushList()
+            inTable = true
+            const isDivider = trimmed.includes('---')
+            const cells = isDivider ? [] : trimmed.split('|').filter((_, idx, arr) => idx !== 0 && idx !== arr.length - 1)
+            tableRows.push({ isDivider, cells })
+            continue
+        }
+
+        // If not in table row, flush accumulated table
+        flushTable()
 
         // Horizontal Rule
         if (trimmed === '---' || trimmed === '***') {
@@ -178,23 +294,12 @@ function parseMarkdownToElements(text) {
                     dangerouslySetInnerHTML={{ __html: formatInline(trimmed.slice(2)) }}
                 />
             )
-        } else if (trimmed.startsWith('|') && trimmed.endsWith('|')) {
-            // Table Row
-            if (trimmed.includes('---')) continue // divider
-            const cells = trimmed.split('|').filter((_, idx, arr) => idx !== 0 && idx !== arr.length - 1)
-            elements.push(
-                <div key={`table-row-${i}`} style={{ display: 'grid', gridTemplateColumns: `repeat(${cells.length}, 1fr)`, gap: '8px', padding: '10px 12px', background: i % 2 === 0 ? 'rgba(255,255,255,0.03)' : 'transparent', borderBottom: '1px solid rgba(255,255,255,0.06)', fontSize: '0.9rem', color: '#CBD5E1' }}>
-                    {cells.map((c, cIdx) => (
-                        <div key={cIdx} dangerouslySetInnerHTML={{ __html: formatInline(c.trim()) }} />
-                    ))}
-                </div>
-            )
         } else {
             // Standard Paragraph
             elements.push(
                 <p 
                     key={`p-${i}`} 
-                    style={{ color: '#CBD5E1', lineHeight: 1.8, marginBottom: '1.25rem', fontSize: '1.02rem' }}
+                    style={{ color: '#CBD5E1', lineHeight: 1.8, marginBottom: '1.25rem', fontSize: '1.02rem', wordBreak: 'break-word' }}
                     dangerouslySetInnerHTML={{ __html: formatInline(trimmed) }} 
                 />
             )
@@ -202,6 +307,7 @@ function parseMarkdownToElements(text) {
     }
 
     flushList()
+    flushTable()
     flushCodeBlock()
     return elements
 }
@@ -375,7 +481,7 @@ export default function BlogPage() {
             {/* Breadcrumb Navigation Bar */}
             <div style={{
                 background: 'rgba(15, 23, 42, 0.85)', borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-                padding: '0.75rem 1.5rem', backdropFilter: 'blur(8px)'
+                padding: '0.75rem 1rem', backdropFilter: 'blur(8px)'
             }}>
                 <div className="container" style={{
                     maxWidth: '1000px', margin: '0 auto', display: 'flex', alignItems: 'center', gap: '8px',
@@ -385,14 +491,14 @@ export default function BlogPage() {
                     <ChevronRight size={14} />
                     <Link to="/blog" style={{ color: '#818CF8', textDecoration: 'none', fontWeight: 600 }}>Blog</Link>
                     <ChevronRight size={14} />
-                    <span style={{ color: '#CBD5E1', maxWidth: '300px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    <span style={{ color: '#CBD5E1', maxWidth: 'min(280px, 45vw)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                         {activePost.title}
                     </span>
                 </div>
             </div>
 
             {/* Main Article Container */}
-            <main style={{ flex: 1, padding: '3rem 1.5rem 5rem' }}>
+            <main style={{ flex: 1, padding: 'clamp(2rem, 4vw, 3rem) clamp(0.75rem, 3vw, 1.5rem) 5rem' }}>
                 <div className="container" style={{ maxWidth: '860px', margin: '0 auto' }}>
                     {/* Back link */}
                     <Link 
@@ -422,19 +528,20 @@ export default function BlogPage() {
                         )}
 
                         <h1 style={{
-                            fontSize: 'clamp(2rem, 4.5vw, 2.9rem)', fontWeight: 900,
-                            color: '#FFFFFF', lineHeight: 1.2, letterSpacing: '-0.025em', marginBottom: '1.25rem'
+                            fontSize: 'clamp(1.75rem, 4.5vw, 2.9rem)', fontWeight: 900,
+                            color: '#FFFFFF', lineHeight: 1.2, letterSpacing: '-0.025em', marginBottom: '1.25rem',
+                            wordBreak: 'break-word'
                         }}>
                             {activePost.title}
                         </h1>
 
-                        <p style={{ fontSize: '1.15rem', color: '#94A3B8', lineHeight: 1.6, marginBottom: '1.5rem' }}>
+                        <p style={{ fontSize: 'clamp(1rem, 2.5vw, 1.15rem)', color: '#94A3B8', lineHeight: 1.6, marginBottom: '1.5rem' }}>
                             {activePost.description}
                         </p>
 
                         {/* Author & Metadata Strip */}
                         <div style={{
-                            display: 'flex', alignItems: 'center', gap: '1.25rem', flexWrap: 'wrap',
+                            display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap',
                             paddingTop: '1rem', borderTop: '1px solid rgba(255, 255, 255, 0.08)',
                             fontSize: '0.85rem', color: '#64748B'
                         }}>
@@ -468,7 +575,7 @@ export default function BlogPage() {
                     {featuredImg && (
                         <div style={{
                             width: '100%',
-                            height: 'clamp(220px, 36vw, 420px)',
+                            height: 'clamp(200px, 36vw, 420px)',
                             borderRadius: '16px',
                             overflow: 'hidden',
                             marginBottom: '2.5rem',
@@ -493,8 +600,9 @@ export default function BlogPage() {
                     <article style={{
                         background: 'rgba(15, 23, 42, 0.65)',
                         border: '1px solid rgba(255, 255, 255, 0.08)',
-                        borderRadius: '16px', padding: 'clamp(1.5rem, 4vw, 2.75rem)',
-                        boxShadow: '0 20px 40px rgba(0, 0, 0, 0.35)', marginBottom: '3rem'
+                        borderRadius: '16px', padding: 'clamp(1.15rem, 4vw, 2.75rem)',
+                        boxShadow: '0 20px 40px rgba(0, 0, 0, 0.35)', marginBottom: '3rem',
+                        overflowWrap: 'break-word', wordBreak: 'break-word'
                     }}>
                         {parseMarkdownToElements(activePost.content)}
                     </article>
@@ -530,13 +638,13 @@ export default function BlogPage() {
                     <div style={{
                         background: 'rgba(15, 23, 42, 0.75)',
                         border: '1px solid rgba(99, 102, 241, 0.25)',
-                        borderRadius: '16px', padding: '1.75rem',
-                        display: 'flex', gap: '1.25rem', alignItems: 'center', marginBottom: '3rem'
+                        borderRadius: '16px', padding: 'clamp(1.25rem, 3vw, 1.75rem)',
+                        display: 'flex', flexDirection: 'row', gap: '1.25rem', alignItems: 'flex-start', marginBottom: '3rem'
                     }}>
                         <div style={{
-                            width: '56px', height: '56px', borderRadius: '50%', background: '#1E1B4B',
+                            width: '48px', height: '48px', borderRadius: '50%', background: '#1E1B4B',
                             border: '2px solid #6366F1', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                            flexShrink: 0, fontWeight: 900, fontSize: '1.2rem', color: '#A5B4FC'
+                            flexShrink: 0, fontWeight: 900, fontSize: '1.1rem', color: '#A5B4FC'
                         }}>
                             NL
                         </div>
@@ -556,13 +664,13 @@ export default function BlogPage() {
                     {/* Contextual Related Systems from Portfolio */}
                     <div style={{
                         background: 'rgba(15, 23, 42, 0.6)',
-                        borderRadius: '16px', padding: '1.75rem',
+                        borderRadius: '16px', padding: 'clamp(1.25rem, 3vw, 1.75rem)',
                         border: '1px solid rgba(255, 255, 255, 0.08)', marginBottom: '3rem'
                     }}>
                         <div style={{ fontSize: '0.82rem', fontWeight: 800, color: '#A5B4FC', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '1rem' }}>
                             Implementasi Nyata pada Portofolio Kami
                         </div>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '10px' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))', gap: '10px' }}>
                             <Link to="/showcase/fullstack/primatera-poultry" style={{ background: 'rgba(255, 255, 255, 0.04)', padding: '12px 16px', borderRadius: '10px', border: '1px solid rgba(255, 255, 255, 0.08)', textDecoration: 'none', color: '#F8FAFC', fontSize: '0.88rem', fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                                 <span>🐔 Primatera Poultry ERP</span>
                                 <ArrowRight size={14} color="#818CF8" />
@@ -582,12 +690,12 @@ export default function BlogPage() {
                     <div style={{
                         background: 'linear-gradient(135deg, rgba(79, 70, 229, 0.25) 0%, rgba(15, 23, 42, 0.95) 100%)',
                         border: '1px solid rgba(99, 102, 241, 0.4)', borderRadius: '20px',
-                        padding: '2.5rem 2rem', textAlign: 'center', position: 'relative', overflow: 'hidden'
+                        padding: 'clamp(1.75rem, 4vw, 2.5rem) clamp(1rem, 3vw, 2rem)', textAlign: 'center', position: 'relative', overflow: 'hidden'
                     }}>
-                        <h3 style={{ fontSize: '1.5rem', fontWeight: 900, color: '#FFFFFF', marginBottom: '0.6rem' }}>
+                        <h3 style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)', fontWeight: 900, color: '#FFFFFF', marginBottom: '0.6rem' }}>
                             {isIndo ? 'Siap Merancang Arsitektur Software Perusahaan Anda?' : 'Ready to Engineer Your Enterprise Software?'}
                         </h3>
-                        <p style={{ fontSize: '0.98rem', color: '#CBD5E1', maxWidth: '580px', margin: '0 auto 1.75rem', lineHeight: 1.6 }}>
+                        <p style={{ fontSize: '0.95rem', color: '#CBD5E1', maxWidth: '580px', margin: '0 auto 1.75rem', lineHeight: 1.6 }}>
                             {isIndo
                                 ? 'Konsultasi arsitektur sistem, audit kode, dan analisis kebutuhan bersama kami. Bebas komitmen, langsung berbicara dengan engineer.'
                                 : 'Discuss your system architecture, technical requirements, or software overhaul directly with our software architect.'}
@@ -598,9 +706,10 @@ export default function BlogPage() {
                                 target="_blank" 
                                 rel="noreferrer"
                                 style={{
-                                    background: '#16A34A', color: '#FFFFFF', padding: '12px 24px',
+                                    background: '#16A34A', color: '#FFFFFF', padding: '12px 20px',
                                     borderRadius: '12px', fontWeight: 700, textDecoration: 'none',
-                                    display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '0.95rem'
+                                    display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px', fontSize: '0.95rem',
+                                    width: '100%', maxWidth: '320px', minHeight: '48px'
                                 }}
                             >
                                 <MessageCircle size={18} /> {isIndo ? 'Konsultasi Teknis via WhatsApp' : 'WhatsApp Consultation'}
@@ -608,9 +717,11 @@ export default function BlogPage() {
                             <Link 
                                 to="/"
                                 style={{
-                                    background: 'rgba(255, 255, 255, 0.08)', color: '#FFFFFF', padding: '12px 24px',
+                                    background: 'rgba(255, 255, 255, 0.08)', color: '#FFFFFF', padding: '12px 20px',
                                     borderRadius: '12px', fontWeight: 700, textDecoration: 'none',
-                                    border: '1px solid rgba(255, 255, 255, 0.15)', fontSize: '0.95rem'
+                                    border: '1px solid rgba(255, 255, 255, 0.15)', fontSize: '0.95rem',
+                                    display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                                    width: '100%', maxWidth: '320px', minHeight: '48px'
                                 }}
                             >
                                 {isIndo ? 'Eksplorasi Portofolio' : 'Explore Portfolio'}

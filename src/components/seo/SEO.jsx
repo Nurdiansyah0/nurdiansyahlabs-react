@@ -122,25 +122,30 @@ const SEO = ({ title, description, keywords, canonical, image, type = 'website',
 
     // Breadcrumb schema
     let breadcrumbSchema = null;
-    if (breadcrumbs && breadcrumbs.length > 0) {
+    const hasBreadcrumbs = Array.isArray(breadcrumbs) && breadcrumbs.length > 0;
+    if (hasBreadcrumbs) {
         breadcrumbSchema = {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             "itemListElement": breadcrumbs.map((crumb, index) => ({
                 "@type": "ListItem",
                 "position": index + 1,
-                "name": crumb.name,
-                "item": crumb.url.startsWith('http') ? crumb.url : `${siteUrl}${crumb.url}`
+                "name": crumb.name || '',
+                "item": (crumb.url && crumb.url.startsWith('http')) ? crumb.url : `${siteUrl}${crumb.url || ''}`
             }))
         };
     }
+
+    const safeKeywords = Array.isArray(keywords)
+        ? keywords.filter(Boolean).join(', ')
+        : (typeof keywords === 'string' ? keywords : undefined);
 
     return (
         <Helmet>
             {/* Basic Meta Tags */}
             <title>{fullTitle}</title>
             <meta name="description" content={description || defaultDesc} />
-            {keywords && <meta name="keywords" content={keywords} />}
+            {safeKeywords && <meta name="keywords" content={safeKeywords} />}
             <link rel="canonical" href={fullCanonical} />
 
             {/* Open Graph / Facebook */}

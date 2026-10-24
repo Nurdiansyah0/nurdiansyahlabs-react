@@ -160,7 +160,7 @@ export default function ConsultantApp() {
                             />
                         </div>
                         {/* Trust Badge */}
-                        <div className="absolute -bottom-6 -left-6 md:bottom-10 md:-left-10 bg-white p-5 rounded-3xl shadow-2xl border border-slate-50 flex items-center gap-4 max-w-[200px] md:max-w-xs animate-bounce-slow">
+                        <div className="absolute -bottom-4 left-4 md:bottom-10 md:-left-10 bg-white p-4 md:p-5 rounded-2xl md:rounded-3xl shadow-2xl border border-slate-50 flex items-center gap-3 md:gap-4 max-w-[200px] md:max-w-xs animate-bounce-slow">
                             <div className="w-12 md:w-14 h-12 md:h-14 bg-amber-100 rounded-2xl flex items-center justify-center text-amber-700 flex-shrink-0">
                                 <CheckCircle size={32} />
                             </div>

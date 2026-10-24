@@ -154,32 +154,33 @@ export default function Services() {
                 <div className="text-center max-w-3xl mx-auto mb-14 lg:mb-20">
                     <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-indigo-500/30 bg-indigo-950/50 text-indigo-400 text-xs font-bold tracking-wider uppercase mb-4">
                         <Sparkles size={14} />
-                        <span>{isIndo ? 'Paket Layanan & Penawaran Komersial' : 'Commercial Packages & Pricing'}</span>
+                        <span>{isIndo ? 'Marketing 5.0 · Solusi Rekayasa Berorientasi Dampak' : 'Marketing 5.0 · Outcome-Driven Engineering Solutions'}</span>
                     </div>
 
                     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-50 tracking-tight leading-[1.15] mb-4">
                         {isIndo ? (
                             <>
-                                Pilihan Paket Transparan Sesuai{' '}
+                                Solusi Next-Tech untuk Mengeliminasi{' '}
                                 <span className="text-gradient-indigo">
-                                    Kebutuhan Nyata
+                                    Chaos Operasional
                                 </span>{' '}
-                                Bisnis Anda
+                                & Mengakselerasi Bisnis
                             </>
                         ) : (
                             <>
-                                Transparent Packages Tailored to Your{' '}
+                                Next-Tech Solutions to Eliminate{' '}
                                 <span className="text-gradient-indigo">
-                                    Real Needs
-                                </span>
+                                    Operational Chaos
+                                </span>{' '}
+                                & Accelerate Growth
                             </>
                         )}
                     </h2>
 
                     <p className="text-slate-400 text-base sm:text-lg leading-relaxed">
                         {isIndo
-                            ? 'Tanpa biaya tersembunyi, tanpa taktik urgensi artifisial. Biaya riil dihitung berdasarkan cakupan rekayasa perangkat lunak dan keandalan sistem produksi.'
-                            : 'No hidden fees, no artificial urgency tactics. True project pricing calculated from engineering scope and production reliability.'}
+                            ? 'Menghilangkan friksi dan inefisiensi manual dengan arsitektur tangguh. Mesin mengeksekusi otomatisasi dan komputasi presisi (<120ms latensi), sementara Lead Systems Architect mendampingi Anda 1-on-1 untuk solusi yang tepat sasaran.'
+                            : 'Eliminating manual friction and operational chaos with resilient architecture. Machines handle precision computing and continuous automated delivery (<120ms latency), while human lead architects partner with you 1-on-1 to deliver exact business outcomes.'}
                     </p>
                 </div>
 
@@ -350,25 +351,25 @@ export default function Services() {
                         </div>
                         <div>
                             <h4 className="text-lg font-bold text-slate-50 mb-1.5">
-                                {isIndo ? 'Standar Rekayasa & Kepastian Komersial NurdiansyahLabs' : 'Engineering Standards & Commercial Assurance'}
+                                {isIndo ? 'Standar Rekayasa Marketing 5.0 & Kepastian Komersial' : 'Marketing 5.0 Engineering Standards & Commercial Assurance'}
                             </h4>
                             <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
                                 {isIndo
-                                    ? 'Setiap proyek dirancang untuk skalabilitas jangka panjang dengan repositori kode bersih, tanpa keterikatan vendor lock-in, dan kepemilikan penuh diserahkan ke klien.'
-                                    : 'Every project is engineered for long-term scalability with clean codebase, zero vendor lock-in, and full client asset ownership.'}
+                                    ? 'Setiap sistem dirancang untuk skalabilitas jangka panjang: otomatisasi CI/CD presisi, telemetri prediktif, tanpa keterikatan vendor lock-in, dan penyerahan 100% hak kekayaan intelektual (IP) ke tangan Anda.'
+                                    : 'Every system is engineered for sustained operational velocity: precision CI/CD automation, predictive telemetry, zero vendor lock-in, and full intellectual property transfer to your organization.'}
                             </p>
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-slate-300 font-medium">
                                 <div className="flex items-center gap-2">
                                     <Check size={14} className="text-emerald-400 shrink-0" />
-                                    <span>{isIndo ? '100% Repositori Milik Klien' : '100% Client Code Ownership'}</span>
+                                    <span>{isIndo ? '100% Repositori Git Milik Klien' : '100% Client Code & Git Ownership'}</span>
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <Check size={14} className="text-emerald-400 shrink-0" />
-                                    <span>{isIndo ? 'Tanpa Markup Biaya Cloud' : 'Zero Cloud Cost Markups'}</span>
+                                    <span>{isIndo ? 'Agile Sprints 1–2 Minggu & CI/CD' : '1–2 Week Agile Sprints & CI/CD'}</span>
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <Check size={14} className="text-emerald-400 shrink-0" />
-                                    <span>{isIndo ? 'Garansi Bug-Fix & SLA SLA' : 'Warranty & Post-Launch SLA'}</span>
+                                    <span>{isIndo ? 'Garansi 30–60 Hari Bebas Bug' : '30–60 Day Bug-Free Warranty'}</span>
                                 </div>
                             </div>
                         </div>

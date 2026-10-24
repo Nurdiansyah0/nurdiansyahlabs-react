@@ -52,8 +52,16 @@ export default function AdminDashboard() {
         try {
             const res = await fetch('/api/v1/auth/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username: usernameInput, password: passwordInput }) })
             const data = await res.json()
-            if (res.ok && data.status === 'success') { setToken(data.token); sessionStorage.setItem('adminToken', data.token); setIsAuthed(true) }
-            else setAuthError(data.error || 'Invalid credentials')
+            if (res.ok && (data.success || data.status === 'success')) {
+                setToken(data.token);
+                sessionStorage.setItem('adminToken', data.token);
+                setIsAuthed(true);
+            } else {
+                const errorMsg = typeof data.error === 'object' && data.error !== null 
+                    ? (data.error.message || data.error.code || 'Invalid credentials')
+                    : (data.error || 'Invalid credentials');
+                setAuthError(errorMsg);
+            }
         } catch { setAuthError('Server error') }
     }
 
@@ -62,8 +70,14 @@ export default function AdminDashboard() {
         try {
             const res = await fetch('/api/v1/auth/forgot_password', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ identifier: usernameInput }) })
             const data = await res.json()
-            if (res.ok) setAuthMessage(data.message || 'Check your email for reset instructions.')
-            else setAuthError(data.error || 'Failed to process request')
+            if (res.ok && (data.success || data.status === 'success' || !data.error)) {
+                setAuthMessage(data.message || 'Check your email for reset instructions.')
+            } else {
+                const errorMsg = typeof data.error === 'object' && data.error !== null 
+                    ? (data.error.message || data.error.code || 'Failed to process request')
+                    : (data.error || 'Failed to process request');
+                setAuthError(errorMsg);
+            }
         } catch { setAuthError('Server error') }
     }
 
@@ -72,8 +86,15 @@ export default function AdminDashboard() {
         try {
             const res = await fetch('/api/v1/auth/reset_password', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token: resetTokenParam, password: passwordInput }) })
             const data = await res.json()
-            if (res.ok) { setAuthMessage('Password reset successfully! You can now log in.'); setTimeout(() => { window.location.href = '/admin' }, 2000) }
-            else setAuthError(data.error || 'Failed to reset password')
+            if (res.ok && (data.success || data.status === 'success' || !data.error)) {
+                setAuthMessage(data.message || 'Password reset successfully! You can now log in.');
+                setTimeout(() => { window.location.href = '/admin' }, 2000)
+            } else {
+                const errorMsg = typeof data.error === 'object' && data.error !== null 
+                    ? (data.error.message || data.error.code || 'Failed to reset password')
+                    : (data.error || 'Failed to reset password');
+                setAuthError(errorMsg);
+            }
         } catch { setAuthError('Server error') }
     }
 
@@ -172,10 +193,16 @@ export default function AdminDashboard() {
         try {
             const r = await fetch('/api/v1/media/upload', { method: 'POST', headers: { 'X-Admin-Token': token }, body: formData })
             const d = await r.json()
-            if (r.ok && d.status === 'success') {
-                const imgData = d.image_data || { url: d.url, alt: 'Uploaded Image', is_primary: true }
+            if (r.ok && (d.success || d.status === 'success')) {
+                const imgUrl = d.data?.url || d.url || d.image_data?.url
+                const imgData = { url: imgUrl, alt: 'Uploaded Image', is_primary: true }
                 setEditingPost(prev => ({ ...prev, images: [...(prev.images || []), imgData] }))
-            } else alert(d.error || 'Failed to upload image')
+            } else {
+                const errorMsg = typeof d.error === 'object' && d.error !== null 
+                    ? (d.error.message || d.error.code || 'Failed to upload image') 
+                    : (d.error || 'Failed to upload image')
+                alert(errorMsg)
+            }
         } catch { alert('Error connecting to upload server.') }
         finally { setUploadingImage(false) }
     }

@@ -13,7 +13,7 @@ export default function Home() {
         <>
             <SEO
                 title="Konsultan Website & Jasa Software Enterprise | NurdiansyahLabs"
-                description="Konsultan website dan jasa rekayasa software enterprise di Indonesia. Solusi end-to-end full SDLC dari arsitektur aplikasi web, custom ERP, hingga deployment produksi."
+                description="Konsultan website dan jasa rekayasa software enterprise di Indonesia berprinsip Marketing 5.0 (Human-Centric Next-Tech). Solusi end-to-end full SDLC dari arsitektur aplikasi web, custom ERP, hingga deployment produksi terukur."
                 canonical="/"
             />
             <Navbar />

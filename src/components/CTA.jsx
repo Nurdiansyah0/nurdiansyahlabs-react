@@ -52,60 +52,58 @@ export default function CTA() {
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                             </span>
-                            <span>{isIndo ? 'Konsultasi Rekayasa Gratis' : 'Free Engineering Consultation'}</span>
+                            <span>{isIndo ? 'Marketing 5.0 · The Bionic Frontline' : 'Marketing 5.0 · The Bionic Frontline'}</span>
                         </div>
 
                         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-50 tracking-tight leading-[1.15] mb-4">
                             {isIndo ? (
                                 <>
-                                    Siap Membangun Sistem Digital{' '}
+                                    Konsultasi Arsitektur 1-on-1 dengan{' '}
                                     <span className="text-gradient-emerald">
-                                        Skala Produksi
-                                    </span>{' '}
-                                    untuk Bisnis Anda?
+                                        Lead Systems Architect
+                                    </span>
                                 </>
                             ) : (
                                 <>
-                                    Ready to Build{' '}
+                                    1-on-1 Architecture Discovery with Our{' '}
                                     <span className="text-gradient-emerald">
-                                        Production-Grade
-                                    </span>{' '}
-                                    Digital Systems for Your Business?
+                                        Lead Systems Architect
+                                    </span>
                                 </>
                             )}
                         </h2>
 
                         <p className="text-slate-300 text-sm sm:text-base leading-relaxed mb-8 max-w-xl">
                             {isIndo ? (
-                                'Diskusikan kebutuhan aplikasi web, sistem ERP, atau otomasi data Anda bersama tim rekayasa kami. Kami memberikan rekomendasi arsitektur terukur, estimasi timeline realistis, dan rancangan biaya transparan — 100% gratis tanpa komitmen.'
+                                'Sesi discovery teknis 30 menit tanpa komitmen: kami bedah bottleneck sistem Anda, review arsitektur database, dan susun roadmap rekayasa terukur. Didukung garansi 30 hari bebas bug dan penyerahan 100% source code tanpa keterikatan vendor lock-in.'
                             ) : (
-                                "Discuss your web application, ERP system, or data automation needs with our engineering team. We provide scalable architecture recommendations, realistic timelines, and transparent cost estimates — 100% free with no commitment required."
+                                "A 30-minute zero-obligation technical discovery session: we analyze your system bottlenecks, review database scalability, and draft an actionable engineering roadmap. Backed by a 30-day bug-free warranty and 100% full source-code ownership with zero vendor lock-in."
                             )}
                         </p>
 
                         {/* Frictionless Contact Buttons */}
-                        <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-8">
+                        <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 mb-8 w-full sm:w-auto">
                             <a
-                                href="https://wa.me/6282176012461"
+                                href={`https://wa.me/6282176012461?text=${encodeURIComponent(isIndo ? 'Halo NurdiansyahLabs, saya ingin menjadwalkan sesi Konsultasi Arsitektur 1-on-1 (30 Menit Discovery Gratis) dengan Lead Systems Architect.' : 'Hello NurdiansyahLabs, I would like to schedule a 1-on-1 Architecture Discovery session (30-Min Free Discovery) with your Lead Systems Architect.')}`}
                                 target="_blank" 
                                 rel="noreferrer"
                                 onClick={() => trackEvent('whatsapp_click', { location: 'cta_section' })}
-                                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-bold text-white bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 transition-all shadow-lg min-h-[48px] text-sm sm:text-base cursor-pointer"
+                                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-bold text-white bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 transition-all shadow-lg min-h-[48px] text-sm sm:text-base cursor-pointer"
                                 style={{
                                     boxShadow: '0 8px 24px -4px rgba(16, 185, 129, 0.4)',
                                 }}
                             >
                                 <MessageCircle size={19} />
-                                <span>{isIndo ? 'Chat via WhatsApp' : 'Chat on WhatsApp'}</span>
+                                <span>{isIndo ? 'Jadwalkan Konsultasi 1-on-1 (WhatsApp)' : 'Book 1-on-1 Discovery (WhatsApp)'}</span>
                             </a>
 
                             <a
                                 href="mailto:nudiansyahdian28.adv@gmail.com"
                                 onClick={() => trackEvent('email_click', { location: 'cta_section' })}
-                                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-semibold text-slate-200 hover:text-white bg-slate-800/80 hover:bg-slate-800 border border-slate-700 transition-all min-h-[48px] text-sm sm:text-base cursor-pointer"
+                                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-semibold text-slate-200 hover:text-white bg-slate-800/80 hover:bg-slate-800 border border-slate-700 transition-all min-h-[48px] text-sm sm:text-base cursor-pointer"
                             >
                                 <Mail size={19} />
-                                <span>{isIndo ? 'Kirim Email Penawaran' : 'Email Us Directly'}</span>
+                                <span>{isIndo ? 'Kirim Spesifikasi Proyek' : 'Email Project Specs'}</span>
                             </a>
                         </div>
 
@@ -113,15 +111,15 @@ export default function CTA() {
                         <div className="pt-6 border-t border-slate-800/80 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-slate-400">
                             <div className="flex items-center gap-2">
                                 <Clock size={15} className="text-emerald-400 shrink-0" />
-                                <span>{isIndo ? 'Respon Cepat < 24 Jam' : 'Fast Response < 24h'}</span>
+                                <span>{isIndo ? 'Discovery 30 Menit Bebas Komitmen' : 'Zero-Obligation 30-Min Discovery'}</span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <Sparkles size={15} className="text-indigo-400 shrink-0" />
-                                <span>{isIndo ? 'Rekomendasi Arsitektur Gratis' : 'Free Architecture Review'}</span>
+                                <span>{isIndo ? '100% Kepemilikan Source Code' : '100% Full Code Ownership'}</span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <ShieldCheck size={15} className="text-sky-400 shrink-0" />
-                                <span>{isIndo ? 'Kerahasiaan & NDA Terjamin' : 'Confidential & NDA Ready'}</span>
+                                <span>{isIndo ? 'Garansi 30 Hari Bebas Bug' : '30-Day Bug-Free Warranty'}</span>
                             </div>
                         </div>
 

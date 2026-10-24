@@ -57,32 +57,32 @@ export default function ServicePage() {
                 ]}
             />
 
-            <header className="bg-indigo-900 text-white py-20 px-6">
+            <header className="bg-indigo-900 text-white py-14 sm:py-20 px-4 sm:px-6">
                 <div className="max-w-4xl mx-auto">
                     <span className="text-indigo-300 font-bold uppercase tracking-wider text-sm">{service.category}</span>
-                    <h1 className="text-4xl md:text-5xl font-black mt-2 mb-4 leading-tight">{service.title}</h1>
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-black mt-2 mb-4 leading-tight break-words">{service.title}</h1>
                     {service.tagline && (
-                        <p className="text-xl text-indigo-200 font-medium italic mb-3">"{service.tagline}"</p>
+                        <p className="text-lg sm:text-xl text-indigo-200 font-medium italic mb-3">"{service.tagline}"</p>
                     )}
-                    <p className="text-lg text-indigo-100 max-w-2xl">{service.description}</p>
-                    <div className="mt-8 flex flex-wrap gap-4">
+                    <p className="text-base sm:text-lg text-indigo-100 max-w-2xl">{service.description}</p>
+                    <div className="mt-8 flex flex-col sm:flex-row flex-wrap gap-4 w-full sm:w-auto">
                         <a 
                             href={`https://wa.me/6282176012461?text=${encodeURIComponent(`Halo NurdiansyahLabs, saya tertarik konsultasi mengenai layanan ${service.title}.`)}`}
                             target="_blank" 
                             rel="noreferrer"
-                            className="bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-3.5 rounded-xl font-bold transition-all transform hover:scale-105 shadow-lg shadow-emerald-950/40 no-underline inline-flex items-center gap-2"
+                            className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white px-6 sm:px-8 py-3.5 rounded-xl font-bold transition-all transform hover:scale-105 shadow-lg shadow-emerald-950/40 no-underline inline-flex items-center justify-center gap-2 min-h-[48px]"
                         >
                             <span>{isIndo ? 'Konsultasi Sekarang (WhatsApp)' : 'Start Project on WhatsApp'}</span>
                         </a>
-                        <Link to="/" className="bg-white/10 hover:bg-white/20 text-white px-8 py-3.5 rounded-xl font-bold backdrop-blur-sm transition-all no-underline">
+                        <Link to="/" className="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white px-6 sm:px-8 py-3.5 rounded-xl font-bold backdrop-blur-sm transition-all no-underline inline-flex items-center justify-center min-h-[48px]">
                             {isIndo ? 'Lihat Portofolio' : 'View Our Work'}
                         </Link>
                     </div>
                 </div>
             </header>
 
-            <main className="max-w-4xl mx-auto py-16 px-6">
-                <div className="bg-white rounded-3xl p-8 md:p-12 shadow-xl shadow-indigo-100/50">
+            <main className="max-w-4xl mx-auto py-12 sm:py-16 px-4 sm:px-6">
+                <div className="bg-white rounded-3xl p-5 sm:p-8 md:p-12 shadow-xl shadow-indigo-100/50">
                     <h2 className="text-2xl font-bold mb-6 text-slate-900">
                         {isIndo ? 'Mengapa Memilih Layanan Kami?' : 'Why Choose Our Service?'}
                     </h2>
@@ -155,7 +155,7 @@ export default function ServicePage() {
                     )}
 
                     <div className="mt-12 pt-8 border-t border-slate-100">
-                        <div className="flex justify-between items-center bg-indigo-50 p-6 rounded-2xl">
+                        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-indigo-50 p-5 sm:p-6 rounded-2xl">
                             <div>
                                 <span className="text-slate-500 text-sm">
                                     {isIndo ? 'Investasi' : 'Investment'}
@@ -170,10 +170,10 @@ export default function ServicePage() {
                 </div>
 
                 <div className="mt-16">
-                    <h2 className="text-2xl font-bold mb-8 text-slate-900 px-6">
+                    <h2 className="text-2xl font-bold mb-8 text-slate-900 px-4 sm:px-6">
                         {isIndo ? 'Layanan Lainnya' : 'Other Services'}
                     </h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 px-6 text-indigo-900">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 px-4 sm:px-6 text-indigo-900">
                         {servicesData.services.filter(s => s.slug !== slug).map(rel => (
                             <Link key={rel.slug} to={`/services/${rel.slug}`} className="bg-white p-6 rounded-2xl border border-slate-100 hover:border-indigo-200 hover:shadow-lg transition-all no-underline">
                                 <div className="font-bold text-lg mb-2">{rel.title}</div>

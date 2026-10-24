@@ -148,7 +148,7 @@ export default function BlogListing() {
                     </m.div>
 
                     {/* Filter and Search Bar */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '3rem' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '3rem', width: '100%', maxWidth: '100%' }}>
                         {/* Search Input */}
                         <div style={{ position: 'relative', maxWidth: '520px', margin: '0 auto', width: '100%' }}>
                             <Search size={18} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: '#64748B' }} />
@@ -161,7 +161,8 @@ export default function BlogListing() {
                                     width: '100%', padding: '12px 16px 12px 46px',
                                     background: 'rgba(15, 23, 42, 0.75)', border: '1px solid rgba(255, 255, 255, 0.12)',
                                     borderRadius: '12px', color: '#F8FAFC', fontSize: '0.95rem',
-                                    outline: 'none', transition: 'border-color 0.2s, box-shadow 0.2s'
+                                    outline: 'none', transition: 'border-color 0.2s, box-shadow 0.2s',
+                                    boxSizing: 'border-box'
                                 }}
                                 onFocus={(e) => {
                                     e.target.style.borderColor = '#6366F1'
@@ -174,8 +175,8 @@ export default function BlogListing() {
                             />
                         </div>
 
-                        {/* Category Pills */}
-                        <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap' }}>
+                        {/* Category Pills with smooth touch wrapping */}
+                        <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap', maxWidth: '100%', padding: '2px 0' }}>
                             {CATEGORIES.map(category => {
                                 const active = selectedCategory === category
                                 return (
@@ -183,11 +184,12 @@ export default function BlogListing() {
                                         key={category}
                                         onClick={() => setSelectedCategory(category)}
                                         style={{
-                                            padding: '8px 16px', borderRadius: '10px', fontSize: '0.85rem', fontWeight: 600,
+                                            padding: '8px 14px', borderRadius: '10px', fontSize: '0.85rem', fontWeight: 600,
                                             cursor: 'pointer', transition: 'all 0.2s',
                                             background: active ? '#4F46E5' : 'rgba(15, 23, 42, 0.6)',
                                             color: active ? '#FFFFFF' : '#94A3B8',
-                                            border: active ? '1px solid #6366F1' : '1px solid rgba(255, 255, 255, 0.08)'
+                                            border: active ? '1px solid #6366F1' : '1px solid rgba(255, 255, 255, 0.08)',
+                                            minHeight: '38px', touchAction: 'manipulation'
                                         }}
                                         onMouseEnter={(e) => {
                                             if (!active) e.currentTarget.style.borderColor = 'rgba(99, 102, 241, 0.4)'
@@ -203,7 +205,7 @@ export default function BlogListing() {
                         </div>
                     </div>
 
-                    {/* Articles Grid */}
+                    {/* Articles Grid (Responsive minmax to prevent 320px-360px overflow) */}
                     {filteredArticles.length === 0 ? (
                         <div style={{ textAlign: 'center', padding: '4rem 1rem', background: 'rgba(15, 23, 42, 0.5)', borderRadius: '16px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
                             <p style={{ color: '#94A3B8', fontSize: '1.05rem', margin: 0 }}>
@@ -211,7 +213,7 @@ export default function BlogListing() {
                             </p>
                         </div>
                     ) : (
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '2rem' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))', gap: '1.75rem' }}>
                             {filteredArticles.map((article, i) => (
                                 <m.article
                                     key={article.slug}
@@ -282,7 +284,7 @@ export default function BlogListing() {
                                         </div>
 
                                         {/* Card Body */}
-                                        <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                                        <div style={{ padding: 'clamp(1rem, 3.5vw, 1.5rem)', flex: 1, display: 'flex', flexDirection: 'column' }}>
                                             <h2 style={{ fontSize: '1.2rem', fontWeight: 800, color: '#F8FAFC', marginBottom: '0.75rem', lineHeight: 1.4 }}>
                                                 {article.title}
                                             </h2>

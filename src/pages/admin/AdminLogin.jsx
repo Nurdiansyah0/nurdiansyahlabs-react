@@ -32,7 +32,7 @@ export default function AdminLogin({
                                 <span style={{ fontSize: '0.8rem', color: '#3730a3', cursor: 'pointer', fontWeight: 600 }} onClick={() => { setAuthView('forgot') }}>Forgot Password?</span>
                             </div>
                         </div>
-                        {authError && <div style={{ color: '#b91c1c', fontSize: '0.85rem' }}>{authError}</div>}
+                        {authError && <div style={{ color: '#b91c1c', fontSize: '0.85rem' }}>{typeof authError === 'object' ? (authError?.message || JSON.stringify(authError)) : authError}</div>}
                         <button aria-label="Sign In" type="submit" style={{ background: '#3730a3', color: '#fff', padding: '0.8rem', borderRadius: '8px', border: 'none', fontWeight: 700, cursor: 'pointer', marginTop: '0.5rem' }}>Sign In</button>
                     </form>
                 )}
@@ -42,7 +42,7 @@ export default function AdminLogin({
                         <p style={{ fontSize: '0.9rem', color: '#1e293b', textAlign: 'center', marginBottom: '0.5rem' }}>Enter your username or email address and we will send you a link to reset your password.</p>
                         <input aria-label="Username or Email" type="text" placeholder="Username or Email" value={usernameInput} onChange={(e) => setUsernameInput(e.target.value)} style={{ padding: '0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', width: '100%', boxSizing: 'border-box' }} required />
                         {authMessage && <div style={{ color: '#047857', fontSize: '0.85rem', background: '#d1fae5', padding: '0.5rem', borderRadius: '4px' }}>{authMessage}</div>}
-                        {authError && <div style={{ color: '#b91c1c', fontSize: '0.85rem' }}>{authError}</div>}
+                        {authError && <div style={{ color: '#b91c1c', fontSize: '0.85rem' }}>{typeof authError === 'object' ? (authError?.message || JSON.stringify(authError)) : authError}</div>}
                         <button aria-label="Send Reset Link" type="submit" style={{ background: '#3730a3', color: '#fff', padding: '0.8rem', borderRadius: '8px', border: 'none', fontWeight: 700, cursor: 'pointer', marginTop: '0.5rem' }}>Send Reset Link</button>
                         <div style={{ textAlign: 'center', marginTop: '1rem' }}>
                             <span style={{ fontSize: '0.85rem', color: '#1e293b', cursor: 'pointer' }} onClick={() => setAuthView('login')}>&larr; Back to Login</span>
@@ -60,7 +60,7 @@ export default function AdminLogin({
                             </div>
                         </div>
                         {authMessage && <div style={{ color: '#047857', fontSize: '0.85rem', background: '#d1fae5', padding: '0.5rem', borderRadius: '4px' }}>{authMessage}</div>}
-                        {authError && <div style={{ color: '#b91c1c', fontSize: '0.85rem' }}>{authError}</div>}
+                        {authError && <div style={{ color: '#b91c1c', fontSize: '0.85rem' }}>{typeof authError === 'object' ? (authError?.message || JSON.stringify(authError)) : authError}</div>}
                         <button aria-label="Save New Password" type="submit" style={{ background: '#3730a3', color: '#fff', padding: '0.8rem', borderRadius: '8px', border: 'none', fontWeight: 700, cursor: 'pointer', marginTop: '0.5rem' }}>Save New Password</button>
                     </form>
                 )}

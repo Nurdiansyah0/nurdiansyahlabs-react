@@ -111,12 +111,12 @@ export default function TechStack3D() {
             </div>
 
             {/* Subheader / Mode Switcher */}
-            <div className="flex items-center justify-between p-3 border-b border-slate-800/50 bg-slate-900/40 text-xs">
-                <div className="flex gap-1">
+            <div className="flex items-center justify-between p-2.5 sm:p-3 border-b border-slate-800/50 bg-slate-900/40 text-xs">
+                <div className="flex gap-1 overflow-x-auto no-scrollbar py-0.5 max-w-full">
                     <button
                         type="button"
                         onClick={() => setActiveTab('arch')}
-                        className={`px-3 py-1.5 rounded-lg font-medium transition-all text-xs min-h-[36px] flex items-center gap-1.5 ${
+                        className={`px-2.5 sm:px-3 py-1.5 rounded-lg font-medium transition-all text-xs min-h-[36px] flex items-center gap-1.5 shrink-0 whitespace-nowrap ${
                             activeTab === 'arch' 
                                 ? 'bg-indigo-600/30 text-indigo-300 border border-indigo-500/40' 
                                 : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
@@ -128,7 +128,7 @@ export default function TechStack3D() {
                     <button
                         type="button"
                         onClick={() => setActiveTab('metrics')}
-                        className={`px-3 py-1.5 rounded-lg font-medium transition-all text-xs min-h-[36px] flex items-center gap-1.5 ${
+                        className={`px-2.5 sm:px-3 py-1.5 rounded-lg font-medium transition-all text-xs min-h-[36px] flex items-center gap-1.5 shrink-0 whitespace-nowrap ${
                             activeTab === 'metrics' 
                                 ? 'bg-indigo-600/30 text-indigo-300 border border-indigo-500/40' 
                                 : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
@@ -140,7 +140,7 @@ export default function TechStack3D() {
                     <button
                         type="button"
                         onClick={() => setActiveTab('contracts')}
-                        className={`px-3 py-1.5 rounded-lg font-medium transition-all text-xs min-h-[36px] flex items-center gap-1.5 ${
+                        className={`px-2.5 sm:px-3 py-1.5 rounded-lg font-medium transition-all text-xs min-h-[36px] flex items-center gap-1.5 shrink-0 whitespace-nowrap ${
                             activeTab === 'contracts' 
                                 ? 'bg-indigo-600/30 text-indigo-300 border border-indigo-500/40' 
                                 : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'

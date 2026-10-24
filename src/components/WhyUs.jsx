@@ -1,5 +1,5 @@
 import { m } from 'framer-motion'
-import { Layers, Database, ShieldCheck } from 'lucide-react'
+import { Layers, Database, ShieldCheck, Sparkles } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useResponsive } from '../hooks/useResponsive'
 
@@ -16,10 +16,14 @@ export default function WhyUs() {
         <section id="why-us" style={{ padding: 'var(--section-py) 0', background: '#f9fafb' }}>
             <div className="container">
                 <div style={{ textAlign: 'center', marginBottom: isMobile ? '2.5rem' : '3.5rem' }}>
+                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '4px 14px', borderRadius: '9999px', background: '#e0e7ff', color: '#4338ca', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.85rem' }}>
+                        <Sparkles size={13} />
+                        <span>Marketing 5.0 · Technology for Humanity</span>
+                    </div>
                     <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', fontWeight: 800, color: '#111827', letterSpacing: '-0.02em', marginBottom: '0.5rem' }}>
                         {t('why.title')}
                     </h2>
-                    <p style={{ color: '#6b7280', fontSize: isMobile ? '0.95rem' : '1.05rem' }}>{t('why.subtitle')}</p>
+                    <p style={{ color: '#6b7280', fontSize: isMobile ? '0.95rem' : '1.05rem', maxWidth: '680px', margin: '0 auto' }}>{t('why.subtitle')}</p>
                 </div>
                 <div className="why-grid">
                     {beliefs.map((b, idx) => (

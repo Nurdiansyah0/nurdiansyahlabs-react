@@ -252,7 +252,7 @@ export default function TrendsDashboard() {
                                     Skor = Minat Pencarian × Laju Momentum (0–100)
                                 </div>
                             </div>
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '1.25rem' }}>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))', gap: '1.25rem' }}>
                                 <AnimatePresence>
                                     {displayed.map((item, i) => (
                                         <KeywordCard key={`${item.service}-${item.keyword}`} item={item} index={i} />

@@ -177,6 +177,9 @@ export default function Navbar() {
                     padding: '1rem',
                     display: 'flex', flexDirection: 'column', gap: '0.5rem',
                     background: '#fff',
+                    width: '100%',
+                    maxWidth: '100vw',
+                    boxSizing: 'border-box'
                 }}>
                     {links.map(l => (
                         l.href.startsWith('/') && !l.href.includes('#') ? (
@@ -223,11 +226,13 @@ export default function Navbar() {
                         style={{
                             display: 'grid',
                             gridTemplateColumns: '1fr 1fr',
-                            gap: '8px',
+                            gap: '6px',
                             padding: '4px',
                             borderRadius: '12px',
                             border: '1px solid #e2e8f0',
                             background: '#f8fafc',
+                            width: '100%',
+                            boxSizing: 'border-box'
                         }}
                     >
                         <button
@@ -237,16 +242,17 @@ export default function Navbar() {
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                gap: '6px',
-                                padding: '10px',
+                                gap: '5px',
+                                padding: '8px 6px',
                                 borderRadius: '8px',
                                 border: 'none',
-                                fontSize: '0.88rem',
+                                fontSize: 'clamp(0.78rem, 3.2vw, 0.88rem)',
                                 fontWeight: lang === 'id' ? 700 : 500,
                                 background: lang === 'id' ? '#312e81' : 'transparent',
                                 color: lang === 'id' ? '#ffffff' : '#475569',
                                 cursor: 'pointer',
                                 minHeight: '44px',
+                                whiteSpace: 'nowrap'
                             }}
                         >
                             <span>🇮🇩</span> Indonesia (ID)
@@ -258,16 +264,17 @@ export default function Navbar() {
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                gap: '6px',
-                                padding: '10px',
+                                gap: '5px',
+                                padding: '8px 6px',
                                 borderRadius: '8px',
                                 border: 'none',
-                                fontSize: '0.88rem',
+                                fontSize: 'clamp(0.78rem, 3.2vw, 0.88rem)',
                                 fontWeight: lang === 'en' ? 700 : 500,
                                 background: lang === 'en' ? '#312e81' : 'transparent',
                                 color: lang === 'en' ? '#ffffff' : '#475569',
                                 cursor: 'pointer',
                                 minHeight: '44px',
+                                whiteSpace: 'nowrap'
                             }}
                         >
                             <span>🇬🇧</span> English (EN)

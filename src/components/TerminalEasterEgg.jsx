@@ -16,7 +16,9 @@ export default function TerminalEasterEgg() {
     useEffect(() => {
         let keys = '';
         const handleKeyDown = (e) => {
-            if (e.ctrlKey && e.key === '`') {
+            if (!e || !e.key) return;
+
+            if (e.ctrlKey && (e.key === '`' || e.code === 'Backquote')) {
                 e.preventDefault();
                 setIsOpen(prev => !prev);
             }
@@ -128,7 +130,7 @@ export default function TerminalEasterEgg() {
                     initial={{ opacity: 0, y: 50, scale: 0.9 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 50, scale: 0.9 }}
-                    className="fixed bottom-6 right-6 w-[500px] h-[350px] bg-slate-900/95 backdrop-blur-md border border-slate-700 rounded-lg shadow-2xl overflow-hidden z-[9999] flex flex-col font-mono text-sm"
+                    className="fixed bottom-4 right-4 left-4 sm:left-auto sm:bottom-6 sm:right-6 sm:w-[500px] max-w-[calc(100vw-2rem)] h-[350px] bg-slate-900/95 backdrop-blur-md border border-slate-700 rounded-lg shadow-2xl overflow-hidden z-[9999] flex flex-col font-mono text-sm"
                 >
                     {/* Header */}
                     <div className="bg-slate-800/80 flex items-center justify-between px-4 py-2 border-b border-slate-700">

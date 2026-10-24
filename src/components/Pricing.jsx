@@ -270,15 +270,15 @@ const PACKAGES = [
         id: 'enterprise',
         featured: false,
         icon: <Cpu size={11} />,
-        badge: { id: 'Discovery Gratis', en: 'Free Discovery' },
+        badge: { id: 'Bionic Advisory · Discovery Gratis', en: 'Bionic Advisory · Free Discovery' },
         label: { id: 'Paket 3', en: 'Package 3' },
         name: {
-            id: 'Konsultasi Arsitektur Teknis & Enterprise Advisory',
-            en: 'Technical Architecture Advisory & Enterprise Consultation',
+            id: 'Konsultasi Arsitektur 1-on-1 dengan Lead Systems Architect',
+            en: '1-on-1 Architecture Discovery with Lead Systems Architect',
         },
         idealFor: {
-            id: 'Ideal untuk: CTO, product manager, tech leader',
-            en: 'Ideal for: CTOs, product managers, tech leaders',
+            id: 'Ideal untuk: Founder, CTO, VP Engineering, Manajer Operasional & Tech Leader',
+            en: 'Ideal for: Founders, CTOs, VPs of Engineering, Operations Managers & Tech Leaders',
         },
         price: { id: 'Konsultasi & Penawaran Khusus (Gratis Sesi Discovery 30 Menit)', en: 'Custom Consultation & Proposal (Free 30-Min Discovery)' },
         paymentNote: { id: 'Advisory 1-on-1 sesuai SOW', en: '1-on-1 advisory per agreed SOW' },
@@ -286,8 +286,8 @@ const PACKAGES = [
         revisions: { id: 'Sesuai scope perjanjian SOW', en: 'Per agreed SOW scope' },
         deliverables: [
             {
-                id: 'Sesi discovery teknis 1-on-1 selama 30 menit (Google Meet / Zoom)',
-                en: '30-minute 1-on-1 technical discovery session (Google Meet / Zoom)',
+                id: 'Sesi discovery teknis 1-on-1 selama 30 menit bersama Lead Systems Architect (Google Meet / Zoom)',
+                en: '30-minute 1-on-1 technical discovery session with Lead Systems Architect (Google Meet / Zoom)',
             },
             {
                 id: 'Audit arsitektur sistem, analisis query bottleneck, & SQL security',
@@ -302,8 +302,8 @@ const PACKAGES = [
                 en: 'Backend performance optimization recommendations & technical debt mitigation',
             },
             {
-                id: 'Penyusunan penawaran custom SOW terstruktur sesuai kebutuhan',
-                en: 'Structured custom SOW proposal tailored to your requirements',
+                id: 'Penyusunan penawaran custom SOW terstruktur sesuai kebutuhan tanpa komitmen',
+                en: 'Structured custom SOW proposal tailored to your requirements with zero obligation',
             },
         ],
         exclusions: [
@@ -317,7 +317,7 @@ const PACKAGES = [
             },
         ],
         cta: {
-            primary: { id: 'Mulai Discovery 1-on-1 Gratis', en: 'Start Free 1-on-1 Discovery' },
+            primary: { id: 'Jadwalkan Discovery 1-on-1 Gratis', en: 'Book Free 1-on-1 Discovery' },
         },
     },
 ]
@@ -409,8 +409,8 @@ export default function Pricing() {
                     className="mt-10 text-center text-xs text-slate-500"
                 >
                     {isIndo
-                        ? '✓ Semua paket termasuk konsultasi awal gratis  ·  ✓ Tidak ada lock-in kontrak jangka panjang  ·  ✓ Pembayaran bertahap berbasis milestone'
-                        : '✓ All packages include a free initial consultation  ·  ✓ No long-term contract lock-in  ·  ✓ Phased milestone-based payments'}
+                        ? '✓ Sesi Discovery 30 Menit Bebas Komitmen  ·  ✓ Garansi 30 Hari Bebas Bug  ·  ✓ 100% Kepemilikan Source Code Tanpa Vendor Lock-in'
+                        : '✓ 30-Min Zero-Obligation Discovery  ·  ✓ 30-Day Bug-Free Warranty  ·  ✓ 100% Source Code Ownership with Zero Vendor Lock-in'}
                 </m.div>
             </div>
         </section>

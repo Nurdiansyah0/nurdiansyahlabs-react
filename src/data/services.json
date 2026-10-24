@@ -4,12 +4,12 @@
             "id": "starter",
             "packageNumber": 1,
             "name": {
-                "id": "Paket 1: Konsultan Website & Frontend Engineering Enterprise",
-                "en": "Package 1: Website Consultant & Enterprise Frontend Engineering"
+                "id": "Paket 1: Modern Web Architecture & Conversion Acceleration",
+                "en": "Package 1: Modern Web Architecture & Conversion Acceleration"
             },
             "title": {
-                "id": "Konsultan Website & Enterprise Web Portal",
-                "en": "Website Consultant & Enterprise Web Portal"
+                "id": "Portal Web & Frontend Berkinerja Tinggi",
+                "en": "High-Performance Web Portal & Frontend"
             },
             "price": {
                 "id": "Mulai Rp 2.500.000",
@@ -17,16 +17,16 @@
             },
             "startingPriceIDR": 2500000,
             "badge": {
-                "id": "Performa Tinggi & Core Web Vitals",
-                "en": "High Performance & Core Web Vitals"
+                "id": "Data-Driven UX & Core Web Vitals 95+",
+                "en": "Data-Driven UX & Core Web Vitals 95+"
             },
             "target": {
-                "id": "Korporasi, perusahaan B2B, startup skala menengah",
-                "en": "Corporations, B2B companies, mid-market startups"
+                "id": "Perusahaan B2B, korporasi, & startup yang membutuhkan konversi instan tanpa friksi",
+                "en": "B2B enterprises, corporations, & startups requiring frictionless buyer conversion"
             },
             "timeline": {
-                "id": "1–3 minggu",
-                "en": "1–3 weeks"
+                "id": "1–2 minggu (Agile Sprint)",
+                "en": "1–2 weeks (Agile Sprint)"
             },
             "revisions": {
                 "id": "Sesuai milestone & scope",
@@ -34,28 +34,28 @@
             },
             "deliverables": [
                 {
-                    "id": "Arsitektur frontend modular React 18 / Vite / Tailwind CSS (< 800ms FCP)",
-                    "en": "Modular frontend architecture with React 18 / Vite / Tailwind CSS (< 800ms FCP)"
+                    "id": "Arsitektur frontend modular React 18 / Vite / Tailwind CSS (< 800ms FCP untuk eliminasi bounce rate)",
+                    "en": "Modular React 18 / Vite / Tailwind CSS frontend (< 800ms FCP eliminating bounce friction)"
                 },
                 {
-                    "id": "Desain responsif mobile-first dengan Core Web Vitals skor 95+",
-                    "en": "Mobile-first responsive design with 95+ Core Web Vitals score"
+                    "id": "Desain responsif mobile-first teroptimasi dengan skor Google Core Web Vitals 95+",
+                    "en": "Mobile-first responsive UX with verified 95+ Google Core Web Vitals score"
                 },
                 {
-                    "id": "Integrasi REST API, manajemen state global, dan security sanitization",
-                    "en": "REST API integration, global state management, and security sanitization"
+                    "id": "Routing leads kontekstual via WhatsApp otomatis & integrasi inquiry form terproteksi",
+                    "en": "Contextual WhatsApp lead routing & protected enterprise inquiry form integration"
                 },
                 {
-                    "id": "Pondasi Technical SEO lengkap, OpenGraph, JSON-LD Schema.org terstruktur",
-                    "en": "Comprehensive Technical SEO foundation, OpenGraph, structured JSON-LD Schema.org"
+                    "id": "Pondasi Technical SEO lengkap, OpenGraph, dan schema JSON-LD terstruktur untuk discovery AI & search",
+                    "en": "Technical SEO foundation, OpenGraph, & structured JSON-LD schema for search & AI discovery"
                 },
                 {
-                    "id": "Setup CI/CD deployment pipeline, SSL HTTPS, dan caching headers",
-                    "en": "CI/CD deployment pipeline setup, SSL HTTPS, and caching headers"
+                    "id": "Automated CI/CD deployment pipeline, SSL HTTPS, edge caching headers & monitoring",
+                    "en": "Automated CI/CD deployment pipeline, SSL HTTPS, edge caching headers & telemetry"
                 },
                 {
-                    "id": "Garansi 30 hari bug-fix & transfer source code lengkap tanpa vendor lock-in",
-                    "en": "30-day bug-fix warranty & 100% full source code ownership without vendor lock-in"
+                    "id": "Garansi 30 hari bebas bug & 100% kepemilikan source code tanpa vendor lock-in",
+                    "en": "30-day bug-free warranty & 100% full source-code ownership with zero vendor lock-in"
                 }
             ],
             "limitations": [
@@ -72,11 +72,11 @@
                 "id": "Konsultasi Web Portal",
                 "en": "Consult Web Portal"
             },
-            "serviceOptionValue": "Paket 1: Enterprise Web Portal & Modular Frontend",
-            "whatsappText": "Halo NurdiansyahLabs, saya tertarik dengan Paket 1: Enterprise Web Portal & Modular Frontend. Bisa bantu jadwalkan diskusi teknis?",
-            "whatsappTextEn": "Hi NurdiansyahLabs, I'm interested in Package 1: Enterprise Web Portal & Modular Frontend. Could we schedule a technical discussion?",
-            "draftMessage": "Halo NurdiansyahLabs, saya tertarik dengan Paket 1: Enterprise Web Portal & Modular Frontend. Saya ingin mendiskusikan kebutuhan arsitektur web untuk perusahaan kami.",
-            "draftMessageEn": "Hi NurdiansyahLabs, I am interested in Package 1: Enterprise Web Portal & Modular Frontend. I would like to discuss building a high-performance web portal for our enterprise.",
+            "serviceOptionValue": "Paket 1: Modern Web Architecture & Conversion Acceleration",
+            "whatsappText": "Halo NurdiansyahLabs, saya tertarik dengan Paket 1: Modern Web Architecture & Conversion Acceleration. Bisa bantu jadwalkan diskusi teknis?",
+            "whatsappTextEn": "Hi NurdiansyahLabs, I'm interested in Package 1: Modern Web Architecture & Conversion Acceleration. Could we schedule a technical discussion?",
+            "draftMessage": "Halo NurdiansyahLabs, saya tertarik dengan Paket 1: Modern Web Architecture & Conversion Acceleration. Saya ingin mendiskusikan kebutuhan arsitektur web performa tinggi untuk perusahaan kami.",
+            "draftMessageEn": "Hi NurdiansyahLabs, I am interested in Package 1: Modern Web Architecture & Conversion Acceleration. I would like to discuss building a high-performance web portal for our enterprise.",
             "slug": "landing-page"
         },
         {
@@ -87,8 +87,8 @@
                 "en": "Package 2: Custom Enterprise ERP & Distributed Operational Systems"
             },
             "title": {
-                "id": "Custom Enterprise ERP & Sistem Operasional",
-                "en": "Custom Enterprise ERP & Operational Systems"
+                "id": "Custom Enterprise ERP & Otomasi Operasional",
+                "en": "Custom Enterprise ERP & Operational Automation"
             },
             "price": {
                 "id": "Sesuai Cakupan Proyek (Mulai Rp 5.000.000)",
@@ -96,16 +96,16 @@
             },
             "startingPriceIDR": 5000000,
             "badge": {
-                "id": "Full SDLC & Arsitektur Database",
-                "en": "Full SDLC & Database Architecture"
+                "id": "Eliminasi Chaos Operasional & Full SDLC",
+                "en": "Operational Velocity & Full SDLC"
             },
             "target": {
-                "id": "Perusahaan multi-cabang, manufaktur, logistik, agribisnis & ritel skala besar",
-                "en": "Multi-branch companies, manufacturing, logistics, agribusiness & large-scale retail"
+                "id": "Perusahaan multi-cabang, agribisnis, manufaktur, & logistik yang menghadapi inefisiensi manual",
+                "en": "Multi-branch enterprises, agribusiness, manufacturing & logistics eliminating manual errors"
             },
             "timeline": {
-                "id": "4–12 minggu (sprint mingguan)",
-                "en": "4–12 weeks (weekly agile sprints)"
+                "id": "4–8 minggu (sprint mingguan teratur)",
+                "en": "4–8 weeks (structured weekly agile sprints)"
             },
             "revisions": {
                 "id": "Sesuai milestone & kesepakatan scope SOW",
@@ -113,28 +113,28 @@
             },
             "deliverables": [
                 {
-                    "id": "Arsitektur modular scalable (React 18 + Python Flask / Node.js + PostgreSQL)",
-                    "en": "Modular scalable architecture (React 18 + Python Flask / Node.js + PostgreSQL)"
+                    "id": "Arsitektur high-concurrency (React 18 + Node.js/Python + PostgreSQL ACID) menangani lonjakan transaksi tanpa bottleneck (< 120ms latency)",
+                    "en": "High-concurrency architecture (React 18 + Node.js/Python + PostgreSQL ACID) handling peak spikes (< 120ms latency)"
                 },
                 {
-                    "id": "Role-Based Access Control (RBAC) multi-level berstandar enterprise",
-                    "en": "Enterprise-grade multi-level Role-Based Access Control (RBAC)"
+                    "id": "Role-Based Access Control (RBAC) multi-level berstandar enterprise dengan tamper-proof audit trail",
+                    "en": "Multi-level Role-Based Access Control (RBAC) with enterprise tamper-proof audit trails"
                 },
                 {
-                    "id": "Database relasional ACID compliant dengan index tuning & automated backup",
-                    "en": "ACID-compliant relational database with index tuning & automated backups"
+                    "id": "Telemetri bisnis prediktif & dashboard operasional real-time (pelacakan susut stok, valuasi inventaris otomatis, margin kotor)",
+                    "en": "Predictive business telemetry & real-time operational dashboard (inventory loss prevention, auto valuation, gross margins)"
                 },
                 {
-                    "id": "Dashboard operasional real-time & KPI bisnis terintegrasi (Stok, Mutasi, Margin)",
-                    "en": "Real-time operational dashboard & integrated business KPIs (Inventory, Audits, Margin)"
+                    "id": "Automasi alur kerja: ekspor faktur PDF digital, sinkronisasi POS/WMS, dan notifikasi instan WhatsApp gateway",
+                    "en": "Automated workflows: digital PDF invoices, POS/WMS synchronization, and real-time WhatsApp gateway alerts"
                 },
                 {
-                    "id": "Fitur export PDF faktur, sinkronisasi POS/WMS, & integrasi WhatsApp gateway",
-                    "en": "PDF invoice export, POS/WMS synchronization, & WhatsApp gateway integration"
+                    "id": "Akses repositori Git transparan dengan rilis berkala 1–2 minggu dan continuous validation",
+                    "en": "Transparent Git repository access with 1–2 week continuous delivery and milestone contracts"
                 },
                 {
-                    "id": "Garansi 60 hari bug-fix, deployment Docker Linux, & SLA support purna jual",
-                    "en": "60-day bug-fix warranty, Docker Linux deployment, & post-sale SLA support"
+                    "id": "Garansi 60 hari bebas bug, manifest deployment Docker Linux, & SLA support purna jual",
+                    "en": "60-day bug-free warranty, Docker Linux deployment manifests, & post-launch SLA support"
                 }
             ],
             "limitations": [
@@ -166,8 +166,8 @@
                 "en": "Package 3: Technical Architecture Advisory, Full SDLC & Enterprise Advisory"
             },
             "title": {
-                "id": "Konsultasi Arsitektur & Full SDLC Advisory",
-                "en": "Technical Architecture Advisory & Full SDLC Advisory"
+                "id": "Konsultasi Arsitektur 1-on-1 dengan Lead Systems Architect",
+                "en": "1-on-1 Architecture Discovery with Lead Systems Architect"
             },
             "price": {
                 "id": "Konsultasi & Penawaran Khusus (Gratis Sesi Discovery 30 Menit)",
@@ -175,16 +175,16 @@
             },
             "startingPriceIDR": 0,
             "badge": {
-                "id": "Discovery 1-on-1 Gratis",
-                "en": "Free 1-on-1 Discovery"
+                "id": "Bionic Advisory · Discovery 30 Menit Gratis",
+                "en": "Bionic Advisory · Free 30-Min Discovery"
             },
             "target": {
-                "id": "CTO, VP Engineering, Product Manager, Tech Leader",
-                "en": "CTOs, VPs of Engineering, Product Managers, Tech Leaders"
+                "id": "Founder, CTO, VP Engineering, Manajer Operasional, & Tech Leader",
+                "en": "Founders, CTOs, VPs of Engineering, Operations Managers, & Tech Leaders"
             },
             "timeline": {
-                "id": "Sesi 30 menit; Audit 3–5 hari kerja",
-                "en": "30-min session; Audit 3–5 working days"
+                "id": "Sesi discovery 30 menit; Blueprint audit 3–5 hari",
+                "en": "30-min discovery session; Blueprint audit in 3–5 days"
             },
             "revisions": {
                 "id": "Sesuai scope perjanjian SOW",
@@ -192,20 +192,20 @@
             },
             "deliverables": [
                 {
-                    "id": "Sesi discovery teknis 1-on-1 selama 30 menit (Google Meet / Zoom)",
-                    "en": "30-minute 1-on-1 technical discovery session (Google Meet / Zoom)"
+                    "id": "Sesi discovery 1-on-1 selama 30 menit bersama Lead Systems Architect (pemetaan domain logic & bottleneck bisnis)",
+                    "en": "1-on-1 discovery session (30 mins) with Lead Systems Architect (mapping business logic & system bottlenecks)"
                 },
                 {
-                    "id": "Audit arsitektur sistem (Monolith vs Microservices), analisis bottleneck query SQL",
-                    "en": "System architecture audit (Monolith vs Microservices), SQL query bottleneck analysis"
+                    "id": "Teardown arsitektur sistem menyeluruh: evaluasi skalabilitas database PostgreSQL, query profiling, & audit security",
+                    "en": "Comprehensive system architecture teardown: PostgreSQL scalability evaluation, query profiling, & security audit"
                 },
                 {
-                    "id": "Review pipeline CI/CD, metodologi Full SDLC, dan strategi mitigasi technical debt",
-                    "en": "CI/CD pipeline review, Full SDLC methodology, and technical debt mitigation roadmap"
+                    "id": "Penyusunan blueprint mitigasi technical debt, kontrak CI/CD, & roadmap sprint rekayasa terstruktur",
+                    "en": "Technical debt mitigation blueprint, CI/CD deployment contracts, & structured agile sprint roadmap"
                 },
                 {
-                    "id": "Dokumen rekomendasi arsitektur resmi & estimasi milestone pengerjaan",
-                    "en": "Formal architecture recommendation document & milestone engineering estimates"
+                    "id": "Dokumen rekomendasi arsitektur resmi & kalkulasi investasi milestone tanpa komitmen / zero-obligation",
+                    "en": "Formal architectural recommendation dossier & milestone investment breakdown with zero obligation"
                 }
             ],
             "limitations": [
@@ -219,8 +219,8 @@
                 }
             ],
             "ctaText": {
-                "id": "Jadwalkan Discovery",
-                "en": "Schedule Discovery"
+                "id": "Jadwalkan Discovery 1-on-1",
+                "en": "Book 1-on-1 Discovery"
             },
             "serviceOptionValue": "Paket 3: Konsultasi Arsitektur Teknis, Full SDLC & Enterprise Advisory",
             "whatsappText": "Halo NurdiansyahLabs, saya ingin menjadwalkan Paket 3: Technical Architecture Advisory (Gratis 30-Menit Discovery) untuk arsitektur proyek saya.",

@@ -70,7 +70,7 @@ export default function AdminProducts({
         fetch('/api/v1/media/upload', { method: 'POST', headers: { 'X-Admin-Token': token }, body: formData })
             .then(r => r.json())
             .then(d => {
-                if (d.status === 'success') setEditingPost(p => ({ ...p, image_url: d.url }))
+                if (d.status === 'success' || d.success) setEditingPost(p => ({ ...p, image_url: d.data?.url || d.url }))
                 else alert('Upload failed')
             })
             .finally(() => onSetUploadingImage(false))

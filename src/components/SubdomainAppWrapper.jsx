@@ -370,10 +370,13 @@ export default function SubdomainAppWrapper({ app, children }) {
                     aria-label="Consultation nudge"
                     style={{
                         position: 'fixed',
-                        bottom: '24px',
-                        right: '24px',
+                        bottom: 'max(1rem, calc(0.75rem + env(safe-area-inset-bottom)))',
+                        right: 'max(1rem, calc(0.75rem + env(safe-area-inset-right)))',
+                        left: 'auto',
                         zIndex: 99998,
-                        maxWidth: '360px',
+                        maxWidth: 'min(360px, calc(100vw - 2rem))',
+                        width: '100%',
+                        boxSizing: 'border-box',
                         background: 'rgba(15, 23, 42, 0.95)',
                         backdropFilter: 'blur(12px)',
                         border: '1px solid rgba(56, 189, 248, 0.3)',

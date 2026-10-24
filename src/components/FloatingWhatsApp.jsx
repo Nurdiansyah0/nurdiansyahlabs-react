@@ -50,8 +50,12 @@ export default function FloatingWhatsApp() {
     return (
         <aside
             aria-label="WhatsApp Quick Consultation"
-            className="fixed bottom-6 right-6 z-40 flex items-center gap-2 select-none group"
-            style={{ animation: 'fadeInUp 0.4s ease-out' }}
+            className="fixed z-40 flex items-center gap-2 select-none group"
+            style={{ 
+                bottom: 'max(1.25rem, calc(1rem + env(safe-area-inset-bottom)))',
+                right: 'max(1rem, calc(1rem + env(safe-area-inset-right)))',
+                animation: 'fadeInUp 0.4s ease-out' 
+            }}
         >
             {/* Pop-up Badge Pill */}
             {!hasDismissed && (

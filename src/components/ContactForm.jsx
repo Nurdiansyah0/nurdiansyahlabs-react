@@ -235,7 +235,7 @@ export default function ContactForm() {
             style={{
                 background: '#ffffff', 
                 borderRadius: '24px', 
-                padding: '2rem',
+                padding: 'clamp(1.25rem, 4vw, 2rem)',
                 border: isHighlighted ? '2px solid #6366f1' : '1px solid rgba(226, 232, 240, 0.8)',
                 boxShadow: isHighlighted 
                     ? '0 0 0 4px rgba(99, 102, 241, 0.25), 0 25px 50px -12px rgba(0, 0, 0, 0.15)' 
@@ -279,8 +279,8 @@ export default function ContactForm() {
                     </m.div>
                 ) : (
                     <m.form key="form" onSubmit={handleSubmit} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
-                            <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#0f172a', margin: 0 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '8px' }}>
+                            <h3 style={{ fontSize: 'clamp(1.1rem, 3vw, 1.3rem)', fontWeight: 800, color: '#0f172a', margin: 0 }}>
                                 {isIndo ? 'Mulai Konsultasi & Penawaran' : 'Start Consultation & Request Quote'}
                             </h3>
                             {formData.service && (

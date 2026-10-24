@@ -23,6 +23,9 @@ export default function ExecutiveSummary({
 
     if (!summary) return null
 
+    const hasMetrics = Array.isArray(metrics) && metrics.length > 0;
+    const hasStack = Array.isArray(stack) && stack.length > 0;
+
     return (
         <aside 
             aria-label={`Executive Technical Summary: ${title}`}
@@ -91,7 +94,7 @@ export default function ExecutiveSummary({
                 </header>
 
                 {isExpanded && (
-                    <div style={{ padding: '1.5rem' }}>
+                    <div style={{ padding: 'clamp(1rem, 3.5vw, 1.5rem)' }}>
                         {subdomain && (
                             <div style={{
                                 marginBottom: '1.25rem',
@@ -160,15 +163,15 @@ export default function ExecutiveSummary({
                             {summary}
                         </p>
 
-                        {(metrics.length > 0 || stack.length > 0) && (
+                        {(hasMetrics || hasStack) && (
                             <div style={{
                                 display: 'grid',
-                                gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+                                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))',
                                 gap: '1rem',
                                 paddingTop: '1rem',
                                 borderTop: '1px solid #f1f5f9'
                             }}>
-                                {metrics.length > 0 && (
+                                {hasMetrics && (
                                     <div>
                                         <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', marginBottom: '8px', letterSpacing: '0.05em' }}>
                                             {isIndo ? 'Tolok Ukur Teknis Utama' : 'Key Technical Benchmarks'}
@@ -181,7 +184,7 @@ export default function ExecutiveSummary({
                                     </div>
                                 )}
 
-                                {stack.length > 0 && (
+                                {hasStack && (
                                     <div>
                                         <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', marginBottom: '8px', letterSpacing: '0.05em' }}>
                                             {isIndo ? 'Stack Produksi Terverifikasi' : 'Verified Production Stack'}
