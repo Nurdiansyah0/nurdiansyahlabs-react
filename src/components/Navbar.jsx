@@ -246,7 +246,7 @@ export default function Navbar() {
                                 background: lang === 'id' ? '#312e81' : 'transparent',
                                 color: lang === 'id' ? '#ffffff' : '#475569',
                                 cursor: 'pointer',
-                                minHeight: '40px',
+                                minHeight: '44px',
                             }}
                         >
                             <span>🇮🇩</span> Indonesia (ID)
@@ -267,7 +267,7 @@ export default function Navbar() {
                                 background: lang === 'en' ? '#312e81' : 'transparent',
                                 color: lang === 'en' ? '#ffffff' : '#475569',
                                 cursor: 'pointer',
-                                minHeight: '40px',
+                                minHeight: '44px',
                             }}
                         >
                             <span>🇬🇧</span> English (EN)
