@@ -1,0 +1,7 @@
+# Protect JSON database files from direct browser access
+# This ensures that nobody can download leads.json or analytics.json directly.
+# PHP scripts can still read and write to these files locally.
+
+<FilesMatch "\.json$">
+    Require all denied
+</FilesMatch>

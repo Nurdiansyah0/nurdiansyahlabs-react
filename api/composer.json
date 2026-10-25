@@ -1,0 +1,11 @@
+{
+    "require": {
+        "phpmailer/phpmailer": "^7.0"
+    },
+    "require-dev": {
+        "composer/semver": "^3.4"
+    },
+    "config": {
+        "platform-check": false
+    }
+}

@@ -1,0 +1,95 @@
+# NurdiansyahLabs — Apache .htaccess
+# Phase 3: Apache-Level A/B Testing + React Router + Security Hardening
+# ─────────────────────────────────────────────────────────────────────────────
+
+Options -Indexes
+ServerSignature Off
+
+# ── Security Headers ──────────────────────────────────────────────────────────
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(self)"
+</IfModule>
+
+# ── Gzip Compression ──────────────────────────────────────────────────────────
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json
+    AddOutputFilterByType DEFLATE image/svg+xml font/woff2
+</IfModule>
+
+# ── Browser Caching for Static Assets ────────────────────────────────────────
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/webp            "access plus 1 year"
+    ExpiresByType image/png             "access plus 1 year"
+    ExpiresByType image/jpeg            "access plus 1 year"
+    ExpiresByType image/svg+xml         "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType text/css              "access plus 1 year"
+    ExpiresByType font/woff2            "access plus 1 year"
+    ExpiresByType text/html             "access plus 0 seconds"
+</IfModule>
+
+# ── A/B Testing: Apache-Level Split (Phase 3) ─────────────────────────────────
+# Randomly assigns 50% of new visitors to variant B (no PHP overhead).
+# Variant B loads index_b.html if it exists, otherwise falls back to index.html.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # ── Permanently drop legacy viral trends scraper paths (HTTP 410 Gone) ──
+    RewriteRule ^blog/(jp|us|id)/ - [R=410,L]
+    RewriteRule ^trends/?.*$ /blog [R=301,L,NC]
+
+    # ── Canonical 301 Redirects: Force HTTPS & non-WWW (Cloudflare Aware) ────
+    # 1. Strip www prefix (e.g. www.nurdiansyahlabs.com -> nurdiansyahlabs.com)
+    RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+    RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+
+    # 2. Force HTTPS preserving the exact host (main domain or active subdomain)
+    RewriteCond %{HTTP:CF-Visitor} !'"scheme":"https"' [NC]
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
+    RewriteCond %{HTTPS} off
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+    # ── Maintenance Mode (COMMENTED OUT - Live for Googlebot Indexing) ──
+    # ErrorDocument 503 /maintenance.html
+    # RewriteCond %{REQUEST_URI} !/maintenance\.html$ [NC]
+    # RewriteCond %{REQUEST_URI} !\.(jpe?g?|png|gif|svg|css|js|ico|woff2?)$ [NC]
+    # RewriteCond %{REQUEST_URI} !^/api/ [NC]
+    # RewriteRule ^.*$ /maintenance.html [L]
+
+    # Assign A/B group via cookie if not yet set
+    # Group B = last digit of microsecond is 0-4 (≈50%)
+    RewriteCond %{HTTP_COOKIE} !NL_AB_TEST
+    RewriteRule ^ - [CO=NL_AB_TEST:%{TIME_SEC}:nurdiansyahlabs.com:1440:/]
+
+    # Serve Variant B if cookie ends in 0-4 AND index_b.html exists
+    RewriteCond %{HTTP_COOKIE} NL_AB_TEST=([02468])
+    RewriteCond %{DOCUMENT_ROOT}/index_b.html -f
+    RewriteRule ^$ /index_b.html [L]
+
+    # ── Sitemap Routing ────────────────────────────────────────────
+    # RewriteRule ^sitemap\.xml$ /api/sitemap.php [L] (served as static file directly)
+
+    # ── React Router: SPA Fallback ─────────────────────────────────────────
+    # Must come AFTER A/B rules
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} !^/api/
+    RewriteRule ^ /index.html [L]
+</IfModule>
+
+# ── Block Access to Sensitive Files ─────────────────────────────────────────
+<FilesMatch "\.(env|sh|sql|sqlite|py|lock|log|gitignore)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Block direct access to database folder
+<IfModule mod_rewrite.c>
+    RewriteRule ^database/ - [F,L]
+    RewriteRule ^cache/ - [F,L]
+</IfModule>

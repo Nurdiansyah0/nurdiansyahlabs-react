@@ -1,0 +1,329 @@
+{
+    "packages": [
+        {
+            "id": "starter",
+            "packageNumber": 1,
+            "name": {
+                "id": "Paket 1: Modern Web Architecture & Conversion Acceleration",
+                "en": "Package 1: Modern Web Architecture & Conversion Acceleration"
+            },
+            "title": {
+                "id": "Portal Web & Frontend Berkinerja Tinggi",
+                "en": "High-Performance Web Portal & Frontend"
+            },
+            "price": {
+                "id": "Mulai Rp 2.500.000",
+                "en": "Starting from $160"
+            },
+            "startingPriceIDR": 2500000,
+            "badge": {
+                "id": "Data-Driven UX & Core Web Vitals 95+",
+                "en": "Data-Driven UX & Core Web Vitals 95+"
+            },
+            "target": {
+                "id": "Perusahaan B2B, korporasi, & startup yang membutuhkan konversi instan tanpa friksi",
+                "en": "B2B enterprises, corporations, & startups requiring frictionless buyer conversion"
+            },
+            "timeline": {
+                "id": "1–2 minggu (Agile Sprint)",
+                "en": "1–2 weeks (Agile Sprint)"
+            },
+            "revisions": {
+                "id": "Sesuai milestone & scope",
+                "en": "Per milestone & scope"
+            },
+            "deliverables": [
+                {
+                    "id": "Arsitektur frontend modular React 18 / Vite / Tailwind CSS (< 800ms FCP untuk eliminasi bounce rate)",
+                    "en": "Modular React 18 / Vite / Tailwind CSS frontend (< 800ms FCP eliminating bounce friction)"
+                },
+                {
+                    "id": "Desain responsif mobile-first teroptimasi dengan skor Google Core Web Vitals 95+",
+                    "en": "Mobile-first responsive UX with verified 95+ Google Core Web Vitals score"
+                },
+                {
+                    "id": "Routing leads kontekstual via WhatsApp otomatis & integrasi inquiry form terproteksi",
+                    "en": "Contextual WhatsApp lead routing & protected enterprise inquiry form integration"
+                },
+                {
+                    "id": "Pondasi Technical SEO lengkap, OpenGraph, dan schema JSON-LD terstruktur untuk discovery AI & search",
+                    "en": "Technical SEO foundation, OpenGraph, & structured JSON-LD schema for search & AI discovery"
+                },
+                {
+                    "id": "Automated CI/CD deployment pipeline, SSL HTTPS, edge caching headers & monitoring",
+                    "en": "Automated CI/CD deployment pipeline, SSL HTTPS, edge caching headers & telemetry"
+                },
+                {
+                    "id": "Garansi 30 hari bebas bug & 100% kepemilikan source code tanpa vendor lock-in",
+                    "en": "30-day bug-free warranty & 100% full source-code ownership with zero vendor lock-in"
+                }
+            ],
+            "limitations": [
+                {
+                    "id": "Biaya domain & infrastruktur hosting recurring ditanggung klien",
+                    "en": "Domain & recurring hosting infrastructure costs borne by client"
+                },
+                {
+                    "id": "Fitur di luar cakupan SOW awal ditangani via change order terstruktur",
+                    "en": "Features beyond agreed initial SOW handled via structured change orders"
+                }
+            ],
+            "ctaText": {
+                "id": "Konsultasi Web Portal",
+                "en": "Consult Web Portal"
+            },
+            "serviceOptionValue": "Paket 1: Modern Web Architecture & Conversion Acceleration",
+            "whatsappText": "Halo NurdiansyahLabs, saya tertarik dengan Paket 1: Modern Web Architecture & Conversion Acceleration. Bisa bantu jadwalkan diskusi teknis?",
+            "whatsappTextEn": "Hi NurdiansyahLabs, I'm interested in Package 1: Modern Web Architecture & Conversion Acceleration. Could we schedule a technical discussion?",
+            "draftMessage": "Halo NurdiansyahLabs, saya tertarik dengan Paket 1: Modern Web Architecture & Conversion Acceleration. Saya ingin mendiskusikan kebutuhan arsitektur web performa tinggi untuk perusahaan kami.",
+            "draftMessageEn": "Hi NurdiansyahLabs, I am interested in Package 1: Modern Web Architecture & Conversion Acceleration. I would like to discuss building a high-performance web portal for our enterprise.",
+            "slug": "landing-page"
+        },
+        {
+            "id": "custom-erp",
+            "packageNumber": 2,
+            "name": {
+                "id": "Paket 2: Custom Enterprise ERP & Sistem Operasional Terdistribusi",
+                "en": "Package 2: Custom Enterprise ERP & Distributed Operational Systems"
+            },
+            "title": {
+                "id": "Custom Enterprise ERP & Otomasi Operasional",
+                "en": "Custom Enterprise ERP & Operational Automation"
+            },
+            "price": {
+                "id": "Sesuai Cakupan Proyek (Mulai Rp 5.000.000)",
+                "en": "Project-Scoped (Starting from $350)"
+            },
+            "startingPriceIDR": 5000000,
+            "badge": {
+                "id": "Eliminasi Chaos Operasional & Full SDLC",
+                "en": "Operational Velocity & Full SDLC"
+            },
+            "target": {
+                "id": "Perusahaan multi-cabang, agribisnis, manufaktur, & logistik yang menghadapi inefisiensi manual",
+                "en": "Multi-branch enterprises, agribusiness, manufacturing & logistics eliminating manual errors"
+            },
+            "timeline": {
+                "id": "4–8 minggu (sprint mingguan teratur)",
+                "en": "4–8 weeks (structured weekly agile sprints)"
+            },
+            "revisions": {
+                "id": "Sesuai milestone & kesepakatan scope SOW",
+                "en": "Per milestone & agreed SOW scope"
+            },
+            "deliverables": [
+                {
+                    "id": "Arsitektur high-concurrency (React 18 + Node.js/Python + PostgreSQL ACID) menangani lonjakan transaksi tanpa bottleneck (< 120ms latency)",
+                    "en": "High-concurrency architecture (React 18 + Node.js/Python + PostgreSQL ACID) handling peak spikes (< 120ms latency)"
+                },
+                {
+                    "id": "Role-Based Access Control (RBAC) multi-level berstandar enterprise dengan tamper-proof audit trail",
+                    "en": "Multi-level Role-Based Access Control (RBAC) with enterprise tamper-proof audit trails"
+                },
+                {
+                    "id": "Telemetri bisnis prediktif & dashboard operasional real-time (pelacakan susut stok, valuasi inventaris otomatis, margin kotor)",
+                    "en": "Predictive business telemetry & real-time operational dashboard (inventory loss prevention, auto valuation, gross margins)"
+                },
+                {
+                    "id": "Automasi alur kerja: ekspor faktur PDF digital, sinkronisasi POS/WMS, dan notifikasi instan WhatsApp gateway",
+                    "en": "Automated workflows: digital PDF invoices, POS/WMS synchronization, and real-time WhatsApp gateway alerts"
+                },
+                {
+                    "id": "Akses repositori Git transparan dengan rilis berkala 1–2 minggu dan continuous validation",
+                    "en": "Transparent Git repository access with 1–2 week continuous delivery and milestone contracts"
+                },
+                {
+                    "id": "Garansi 60 hari bebas bug, manifest deployment Docker Linux, & SLA support purna jual",
+                    "en": "60-day bug-free warranty, Docker Linux deployment manifests, & post-launch SLA support"
+                }
+            ],
+            "limitations": [
+                {
+                    "id": "Biaya server VPS/cloud hosting & API pihak ketiga ditanggung klien",
+                    "en": "VPS/cloud server & third-party API costs borne by client"
+                },
+                {
+                    "id": "Fitur tambahan di luar scope disepakati per change order",
+                    "en": "Features beyond agreed scope handled via change order"
+                }
+            ],
+            "ctaText": {
+                "id": "Minta Penawaran ERP",
+                "en": "Request ERP Proposal"
+            },
+            "serviceOptionValue": "Paket 2: Custom Enterprise ERP & Sistem Operasional Terdistribusi",
+            "whatsappText": "Halo NurdiansyahLabs, saya ingin konsultasi pembuatan Paket 2: Custom Enterprise ERP & Sistem Operasional untuk operasional perusahaan kami.",
+            "whatsappTextEn": "Hi NurdiansyahLabs, I'd like to request a consultation for Package 2: Custom Enterprise ERP & Distributed Operational Systems.",
+            "draftMessage": "Halo NurdiansyahLabs, saya ingin meminta penawaran untuk Paket 2: Custom Enterprise ERP & Sistem Operasional. Bisnis kami membutuhkan sistem kustom untuk pengelolaan operasional, inventaris, dan database skala besar.",
+            "draftMessageEn": "Hi NurdiansyahLabs, I would like to request a proposal for Package 2: Custom Enterprise ERP & Operational Systems. We need a tailored system for high-volume operations and database workflows.",
+            "slug": "web-development"
+        },
+        {
+            "id": "advisory",
+            "packageNumber": 3,
+            "name": {
+                "id": "Paket 3: Konsultasi Arsitektur Teknis, Full SDLC & Enterprise Advisory",
+                "en": "Package 3: Technical Architecture Advisory, Full SDLC & Enterprise Advisory"
+            },
+            "title": {
+                "id": "Konsultasi Arsitektur 1-on-1 dengan Lead Systems Architect",
+                "en": "1-on-1 Architecture Discovery with Lead Systems Architect"
+            },
+            "price": {
+                "id": "Konsultasi & Penawaran Khusus (Gratis Sesi Discovery 30 Menit)",
+                "en": "Enterprise Consultation (Complimentary 30-Min Discovery)"
+            },
+            "startingPriceIDR": 0,
+            "badge": {
+                "id": "Bionic Advisory · Discovery 30 Menit Gratis",
+                "en": "Bionic Advisory · Free 30-Min Discovery"
+            },
+            "target": {
+                "id": "Founder, CTO, VP Engineering, Manajer Operasional, & Tech Leader",
+                "en": "Founders, CTOs, VPs of Engineering, Operations Managers, & Tech Leaders"
+            },
+            "timeline": {
+                "id": "Sesi discovery 30 menit; Blueprint audit 3–5 hari",
+                "en": "30-min discovery session; Blueprint audit in 3–5 days"
+            },
+            "revisions": {
+                "id": "Sesuai scope perjanjian SOW",
+                "en": "Per agreed SOW scope"
+            },
+            "deliverables": [
+                {
+                    "id": "Sesi discovery 1-on-1 selama 30 menit bersama Lead Systems Architect (pemetaan domain logic & bottleneck bisnis)",
+                    "en": "1-on-1 discovery session (30 mins) with Lead Systems Architect (mapping business logic & system bottlenecks)"
+                },
+                {
+                    "id": "Teardown arsitektur sistem menyeluruh: evaluasi skalabilitas database PostgreSQL, query profiling, & audit security",
+                    "en": "Comprehensive system architecture teardown: PostgreSQL scalability evaluation, query profiling, & security audit"
+                },
+                {
+                    "id": "Penyusunan blueprint mitigasi technical debt, kontrak CI/CD, & roadmap sprint rekayasa terstruktur",
+                    "en": "Technical debt mitigation blueprint, CI/CD deployment contracts, & structured agile sprint roadmap"
+                },
+                {
+                    "id": "Dokumen rekomendasi arsitektur resmi & kalkulasi investasi milestone tanpa komitmen / zero-obligation",
+                    "en": "Formal architectural recommendation dossier & milestone investment breakdown with zero obligation"
+                }
+            ],
+            "limitations": [
+                {
+                    "id": "Sesi konsultasi gratis difokuskan pada asesmen dan arah strategis arsitektur",
+                    "en": "Complimentary session focuses on assessment and architectural strategic direction"
+                },
+                {
+                    "id": "Implementasi hands-on rekayasa kode diatur dalam kontrak SOW terpisah",
+                    "en": "Hands-on engineering implementation is governed under a separate SOW contract"
+                }
+            ],
+            "ctaText": {
+                "id": "Jadwalkan Discovery 1-on-1",
+                "en": "Book 1-on-1 Discovery"
+            },
+            "serviceOptionValue": "Paket 3: Konsultasi Arsitektur Teknis, Full SDLC & Enterprise Advisory",
+            "whatsappText": "Halo NurdiansyahLabs, saya ingin menjadwalkan Paket 3: Technical Architecture Advisory (Gratis 30-Menit Discovery) untuk arsitektur proyek saya.",
+            "whatsappTextEn": "Hi NurdiansyahLabs, I would like to schedule a 30-minute Technical Architecture Advisory session.",
+            "draftMessage": "Halo NurdiansyahLabs, saya ingin menjadwalkan sesi Paket 3: Technical Architecture Advisory & Enterprise Consultation (Gratis 30-Menit Discovery) untuk mendiskusikan arsitektur sistem dan strategi teknologi kami.",
+            "draftMessageEn": "Hi NurdiansyahLabs, I would like to book a Complimentary 30-Minute Technical Architecture Discovery session to discuss our system scalability and technology stack.",
+            "slug": "machine-learning"
+        }
+    ],
+    "services": [
+        {
+            "slug": "landing-page",
+            "title": "Konsultan Website & Frontend Engineering Enterprise",
+            "tagline": "Website Consultant Profesional, Jasa Pembuatan Website Performa Tinggi & Modern Web Apps",
+            "description": "Layanan konsultan website profesional (website consultant) dan rekayasa frontend enterprise di Indonesia. Solusi web application modern, portal korporat, dan company profile dengan performa tinggi (< 800ms FCP), Core Web Vitals 95+, Technical SEO lengkap, dan arsitektur tanpa celah keamanan.",
+            "category": "Paket Layanan 1",
+            "price": "Mulai Rp 2.500.000",
+            "startingPriceIDR": 2500000,
+            "idealFor": "Korporasi, Perusahaan B2B, Startup Skala Menengah",
+            "estimation": "1–3 minggu",
+            "revisions": "Sesuai milestone & kesepakatan scope",
+            "inclusions": [
+                "Arsitektur frontend modular React 18 / Vite / Tailwind CSS (< 800ms FCP)",
+                "Desain responsif mobile-first dengan Core Web Vitals skor 95+",
+                "Integrasi REST API, manajemen state global, dan data sanitization",
+                "Pondasi Technical SEO lengkap, OpenGraph, JSON-LD Schema.org terstruktur",
+                "Setup CI/CD deployment pipeline, SSL HTTPS, dan caching headers",
+                "Garansi 30 hari bug-fix & transfer source code lengkap tanpa vendor lock-in"
+            ],
+            "limitations": [
+                "Biaya domain & infrastruktur hosting recurring ditanggung klien",
+                "Fitur di luar cakupan SOW awal ditangani via change order terstruktur"
+            ]
+        },
+        {
+            "slug": "web-development",
+            "title": "Custom Enterprise ERP & Sistem Operasional Terdistribusi",
+            "tagline": "Rekayasa Sistem ERP Kustom & Database Skala Produksi (Full SDLC)",
+            "description": "Aplikasi web skala enterprise dan ERP operasional kustom untuk korporasi, multi-cabang, manufaktur, agribisnis, ritel, dan logistik. Menghilangkan bottleneck spreadsheet dan sistem warisan usang dengan metodologi Full SDLC.",
+            "category": "Paket Layanan 2",
+            "price": "Sesuai Cakupan Proyek (Mulai Rp 5.000.000)",
+            "startingPriceIDR": 5000000,
+            "idealFor": "Perusahaan Multi-Cabang, Manufaktur, Logistik, Agribisnis & Ritel Skala Besar",
+            "estimation": "4–12 minggu (sprint mingguan)",
+            "revisions": "Sesuai milestone & kesepakatan scope SOW",
+            "inclusions": [
+                "Arsitektur modern modular (React 18, Flask/Python, PostgreSQL)",
+                "Role-Based Access Control (RBAC: Admin, Manajer, Operator, Kasir)",
+                "Dashboard operasional real-time & KPI bisnis (FCR, Stok, Keuangan)",
+                "Database relasional aman dengan audit trail & backup otomatis",
+                "Fitur export laporan otomatis (PDF faktur, rekap Excel/CSV)",
+                "Deployment Docker container / VPS Linux dengan monitoring",
+                "Garansi 30 hari bug-fix & SLA support purna jual",
+                "Dokumentasi sistem & video panduan operasional"
+            ],
+            "limitations": [
+                "Biaya infrastruktur cloud (VPS/DB) dan API pihak ketiga ditanggung klien",
+                "Fitur baru di luar cakupan awal ditangani via change order terstruktur"
+            ]
+        },
+        {
+            "slug": "data-analyst",
+            "title": "Jasa Data Scientist & Business Intelligence Analytics",
+            "tagline": "Ubah Data Mentah Menjadi Prediksi & Keputusan Bisnis yang Akurat",
+            "description": "Layanan jasa data scientist profesional: dashboard interaktif Power BI, Tableau, dan pemodelan analitik data untuk akselerasi pertumbuhan bisnis Anda.",
+            "category": "Layanan Analitik",
+            "price": "Mulai Rp 2.500.000",
+            "startingPriceIDR": 2500000,
+            "idealFor": "Manajer Operasional, Pemilik Bisnis Ritel, Tim Keuangan",
+            "estimation": "1–3 minggu",
+            "revisions": "2x revisi dashboard",
+            "inclusions": [
+                "Data cleaning & pemodelan data dari berbagai sumber (Excel, SQL, CSV)",
+                "Dashboard visual interaktif (Power BI / Tableau / React)",
+                "Automasi pembaruan data berkala",
+                "Pelatihan interpretasi metrik untuk tim operasional"
+            ],
+            "limitations": [
+                "Lisensi Power BI Pro / Tableau (jika cloud) disediakan oleh klien"
+            ]
+        },
+        {
+            "slug": "machine-learning",
+            "title": "Jasa Machine Learning & AI Engineering Enterprise",
+            "tagline": "Jasa Machine Learning, Computer Vision & Edge AI untuk Transformasi Bisnis",
+            "description": "Layanan jasa machine learning profesional dan rekayasa AI enterprise: pengembangan model prediktif, computer vision edge inference, NLP, dan integrasi pipeline AI/ML skala produksi.",
+            "category": "Layanan Machine Learning",
+            "price": "Konsultasi & Penawaran Khusus (Gratis 30-Menit Discovery)",
+            "startingPriceIDR": 0,
+            "idealFor": "CTOs, Product Managers, Engineering Leads, Tech Founders",
+            "estimation": "Sesi 30 menit; Audit 3–5 hari kerja",
+            "revisions": "Sesuai perjanjian SOW",
+            "inclusions": [
+                "1-on-1 sesi discovery teknis gratis (30 menit via Google Meet/Zoom)",
+                "Audit arsitektur sistem, bottleneck performa, & keamanan SQL",
+                "Roadmap modernisasi teknologi & mitigasi technical debt",
+                "Strategi pipeline machine learning & computer vision edge inference",
+                "Penyusunan Scope of Work (SOW) & estimasi milestone transparan"
+            ],
+            "limitations": [
+                "Sesi gratis difokuskan pada asesmen & directional strategy",
+                "Eksekusi hands-on engineering dan coding diatur dalam kontrak SOW terpisah"
+            ]
+        }
+    ]
+}

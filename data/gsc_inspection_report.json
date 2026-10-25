@@ -1,0 +1,344 @@
+[
+  {
+    "url": "https://nurdiansyahlabs.com/",
+    "verdict": "PASS",
+    "coverage": "Submitted and indexed",
+    "robots": "ALLOWED",
+    "indexing": "INDEXING_ALLOWED",
+    "lastCrawl": "2026-10-23T23:57:57Z",
+    "canonical": "https://nurdiansyahlabs.com/"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/blog",
+    "verdict": "NEUTRAL",
+    "coverage": "URL is unknown to Google",
+    "robots": "ROBOTS_TXT_STATE_UNSPECIFIED",
+    "indexing": "INDEXING_STATE_UNSPECIFIED",
+    "lastCrawl": "-",
+    "canonical": "-"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/trends",
+    "verdict": "NEUTRAL",
+    "coverage": "Server error (5xx)",
+    "robots": "ALLOWED",
+    "indexing": "INDEXING_STATE_UNSPECIFIED",
+    "lastCrawl": "2026-10-24T01:12:13Z",
+    "canonical": "-"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/services/web-development",
+    "verdict": "NEUTRAL",
+    "coverage": "Server error (5xx)",
+    "robots": "ALLOWED",
+    "indexing": "INDEXING_STATE_UNSPECIFIED",
+    "lastCrawl": "2026-10-21T19:35:25Z",
+    "canonical": "-"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/services/landing-page",
+    "verdict": "PASS",
+    "coverage": "Submitted and indexed",
+    "robots": "ALLOWED",
+    "indexing": "INDEXING_ALLOWED",
+    "lastCrawl": "2026-09-14T19:18:44Z",
+    "canonical": "https://nurdiansyahlabs.com/services/landing-page"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/services/data-analyst",
+    "verdict": "NEUTRAL",
+    "coverage": "Server error (5xx)",
+    "robots": "ALLOWED",
+    "indexing": "INDEXING_STATE_UNSPECIFIED",
+    "lastCrawl": "2026-10-18T08:41:04Z",
+    "canonical": "-"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/services/machine-learning",
+    "verdict": "NEUTRAL",
+    "coverage": "Page with redirect",
+    "robots": "ALLOWED",
+    "indexing": "INDEXING_ALLOWED",
+    "lastCrawl": "2026-10-11T16:39:23Z",
+    "canonical": "https://nurdiansyahlabs.com/services/machine-learning/"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/layanan/industri/klinik-kesehatan",
+    "verdict": "NEUTRAL",
+    "coverage": "URL is unknown to Google",
+    "robots": "ROBOTS_TXT_STATE_UNSPECIFIED",
+    "indexing": "INDEXING_STATE_UNSPECIFIED",
+    "lastCrawl": "-",
+    "canonical": "-"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/layanan/industri/toko-online-retail",
+    "verdict": "NEUTRAL",
+    "coverage": "URL is unknown to Google",
+    "robots": "ROBOTS_TXT_STATE_UNSPECIFIED",
+    "indexing": "INDEXING_STATE_UNSPECIFIED",
+    "lastCrawl": "-",
+    "canonical": "-"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/layanan/industri/bisnis-fb-kuliner",
+    "verdict": "NEUTRAL",
+    "coverage": "URL is unknown to Google",
+    "robots": "ROBOTS_TXT_STATE_UNSPECIFIED",
+    "indexing": "INDEXING_STATE_UNSPECIFIED",
+    "lastCrawl": "-",
+    "canonical": "-"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/showcase/landing-page/toko-laptop-batam",
+    "verdict": "NEUTRAL",
+    "coverage": "URL is unknown to Google",
+    "robots": "ROBOTS_TXT_STATE_UNSPECIFIED",
+    "indexing": "INDEXING_STATE_UNSPECIFIED",
+    "lastCrawl": "-",
+    "canonical": "-"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/showcase/landing-page/batam-chicken-supplier",
+    "verdict": "NEUTRAL",
+    "coverage": "URL is unknown to Google",
+    "robots": "ROBOTS_TXT_STATE_UNSPECIFIED",
+    "indexing": "INDEXING_STATE_UNSPECIFIED",
+    "lastCrawl": "-",
+    "canonical": "-"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/showcase/landing-page/warung-makan",
+    "verdict": "NEUTRAL",
+    "coverage": "URL is unknown to Google",
+    "robots": "ROBOTS_TXT_STATE_UNSPECIFIED",
+    "indexing": "INDEXING_STATE_UNSPECIFIED",
+    "lastCrawl": "-",
+    "canonical": "-"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/showcase/landing-page/batam-rental-mobil",
+    "verdict": "NEUTRAL",
+    "coverage": "URL is unknown to Google",
+    "robots": "ROBOTS_TXT_STATE_UNSPECIFIED",
+    "indexing": "INDEXING_STATE_UNSPECIFIED",
+    "lastCrawl": "-",
+    "canonical": "-"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/showcase/fullstack/koperasi-pos",
+    "verdict": "PASS",
+    "coverage": "Submitted and indexed",
+    "robots": "ALLOWED",
+    "indexing": "INDEXING_ALLOWED",
+    "lastCrawl": "2026-10-11T16:00:29Z",
+    "canonical": "https://nurdiansyahlabs.com/showcase/fullstack/koperasi-pos"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/showcase/fullstack/warehouse-wms",
+    "verdict": "NEUTRAL",
+    "coverage": "URL is unknown to Google",
+    "robots": "ROBOTS_TXT_STATE_UNSPECIFIED",
+    "indexing": "INDEXING_STATE_UNSPECIFIED",
+    "lastCrawl": "-",
+    "canonical": "-"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/showcase/fullstack/vehicle-inspection",
+    "verdict": "NEUTRAL",
+    "coverage": "URL is unknown to Google",
+    "robots": "ROBOTS_TXT_STATE_UNSPECIFIED",
+    "indexing": "INDEXING_STATE_UNSPECIFIED",
+    "lastCrawl": "-",
+    "canonical": "-"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/showcase/fullstack/attendance",
+    "verdict": "NEUTRAL",
+    "coverage": "URL is unknown to Google",
+    "robots": "ROBOTS_TXT_STATE_UNSPECIFIED",
+    "indexing": "INDEXING_STATE_UNSPECIFIED",
+    "lastCrawl": "-",
+    "canonical": "-"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/showcase/fullstack/primatera-poultry",
+    "verdict": "PASS",
+    "coverage": "Submitted and indexed",
+    "robots": "ALLOWED",
+    "indexing": "INDEXING_ALLOWED",
+    "lastCrawl": "2026-09-14T11:26:40Z",
+    "canonical": "https://nurdiansyahlabs.com/showcase/fullstack/primatera-poultry"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/showcase/data-analyst/crop-yield",
+    "verdict": "NEUTRAL",
+    "coverage": "URL is unknown to Google",
+    "robots": "ROBOTS_TXT_STATE_UNSPECIFIED",
+    "indexing": "INDEXING_STATE_UNSPECIFIED",
+    "lastCrawl": "-",
+    "canonical": "-"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/showcase/data-analyst/retail-sales",
+    "verdict": "NEUTRAL",
+    "coverage": "Crawled - currently not indexed",
+    "robots": "ALLOWED",
+    "indexing": "INDEXING_ALLOWED",
+    "lastCrawl": "2026-09-20T12:47:46Z",
+    "canonical": "https://nurdiansyahlabs.com/showcase/data-analyst/retail-sales"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/showcase/data-analyst/ecommerce-analytics",
+    "verdict": "NEUTRAL",
+    "coverage": "URL is unknown to Google",
+    "robots": "ROBOTS_TXT_STATE_UNSPECIFIED",
+    "indexing": "INDEXING_STATE_UNSPECIFIED",
+    "lastCrawl": "-",
+    "canonical": "-"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/showcase/data-analyst/clinic-analytics",
+    "verdict": "NEUTRAL",
+    "coverage": "URL is unknown to Google",
+    "robots": "ROBOTS_TXT_STATE_UNSPECIFIED",
+    "indexing": "INDEXING_STATE_UNSPECIFIED",
+    "lastCrawl": "-",
+    "canonical": "-"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/showcase/data-science/churn-prediction",
+    "verdict": "NEUTRAL",
+    "coverage": "URL is unknown to Google",
+    "robots": "ROBOTS_TXT_STATE_UNSPECIFIED",
+    "indexing": "INDEXING_STATE_UNSPECIFIED",
+    "lastCrawl": "-",
+    "canonical": "-"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/showcase/data-science/customer-clustering",
+    "verdict": "NEUTRAL",
+    "coverage": "URL is unknown to Google",
+    "robots": "ROBOTS_TXT_STATE_UNSPECIFIED",
+    "indexing": "INDEXING_STATE_UNSPECIFIED",
+    "lastCrawl": "-",
+    "canonical": "-"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/showcase/data-science/sales-forecasting",
+    "verdict": "NEUTRAL",
+    "coverage": "URL is unknown to Google",
+    "robots": "ROBOTS_TXT_STATE_UNSPECIFIED",
+    "indexing": "INDEXING_STATE_UNSPECIFIED",
+    "lastCrawl": "-",
+    "canonical": "-"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/showcase/data-science/smart-vision",
+    "verdict": "PASS",
+    "coverage": "Submitted and indexed",
+    "robots": "ALLOWED",
+    "indexing": "INDEXING_ALLOWED",
+    "lastCrawl": "2026-08-07T19:16:34Z",
+    "canonical": "https://nurdiansyahlabs.com/showcase/data-science/smart-vision"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/blog/jasa-landing-page-murah-indonesia",
+    "verdict": "PASS",
+    "coverage": "Submitted and indexed",
+    "robots": "ALLOWED",
+    "indexing": "INDEXING_ALLOWED",
+    "lastCrawl": "2026-10-01T03:47:22Z",
+    "canonical": "https://nurdiansyahlabs.com/blog/jasa-landing-page-murah-indonesia"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/blog/jasa-fullstack-developer-indonesia",
+    "verdict": "NEUTRAL",
+    "coverage": "URL is unknown to Google",
+    "robots": "ROBOTS_TXT_STATE_UNSPECIFIED",
+    "indexing": "INDEXING_STATE_UNSPECIFIED",
+    "lastCrawl": "-",
+    "canonical": "-"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/blog/jasa-analisis-data-bisnis-indonesia",
+    "verdict": "PASS",
+    "coverage": "Submitted and indexed",
+    "robots": "ALLOWED",
+    "indexing": "INDEXING_ALLOWED",
+    "lastCrawl": "2026-07-27T15:56:02Z",
+    "canonical": "https://nurdiansyahlabs.com/blog/jasa-analisis-data-bisnis-indonesia"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/blog/jasa-machine-learning-data-science",
+    "verdict": "PASS",
+    "coverage": "Submitted and indexed",
+    "robots": "ALLOWED",
+    "indexing": "INDEXING_ALLOWED",
+    "lastCrawl": "2026-09-20T20:29:46Z",
+    "canonical": "https://nurdiansyahlabs.com/blog/jasa-machine-learning-data-science"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/blog/buat-dashboard-bisnis-power-bi-tableau",
+    "verdict": "PASS",
+    "coverage": "Submitted and indexed",
+    "robots": "ALLOWED",
+    "indexing": "INDEXING_ALLOWED",
+    "lastCrawl": "2026-10-01T03:42:07Z",
+    "canonical": "https://nurdiansyahlabs.com/blog/buat-dashboard-bisnis-power-bi-tableau"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/blog/berapa-harga-jasa-landing-page-profesional",
+    "verdict": "NEUTRAL",
+    "coverage": "Crawled - currently not indexed",
+    "robots": "ALLOWED",
+    "indexing": "INDEXING_ALLOWED",
+    "lastCrawl": "2026-06-03T07:28:08Z",
+    "canonical": "https://nurdiansyahlabs.com/blog/berapa-harga-jasa-landing-page-profesional"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/blog/cara-memilih-jasa-web-developer-terpercaya",
+    "verdict": "NEUTRAL",
+    "coverage": "Crawled - currently not indexed",
+    "robots": "ALLOWED",
+    "indexing": "INDEXING_ALLOWED",
+    "lastCrawl": "2026-06-16T17:21:06Z",
+    "canonical": "https://nurdiansyahlabs.com/blog/cara-memilih-jasa-web-developer-terpercaya"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/blog/kapan-bisnis-butuh-data-analyst",
+    "verdict": "NEUTRAL",
+    "coverage": "URL is unknown to Google",
+    "robots": "ROBOTS_TXT_STATE_UNSPECIFIED",
+    "indexing": "INDEXING_STATE_UNSPECIFIED",
+    "lastCrawl": "-",
+    "canonical": "-"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/blog/jasa-website-umkm-integrasi-whatsapp",
+    "verdict": "PASS",
+    "coverage": "Submitted and indexed",
+    "robots": "ALLOWED",
+    "indexing": "INDEXING_ALLOWED",
+    "lastCrawl": "2026-10-21T10:05:09Z",
+    "canonical": "https://nurdiansyahlabs.com/blog/jasa-website-umkm-integrasi-whatsapp"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/blog/manfaat-machine-learning-untuk-bisnis-kecil",
+    "verdict": "NEUTRAL",
+    "coverage": "URL is unknown to Google",
+    "robots": "ROBOTS_TXT_STATE_UNSPECIFIED",
+    "indexing": "INDEXING_STATE_UNSPECIFIED",
+    "lastCrawl": "-",
+    "canonical": "-"
+  },
+  {
+    "url": "https://nurdiansyahlabs.com/blog/programmer-freelance-indonesia",
+    "verdict": "NEUTRAL",
+    "coverage": "URL is unknown to Google",
+    "robots": "ROBOTS_TXT_STATE_UNSPECIFIED",
+    "indexing": "INDEXING_STATE_UNSPECIFIED",
+    "lastCrawl": "-",
+    "canonical": "-"
+  }
+]

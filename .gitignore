@@ -1,0 +1,73 @@
+# Dependencies
+node_modules/
+venv/
+/vendor/
+.target/
+
+# Build outputs
+/dist/
+*.zip
+*.log
+
+# Sensitive Credentials, Keys & Local Secrets
+id_rsa*
+id_ed25519*
+*.pem
+*.key
+*.id_rsa
+connection*
+postgre-env
+credentials/
+.secrets/
+*credentials*.json
+*service_account*.json
+gsc-*.json
+.env
+.env.*
+env.local.php
+.user.ini
+
+# Backups & Dumps
+backups/
+*.sql
+!/database/schema.sql
+!/database/init.sql
+!/database/seeds/*.sql
+cloudflare_dns_backup*.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+
+# Backend temporary diagnostics
+api/diagnose_env.php
+api/truncate_db.php
+diagnose_env.php
+truncate_db.php
+diagnose_db.php
+scripts/diagnose_db.php
+.unlighthouse
+
+# Sensitive Keys & Environment Files
+connection
+connection.pub
+postgre-env
+*.db
+*.sqlite
+__pycache__/
+*.pyc
+.pytest_cache/
+*credentials*.json
+*service_account*.json
+gsc-*.json
+
+# Agent Folders & Skills
+.agent/
+.agents/
+
+
+

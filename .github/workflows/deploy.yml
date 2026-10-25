@@ -1,0 +1,131 @@
+name: 🚀 CI/CD — Build & Deploy to cPanel
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Allows manual trigger from GitHub Actions UI
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+jobs:
+  # ─── STAGE 1: BUILD & PACKAGE ────────────────────────────────
+  build:
+    name: '🔨 Stage 1: Build & Package'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📦 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: 📥 Install Dependencies
+        run: npm ci
+
+      - name: 🔨 Build Frontend (Vite & Prerender)
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: 🔍 SEO Drift Validation
+        run: npm run validate:seo
+
+      - name: 🗂️ Package Backend & Harden Security
+        env:
+          GIT_COMMIT: ${{ github.sha }}
+          GIT_BRANCH: ${{ github.ref_name }}
+          TRIGGERED_BY: ${{ github.actor }}
+        run: npm run package:deploy
+
+      - name: 📤 Upload Deployment Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-dist
+          path: dist/
+          retention-days: 3
+          if-no-files-found: error
+
+  # ─── STAGE 2: DEPLOY TO PRODUCTION ───────────────────────────
+  deploy:
+    name: '📂 Stage 2: Deploy to Production'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://nurdiansyahlabs.com
+
+    steps:
+      - name: 📦 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: 📥 Install Dependencies
+        run: npm ci
+
+      - name: 📥 Download Deployment Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: production-dist
+          path: dist
+
+      - name: 🧹 Clean Orphaned Remote Directory
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: node scripts/cleanup_orphaned_deployment.cjs
+
+      - name: 🚀 Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./dist/
+          server-dir: ./
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.env*
+            **/node_modules/**
+            **/cache/**
+            **/upload_articles/**
+            **/api/v1/**
+
+  # ─── STAGE 3: LIVE VERIFICATION ──────────────────────────────
+  verify:
+    name: '🔍 Stage 3: Live Verification'
+    needs: deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📦 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: 📥 Install Dependencies
+        run: npm ci
+
+      - name: 🩺 Run Post-Deploy Live Smoke Test
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: node scripts/verify_deployment.cjs

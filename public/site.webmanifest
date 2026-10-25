@@ -1,0 +1,71 @@
+{
+  "name": "NurdiansyahLabs – Enterprise Software Studio",
+  "short_name": "NurdiansyahLabs",
+  "description": "Enterprise Software Engineering, Full SDLC Architecture, and Mission-Critical Web Applications.",
+  "start_url": "/",
+  "id": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#070A0F",
+  "theme_color": "#0F172A",
+  "categories": ["business", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/assets/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icon-maskable-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/icon-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Insights & Engineering Blog",
+      "short_name": "Blog",
+      "description": "Artikel teknis arsitektur software, sistem enterprise, dan full SDLC.",
+      "url": "/blog",
+      "icons": [
+        {
+          "src": "/assets/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Layanan Enterprise & Solutions",
+      "short_name": "Services",
+      "description": "Layanan pengembangan software enterprise, custom ERP, dan arsitektur web.",
+      "url": "/#services",
+      "icons": [
+        {
+          "src": "/assets/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}
