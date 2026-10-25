@@ -193,13 +193,14 @@ export default function ContactForm() {
 
     const inputStyle = {
         width: '100%', padding: '12px 16px', borderRadius: '12px',
-        border: '1px solid #e2e8f0', background: '#f8fafc',
-        fontSize: '0.95rem', color: '#0f172a', transition: 'all 0.2s',
-        marginBottom: '1rem', outline: 'none'
+        border: '1px solid rgba(255, 255, 255, 0.12)', background: 'rgba(7, 9, 15, 0.75)',
+        fontSize: '0.95rem', color: '#f8fafc', transition: 'all 0.2s',
+        marginBottom: '1rem', outline: 'none',
+        boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.04)'
     }
 
     const labelStyle = {
-        display: 'block', fontSize: '0.85rem', fontWeight: 700, color: '#1e293b', marginBottom: '6px'
+        display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#cbd5e1', marginBottom: '6px'
     }
 
     const serviceOptions = [
@@ -233,13 +234,15 @@ export default function ContactForm() {
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             style={{
-                background: '#ffffff', 
+                background: 'rgba(12, 16, 26, 0.85)', 
+                backdropFilter: 'blur(20px)',
+                WebkitBackdropFilter: 'blur(20px)',
                 borderRadius: '24px', 
                 padding: 'clamp(1.25rem, 4vw, 2rem)',
-                border: isHighlighted ? '2px solid #6366f1' : '1px solid rgba(226, 232, 240, 0.8)',
+                border: isHighlighted ? '2px solid #818cf8' : '1px solid rgba(255, 255, 255, 0.1)',
                 boxShadow: isHighlighted 
-                    ? '0 0 0 4px rgba(99, 102, 241, 0.25), 0 25px 50px -12px rgba(0, 0, 0, 0.15)' 
-                    : '0 20px 40px rgba(0,0,0,0.08)', 
+                    ? '0 0 0 4px rgba(129, 140, 248, 0.25), 0 25px 50px -12px rgba(0, 0, 0, 0.8)' 
+                    : 'inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 20px 40px rgba(0,0,0,0.8)', 
                 position: 'relative',
                 overflow: 'hidden',
                 transition: 'border 0.3s ease, box-shadow 0.3s ease'
@@ -257,14 +260,14 @@ export default function ContactForm() {
                         <m.div
                             initial={{ scale: 0 }} animate={{ scale: 1 }}
                             transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-                            style={{ display: 'inline-flex', background: '#dcfce7', color: '#16a34a', padding: '16px', borderRadius: '50%', marginBottom: '1.5rem' }}
+                            style={{ display: 'inline-flex', background: 'rgba(16, 185, 129, 0.15)', color: '#34d399', padding: '16px', borderRadius: '50%', marginBottom: '1.5rem', border: '1px solid rgba(52, 211, 153, 0.3)' }}
                         >
                             <CheckCircle size={40} />
                         </m.div>
-                        <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#0f172a', marginBottom: '0.5rem' }}>
+                        <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#f8fafc', marginBottom: '0.5rem' }}>
                             {isIndo ? 'Permintaan Terkirim!' : 'Inquiry Submitted!'}
                         </h3>
-                        <p style={{ color: '#1e293b', lineHeight: 1.6 }}>
+                        <p style={{ color: '#cbd5e1', lineHeight: 1.6 }}>
                             {isIndo 
                                 ? 'Terima kasih atas pesan Anda. Kami akan meninjau kebutuhan proyek Anda dan membalas dalam waktu maksimal 2-4 jam kerja.' 
                                 : 'Thank you for reaching out. We will review your project scope and respond within 2-4 business hours.'}
@@ -272,7 +275,7 @@ export default function ContactForm() {
                         <button 
                             aria-label="Kirim Permintaan Baru"
                             onClick={() => setStatus('idle')}
-                            style={{ marginTop: '2rem', background: '#f1f5f9', color: '#1e293b', border: 'none', padding: '10px 24px', borderRadius: '9999px', fontWeight: 600, cursor: 'pointer' }}
+                            style={{ marginTop: '2rem', background: 'rgba(255, 255, 255, 0.08)', color: '#f8fafc', border: '1px solid rgba(255, 255, 255, 0.15)', padding: '10px 24px', borderRadius: '9999px', fontWeight: 600, cursor: 'pointer' }}
                         >
                             {isIndo ? 'Kirim Pesan Lain' : 'Send Another Inquiry'}
                         </button>
@@ -280,7 +283,7 @@ export default function ContactForm() {
                 ) : (
                     <m.form key="form" onSubmit={handleSubmit} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '8px' }}>
-                            <h3 style={{ fontSize: 'clamp(1.1rem, 3vw, 1.3rem)', fontWeight: 800, color: '#0f172a', margin: 0 }}>
+                            <h3 style={{ fontSize: 'clamp(1.1rem, 3vw, 1.3rem)', fontWeight: 800, color: '#f8fafc', margin: 0 }}>
                                 {isIndo ? 'Mulai Konsultasi & Penawaran' : 'Start Consultation & Request Quote'}
                             </h3>
                             {formData.service && (
@@ -288,8 +291,9 @@ export default function ContactForm() {
                                     display: 'inline-flex',
                                     alignItems: 'center',
                                     gap: '4px',
-                                    background: '#e0e7ff',
-                                    color: '#3730a3',
+                                    background: 'rgba(99, 102, 241, 0.2)',
+                                    color: '#c4b5fd',
+                                    border: '1px solid rgba(167, 139, 250, 0.3)',
                                     fontSize: '0.75rem',
                                     fontWeight: 700,
                                     padding: '4px 10px',
@@ -301,7 +305,7 @@ export default function ContactForm() {
                         </div>
 
                         {status === 'error' && (
-                            <m.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} style={{ background: '#fee2e2', color: '#b91c1c', padding: '12px 16px', borderRadius: '8px', marginBottom: '1rem', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 500 }}>
+                            <m.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} style={{ background: 'rgba(239, 68, 68, 0.15)', color: '#fca5a5', border: '1px solid rgba(248, 113, 113, 0.3)', padding: '12px 16px', borderRadius: '8px', marginBottom: '1rem', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 500 }}>
                                 <AlertCircle size={16} /> {errorMsg}
                             </m.div>
                         )}
@@ -313,8 +317,8 @@ export default function ContactForm() {
                                 type="text" name="name" required value={formData.name} onChange={handleChange}
                                 placeholder={t('contact.namePlaceholder')} style={inputStyle}
                                 disabled={status === 'submitting'}
-                                onFocus={e => e.target.style.borderColor = '#3730a3'}
-                                onBlur={e => e.target.style.borderColor = '#e2e8f0'}
+                                onFocus={e => { e.target.style.borderColor = '#818cf8'; e.target.style.boxShadow = '0 0 0 2px rgba(129, 140, 248, 0.2)' }}
+                                onBlur={e => { e.target.style.borderColor = 'rgba(255, 255, 255, 0.12)'; e.target.style.boxShadow = 'inset 0 1px 0 rgba(255, 255, 255, 0.04)' }}
                             />
                         </div>
 
@@ -325,8 +329,8 @@ export default function ContactForm() {
                                 type="text" name="contact" required value={formData.contact} onChange={handleChange}
                                 placeholder={t('contact.emailPlaceholder')} style={inputStyle}
                                 disabled={status === 'submitting'}
-                                onFocus={e => e.target.style.borderColor = '#3730a3'}
-                                onBlur={e => e.target.style.borderColor = '#e2e8f0'}
+                                onFocus={e => { e.target.style.borderColor = '#818cf8'; e.target.style.boxShadow = '0 0 0 2px rgba(129, 140, 248, 0.2)' }}
+                                onBlur={e => { e.target.style.borderColor = 'rgba(255, 255, 255, 0.12)'; e.target.style.boxShadow = 'inset 0 1px 0 rgba(255, 255, 255, 0.04)' }}
                             />
                         </div>
 
@@ -355,8 +359,8 @@ export default function ContactForm() {
                                     ...inputStyle, 
                                     cursor: status === 'submitting' ? 'not-allowed' : 'pointer',
                                     display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                                    borderColor: isDropdownOpen ? '#3730a3' : (formData.service ? '#6366f1' : '#e2e8f0'),
-                                    color: formData.service ? '#0f172a' : '#94a3b8',
+                                    borderColor: isDropdownOpen ? '#818cf8' : (formData.service ? 'rgba(129, 140, 248, 0.5)' : 'rgba(255, 255, 255, 0.12)'),
+                                    color: formData.service ? '#f8fafc' : '#64748b',
                                     textAlign: 'left',
                                     fontWeight: formData.service ? 600 : 400
                                 }}
@@ -364,7 +368,7 @@ export default function ContactForm() {
                                 <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                                     {selectedServiceLabel}
                                 </span>
-                                <ChevronDown size={18} style={{ transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s', flexShrink: 0, color: '#64748b' }} />
+                                <ChevronDown size={18} style={{ transform: isDropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s', flexShrink: 0, color: '#94a3b8' }} />
                             </button>
 
                             <AnimatePresence>
@@ -378,9 +382,9 @@ export default function ContactForm() {
                                         transition={{ duration: 0.15 }}
                                         style={{
                                             position: 'absolute', top: 'calc(100% - 12px)', left: 0, right: 0, zIndex: 50,
-                                            background: '#ffffff', borderRadius: '12px', padding: '6px',
-                                            boxShadow: '0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1)',
-                                            border: '1px solid #e2e8f0', maxHeight: '220px', overflowY: 'auto'
+                                            background: '#0c101b', borderRadius: '14px', padding: '6px',
+                                            boxShadow: '0 20px 40px rgba(0,0,0,0.85), inset 0 1px 0 rgba(255,255,255,0.1)',
+                                            border: '1px solid rgba(255, 255, 255, 0.12)', maxHeight: '230px', overflowY: 'auto'
                                         }}
                                     >
                                         <div 
@@ -391,12 +395,12 @@ export default function ContactForm() {
                                             onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && handleServiceSelect('')}
                                             style={{
                                                 padding: '10px 14px', borderRadius: '8px', cursor: 'pointer',
-                                                fontSize: '0.88rem', transition: 'background 0.2s', color: '#64748b',
-                                                background: formData.service === '' ? '#f1f5f9' : 'transparent',
+                                                fontSize: '0.88rem', transition: 'background 0.2s', color: '#94a3b8',
+                                                background: formData.service === '' ? 'rgba(255, 255, 255, 0.05)' : 'transparent',
                                                 marginBottom: '4px'
                                             }}
-                                            onMouseEnter={e => e.currentTarget.style.background = '#f8fafc'}
-                                            onMouseLeave={e => e.currentTarget.style.background = formData.service === '' ? '#f1f5f9' : 'transparent'}
+                                            onMouseEnter={e => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)'}
+                                            onMouseLeave={e => e.currentTarget.style.background = formData.service === '' ? 'rgba(255, 255, 255, 0.05)' : 'transparent'}
                                         >
                                             {isIndo ? '— Pilih Paket atau Layanan —' : '— Select Package or Service —'}
                                         </div>
@@ -410,13 +414,14 @@ export default function ContactForm() {
                                                 onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && handleServiceSelect(opt.value)}
                                                 style={{
                                                     padding: '10px 14px', borderRadius: '8px', cursor: 'pointer',
-                                                    fontSize: '0.88rem', transition: 'background 0.2s', color: '#0f172a',
+                                                    fontSize: '0.88rem', transition: 'background 0.2s', 
+                                                    color: formData.service === opt.value ? '#c4b5fd' : '#f1f5f9',
                                                     fontWeight: formData.service === opt.value ? 700 : 500,
-                                                    background: formData.service === opt.value ? '#e0e7ff' : 'transparent',
+                                                    background: formData.service === opt.value ? 'rgba(99, 102, 241, 0.25)' : 'transparent',
                                                     marginBottom: '4px'
                                                 }}
                                                 onMouseEnter={e => {
-                                                    if (formData.service !== opt.value) e.currentTarget.style.background = '#f8fafc'
+                                                    if (formData.service !== opt.value) e.currentTarget.style.background = 'rgba(255, 255, 255, 0.06)'
                                                 }}
                                                 onMouseLeave={e => {
                                                     if (formData.service !== opt.value) e.currentTarget.style.background = 'transparent'
@@ -438,8 +443,8 @@ export default function ContactForm() {
                                 placeholder={t('contact.msgPlaceholder')}
                                 style={{ ...inputStyle, minHeight: '120px', resize: 'vertical' }}
                                 disabled={status === 'submitting'}
-                                onFocus={e => e.target.style.borderColor = '#3730a3'}
-                                onBlur={e => e.target.style.borderColor = '#e2e8f0'}
+                                onFocus={e => { e.target.style.borderColor = '#818cf8'; e.target.style.boxShadow = '0 0 0 2px rgba(129, 140, 248, 0.2)' }}
+                                onBlur={e => { e.target.style.borderColor = 'rgba(255, 255, 255, 0.12)'; e.target.style.boxShadow = 'inset 0 1px 0 rgba(255, 255, 255, 0.04)' }}
                             />
                         </div>
 
@@ -449,14 +454,25 @@ export default function ContactForm() {
                             disabled={status === 'submitting'}
                             style={{
                                 width: '100%', padding: '16px', borderRadius: '12px',
-                                background: status === 'submitting' ? '#a5b4fc' : '#3730a3',
-                                color: '#fff', border: 'none', fontWeight: 700, fontSize: '1rem',
+                                background: status === 'submitting' ? '#4338ca' : 'linear-gradient(135deg, #4f46e5 0%, #4338ca 100%)',
+                                color: '#fff', border: '1px solid rgba(255, 255, 255, 0.2)', fontWeight: 700, fontSize: '1rem',
                                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
                                 cursor: status === 'submitting' ? 'not-allowed' : 'pointer',
-                                transition: 'background 0.2s, transform 0.1s'
+                                boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.25), 0 8px 25px -4px rgba(79, 70, 229, 0.5)',
+                                transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
                             }}
-                            onMouseEnter={e => { if (status !== 'submitting') e.currentTarget.style.background = '#4338ca' }}
-                            onMouseLeave={e => { if (status !== 'submitting') e.currentTarget.style.background = '#3730a3' }}
+                            onMouseEnter={e => { 
+                                if (status !== 'submitting') {
+                                    e.currentTarget.style.transform = 'translateY(-1px)'
+                                    e.currentTarget.style.boxShadow = 'inset 0 1px 0 rgba(255,255,255,0.35), 0 12px 30px -4px rgba(79, 70, 229, 0.6)'
+                                }
+                            }}
+                            onMouseLeave={e => { 
+                                if (status !== 'submitting') {
+                                    e.currentTarget.style.transform = 'translateY(0)'
+                                    e.currentTarget.style.boxShadow = 'inset 0 1px 0 rgba(255,255,255,0.25), 0 8px 25px -4px rgba(79, 70, 229, 0.5)'
+                                }
+                            }}
                             onMouseDown={e => { if (status !== 'submitting') e.currentTarget.style.transform = 'scale(0.98)' }}
                             onMouseUp={e => { if (status !== 'submitting') e.currentTarget.style.transform = 'scale(1)' }}
                         >
@@ -471,7 +487,7 @@ export default function ContactForm() {
                                 t('contact.btnSubmit')
                             )}
                         </button>
-                        <div style={{ textAlign: 'center', marginTop: '1rem', fontSize: '0.75rem', color: '#475569' }}>
+                        <div style={{ textAlign: 'center', marginTop: '1rem', fontSize: '0.75rem', color: '#94a3b8' }}>
                             {t('contact.privacyText')}
                         </div>
                     </m.form>

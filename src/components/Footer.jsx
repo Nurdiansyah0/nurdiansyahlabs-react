@@ -9,62 +9,90 @@ export default function Footer() {
     return (
         <footer 
             style={{ 
-                background: '#070A0F', 
+                background: '#050609', 
                 color: '#94A3B8', 
                 borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-                paddingTop: '4rem',
+                paddingTop: '4.5rem',
                 paddingBottom: '2.5rem'
             }}
         >
             <div className="container">
                 {/* 4-Column Enterprise Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 pb-12 border-b border-slate-800/80">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 pb-12 border-b border-white/[0.08]">
                     
                     {/* Col 1: Brand & Enterprise Positioning (4 cols) */}
                     <div className="lg:col-span-4 space-y-4">
                         <Link to="/" className="inline-flex items-center gap-2.5 text-slate-100 font-extrabold text-lg tracking-tight no-underline">
-                            <img src="/assets/logo.svg" alt="NurdiansyahLabs Logo" className="w-8 h-8" />
+                            <img 
+                                src="/assets/logo.svg" 
+                                alt="NurdiansyahLabs Logo" 
+                                className="w-8 h-8" 
+                                style={{ filter: 'drop-shadow(0 0 10px rgba(99, 102, 241, 0.4))' }}
+                            />
                             <span>Nurdiansyah<span className="text-indigo-400">Labs</span></span>
+                            <span 
+                                className="font-mono"
+                                style={{
+                                    fontSize: '9px',
+                                    fontWeight: 700,
+                                    letterSpacing: '0.08em',
+                                    color: '#c4b5fd',
+                                    background: 'rgba(99, 102, 241, 0.15)',
+                                    border: '1px solid rgba(167, 139, 250, 0.3)',
+                                    padding: '2px 5px',
+                                    borderRadius: '5px',
+                                }}
+                            >
+                                STUDIO
+                            </span>
                         </Link>
                         <p className="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-sm">
                             {isIndo 
                                 ? 'Studio rekayasa software enterprise & Full SDLC Software Engineer di Indonesia. Kami merancang arsitektur aplikasi web berkinerja tinggi, custom ERP, dan sistem database terdistribusi skala produksi.'
                                 : 'Enterprise software engineering studio & Full SDLC Software Engineer based in Indonesia. We architect high-performance web applications, custom ERPs, and distributed production databases.'}
                         </p>
-                        <div className="flex items-center gap-2 text-xs text-emerald-400">
-                            <ShieldCheck size={16} />
-                            <span>{isIndo ? 'Disiplin SDLC Ketat · 100% Kepemilikan Kode' : 'Rigorous SDLC · 100% Code Ownership'}</span>
+                        
+                        {/* Live SLA & SDLC Status Pills */}
+                        <div className="flex flex-col gap-2 pt-1">
+                            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-950/40 border border-emerald-500/25 text-emerald-400 font-mono text-[11px] w-fit">
+                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                                <span>{isIndo ? 'Status Sistem: 99.9% SLA Normal' : 'Systems Operational · 99.9% SLA'}</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-xs text-slate-400 font-mono">
+                                <ShieldCheck size={15} className="text-indigo-400" />
+                                <span>{isIndo ? 'Disiplin SDLC Ketat · 100% Kepemilikan Kode' : 'Rigorous SDLC · 100% Code Ownership'}</span>
+                            </div>
                         </div>
                     </div>
 
                     {/* Col 2: Solusi & Layanan (3 cols) */}
                     <div className="lg:col-span-3 space-y-3">
-                        <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-200">
+                        <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-200">
                             {isIndo ? 'Layanan & Solusi' : 'Services & Solutions'}
                         </h4>
                         <ul className="space-y-2 text-xs sm:text-sm">
                             <li>
-                                <a href="/#services" className="text-slate-400 hover:text-indigo-300 transition-colors no-underline">
+                                <a href="/#services" className="text-slate-400 hover:text-white transition-colors no-underline">
                                     {isIndo ? 'Jasa Software Enterprise' : 'Enterprise Software Engineering'}
                                 </a>
                             </li>
                             <li>
-                                <Link to="/services/web-development" className="text-slate-400 hover:text-indigo-300 transition-colors no-underline">
+                                <Link to="/services/web-development" className="text-slate-400 hover:text-white transition-colors no-underline">
                                     {isIndo ? 'Custom ERP & Web Apps' : 'Custom ERP & Web Apps'}
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/services/landing-page" className="text-slate-400 hover:text-indigo-300 transition-colors no-underline">
+                                <Link to="/services/landing-page" className="text-slate-400 hover:text-white transition-colors no-underline">
                                     {isIndo ? 'Enterprise Web Portal' : 'Enterprise Web Portal'}
                                 </Link>
                             </li>
                             <li>
-                                <a href="/#services" className="text-slate-400 hover:text-indigo-300 transition-colors no-underline">
+                                <a href="/#services" className="text-slate-400 hover:text-white transition-colors no-underline">
                                     {isIndo ? 'Konsultasi Arsitektur Teknis' : 'Architecture Advisory'}
                                 </a>
                             </li>
                             <li>
-                                <Link to="/trends" className="text-slate-400 hover:text-indigo-300 transition-colors no-underline">
+                                <Link to="/trends" className="text-slate-400 hover:text-white transition-colors no-underline">
                                     {isIndo ? 'Tech Trends Radar 2026' : 'Tech Trends Radar 2026'}
                                 </Link>
                             </li>
@@ -73,32 +101,32 @@ export default function Footer() {
 
                     {/* Col 3: Wawasan & Whitepaper Teknis (3 cols) */}
                     <div className="lg:col-span-3 space-y-3">
-                        <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-200">
+                        <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-200">
                             {isIndo ? 'Wawasan & Artikel' : 'Technical Insights'}
                         </h4>
                         <ul className="space-y-2 text-xs sm:text-sm">
                             <li>
-                                <Link to="/blog/arsitektur-software-enterprise-monolith-vs-microservices" className="text-slate-400 hover:text-indigo-300 transition-colors no-underline">
+                                <Link to="/blog/arsitektur-software-enterprise-monolith-vs-microservices" className="text-slate-400 hover:text-white transition-colors no-underline">
                                     {isIndo ? 'Monolith vs Microservices' : 'Monolith vs Microservices'}
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/blog/panduan-full-sdlc-software-engineer-enterprise" className="text-slate-400 hover:text-indigo-300 transition-colors no-underline">
+                                <Link to="/blog/panduan-full-sdlc-software-engineer-enterprise" className="text-slate-400 hover:text-white transition-colors no-underline">
                                     {isIndo ? 'Panduan Full SDLC Enterprise' : 'Full SDLC Enterprise Guide'}
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/blog/migrasi-excel-ke-custom-erp-operasional" className="text-slate-400 hover:text-indigo-300 transition-colors no-underline">
+                                <Link to="/blog/migrasi-excel-ke-custom-erp-operasional" className="text-slate-400 hover:text-white transition-colors no-underline">
                                     {isIndo ? 'Migrasi Excel ke Custom ERP' : 'Excel to Custom ERP'}
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/blog/optimasi-database-postgresql-high-concurrency-transaksi" className="text-slate-400 hover:text-indigo-300 transition-colors no-underline">
+                                <Link to="/blog/optimasi-database-postgresql-high-concurrency-transaksi" className="text-slate-400 hover:text-white transition-colors no-underline">
                                     {isIndo ? 'Optimasi PostgreSQL Concurrency' : 'PostgreSQL Concurrency Tuning'}
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/blog/studi-kasus-arsitektur-wms-pos-terdistribusi" className="text-slate-400 hover:text-indigo-300 transition-colors no-underline">
+                                <Link to="/blog/studi-kasus-arsitektur-wms-pos-terdistribusi" className="text-slate-400 hover:text-white transition-colors no-underline">
                                     {isIndo ? 'Studi Kasus WMS & POS' : 'Distributed WMS/POS Case Study'}
                                 </Link>
                             </li>
@@ -113,7 +141,7 @@ export default function Footer() {
 
                     {/* Col 4: Lokasi & Kontak (2 cols) */}
                     <div className="lg:col-span-2 space-y-3">
-                        <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-200">
+                        <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-200">
                             {isIndo ? 'Kontak & Lokasi' : 'Contact & Base'}
                         </h4>
                         <div className="space-y-2.5 text-xs text-slate-400">
@@ -151,15 +179,15 @@ export default function Footer() {
                             </div>
                         </div>
 
-                        {/* Social & Maps Icons */}
-                        <div className="flex gap-2.5 pt-2">
+                        {/* Social & Maps Icons with Specular Ghost Style */}
+                        <div className="flex gap-2 pt-2">
                             <a 
                                 href="https://maps.google.com/?cid=5919226666349071529" 
                                 target="_blank" 
                                 rel="noreferrer"
                                 aria-label="Google Maps Business Profile"
                                 title="Google Maps Business Profile"
-                                className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-amber-400 hover:border-amber-500/50 transition-colors"
+                                className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.08] hover:border-amber-500/50 hover:bg-white/[0.08] flex items-center justify-center text-slate-400 hover:text-amber-400 transition-colors shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]"
                             >
                                 <MapPin size={15} />
                             </a>
@@ -168,14 +196,14 @@ export default function Footer() {
                                 target="_blank" 
                                 rel="noreferrer"
                                 aria-label="WhatsApp"
-                                className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-emerald-400 hover:border-emerald-500/50 transition-colors"
+                                className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.08] hover:border-emerald-500/50 hover:bg-white/[0.08] flex items-center justify-center text-slate-400 hover:text-emerald-400 transition-colors shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]"
                             >
                                 <MessageCircle size={15} />
                             </a>
                             <a 
                                 href="mailto:nudiansyahdian28.adv@gmail.com" 
                                 aria-label="Email"
-                                className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-rose-400 hover:border-rose-500/50 transition-colors"
+                                className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.08] hover:border-rose-500/50 hover:bg-white/[0.08] flex items-center justify-center text-slate-400 hover:text-rose-400 transition-colors shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]"
                             >
                                 <Mail size={15} />
                             </a>
@@ -184,7 +212,7 @@ export default function Footer() {
                                 target="_blank" 
                                 rel="noreferrer"
                                 aria-label="GitHub"
-                                className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-indigo-400 hover:border-indigo-500/50 transition-colors"
+                                className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.08] hover:border-indigo-500/50 hover:bg-white/[0.08] flex items-center justify-center text-slate-400 hover:text-indigo-400 transition-colors shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]"
                             >
                                 <Github size={15} />
                             </a>
@@ -193,7 +221,7 @@ export default function Footer() {
                                 target="_blank" 
                                 rel="noreferrer"
                                 aria-label="LinkedIn"
-                                className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-sky-400 hover:border-sky-500/50 transition-colors"
+                                className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.08] hover:border-sky-500/50 hover:bg-white/[0.08] flex items-center justify-center text-slate-400 hover:text-sky-400 transition-colors shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]"
                             >
                                 <Linkedin size={15} />
                             </a>
@@ -204,9 +232,9 @@ export default function Footer() {
 
                 {/* Bottom Bar: Copyright & CI/CD Pipeline Badge */}
                 <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-                    <p>© 2026 NurdiansyahLabs. All rights reserved.</p>
+                    <p className="font-mono text-[11px]">© 2026 NurdiansyahLabs Studio. All rights reserved.</p>
                     <div className="flex items-center gap-3">
-                        <span className="hidden sm:inline">CI/CD Production:</span>
+                        <span className="hidden sm:inline font-mono text-[11px] text-slate-500">Zero-Downtime Pipeline:</span>
                         <a 
                             href="https://github.com/Nurdiansyah0/nurdiansyahlabs-react/actions" 
                             target="_blank" 

@@ -129,21 +129,23 @@ export default function FlagshipShowcase() {
             id="showcase" 
             className="py-16 sm:py-20 lg:py-24 relative overflow-hidden"
             style={{
-                background: 'linear-gradient(180deg, #0B0F17 0%, #0F172A 50%, #0B0F17 100%)',
+                background: '#07080d',
                 color: '#F8FAFC',
                 borderTop: '1px solid rgba(255, 255, 255, 0.06)',
                 borderBottom: '1px solid rgba(255, 255, 255, 0.06)',
             }}
         >
-            {/* Background Ambient Glow */}
+            {/* Background Ambient Glow & Dot Matrix */}
             <div 
                 aria-hidden="true" 
                 style={{
                     position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0,
                     backgroundImage: `
-                        radial-gradient(circle at 80% 20%, ${selectedProject.accentGlow} 0%, transparent 40%),
-                        radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.08) 0%, transparent 40%)
+                        radial-gradient(circle at 80% 20%, ${selectedProject.accentGlow} 0%, transparent 45%),
+                        radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.12) 0%, transparent 45%),
+                        radial-gradient(rgba(255, 255, 255, 0.25) 1px, transparent 1px)
                     `,
+                    backgroundSize: '100% 100%, 100% 100%, 32px 32px',
                     transition: 'background-image 0.5s ease'
                 }} 
             />
@@ -151,20 +153,27 @@ export default function FlagshipShowcase() {
             <div className="container relative z-10">
                 {/* Section Header */}
                 <div className="max-w-3xl mb-12 text-left">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-violet-500/30 bg-violet-950/40 text-violet-300 text-xs font-mono mb-4">
+                        <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
+                        <span>
+                            {isIndo ? 'STUDI KASUS ENTERPRISE · BUKTI PRODUKSI' : 'ENTERPRISE CASE STUDIES · PRODUCTION BLUEPRINTS'}
+                        </span>
+                    </div>
+
                     <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-50 leading-tight mb-4">
                         {isIndo ? (
                             <>
                                 Sistem Nyata dengan ROI Terukur yang Menggerakkan{' '}
-                                <span className="text-gradient-indigo">
+                                <span className="font-serif-accent italic font-normal text-slate-100">
                                     Operasional Klien
-                                </span>
+                                </span>.
                             </>
                         ) : (
                             <>
                                 Real Production Systems Delivering Measured ROI for{' '}
-                                <span className="text-gradient-indigo">
+                                <span className="font-serif-accent italic font-normal text-slate-100">
                                     Client Operations
-                                </span>
+                                </span>.
                             </>
                         )}
                     </h2>
@@ -187,11 +196,13 @@ export default function FlagshipShowcase() {
                                 onClick={() => handleSelect(proj)}
                                 className={`px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl font-medium text-xs sm:text-sm whitespace-nowrap transition-all flex items-center gap-2.5 min-h-[44px] cursor-pointer ${
                                     isSelected 
-                                        ? 'bg-slate-800 text-white border border-slate-600 shadow-lg' 
-                                        : 'bg-slate-900/60 text-slate-400 hover:text-slate-200 border border-slate-800/80 hover:bg-slate-800/40'
+                                        ? 'bg-slate-900/90 text-white border border-white/20 shadow-xl' 
+                                        : 'bg-slate-900/40 text-slate-400 hover:text-slate-200 border border-white/[0.06] hover:bg-slate-800/40'
                                 }`}
                                 style={{
-                                    boxShadow: isSelected ? `0 4px 20px -4px ${proj.accentGlow}` : 'none',
+                                    boxShadow: isSelected 
+                                        ? `inset 0 1px 0 rgba(255,255,255,0.2), 0 8px 25px -4px ${proj.accentGlow}` 
+                                        : 'inset 0 1px 0 rgba(255,255,255,0.04)',
                                     borderColor: isSelected ? proj.accent : undefined
                                 }}
                             >
@@ -216,10 +227,11 @@ export default function FlagshipShowcase() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -15 }}
                         transition={{ duration: 0.3 }}
-                        className="rounded-2xl border border-slate-800 bg-slate-900/70 p-6 sm:p-8 lg:p-10"
+                        className="rounded-2xl border border-white/[0.08] bg-[#0b0e17]/80 p-6 sm:p-8 lg:p-10"
                         style={{
-                            boxShadow: `0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 30px -10px ${selectedProject.accentGlow}`,
-                            backdropFilter: 'blur(12px)'
+                            boxShadow: `inset 0 1px 0 rgba(255,255,255,0.12), 0 25px 50px -15px rgba(0, 0, 0, 0.8), 0 0 40px -15px ${selectedProject.accentGlow}`,
+                            backdropFilter: 'blur(16px)',
+                            WebkitBackdropFilter: 'blur(16px)'
                         }}
                     >
                         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
@@ -249,8 +261,8 @@ export default function FlagshipShowcase() {
                                 </div>
 
                                 {/* Problem Statement */}
-                                <div className="p-4 rounded-xl border border-slate-800 bg-slate-950/60">
-                                    <div className="text-xs font-semibold text-rose-400 flex items-center gap-1.5 mb-1.5 uppercase tracking-wider">
+                                <div className="p-4 rounded-xl border border-white/[0.08] bg-[#07090f]/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+                                    <div className="text-xs font-semibold text-rose-400 flex items-center gap-1.5 mb-1.5 uppercase tracking-wider font-mono">
                                         <Zap size={14} />
                                         <span>{isIndo ? 'Tantangan Bisnis' : 'Core Business Challenge'}</span>
                                     </div>
@@ -260,8 +272,8 @@ export default function FlagshipShowcase() {
                                 </div>
 
                                 {/* Solution & Value */}
-                                <div className="p-4 rounded-xl border border-slate-800 bg-slate-950/60">
-                                    <div className="text-xs font-semibold text-emerald-400 flex items-center gap-1.5 mb-1.5 uppercase tracking-wider">
+                                <div className="p-4 rounded-xl border border-white/[0.08] bg-[#07090f]/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+                                    <div className="text-xs font-semibold text-emerald-400 flex items-center gap-1.5 mb-1.5 uppercase tracking-wider font-mono">
                                         <CheckCircle2 size={14} />
                                         <span>{isIndo ? 'Solusi & Dampak Sistem' : 'Engineered Solution & Impact'}</span>
                                     </div>
@@ -279,7 +291,7 @@ export default function FlagshipShowcase() {
                                         {selectedProject.metrics.map((mItem, idx) => (
                                             <div 
                                                 key={idx} 
-                                                className="p-3 rounded-lg border border-slate-800/80 bg-slate-900/60"
+                                                className="p-3 rounded-xl border border-white/[0.08] bg-[#0d111a]/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"
                                             >
                                                 <div className="text-[11px] text-slate-400">
                                                     {isIndo ? mItem.labelId : mItem.label}
@@ -301,7 +313,7 @@ export default function FlagshipShowcase() {
                                         {selectedProject.stack.map((tech, idx) => (
                                             <span 
                                                 key={idx}
-                                                className="text-xs font-mono px-3 py-1 rounded-md bg-slate-950 text-slate-300 border border-slate-800"
+                                                className="text-xs font-mono px-3 py-1 rounded-lg bg-[#07090f] text-slate-300 border border-white/[0.08] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
                                             >
                                                 {tech}
                                             </span>
@@ -316,10 +328,10 @@ export default function FlagshipShowcase() {
                                             href={selectedProject.subdomain}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-white transition-all shadow-md min-h-[44px] text-sm cursor-pointer"
+                                            className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-white transition-all min-h-[44px] text-sm cursor-pointer border border-white/20"
                                             style={{
-                                                background: '#16a34a',
-                                                boxShadow: '0 6px 20px -4px rgba(22, 163, 74, 0.4)'
+                                                background: 'linear-gradient(180deg, #16a34a 0%, #15803d 100%)',
+                                                boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.25), 0 6px 20px -4px rgba(22, 163, 74, 0.4)'
                                             }}
                                         >
                                             <span>{isIndo ? `🌐 Uji Live Demo: ${selectedProject.subdomainHost}` : `🌐 Test Live Demo: ${selectedProject.subdomainHost}`}</span>
@@ -330,10 +342,10 @@ export default function FlagshipShowcase() {
                                     <Link
                                         to={selectedProject.route}
                                         onClick={() => trackEvent('showcase_demo_click', { project: selectedProject.slug })}
-                                        className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-white transition-all shadow-md min-h-[44px] text-sm cursor-pointer"
+                                        className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-white transition-all min-h-[44px] text-sm cursor-pointer border border-white/20"
                                         style={{
                                             background: selectedProject.accent,
-                                            boxShadow: `0 6px 20px -4px ${selectedProject.accentGlow}`
+                                            boxShadow: `inset 0 1px 0 rgba(255,255,255,0.25), 0 6px 20px -4px ${selectedProject.accentGlow}`
                                         }}
                                     >
                                         <span>{isIndo ? 'Arsitektur & Bukti ROI' : 'Architecture & ROI Blueprint'}</span>
@@ -342,7 +354,7 @@ export default function FlagshipShowcase() {
 
                                     <a
                                         href="#contact"
-                                        className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-semibold text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-800 border border-slate-700 transition-all min-h-[44px] text-sm cursor-pointer"
+                                        className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-semibold text-slate-300 hover:text-white bg-white/[0.05] hover:bg-white/[0.08] border border-white/[0.1] transition-all min-h-[44px] text-sm cursor-pointer shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]"
                                     >
                                         <span>{isIndo ? 'Konsultasi Arsitektur Serupa' : 'Consult Similar Architecture'}</span>
                                         <ArrowRight size={16} />
@@ -353,13 +365,13 @@ export default function FlagshipShowcase() {
                             {/* Right Column: Simulated Live Console Preview */}
                             <div className="lg:col-span-5 w-full">
                                 <div 
-                                    className="rounded-xl overflow-hidden border border-slate-800 bg-slate-950 text-left font-mono text-xs shadow-2xl"
+                                    className="rounded-xl overflow-hidden border border-white/[0.1] bg-[#06080e] text-left font-mono text-xs shadow-2xl"
                                     style={{
-                                        boxShadow: `0 15px 35px -10px rgba(0, 0, 0, 0.8), 0 0 25px -5px ${selectedProject.accentGlow}`
+                                        boxShadow: `inset 0 1px 0 rgba(255,255,255,0.1), 0 20px 45px -10px rgba(0, 0, 0, 0.9), 0 0 30px -5px ${selectedProject.accentGlow}`
                                     }}
                                 >
                                     {/* Mockup Title Bar */}
-                                    <div className="px-4 py-3 bg-slate-900 border-b border-slate-800 flex items-center justify-between">
+                                    <div className="px-4 py-3 bg-[#0b0e17] border-b border-white/[0.08] flex items-center justify-between">
                                         <div className="flex items-center gap-1.5">
                                             <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
                                             <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
@@ -386,7 +398,7 @@ export default function FlagshipShowcase() {
                                             {selectedProject.previewData.kpis.map((kpi, idx) => (
                                                 <div 
                                                     key={idx}
-                                                    className="p-3 rounded-lg border border-slate-800/80 bg-slate-900/60"
+                                                    className="p-3 rounded-lg border border-white/[0.08] bg-[#0c101b] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]"
                                                 >
                                                     <div className="text-[10px] text-slate-400">{kpi.label}</div>
                                                     <div 
@@ -400,8 +412,8 @@ export default function FlagshipShowcase() {
                                         </div>
 
                                         {/* Status Bar */}
-                                        <div className="p-3 rounded-lg border border-slate-800 bg-slate-900/40 text-[11px] text-slate-300 flex items-center gap-2">
-                                            <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0"></span>
+                                        <div className="p-3 rounded-lg border border-white/[0.08] bg-[#0c101b] text-[11px] text-slate-300 flex items-center gap-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
+                                            <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0 animate-pulse"></span>
                                             <span className="truncate">{selectedProject.previewData.statusText}</span>
                                         </div>
 
@@ -409,7 +421,7 @@ export default function FlagshipShowcase() {
                                         <div className="pt-2">
                                             <Link
                                                 to={selectedProject.route}
-                                                className="w-full py-2.5 px-4 rounded-lg font-sans font-semibold text-xs flex items-center justify-center gap-2 text-slate-200 hover:text-white bg-slate-800 hover:bg-slate-700 transition-colors border border-slate-700"
+                                                className="w-full py-2.5 px-4 rounded-xl font-sans font-semibold text-xs flex items-center justify-center gap-2 text-slate-200 hover:text-white bg-white/[0.06] hover:bg-white/[0.1] transition-colors border border-white/[0.1] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"
                                             >
                                                 <span>{isIndo ? 'Jelajahi Demo Lengkap di Layar Penuh' : 'Launch Fullscreen Live Experience'}</span>
                                                 <ExternalLink size={14} />

@@ -16,23 +16,22 @@ export default function CTA() {
             id="contact" 
             className="relative overflow-hidden py-16 sm:py-20 lg:py-24"
             style={{
-                background: 'linear-gradient(180deg, #0B0F17 0%, #111827 50%, #070A0F 100%)',
+                background: '#07080d',
                 color: '#F8FAFC',
                 borderTop: '1px solid rgba(255, 255, 255, 0.08)',
             }}
         >
-            {/* Background Ambient Glow */}
+            {/* Background Ambient Glow & Dot Matrix */}
             <div 
                 aria-hidden="true" 
                 style={{
                     position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0,
                     backgroundImage: `
-                        radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.12) 0%, transparent 45%),
-                        radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 45%),
-                        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px)
+                        radial-gradient(circle at 15% 25%, rgba(99, 102, 241, 0.18) 0%, transparent 50%),
+                        radial-gradient(circle at 85% 75%, rgba(16, 185, 129, 0.12) 0%, transparent 50%),
+                        radial-gradient(rgba(255, 255, 255, 0.25) 1px, transparent 1px)
                     `,
-                    backgroundSize: '100% 100%, 100% 100%, 48px 48px, 48px 48px',
+                    backgroundSize: '100% 100%, 100% 100%, 32px 32px',
                 }} 
             />
 
@@ -47,20 +46,27 @@ export default function CTA() {
                         transition={{ duration: 0.5 }}
                         className="lg:col-span-6 text-left"
                     >
-                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-50 tracking-tight leading-[1.15] mb-4">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-950/40 text-emerald-300 text-xs font-mono mb-4">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                            <span>
+                                {isIndo ? 'SESI DISCOVERY 1-ON-1 · ZERO OBLIGATION' : '1-ON-1 DISCOVERY · ZERO OBLIGATION'}
+                            </span>
+                        </div>
+
+                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-50 tracking-tight leading-[1.18] mb-4">
                             {isIndo ? (
                                 <>
-                                    Konsultasi Arsitektur 1-on-1 dengan{' '}
-                                    <span className="text-gradient-emerald">
+                                    Konsultasi Arsitektur 1-on-1 bersama{' '}
+                                    <span className="font-serif-accent italic font-normal text-slate-100">
                                         Lead Systems Architect
-                                    </span>
+                                    </span>.
                                 </>
                             ) : (
                                 <>
                                     1-on-1 Architecture Discovery with Our{' '}
-                                    <span className="text-gradient-emerald">
+                                    <span className="font-serif-accent italic font-normal text-slate-100">
                                         Lead Systems Architect
-                                    </span>
+                                    </span>.
                                 </>
                             )}
                         </h2>
@@ -80,9 +86,10 @@ export default function CTA() {
                                 target="_blank" 
                                 rel="noreferrer"
                                 onClick={() => trackEvent('whatsapp_click', { location: 'cta_section' })}
-                                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-bold text-white bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 transition-all shadow-lg min-h-[48px] text-sm sm:text-base cursor-pointer"
+                                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-bold text-white transition-all min-h-[48px] text-sm sm:text-base cursor-pointer border border-white/20"
                                 style={{
-                                    boxShadow: '0 8px 24px -4px rgba(16, 185, 129, 0.4)',
+                                    background: 'linear-gradient(180deg, #16a34a 0%, #15803d 100%)',
+                                    boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.3), 0 8px 25px -4px rgba(16, 185, 129, 0.45)',
                                 }}
                             >
                                 <MessageCircle size={19} />
@@ -92,7 +99,7 @@ export default function CTA() {
                             <a
                                 href="mailto:nudiansyahdian28.adv@gmail.com"
                                 onClick={() => trackEvent('email_click', { location: 'cta_section' })}
-                                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-semibold text-slate-200 hover:text-white bg-slate-800/80 hover:bg-slate-800 border border-slate-700 transition-all min-h-[48px] text-sm sm:text-base cursor-pointer"
+                                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-semibold text-slate-200 hover:text-white bg-white/[0.05] hover:bg-white/[0.09] border border-white/[0.1] transition-all min-h-[48px] text-sm sm:text-base cursor-pointer shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"
                             >
                                 <Mail size={19} />
                                 <span>{isIndo ? 'Kirim Spesifikasi Proyek' : 'Email Project Specs'}</span>
@@ -100,7 +107,7 @@ export default function CTA() {
                         </div>
 
                         {/* Operational Confidence Points */}
-                        <div className="pt-6 border-t border-slate-800/80 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-slate-400">
+                        <div className="pt-6 border-t border-white/[0.08] grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-slate-400">
                             <div className="flex items-center gap-2">
                                 <Clock size={15} className="text-emerald-400 shrink-0" />
                                 <span>{isIndo ? 'Discovery 30 Menit Bebas Komitmen' : 'Zero-Obligation 30-Min Discovery'}</span>

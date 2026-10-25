@@ -7,7 +7,7 @@ import { INITIAL_BLOG_POSTS } from '../data/blogData'
 export default function LatestBlogs() {
     const { isIndo } = useLanguage()
 
-    // Take the top 3-5 articles
+    // Take the top 3 featured articles
     const featuredArticles = INITIAL_BLOG_POSTS.slice(0, 3)
 
     return (
@@ -15,35 +15,48 @@ export default function LatestBlogs() {
             id="insights" 
             className="py-16 sm:py-20 lg:py-24 relative overflow-hidden"
             style={{
-                background: 'linear-gradient(180deg, #0B0F17 0%, #0D131F 50%, #0B0F17 100%)',
+                background: '#07080d',
                 color: '#F8FAFC',
                 borderTop: '1px solid rgba(255, 255, 255, 0.06)',
             }}
         >
+            {/* Background Ambient Glow & Dot Matrix */}
+            <div 
+                aria-hidden="true" 
+                style={{
+                    position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0,
+                    backgroundImage: `
+                        radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.15) 0%, transparent 55%),
+                        radial-gradient(rgba(255, 255, 255, 0.25) 1px, transparent 1px)
+                    `,
+                    backgroundSize: '100% 100%, 32px 32px',
+                }} 
+            />
+
             <div className="container relative z-10">
                 {/* Section Header */}
                 <div className="max-w-3xl mb-12 text-left">
-                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-indigo-500/30 bg-indigo-950/40 text-indigo-400 text-xs font-semibold tracking-wider uppercase mb-3">
-                        <Sparkles size={13} className="text-indigo-400" />
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-500/30 bg-indigo-950/40 text-indigo-300 text-xs font-mono mb-4">
+                        <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
                         <span>
-                            {isIndo ? 'Wawasan & Panduan Rekayasa Sistem' : 'Technical Insights & Engineering Guides'}
+                            {isIndo ? 'REKAYASA SISTEM & WHITEPAPER · FIELD NOTES' : 'SYSTEM ARCHITECTURE & WHITEPAPERS · FIELD NOTES'}
                         </span>
                     </div>
 
                     <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-50 leading-tight mb-4">
                         {isIndo ? (
                             <>
-                                Arsitektur & Praktik Terbaik{' '}
-                                <span className="text-gradient-indigo">
+                                Wawasan Arsitektur & Rekayasa{' '}
+                                <span className="font-serif-accent italic font-normal text-slate-100">
                                     Software Enterprise
-                                </span>
+                                </span>.
                             </>
                         ) : (
                             <>
                                 Architectural Insights &{' '}
-                                <span className="text-gradient-indigo">
+                                <span className="font-serif-accent italic font-normal text-slate-100">
                                     Enterprise Engineering
-                                </span>
+                                </span>.
                             </>
                         )}
                     </h2>
@@ -64,14 +77,19 @@ export default function LatestBlogs() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.4, delay: idx * 0.1 }}
-                            className="group flex flex-col justify-between rounded-2xl border border-slate-800 bg-slate-900/60 p-6 hover:border-indigo-500/50 hover:bg-slate-900/90 transition-all shadow-lg"
+                            className="group flex flex-col justify-between rounded-2xl border border-white/[0.08] bg-[#0c101b]/80 p-6 hover:border-indigo-500/40 hover:bg-[#0e1424]/90 transition-all duration-300 shadow-xl"
+                            style={{
+                                boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.1), 0 20px 40px -15px rgba(0,0,0,0.8)',
+                                backdropFilter: 'blur(16px)',
+                                WebkitBackdropFilter: 'blur(16px)'
+                            }}
                         >
                             <div>
-                                <div className="flex items-center justify-between text-xs text-slate-400 mb-3">
-                                    <span className="px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold bg-indigo-950/60 text-indigo-300 border border-indigo-800/40">
+                                <div className="flex items-center justify-between text-xs text-slate-400 mb-3.5">
+                                    <span className="px-2.5 py-1 rounded-md text-[11px] font-mono font-semibold bg-violet-950/60 text-violet-300 border border-violet-500/25">
                                         {article.category}
                                     </span>
-                                    <span className="flex items-center gap-1">
+                                    <span className="flex items-center gap-1.5 font-mono text-[11px] text-slate-400">
                                         <Clock size={12} />
                                         {article.readTime}
                                     </span>
@@ -88,13 +106,13 @@ export default function LatestBlogs() {
                                 </p>
                             </div>
 
-                            <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between">
+                            <div className="pt-4 border-t border-white/[0.08] flex items-center justify-between">
                                 <span className="text-[11px] font-mono text-indigo-400">
                                     {article.serviceLabel || 'Software Enterprise'}
                                 </span>
                                 <Link 
                                     to={`/blog/${article.slug}`}
-                                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-400 hover:text-indigo-300 transition-colors no-underline group-hover:translate-x-0.5"
+                                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-400 hover:text-indigo-300 transition-colors no-underline group-hover:translate-x-1 duration-200"
                                 >
                                     <span>{isIndo ? 'Baca Panduan' : 'Read Article'}</span>
                                     <ArrowRight size={13} />
@@ -104,11 +122,14 @@ export default function LatestBlogs() {
                     ))}
                 </div>
 
-                {/* View All Button */}
+                {/* View All Button with Specular Glass */}
                 <div className="text-center pt-2">
                     <Link
                         to="/blog"
-                        className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-slate-700 bg-slate-900/70 hover:bg-slate-800 text-slate-200 hover:text-white font-semibold text-sm transition-all no-underline shadow-md"
+                        className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-white/[0.12] bg-white/[0.05] hover:bg-white/[0.09] text-slate-200 hover:text-white font-semibold text-sm transition-all no-underline shadow-lg"
+                        style={{
+                            boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.12), 0 10px 25px -5px rgba(0,0,0,0.5)'
+                        }}
                     >
                         <BookOpen size={16} className="text-indigo-400" />
                         <span>{isIndo ? 'Lihat Semua 5 Panduan & Whitepaper Teknis' : 'View All 5 Engineering Whitepapers'}</span>
