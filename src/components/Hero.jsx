@@ -15,7 +15,7 @@ export default function Hero() {
         <section 
             id="hero"
             style={{
-                background: 'linear-gradient(180deg, #070A0F 0%, #0B0F17 50%, #0F172A 100%)',
+                background: '#07080d',
                 color: '#F8FAFC',
                 position: 'relative',
                 overflow: 'hidden',
@@ -23,19 +23,25 @@ export default function Hero() {
                 paddingBottom: isSm ? '3.5rem' : '5rem',
             }}
         >
-            {/* Ambient Background Glow & Engineering Grid */}
+            {/* Top Volumetric Aurora Mesh (Stacked Devs aesthetic) */}
             <div 
                 aria-hidden="true" 
+                className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-[420px] pointer-events-none opacity-45 blur-[130px] -z-0"
                 style={{
-                    position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0,
-                    backgroundImage: `
-                        radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.15) 0%, transparent 45%),
-                        radial-gradient(circle at 85% 65%, rgba(6, 182, 212, 0.1) 0%, transparent 45%),
-                        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px)
-                    `,
-                    backgroundSize: '100% 100%, 100% 100%, 48px 48px, 48px 48px',
-                }} 
+                    background: 'radial-gradient(ellipse 70% 60% at 50% -10%, rgba(167, 139, 250, 0.45) 0%, rgba(99, 102, 241, 0.25) 45%, transparent 75%)'
+                }}
+            />
+
+            {/* Micro Dot Matrix Backdrop */}
+            <div 
+                aria-hidden="true" 
+                className="absolute inset-0 pointer-events-none opacity-[0.14] -z-0"
+                style={{
+                    backgroundImage: 'radial-gradient(rgba(255, 255, 255, 0.4) 1px, transparent 1px)',
+                    backgroundSize: '28px 28px',
+                    maskImage: 'radial-gradient(ellipse 70% 60% at 50% 30%, #000 60%, transparent 100%)',
+                    WebkitMaskImage: 'radial-gradient(ellipse 70% 60% at 50% 30%, #000 60%, transparent 100%)',
+                }}
             />
 
             <div className="container relative z-10">
@@ -43,25 +49,41 @@ export default function Hero() {
                     
                     {/* Left Column: Value Proposition & CTAs */}
                     <div className="lg:col-span-7 text-left">
-                        {/* Core Headline (H1): Enterprise & Full SDLC Keyword Anchored */}
+                        {/* Live Engineering Status Pill */}
+                        <m.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5 }}
+                            className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-violet-400/25 bg-violet-950/40 backdrop-blur-md mb-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]"
+                        >
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-violet-400"></span>
+                            </span>
+                            <span className="text-[11px] sm:text-xs font-mono font-medium text-violet-200 tracking-wide">
+                                {isIndo ? 'Engineering Studio · Full SDLC & AI-Hardened' : 'Engineering Studio · Full SDLC & AI-Hardened'}
+                            </span>
+                        </m.div>
+
+                        {/* Core Headline (H1): Contrast Pairing Sans + Editorial Serif */}
                         <m.h1
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.1 }}
-                            className="font-extrabold tracking-tight text-slate-50 leading-[1.14] mb-4 text-2xl sm:text-4xl md:text-5xl lg:text-[3.15rem] break-words"
+                            className="font-extrabold tracking-tight text-white leading-[1.12] mb-4 text-2xl sm:text-4xl md:text-5xl lg:text-[3.25rem] break-words"
                         >
                             {isIndo ? (
                                 <>
-                                    Jasa Software Enterprise &{' '}
-                                    <span style={{ color: '#818cf8' }}>
-                                        Full SDLC Software Engineer
+                                    Bangun software enterprise & arsitektur sistem{' '}
+                                    <span className="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-violet-200 via-indigo-100 to-purple-300 pr-1">
+                                        tanpa kompromi.
                                     </span>
                                 </>
                             ) : (
                                 <>
-                                    Enterprise Software Engineering &{' '}
-                                    <span style={{ color: '#818cf8' }}>
-                                        Full SDLC Systems Architecture
+                                    Architecting enterprise systems & software with{' '}
+                                    <span className="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-violet-200 via-indigo-100 to-purple-300 pr-1">
+                                        zero compromise.
                                     </span>
                                 </>
                             )}
@@ -72,29 +94,38 @@ export default function Hero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.2 }}
-                            className="text-slate-300 text-sm sm:text-lg leading-relaxed max-w-2xl mb-6"
+                            className="text-slate-300/90 text-sm sm:text-lg leading-relaxed max-w-2xl mb-6 font-normal"
                         >
                             {isIndo ? (
-                                'Bukan sekadar website biasa. Kami merancang arsitektur sistem, custom ERP, dan software enterprise terintegrasi dengan metodologi Full SDLC—dari analisis kebutuhan, backend terdistribusi, database performa tinggi, hingga deployment produksi yang aman dan terukur.'
+                                'Bukan sekadar website standar. Kami merancang arsitektur web modern, custom ERP, database terdistribusi, dan platform enterprise skala produksi—dikerjakan dengan standar keamanan ketat, performa tinggi, dan akselerasi AI.'
                             ) : (
-                                'Beyond basic web pages. We architect, engineer, and deploy production-grade enterprise software, custom ERPs, and resilient distributed systems with end-to-end Full SDLC engineering rigor.'
+                                'Beyond basic web pages. We engineer secure web applications, custom ERPs, scalable databases, and cloud infrastructure—pixel-perfect on every screen and hardened to industry standards.'
                             )}
                         </m.p>
 
-                        {/* Service Pillars Tagline Chips */}
+                        {/* Service Pillars Specular Pills */}
                         <m.div
                             initial={{ opacity: 0, y: 15 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.25 }}
-                            className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-8 text-[11px] sm:text-xs font-semibold text-indigo-200"
+                            className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-8 text-[11px] sm:text-xs font-mono text-slate-300"
                         >
-                            <span className="px-2.5 sm:px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/20">{isIndo ? 'Full SDLC Sprint 1–2 Minggu' : 'Full SDLC 1–2 Week Sprints'}</span>
-                            <span className="text-slate-500 hidden sm:inline">•</span>
-                            <span className="px-2.5 sm:px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/20">{isIndo ? 'High-Concurrency (< 120ms)' : 'High-Concurrency (< 120ms)'}</span>
-                            <span className="text-slate-500 hidden sm:inline">•</span>
-                            <span className="px-2.5 sm:px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/20">{isIndo ? 'Telemetri Prediktif & Analitik' : 'Predictive Telemetry & Analytics'}</span>
-                            <span className="text-slate-500 hidden sm:inline">•</span>
-                            <span className="px-2.5 sm:px-3 py-1 rounded-lg bg-indigo-950/60 border border-indigo-500/20">{isIndo ? 'Bionic 1-on-1 Architect Advisory' : 'Bionic 1-on-1 Architect Advisory'}</span>
+                            <span className="px-3 py-1 rounded-full bg-slate-900/70 border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] flex items-center gap-1.5">
+                                <span className="w-1.5 h-1.5 rounded-full bg-violet-400"></span>
+                                {isIndo ? 'Full SDLC Sprint 1–2 Minggu' : 'Full SDLC 1–2 Wk Sprints'}
+                            </span>
+                            <span className="px-3 py-1 rounded-full bg-slate-900/70 border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] flex items-center gap-1.5">
+                                <span className="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+                                {isIndo ? 'High-Concurrency (< 120ms)' : 'Latency < 120ms'}
+                            </span>
+                            <span className="px-3 py-1 rounded-full bg-slate-900/70 border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] flex items-center gap-1.5">
+                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                                {isIndo ? 'OWASP Hardened' : 'OWASP Hardened'}
+                            </span>
+                            <span className="px-3 py-1 rounded-full bg-slate-900/70 border border-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] flex items-center gap-1.5">
+                                <span className="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                                {isIndo ? '1-on-1 Architect Advisory' : 'Architect Advisory'}
+                            </span>
                         </m.div>
 
                         {/* Dual Action CTAs */}
@@ -104,24 +135,21 @@ export default function Hero() {
                             transition={{ duration: 0.6, delay: 0.3 }}
                             className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 mb-8 w-full sm:w-auto"
                         >
-                            {/* Primary CTA: Smooth scroll to #contact */}
+                            {/* Primary CTA: Specular Glow Button */}
                             <a
                                 href="#contact"
                                 onClick={() => trackEvent('hero_primary_cta', { target: '#contact', text: isIndo ? 'Konsultasi Arsitektur 1-on-1' : '1-on-1 Architecture Discovery' })}
-                                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 transition-all shadow-lg shadow-emerald-950/40 min-h-[48px] text-sm sm:text-base cursor-pointer"
-                                style={{
-                                    boxShadow: '0 8px 24px -4px rgba(16, 185, 129, 0.35)',
-                                }}
+                                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white bg-gradient-to-r from-violet-600 via-indigo-600 to-indigo-500 hover:from-violet-500 hover:to-indigo-500 transition-all shadow-[0_0_0_1px_rgba(255,255,255,0.2),0_12px_32px_-8px_rgba(129,140,248,0.6)] min-h-[48px] text-sm sm:text-base cursor-pointer group"
                             >
                                 <span>{isIndo ? 'Konsultasi Arsitektur 1-on-1' : '1-on-1 Architecture Discovery'}</span>
-                                <ArrowRight size={18} />
+                                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                             </a>
 
-                            {/* Secondary CTA: Scroll to #services */}
+                            {/* Secondary CTA: Glass Specular Outline */}
                             <a
                                 href="#services"
                                 onClick={() => trackEvent('hero_secondary_cta', { target: '#services', text: isIndo ? 'Lihat Solusi Produksi' : 'Explore Production Solutions' })}
-                                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-slate-200 hover:text-white bg-slate-900/80 hover:bg-slate-800 border border-slate-700/80 hover:border-slate-600 transition-all min-h-[48px] text-sm sm:text-base cursor-pointer"
+                                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-slate-200 hover:text-white bg-slate-900/80 hover:bg-slate-800 border border-white/10 hover:border-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition-all min-h-[48px] text-sm sm:text-base cursor-pointer"
                             >
                                 <span>{isIndo ? 'Lihat Solusi Produksi' : 'Explore Production Solutions'}</span>
                             </a>
@@ -147,22 +175,22 @@ export default function Hero() {
                             initial={{ opacity: 0, y: 15 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.4 }}
-                            className="pt-6 border-t border-slate-800/80 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4"
+                            className="pt-6 border-t border-white/[0.08] grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4"
                         >
-                            <div>
+                            <div className="p-2 rounded-lg bg-slate-950/40 border border-white/[0.04]">
                                 <div className="text-lg sm:text-2xl font-extrabold font-mono text-sky-400">99.9%</div>
                                 <div className="text-[11px] sm:text-xs text-slate-400 mt-0.5">{isIndo ? 'Uptime SLA Target' : 'Production Uptime SLA'}</div>
                             </div>
-                            <div>
+                            <div className="p-2 rounded-lg bg-slate-950/40 border border-white/[0.04]">
                                 <div className="text-lg sm:text-2xl font-extrabold font-mono text-emerald-400">&lt; 120ms</div>
                                 <div className="text-[11px] sm:text-xs text-slate-400 mt-0.5">{isIndo ? 'Respon Latensi API' : 'API Response SLA'}</div>
                             </div>
-                            <div>
-                                <div className="text-lg sm:text-2xl font-extrabold font-mono text-indigo-400">{isIndo ? '18+ Modul' : '18+ Modules'}</div>
+                            <div className="p-2 rounded-lg bg-slate-950/40 border border-white/[0.04]">
+                                <div className="text-lg sm:text-2xl font-extrabold font-mono text-violet-400">{isIndo ? '18+ Modul' : '18+ Modules'}</div>
                                 <div className="text-[11px] sm:text-xs text-slate-400 mt-0.5">{isIndo ? 'Sistem Terverifikasi' : 'Verified Modules'}</div>
                             </div>
-                            <div>
-                                <div className="text-lg sm:text-2xl font-extrabold font-mono text-slate-50">100%</div>
+                            <div className="p-2 rounded-lg bg-slate-950/40 border border-white/[0.04]">
+                                <div className="text-lg sm:text-2xl font-extrabold font-mono text-slate-100">100%</div>
                                 <div className="text-[11px] sm:text-xs text-slate-400 mt-0.5">{isIndo ? 'Kepemilikan Source Code' : 'Full Code Ownership'}</div>
                             </div>
                         </m.div>

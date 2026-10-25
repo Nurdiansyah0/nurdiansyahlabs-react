@@ -6,6 +6,7 @@ venv/
 
 # Build outputs
 /dist/
+dist_root_backup/
 *.zip
 *.log
 

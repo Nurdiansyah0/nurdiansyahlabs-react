@@ -49,11 +49,16 @@ export default {
                 sans: ['"Plus Jakarta Sans"', 'Inter', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
                 heading: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
                 body: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                serif: ['"Instrument Serif"', 'Georgia', 'serif'],
+                mono: ['"Geist Mono"', 'JetBrains Mono', 'Fira Code', 'monospace'],
             },
             boxShadow: {
                 'studio-card': '0 10px 30px -10px rgba(0, 0, 0, 0.5)',
                 'studio-glow': '0 0 25px -5px rgba(99, 102, 241, 0.25)',
                 'studio-cyan': '0 0 25px -5px rgba(6, 182, 212, 0.25)',
+                'specular': 'inset 0 1px 0 0 rgba(255, 255, 255, 0.12), 0 20px 40px -15px rgba(0, 0, 0, 0.7)',
+                'specular-hover': 'inset 0 1px 0 0 rgba(255, 255, 255, 0.2), 0 25px 50px -12px rgba(167, 139, 250, 0.25)',
+                'aurora-glow': '0 0 80px -20px rgba(167, 139, 250, 0.35)',
             },
             borderRadius: {
                 'card': '16px',
