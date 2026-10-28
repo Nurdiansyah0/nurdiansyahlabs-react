@@ -1,14 +1,39 @@
 import { Link } from 'react-router-dom'
 import { m } from 'framer-motion'
-import { BookOpen, Clock, ArrowRight, Sparkles } from 'lucide-react'
+import { BookOpen, Clock, ArrowRight } from 'lucide-react'
 import { useLanguage } from '../i18n/LanguageContext'
-import { INITIAL_BLOG_POSTS } from '../data/blogData'
+
+const FEATURED_ARTICLES = [
+    {
+        slug: 'arsitektur-software-enterprise-monolith-vs-microservices',
+        title: 'Arsitektur Software Enterprise: Memilih Modular Monolith vs Microservices di 2026',
+        description: 'Panduan teknis mendalam untuk CTO dan software architect dalam memilih pola arsitektur yang tepat untuk aplikasi bisnis skala besar.',
+        category: 'Arsitektur Sistem',
+        serviceLabel: 'Enterprise Architecture',
+        readTime: '7 min baca'
+    },
+    {
+        slug: 'panduan-full-sdlc-software-engineer-enterprise',
+        title: 'Panduan Full SDLC: Metodologi Rekayasa Software Enterprise dari Analisis hingga Deployment',
+        description: 'Langkah demi langkah menerapkan siklus hidup pengembangan perangkat lunak (SDLC) yang ketat untuk menjamin stabilitas dan keamanan produksi.',
+        category: 'Full SDLC',
+        serviceLabel: 'Full SDLC Engineering',
+        readTime: '9 min baca'
+    },
+    {
+        slug: 'migrasi-excel-ke-custom-erp-operasional',
+        title: 'Kapan Perusahaan Harus Migrasi dari Spreadsheet & Excel ke Custom ERP Terintegrasi?',
+        description: 'Tanda-tanda kritis saat spreadsheet mulai menghambat pertumbuhan bisnis, dan cara merancang custom ERP yang tepat sasaran.',
+        category: 'Sistem ERP',
+        serviceLabel: 'Enterprise ERP',
+        readTime: '8 min baca'
+    }
+]
 
 export default function LatestBlogs() {
     const { isIndo } = useLanguage()
 
-    // Take the top 3 featured articles
-    const featuredArticles = INITIAL_BLOG_POSTS.slice(0, 3)
+    const featuredArticles = FEATURED_ARTICLES
 
     return (
         <section 

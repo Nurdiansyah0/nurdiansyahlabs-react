@@ -13,7 +13,6 @@ import os
 import sqlite3
 import datetime
 import urllib.request
-import re
 from html.parser import HTMLParser
 
 BASE_URL = os.environ.get("SEO_TARGET_URL", "https://nurdiansyahlabs.com")

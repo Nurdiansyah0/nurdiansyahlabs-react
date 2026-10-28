@@ -1,6 +1,8 @@
 from flask import Blueprint, request, jsonify
 from datetime import datetime, timezone
+import logging
 import smtplib
+import threading
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from app.core.config import Config
@@ -8,10 +10,13 @@ from app.core.database import db
 from app.modules.leads.models import Lead
 from app.modules.auth.decorators import admin_required
 
+logger = logging.getLogger(__name__)
 leads_bp = Blueprint("leads", __name__, url_prefix="/api/v1/leads")
+
 
 def send_lead_email(name, contact, service, message):
     if not Config.SMTP_USER or not Config.SMTP_PASS:
+        logger.warning("Lead received from '%s' (%s), but SMTP_USER/SMTP_PASS is not configured.", name, contact)
         return False, "SMTP not configured"
     try:
         msg = MIMEMultipart()
@@ -21,13 +26,13 @@ def send_lead_email(name, contact, service, message):
 
         body = f"""
         Halo Admin, ada prospek baru yang menghubungi via website NurdiansyahLabs:
-        
+
         • Nama: {name}
         • Kontak: {contact}
         • Layanan: {service}
         • Pesan:
         {message}
-        
+
         Waktu: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')}
         """
         msg.attach(MIMEText(body, 'plain'))
@@ -37,9 +42,12 @@ def send_lead_email(name, contact, service, message):
         server.login(Config.SMTP_USER, Config.SMTP_PASS)
         server.send_message(msg)
         server.quit()
+        logger.info("Lead notification email sent successfully for '%s'.", name)
         return True, "Email sent"
     except Exception as e:
+        logger.error("Failed to send lead notification email for '%s': %s", name, str(e))
         return False, str(e)
+
 
 @leads_bp.route("", methods=["POST"])
 def submit_lead():
@@ -65,8 +73,12 @@ def submit_lead():
     db.session.add(lead)
     db.session.commit()
 
-    # Attempt email sending in background/safely without breaking response
-    email_sent, email_msg = send_lead_email(name, contact, service, message)
+    # Dispatch email notification asynchronously in a background thread to avoid blocking HTTP response
+    threading.Thread(
+        target=send_lead_email,
+        args=(name, contact, service, message),
+        daemon=True
+    ).start()
 
     return jsonify({
         "success": True,

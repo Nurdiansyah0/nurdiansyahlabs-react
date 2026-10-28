@@ -71,7 +71,7 @@ const SEO = ({ title, description, keywords, canonical, image, type = 'website',
             "hasMap": "https://maps.google.com/?cid=5919226666349071529",
             "founder": { "@id": `${siteUrl}/#person` },
             "telephone": "+6282176012461",
-            "priceRange": "Rp 500.000 – Rp 5.000.000+",
+            "priceRange": "Rp 2.500.000 – Rp 5.000.000+",
             "address": {
                 "@type": "PostalAddress",
                 "addressLocality": "Batam",
@@ -90,21 +90,21 @@ const SEO = ({ title, description, keywords, canonical, image, type = 'website',
                 "itemListElement": [
                     {
                         "@type": "Offer",
-                        "name": "Paket 1: Starter Web & Landing Page",
-                        "price": "500000",
+                        "name": "Paket 1: Modern Web Architecture & Conversion Acceleration",
+                        "price": "2500000",
                         "priceCurrency": "IDR",
                         "url": `${siteUrl}/services/landing-page`
                     },
                     {
                         "@type": "Offer",
-                        "name": "Paket 2: Custom Web Application & Operational ERP",
-                        "price": "2500000",
+                        "name": "Paket 2: Custom Enterprise ERP & Sistem Operasional Terdistribusi",
+                        "price": "5000000",
                         "priceCurrency": "IDR",
                         "url": `${siteUrl}/services/web-development`
                     },
                     {
                         "@type": "Offer",
-                        "name": "Paket 3: Technical Architecture Advisory & Enterprise Consultation",
+                        "name": "Paket 3: Konsultasi Arsitektur Teknis, Full SDLC & Enterprise Advisory",
                         "price": "0",
                         "priceCurrency": "IDR",
                         "description": "Gratis 30-Menit Discovery Consultation",

@@ -1,6 +1,7 @@
 import os
+import tempfile
 import uuid
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, current_app, request, jsonify
 from werkzeug.utils import secure_filename
 from app.core.config import Config
 from app.modules.auth.decorators import admin_required
@@ -59,8 +60,13 @@ def upload_file():
 
     safe_base = secure_filename(file.filename).rsplit('.', 1)[0]
     safe_name = f"{uuid.uuid4().hex[:12]}_{safe_base}.{ext}"
-    os.makedirs(Config.UPLOAD_FOLDER, exist_ok=True)
-    destination = os.path.join(Config.UPLOAD_FOLDER, safe_name)
+    upload_folder = current_app.config.get("UPLOAD_FOLDER", Config.UPLOAD_FOLDER)
+    try:
+        os.makedirs(upload_folder, exist_ok=True)
+    except OSError:
+        upload_folder = os.path.join(tempfile.gettempdir(), "upload_articles")
+        os.makedirs(upload_folder, exist_ok=True)
+    destination = os.path.join(upload_folder, safe_name)
     file.save(destination)
 
     public_url = f"/upload_articles/{safe_name}"

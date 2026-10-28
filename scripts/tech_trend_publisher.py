@@ -135,7 +135,6 @@ def generate_article_content(topic, service_code="B", custom_notes=""):
     """
     svc = SERVICES.get(service_code, SERVICES["B"])
     slug = create_slug(topic)
-    date_str = datetime.now().strftime("%d %B %Y")
     wa_number = "6282176012461"
     wa_text = urllib.parse.quote(f"Halo NurdiansyahLabs, saya membaca artikel Anda tentang '{topic}' dan ingin konsultasi pembuatan sistem untuk bisnis saya.")
     wa_link = f"https://wa.me/{wa_number}?text={wa_text}"
@@ -304,56 +303,23 @@ VALUES (
     return md_path, sql_path, social_path
 
 def try_insert_database(post_data):
-    """Attempt direct insertion into local or cPanel database via PHP db connection."""
+    """Attempt direct insertion into database via Python SQLAlchemy PostService."""
     try:
-        # Check if php is available
-        import tempfile
-        with tempfile.NamedTemporaryFile(mode='w', suffix='.php', delete=False) as f:
-            temp_php = f.name
-            f.write(f"""<?php
-require_once '{BASE_DIR}/database/db.php';
-$pdo = getDB();
-if (!$pdo) {{
-    echo "NO_DB";
-    exit(0);
-}}
-$sql = "INSERT INTO posts (slug, title, description, service, serviceLabel, accent, accentLight, images, faqs, content)
-        VALUES (:slug, :title, :description, :service, :serviceLabel, :accent, :accentLight, :images, :faqs, :content)
-        ON DUPLICATE KEY UPDATE title = :title, description = :description, content = :content";
-$stmt = $pdo->prepare($sql);
-$stmt->execute([
-    'slug' => {json.dumps(post_data['slug'])},
-    'title' => {json.dumps(post_data['title'])},
-    'description' => {json.dumps(post_data['description'])},
-    'service' => {json.dumps(post_data['service'])},
-    'serviceLabel' => {json.dumps(post_data['serviceLabel'])},
-    'accent' => {json.dumps(post_data['accent'])},
-    'accentLight' => {json.dumps(post_data['accentLight'])},
-    'images' => {json.dumps(post_data['images'])},
-    'faqs' => {json.dumps(post_data['faqs'])},
-    'content' => {json.dumps(post_data['content'])}
-]);
-echo "SUCCESS";
-?>""")
-
-        status = "UNKNOWN"
-        try:
-            cmd = f"php {temp_php}"
-            output = os.popen(cmd).read().strip()
-            if "SUCCESS" in output:
-                status = "INSERTED"
-            elif "NO_DB" in output:
-                status = "NO_LOCAL_DB"
+        backend_dir = os.path.join(BASE_DIR, "backend")
+        if backend_dir not in sys.path:
+            sys.path.insert(0, backend_dir)
+        from app import create_app
+        from app.modules.posts.service import PostService
+        app = create_app()
+        with app.app_context():
+            existing = PostService.get_by_slug(post_data["slug"])
+            if existing:
+                PostService.update_post(post_data["slug"], post_data)
             else:
-                status = f"INFO: {output}"
-        except Exception as e:
-            status = f"EXCEPTION: {e}"
-        finally:
-            if os.path.exists(temp_php):
-                os.remove(temp_php)
-        return status
+                PostService.create_post(post_data)
+            return "INSERTED"
     except Exception as e:
-        return f"CANNOT_CONNECT: {e}"
+        return f"NO_LOCAL_DB ({e})"
 
 def main():
     import argparse
@@ -390,7 +356,7 @@ def main():
         curated = CURATED_VIRAL_TECH[0]
         selected_topic = curated["topic"]
         selected_service = curated["service"]
-        print(f"\n⚡ Mode Auto dipilih: Memproses topik viral terverifikasi:")
+        print("\n⚡ Mode Auto dipilih: Memproses topik viral terverifikasi:")
         print(f"   📌 Topik: {selected_topic}")
         print(f"   📌 Layanan Target: {SERVICES[selected_service]['name']}")
 
@@ -434,7 +400,7 @@ def main():
     elif db_status == "NO_LOCAL_DB":
         print("ℹ️ Database MySQL lokal tidak aktif/tersambung (normal jika di lingkungan dev tanpa container).")
         print(f"👉 File SQL telah dibuat di '{sql_path}'. Anda dapat mengimpornya langsung di cPanel phpMyAdmin,")
-        print(f"   atau salin isinya ke menu Admin Dashboard (/admin).")
+        print("   atau salin isinya ke menu Admin Dashboard (/admin).")
     else:
         print(f"ℹ️ Status DB: {db_status}")
 

@@ -98,12 +98,14 @@ export default defineConfig({
         },
         rollupOptions: {
             output: {
-                manualChunks: {
-                    vendor: ['react', 'react-dom'],
-                    router: ['react-router-dom'],
-                    animation: ['framer-motion'],
-                    charts: ['recharts'],
-                    icons: ['lucide-react']
+                manualChunks(id) {
+                    if (id.includes('node_modules')) {
+                        if (id.includes('recharts') || id.includes('d3-')) return 'charts'
+                        if (id.includes('framer-motion') || id.includes('motion-')) return 'animation'
+                        if (id.includes('react-router')) return 'router'
+                        if (id.includes('lucide-react')) return 'icons'
+                        if (id.includes('/react/') || id.includes('/react-dom/') || id.includes('/scheduler/')) return 'vendor'
+                    }
                 }
             }
         }

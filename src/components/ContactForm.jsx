@@ -6,52 +6,52 @@ import { useTracker } from '../hooks/useTracker'
 
 const PACKAGE_CONFIG = {
     'starter': {
-        value: 'Paket 1: Starter Web & Landing Page',
-        message: 'Halo NurdiansyahLabs, saya tertarik dengan Paket 1: Starter Web & Landing Page (Mulai Rp 500.000). Saya ingin mendiskusikan kebutuhan landing page untuk bisnis/startup saya.'
+        value: 'Paket 1: Modern Web Architecture & Conversion Acceleration',
+        message: 'Halo NurdiansyahLabs, saya tertarik dengan Paket 1: Modern Web Architecture & Conversion Acceleration (Mulai Rp 2.500.000). Saya ingin mendiskusikan kebutuhan arsitektur web performa tinggi untuk perusahaan kami.'
     },
     'landing-page': {
-        value: 'Paket 1: Starter Web & Landing Page',
-        message: 'Halo NurdiansyahLabs, saya tertarik dengan Paket 1: Starter Web & Landing Page (Mulai Rp 500.000). Saya ingin mendiskusikan kebutuhan landing page untuk bisnis/startup saya.'
+        value: 'Paket 1: Modern Web Architecture & Conversion Acceleration',
+        message: 'Halo NurdiansyahLabs, saya tertarik dengan Paket 1: Modern Web Architecture & Conversion Acceleration (Mulai Rp 2.500.000). Saya ingin mendiskusikan kebutuhan arsitektur web performa tinggi untuk perusahaan kami.'
     },
     'Landing Page': {
-        value: 'Paket 1: Starter Web & Landing Page',
-        message: 'Halo NurdiansyahLabs, saya tertarik dengan Paket 1: Starter Web & Landing Page (Mulai Rp 500.000). Saya ingin mendiskusikan kebutuhan landing page untuk bisnis/startup saya.'
+        value: 'Paket 1: Modern Web Architecture & Conversion Acceleration',
+        message: 'Halo NurdiansyahLabs, saya tertarik dengan Paket 1: Modern Web Architecture & Conversion Acceleration (Mulai Rp 2.500.000). Saya ingin mendiskusikan kebutuhan arsitektur web performa tinggi untuk perusahaan kami.'
     },
     'custom': {
-        value: 'Paket 2: Custom Web Application & Operational ERP',
-        message: 'Halo NurdiansyahLabs, saya ingin meminta penawaran untuk Paket 2: Custom Web Application & Operational ERP (Mulai Rp 2.500.000). Bisnis kami membutuhkan sistem kustom untuk pengelolaan operasional dan database.'
+        value: 'Paket 2: Custom Enterprise ERP & Sistem Operasional Terdistribusi',
+        message: 'Halo NurdiansyahLabs, saya ingin meminta penawaran untuk Paket 2: Custom Enterprise ERP & Sistem Operasional (Mulai Rp 5.000.000). Bisnis kami membutuhkan sistem kustom untuk pengelolaan operasional, inventaris, dan database skala besar.'
     },
     'custom-erp': {
-        value: 'Paket 2: Custom Web Application & Operational ERP',
-        message: 'Halo NurdiansyahLabs, saya ingin meminta penawaran untuk Paket 2: Custom Web Application & Operational ERP (Mulai Rp 2.500.000). Bisnis kami membutuhkan sistem kustom untuk pengelolaan operasional dan database.'
+        value: 'Paket 2: Custom Enterprise ERP & Sistem Operasional Terdistribusi',
+        message: 'Halo NurdiansyahLabs, saya ingin meminta penawaran untuk Paket 2: Custom Enterprise ERP & Sistem Operasional (Mulai Rp 5.000.000). Bisnis kami membutuhkan sistem kustom untuk pengelolaan operasional, inventaris, dan database skala besar.'
     },
     'web-development': {
-        value: 'Paket 2: Custom Web Application & Operational ERP',
-        message: 'Halo NurdiansyahLabs, saya ingin meminta penawaran untuk Paket 2: Custom Web Application & Operational ERP (Mulai Rp 2.500.000). Bisnis kami membutuhkan sistem kustom untuk pengelolaan operasional dan database.'
+        value: 'Paket 2: Custom Enterprise ERP & Sistem Operasional Terdistribusi',
+        message: 'Halo NurdiansyahLabs, saya ingin meminta penawaran untuk Paket 2: Custom Enterprise ERP & Sistem Operasional (Mulai Rp 5.000.000). Bisnis kami membutuhkan sistem kustom untuk pengelolaan operasional, inventaris, dan database skala besar.'
     },
     'Fullstack Web': {
-        value: 'Paket 2: Custom Web Application & Operational ERP',
-        message: 'Halo NurdiansyahLabs, saya ingin meminta penawaran untuk Paket 2: Custom Web Application & Operational ERP (Mulai Rp 2.500.000). Bisnis kami membutuhkan sistem kustom untuk pengelolaan operasional dan database.'
+        value: 'Paket 2: Custom Enterprise ERP & Sistem Operasional Terdistribusi',
+        message: 'Halo NurdiansyahLabs, saya ingin meminta penawaran untuk Paket 2: Custom Enterprise ERP & Sistem Operasional (Mulai Rp 5.000.000). Bisnis kami membutuhkan sistem kustom untuk pengelolaan operasional, inventaris, dan database skala besar.'
     },
     'advisory': {
-        value: 'Paket 3: Technical Architecture Advisory & Enterprise Consultation',
+        value: 'Paket 3: Konsultasi Arsitektur Teknis, Full SDLC & Enterprise Advisory',
         message: 'Halo NurdiansyahLabs, saya ingin menjadwalkan sesi Paket 3: Technical Architecture Advisory & Enterprise Consultation (Gratis 30-Menit Discovery) untuk mendiskusikan arsitektur sistem dan strategi teknologi kami.'
     },
     'machine-learning': {
-        value: 'Paket 3: Technical Architecture Advisory & Enterprise Consultation',
+        value: 'Paket 3: Konsultasi Arsitektur Teknis, Full SDLC & Enterprise Advisory',
         message: 'Halo NurdiansyahLabs, saya ingin menjadwalkan sesi Paket 3: Technical Architecture Advisory & Enterprise Consultation (Gratis 30-Menit Discovery) untuk mendiskusikan arsitektur sistem dan strategi teknologi kami.'
     },
     'Data Science': {
-        value: 'Paket 3: Technical Architecture Advisory & Enterprise Consultation',
+        value: 'Paket 3: Konsultasi Arsitektur Teknis, Full SDLC & Enterprise Advisory',
         message: 'Halo NurdiansyahLabs, saya ingin menjadwalkan sesi Paket 3: Technical Architecture Advisory & Enterprise Consultation (Gratis 30-Menit Discovery) untuk mendiskusikan arsitektur sistem dan strategi teknologi kami.'
     },
     'data-analyst': {
         value: 'Business Intelligence & Data Analytics Dashboard',
-        message: 'Halo NurdiansyahLabs, saya ingin konsultasi mengenai pembuatan Business Intelligence & Dashboard Data untuk analisa performa bisnis saya.'
+        message: 'Halo NurdiansyahLabs, saya ingin konsultasi mengenai pembuatan Business Intelligence & Dashboard Data (Mulai Rp 2.500.000) untuk analisa performa bisnis saya.'
     },
     'Data Analyst': {
         value: 'Business Intelligence & Data Analytics Dashboard',
-        message: 'Halo NurdiansyahLabs, saya ingin konsultasi mengenai pembuatan Business Intelligence & Dashboard Data untuk analisa performa bisnis saya.'
+        message: 'Halo NurdiansyahLabs, saya ingin konsultasi mengenai pembuatan Business Intelligence & Dashboard Data (Mulai Rp 2.500.000) untuk analisa performa bisnis saya.'
     }
 }
 
@@ -205,20 +205,20 @@ export default function ContactForm() {
 
     const serviceOptions = [
         { 
-            value: "Paket 1: Starter Web & Landing Page", 
-            label: isIndo ? "Paket 1: Starter Web & Landing Page (Mulai Rp 500rb)" : "Package 1: Starter Web & Landing Page (From Rp 500k)" 
+            value: "Paket 1: Modern Web Architecture & Conversion Acceleration", 
+            label: isIndo ? "Paket 1: Modern Web Portal & Frontend (Mulai Rp 2,5jt)" : "Package 1: Modern Web Portal & Frontend (From $160)" 
         },
         { 
-            value: "Paket 2: Custom Web Application & Operational ERP", 
-            label: isIndo ? "Paket 2: Custom Web App & Operational ERP (Mulai Rp 2.5jt)" : "Package 2: Custom Web App & Operational ERP (From Rp 2.5M)" 
+            value: "Paket 2: Custom Enterprise ERP & Sistem Operasional Terdistribusi", 
+            label: isIndo ? "Paket 2: Custom Enterprise ERP & Sistem Operasional (Mulai Rp 5jt)" : "Package 2: Custom Enterprise ERP & Operational Systems (From $350)" 
         },
         { 
-            value: "Paket 3: Technical Architecture Advisory & Enterprise Consultation", 
-            label: isIndo ? "Paket 3: Technical Architecture Advisory (Gratis Discovery)" : "Package 3: Technical Architecture Advisory (Free Discovery)" 
+            value: "Paket 3: Konsultasi Arsitektur Teknis, Full SDLC & Enterprise Advisory", 
+            label: isIndo ? "Paket 3: Technical Architecture Advisory (Gratis Discovery 30m)" : "Package 3: Technical Architecture Advisory (Free 30m Discovery)" 
         },
         { 
             value: "Business Intelligence & Data Analytics Dashboard", 
-            label: isIndo ? "Business Intelligence & Dashboard Data (Mulai Rp 2.5jt)" : "Business Intelligence & Data Dashboard" 
+            label: isIndo ? "Business Intelligence & Dashboard Data (Mulai Rp 2,5jt)" : "Business Intelligence & Data Dashboard (From $160)" 
         },
         { 
             value: "Konsultasi Kustom / Lainnya", 
