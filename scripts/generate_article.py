@@ -12,7 +12,6 @@ Usage: python3 generate_article.py <keyword> <volume> <language>
 import sys
 import json
 import os
-import re
 import random
 import hashlib
 import urllib.request

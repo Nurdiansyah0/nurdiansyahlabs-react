@@ -14,10 +14,10 @@ if os.path.exists(env_path):
                 k, v = line.split("=", 1)
                 env_vars[k.strip()] = v.strip()
 
-mysql_host = "localhost"
-mysql_user = "uygpuazs_root"
-mysql_pass = "Nurdiansyah@024"
-mysql_db = "uygpuazs_nurdiansyahlabs_db"
+mysql_host = env_vars.get("MYSQL_HOST") or os.environ.get("MYSQL_HOST", "localhost")
+mysql_user = env_vars.get("MYSQL_USER") or os.environ.get("MYSQL_USER", "uygpuazs_root")
+mysql_pass = env_vars.get("MYSQL_PASS") or os.environ.get("MYSQL_PASS", "")
+mysql_db = env_vars.get("MYSQL_DB") or os.environ.get("MYSQL_DB", "uygpuazs_nurdiansyahlabs_db")
 
 pg_url = env_vars.get("DATABASE_URL")
 if pg_url.startswith("postgresql+psycopg://"):

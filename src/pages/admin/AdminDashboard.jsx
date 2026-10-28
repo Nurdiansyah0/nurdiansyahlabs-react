@@ -174,7 +174,7 @@ export default function AdminDashboard() {
     const handleGenerateTrendPost = async (geo = 'ID') => {
         setLoading(true)
         try {
-            const r = await fetch(`/api/v1/trends/auto_post?key=nurdiansyah-cron-2026&geo=${geo}`)
+            const r = await authFetch(`/api/v1/trends/auto_post?geo=${geo}`)
             const d = await r.json()
             if (r.ok) {
                 if (d.success || d.status === 'success') {

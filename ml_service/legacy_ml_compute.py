@@ -192,7 +192,6 @@ def recommend(user_id: str, limit: int, category_filter: str | None, exclude_see
 
     history = set(user["history"])
     cb = normalise(content_score(user["history"]))
-    pop = popularity_score()
 
     # Collaborative proxy: users who share category preferences
     history_cats = {PRODUCTS[PID_IDX[pid]]["category"] for pid in user["history"] if pid in PID_IDX}
@@ -227,7 +226,7 @@ def recommend(user_id: str, limit: int, category_filter: str | None, exclude_see
 
 def _reason(p: dict, history_cats: set, score: float, cb: float) -> str:
     if p["category"] in history_cats and score > 0.6:
-        return f"Populer di kalangan pengguna dengan profil serupa"
+        return "Populer di kalangan pengguna dengan profil serupa"
     elif p["category"] in history_cats:
         return f"Mirip dengan {p['category']} yang pernah Anda lihat"
     elif p["rating"] >= 4.8:

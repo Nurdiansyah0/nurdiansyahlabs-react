@@ -1,4 +1,5 @@
 import os
+import secrets
 from pathlib import Path
 
 env_file = Path(__file__).resolve().parent.parent.parent / ".env"
@@ -11,7 +12,7 @@ if env_file.exists():
                 os.environ.setdefault(k.strip(), v.strip())
 
 class Config:
-    SECRET_KEY = os.environ.get("SECRET_KEY", "nurdiansyahlabs-secret-key-change-in-production")
+    SECRET_KEY = os.environ.get("SECRET_KEY") or secrets.token_hex(32)
     DATABASE_URL = os.environ.get(
         "DATABASE_URL", 
         "sqlite:///nurdiansyahlabs.db"

@@ -1,5 +1,5 @@
-from datetime import datetime, timezone, date
-from sqlalchemy import String, Integer, Numeric, Text, Date, DateTime, Enum
+from datetime import datetime, timezone, date as dt_date
+from sqlalchemy import String, Integer, Numeric, Text, Date, DateTime
 from sqlalchemy.orm import Mapped, mapped_column
 from app.core.database import db
 
@@ -25,7 +25,7 @@ class PrimateraRecord(db.Model):
     __tablename__ = "primatera_records"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    date: Mapped[date] = mapped_column(Date, nullable=False)
+    date: Mapped[dt_date] = mapped_column(Date, nullable=False)
     flock_id: Mapped[str] = mapped_column(String(50), nullable=False)
     feed_consumed_kg: Mapped[float] = mapped_column(Numeric(10, 2), default=0.0)
     mortality_count: Mapped[int] = mapped_column(Integer, default=0)
@@ -48,7 +48,7 @@ class PrimateraTransaction(db.Model):
     __tablename__ = "primatera_transactions"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    date: Mapped[date] = mapped_column(Date, nullable=False)
+    date: Mapped[dt_date] = mapped_column(Date, nullable=False)
     type: Mapped[str] = mapped_column(String(20), nullable=False) # INCOME or EXPENSE
     category: Mapped[str] = mapped_column(String(50), nullable=False)
     amount: Mapped[float] = mapped_column(Numeric(15, 2), nullable=False)

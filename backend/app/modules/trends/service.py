@@ -1,5 +1,4 @@
 import abc
-import os
 import json
 import urllib.request
 from app.core.config import Config
