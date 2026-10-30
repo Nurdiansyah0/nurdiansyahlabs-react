@@ -66,7 +66,7 @@ def check_dependencies():
         return False
 
 
-def get_gsc_service(credentials_path: str):
+def get_gsc_service(credentials_path: str, write_access: bool = False):
     """Authenticates using Service Account JSON and returns the Search Console service."""
     from google.oauth2 import service_account
     from googleapiclient.discovery import build
@@ -77,9 +77,10 @@ def get_gsc_service(credentials_path: str):
         return None
 
     try:
+        scope = "https://www.googleapis.com/auth/webmasters" if write_access else "https://www.googleapis.com/auth/webmasters.readonly"
         credentials = service_account.Credentials.from_service_account_file(
             credentials_path,
-            scopes=["https://www.googleapis.com/auth/webmasters.readonly"]
+            scopes=[scope]
         )
         service = build("searchconsole", "v1", credentials=credentials)
         return service
@@ -256,11 +257,27 @@ def check_sitemaps(service, site_url: str):
         print(f"{RED}[Error saat mengambil sitemap]:{RESET} {e}")
 
 
+def submit_sitemap(service, site_url: str, feedpath: Optional[str] = None):
+    """Submits or resubmits the XML sitemap to Google Search Console."""
+    base_web_url = site_url.replace("sc-domain:", "https://").rstrip("/")
+    target_feed = feedpath or f"{base_web_url}/sitemap.xml"
+    print(f"\n{BOLD}=== MENGIRIM ULANG (RESUBMIT) SITEMAP KE GSC ==={RESET}")
+    print(f"  • Properti : {site_url}")
+    print(f"  • Sitemap  : {target_feed}")
+    try:
+        service.sitemaps().submit(siteUrl=site_url, feedpath=target_feed).execute()
+        print(f"  {GREEN}{BOLD}✔ Sitemap berhasil dikirim ulang ke Google Search Console!{RESET}")
+        check_sitemaps(service, site_url)
+    except Exception as e:
+        print(f"  {RED}✖ Gagal mengirim ulang sitemap:{RESET} {e}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Google Search Console Inspector & Error Monitor")
     parser.add_argument("--url", type=str, help="URL spesifik yang ingin diinspeksi")
     parser.add_argument("--all", action="store_true", help="Inspeksi seluruh rute utama website")
     parser.add_argument("--sitemap", action="store_true", help="Periksa status sitemap di Search Console")
+    parser.add_argument("--submit-sitemap", action="store_true", help="Resubmit sitemap.xml ke Google Search Console")
     parser.add_argument("--credentials", type=str, default=DEFAULT_CREDENTIALS, help="Path ke file credentials JSON")
     parser.add_argument("--site-url", type=str, default=DEFAULT_SITE_URL, help="URL Properti Google Search Console")
     parser.add_argument("--json", action="store_true", help="Output format JSON")
@@ -270,12 +287,16 @@ def main():
     if not check_dependencies():
         sys.exit(1)
 
-    service = get_gsc_service(args.credentials)
+    service = get_gsc_service(args.credentials, write_access=args.submit_sitemap)
     if not service:
         sys.exit(1)
 
     site_url = resolve_site_url(service, args.site_url)
     base_web_url = site_url.replace("sc-domain:", "https://").rstrip("/")
+
+    if args.submit_sitemap:
+        submit_sitemap(service, site_url)
+        return
 
     if args.sitemap:
         check_sitemaps(service, site_url)

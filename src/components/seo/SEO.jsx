@@ -10,7 +10,13 @@ const SEO = ({ title, description, keywords, canonical, image, type = 'website',
         ? (titleStr.includes(siteTitle) ? titleStr : `${titleStr} | ${siteTitle}`)
         : siteTitle;
     const siteUrl = "https://nurdiansyahlabs.com";
-    const fullCanonical = canonical ? `${siteUrl}${canonical}` : siteUrl;
+    const normalizedPath = canonical
+        ? (canonical === "/" ? "/" : `/${canonical.replace(/^\/+|\/+$/g, "")}`)
+        : "/";
+    const fullCanonical = normalizedPath === "/" ? `${siteUrl}/` : `${siteUrl}${normalizedPath}`;
+    const fullImage = image
+        ? (String(image).startsWith("http") ? String(image) : `${siteUrl}${String(image).startsWith("/") ? "" : "/"}${image}`)
+        : `${siteUrl}/assets/Logo_Primatera.png`;
     const defaultDesc = "Jasa rekayasa software enterprise, custom ERP, dan arsitektur aplikasi web skala produksi di Indonesia. Solusi end-to-end full SDLC software engineer terpercaya.";
     const descStr = typeof description === 'object' && description !== null
         ? (description.id || description.en || String(description))
@@ -23,7 +29,7 @@ const SEO = ({ title, description, keywords, canonical, image, type = 'website',
             "@id": `${siteUrl}/#person`,
             "name": "Nurdiansyah",
             "url": siteUrl,
-            "jobTitle": "Fullstack Software Engineer & Architect",
+            "jobTitle": "Enterprise Software Engineer & Systems Architect",
             "alumniOf": "Universitas Terbuka",
             "knowsAbout": [
                 "React",
@@ -51,34 +57,53 @@ const SEO = ({ title, description, keywords, canonical, image, type = 'website',
             "@type": "ProfilePage",
             "@id": `${siteUrl}/#profile`,
             "url": siteUrl,
-            "name": "Nurdiansyah – Software Engineering Portfolio & Studio",
+            "name": "Nurdiansyah – Enterprise Software Engineering & Architecture",
             "mainEntity": {
                 "@type": "Person",
                 "@id": `${siteUrl}/#person`,
                 "name": "Nurdiansyah",
+                "jobTitle": "Enterprise Software Engineer & Systems Architect",
                 "url": siteUrl
             },
-            "isPartOf": { "@id": `${siteUrl}/#website` }
+            "isPartOf": {
+                "@type": "WebSite",
+                "@id": `${siteUrl}/#website`
+            }
         },
-
         {
             "@type": ["ProfessionalService", "LocalBusiness"],
             "@id": `${siteUrl}/#service`,
-            "name": "NurdiansyahLabs",
+            "name": "NurdiansyahLabs - Jasa Software Enterprise & Full SDLC Engineer",
             "alternateName": "Konsultan Teknologi, Informasi, Web Developer, IT Architect, Software Developer",
-            "image": `${siteUrl}/assets/Logo.png`,
+            "logo": `${siteUrl}/assets/logo.svg`,
+            "image": `${siteUrl}/assets/android-chrome-512x512.png`,
             "url": siteUrl,
             "hasMap": "https://maps.google.com/?cid=5919226666349071529",
             "founder": { "@id": `${siteUrl}/#person` },
-            "telephone": "+6282176012461",
+            "telephone": "+62-821-7601-2461",
+            "email": "nudiansyahdian28.adv@gmail.com",
             "priceRange": "Rp 2.500.000 – Rp 5.000.000+",
+            "openingHours": "Mo-Su 08:00-21:00",
             "address": {
                 "@type": "PostalAddress",
-                "addressLocality": "Batam",
+                "streetAddress": "Perm Griya Batu Aji Asri Tahap 4",
+                "addressLocality": "Batu Aji, Batam",
                 "addressRegion": "Kepulauan Riau",
+                "postalCode": "29424",
                 "addressCountry": "ID"
             },
-            "description": "Fullstack web applications, enterprise software architecture, custom ERP systems, and IT consultancy in Batam & Indonesia.",
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 1.0308,
+                "longitude": 103.9747
+            },
+            "areaServed": [
+                { "@type": "Country", "name": "Indonesia" },
+                { "@type": "City", "name": "Batam" },
+                { "@type": "City", "name": "Jakarta" },
+                { "@type": "City", "name": "Surabaya" }
+            ],
+            "description": "Jasa rekayasa software enterprise, custom ERP, konsultan website, dan arsitektur aplikasi web skala produksi di Indonesia. Solusi end-to-end full SDLC dari analisis arsitektur hingga deployment.",
             "sameAs": [
                 "https://maps.google.com/?cid=5919226666349071529",
                 "https://github.com/Nurdiansyah0",
@@ -122,6 +147,47 @@ const SEO = ({ title, description, keywords, canonical, image, type = 'website',
         }
     ];
 
+    if (normalizedPath === "/") {
+        baseGraph.push({
+            "@type": "FAQPage",
+            "@id": `${siteUrl}/#faq`,
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "Apa saja layanan utama yang disediakan NurdiansyahLabs?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "NurdiansyahLabs adalah perusahaan software dan konsultan IT di Batam yang menyediakan jasa software enterprise, custom ERP, konsultan website, jasa machine learning, dan data scientist dengan metodologi Full SDLC ketat."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Apakah NurdiansyahLabs melayani klien di luar kota Batam?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Ya, kami melayani perusahaan korporasi, UMKM, dan startup di seluruh Indonesia termasuk Jakarta, Surabaya, Bandung, Medan, hingga klien internasional dengan manajemen proyek transparan dan repositori Git mandiri."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Berapa lama estimasi pengerjaan software enterprise dan custom ERP?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Waktu pengerjaan berkisar antara 2 hingga 8 minggu tergantung pada skala modul dan kompleksitas sistem, dengan garansi 30 hari bug-fix serta 100% kepemilikan source code tanpa vendor lock-in."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Bagaimana proses konsultasi IT dan rekayasa software di NurdiansyahLabs?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Kami menyediakan sesi discovery teknis 1-on-1 gratis selama 30 menit via Google Meet atau WhatsApp untuk membedah arsitektur sistem, bottleneck database, estimasi milestone, dan scope of work (SOW) proyek Anda."
+                    }
+                }
+            ]
+        });
+    }
+
     if (additionalSchemas && Array.isArray(additionalSchemas)) {
         baseGraph.push(...additionalSchemas);
     }
@@ -148,7 +214,7 @@ const SEO = ({ title, description, keywords, canonical, image, type = 'website',
     }
 
     return (
-        <Helmet>
+        <Helmet defer={false}>
             {/* Basic Meta Tags */}
             <title>{fullTitle}</title>
             <meta name="description" content={descStr} />
@@ -159,13 +225,13 @@ const SEO = ({ title, description, keywords, canonical, image, type = 'website',
             <meta property="og:title" content={fullTitle} />
             <meta property="og:description" content={descStr} />
             <meta property="og:url" content={fullCanonical} />
-            {image && <meta property="og:image" content={`${siteUrl}${image}`} />}
+            <meta property="og:image" content={fullImage} />
 
             {/* Twitter */}
             <meta name="twitter:card" content="summary_large_image" />
             <meta name="twitter:title" content={fullTitle} />
             <meta name="twitter:description" content={descStr} />
-            {image && <meta name="twitter:image" content={`${siteUrl}${image}`} />}
+            <meta name="twitter:image" content={fullImage} />
 
             {/* Schema.org JSON-LD Graph */}
             <script type="application/ld+json">

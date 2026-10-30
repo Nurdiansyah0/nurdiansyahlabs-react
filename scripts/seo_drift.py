@@ -47,6 +47,7 @@ class HeadMetadataParser(HTMLParser):
         self.title = ""
         self.description = ""
         self.canonical = ""
+        self.canonicals = []
         self.has_json_ld = False
         self.json_ld_blocks = []
         self.in_script_ld = False
@@ -59,7 +60,9 @@ class HeadMetadataParser(HTMLParser):
         elif tag == "meta" and attr_dict.get("name", "").lower() == "description":
             self.description = attr_dict.get("content", "")
         elif tag == "link" and attr_dict.get("rel", "").lower() == "canonical":
-            self.canonical = attr_dict.get("href", "")
+            href = attr_dict.get("href", "").strip()
+            self.canonical = href
+            self.canonicals.append(href)
         elif tag == "script" and attr_dict.get("type", "").lower() == "application/ld+json":
             self.in_script_ld = True
             self.has_json_ld = True
@@ -123,6 +126,7 @@ def snapshot_route(route):
                 "title": parser.title.strip(),
                 "description": parser.description.strip(),
                 "canonical": parser.canonical.strip(),
+                "canonical_count": len(parser.canonicals),
                 "has_json_ld": 1 if parser.has_json_ld else 0,
                 "has_error_boundary": 1 if "Something went wrong" in content else 0
             }
@@ -162,6 +166,7 @@ def run_drift_check():
 
     for route in ROUTES_TO_MONITOR:
         snap = snapshot_route(route)
+        expected_canonical = "https://nurdiansyahlabs.com/" if route == "/" else f"https://nurdiansyahlabs.com{route}"
         
         # Invariants Check
         if snap["status_code"] != 200:
@@ -172,6 +177,10 @@ def run_drift_check():
             anomalies.append(f"[WARN TITLE] {route}: Title tag is empty")
         elif not route.endswith(('.txt', '.xml')) and not snap["canonical"]:
             anomalies.append(f"[WARN CANONICAL] {route}: Canonical link missing")
+        elif not route.endswith(('.txt', '.xml')) and snap.get("canonical_count", 1) > 1:
+            anomalies.append(f"[FAIL CANONICAL_DUP] {route}: Found {snap['canonical_count']} canonical tags (Expected 1)")
+        elif not route.endswith(('.txt', '.xml')) and snap["canonical"] != expected_canonical:
+            anomalies.append(f"[FAIL CANONICAL_MISMATCH] {route}: Got '{snap['canonical']}' (Expected '{expected_canonical}')")
         else:
             success_count += 1
 

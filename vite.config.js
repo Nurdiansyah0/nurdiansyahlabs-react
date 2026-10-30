@@ -67,7 +67,24 @@ export default defineConfig({
                 postProcess(renderedRoute) {
                     // Ignore any redirects.
                     renderedRoute.route = renderedRoute.originalRoute
-                    // Optional: Minify HTML here or rely on Vite
+
+                    // Enforce deterministic self-referencing canonical & og:url across all prerendered routes
+                    const siteUrl = 'https://nurdiansyahlabs.com'
+                    const routePath = renderedRoute.originalRoute === '/'
+                        ? '/'
+                        : `/${renderedRoute.originalRoute.replace(/^\/+|\/+$/g, '')}`
+                    const expectedCanonical = routePath === '/' ? `${siteUrl}/` : `${siteUrl}${routePath}`
+
+                    // Strip any existing canonical links and inject a single authoritative self-referencing canonical
+                    renderedRoute.html = renderedRoute.html.replace(/<link[^>]*rel=["']canonical["'][^>]*>/gi, '')
+                    renderedRoute.html = renderedRoute.html.replace(
+                        /<\/head>/i,
+                        `  <link rel="canonical" href="${expectedCanonical}" data-rh="true" />\n</head>`
+                    )
+                    renderedRoute.html = renderedRoute.html.replace(
+                        /<meta[^>]*property=["']og:url["'][^>]*>/gi,
+                        `<meta property="og:url" content="${expectedCanonical}" data-rh="true" />`
+                    )
                 }
             })
         ] : [])

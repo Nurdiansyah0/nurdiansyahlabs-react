@@ -26,7 +26,7 @@ PORT="${TEST_PORT:-3000}"
 echo "🚀 [SEO Audit] Menjalankan server static lokal pada port ${PORT}..."
 
 # Start local server to serve dist
-npx serve dist -l "${PORT}" &
+python3 -m http.server "${PORT}" --bind 127.0.0.1 --directory dist >/dev/null 2>&1 &
 SERVE_PID=$!
 
 # Ensure server process is terminated on script exit
